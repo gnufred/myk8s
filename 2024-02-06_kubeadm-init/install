@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+echo "install required packages"
+apt-get -y update
+apt-get -y install \
+	apt-transport-https \
+	ca-certificates \
+	conntrack \
+	containerd \
+	curl \
+	gpg \
+	socat \
+	wget
+
+echo "install kubes"
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+apt-get update
+apt-get install -y kubelet kubeadm kubectl
+apt-mark hold kubelet kubeadm kubectl
+
+echo "install crictl"
+VERSION="v1.29.0"
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/crictl-$VERSION-linux-amd64.tar.gz
+tar zxvf crictl-$VERSION-linux-amd64.tar.gz -C /usr/local/bin
+rm -f crictl-$VERSION-linux-amd64.tar.gz
+
+echo "post install config"
+modprobe br_netfilter
+echo "1" > /proc/sys/net/ipv4/ip_forward
+swapoff /swap.img
+
+echo "init"
+kubeadm init
