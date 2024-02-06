@@ -1,0 +1,64 @@
+#!/usr/bin/bash
+
+echo "change hostname"
+hostnamectl set-hostname vg-cplane
+
+echo "install dependencies"
+apt-get update
+apt-get install -y iw
+
+echo "install the container runtime"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt install -y containerd.io
+
+echo "configure container to start with cgroups"
+# https://github.com/kubernetes/kubeadm/issues/2792
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+sed -i 's,registry.k8s.io/pause:3.6,registry.k8s.io/pause:3.9,' /etc/containerd/config.toml
+systemctl restart containerd
+
+echo "install kubes"
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+apt-get update
+apt-get install -y kubelet kubeadm kubectl 
+apt-mark hold kubelet kubeadm kubectl
+
+echo "disable app armor"
+systemctl stop apparmor
+systemctl disable apparmor
+
+echo "disable swap"
+swapoff /swap.img
+rm /swap.img
+cat /etc/fstab | sed '/swap\.img/d' > /etc/fstab.new
+mv /etc/fstab /etc/fstab.old
+mv /etc/fstab.new /etc/fstab
+
+echo "enable br_netfilter"
+modprobe br_netfilter
+echo "br_netfilter" >> /etc/module
+echo "br_netfilter" >> /etc/modules-load.d/containerd.conf 
+
+echo "enable overlay"
+modprobe overlay
+echo "overlay" >> /etc/module
+echo "overlay" >> /etc/modules-load.d/containerd.conf 
+
+echo "enable IP forwarding"
+sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+sysctl --system
+
+#echo "init"
+#kubeadm init
+
+echo "root config"
+echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /root/.bashrc
+echo -e "\nsudo su -l root" >> /home/vagrant/.bashrc
