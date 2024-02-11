@@ -57,7 +57,7 @@ EOF
 sysctl --system
 
 #echo "init"
-#kubeadm init
+kubeadm init
 
 echo "root config"
 echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /root/.bashrc

@@ -4,7 +4,7 @@
 
 Get `kubectl` to talk to the Vagrant VM control plane.
 
-`kubectl --kubeconfig=vagrant.kube.config cluster-info` should work as expected.
+`kubectl cluster-info` should work as expected, from the host, to the guest VM control place.
 
 ## Docs
 
@@ -28,10 +28,4 @@ Get `kubectl` to talk to the Vagrant VM control plane.
 ```
 vagrant up && vagrant ssh
 kubectl cluster-info
-```
-
-Need to fix the container runtime not ready
-
-```
-Feb 08 01:41:28 vg-cplane kubelet[703]: E0208 01:41:28.897131     703 kubelet.go:2892] "Container runtime network not ready" networkReady="NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized"
 ```
