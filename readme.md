@@ -8,7 +8,7 @@ Time to go back to the night lab.
 
 ## Folder structure
 
-This repository is an archive of my "labs", order by start date format "YYYY-MM-DD". Each include a readme.md describing the lab.
+This repository is an archive of my "labs", order by start date format "YY-MM-DD". Each include a readme.md describing the lab.
 
 ## Learning resources
 
