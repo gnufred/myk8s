@@ -1,0 +1,30 @@
+---
+- name: Add Docker GPG key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repository
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
+    state: present
+    filename: docker
+
+- name: Install containerd
+  ansible.builtin.apt:
+    name: containerd.io=1.6.28-1
+    state: present
+
+- name: Hold containerd
+  ansible.builtin.dpkg_selections:
+    name: containerd
+    selection: hold
+
+# Fix: unable to create a new DNS service: rpc error: code = Unknown desc = malformed header: missing HTTP content-type
+# https://github.com/kubernetes/kubeadm/issues/2792
+- name: Copy containerd configuration
+  ansible.builtin.template:
+    src: config.toml
+    dest: /etc/containerd/config.toml
+  notify: 
+    - Restart containerd
