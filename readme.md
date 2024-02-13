@@ -1,16 +1,29 @@
 # My Kubernetes journey
 
-My 2024 New Year resolution was to end my career as a Kubernetes developer (one who wrote the Kubernetes codebase).
+My 2024 New Year resolution is: Become a Kubernetes developer (one who writes Kubernetes code).
 
-When I started learning "the Internet" more than 20 years ago, HTML was somewhat usable, CSS wasn't a thing yet, and PHP 3 had had just been released. I made a lot of progress since then, but I missed the Golang, and Kubernetes train. But not for long...
+When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP 3 just released. I made a lot of progress since, but I missed the Golang, and Kubernetes train. But not for long...
 
-Time to go back to the night lab.
+Time to go back to the night lab! 🌘 🖥
 
-## Folder structure
+## Labs
 
-This repository is an archive of my "labs", order by start date format "YY-MM-DD". Each include a readme.md describing the lab.
+### [ansible kubeadm init](./24-02-13_kubeadm-init-ansible/)
 
-## Learning resources
+Covert each steps of the `kubeadm init` processes into Ansible roles, in a new playbook. Provision a Vagrant VM where `kubectl cluster-info` runs as expected.
 
-* https://learning.edx.org/course/course-v1:LinuxFoundationX+LFS158x+1T2022/home
-* https://github.com/kelseyhightower/kubernetes-the-hard-way
+### [ansible pre init](./24-02-12_ctl-ansible/)
+
+Convert the Vagrant bash script to an Ansible playbook, where `kubeadm init` finishes.
+
+### [kubectl cluster-info](./24-02-07_kubectl-api/)
+
+Provision a Vagrant VM via bash script, where `kubectl cluster-info` runs as expected.
+
+### [kubeadm init](./24-02-06_kubeadm-init/)
+
+Provision a Vagrant VM with a bash script where `kubeadm init` finishes.
+
+### [Install kubectl](./24-02-05_install-kubectl/)
+
+Write a bash script that install and update the `kubectl` cli on my workstation.
