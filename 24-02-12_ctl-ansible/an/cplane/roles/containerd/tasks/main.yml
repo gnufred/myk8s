@@ -20,11 +20,15 @@
     name: containerd
     selection: hold
 
-# Fix: unable to create a new DNS service: rpc error: code = Unknown desc = malformed header: missing HTTP content-type
-# https://github.com/kubernetes/kubeadm/issues/2792
-- name: Copy containerd configuration
+- name: Configure containerd
   ansible.builtin.template:
     src: config.toml
     dest: /etc/containerd/config.toml
   notify: 
     - Restart containerd
+
+- name: Configure crictl 
+  ansible.builtin.template:
+    src: crictl.yaml
+    dest: /etc/crictl.yaml
+

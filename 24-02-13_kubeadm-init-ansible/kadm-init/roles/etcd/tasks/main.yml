@@ -1,0 +1,9 @@
+---
+- name: Check if kubeadm-flags.env exists
+  stat:
+    path: /etc/kubernetes/manifests/etcd.yaml
+  register: etcdyaml
+
+- name: Initialize etcd
+  when: not etcdyaml.stat.exists
+  shell: kubeadm init phase etcd local
