@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [ansible auth](./24-03-15_usr-auth/)
+
+Configure the control plane user authentication via Ansible.
+
 ### [ansible kubeadm init](./24-02-13_kubeadm-init-ansible/)
 
 Covert each steps of the `kubeadm init` processes into Ansible roles, in a new playbook. Provision a Vagrant VM where `kubectl cluster-info` runs as expected.

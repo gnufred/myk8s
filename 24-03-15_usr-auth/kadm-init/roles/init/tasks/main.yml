@@ -1,0 +1,22 @@
+---
+- name: Check kubelet version
+  import_tasks: check-version.yml
+  vars:
+    bin: kubelet
+    shell: kubelet --version|grep -oE 'v.*$'
+    version: v1.29.1
+
+- name: Check kubeadm version
+  import_tasks: check-version.yml
+  vars:
+    bin: kubeadm 
+    shell: kubeadm version|grep -oE 'GitVersion:"[^"]*"'|grep -oE 'v.*[^"]'
+    version: v1.29.1
+
+- name: Check kubectl version
+  import_tasks: check-version.yml
+  vars:
+    bin: kubectl
+    shell: kubectl version 2> /dev/null |head -n1|grep -oE 'v.*[^"]'
+    version: v1.29.1
+

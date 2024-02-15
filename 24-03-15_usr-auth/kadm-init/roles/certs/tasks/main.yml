@@ -1,0 +1,8 @@
+---
+- name: Count certs
+  shell: find /etc/kubernetes/pki -type f|wc -l
+  register: k8s_certs_count
+
+- name: Generate certs
+  when: k8s_certs_count.stdout != '22'
+  shell: kubeadm init phase certs all

@@ -1,0 +1,9 @@
+- name: "Install {{ package }}={{ version }}"
+  ansible.builtin.apt:
+    name: "{{ package }}={{ version }}"
+    state: present
+
+- name: "Hold {{ package }}"
+  ansible.builtin.dpkg_selections:
+    name: "{{ package }}"
+    selection: hold
