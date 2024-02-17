@@ -1,0 +1,8 @@
+---
+- name: Count config files
+  shell: find /etc/kubernetes -type f -name '*.conf'|wc -l 
+  register: k8s_confs_count
+
+- name: Generate config files
+  when: k8s_confs_count.stdout != '5'
+  shell: kubeadm init phase kubeconfig all

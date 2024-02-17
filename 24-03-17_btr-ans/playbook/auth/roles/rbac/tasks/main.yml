@@ -1,0 +1,10 @@
+---
+- name: Copy RBAC manifests
+  template:
+    src: "{{ item }}.yaml"
+    dest: "/etc/kubernetes/manifests/rbac/{{ user }}.yaml"
+  loop:
+    - bindings
+
+- name: Apply
+  shell: /etc/kubernetes/run/apply "/etc/kubernetes/manifests/rbac/{{ user }}.yaml"

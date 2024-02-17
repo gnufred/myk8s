@@ -1,0 +1,6 @@
+#!/bin/bash
+file="$1"
+export KUBECONFIG=$(cat /etc/kubernetes/var/kubeconfig)
+kubectl apply \
+  --context=kubernetes-admin@kubernetes \
+  -f "$file"

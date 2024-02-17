@@ -1,0 +1,8 @@
+---
+- name: Save var kubeconfig
+  shell: echo '/etc/kubernetes/admin.conf' > cat /etc/kubernetes/var/kubeconfig
+
+- name: Update root bashrc 
+  lineinfile:
+    line: export KUBECONFIG=$(cat /etc/kubernetes/var/kubeconfig)
+    dest: /root/.bashrc

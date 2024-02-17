@@ -1,0 +1,36 @@
+---
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
+    state: present
+    filename: docker
+
+- name: Install containerd
+  apt:
+    name: containerd.io=1.6.28-1
+    state: present
+
+- name: Hold containerd
+  dpkg_selections:
+    name: containerd
+    selection: hold
+
+- name: Configure containerd
+  copy:
+    src: config.toml
+    dest: /etc/containerd/config.toml
+
+- name: Configure crictl 
+  copy:
+    src: crictl.yaml
+    dest: /etc/crictl.yaml
+
+- name: Restart containerd
+  service:
+    name: containerd
+    state: restarted

@@ -1,0 +1,8 @@
+---
+- name: "Get {{ bin }} version"
+  shell: " {{ shell }}"
+  register: binver
+
+- name: "Check {{ bin }} version is {{ version }}"
+  when: binver.stdout != version
+  fail: "kubelet {{ binver.stdout }}, want {{ version }}"

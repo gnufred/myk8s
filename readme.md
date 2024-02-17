@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [refactor everything](./24-03-17_btr-ans/)
+
+Refactor everything I've done so far. Everything is now absolutely perfect!
+
 ### [ansible auth](./24-03-15_usr-auth/)
 
 Configure the control plane user authentication via Ansible.
