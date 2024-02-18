@@ -1,0 +1,16 @@
+---
+# We need to wait before using `kubectl wait`.
+# The provisioning goes too fast and the pods are not even
+# created when we call `kubectl wait` so it fails immediately.
+- name: Wait for init process to create pods
+  pause:
+    seconds: 10
+
+- name: Kubectl wait
+  shell: |
+    export KUBECONFIG=$(cat /etc/kubernetes/var/kubeconfig)
+    kubectl wait \
+      --for=condition=Ready pods \
+      --namespace=kube-system \
+      --selector tier=control-plane \
+      --timeout=3m

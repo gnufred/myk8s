@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [ufw: firewall](./24-03-18_ufw/)
+
+Add UFW rules to the control plane nodes.
+
 ### [refactor everything](./24-03-17_btr-ans/)
 
 Refactor everything I've done so far. Everything is now absolutely perfect!

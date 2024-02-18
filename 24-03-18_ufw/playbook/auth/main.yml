@@ -1,0 +1,10 @@
+- name: Create and configure the admin user
+  hosts: myk8s
+  become: true
+  become_user: root
+
+  vars:
+    user: admin
+  roles:
+    - {role: rbac, tags: role_rbac }
+    - {role: certs, tags: role_certs }

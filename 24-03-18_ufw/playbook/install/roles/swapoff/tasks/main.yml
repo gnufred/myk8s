@@ -1,0 +1,23 @@
+- name: Check if swap file exists
+  stat:
+    path: /swap.img
+  register: swapimg
+
+- name: Disable swap
+  when: swapimg.stat.exists
+  shell: swapoff /swap.img
+  ignore_errors: true
+
+- name: Delete swap.img
+  when: swapimg.stat.exists
+  file:
+    path: /swap.img
+    state: absent
+
+- name: Remove swap.img from fstab
+  when: swapimg.stat.exists
+  replace:
+    path: /etc/fstab
+    regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+    replace: '# \1'
+

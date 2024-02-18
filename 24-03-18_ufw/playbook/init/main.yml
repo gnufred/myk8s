@@ -1,0 +1,16 @@
+- name: Initialize Kubernetes control plane
+  hosts: myk8s
+  become: true
+  become_user: root
+
+  roles:
+    - {role: init, tags: role_init }
+    - {role: preflight, tags: role_preflight }
+    - {role: certs, tags: role_certs }
+    - {role: config, tags: role_config }
+    - {role: kubelet, tags: role_kubelet }
+    - {role: cplane, tags: role_cplane }
+    - {role: etcd, tags: role_etcd }
+    - {role: upload, tags: role_upload }
+    - {role: wait, tags: role_wait }
+    - {role: run, tags: role_run }

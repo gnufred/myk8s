@@ -1,0 +1,10 @@
+- name: "Install {{ package }}={{ version }}"
+  apt:
+    name: "{{ package }}={{ version }}"
+    state: present
+
+- name: "Hold {{ package }}"
+  dpkg_selections:
+    name: "{{ package }}"
+    selection: hold
+
