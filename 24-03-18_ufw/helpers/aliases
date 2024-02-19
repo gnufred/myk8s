@@ -1,7 +1,11 @@
 #!/bin/bash
+ 
 # This script is meant to be sourced.
 # Running it won't do anything.
 
+
+# Alias `run/kubectl` to `kc` in the
+# Vagrant folder.
 function kc(){
 	if [[ -f run/kubectl ]]; then
 		run/kubectl "$@"
@@ -10,6 +14,8 @@ function kc(){
 	fi
 }
 
+# Alias `run/playbook` to `pb` in the
+# Vagrant folder.
 function pb(){
 	if [[ -f run/playbook ]]; then
 		run/playbook "$@"
@@ -17,3 +23,13 @@ function pb(){
 		echo "cannot find run/playbook"
 	fi
 }
+
+# Vagrant aliases.
+alias vgi='vagrant init'
+alias vgs='vagrant ssh'
+function vgc(){ vagrant ssh -c "$1"; }
+alias vgh='vagrant halt'
+alias vgr='vagrant reload'
+alias vgu='vagrant up'
+alias vgp='vagrant up --provision'
+alias vgd='vagrant destroy --force'

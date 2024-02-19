@@ -22,10 +22,6 @@ Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
 
 ### Aliases
 
-You can source graceful aliases:
-
 ```
 source helpers/aliases
-pb # to run/playbook
-kc # to run/kubectl
 ```
