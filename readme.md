@@ -28,7 +28,7 @@ Covert each steps of the `kubeadm init` processes into Ansible roles, in a new p
 
 Convert the Vagrant bash script to an Ansible playbook, where `kubeadm init` finishes.
 
-### [kubectl cluster-info](./24-02-07_kubectl-api/)
+### 24-02-07: [kubectl cluster-info](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-07/2024-02-07_kubectl-api?ref_type=tags)
 
 Provision a Vagrant VM via bash script, where `kubectl cluster-info` runs as expected.
 

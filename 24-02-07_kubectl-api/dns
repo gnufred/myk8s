@@ -1,9 +1,0 @@
-#!/usr/bin/bash
-
-echo "limit DNS resolver to 3 entries"
-# https://github.com/canonical/microk8s/issues/3786
-sed -i 's/DNS=4.2.2.1 4.2.2.2 208.67.220.220/DNS=1.1.1.1/' /etc/systemd/resolved.conf
-sed -i '/DNS=4/d' /run/systemd/network/10-netplan-eth0.network
-sed -i 's/DNS=208.67.220.220/DNS=1.1.1.1/' /run/systemd/network/10-netplan-eth0.network
-systemctl restart systemd-resolved
-resolvectl dns 2 1.1.1.1
