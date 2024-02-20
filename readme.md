@@ -20,7 +20,7 @@ Refactor everything I've done so far. Everything is now absolutely perfect!
 
 Configure the control plane user authentication via Ansible.
 
-### [ansible kubeadm init](./24-02-13_kubeadm-init-ansible/)
+### 24-02-13: [ansible kubeadm init](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-13/24-02-13_kubeadm-init-ansible?ref_type=tags)
 
 Covert each steps of the `kubeadm init` processes into Ansible roles, in a new playbook. Provision a Vagrant VM where `kubectl cluster-info` runs as expected.
 
