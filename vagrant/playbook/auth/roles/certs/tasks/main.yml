@@ -2,9 +2,6 @@
 # CloudFlare's PKI/TLS toolkit
 # https://github.com/cloudflare/cfssl
 ---
-- name: Set username variable file
-  shell: "echo '{{ user }}' > /etc/kubernetes/var/uname"
-
 - name: Create config directories 
   file:
     path: "/etc/kubernetes/{{ item }}"
@@ -19,10 +16,14 @@
     dest: /etc/kubernetes/run/certs
     mode: 500
   loop:
-    - gen
+    - generate
+    - dump-api-ca
+
+- name: Set username variable file
+  shell: "echo '{{ user }}' > /etc/kubernetes/var/uname"
 
 - name: Generate cert files
-  shell: /etc/kubernetes/run/certs/gen
+  shell: /etc/kubernetes/run/certs/generate
 
 - name: Download cert files
   tags: get-certs
@@ -33,3 +34,20 @@
   loop:
     - crt
     - key
+
+- name: Check if API server CA exists
+  stat:
+    path: /etc/kubernetes/pki/apiserver-ca.crt
+  register: apicacrt
+
+- name: Dump the API server CA
+  shell: /etc/kubernetes/run/certs/dump-api-ca
+  when: not apicacrt.stat.exists
+
+- name: Download ca cert files
+  tags: get-certs
+  fetch:
+    src: /etc/kubernetes/pki/apiserver-ca.crt
+    dest: ../../.certs/api-ca.crt
+    flat: true
+

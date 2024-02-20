@@ -13,4 +13,4 @@
       --for=condition=Ready pods \
       --namespace=kube-system \
       --selector tier=control-plane \
-      --timeout=3m
+      --timeout=30s

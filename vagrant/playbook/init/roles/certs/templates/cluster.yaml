@@ -1,0 +1,7 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+certificatesDir: /etc/kubernetes/pki
+apiServer:
+  certSANs:
+    - "localhost"
+    - "127.0.0.1"

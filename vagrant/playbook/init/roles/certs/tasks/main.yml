@@ -1,8 +1,20 @@
 ---
-- name: Count certs
-  shell: find /etc/kubernetes/pki -type f|wc -l
-  register: k8s_certs_count
+- name: Copy cluster.yaml
+  template:
+    src: cluster.yaml
+    dest: /etc/kubernetes/manifests
 
 - name: Generate certs
-  when: k8s_certs_count.stdout != '22'
-  shell: kubeadm init phase certs all
+  shell: "kubeadm init phase certs {{ item }}"
+  loop:
+    - ca
+    - apiserver --config /etc/kubernetes/manifests/cluster.yaml
+    - apiserver-kubelet-client
+    - front-proxy-ca
+    - front-proxy-client
+    - etcd-ca
+    - etcd-server
+    - etcd-peer
+    - etcd-healthcheck-client
+    - apiserver-etcd-client
+    - sa

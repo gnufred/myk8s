@@ -4,8 +4,6 @@ export KUBECONFIG=$(cat /etc/kubernetes/var/kubeconfig)
 USER=$(cat /etc/kubernetes/var/uname)
 PROF=kubernetes
 CONF=/etc/cluster/certs/$USER.json
-CACRT=/etc/kubernetes/pki/apiserver-kubelet-client.crt
-CAKEY=/etc/kubernetes/pki/apiserver-kubelet-client.key
 USCRT=/etc/kubernetes/pki/user/$USER.crt
 USCSR=/etc/kubernetes/pki/user/$USER.csr
 USKEY=/etc/kubernetes/pki/user/$USER.key
@@ -27,7 +25,8 @@ spec:
   usages:
   - client auth
 EOF
-kubectl certificate approve $REQUEST
+
+kubectl certificate approve $REQUEST && sleep 1 && \
 kubectl get csr $REQUEST -o jsonpath='{.status.certificate}' | base64 -d > $USCRT
 
 kubectl config set-credentials $USER \

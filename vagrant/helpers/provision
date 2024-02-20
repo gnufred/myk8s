@@ -5,4 +5,4 @@ run/playbook -b ufw && \
 run/playbook -b install && \
 run/playbook -b init && \
 run/playbook -b auth && \
-run/kubectl cluster-info
+echo "Provisioning completed."

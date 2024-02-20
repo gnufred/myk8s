@@ -1,12 +1,17 @@
 #!/bin/bash
 
+SERVER='localhost'
+PORT=$(grep 'forwarded_port' Vagrantfile|cut -d' ' -f8)
+
 USER=$(cat playbook/auth/main.yml|grep ' user:'|awk '{print $2}')
-SERVER='https://127.0.0.1:6443'
+
+CACRT=".certs/api-ca.crt"
 USCRT=".certs/$USER.crt"
 USKEY=".certs/$USER.key"
+
 kubectl \
+	--server="https://$SERVER:$PORT" \
+	--certificate-authority "$CACRT" \
 	--client-certificate "$USCRT" \
 	--client-key "$USKEY" \
-	--server=$SERVER\
-	--insecure-skip-tls-verify \
 	"$@"

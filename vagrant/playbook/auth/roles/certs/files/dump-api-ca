@@ -1,0 +1,9 @@
+#!/bin/bash
+export KUBECONFIG=$(cat /etc/kubernetes/var/kubeconfig)
+
+APICA=/etc/kubernetes/pki/apiserver-ca.crt
+
+kubectl config view \
+	--raw -o \
+	jsonpath='{.clusters[0].cluster.certificate-authority-data}' | \
+	base64 -d > "$APICA"
