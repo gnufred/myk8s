@@ -1,5 +1,0 @@
----
-- name: Copy cluster blinders
-  ansible.builtin.template:
-    src: bindings.yaml
-    dest: /etc/cluster/cplane/bindings.yaml

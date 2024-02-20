@@ -1,9 +1,0 @@
----
-- name: apply config
-  shell: |
-    kubectl \
-      --kubeconfig=/etc/kubernetes/admin.conf \
-      --context=kubernetes-admin@kubernetes \
-        apply \
-          --recursive \
-          -f /etc/cluster/cplane/

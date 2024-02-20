@@ -1,8 +1,0 @@
----
-- name: Count manifest files
-  shell: find /etc/kubernetes/manifests -type f -name '*.yaml'|wc -l 
-  register: k8s_manifs_count
-
-- name: Configure and instanciate the control plane 
-  when: k8s_manifs_count.stdout != '3'
-  shell: kubeadm init phase control-plane all

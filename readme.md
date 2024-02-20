@@ -16,7 +16,7 @@ Add UFW rules to the control plane nodes.
 
 Refactor everything I've done so far. Everything is now absolutely perfect!
 
-### [ansible auth](./24-03-15_usr-auth/)
+### 24-03-15: [ansible auth](https://gitlab.com/gnufred/myk8s/-/tree/2024-03-15/24-03-15_usr-auth?ref_type=tags)
 
 Configure the control plane user authentication via Ansible.
 
