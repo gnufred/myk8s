@@ -1,7 +1,0 @@
----
-- name: Disable app armor 
-  ansible.builtin.systemd_service:
-    name: apparmor
-    state: stopped
-    enabled: false
-

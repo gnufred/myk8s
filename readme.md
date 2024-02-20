@@ -12,7 +12,7 @@ Time to go back to the night lab! 🌘 🖥
 
 Add UFW rules to the control plane nodes.
 
-### [refactor everything](./24-03-17_btr-ans/)
+### 24-03-17: [refactor everything](https://gitlab.com/gnufred/myk8s/-/tree/2024-03-17/24-03-17_btr-ans?ref_type=tags)
 
 Refactor everything I've done so far. Everything is now absolutely perfect!
 
