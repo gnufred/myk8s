@@ -36,6 +36,6 @@ Provision a Vagrant VM via bash script, where `kubectl cluster-info` runs as exp
 
 Provision a Vagrant VM with a bash script where `kubeadm init` finishes.
 
-### [Install kubectl](./24-02-05_install-kubectl/)
+### 24-02-05: [Install kubectl](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-05/2024-02-05_install_kubectl?ref_type=tags)
 
 Write a bash script that install and update the `kubectl` cli on my workstation.
