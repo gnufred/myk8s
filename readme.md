@@ -32,7 +32,7 @@ Convert the Vagrant bash script to an Ansible playbook, where `kubeadm init` fin
 
 Provision a Vagrant VM via bash script, where `kubectl cluster-info` runs as expected.
 
-### [kubeadm init](./24-02-06_kubeadm-init/)
+### 24-02-06: [kubeadm init](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-06/2024-02-06_kubeadm-init?ref_type=tags)
 
 Provision a Vagrant VM with a bash script where `kubeadm init` finishes.
 
