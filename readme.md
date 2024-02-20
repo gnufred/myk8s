@@ -8,15 +8,15 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
-### 24-03-18: [ufw: firewall](https://gitlab.com/gnufred/myk8s/-/tree/2024-03-18/24-03-18_ufw?ref_type=tags)
+### 24-02-18: [ufw: firewall](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-18/24-03-18_ufw?ref_type=tags)
 
 Add UFW rules to the control plane nodes.
 
-### 24-03-17: [refactor everything](https://gitlab.com/gnufred/myk8s/-/tree/2024-03-17/24-03-17_btr-ans?ref_type=tags)
+### 24-02-17: [refactor everything](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-17/24-03-17_btr-ans?ref_type=tags)
 
 Refactor everything I've done so far. Everything is now absolutely perfect!
 
-### 24-03-15: [ansible auth](https://gitlab.com/gnufred/myk8s/-/tree/2024-03-15/24-03-15_usr-auth?ref_type=tags)
+### 24-02-15: [ansible auth](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-15/24-03-15_usr-auth?ref_type=tags)
 
 Configure the control plane user authentication via Ansible.
 
