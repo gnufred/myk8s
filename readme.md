@@ -8,7 +8,7 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
-### [ufw: firewall](./24-03-18_ufw/)
+### 24-03-18: [ufw: firewall](https://gitlab.com/gnufred/myk8s/-/tree/2024-03-18/24-03-18_ufw?ref_type=tags)
 
 Add UFW rules to the control plane nodes.
 

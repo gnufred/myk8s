@@ -1,14 +1,12 @@
-# Uncomplicated Firewall
+# MyK8s Vagrant lab
 
-Goal: Configure UFW on the control plane node.
+Latest Vagrant configuration for my K8s labs.
 
 ## Usage
 
-### Provision the VM
+### Provision
 
-```
-helpers/provision
-```
+Run `helpers/provision`.
 
 ### Playbook
 
@@ -22,6 +20,4 @@ Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
 
 ### Aliases
 
-```
-source helpers/aliases
-```
+Run `source helpers/aliases`.
