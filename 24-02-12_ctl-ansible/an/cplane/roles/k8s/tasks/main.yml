@@ -1,5 +1,0 @@
----
-- name: Root config file
-  lineinfile:
-    line: export KUBECONFIG=/etc/kubernetes/admin.conf
-    dest: /root/.bashrc

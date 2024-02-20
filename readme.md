@@ -24,7 +24,7 @@ Configure the control plane user authentication via Ansible.
 
 Covert each steps of the `kubeadm init` processes into Ansible roles, in a new playbook. Provision a Vagrant VM where `kubectl cluster-info` runs as expected.
 
-### [ansible pre init](./24-02-12_ctl-ansible/)
+### 24-02-12: [ansible pre init](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-12/24-02-12_ctl-ansible?ref_type=tags)
 
 Convert the Vagrant bash script to an Ansible playbook, where `kubeadm init` finishes.
 
