@@ -8,6 +8,10 @@
   ufw:
     state: reset
 
+- name: Enable UFW
+  ufw:
+    state: enabled
+
 - name: Allow SSH
   ufw:
     rule: allow
@@ -28,10 +32,7 @@
     - outgoing
     - routed
 
-- name: Enable loggin
+- name: Enable logging
   ufw:
     logging: 'on'
 
-- name: Enable UFW
-  ufw:
-    state: enabled

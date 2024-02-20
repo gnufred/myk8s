@@ -10,3 +10,4 @@
   roles:
     - {role: service, tags: role_service}
     - {role: wan, tags: role_wan}
+    - {role: cplane, tags: role_cplane}
