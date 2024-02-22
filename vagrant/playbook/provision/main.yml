@@ -19,12 +19,4 @@
         state: directory
         path: "/etc/kubernetes/{{ item }}"
       loop:
-        - manifests/rbac
-        - run
         - var
-
-    - name: Save var hostname
-      shell: echo myk8s > /etc/kubernetes/var/hostname 
-
-    - name: Save kubeconfig
-      shell: echo "/etc/kubernetes/admin.conf" > /etc/kubernetes/var/kubeconfig

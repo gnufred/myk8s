@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### 2024-02-20: [Improve](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-20/?ref_type=tags)
+
+Secure host/guest TLS. Ansible refactoring. Other stuff.
+
 ### 2024-02-18: [UFW firewall](https://gitlab.com/gnufred/myk8s/-/tree/2024-02-18/24-03-18_ufw?ref_type=tags)
 
 Add UFW rules to the control plane nodes.

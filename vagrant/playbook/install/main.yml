@@ -11,4 +11,4 @@
     - {role: kernel, tags: role_kernel} 
     - {role: containerd, tags: role_containerd} 
     - {role: kubes, tags: role_kubes} 
-    - {role: config, tags: role_config} 
+    - {role: python, tags: role_python} 

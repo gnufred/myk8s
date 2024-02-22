@@ -1,0 +1,17 @@
+---
+- name: Allow Vagrant to read kubeconfig
+  file:
+    path: /etc/kubernetes/admin.conf
+    owner: root
+    group: vagrant
+    mode: '640'
+
+- name: Update Vagrant bashrc 
+  lineinfile:
+    line: export KUBECONFIG=/etc/kubernetes/admin.conf
+    dest: /home/vagrant/.bashrc
+
+- name: Update root bashrc 
+  lineinfile:
+    line: export KUBECONFIG=/etc/kubernetes/admin.conf
+    dest: /root/.bashrc

@@ -41,8 +41,8 @@
   register: apicacrt
 
 - name: Dump the API server CA
-  shell: /etc/kubernetes/run/certs/dump-api-ca
   when: not apicacrt.stat.exists
+  shell: /etc/kubernetes/run/certs/dump-api-ca
 
 - name: Download ca cert files
   tags: get-certs

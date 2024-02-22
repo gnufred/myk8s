@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.define "myk8s"
   config.vm.box = "generic/ubuntu2204"
-  config.vm.network "forwarded_port", guest: 6443, host: 6445
+  config.vm.network "forwarded_port", guest: 6443, host: 6446
   config.vm.provider "libvirt" do |v|
     v.memory = 1024
     v.cpus = 1

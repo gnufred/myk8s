@@ -13,4 +13,3 @@
     - {role: etcd, tags: role_etcd }
     - {role: upload, tags: role_upload }
     - {role: wait, tags: role_wait }
-    - {role: run, tags: role_run }

@@ -1,0 +1,13 @@
+- name: Create default namespace policies
+  kubernetes.core.k8s:
+    kubeconfig: /etc/kubernetes/admin.conf
+    state: present
+    definition:
+      apiVersion: v1
+      kind: ResourceQuota
+      metadata:
+        name: pods
+        namespace: default
+      spec:
+        hard:
+          pods: "0"

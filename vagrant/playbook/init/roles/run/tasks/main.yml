@@ -1,7 +1,0 @@
----
-- name: Copy helper scripts
-  copy:
-    src: "{{ item }}"
-    dest: /etc/kubernetes/run
-    mode: 500
-  loop: "{{ query('fileglob', '*') }}"
