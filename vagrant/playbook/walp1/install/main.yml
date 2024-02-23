@@ -1,0 +1,11 @@
+---
+- name: Configure OS and install K8s packages
+  hosts: walp1
+  become: true
+  become_user: root
+
+  roles:
+    - {role: host, tags: role_host} 
+    - {role: kernel, tags: role_kernel}
+    - {role: containerd, tags: role_containerd}
+    - {role: kubes, tags: role_kubes}

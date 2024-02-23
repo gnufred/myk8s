@@ -1,9 +1,9 @@
 #!/bin/bash
 
 SERVER='localhost'
-PORT=$(grep 'forwarded_port' Vagrantfile|cut -d' ' -f8)
+PORT=$(grep 'myk8s.vm.network "forwarded_port"' Vagrantfile|awk '{print $6}')
 
-USER=$(cat playbook/auth/main.yml|grep ' user:'|awk '{print $2}')
+USER=$(cat playbook/myk8s/auth/main.yml|grep ' user:'|awk '{print $2}')
 
 CACRT=".certs/api-ca.crt"
 USCRT=".certs/$USER.crt"

@@ -27,7 +27,7 @@ OPTIONS:
 # https://linuxcommand.org/lc3_wss0120.php
 while [ "$1" != "" ]; do
     case $1 in
-		-h | --help ) usage; exit;;
+		     --help ) usage; exit;;
         -p | --playbook ) shift; PLAYBOOK="$1";;
         -b | --book ) shift; BOOK="$1";;
         -r | --role ) shift; TAGS="role_$1";;

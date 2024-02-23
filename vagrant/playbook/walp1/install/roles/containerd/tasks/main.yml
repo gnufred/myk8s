@@ -1,0 +1,16 @@
+---
+- name: "Install containerd packages"
+  apk:
+    name: "{{ item }}"
+    repository: "{{ repo }}"
+    state: present
+  vars:
+    repo: http://dl-cdn.alpinelinux.org/alpine/edge/community/
+  loop:
+    - containerd
+
+- name: Enable containerd
+  service:
+    name: containerd
+    state: started
+    enabled: yes

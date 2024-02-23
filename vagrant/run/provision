@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# print help
+usage() {
+	echo "Provision Vagrant VMs
+
+USAGE:
+    run/provision <HOST> (optional)
+    run/provision --help
+
+HOST:
+    Must be a hostname or a empty value.
+	Empty value means all hosts."
+}
+
+if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+	usage
+	exit
+fi
+
+HOST="$1"
+
+if [[ -z "$HOST" ]] || [[ "$HOST" == "myk8s" ]]; then 
+	vagrant up --provision myk8s && \
+	run/playbook -b myk8s/ufw && \
+	run/playbook -b myk8s/install && \
+	run/playbook -b myk8s/init && \
+	run/playbook -b myk8s/auth && \
+	run/playbook -b myk8s/defaults && \
+	echo "[myk8s] provisioning completed."
+fi
+
+if [[ -z "$HOST" ]] || [[ "$HOST" == "walp1" ]]; then 
+	vagrant up --provision walp1 && \
+	run/playbook -b walp1/install && \
+	echo "[walp1] provisioning completed."
+fi

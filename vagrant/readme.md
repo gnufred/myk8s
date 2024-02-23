@@ -6,7 +6,7 @@ Latest Vagrant configuration for my K8s labs.
 
 ### Provision
 
-Run `helpers/provision`.
+Use `run/provision`.
 
 ### Playbook
 
@@ -20,4 +20,4 @@ Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
 
 ### Aliases
 
-Run `source helpers/aliases`.
+Use `source run/aliases`.
