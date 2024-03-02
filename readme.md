@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [2024-03-02](//gitlab.com/gnufred/myk8s/-/tree/2024-02-23/vagrant): Alpine control plane
+
+Convert the Ubuntu control plane to an Alpine Linux control plane.
+
 ### [2024-02-23](//gitlab.com/gnufred/myk8s/-/tree/2024-02-23/vagrant): Alpine worker
 
 Add an Alpine Linux worker node.

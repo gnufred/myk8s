@@ -1,7 +1,0 @@
----
-- name: Allow kubectl
-  ufw:
-    rule: allow
-    port: 6443
-    proto: tcp
-    direction: in

@@ -16,23 +16,26 @@ HOST:
 if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
 	usage
 	exit
+else
+	HOST="$1"
 fi
 
-HOST="$1"
-
-if [[ -z "$HOST" ]] || [[ "$HOST" == "myk8s" ]]; then 
-	vagrant up --provision myk8s && \
-	run/playbook -b myk8s/ufw && \
-	run/playbook -b myk8s/install && \
-	run/playbook -b myk8s/init && \
-	run/playbook -b myk8s/auth && \
-	run/playbook -b myk8s/defaults && \
-	echo "[myk8s] provisioning completed."
+NAME="cp1"
+if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
+	vagrant up --provision $NAME && \
+	run/playbook -h $NAME -b install && \
+	run/playbook -h $NAME -b ufw && \
+	run/playbook -h $NAME -b init && \
+	run/playbook -h $NAME -b auth && \
+	run/playbook -h $NAME -b bash && \
+	echo "[$NAME] provisioning completed."
 fi
 
-if [[ -z "$HOST" ]] || [[ "$HOST" == "walp1" ]]; then 
-	vagrant up --provision walp1 && \
-	run/playbook -b walp1/install && \
-	run/playbook -b walp1/join && \
-	echo "[walp1] provisioning completed."
+NAME="wo1"
+if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
+	vagrant up --provision $NAME && \
+	run/playbook -h $NAME -b ufw && \
+	run/playbook -h $NAME -b install && \
+	run/playbook -b join && \
+	echo "[$NAME] provisioning completed."
 fi

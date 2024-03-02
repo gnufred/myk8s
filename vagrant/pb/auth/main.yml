@@ -1,0 +1,10 @@
+- name: Create and configure the admin user
+  hosts: cp1
+  become: true
+  become_user: root
+
+  vars:
+    sa_user: superadmin
+  roles:
+    - {role: rbac, tags: role_rbac }
+    - {role: certs, tags: role_certs }

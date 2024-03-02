@@ -1,0 +1,14 @@
+---
+- name: Check if cluster.yaml
+  stat:
+    path: /etc/kubernetes/manifests/cluster.yaml
+  register: cluster_yaml
+
+- name: Pull images
+  when: not cluster_yaml.stat.exists
+  shell: kubeadm config images pull
+
+- name: Run pre flight checks
+  when: not cluster_yaml.stat.exists
+  shell: |
+    kubeadm init phase preflight

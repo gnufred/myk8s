@@ -1,0 +1,13 @@
+# Configure Uncomplicated Firewall
+# https://manpages.ubuntu.com/manpages/jammy/en/man8/ufw.8.html
+# https://docs.ansible.com/ansible/latest/collections/community/general/ufw_module.html
+---
+- name: Provision the Vagrant VM
+  hosts: cp1, wo1
+  become: true
+  become_user: root
+
+  roles:
+    - {role: install, tags: role_install}
+    - {role: service, tags: role_service}
+    - {role: rules, tags: role_rules}

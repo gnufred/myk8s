@@ -1,0 +1,11 @@
+---
+- name: Change hostname
+  shell: "hostname {{ hostname }}"
+
+- name: Change hostname file
+  shell: 'echo "{{ hostname }}" > /etc/hostname'
+
+- name: Copy /etc/hosts
+  template:
+    src: hosts
+    dest: /etc/hosts

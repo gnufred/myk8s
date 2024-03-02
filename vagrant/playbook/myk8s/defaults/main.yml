@@ -1,9 +1,0 @@
-- name: Set cluster defaults
-  hosts: myk8s
-  become: true
-  become_user: root
-
-  roles:
-    # default namespace
-    - {role: bash, tags: role_bash }
-    - {role: defspace, tags: role_defspace }

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 SERVER='localhost'
-PORT=$(grep 'myk8s.vm.network "forwarded_port"' Vagrantfile|awk '{print $6}')
-USER=$(grep sa_user "$(find playbook/ -type d -name auth)/main.yml"|grep -oE 'sa_user: .*'|cut -d' ' -f2)
+PORT=$(grep 'cp1.vm.network "forwarded_port"' Vagrantfile|awk '{print $6}')
+USER=$(grep sa_user "$(find pb/ -type d -name auth)/main.yml"|grep -oE 'sa_user: .*'|cut -d' ' -f2)
 
-CACRT=$(find playbook/ -type f -name api-ca.crt)
-USCRT=$(find playbook/ -type f -name "$USER.crt")
-USKEY=$(find playbook/ -type f -name "$USER.key")
+CACRT=$(find pb/ -type f -name api-ca.crt)
+USCRT=$(find pb/ -type f -name "$USER.crt")
+USKEY=$(find pb/ -type f -name "$USER.key")
 
 kubectl \
 	--server="https://$SERVER:$PORT" \
