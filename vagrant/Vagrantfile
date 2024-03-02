@@ -4,8 +4,8 @@ Vagrant.configure("2") do |config|
 		myk8s.vm.box = "generic/ubuntu2204"
 		myk8s.vm.network "forwarded_port", guest: 6443, host: 6446
 		myk8s.vm.provider "libvirt" do |v|
-			v.memory = 1024
-			v.cpus = 1
+			v.memory = 1800
+			v.cpus = 2
 		end
 		myk8s.vm.provision "ansible" do |ansible|
 			ansible.playbook = "playbook/myk8s/provision/main.yml"

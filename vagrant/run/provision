@@ -33,5 +33,6 @@ fi
 if [[ -z "$HOST" ]] || [[ "$HOST" == "walp1" ]]; then 
 	vagrant up --provision walp1 && \
 	run/playbook -b walp1/install && \
+	run/playbook -b walp1/join && \
 	echo "[walp1] provisioning completed."
 fi

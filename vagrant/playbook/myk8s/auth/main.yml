@@ -4,7 +4,7 @@
   become_user: root
 
   vars:
-    user: admin
+    sa_user: superadmin
   roles:
     - {role: rbac, tags: role_rbac }
     - {role: certs, tags: role_certs }

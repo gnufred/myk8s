@@ -1,7 +1,7 @@
 #!/bin/bash
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
-USER=$(cat /etc/kubernetes/var/uname)
+USER=$(cat /etc/kubernetes/var/.sa_user)
 PROF=kubernetes
 CONF=/etc/cluster/certs/$USER.json
 USCRT=/etc/kubernetes/pki/user/$USER.crt

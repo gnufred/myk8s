@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [2024-02-23](//gitlab.com/gnufred/myk8s/-/tree/2024-02-23/vagrant): Alpine worker
+
+Add an Alpine Linux worker node.
+
 ### [2024-02-20](//gitlab.com/gnufred/myk8s/-/tree/2024-02-20/vagrant): Improve
 
 Secure host/guest TLS. Ansible refactoring. Other stuff.

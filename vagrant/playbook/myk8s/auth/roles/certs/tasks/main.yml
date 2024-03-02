@@ -19,8 +19,8 @@
     - generate
     - dump-api-ca
 
-- name: Set username variable file
-  shell: "echo '{{ user }}' > /etc/kubernetes/var/uname"
+- name: Set sa_user variable file
+  shell: "echo '{{ sa_user }}' > /etc/kubernetes/var/.sa_user"
 
 - name: Generate cert files
   shell: /etc/kubernetes/run/certs/generate
@@ -28,26 +28,21 @@
 - name: Download cert files
   tags: get-certs
   fetch:
-    src: "/etc/kubernetes/pki/user/{{ user }}.{{ item }}"
-    dest: "../../.certs/{{ user }}.{{ item }}"
+    src: "/etc/kubernetes/pki/user/{{ sa_user }}.{{ item }}"
+    dest: ".certs/{{ sa_user }}.{{ item }}"
     flat: true
   loop:
     - crt
     - key
 
-- name: Check if API server CA exists
-  stat:
-    path: /etc/kubernetes/pki/apiserver-ca.crt
-  register: apicacrt
-
 - name: Dump the API server CA
-  when: not apicacrt.stat.exists
+  tags: get-certs
   shell: /etc/kubernetes/run/certs/dump-api-ca
 
 - name: Download ca cert files
   tags: get-certs
   fetch:
     src: /etc/kubernetes/pki/apiserver-ca.crt
-    dest: ../../.certs/api-ca.crt
+    dest: .certs/api-ca.crt
     flat: true
 

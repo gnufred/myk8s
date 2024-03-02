@@ -12,4 +12,5 @@
     - {role: cplane, tags: role_cplane }
     - {role: etcd, tags: role_etcd }
     - {role: upload, tags: role_upload }
+    - {role: bootstrap, tags: role_bootstrap }
     - {role: wait, tags: role_wait }

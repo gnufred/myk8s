@@ -17,7 +17,3 @@ Read `run/playbook --help`.
 ### Kubectl
 
 Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
-
-### Aliases
-
-Use `source run/aliases`.

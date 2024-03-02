@@ -1,0 +1,2 @@
+- name: Bootstrap tokens
+  shell: kubeadm init phase bootstrap-token
