@@ -1,0 +1,29 @@
+---
+- name: Install dependencies
+  apk:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - socat
+    - ethtool
+    - iproute2
+    - conntrack-tools
+
+- name: Install kube packages
+  apk:
+    name: "{{ item }}={{ version }}"
+    repository: "{{ repo }}"
+    state: present
+  vars:
+    version: 1.29.1-r0
+    repo: https://dl-cdn.alpinelinux.org/alpine/edge/community/
+  loop:
+    - kubeadm
+    - kubectl
+    - kubelet
+
+- name: Enable kubelet service
+  service:
+    name: kubelet
+    state: started
+    enabled: yes

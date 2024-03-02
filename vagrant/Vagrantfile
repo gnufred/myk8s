@@ -1,28 +1,31 @@
 Vagrant.configure("2") do |config|
 
-	config.vm.define "myk8s" do |myk8s|
-		myk8s.vm.box = "generic/ubuntu2204"
-		myk8s.vm.network "forwarded_port", guest: 6443, host: 6446
-		myk8s.vm.provider "libvirt" do |v|
+	config.vm.define "cp1" do |cp1|
+		cp1.vm.box = "generic/alpine319"
+		cp1.vm.network "forwarded_port", guest: 6443, host: 6447
+		cp1.vm.provider "libvirt" do |v|
 			v.memory = 1800
 			v.cpus = 2
 		end
-		myk8s.vm.provision "ansible" do |ansible|
-			ansible.playbook = "playbook/myk8s/provision/main.yml"
+		cp1.vm.provision "shell" do |shell|
+			shell.path = "pb/alpine319.sh"
+		end
+		cp1.vm.provision "ansible" do |ansible|
+			ansible.playbook = "pb/vagrant.yml"
 		end
 	end
 
-	config.vm.define "walp1" do |walp1|
-		walp1.vm.box = "generic/alpine319"
-		walp1.vm.provider "libvirt" do |v|
+	config.vm.define "wo1" do |wo1|
+		wo1.vm.box = "generic/alpine319"
+		wo1.vm.provider "libvirt" do |v|
 			v.memory = 1800
 			v.cpus = 2
 		end
-		walp1.vm.provision "shell" do |shell|
-			shell.path = "playbook/walp1/provision/main.sh"
+		wo1.vm.provision "shell" do |shell|
+			shell.path = "pb/alpine319.sh"
 		end
-		walp1.vm.provision "ansible" do |ansible|
-			ansible.playbook = "playbook/walp1/provision/main.yml"
+		wo1.vm.provision "ansible" do |ansible|
+			ansible.playbook = "pb/vagrant.yml"
 		end
 	end
 

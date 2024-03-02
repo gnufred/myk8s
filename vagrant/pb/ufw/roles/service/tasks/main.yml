@@ -1,0 +1,33 @@
+---
+- name: Reset UFW
+  ufw:
+    state: reset
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+
+- name: Allow SSH
+  ufw:
+    rule: allow
+    port: ssh
+    proto: tcp
+    direction: in
+
+# On a production cluster, use `deny` for `incoming`.
+# Deny will drop the traffic.
+# On a VM we want the connection to be rejected with
+# an error.
+- name: Reject everything
+  ufw:
+    direction: '{{ item }}'
+    policy: reject
+  loop:
+    - incoming
+    - outgoing
+    - routed
+
+- name: Enable logging
+  ufw:
+    logging: 'on'
+

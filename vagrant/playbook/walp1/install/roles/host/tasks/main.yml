@@ -1,5 +1,0 @@
----
-- name: Copy /etc/hosts
-  template:
-    src: hosts
-    dest: /etc/hosts

@@ -9,10 +9,13 @@ USAGE:
     run/playbook --help
 
 OPTIONS:
+    -h, --host <HOST> string (optional)
+            The playbook to run.
+
     -p, --playbook <PLAYBOOK> string (mandatory)
             The playbook to run.
 
-    -b, --book <PLAYBOOK> string (mandatory)
+    -b, --book <PLAYBOOK> string (special)
             Alias for -p, --playbook.
 
     -r, --role <ROLE> string (optional)
@@ -28,6 +31,7 @@ OPTIONS:
 while [ "$1" != "" ]; do
     case $1 in
 		     --help ) usage; exit;;
+        -h | --host ) shift; HOST="$1";;
         -p | --playbook ) shift; PLAYBOOK="$1";;
         -b | --book ) shift; BOOK="$1";;
         -r | --role ) shift; TAGS="role_$1";;
@@ -44,9 +48,9 @@ if [[ -z "$PLAYBOOK" ]]; then
 	echo "ERROR: Playbook name required."
 	exit
 else
-	PLAYBOOK="playbook/$PLAYBOOK/main.yml"
+	PLAYBOOK="pb/$PLAYBOOK/main.yml"
 fi
 
 # https://docs.ansible.com/ansible/latest/scenario_guides/guide_vagrant.html
 INVENTORY=.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory 
-ansible-playbook -i $INVENTORY $PLAYBOOK ${TAGS:+"--tags" "$TAGS"}
+ansible-playbook -i $INVENTORY $PLAYBOOK ${TAGS:+"--tags" "$TAGS"} ${HOST:+"-l" "$HOST"}
