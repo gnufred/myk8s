@@ -1,5 +1,15 @@
 ---
-- name: "Install containerd packages"
+- name: Create /etc/cni/net.d
+  file:
+    path: /etc/cni/net.d
+    state: directory
+
+- name: Copy 10-containerd-net.conflist
+  copy:
+    src: 10-containerd-net.conflist
+    dest: /etc/cni/net.d/10-containerd-net.conflist
+
+- name: Install containerd packages
   apk:
     name: "{{ item }}"
     repository: "{{ repo }}"
@@ -7,6 +17,7 @@
   vars:
     repo: https://dl-cdn.alpinelinux.org/alpine/edge/community
   loop:
+    - cni-plugins
     - containerd
 
 - name: Enable containerd
