@@ -12,3 +12,4 @@
     - default
     - kube-public
     - kube-system
+    - kube-node-lease
