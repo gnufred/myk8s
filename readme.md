@@ -1,8 +1,8 @@
 # My Kubernetes journey
 
-My 2024 New Year resolution is: Become a Kubernetes developer (one who writes Kubernetes code).
+My 2024 New Year resolution is to become a Kubernetes developer (one who writes Kubernetes code).
 
-When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP 3 just released. I made a lot of progress since, but I missed the Golang, and Kubernetes train. But not for long...
+When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP 3 was just released. I made a lot of progress since, but I missed the Golang, and Kubernetes train. But not for long...
 
 Time to go back to the night lab! 🌘 🖥
 
@@ -15,6 +15,10 @@ Add CNI plugin to get node to change state from NotReady to Ready.
 ### [2024-03-02](//gitlab.com/gnufred/myk8s/-/tree/2024-03-02/vagrant): Alpine control plane
 
 Convert the Ubuntu control plane to an Alpine Linux control plane.
+
+### [2024-02-28](https://training.linuxfoundation.org/training/kubernetes-fundamentals-lfs258-cka-exam-bundle/): LFS258 + CKA bundle
+
+Having goals and deadline is important. As such, I purchased the LFS258 + CKA bundle. Clock is ticking! 365 day left to get the cert :)
 
 ### [2024-02-23](//gitlab.com/gnufred/myk8s/-/tree/2024-02-23/vagrant): Alpine worker
 
@@ -38,7 +42,7 @@ Configure the control plane user authentication via Ansible.
 
 ### [2024-02-13](//gitlab.com/gnufred/myk8s/-/tree/2024-02-13/24-02-13_kubeadm-init-ansible): Ansible kubeadm init
 
-Covert each steps of the `kubeadm init` processes into Ansible roles, in a new playbook. Provision a Vagrant VM where `kubectl cluster-info` runs as expected.
+Covert each step of the `kubeadm init` processes into Ansible roles, in a new playbook. Provision a Vagrant VM where `kubectl cluster-info` runs as expected.
 
 ### [2024-02-12](//gitlab.com/gnufred/myk8s/-/tree/2024-02-12/24-02-12_ctl-ansible): Ansible pre init
 
@@ -54,4 +58,4 @@ Provision a Vagrant VM with a bash script where `kubeadm init` finishes.
 
 ### [2024-02-05](//gitlab.com/gnufred/myk8s/-/tree/2024-02-05/2024-02-05_install_kubectl): Install kubectl
 
-Write a bash script that install and update the `kubectl` cli on my workstation.
+Write a bash script that installs and updates the `kubectl` cli on my workstation.
