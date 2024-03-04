@@ -1,5 +1,11 @@
 #!/bin/bash
-echo "Install Python to run Ansible"
-apk add python3 py3-pip &&
-pip install kubernetes 2> /dev/null &&
-pip cache purge 2> /dev/null
+
+# Make sure no packages are downloaded
+truncate -s0 /etc/apk/repositories
+
+# Download packages manually from:
+# https://pkgs.alpinelinux.org/contents
+# https://pkgs.alpinelinux.org/packages
+
+apk add --allow-untrusted /.lfs/apk/python3/*
+apk add --allow-untrusted /.lfs/apk/py3-kubernetes/*

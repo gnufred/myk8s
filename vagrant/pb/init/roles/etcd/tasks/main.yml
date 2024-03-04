@@ -7,3 +7,8 @@
 - name: Initialize etcd
   when: not etcdyaml.stat.exists
   shell: kubeadm init phase etcd local
+
+- name: Wait for etcd to init
+  when: not etcdyaml.stat.exists
+  pause:
+    seconds: 10

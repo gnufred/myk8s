@@ -1,15 +1,3 @@
 ---
 - name: Install dependencies
-  apk:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - libmnl
-    - libnftnl
-    - iptables
-    - iptables-openrc
-    - ip6tables
-    - ip6tables-openrc
-    - ufw
-    - ufw-pyc
-    - ufw-openrc
+  shell: apk add --allow-untrusted /.lfs/apk/ufw/*

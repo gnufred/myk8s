@@ -6,6 +6,7 @@
   loop:
     - var
     - manifests
+    - pki
 
 - name: Check kubelet version
   import_tasks: check-version.yml

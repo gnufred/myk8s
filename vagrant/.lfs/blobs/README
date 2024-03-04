@@ -1,0 +1,2 @@
+This is the content of /var/lib/containerd/io.containerd.content.v1.content/blobs/
+after the initial `kubeadm config images pull`.

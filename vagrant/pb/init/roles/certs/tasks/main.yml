@@ -1,14 +1,14 @@
 ---
 - name: Copy cluster.yaml
   copy:
-    src: cluster.yaml
-    dest: /etc/kubernetes/manifests/cluster.yaml
+    src: apiserver.yaml
+    dest: /etc/kubernetes/pki/apiserver.yaml
 
 - name: Generate certs
   shell: "kubeadm init phase certs {{ item }}"
   loop:
     - ca
-    - apiserver --config /etc/kubernetes/manifests/cluster.yaml
+    - apiserver --config /etc/kubernetes/pki/apiserver.yaml
     - apiserver-kubelet-client
     - front-proxy-ca
     - front-proxy-client

@@ -6,3 +6,8 @@
 - name: Configure and instanciate the control plane 
   when: k8s_manifs_count.stdout != '3'
   shell: kubeadm init phase control-plane all
+
+- name: Wait for control plane to init
+  when: k8s_manifs_count.stdout != '3'
+  pause:
+    seconds: 10

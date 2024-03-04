@@ -34,8 +34,8 @@ fi
 NAME="wo1"
 if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
 	vagrant up --provision $NAME && \
-	run/playbook -h $NAME -b ufw && \
 	run/playbook -h $NAME -b install && \
+	run/playbook -h $NAME -b ufw && \
 	run/playbook -b join && \
 	echo "[$NAME] provisioning completed."
 fi

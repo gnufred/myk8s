@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [2024-03-05](//gitlab.com/gnufred/myk8s/-/tree/2024-03-05/vagrant): Offline provisioning
+
+VM provisioning must happens without downloading packages, or container images.
+
 ### [2024-03-03](//gitlab.com/gnufred/myk8s/-/tree/2024-03-03/vagrant): CNI plugin
 
 Add CNI plugin to get node to change state from NotReady to Ready.

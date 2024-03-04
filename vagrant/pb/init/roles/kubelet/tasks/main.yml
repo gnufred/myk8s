@@ -19,7 +19,7 @@
     state: started
     enabled: yes
 
-- name: Wait for init process to create pods
+- name: Wait for kubelet to init
   when: (not file1.stat.exists) or (not file2.stat.exists)
   pause:
-    seconds: 60
+    seconds: 10

@@ -4,9 +4,22 @@
     path: /etc/kubernetes/manifests/cluster.yaml
   register: cluster_yaml
 
+- name: Create image folder
+  file:
+    path: /var/lib/containerd/io.containerd.content.v1.content/blobs/
+    state: directory
+
 - name: Pull images
-  when: not cluster_yaml.stat.exists
-  shell: kubeadm config images pull
+  # This obviously doesn't pull images.
+  # shell: kubeadm config images pull
+  # is usually what we use, but given we
+  # provision VMs from the git large file
+  # storage engine, we just create a simlink
+  # to the blobs.
+  file:
+    src: /.lfs/blobs/sha256
+    path: /var/lib/containerd/io.containerd.content.v1.content/blobs/sha256
+    state: link
 
 - name: Run pre flight checks
   when: not cluster_yaml.stat.exists
