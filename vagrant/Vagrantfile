@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
 
 	config.vm.define "cp1" do |cp1|
 		cp1.vm.box = "generic/alpine319"
-		cp1.vm.network "forwarded_port", guest: 6443, host: 8112
+		cp1.vm.network "forwarded_port", guest: 6443, host: 8950
 		cp1.vm.synced_folder ".lfs", "/.lfs", type: "rsync"
 		cp1.vm.provider "libvirt" do |v|
 			v.memory = 1800

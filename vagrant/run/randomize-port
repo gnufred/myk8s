@@ -8,6 +8,13 @@ if [ -z "$1" ]; then
 	exit
 fi
 
+# This files signifies that the master control plane node is up and runnning.
+# In this case, we don't want to change the port, or it will mess up the forwarding
+# until we detroy the box.
+if [ -f .vagrant/machines/cp1/libvirt/logs/ssh-forwarding-*_6443.log ]; then
+	exit
+fi
+
 NAME="$1"
 FORW_LINE=$(grep "$NAME.vm.network \"forwarded_port\"" Vagrantfile)
 CURR_PORT=$(echo "$FORW_LINE"|awk '{print $6}')
