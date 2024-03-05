@@ -33,14 +33,15 @@ provision() {
 		vagrant up --provision $NAME && \
 		for B in ${BOOKS[@]}; do run/playbook -h $NAME -b $B; done && \
 		echo "[$NAME] provisioning completed"
+		echo ""
 	fi
 }
 
 join_worker() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
-		echo "[$NAME] joining the cluster"
-		run/playbook -h "$CLUSTER $WORKER" -b join
-		echo "[$NAME] joined the cluster"
+		echo "[$NAME] joining cluster $CLUSTER"
+		run/playbook -h "$CLUSTER $WORKER" -b join && \
+		echo "[$NAME] joined cluster $CLUSTER"
 	fi
 }
 
