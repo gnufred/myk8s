@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ ! -f Vagrantfile ]; then
+	echo "ERROR: Cannot find Vagrantfile"
+	exit
+fi
+if [ -z "$1" ]; then
+	echo "ERROR: Need a hostname as the first argument"
+	exit
+fi
+
+NAME="$1"
+FORW_LINE=$(grep "$NAME.vm.network \"forwarded_port\"" Vagrantfile)
+CURR_PORT=$(echo "$FORW_LINE"|awk '{print $6}')
+RAND_PORT=$(shuf -i 6450-9999 -n1) 
+NEW_LINE=$(echo "$FORW_LINE"|sed "s/$CURR_PORT/$RAND_PORT/")
+sed -i "s/$FORW_LINE/$NEW_LINE/" Vagrantfile

@@ -20,6 +20,13 @@ else
 	HOST="$1"
 fi
 
+# Fix: https://gitlab.com/gnufred/myk8s/-/issues/1
+randomize_port() {
+	if [[ "$NAME" == "cp1" ]]; then
+		run/randomize-port "$NAME"
+	fi
+}
+
 provision() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
 		echo "[$NAME] provisioning started"
@@ -39,6 +46,7 @@ join_worker() {
 
 NAME=cp1
 BOOKS=(install ufw init auth bash)
+randomize_port $NAME
 provision $NAME $BOOKS
 
 NAME=wo1
