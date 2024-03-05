@@ -20,22 +20,31 @@ else
 	HOST="$1"
 fi
 
-NAME="cp1"
-if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
-	vagrant up --provision $NAME && \
-	run/playbook -h $NAME -b install && \
-	run/playbook -h $NAME -b ufw && \
-	run/playbook -h $NAME -b init && \
-	run/playbook -h $NAME -b auth && \
-	run/playbook -h $NAME -b bash && \
-	echo "[$NAME] provisioning completed."
-fi
+provision() {
+	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
+		echo "[$NAME] provisioning started"
+		vagrant up --provision $NAME && \
+		for B in ${BOOKS[@]}; do run/playbook -h $NAME -b $B; done && \
+		echo "[$NAME] provisioning completed"
+	fi
+}
 
-NAME="wo1"
-if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
-	vagrant up --provision $NAME && \
-	run/playbook -h $NAME -b install && \
-	run/playbook -h $NAME -b ufw && \
-	run/playbook -b join && \
-	echo "[$NAME] provisioning completed."
-fi
+join_worker() {
+	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
+		echo "[$NAME] joining the cluster"
+		run/playbook -h "$CLUSTER $WORKER" -b join
+		echo "[$NAME] joined the cluster"
+	fi
+}
+
+NAME=cp1
+BOOKS=(install ufw init auth bash)
+provision $NAME $BOOKS
+
+NAME=wo1
+BOOKS=(install ufw)
+provision $NAME $BOOKS
+
+CLUSTER=cp1
+WORKER=wo1
+join_worker $CLUSTER $WORKER
