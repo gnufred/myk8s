@@ -3,7 +3,7 @@
 # https://docs.ansible.com/ansible/latest/collections/community/general/ufw_module.html
 ---
 - name: Provision the Vagrant VM
-  hosts: cp1, wo1
+  hosts: all
   become: true
   become_user: root
 

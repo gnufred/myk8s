@@ -4,4 +4,4 @@
 # we will reuse to run playbook manually.
 ---
 - name: Provision the Vagrant VM
-  hosts: cp1, wo1
+  hosts: all

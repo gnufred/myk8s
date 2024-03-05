@@ -1,6 +1,6 @@
 ---
 - name: Configure OS and install K8s packages
-  hosts: cp1, wo1
+  hosts: all
   become: true
   become_user: root
 

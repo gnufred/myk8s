@@ -28,32 +28,40 @@ randomize_port() {
 }
 
 provision() {
-	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
-		echo "[$NAME] provisioning started"
-		vagrant up --provision $NAME && \
-		for B in ${BOOKS[@]}; do run/playbook -h $NAME -b $B; done && \
-		echo "[$NAME] provisioning completed"
+	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
+		echo "[$NODE] provisioning started"
+		vagrant up --provision $NODE && \
+		for B in ${BOOKS[@]}; do run/playbook -h $NODE -b $B; done && \
+		echo "[$NODE] provisioning completed"
 		echo ""
 	fi
 }
 
 join_worker() {
-	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NAME" ]]; then 
-		echo "[$NAME] joining cluster $CLUSTER"
+	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
+		echo "[$NODE] joining cluster $CLUSTER"
 		run/playbook -h "$CLUSTER $WORKER" -b join && \
-		echo "[$NAME] joined cluster $CLUSTER"
+		echo "[$NODE] joined cluster $CLUSTER"
 	fi
 }
 
-NAME=cp1
-BOOKS=(install ufw init auth bash)
-randomize_port $NAME
-provision $NAME $BOOKS
-
-NAME=wo1
-BOOKS=(install ufw)
-provision $NAME $BOOKS
-
 CLUSTER=cp1
-WORKER=wo1
-join_worker $CLUSTER $WORKER
+NAME=cp
+BOOKS=(install ufw init auth bash)
+for i in 1; do
+	NODE="$NAME$i"
+	randomize_port $NAME
+done
+for i in 1; do
+	NODE="$NAME$i"
+	provision $NODE $BOOKS
+done
+
+NAME=wo
+BOOKS=(install ufw)
+for i in {1..6}; do
+	NODE="$NAME$i"
+	provision $NODE $BOOKS
+	WORKER=$NODE
+	join_worker $CLUSTER $WORKER
+done

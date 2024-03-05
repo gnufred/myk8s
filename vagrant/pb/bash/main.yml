@@ -1,5 +1,5 @@
 - name: Configure bash environment
-  hosts: cp1, wo1
+  hosts: cp1
   become: true
   become_user: root
 
