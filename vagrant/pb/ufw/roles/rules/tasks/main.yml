@@ -9,7 +9,7 @@
       - tcp
       - udp
 
-- name: "Allow {{ item }}"
+- name: Allow HTTPs
   ufw:
     rule: allow
     port: "{{ item }}"
