@@ -3,5 +3,5 @@ kind: ClusterConfiguration
 certificatesDir: /etc/kubernetes/pki
 apiServer:
   certSANs:
-    - "localhost"
-    - "127.0.0.1"
+    - "lb0"
+    - "10.0.0.20"

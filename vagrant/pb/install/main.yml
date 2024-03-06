@@ -1,15 +1,10 @@
 ---
 - name: Configure OS and install K8s packages
-  hosts: all
+  hosts: cp0, cp1, cp2, wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
 
   roles:
-    - role: host
-      tags: role_host 
-      vars:
-        hostname: "{{ inventory_hostname }}"
-
     - {role: kernel, tags: role_kernel}
     - {role: containerd, tags: role_containerd}
     - {role: kubes, tags: role_kubes}

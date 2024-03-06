@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVER=$(cat .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory|grep cp0|awk '{print $2}'|cut -d'=' -f2)
+SERVER=10.0.0.20
 PORT=6443
 USER=$(grep sa_user "$(find pb/ -type d -name auth)/main.yml"|grep -oE 'sa_user: .*'|cut -d' ' -f2)
 
@@ -9,8 +9,8 @@ USCRT=$(find pb/ -type f -name "$USER.crt")
 USKEY=$(find pb/ -type f -name "$USER.key")
 
 kubectl \
-	--server="https://$SERVER:$PORT" \
 	--certificate-authority "$CACRT" \
+	--server="https://$SERVER:$PORT" \
 	--client-certificate "$USCRT" \
 	--client-key "$USKEY" \
 	"$@"

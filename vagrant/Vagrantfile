@@ -1,57 +1,78 @@
-Vagrant.configure("2") do |config|
+Vagrant.configure('2') do |config|
 
 
+	# control plane
 	(0..0).each do |i|
-		config.vm.define "cp#{i}" do |cp|
+		config.vm.define "cp#{i}" do |n|
 
-			cp.vm.box = "generic/alpine319"
+			n.vm.box = 'generic/alpine319'
 
-			cp.vm.synced_folder ".lfs", "/.lfs", type: "rsync"
+			n.vm.network :private_network, ip: "10.0.0.1#{i}"
 
-			cp.vm.network :private_network,
-				ip: "10.0.0.1#{i}"
-
-			cp.vm.provider "libvirt" do |v|
+			n.vm.provider :libvirt do |v|
 				v.memory = 1800
 				v.cpus = 2
 			end
 
-			cp.vm.provision "shell" do |shell|
-				shell.path = "pb/alpine319.sh"
+			packages = ['python3', 'py3-kubernetes', 'ufw', 'containerd', 'kubes']
+			packages.each do |p|
+				n.vm.synced_folder ".lfs/apk/#{p}", "/.lfs/apk/#{p}", id: "#{p}", type: 'rsync'
 			end
+			n.vm.synced_folder '.lfs/blobs', '/.lfs/blobs', id: 'blogs', type: 'rsync'
 
-			cp.vm.provision "ansible" do |ansible|
-				ansible.playbook = "pb/vagrant.yml"
-			end
+			n.vm.provision :shell, path: 'prov/cp.sh'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+
 		end
 	end
 
 
+	# load balancer
+	(0..0).each do |i|
+		config.vm.define "lb#{i}" do |n|
+
+			n.vm.box = 'generic/alpine319'
+
+			n.vm.network :private_network, ip: "10.0.0.2#{i}"
+
+			n.vm.provider 'libvirt' do |v|
+				v.memory = 1000
+				v.cpus = 1
+			end
+
+			packages = ['python3', 'haproxy', 'ufw']
+			packages.each do |p|
+				n.vm.synced_folder ".lfs/apk/#{p}", "/.lfs/apk/#{p}", id: "#{p}", type: 'rsync'
+			end
+
+			n.vm.provision :shell, path: 'prov/lb.sh'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+
+		end
+	end
+
+
+	# workers
 	(0..5).each do |i|
-		config.vm.define "wo#{i}" do |wo|
+		config.vm.define "wo#{i}" do |n|
 
-			wo.vm.box = "generic/alpine319"
+			n.vm.box = 'generic/alpine319'
 
-			wo.vm.synced_folder ".lfs", "/.lfs", type: "rsync"
-
-			wo.vm.provider "libvirt" do |v|
+			n.vm.provider 'libvirt' do |v|
 				v.memory = 1800
 				v.cpus = 2
 			end
 
-			wo.vm.network :private_network,
-				ip: "10.0.0.3#{i}"
+			n.vm.network :private_network, ip: "10.0.0.3#{i}"
 
-			wo.vm.provision "shell" do |shell|
-				shell.path = "pb/alpine319.sh"
+			packages = ['python3', 'ufw', 'containerd', 'kubes']
+			packages.each do |p|
+				n.vm.synced_folder ".lfs/apk/#{p}", "/.lfs/apk/#{p}", id: "#{p}", type: 'rsync'
 			end
 
-			wo.vm.provision "ansible" do |ansible|
-				ansible.playbook = "pb/vagrant.yml"
-			end
-
+			n.vm.provision :shell, path: 'prov/wo.sh'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
 		end
 	end
-
 
 end

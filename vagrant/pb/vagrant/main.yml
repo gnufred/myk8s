@@ -1,0 +1,25 @@
+# This playbook doesn't do much.
+# That's intended. The goal is to have Vagrant
+# create the `vagrant_ansible_inventory` which
+# we will reuse to run playbook manually.
+---
+- name: Provision the Vagrant VM
+  hosts: all
+  become: true
+  become_user: root
+
+  vars:
+    hostname: "{{ inventory_hostname }}"
+
+  tasks:
+
+  - name: Change hostname
+    shell: "hostname {{ hostname }}"
+
+  - name: Change hostname file
+    shell: 'echo "{{ hostname }}" > /etc/hostname'
+
+  - name: Copy /etc/hosts
+    template:
+      src: hosts
+      dest: /etc/hosts

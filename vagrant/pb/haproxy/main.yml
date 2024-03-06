@@ -1,0 +1,50 @@
+---
+- name: Configure haproxy
+  hosts: lb0
+  become: true
+  become_user: root
+
+  vars:
+    hostname: "{{ inventory_hostname }}"
+
+  tasks:
+    - name: Install packages
+      shell: apk add --allow-untrusted /.lfs/apk/haproxy/*
+
+    - name: Copy rsyslog configuration
+      copy:
+        src: rsyslog.conf
+        dest: /etc/rsyslog.conf
+
+    - name: Create haproxy directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /var/lib/haproxy
+        - /var/lib/haproxy/dev
+
+    - name: Copy haproxy configuration
+      copy:
+        src: haproxy.cfg
+        dest: /etc/haproxy/haproxy.cfg
+
+    - name: Create haproxy log file
+      file:
+        path: /var/log/haproxy.log
+        state: touch
+        owner: root
+        group: haproxy
+        mode: '0644'
+
+    - name: Enable rsyslog
+      service:
+        name: rsyslog
+        state: restarted
+        enabled: yes
+
+    - name: Enable haproxy
+      service:
+        name: haproxy
+        state: restarted
+        enabled: yes

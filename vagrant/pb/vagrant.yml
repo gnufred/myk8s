@@ -1,7 +1,0 @@
-# This playbook doesn't do much.
-# That's intended. The goal is to have Vagrant
-# create the `vagrant_ansible_inventory` which
-# we will reuse to run playbook manually.
----
-- name: Provision the Vagrant VM
-  hosts: all

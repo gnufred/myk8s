@@ -40,14 +40,21 @@ join_worker() {
 
 CLUSTER=cp0
 NAME=cp
-BOOKS=(install ufw init auth bash)
+BOOKS=(ufw install init auth bash)
+for i in 0; do
+	NODE="$NAME$i"
+	provision $NODE $BOOKS
+done
+
+NAME=lb
+BOOKS=(ufw haproxy)
 for i in 0; do
 	NODE="$NAME$i"
 	provision $NODE $BOOKS
 done
 
 NAME=wo
-BOOKS=(install ufw)
+BOOKS=(ufw install)
 for i in {0..5}; do
 	NODE="$NAME$i"
 	provision $NODE $BOOKS
