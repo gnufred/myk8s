@@ -1,6 +1,6 @@
 ---
 - name: Generate join command
-  hosts: cp1
+  hosts: cp0
   become: true
   become_user: root
 
@@ -23,7 +23,7 @@
         state: absent
 
 - name: Join the cluster as a worker node
-  hosts: wo1, wo2, wo3, wo4, wo5, wo6
+  hosts: wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
 

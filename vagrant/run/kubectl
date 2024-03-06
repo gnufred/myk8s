@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVER=$(cat .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory|grep cp1|awk '{print $2}'|cut -d'=' -f2)
+SERVER=$(cat .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory|grep cp0|awk '{print $2}'|cut -d'=' -f2)
 PORT=6443
 USER=$(grep sa_user "$(find pb/ -type d -name auth)/main.yml"|grep -oE 'sa_user: .*'|cut -d' ' -f2)
 

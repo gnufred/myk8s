@@ -38,17 +38,17 @@ join_worker() {
 	fi
 }
 
-CLUSTER=cp1
+CLUSTER=cp0
 NAME=cp
 BOOKS=(install ufw init auth bash)
-for i in 1; do
+for i in 0; do
 	NODE="$NAME$i"
 	provision $NODE $BOOKS
 done
 
 NAME=wo
 BOOKS=(install ufw)
-for i in {1..6}; do
+for i in {0..5}; do
 	NODE="$NAME$i"
 	provision $NODE $BOOKS
 	WORKER=$NODE
