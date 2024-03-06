@@ -8,6 +8,9 @@ Vagrant.configure("2") do |config|
 
 			cp.vm.synced_folder ".lfs", "/.lfs", type: "rsync"
 
+			cp.vm.network :private_network,
+				ip: "10.0.0.1#{i}"
+
 			cp.vm.provider "libvirt" do |v|
 				v.memory = 1800
 				v.cpus = 2
@@ -35,6 +38,9 @@ Vagrant.configure("2") do |config|
 				v.memory = 1800
 				v.cpus = 2
 			end
+
+			wo.vm.network :private_network,
+				ip: "10.0.0.3#{i}"
 
 			wo.vm.provision "shell" do |shell|
 				shell.path = "pb/alpine319.sh"
