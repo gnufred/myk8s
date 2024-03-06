@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SERVER='localhost'
-PORT=$(grep 'cp1.vm.network "forwarded_port"' Vagrantfile|awk '{print $6}')
+SERVER=$(cat .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory|grep cp1|awk '{print $2}'|cut -d'=' -f2)
+PORT=6443
 USER=$(grep sa_user "$(find pb/ -type d -name auth)/main.yml"|grep -oE 'sa_user: .*'|cut -d' ' -f2)
 
 CACRT=$(find pb/ -type f -name api-ca.crt)

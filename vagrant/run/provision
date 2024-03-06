@@ -20,13 +20,6 @@ else
 	HOST="$1"
 fi
 
-# Fix: https://gitlab.com/gnufred/myk8s/-/issues/1
-randomize_port() {
-	if [[ "$NAME" == "cp1" ]]; then
-		run/randomize-port "$NAME"
-	fi
-}
-
 provision() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
 		echo "[$NODE] provisioning started"
@@ -48,10 +41,6 @@ join_worker() {
 CLUSTER=cp1
 NAME=cp
 BOOKS=(install ufw init auth bash)
-for i in 1; do
-	NODE="$NAME$i"
-	randomize_port $NAME
-done
 for i in 1; do
 	NODE="$NAME$i"
 	provision $NODE $BOOKS
