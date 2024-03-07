@@ -9,7 +9,7 @@
     - name: Create var .join_cmd
       shell: |
         KUBECONFIG=/etc/kubernetes/admin.conf
-        kubeadm token create --print-join-command --ttl 1m > /etc/kubernetes/var/.join_cmd
+        kubeadm token create --description 'Worker join short lived token' --print-join-command --ttl 1m | sed 's/kubeadm /kubeadm -v=5 /;s/join [^:]*/join 10.0.0.20/' > /etc/kubernetes/var/.join_cmd
 
     - name: Fetch join command
       fetch:
@@ -41,6 +41,12 @@
       stat:
         path: /etc/kubernetes/kubelet.conf 
       register: joined
+
+    - name: Enable kubelet service
+      service:
+        name: kubelet
+        state: started
+        enabled: yes
 
     - name: Get var .join_cmd
       when: not joined.stat.exists

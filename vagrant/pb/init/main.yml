@@ -1,7 +1,13 @@
+
 - name: Initialize Kubernetes control plane
   hosts: cp0
   become: true
   become_user: root
+
+  # High availability variables
+  # https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/
+  vars:
+    cpe: '10.0.0.20:6443'
 
   roles:
     - {role: init, tags: role_init }
