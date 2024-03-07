@@ -1,22 +1,79 @@
 
 - name: Initialize Kubernetes control plane
-  hosts: cp0
+  hosts: cp0, cp1, cp2
   become: true
   become_user: root
 
   # High availability variables
   # https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/
   vars:
+    version: v1.29.1
     cpe: '10.0.0.20:6443'
 
-  roles:
-    - {role: init, tags: role_init }
-    - {role: preflight, tags: role_preflight }
-    - {role: certs, tags: role_certs }
-    - {role: config, tags: role_config }
-    - {role: kubelet, tags: role_kubelet }
-    - {role: cplane, tags: role_cplane }
-    - {role: etcd, tags: role_etcd }
-    - {role: upload, tags: role_upload }
-    - {role: bootstrap, tags: role_bootstrap }
-    - {role: wait, tags: role_wait }
+  tasks:
+
+    #################
+    ### PREFLIGHT ###
+    #################
+
+  - name: Create Kubernetes config folders
+    tags: preflight
+    file:
+      state: directory
+      path: "/etc/kubernetes/{{ item }}"
+    loop:
+      - var
+      - manifests
+      - pki
+
+  - name: Check kubelet version
+    tags: preflight
+    import_tasks: check-version.yml
+    vars:
+      bin: kubelet
+      shell: kubelet --version|grep -oE 'v.*$'
+      wanted: "{{ version }}"
+
+  - name: Check kubeadm version
+    tags: preflight
+    import_tasks: check-version.yml
+    vars:
+      bin: kubeadm 
+      shell: kubeadm version|grep -oE 'GitVersion:"[^"]*"'|grep -oE 'v.*[^"]'
+      wanted: "{{ version }}"
+
+  - name: Check kubectl version
+    tags: preflight
+    import_tasks: check-version.yml
+    vars:
+      bin: kubectl
+      shell: kubectl version 2> /dev/null |head -n1|grep -oE 'v.*[^"]'
+      wanted: "{{ version }}"
+
+  - name: Create image folder
+    tags: preflight
+    file:
+      path: /var/lib/containerd/io.containerd.content.v1.content/blobs/
+      state: directory
+
+  - name: Link to image lfs storage
+    tags: preflight
+    file:
+      src: /.lfs/blobs/sha256
+      path: /var/lib/containerd/io.containerd.content.v1.content/blobs/sha256
+      state: link
+
+    ###########
+    ### INI ###
+    ###########
+    
+  - name: Check if cluster is configured
+    tags: init
+    stat:
+      path: /etc/kubernetes/pki/ca.crt
+    register: cacert
+
+  - name: Initialize cluster 
+    tags: init
+    when: not cacert.stat.exists
+    shell: "kubeadm init --control-plane-endpoint {{ cpe }}"

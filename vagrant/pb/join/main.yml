@@ -9,7 +9,7 @@
     - name: Create var .join_cmd
       shell: |
         KUBECONFIG=/etc/kubernetes/admin.conf
-        kubeadm token create --description 'Worker join short lived token' --print-join-command --ttl 1m | sed 's/kubeadm /kubeadm -v=5 /;s/join [^:]*/join 10.0.0.20/' > /etc/kubernetes/var/.join_cmd
+        kubeadm token create --description 'Automation short lived join token' --print-join-command --ttl 5m > /etc/kubernetes/var/.join_cmd
 
     - name: Fetch join command
       fetch:
@@ -22,8 +22,24 @@
         path: /etc/kubernetes/var/.join_cmd
         state: absent
 
-- name: Join the cluster as a worker node
-  hosts: wo0, wo1, wo2, wo3, wo4, wo5
+    - name: Fetch certificates
+      fetch:
+        src: "/etc/kubernetes/pki/{{ item }}"
+        dest: ".certs/{{ item }}"
+        flat: true
+      loop:
+        - ca.crt
+        - ca.key
+        - sa.key
+        - sa.pub
+        - front-proxy-ca.crt
+        - front-proxy-ca.key
+        - etcd/ca.crt
+        - etcd/ca.key
+
+
+- name: Prepare for join
+  hosts: cp1, cp2, wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
 
@@ -36,17 +52,83 @@
       loop:
         - var
         - manifests
-
-    - name: Check if node has joined a cluster
-      stat:
-        path: /etc/kubernetes/kubelet.conf 
-      register: joined
+        - pki
+        - pki/etcd
 
     - name: Enable kubelet service
       service:
         name: kubelet
         state: started
         enabled: yes
+
+
+- name: Join the cluster as a control plane
+  hosts: cp1, cp2
+  become: true
+  become_user: root
+
+  tasks:
+
+    - name: Create image folder
+      file:
+        path: /var/lib/containerd/io.containerd.content.v1.content/blobs/
+        state: directory
+
+    - name: Link to image lfs storage
+      file:
+        src: /.lfs/blobs/sha256
+        path: /var/lib/containerd/io.containerd.content.v1.content/blobs/sha256
+        state: link
+
+    - name: Upload certificates
+      copy:
+        src: ".certs/{{ item }}"
+        dest: "/etc/kubernetes/pki/{{ item }}"
+      loop:
+        - ca.crt
+        - ca.key
+        - sa.key
+        - sa.pub
+        - front-proxy-ca.crt
+        - front-proxy-ca.key
+        - etcd/ca.crt
+        - etcd/ca.key
+
+    - name: Check if node has joined a cluster
+      stat:
+        path: /etc/kubernetes/kubelet.conf 
+      register: joined
+
+    - name: Get var .join_cmd
+      when: not joined.stat.exists
+      copy:
+        src: .join_cmd
+        dest: /etc/kubernetes/var/.join_cmd
+
+    - name: Join the cluster
+      when: not joined.stat.exists
+      shell: |
+        join_cmd=$(cat /etc/kubernetes/var/.join_cmd)
+        $join_cmd --control-plane
+
+    - name: Delete var .join_cmd
+      when: not joined.stat.exists
+      file:
+        path: /etc/kubernetes/var/.join_cmd
+        state: absent
+
+
+- name: Join the cluster as a worker node
+  hosts: wo0, wo1, wo2, wo3, wo4, wo5
+  become: true
+  become_user: root
+
+  tasks:
+
+    - name: Check if node has joined a cluster
+      stat:
+        path: /etc/kubernetes/kubelet.conf 
+      register: joined
 
     - name: Get var .join_cmd
       when: not joined.stat.exists

@@ -3,6 +3,7 @@
 alias kc='run/kubectl'
 alias pb='run/playbook'
 
+alias vgstat='vagrant status'
 alias vgi='vagrant init'
 alias vgs='vagrant ssh'
 function vgc(){ vagrant ssh -c "$1"; }

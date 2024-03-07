@@ -30,13 +30,20 @@ provision() {
 	fi
 }
 
-join_worker() {
+join() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
 		echo "[$NODE] joining cluster $CLUSTER"
-		run/playbook -h "$CLUSTER $WORKER" -b join && \
+		run/playbook -h "$CLUSTER $NODE" -b join && \
 		echo "[$NODE] joined cluster $CLUSTER"
 	fi
 }
+
+NAME=lb
+BOOKS=(ufw haproxy)
+for i in 0; do
+	NODE="$NAME$i"
+	provision $NODE $BOOKS
+done
 
 CLUSTER=cp0
 NAME=cp
@@ -46,11 +53,11 @@ for i in 0; do
 	provision $NODE $BOOKS
 done
 
-NAME=lb
-BOOKS=(ufw haproxy)
-for i in 0; do
+BOOKS=(ufw install)
+for i in {1..2}; do
 	NODE="$NAME$i"
 	provision $NODE $BOOKS
+	join $CLUSTER $NODE
 done
 
 NAME=wo
@@ -58,6 +65,5 @@ BOOKS=(ufw install)
 for i in {0..5}; do
 	NODE="$NAME$i"
 	provision $NODE $BOOKS
-	WORKER=$NODE
-	join_worker $CLUSTER $WORKER
+	join $CLUSTER $NODE
 done

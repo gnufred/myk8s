@@ -3,6 +3,6 @@
   shell: " {{ shell }}"
   register: binver
 
-- name: "Check {{ bin }} version is {{ version }}"
+- name: "Check {{ bin }} version is {{ wanted }}"
   when: binver.stdout != version
-  fail: "kubelet {{ binver.stdout }}, want {{ version }}"
+  fail: "{{ bin }} {{ binver.stdout }}, want {{ wanted }}"
