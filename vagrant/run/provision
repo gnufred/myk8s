@@ -32,38 +32,53 @@ provision() {
 
 join() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
-		echo "[$NODE] joining cluster $CLUSTER"
-		run/playbook -h "$CLUSTER $NODE" -b join && \
-		echo "[$NODE] joined cluster $CLUSTER"
+		echo "[$NODE] joining cluster $MAIN"
+		run/playbook -h "$MAIN $NODE" -b join -x "{\"uid\":\"$NODE_$(date +%s)\"}" && \
+		echo "[$NODE] joined cluster $MAIN"
 	fi
 }
 
-NAME=lb
-BOOKS=(ufw haproxy)
-for i in 0; do
-	NODE="$NAME$i"
-	provision $NODE $BOOKS
-done
+load_balancer() {
+	NAME=lb
+	BOOKS=(ufw haproxy)
+	for i in 0; do
+		NODE="$NAME$i"
+		provision $NODE $BOOKS
+	done
+}
 
-CLUSTER=cp0
-NAME=cp
-BOOKS=(ufw install init auth bash)
-for i in 0; do
-	NODE="$NAME$i"
-	provision $NODE $BOOKS
-done
+cplane_main(){
+	MAIN=cp0
+	NAME=cp
+	BOOKS=(ufw install init auth)
+	for i in 0; do
+		NODE="$NAME$i"
+		provision $NODE $BOOKS
+	done
+}
 
-BOOKS=(ufw install)
-for i in {1..2}; do
-	NODE="$NAME$i"
-	provision $NODE $BOOKS
-	join $CLUSTER $NODE
-done
+cplane_replica(){
+	BOOKS=(ufw install)
+	for i in {1..2}; do
+		NODE="$NAME$i"
+		provision $NODE $BOOKS && \
+		join $MAIN $NODE &
+	done
+	wait
+}
 
-NAME=wo
-BOOKS=(ufw install)
-for i in {0..5}; do
-	NODE="$NAME$i"
-	provision $NODE $BOOKS
-	join $CLUSTER $NODE
-done
+worker() {
+	NAME=wo
+	BOOKS=(ufw install)
+	for i in {0..5}; do
+		NODE="$NAME$i"
+		provision $NODE $BOOKS && \
+		join $MAIN $NODE &
+	done
+	wait
+}
+
+load_balancer
+cplane_main
+cplane_replica
+worker

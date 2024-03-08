@@ -1,15 +1,25 @@
 ---
 - name: "Load {{ module }}"
-  community.general.modprobe:
+  tags: kernel
+  modprobe:
     name: "{{ module }}"
     state: present
 
 - name: "Add {{ module }} to /etc/module"
+  tags: kernel
   lineinfile:
     line: "{{ module }}"
     dest: /etc/modules
 
+- name: Create module container config file
+  tags: kernel
+  file:
+    path: /etc/modules-load.d/containerd.conf
+    state: touch
+
 - name: "Add {{ module }} to /etc/modules-load.d/containerd.conf"
+  tags: kernel
   lineinfile:
     line: "{{ module }}"
     dest: /etc/modules-load.d/containerd.conf
+

@@ -4,7 +4,94 @@
   become: true
   become_user: root
 
-  roles:
-    - {role: kernel, tags: role_kernel}
-    - {role: containerd, tags: role_containerd}
-    - {role: kubes, tags: role_kubes}
+  tasks:
+
+  - name: Enable kernel modules
+    tags: kernel
+    include_tasks: enable.yml
+    vars:
+      module: "{{ item }}"
+    loop:
+      - overlay
+      - br_netfilter
+
+  - name: Create module container config file
+    tags: kernel
+    file:
+      path: /etc/sysctl.d/kubernetes.conf
+      state: touch
+
+  - name: Enable required kernel options
+    tags: kernel
+    lineinfile:
+      line: "{{ item }}"
+      dest: /etc/sysctl.d/kubernetes.conf
+    loop:
+      - 'net.ipv4.ip_forward = 1'
+      - 'net.bridge.bridge-nf-call-iptables = 1'
+      - 'net.bridge.bridge-nf-call-ip6tables = 1'
+
+  - name: Reload Kernel configuration
+    tags: kernel
+    shell: sysctl -p /etc/sysctl.d/kubernetes.conf
+
+  - name: Create /etc/cni/net.d
+    tags: containerd
+    file:
+      path: /etc/cni/net.d
+      state: directory
+
+  - name: Copy 10-containerd-net.conflist
+    tags: containerd
+    copy:
+      src: 10-containerd-net.conflist
+      dest: /etc/cni/net.d/10-containerd-net.conflist
+
+  - name: Install containerd packages
+    tags: containerd
+    shell: apk add --allow-untrusted /.lfs/apk/containerd/*
+
+  - name: Enable containerd
+    tags: containerd
+    service:
+      name: containerd
+      enabled: yes
+      state: started
+
+  - name: Install packages
+    tags: kubes
+    shell: apk add --allow-untrusted /.lfs/apk/kubes/*
+
+  - name: Create Kubernetes config folders
+    tags: dirs
+    file:
+      state: directory
+      path: "/etc/kubernetes/{{ item }}"
+    loop:
+      - manifests
+      - pki
+      - pki/etcd
+      - pki/user
+      - run/certs
+      - var
+
+
+- name: Link to control plane container image blobs
+  hosts: cp0, cp1, cp2
+  become: true
+  become_user: root
+
+  tasks:
+
+  - name: Create image folder
+    tags: dirs
+    file:
+      path: /var/lib/containerd/io.containerd.content.v1.content/blobs/
+      state: directory
+
+  - name: Link to image lfs storage
+    tags: dirs
+    file:
+      src: /.lfs/blobs/sha256
+      path: /var/lib/containerd/io.containerd.content.v1.content/blobs/sha256
+      state: link

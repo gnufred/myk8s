@@ -1,35 +1,33 @@
-- name: "Role {{ sa_user }}-{{ namespace }}"
-  tags: rbac_admin
+- name: "ClusterRole {{ sa_user }}"
+  tags: rbac
   kubernetes.core.k8s:
     kubeconfig: /etc/kubernetes/admin.conf
     state: present
     definition:
       apiVersion: rbac.authorization.k8s.io/v1
-      kind: Role
+      kind: ClusterRole
       metadata:
-        name: "{{ sa_user }}-{{ namespace }}"
-        namespace: "{{ namespace }}"
+        name: "{{ sa_user }}"
       rules:
-      - apiGroups: ["*"]
+      - apiGroups: [""]
         resources: ["*"]
         verbs: ["*"]
 
-- name: "RoleBinding {{ sa_user }}-{{ namespace }}"
-  tags: rbac_admin
+- name: ClusterRoleBinding admin-cluster-binding
+  tags: rbac
   kubernetes.core.k8s:
     kubeconfig: /etc/kubernetes/admin.conf
     state: present
     definition:
       apiVersion: rbac.authorization.k8s.io/v1
-      kind: RoleBinding
+      kind: ClusterRoleBinding
       metadata:
-        name: "{{ sa_user }}-{{ namespace }}" 
-        namespace: "{{ namespace }}"
+        name: "{{ sa_user }}"
       subjects:
       - kind: User
         name: "{{ sa_user }}"
         apiGroup: rbac.authorization.k8s.io
       roleRef:
-        kind: Role
-        name: "{{ sa_user }}-{{ namespace }}"
+        kind: ClusterRole
+        name: "{{ sa_user }}"
         apiGroup: rbac.authorization.k8s.io

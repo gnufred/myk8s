@@ -5,6 +5,60 @@
 
   vars:
     sa_user: superadmin
-  roles:
-    - {role: rbac, tags: role_rbac }
-    - {role: certs, tags: role_certs }
+
+  tasks:
+
+  - name: Create superadmin cluster bindings 
+    tags: rbac
+    include_tasks: sa-cluster.yml
+
+  - name: Create superadmin namespaces bindings 
+    tags: rbac
+    include_tasks: sa-namespace.yml
+    vars:
+      namespace: "{{ item }}"
+    loop:
+      - default
+      - kube-public
+      - kube-system
+      - kube-node-lease
+
+  - name: Copy helper scripts
+    tags: certs
+    copy:
+      src: "{{ item }}"
+      dest: /etc/kubernetes/run/certs
+      mode: 500
+    loop:
+      - generate
+      - dump-api-ca
+
+  - name: Set sa_user variable file
+    tags: certs
+    shell: "echo '{{ sa_user }}' > /etc/kubernetes/var/.sa_user"
+
+  - name: Generate cert files
+    tags: certs
+    shell: /etc/kubernetes/run/certs/generate
+
+  - name: Download cert files
+    tags: certs
+    fetch:
+      src: "/etc/kubernetes/pki/user/{{ sa_user }}.{{ item }}"
+      dest: "../../.certs/{{ sa_user }}.{{ item }}"
+      flat: true
+    loop:
+      - crt
+      - key
+
+  - name: Dump the API server CA
+    tags: certs
+    shell: /etc/kubernetes/run/certs/dump-api-ca
+
+  - name: Download ca cert files
+    tags: get-certs
+    fetch:
+      src: /etc/kubernetes/pki/apiserver-ca.crt
+      dest: ../../.certs/api-ca.crt
+      flat: true
+

@@ -18,12 +18,11 @@ OPTIONS:
     -b, --book <PLAYBOOK> string (special)
             Alias for -p, --playbook.
 
-    -r, --role <ROLE> string (optional)
-            Run a single role from the specified playbook.
-
-    -t, --tags <tags> string (optional)
+    -t, --tags <TAGS> string (optional)
             Run selected tags.
-            For more information see: ansible-playbook --help."
+
+    -x, --extra-vars <JSON> string (optional)
+            Pass extra variables."
 }
 
 # process args
@@ -34,8 +33,8 @@ while [ "$1" != "" ]; do
         -h | --host ) shift; HOST="$1";;
         -p | --playbook ) shift; PLAYBOOK="$1";;
         -b | --book ) shift; BOOK="$1";;
-        -r | --role ) shift; TAGS="role_$1";;
         -t | --tags ) shift; TAGS="$1";;
+		-x | --extra-vars ) shift; XVARS="$1";;
     esac
     shift
 done
@@ -53,4 +52,4 @@ fi
 
 # https://docs.ansible.com/ansible/latest/scenario_guides/guide_vagrant.html
 INVENTORY=.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory 
-ansible-playbook -i $INVENTORY $PLAYBOOK ${TAGS:+"--tags" "$TAGS"} ${HOST:+"-l" "$HOST"}
+ansible-playbook -i $INVENTORY $PLAYBOOK ${TAGS:+"--tags" "$TAGS"} ${HOST:+"-l" "$HOST"} ${XVARS:+"--extra-vars" "$XVARS"}

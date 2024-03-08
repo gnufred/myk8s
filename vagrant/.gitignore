@@ -1,4 +1,4 @@
 .vagrant
 .cache
 .certs
-.join_cmd
+.join*

@@ -1,3 +1,0 @@
----
-- name: Install packages
-  shell: apk add --allow-untrusted /.lfs/apk/kubes/*

@@ -1,59 +1,10 @@
 ---
-- name: Generate join command
-  hosts: cp0
-  become: true
-  become_user: root
-
-  tasks:
-
-    - name: Create var .join_cmd
-      shell: |
-        KUBECONFIG=/etc/kubernetes/admin.conf
-        kubeadm token create --description 'Automation short lived join token' --print-join-command --ttl 5m > /etc/kubernetes/var/.join_cmd
-
-    - name: Fetch join command
-      fetch:
-        src: /etc/kubernetes/var/.join_cmd
-        dest: .join_cmd
-        flat: true
-
-    - name: Delete var .join_cmd
-      file:
-        path: /etc/kubernetes/var/.join_cmd
-        state: absent
-
-    - name: Fetch certificates
-      fetch:
-        src: "/etc/kubernetes/pki/{{ item }}"
-        dest: ".certs/{{ item }}"
-        flat: true
-      loop:
-        - ca.crt
-        - ca.key
-        - sa.key
-        - sa.pub
-        - front-proxy-ca.crt
-        - front-proxy-ca.key
-        - etcd/ca.crt
-        - etcd/ca.key
-
-
-- name: Prepare for join
+- name: Prepare all nodes
   hosts: cp1, cp2, wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
 
   tasks:
-
-    - name: Create Kubernetes config folders
-      file:
-        state: directory
-        path: "/etc/kubernetes/{{ item }}"
-      loop:
-        - var
-        - manifests
-        - pki
-        - pki/etcd
 
     - name: Enable kubelet service
       service:
@@ -62,27 +13,16 @@
         enabled: yes
 
 
-- name: Join the cluster as a control plane
+- name: Prepare extra control planes 
   hosts: cp1, cp2
   become: true
   become_user: root
 
   tasks:
 
-    - name: Create image folder
-      file:
-        path: /var/lib/containerd/io.containerd.content.v1.content/blobs/
-        state: directory
-
-    - name: Link to image lfs storage
-      file:
-        src: /.lfs/blobs/sha256
-        path: /var/lib/containerd/io.containerd.content.v1.content/blobs/sha256
-        state: link
-
     - name: Upload certificates
       copy:
-        src: ".certs/{{ item }}"
+        src: "../../.certs/{{ item }}"
         dest: "/etc/kubernetes/pki/{{ item }}"
       loop:
         - ca.crt
@@ -94,28 +34,40 @@
         - etcd/ca.crt
         - etcd/ca.key
 
-    - name: Check if node has joined a cluster
-      stat:
-        path: /etc/kubernetes/kubelet.conf 
-      register: joined
 
-    - name: Get var .join_cmd
-      when: not joined.stat.exists
+- name: Prepare join command
+  hosts: cp0
+  become: true
+  become_user: root
+
+  tasks:
+
+    - name: "Create var .join_cmd_{{ uid }}"
+      shell: |
+        KUBECONFIG=/etc/kubernetes/admin.conf
+        kubeadm token create --description 'Automation short lived join token' --print-join-command --ttl 5m > "/etc/kubernetes/var/.join_cmd_{{ uid }}"
+
+    - name: Fetch join command
+      fetch:
+        src: "/etc/kubernetes/var/.join_cmd_{{ uid }}"
+        dest: ".join_cmd_{{ uid }}"
+        flat: true
+
+
+- name: Join the cluster as a control plane
+  hosts: cp1, cp2
+  become: true
+  become_user: root
+
+  tasks:
+
+    - name: "Get var .join_cmd_{{ uid }}"
       copy:
-        src: .join_cmd
-        dest: /etc/kubernetes/var/.join_cmd
+        src: ".join_cmd_{{ uid }}"
+        dest: "/etc/kubernetes/var/.join_cmd_{{ uid }}"
 
     - name: Join the cluster
-      when: not joined.stat.exists
-      shell: |
-        join_cmd=$(cat /etc/kubernetes/var/.join_cmd)
-        $join_cmd --control-plane
-
-    - name: Delete var .join_cmd
-      when: not joined.stat.exists
-      file:
-        path: /etc/kubernetes/var/.join_cmd
-        state: absent
+      shell: $(cat "/etc/kubernetes/var/.join_cmd_{{ uid }}") --control-plane
 
 
 - name: Join the cluster as a worker node
@@ -125,25 +77,10 @@
 
   tasks:
 
-    - name: Check if node has joined a cluster
-      stat:
-        path: /etc/kubernetes/kubelet.conf 
-      register: joined
-
-    - name: Get var .join_cmd
-      when: not joined.stat.exists
+    - name: "Get var .join_cmd_{{ uid }}"
       copy:
-        src: .join_cmd
-        dest: /etc/kubernetes/var/.join_cmd
+        src: ".join_cmd_{{ uid }}"
+        dest: "/etc/kubernetes/var/.join_cmd_{{ uid }}"
 
     - name: Join the cluster
-      when: not joined.stat.exists
-      shell: |
-        join_cmd=$(cat /etc/kubernetes/var/.join_cmd)
-        $join_cmd
-
-    - name: Delete var .join_cmd
-      when: not joined.stat.exists
-      file:
-        path: /etc/kubernetes/var/.join_cmd
-        state: absent
+      shell: $(cat "/etc/kubernetes/var/.join_cmd_{{ uid }}")
