@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [2024-03-08](//gitlab.com/gnufred/myk8s/-/tree/2024-03-08/vagrant): HighAvail control plane
+
+Adds a load balancer, as the control plane endpoint, two new control planes, and connects workers via the LB.
+
 ### [2024-03-05](//gitlab.com/gnufred/myk8s/-/tree/2024-03-05/vagrant): Offline provisioning
 
 VM provisioning must happens without downloading packages, or container images.
