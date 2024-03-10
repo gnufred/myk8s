@@ -16,9 +16,9 @@ HOST:
 if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
 	usage
 	exit
-else
-	HOST="$1"
 fi
+
+HOST="$1"
 
 provision() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
@@ -33,7 +33,7 @@ provision() {
 join() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
 		echo "[$NODE] joining cluster $MAIN"
-		run/playbook -h "$MAIN $NODE" -b join -x "{\"uid\":\"$NODE_$(date +%s)\"}" && \
+		. run/join "$NODE" && \
 		echo "[$NODE] joined cluster $MAIN"
 	fi
 }

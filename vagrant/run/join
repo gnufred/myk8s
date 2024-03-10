@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+if [[ -z "$1" ]]; then
+	echo "ERROR: Argument <NODE_TO_JOIN> required"
+	exit
+fi
+
+MAIN="cp0"
+NODE="$1"
+
+run/playbook \
+	-h "$MAIN $NODE" \
+	-b join \
+	-x "{\"uid\":\"${NODE}_$(date +%s)\"}"
