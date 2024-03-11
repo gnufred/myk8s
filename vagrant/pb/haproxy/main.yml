@@ -8,13 +8,9 @@
     hostname: "{{ inventory_hostname }}"
 
   tasks:
+
     - name: Install packages
       shell: apk add --allow-untrusted /.lfs/apk/haproxy/*
-
-    - name: Copy rsyslog configuration
-      copy:
-        src: rsyslog.conf
-        dest: /etc/rsyslog.conf
 
     - name: Create haproxy directories
       file:
@@ -24,12 +20,8 @@
         - /var/lib/haproxy
         - /var/lib/haproxy/dev
 
-    - name: Copy haproxy configuration
-      copy:
-        src: haproxy.cfg
-        dest: /etc/haproxy/haproxy.cfg
-
     - name: Create haproxy log file
+      tags: rsyslog
       file:
         path: /var/log/haproxy.log
         state: touch
@@ -37,11 +29,10 @@
         group: haproxy
         mode: '0644'
 
-    - name: Enable rsyslog
-      service:
-        name: rsyslog
-        state: restarted
-        enabled: yes
+    - name: Copy haproxy configuration
+      copy:
+        src: haproxy.cfg
+        dest: /etc/haproxy/haproxy.cfg
 
     - name: Enable haproxy
       service:

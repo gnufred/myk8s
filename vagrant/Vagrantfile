@@ -14,10 +14,7 @@ Vagrant.configure('2') do |config|
 				v.cpus = 1
 			end
 
-			packages = ['python3', 'haproxy', 'ufw']
-			packages.each do |p|
-				n.vm.synced_folder ".lfs/apk/#{p}", "/.lfs/apk/#{p}", id: "#{p}", type: 'rsync'
-			end
+			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/lb.sh'
 			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
@@ -39,11 +36,8 @@ Vagrant.configure('2') do |config|
 				v.cpus = 2
 			end
 
-			packages = ['python3', 'py3-kubernetes', 'ufw', 'containerd', 'kubes']
-			packages.each do |p|
-				n.vm.synced_folder ".lfs/apk/#{p}", "/.lfs/apk/#{p}", id: "#{p}", type: 'rsync'
-			end
-			n.vm.synced_folder '.lfs/blobs', '/.lfs/blobs', id: 'blogs', type: 'rsync'
+			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
+			n.vm.synced_folder '.lfs/blobs', '/.lfs/blobs', id: 'blobs', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/cp.sh'
 			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
@@ -65,10 +59,7 @@ Vagrant.configure('2') do |config|
 
 			n.vm.network :private_network, ip: "10.0.0.3#{i}"
 
-			packages = ['python3', 'ufw', 'containerd', 'kubes']
-			packages.each do |p|
-				n.vm.synced_folder ".lfs/apk/#{p}", "/.lfs/apk/#{p}", id: "#{p}", type: 'rsync'
-			end
+			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/wo.sh'
 			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'

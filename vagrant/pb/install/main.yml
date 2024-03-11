@@ -1,10 +1,42 @@
----
+  ### ALL ###
+- name: Configure rsyslog
+  hosts: all
+  become: true
+  become_user: root
+
+  tasks:
+
+
+    ### RSYSLOG ###
+    
+  - name: Copy rsyslog configuration
+    tags: rsyslog
+    template:
+      src: rsyslog.conf
+      dest: /etc/rsyslog.conf
+
+  - name: Install packages
+    tags: rsyslog
+    shell: apk add --allow-untrusted /.lfs/apk/rsyslog/*
+
+  - name: Enable rsyslog
+    tags: rsyslog
+    service:
+      name: rsyslog
+      state: restarted
+      enabled: yes
+
+
+  ### NODES ###
 - name: Configure OS and install K8s packages
   hosts: cp0, cp1, cp2, wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
 
   tasks:
+
+
+    ### KERNEL ###
 
   - name: Enable kernel modules
     tags: kernel
@@ -35,6 +67,9 @@
     tags: kernel
     shell: sysctl -p /etc/sysctl.d/kubernetes.conf
 
+
+    ### CONTAINERD ###
+
   - name: Create /etc/cni/net.d
     tags: containerd
     file:
@@ -58,6 +93,9 @@
       enabled: yes
       state: started
 
+
+    ### KUBES ###
+
   - name: Install packages
     tags: kubes
     shell: apk add --allow-untrusted /.lfs/apk/kubes/*
@@ -75,6 +113,8 @@
       - run/certs
       - var
 
+
+  ### DIRS ###
 
 - name: Link to control plane container image blobs
   hosts: cp0, cp1, cp2

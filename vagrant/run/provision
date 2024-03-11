@@ -45,7 +45,7 @@ join() {
 
 load_balancer() {
 	NAME=lb
-	BOOKS=(ufw haproxy)
+	BOOKS=(ufw install haproxy)
 	for i in 0; do
 		NODE="$NAME$i"
 		provision $NODE $BOOKS
