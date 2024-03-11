@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SERVER=10.0.0.10
-PORT=6443
+SERVER=10.1.2.10
+PORT=9443
 USER=$(grep sa_user "$(find pb/ -type d -name auth)/main.yml"|grep -oE 'sa_user: .*'|cut -d' ' -f2)
 
 CACRT=.certs/api-ca.crt

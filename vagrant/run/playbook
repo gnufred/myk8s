@@ -10,7 +10,7 @@ USAGE:
 
 OPTIONS:
     -h, --host <HOST> string (optional)
-            The playbook to run.
+            The host to run the playbook on.
 
     -p, --playbook <PLAYBOOK> string (mandatory)
             The playbook to run.
