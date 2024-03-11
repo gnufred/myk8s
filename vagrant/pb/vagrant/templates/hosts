@@ -1,11 +1,11 @@
 127.0.0.1   {{ hostname }} localhost.localdomain localhost
 ::1         {{ hostname }} localhost localhost.localdomain
 
-10.0.0.10	cp0
-10.0.0.11	cp1
-10.0.0.12	cp2
+10.0.0.10	lb0
 
-10.0.0.20	lb0
+10.0.0.20	cp0
+10.0.0.21	cp1
+10.0.0.22	cp2
 
 10.0.0.30	wo0
 10.0.0.31	wo1

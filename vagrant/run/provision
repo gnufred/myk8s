@@ -20,6 +20,11 @@ fi
 
 HOST="$1"
 
+prestart() {
+	# delete previous join commands
+	find -name '.join*' -delete
+}
+
 provision() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
 		echo "[$NODE] provisioning started"
@@ -78,6 +83,7 @@ worker() {
 	wait
 }
 
+prestart
 load_balancer
 cplane_main
 cplane_replica
