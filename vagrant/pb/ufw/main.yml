@@ -2,99 +2,38 @@
 # https://manpages.ubuntu.com/manpages/jammy/en/man8/ufw.8.html
 # https://docs.ansible.com/ansible/latest/collections/community/general/ufw_module.html
 ---
-- name: Configure UFW
+- name: Install and configure UFW
   hosts: all
   become: true
   become_user: root
-
   tasks:
 
   - name: Install dependencies
     shell: apk add --allow-untrusted /.lfs/apk/ufw/*
 
-#  - name: Enable UFW
-#    ufw:
-#      state: disabled
-#
-#  - name: Enable logging
-#    ufw:
-#      logging: 'on'
-#
-#  - name: Allow SSH
-#    ufw:
-#      rule: allow
-#      port: ssh
-#      proto: tcp
-#      direction: in
-#
-#    # On a production cluster, use `deny` for `incoming`.
-#    # Deny will drop the traffic.
-#    # On a VM we want the connection to be rejected with
-#    # an error.
-#  - name: Reject everything
-#    ufw:
-#      direction: '{{ item }}'
-#      policy: reject
-#    loop:
-#      - incoming
-#      - outgoing
-#      - routed
-#
-#  - name: Allow dns
-#    ufw:
-#      rule: allow
-#      port: 53
-#      proto: '{{ item }}'
-#      direction: out
-#    loop:
-#        - tcp
-#        - udp
-#
-#  - name: Allow HTTPs
-#    ufw:
-#      rule: allow
-#      port: "{{ item }}"
-#      proto: tcp
-#      direction: out
-#    loop:
-#      - https
-#
-#  - name: Allow Kubernetes API server
-#    ufw:
-#      rule: allow
-#      port: 6443
-#      proto: tcp
-#      direction: "{{ item }}"
-#    loop:
-#      - in
-#      - out
-#
-#  - name: Allow etcd cp0
-#    ufw:
-#      rule: allow
-#      port: 2379
-#      proto: tcp
-#      direction: "{{ item }}"
-#    loop:
-#      - in
-#      - out
-#
-#  - name: Allow etcd cp1
-#    ufw:
-#      rule: allow
-#      port: 2380
-#      proto: tcp
-#      direction: "{{ item }}"
-#    loop:
-#      - in
-#      - out
-#
-#  - name: Allow etcd cp2
-#    ufw:
-#      rule: allow
-#      port: 2381
-#      proto: tcp
-#      direction: "{{ item }}"
-#    loop:
-#      - in
-#      - out
+  - name: Enable UFW
+    ufw:
+      logging: high
+      state: enabled
+
+    # Just making sure lock ourselves out, if change
+    # any other rules afterward.
+  - name: SSH (in)
+    ufw:
+      rule: allow
+      port: 22
+      proto: tcp
+      direction: in
+      interface: eth0
+
+    # The main goal is to log all network requests
+    # in the firewall for inspection.
+    # Given it's a test lab, I don't want to block
+    # anything by default.
+  - name: Allow everything
+    ufw:
+      direction: '{{ item }}'
+      policy: allow
+    loop:
+      - incoming
+      - outgoing

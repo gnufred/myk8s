@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [2024-03-11](//gitlab.com/gnufred/myk8s/-/tree/2024-03-11/vagrant): Ready to use the API!
+
+Simplify the playbook file structure, enable rsyslog on all nodes, activate logs for packet transmissions, and many other small improvements.
+
 ### [2024-03-08](//gitlab.com/gnufred/myk8s/-/tree/2024-03-08/vagrant): HighAvail control plane
 
 Adds a load balancer, as the control plane endpoint, two new control planes, and connects workers via the LB.

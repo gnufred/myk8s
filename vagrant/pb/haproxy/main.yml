@@ -12,14 +12,6 @@
     - name: Install packages
       shell: apk add --allow-untrusted /.lfs/apk/haproxy/*
 
-    - name: Create haproxy directories
-      file:
-        path: "{{ item }}"
-        state: directory
-      loop:
-        - /var/lib/haproxy
-        - /var/lib/haproxy/dev
-
     - name: Create haproxy log file
       tags: rsyslog
       file:

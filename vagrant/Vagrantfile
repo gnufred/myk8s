@@ -7,7 +7,7 @@ Vagrant.configure('2') do |config|
 
 			n.vm.box = 'generic/alpine319'
 
-			n.vm.network :private_network, ip: "10.0.0.1#{i}"
+			n.vm.network :private_network, ip: "10.1.2.1#{i}"
 
 			n.vm.provider 'libvirt' do |v|
 				v.memory = 1000
@@ -29,7 +29,7 @@ Vagrant.configure('2') do |config|
 
 			n.vm.box = 'generic/alpine319'
 
-			n.vm.network :private_network, ip: "10.0.0.2#{i}"
+			n.vm.network :private_network, ip: "10.1.2.2#{i}"
 
 			n.vm.provider :libvirt do |v|
 				v.memory = 1800
@@ -57,7 +57,7 @@ Vagrant.configure('2') do |config|
 				v.cpus = 2
 			end
 
-			n.vm.network :private_network, ip: "10.0.0.3#{i}"
+			n.vm.network :private_network, ip: "10.1.2.3#{i}"
 
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 

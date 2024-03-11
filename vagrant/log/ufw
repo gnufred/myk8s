@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [[ -z "$1" ]]; then
-	echo "ERROR: Argument <NODE> required"
-	exit
-fi
-
-vagrant ssh "$1" -c 'tail -fn+0 /var/log/ufw.log'

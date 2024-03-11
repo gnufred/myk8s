@@ -1,0 +1,72 @@
+#!/bin/bash
+
+usage() {
+	echo "Tail VM logs
+
+USAGE:
+    run/log <ACTION> [OPTIONS]
+    run/log --help
+
+ACTIONS:
+    w, watch
+    c, cat
+
+OPTIONS:
+    -h, --host <HOST> string (optional)
+            The host to fetch logs from.
+
+    -n, --name <NAME> string (optional)
+            Log name to view.
+
+    -f, --file <FILE> string (optional)
+            Log file to view."
+}
+
+# https://linuxcommand.org/lc3_wss0120.php
+SUBCMD="$1"
+while [ "$1" != "" ]; do
+    case $1 in
+		     --help ) usage; exit;;
+        -h | --host ) shift; HOST="$1";;
+        -n | --name ) shift; NAME="$1";;
+        -f | --file ) shift; FILE="$1";;
+    esac
+    shift
+done
+
+case $NAME in
+	haproxy) FILE='/var/log/haproxy.log';;
+	messages) FILE='/var/log/messages.log';;
+	ufw) FILE='/var/log/ufw.log';;
+esac
+
+print_sep() {
+	for i in $(seq 1 $(tput cols)); do
+		printf "="
+	done
+	echo
+}
+vssh() {
+	print_sep
+	echo "[$HOST] $COMMAND"
+	print_sep
+	vagrant ssh "$HOST" -c "$COMMAND"
+}
+
+watch() {
+	COMMAND="tail -fn+0 $FILE"
+	vssh "$COMMAND"
+}
+
+cat() {
+	COMMAND="cat $FILE"
+	vssh "$COMMAND"
+}
+
+case "$SUBCMD" in
+	c)		cat "$FILE";;
+	cat)	cat "$FILE";;
+	w)		watch "$FILE";;
+	watch)  watch "$FILE";;
+	*)		watch "$FILE";;
+esac
