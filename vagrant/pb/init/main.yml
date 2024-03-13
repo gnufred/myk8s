@@ -13,17 +13,22 @@
     register: cacert
 
   - name: Enable kubelet service
+    tags: init
     service:
       name: kubelet
       state: started
       enabled: yes
 
+  - name: Copy cluster configuration
+    tags: init
+    copy:
+      src: cluster.yaml
+      dest: /etc/kubernetes/cluster.yaml
+
   - name: Kubeadmin init
     tags: init
     when: not cacert.stat.exists
-    shell: "kubeadm init --control-plane-endpoint {{ cpe }}"
-    vars:
-      cpe: '10.1.2.10:6443'
+    shell: kubeadm init --config /etc/kubernetes/cluster.yaml
 
   - name: Fetch certificates
     tags: certs

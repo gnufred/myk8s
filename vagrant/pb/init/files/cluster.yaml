@@ -1,0 +1,6 @@
+# https://kubernetes.io/docs/reference/config-api/kubeadm-config.v1beta3/
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+controlPlaneEndpoint: "10.1.2.10:6443"
+certSANs:
+  - "10.1.2.10"
