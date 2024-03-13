@@ -132,7 +132,7 @@
 
   tasks:
 
-  - name: Check if blogs are already uploaded
+  - name: Check if blobs are already uploaded
     tags: blobs
     stat:
       path: /var/lib/containerd/io.containerd.content.v1.content/blobs
