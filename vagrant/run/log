@@ -37,6 +37,7 @@ done
 case $NAME in
 	haproxy) FILE='/var/log/haproxy.log';;
 	messages) FILE='/var/log/messages.log';;
+	kubelet) FILE='/var/log/kubelet/kubelet.log';;
 	ufw) FILE='/var/log/ufw.log';;
 esac
 

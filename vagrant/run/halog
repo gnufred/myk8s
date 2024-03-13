@@ -1,3 +1,0 @@
-#!/bin/bash
-
-vagrant ssh lb0 -c 'tail -f /var/log/haproxy.log'
