@@ -12,6 +12,12 @@
       path: /etc/kubernetes/pki/ca.crt
     register: cacert
 
+  - name: Enable kubelet service
+    service:
+      name: kubelet
+      state: started
+      enabled: yes
+
   - name: Kubeadmin init
     tags: init
     when: not cacert.stat.exists

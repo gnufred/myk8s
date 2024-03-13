@@ -16,6 +16,12 @@
       logging: high
       state: enabled
 
+  - name: Enable UFW service
+    service:
+      name: ufw
+      state: started
+      enabled: yes
+
     # Just making sure lock ourselves out, if change
     # any other rules afterward.
   - name: SSH (in)
