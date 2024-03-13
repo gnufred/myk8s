@@ -101,7 +101,7 @@
     shell: apk add --allow-untrusted /.lfs/apk/kubes/*
 
   - name: Create Kubernetes config folders
-    tags: dirs
+    tags: kubes
     file:
       state: directory
       path: "/etc/kubernetes/{{ item }}"
@@ -116,22 +116,29 @@
 
   ### DIRS ###
 
-- name: Link to control plane container image blobs
+- name: Upload control plane container image blobs
   hosts: cp0, cp1, cp2
   become: true
   become_user: root
 
   tasks:
 
+  - name: Check if blogs are already uploaded
+    tags: blobs
+    stat:
+      path: /var/lib/containerd/io.containerd.content.v1.content/blobs
+    register: blobdir
+
   - name: Create image folder
-    tags: dirs
+    tags: blobs
+    when: not blobdir.stat.exists
     file:
-      path: /var/lib/containerd/io.containerd.content.v1.content/blobs/
+      path: /var/lib/containerd/io.containerd.content.v1.content/blobs
       state: directory
 
-  - name: Link to image lfs storage
-    tags: dirs
-    file:
-      src: /.lfs/blobs/sha256
-      path: /var/lib/containerd/io.containerd.content.v1.content/blobs/sha256
-      state: link
+  - name: Upload blobs
+    tags: blobs
+    when: not blobdir.stat.exists
+    copy:
+      src: ../../../.lfs/blobs/sha256
+      dest: /var/lib/containerd/io.containerd.content.v1.content/blobs

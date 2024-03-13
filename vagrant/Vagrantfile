@@ -37,7 +37,6 @@ Vagrant.configure('2') do |config|
 			end
 
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
-			n.vm.synced_folder '.lfs/blobs', '/.lfs/blobs', id: 'blobs', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/cp.sh'
 			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
