@@ -98,6 +98,13 @@
       enabled: yes
       state: started
 
+  - name: Allow non sudo crictl usage
+    tags: containerd
+    file:
+      path: /run/containerd/containerd.sock
+      owner: root
+      group: vagrant
+
 
     ### KUBES ###
 
