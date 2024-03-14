@@ -82,6 +82,11 @@
       src: 10-containerd-net.conflist
       dest: /etc/cni/net.d/10-containerd-net.conflist
 
+  - name: Configure crictl
+    copy:
+      src: crictl.yaml
+      dest: /etc/crictl.yaml
+
   - name: Install containerd packages
     tags: containerd
     shell: apk add --allow-untrusted /.lfs/apk/containerd/*
