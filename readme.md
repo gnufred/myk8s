@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### [2024-03-15](//gitlab.com/gnufred/k): kubectl aliases
+
+Created a script to alias kubectl commands, resources, and options.
+
 ### [2024-03-11](//gitlab.com/gnufred/myk8s/-/tree/2024-03-11/vagrant): Ready to use the API!
 
 Simplify the playbook file structure, enable rsyslog on all nodes, activate logs for packet transmissions, and many other small improvements.

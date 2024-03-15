@@ -2,7 +2,6 @@
 
 export KUBECONFIG=.kubeconfig
 
-alias k='run/kubectl'
 alias pb='run/playbook'
 
 alias vgstat='vagrant status'
