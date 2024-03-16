@@ -98,6 +98,11 @@
       enabled: yes
       state: started
 
+  - name: Wait for containerd to start
+    wait_for:
+      path: /run/containerd/containerd.sock
+      timeout: 10
+
   - name: Allow non sudo crictl usage
     tags: containerd
     file:
