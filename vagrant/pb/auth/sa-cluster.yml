@@ -1,18 +1,3 @@
-- name: "ClusterRole {{ sa_user }}"
-  tags: rbac
-  kubernetes.core.k8s:
-    kubeconfig: /etc/kubernetes/admin.conf
-    state: present
-    definition:
-      apiVersion: rbac.authorization.k8s.io/v1
-      kind: ClusterRole
-      metadata:
-        name: "{{ sa_user }}"
-      rules:
-      - apiGroups: [""]
-        resources: ["*"]
-        verbs: ["*"]
-
 - name: ClusterRoleBinding admin-cluster-binding
   tags: rbac
   kubernetes.core.k8s:
@@ -29,5 +14,5 @@
         apiGroup: rbac.authorization.k8s.io
       roleRef:
         kind: ClusterRole
-        name: "{{ sa_user }}"
+        name: cluster-admin
         apiGroup: rbac.authorization.k8s.io
