@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Labs
 
+### 2024-03-18: Up and Running
+
+Finished reading [Kubernetes: Up and Running](https://www.oreilly.com/library/view/kubernetes-up-and/9781491935668/).
+
 ### [2024-03-15](//gitlab.com/gnufred/k): kubectl aliases
 
 Created a script to alias kubectl commands, resources, and options.
