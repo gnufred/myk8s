@@ -1,6 +1,6 @@
 ---
 - name: Initialize main control plane
-  hosts: cp0,
+  hosts: cp0
   become: true
   become_user: root
 
@@ -11,6 +11,10 @@
     stat:
       path: /etc/kubernetes/pki/ca.crt
     register: cacert
+
+  - name: Install etcdctl
+    tags: init
+    shell: apk add --allow-untrusted /.lfs/apk/etcd/*
 
   - name: Enable kubelet service
     tags: init
@@ -47,7 +51,7 @@
       - etcd/ca.key
 
   - name: Allow Vagrant to read kubeconfig
-    tags: bash
+    tags: shell
     file:
       path: /etc/kubernetes/admin.conf
       owner: root
@@ -55,7 +59,7 @@
       mode: '640'
 
   - name: Copy Vagrant bash files
-    tags: bash
+    tags: shell
     copy:
       src: "{{ item }}"
       dest: "/home/vagrant/{{ item }}"
@@ -67,7 +71,7 @@
       - .bashrc
 
   - name: Copy root bash files
-    tags: bash
+    tags: shell
     copy:
       src: "{{ item }}"
       dest: "/root/{{ item }}"

@@ -20,6 +20,10 @@
 
   tasks:
 
+    - name: Install etcdctl
+      tags: init
+      shell: apk add --allow-untrusted /.lfs/apk/etcd/*
+
     - name: Upload certificates
       copy:
         src: "../../.certs/{{ item }}"
