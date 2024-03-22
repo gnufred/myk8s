@@ -20,6 +20,13 @@ fi
 
 HOST="$1"
 
+exit_on_error() {
+	if [[ "$1" -ne "0" ]]; then
+		echo "$2"
+		exit $1
+	fi
+}
+
 prestart() {
 	# delete previous join commands
 	find -name '.join*' -delete
@@ -29,9 +36,11 @@ provision() {
 	if [[ -z "$HOST" ]] || [[ "$HOST" == "$NODE" ]]; then 
 		echo "[$NODE] provisioning started"
 		vagrant up --provision $NODE && \
-		for B in ${BOOKS[@]}; do run/playbook -h $NODE -b $B; done && \
-		echo "[$NODE] provisioning completed"
-		echo ""
+		for B in ${BOOKS[@]}; do
+			run/playbook -h $NODE -b $B
+			exit_on_error $? "[$NODE] provisioning failed"
+		done
+		echo -e "[$NODE] provisioning completed\n"
 	fi
 }
 
@@ -49,6 +58,7 @@ load_balancer() {
 	for i in 0; do
 		NODE="$NAME$i"
 		provision $NODE $BOOKS
+		exit_on_error $? "[$NODE] provisioning failed"
 	done
 }
 
@@ -59,6 +69,7 @@ cplane_main(){
 	for i in 0; do
 		NODE="$NAME$i"
 		provision $NODE $BOOKS
+		exit_on_error $? "[$NODE] provisioning failed"
 	done
 }
 
@@ -68,6 +79,7 @@ cplane_replica(){
 		NODE="$NAME$i"
 		provision $NODE $BOOKS && \
 		join $MAIN $NODE &
+		exit_on_error $? "[$NODE] provisioning failed"
 	done
 	wait
 }

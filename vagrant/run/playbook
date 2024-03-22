@@ -45,7 +45,7 @@ fi
 
 if [[ -z "$PLAYBOOK" ]]; then
 	echo "ERROR: Playbook name required."
-	exit
+	exit 1
 else
 	PLAYBOOK="pb/$PLAYBOOK/main.yml"
 fi
@@ -53,3 +53,5 @@ fi
 # https://docs.ansible.com/ansible/latest/scenario_guides/guide_vagrant.html
 INVENTORY=.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory 
 ansible-playbook -i $INVENTORY $PLAYBOOK ${TAGS:+"--tags" "$TAGS"} ${HOST:+"-l" "$HOST"} ${XVARS:+"--extra-vars" "$XVARS"}
+STATCODE=$?
+exit $STATCODE

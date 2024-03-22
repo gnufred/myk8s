@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+	echo "ERROR: Argument <NODE_TO_JOIN> required"
+	exit
+fi
+
+worker() {
+	kubectl delete node $NODE
+	vagrant destroy --force $NODE
+}
+
+cplane_main() {
+	echo "[$NODE] Error: removing main node is not allowed."
+	exit 1
+}
+
+cplane_replica() {
+	run/playbook \
+		-h cp0 \
+		-b remove \
+		-x "{\"uid\":\"${NODE}\"}"
+	vagrant destroy --force $NODE
+}
+
+NODE="$1"
+
+if [[ "$NODE" == "cp0" ]]; then cplane_main; exit; fi
+
+case "${NODE:0:2}" in
+	cp) cplane_replica $NODE;;
+	wo) worker $NODE;;
+	*)  echo "[$NODE] Error: invalid node type."
+		exit 1
+		;;
+esac
