@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# print help
+usage() {
+	echo "Save an etcd snapshot
+
+USAGE:
+    run/etcd/restore [OPTIONS]
+    run/etcd/restore --help
+
+OPTIONS:
+    -f, --file <FILE> etcd snapshot (mandatory)
+            The etcd snapshot to recover."
+}
+
+# process args
+# https://linuxcommand.org/lc3_wss0120.php
+while [ "$1" != "" ]; do
+    case $1 in
+		     --help ) usage; exit;;
+    esac
+    shift
+done
+
+run/playbook \
+	-h "cp0" \
+	-b etcd \
+    -t backup

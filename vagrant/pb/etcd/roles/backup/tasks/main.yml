@@ -1,0 +1,16 @@
+---
+- name: Create etcd snapshot
+  shell: |
+    source /root/.bashrc
+    etcdctl snapshot save /var/lib/etcd/snap.db
+
+- name: Fetch snapshot
+  fetch:
+    src: /var/lib/etcd/snap.db
+    dest: "files/{{ ansible_date_time.epoch }}.db"
+    flat: true
+
+- name: Delete snapshot
+  file:
+    path: /var/lib/etcd/snap.db
+    state: absent

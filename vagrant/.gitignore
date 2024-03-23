@@ -1,3 +1,4 @@
+pb/etcd/files/*.db
 .vagrant
 .cache
 .certs
