@@ -73,6 +73,13 @@
     - name: Join the cluster
       shell: $(cat "/etc/kubernetes/var/.join_cmd_{{ uid }}") --control-plane
 
+    - name: Allow Vagrant to read kubeconfig
+      file:
+        path: /etc/kubernetes/admin.conf
+        owner: root
+        group: vagrant
+        mode: '640'
+
 
 - name: Join the cluster as a worker node
   hosts: wo0, wo1, wo2, wo3, wo4, wo5

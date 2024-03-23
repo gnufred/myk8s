@@ -1,8 +1,0 @@
-- name: Operate etcd
-  hosts: cp0
-  become: true
-  become_user: root
-
-  roles:
-    - {role: backup, tags: backup }
-    - {role: restore, tags: restore }

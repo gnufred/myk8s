@@ -1,0 +1,27 @@
+- name: Restore certificates
+  copy:
+    src: "../../.certs/{{ item }}"
+    dest: "/etc/kubernetes/pki/{{ item }}"
+  loop:
+    - apiserver-etcd-client.crt
+    - apiserver-etcd-client.key
+    - apiserver-kubelet-client.crt
+    - apiserver-kubelet-client.key
+    - apiserver.crt
+    - apiserver.key
+    - ca.crt
+    - ca.key
+    - etcd/ca.crt
+    - etcd/ca.key
+    - etcd/healthcheck-client.crt
+    - etcd/healthcheck-client.key
+    - etcd/peer.crt
+    - etcd/peer.key
+    - etcd/server.crt
+    - etcd/server.key
+    - front-proxy-ca.crt
+    - front-proxy-ca.key
+    - front-proxy-client.crt
+    - front-proxy-client.key
+    - sa.key
+    - sa.pub 

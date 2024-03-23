@@ -9,14 +9,11 @@
   - name: Check if cluster is configured
     tags: init
     stat:
-      path: /etc/kubernetes/pki/ca.crt
+      path: /etc/kubernetes/admin.conf 
     register: cacert
 
-  - name: Install etcdctl
-    tags: init
-    shell: apk add --allow-untrusted /.lfs/apk/etcd/*
-
   - name: Enable kubelet service
+    when: not cacert.stat.exists
     tags: init
     service:
       name: kubelet
@@ -24,61 +21,53 @@
       enabled: yes
 
   - name: Copy cluster configuration
+    when: not cacert.stat.exists
     tags: init
     copy:
       src: cluster.yaml
       dest: /etc/kubernetes/cluster.yaml
 
   - name: Kubeadmin init
-    tags: init
     when: not cacert.stat.exists
-    shell: kubeadm init --config /etc/kubernetes/cluster.yaml
+    tags: init
+    shell: kubeadm init --config /etc/kubernetes/cluster.yaml --ignore-preflight-errors=DirAvailable--var-lib-etcd
 
   - name: Fetch certificates
+    when: not cacert.stat.exists
     tags: certs
     fetch:
       src: "/etc/kubernetes/pki/{{ item }}"
       dest: "../../.certs/{{ item }}"
       flat: true
     loop:
+      - apiserver-etcd-client.crt
+      - apiserver-etcd-client.key
+      - apiserver-kubelet-client.crt
+      - apiserver-kubelet-client.key
+      - apiserver.crt
+      - apiserver.key
       - ca.crt
       - ca.key
-      - sa.key
-      - sa.pub
-      - front-proxy-ca.crt
-      - front-proxy-ca.key
       - etcd/ca.crt
       - etcd/ca.key
+      - etcd/healthcheck-client.crt
+      - etcd/healthcheck-client.key
+      - etcd/peer.crt
+      - etcd/peer.key
+      - etcd/server.crt
+      - etcd/server.key
+      - front-proxy-ca.crt
+      - front-proxy-ca.key
+      - front-proxy-client.crt
+      - front-proxy-client.key
+      - sa.key
+      - sa.pub 
 
   - name: Allow Vagrant to read kubeconfig
+    when: not cacert.stat.exists
     tags: shell
     file:
       path: /etc/kubernetes/admin.conf
       owner: root
       group: vagrant
       mode: '640'
-
-  - name: Copy Vagrant bash files
-    tags: shell
-    copy:
-      src: "{{ item }}"
-      dest: "/home/vagrant/{{ item }}"
-      owner: vagrant
-      group: vagrant
-      mode: '600'
-    loop: 
-      - .bash_profile
-      - .bashrc
-
-  - name: Copy root bash files
-    tags: shell
-    copy:
-      src: "{{ item }}"
-      dest: "/root/{{ item }}"
-      owner: root
-      group: root
-      mode: '600'
-    loop: 
-      - .bash_profile
-      - .bashrc
-

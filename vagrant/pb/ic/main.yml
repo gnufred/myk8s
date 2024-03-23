@@ -1,0 +1,9 @@
+- name: Operate etcd
+  hosts: cp0
+  become: true
+  become_user: root
+
+  roles:
+    - {role: etcd_backup, tags: etcd_backup }
+    - {role: etcd_restore, tags: etcd_restore }
+    - {role: pki_restore, tags: pki_restore }

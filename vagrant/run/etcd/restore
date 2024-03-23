@@ -29,7 +29,7 @@ while [ "$1" != "" ]; do
 done
 
 if [[ "$SUBCOMMAND" == "list" ]]; then
-	ls pb/etcd/.bkp
+	find pb/ic/files -name '*.db'|sort|sed 's,pb/ic/files/,,'
 	exit 0
 fi
 
@@ -41,6 +41,6 @@ fi
 
 run/playbook \
 	-h "cp0" \
-	-b etcd \
-    -t restore \
+	-b ic \
+    -t etcd_restore \
 	-x "{\"backup_file\":\"${FILE}\"}"

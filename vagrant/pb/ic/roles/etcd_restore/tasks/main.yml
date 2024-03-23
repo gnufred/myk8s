@@ -2,7 +2,7 @@
 #
 # This can only succeed when there is a single control plane.
 # Otherwise, the extra etcd nodes will restore the quorum after the restart.
-# Effectively overwritting the restored snapshot.
+# Effectively overwriting the restored snapshot.
 ---
 - name: Push snapshot
   copy:
@@ -14,15 +14,10 @@
     path: /var/lib/etcd/
     state: absent
 
-- name: Create etcd snapshot
+- name: Restore etcd snapshot
   shell: |
     source /root/.bashrc
     etcdctl --data-dir=/var/lib/etcd snapshot restore /tmp/snap.db
-
-- name: Restart etcd
-  shell: |
-    POD=$(crictl pods|grep etcd-cp0|grep ' Ready '|awk '{print $1}')
-    crictl stopp $POD
 
 - name: Clean snapshot
   file:

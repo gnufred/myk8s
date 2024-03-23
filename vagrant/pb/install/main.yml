@@ -149,6 +149,16 @@
 
   tasks:
 
+
+    ### ETCD ###
+
+  - name: Install etcdctl
+    tags: etcd
+    shell: apk add --allow-untrusted /.lfs/apk/etcd/*
+
+
+    ### IMAGES ###
+
   - name: Check if blobs are already uploaded
     tags: blobs
     stat:
@@ -168,3 +178,31 @@
     copy:
       src: ../../../.lfs/blobs/sha256
       dest: /var/lib/containerd/io.containerd.content.v1.content/blobs
+    
+
+    ### BASH ###
+    
+  - name: Copy Vagrant bash files
+    tags: shell
+    copy:
+      src: "{{ item }}"
+      dest: "/home/vagrant/{{ item }}"
+      owner: vagrant
+      group: vagrant
+      mode: '600'
+    loop: 
+      - .bash_profile
+      - .bashrc
+
+  - name: Copy root bash files
+    tags: shell
+    copy:
+      src: "{{ item }}"
+      dest: "/root/{{ item }}"
+      owner: root
+      group: root
+      mode: '600'
+    loop: 
+      - .bash_profile
+      - .bashrc
+
