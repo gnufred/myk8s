@@ -1,12 +1,16 @@
-# My Kubernetes journey
+# My Kubernetes Journey
 
-My 2024 New Year resolution is to become a Kubernetes developer (one who writes Kubernetes code).
+My 2024 New Year's resolution is to become a Kubernetes contributor (who writes Kubernetes code).
 
-When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP 3 was just released. I made a lot of progress since, but I missed the Golang, and Kubernetes train. But not for long...
+When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP 3 had just been released. I've made a lot of progress since then, but I missed the Kubernetes train.
 
 Time to go back to the night lab! 🌘 🖥
 
-## Labs
+## Training
+
+### [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
+
+Progress: Chapter 5/18
 
 ### 2024-03-18: Up and Running
 
@@ -14,68 +18,68 @@ Finished reading [Kubernetes: Up and Running](https://www.oreilly.com/library/vi
 
 ### [2024-03-15](//gitlab.com/gnufred/k): kubectl aliases
 
-Created a script to alias kubectl commands, resources, and options.
+Created a script to alias `kubectl` commands, resources, and options.
 
-### [2024-03-11](//gitlab.com/gnufred/myk8s/-/tree/2024-03-11/vagrant): Ready to use the API!
+### [2024-03-11](//gitlab.com/gnufred/myk8s/-/tree/2024-03-11/vagrant): Ready to Use the API!
 
-Simplify the playbook file structure, enable rsyslog on all nodes, activate logs for packet transmissions, and many other small improvements.
+Simplified the playbook file structure, enabled rsyslog on all nodes, activated logs for packet transmissions, and made many other small improvements.
 
-### [2024-03-08](//gitlab.com/gnufred/myk8s/-/tree/2024-03-08/vagrant): HighAvail control plane
+### [2024-03-08](//gitlab.com/gnufred/myk8s/-/tree/2024-03-08/vagrant): High Availability Control Plane
 
-Adds a load balancer, as the control plane endpoint, two new control planes, and connects workers via the LB.
+Added a load balancer as the control plane endpoint, two new control planes, and connected workers via the LB.
 
-### [2024-03-05](//gitlab.com/gnufred/myk8s/-/tree/2024-03-05/vagrant): Offline provisioning
+### [2024-03-05](//gitlab.com/gnufred/myk8s/-/tree/2024-03-05/vagrant): Offline Provisioning
 
-VM provisioning must happens without downloading packages, or container images.
+VM provisioning must happen without downloading packages or container images.
 
-### [2024-03-03](//gitlab.com/gnufred/myk8s/-/tree/2024-03-03/vagrant): CNI plugin
+### [2024-03-03](//gitlab.com/gnufred/myk8s/-/tree/2024-03-03/vagrant): CNI Plugin
 
-Add CNI plugin to get node to change state from NotReady to Ready.
+Added a CNI plugin to get the node to change state from NotReady to Ready.
 
-### [2024-03-02](//gitlab.com/gnufred/myk8s/-/tree/2024-03-02/vagrant): Alpine control plane
+### [2024-03-02](//gitlab.com/gnufred/myk8s/-/tree/2024-03-02/vagrant): Alpine Control Plane
 
-Convert the Ubuntu control plane to an Alpine Linux control plane.
+Converted the Ubuntu control plane to an Alpine Linux control plane.
 
-### [2024-02-28](https://training.linuxfoundation.org/training/kubernetes-fundamentals-lfs258-cka-exam-bundle/): LFS258 + CKA bundle
+### [2024-02-28](https://training.linuxfoundation.org/training/kubernetes-fundamentals-lfs258-cka-exam-bundle/): LFS258 + CKA Bundle
 
-Having goals and deadline is important. As such, I purchased the LFS258 + CKA bundle. Clock is ticking! 365 day left to get the cert :)
+Having goals and deadlines is important. As such, I purchased the LFS258 + CKA bundle. The clock is ticking! 365 days left to get the cert :)
 
-### [2024-02-23](//gitlab.com/gnufred/myk8s/-/tree/2024-02-23/vagrant): Alpine worker
+### [2024-02-23](//gitlab.com/gnufred/myk8s/-/tree/2024-02-23/vagrant): Alpine Worker
 
-Add an Alpine Linux worker node.
+Added an Alpine Linux worker node.
 
-### [2024-02-20](//gitlab.com/gnufred/myk8s/-/tree/2024-02-20/vagrant): Improve
+### [2024-02-20](//gitlab.com/gnufred/myk8s/-/tree/2024-02-20/vagrant): Improvements
 
-Secure host/guest TLS. Ansible refactoring. Other stuff.
+Secured host/guest TLS, refactored Ansible, and other tasks.
 
-### [2024-02-18](//gitlab.com/gnufred/myk8s/-/tree/2024-02-18/24-03-18_ufw): UFW firewall
+### [2024-02-18](//gitlab.com/gnufred/myk8s/-/tree/2024-02-18/24-03-18_ufw): UFW Firewall
 
-Add UFW rules to the control plane nodes.
+Added UFW rules to the control plane nodes.
 
-### [2024-02-17](//gitlab.com/gnufred/myk8s/-/tree/2024-02-17/24-03-17_btr-ans): Refactor everything
+### [2024-02-17](//gitlab.com/gnufred/myk8s/-/tree/2024-02-17/24-03-17_btr-ans): Refactored Everything
 
-Refactor everything I've done so far. Everything is now absolutely perfect!
+Refactored everything I've done so far. Everything is now absolutely perfect!
 
-### [2024-02-15](//gitlab.com/gnufred/myk8s/-/tree/2024-02-15/24-03-15_usr-auth): Ansible auth
+### [2024-02-15](//gitlab.com/gnufred/myk8s/-/tree/2024-02-15/24-03-15_usr-auth): Ansible Auth
 
-Configure the control plane user authentication via Ansible.
+Configured control plane user authentication via Ansible.
 
-### [2024-02-13](//gitlab.com/gnufred/myk8s/-/tree/2024-02-13/24-02-13_kubeadm-init-ansible): Ansible kubeadm init
+### [2024-02-13](//gitlab.com/gnufred/myk8s/-/tree/2024-02-13/24-02-13_kubeadm-init-ansible): Ansible `kubeadm init`
 
-Covert each step of the `kubeadm init` processes into Ansible roles, in a new playbook. Provision a Vagrant VM where `kubectl cluster-info` runs as expected.
+Converted each step of the `kubeadm init` process into Ansible roles in a new playbook. Provisioned a Vagrant VM where `kubectl cluster-info` runs as expected.
 
-### [2024-02-12](//gitlab.com/gnufred/myk8s/-/tree/2024-02-12/24-02-12_ctl-ansible): Ansible pre init
+### [2024-02-12](//gitlab.com/gnufred/myk8s/-/tree/2024-02-12/24-02-12_ctl-ansible): Ansible Pre-Init
 
-Convert the Vagrant bash script to an Ansible playbook, where `kubeadm init` finishes.
+Converted the Vagrant bash script to an Ansible playbook where `kubeadm init` finishes.
 
-### [2024-02-07](//gitlab.com/gnufred/myk8s/-/tree/2024-02-07/2024-02-07_kubectl-api): kubectl cluster-info
+### [2024-02-07](//gitlab.com/gnufred/myk8s/-/tree/2024-02-07/2024-02-07_kubectl-api): `kubectl cluster-info`
 
-Provision a Vagrant VM via bash script, where `kubectl cluster-info` runs as expected.
+Provisioned a Vagrant VM via a bash script where `kubectl cluster-info` runs as expected.
 
-### [2024-02-06](//gitlab.com/gnufred/myk8s/-/tree/2024-02-06/2024-02-06_kubeadm-init): kubeadm init
+### [2024-02-06](//gitlab.com/gnufred/myk8s/-/tree/2024-02-06/2024-02-06_kubeadm-init): `kubeadm init`
 
-Provision a Vagrant VM with a bash script where `kubeadm init` finishes.
+Provisioned a Vagrant VM with a bash script where `kubeadm init` finishes.
 
-### [2024-02-05](//gitlab.com/gnufred/myk8s/-/tree/2024-02-05/2024-02-05_install_kubectl): Install kubectl
+### [2024-02-05](//gitlab.com/gnufred/myk8s/-/tree/2024-02-05/2024-02-05_install_kubectl): Install `kubectl`
 
-Write a bash script that installs and updates the `kubectl` cli on my workstation.
+Wrote a bash script that installs and updates the `kubectl` CLI on my workstation.
