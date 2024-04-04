@@ -16,7 +16,7 @@ Vagrant.configure('2') do |config|
 
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
-			n.vm.provision :shell, path: 'prov/lb.sh'
+			n.vm.provision :shell, path: 'prov/def.sh'
 			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
 
 		end
@@ -44,7 +44,6 @@ Vagrant.configure('2') do |config|
 		end
 	end
 
-
 	# workers
 	(0..5).each do |i|
 		config.vm.define "wo#{i}" do |n|
@@ -60,8 +59,29 @@ Vagrant.configure('2') do |config|
 
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
-			n.vm.provision :shell, path: 'prov/wo.sh'
+			n.vm.provision :shell, path: 'prov/def.sh'
 			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+		end
+	end
+
+	# nfs storage
+	(0..0).each do |i|
+		config.vm.define "nf#{i}" do |n|
+
+			n.vm.box = 'generic/alpine319'
+
+			n.vm.network :private_network, ip: "10.1.2.4#{i}"
+
+			n.vm.provider 'libvirt' do |v|
+				v.memory = 1000
+				v.cpus = 1
+			end
+
+			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
+
+			n.vm.provision :shell, path: 'prov/def.sh'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+
 		end
 	end
 

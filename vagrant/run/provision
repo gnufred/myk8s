@@ -84,6 +84,15 @@ cplane_replica(){
 	wait
 }
 
+nfs() {
+	NAME=nf
+	BOOKS=(ufw install)
+	for i in {0..0}; do
+		NODE="$NAME$i"
+		provision $NODE $BOOKS &
+	done
+}
+
 worker() {
 	NAME=wo
 	BOOKS=(ufw install)
@@ -99,4 +108,5 @@ prestart
 load_balancer
 cplane_main
 cplane_replica
+nfs
 worker

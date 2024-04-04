@@ -1,0 +1,11 @@
+# /etc/exports
+#
+# See exports(5) for a description.
+
+# use exportfs -arv to reread
+/export    wo0(rw,root_squash,no_subtree_check)
+/export    wo1(rw,root_squash,no_subtree_check)
+/export    wo2(rw,root_squash,no_subtree_check)
+/export    wo3(rw,root_squash,no_subtree_check)
+/export    wo4(rw,root_squash,no_subtree_check)
+/export    wo5(rw,root_squash,no_subtree_check)

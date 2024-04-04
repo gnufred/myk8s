@@ -206,3 +206,50 @@
       - .bash_profile
       - .bashrc
 
+
+  ### NFS: ALL ###
+- name: Install NFS
+  hosts: nf0, wo0, wo1, wo2, wo3, wo4, wo5
+  become: true
+  become_user: root
+
+  tasks:
+
+  - name: Install nfs packages
+    tags: nfs
+    shell: apk add --allow-untrusted /.lfs/apk/nfs/*
+
+  ### NFS: SERVER ###
+- name: Configure NFS server
+  hosts: nf0
+  become: true
+  become_user: root
+
+  tasks:
+
+  - name: Enable rpcbind
+    tags: nfs
+    service:
+      name: rpcbind
+      enabled: yes
+      state: started
+
+  - name: Create /export
+    tags: nfs
+    file:
+      path: /export
+      state: directory
+
+  - name: Copy export config
+    tags: nfs
+    copy:
+      src: exports
+      dest: /etc/exports
+
+  - name: Enable nfs
+    tags: nfs
+    service:
+      name: nfs
+      enabled: yes
+      state: reloaded
+
