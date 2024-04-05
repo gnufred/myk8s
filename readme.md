@@ -1,6 +1,6 @@
 # My Kubernetes Journey
 
-My 2024 New Year's resolution is to become a Kubernetes contributor (who writes Kubernetes code).
+My 2024 New Year's resolution is to become a [Kubernetes contributor](https://github.com/kubernetes/community/blob/master/contributors/guide/README.md).
 
 When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP 3 had just been released. I've made a lot of progress since then, but I missed the Kubernetes train.
 
@@ -8,13 +8,23 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Training
 
-### [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
+### Ongoing: [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
 
 Progress: Chapter 7/18
 
-### 2024-03-18: Up and Running
+### 2024-03-18: Up and Running!
 
-Finished reading [Kubernetes: Up and Running](https://www.oreilly.com/library/view/kubernetes-up-and/9781491935668/).
+Completed study and labs from [Kubernetes: Up and Running](https://www.oreilly.com/library/view/kubernetes-up-and/9781491935668/).
+
+### 2024-02-28: LFS258 + CKA Bundle
+
+Having goals and deadlines is important. As such, I purchased the [LFS258 + CKA bundle](https://training.linuxfoundation.org/training/kubernetes-fundamentals-lfs258-cka-exam-bundle/). The clock is ticking! 365 days left to get the cert :)
+
+## Labs
+
+### [2024-04-05](//gitlab.com/gnufred/myk8s/-/tree/2024-04-05/vagrant): NFS server
+
+Added an NFS server to enable PV and PVC.
 
 ### [2024-03-15](//gitlab.com/gnufred/k): kubectl aliases
 
@@ -39,10 +49,6 @@ Added a CNI plugin to get the node to change state from NotReady to Ready.
 ### [2024-03-02](//gitlab.com/gnufred/myk8s/-/tree/2024-03-02/vagrant): Alpine Control Plane
 
 Converted the Ubuntu control plane to an Alpine Linux control plane.
-
-### [2024-02-28](https://training.linuxfoundation.org/training/kubernetes-fundamentals-lfs258-cka-exam-bundle/): LFS258 + CKA Bundle
-
-Having goals and deadlines is important. As such, I purchased the LFS258 + CKA bundle. The clock is ticking! 365 days left to get the cert :)
 
 ### [2024-02-23](//gitlab.com/gnufred/myk8s/-/tree/2024-02-23/vagrant): Alpine Worker
 
