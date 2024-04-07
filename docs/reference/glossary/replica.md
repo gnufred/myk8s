@@ -10,11 +10,11 @@ tags:
 - fundamental
 - workload
 ---
-A copy or duplicate of a {{< glossary_tooltip text="Pod" term_id="pod" >}} or
+A copy or duplicate of a {{}} or
 a set of pods. Replicas ensure high availability, scalability, and fault tolerance
 by maintaining multiple identical instances of a pod.
 
-<!--more-->
+
 Replicas are commonly used in Kubernetes to achieve the desired application state and reliability.
 They enable workload scaling and distribution across multiple nodes in a cluster.
 

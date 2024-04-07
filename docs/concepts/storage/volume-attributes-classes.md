@@ -6,15 +6,15 @@ title: Volume Attributes Classes
 content_type: concept
 weight: 40
 ---
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.29" state="alpha" >}}
+
+{{}}
 
 This page assumes that you are familiar with [StorageClasses](/docs/concepts/storage/storage-classes/),
 [volumes](/docs/concepts/storage/volumes/) and [PersistentVolumes](/docs/concepts/storage/persistent-volumes/)
 in Kubernetes.
 
-<!-- body -->
+
 
 A VolumeAttributesClass provides a way for administrators to describe the mutable
 "classes" of storage they offer. Different classes might map to different quality-of-service levels.
@@ -30,7 +30,7 @@ If you want to test the feature whilst it's alpha, you need to enable the `Volum
 ```
 
 You can also only use VolumeAttributesClasses with storage backed by
-{{< glossary_tooltip text="Container Storage Interface" term_id="csi" >}}, and only where the
+{{}}, and only where the
 relevant CSI driver implements the `ModifyVolume` API.
 
 ## The VolumeAttributesClass API

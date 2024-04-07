@@ -10,16 +10,7 @@ weight: 5
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: coordination.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 Lease defines a lease concept.
 
-<hr>
+
 
 - **apiVersion**: coordination.k8s.io/v1
 
@@ -38,11 +29,11 @@ Lease defines a lease concept.
 - **kind**: Lease
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../cluster-resources/lease-v1#LeaseSpec" >}}">LeaseSpec</a>)
+- **spec** (}}">LeaseSpec)
 
   spec contains the specification of the Lease. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
@@ -54,13 +45,13 @@ Lease defines a lease concept.
 
 LeaseSpec is a specification of a Lease.
 
-<hr>
+
 
 - **acquireTime** (MicroTime)
 
   acquireTime is a time when the current lease was acquired.
 
-  <a name="MicroTime"></a>
+  
   *MicroTime is version of Time with microsecond level precision.*
 
 - **holderIdentity** (string)
@@ -79,7 +70,7 @@ LeaseSpec is a specification of a Lease.
 
   renewTime is a time when the current holder of a lease has last updated the lease.
 
-  <a name="MicroTime"></a>
+  
   *MicroTime is version of Time with microsecond level precision.*
 
 
@@ -90,7 +81,7 @@ LeaseSpec is a specification of a Lease.
 
 LeaseList is a list of Lease objects.
 
-<hr>
+
 
 - **apiVersion**: coordination.k8s.io/v1
 
@@ -98,11 +89,11 @@ LeaseList is a list of Lease objects.
 - **kind**: LeaseList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>), required
+- **items** ([]}}">Lease), required
 
   items is a list of schema objects.
 
@@ -114,7 +105,7 @@ LeaseList is a list of Lease objects.
 
 
 
-<hr>
+
 
 
 
@@ -137,19 +128,19 @@ GET /apis/coordination.k8s.io/v1/namespaces/{namespace}/leases/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): OK
+200 (}}">Lease): OK
 
 401: Unauthorized
 
@@ -165,69 +156,69 @@ GET /apis/coordination.k8s.io/v1/namespaces/{namespace}/leases
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../cluster-resources/lease-v1#LeaseList" >}}">LeaseList</a>): OK
+200 (}}">LeaseList): OK
 
 401: Unauthorized
 
@@ -243,64 +234,64 @@ GET /apis/coordination.k8s.io/v1/leases
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../cluster-resources/lease-v1#LeaseList" >}}">LeaseList</a>): OK
+200 (}}">LeaseList): OK
 
 401: Unauthorized
 
@@ -316,43 +307,43 @@ POST /apis/coordination.k8s.io/v1/namespaces/{namespace}/leases
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>, required
+- **body**: }}">Lease, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): OK
+200 (}}">Lease): OK
 
-201 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): Created
+201 (}}">Lease): Created
 
-202 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): Accepted
+202 (}}">Lease): Accepted
 
 401: Unauthorized
 
@@ -373,41 +364,41 @@ PUT /apis/coordination.k8s.io/v1/namespaces/{namespace}/leases/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>, required
+- **body**: }}">Lease, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): OK
+200 (}}">Lease): OK
 
-201 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): Created
+201 (}}">Lease): Created
 
 401: Unauthorized
 
@@ -428,46 +419,46 @@ PATCH /apis/coordination.k8s.io/v1/namespaces/{namespace}/leases/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): OK
+200 (}}">Lease): OK
 
-201 (<a href="{{< ref "../cluster-resources/lease-v1#Lease" >}}">Lease</a>): Created
+201 (}}">Lease): Created
 
 401: Unauthorized
 
@@ -488,41 +479,41 @@ DELETE /apis/coordination.k8s.io/v1/namespaces/{namespace}/leases/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
-202 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): Accepted
+202 (}}">Status): Accepted
 
 401: Unauthorized
 
@@ -538,79 +529,79 @@ DELETE /apis/coordination.k8s.io/v1/namespaces/{namespace}/leases
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

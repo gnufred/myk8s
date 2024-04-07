@@ -9,7 +9,7 @@ content_type: concept
 weight: 65
 ---
 
-<!-- overview -->
+
 
 Windows applications constitute a large portion of the services and applications that
 run in many organizations. [Windows containers](https://aka.ms/windowscontainers)
@@ -21,21 +21,21 @@ applications don't have to look for separate orchestrators to manage their workl
 leading to increased operational efficiencies across their deployments, regardless
 of operating system.
 
-<!-- body -->
+
 
 ## Windows nodes in Kubernetes
 
 To enable the orchestration of Windows containers in Kubernetes, include Windows nodes
 in your existing Linux cluster. Scheduling Windows containers in
-{{< glossary_tooltip text="Pods" term_id="pod" >}} on Kubernetes is similar to
+{{}} on Kubernetes is similar to
 scheduling Linux-based containers.
 
 In order to run Windows containers, your Kubernetes cluster must include
 multiple operating systems.
-While you can only run the {{< glossary_tooltip text="control plane" term_id="control-plane" >}} on Linux,
+While you can only run the {{}} on Linux,
 you can deploy worker nodes running either Windows or Linux.
 
-Windows {{< glossary_tooltip text="nodes" term_id="node" >}} are
+Windows {{}} are
 [supported](#windows-os-version-support) provided that the operating system is
 Windows Server 2019 or Windows Server 2022.
 
@@ -126,7 +126,7 @@ section refers to several key workload abstractions and how they map to Windows.
   * Job
   * CronJob
   * ReplicationController
-* {{< glossary_tooltip text="Services" term_id="service" >}}
+* {{}}
   See [Load balancing and Services](/docs/concepts/services-networking/windows-networking/#load-balancing-and-services) for more details.
 
 Pods, workload resources, and Services are critical elements to managing Windows
@@ -136,8 +136,8 @@ environment.
 
 * `kubectl exec`
 * Pod and container metrics
-* {{< glossary_tooltip text="Horizontal pod autoscaling" term_id="horizontal-pod-autoscaler" >}}
-* {{< glossary_tooltip text="Resource quotas" term_id="resource-quota" >}}
+* {{}}
+* {{}}
 * Scheduler preemption
 
 ### Command line options for the kubelet {#kubelet-compatibility}
@@ -259,14 +259,14 @@ The following list documents differences between how Pod specifications work bet
 
 #### Field compatibility for hostNetwork {#compatibility-v1-pod-spec-containers-hostnetwork}
 
-{{< feature-state for_k8s_version="v1.26" state="alpha" >}}
+{{}}
 
 The kubelet can now request that pods running on Windows nodes use the host's network namespace instead
 of creating a new pod network namespace. To enable this functionality pass `--feature-gates=WindowsHostNetwork=true` to the kubelet.
 
-{{< note >}}
+{{}}
 This functionality requires a container runtime that supports this functionality.
-{{< /note >}}
+{{}}
 
 #### Field compatibility for Pod security context {#compatibility-v1-pod-spec-containers-securitycontext}
 
@@ -291,7 +291,7 @@ network port spaces). Kubernetes uses pause containers to allow for worker conta
 crashing or restarting without losing any of the networking configuration.
 
 Kubernetes maintains a multi-architecture image that includes support for Windows.
-For Kubernetes v{{< skew currentPatchVersion >}} the recommended pause image is `registry.k8s.io/pause:3.6`.
+For Kubernetes v{{}} the recommended pause image is `registry.k8s.io/pause:3.6`.
 The [source code](https://github.com/kubernetes/kubernetes/tree/master/build/pause)
 is available on GitHub.
 
@@ -306,7 +306,7 @@ binaries.
 ## Container runtimes {#container-runtime}
 
 You need to install a
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+{{}}
 into each node in the cluster so that Pods can run there.
 
 The following container runtimes work with Windows:
@@ -315,17 +315,17 @@ The following container runtimes work with Windows:
 
 ### ContainerD
 
-{{< feature-state for_k8s_version="v1.20" state="stable" >}}
+{{}}
 
-You can use {{< glossary_tooltip term_id="containerd" text="ContainerD" >}} 1.4.0+
+You can use {{}} 1.4.0+
 as the container runtime for Kubernetes nodes that run Windows.
 
 Learn how to [install ContainerD on a Windows node](/docs/setup/production-environment/container-runtimes/#containerd).
-{{< note >}}
+{{}}
 There is a [known limitation](/docs/tasks/configure-pod-container/configure-gmsa/#gmsa-limitations)
 when using GMSA with containerd to access Windows network shares, which requires a
 kernel patch.
-{{< /note >}}
+{{}}
 
 ### Mirantis Container Runtime {#mcr}
 
@@ -340,7 +340,7 @@ On Windows nodes, strict compatibility rules apply where the host OS version mus
 match the container base image OS version. Only Windows containers with a container
 operating system of Windows Server 2019 are fully supported.
 
-For Kubernetes v{{< skew currentVersion >}}, operating system compatibility for Windows nodes (and Pods)
+For Kubernetes v{{}}, operating system compatibility for Windows nodes (and Pods)
 is as follows:
 
 Windows Server LTSC release
@@ -356,11 +356,11 @@ The Kubernetes [version-skew policy](/docs/setup/release/version-skew-policy/) a
 
 {{% thirdparty-content %}}
 
-{{< note >}}
+{{}}
 The following hardware specifications outlined here should be regarded as sensible default values. 
 They are not intended to represent minimum requirements or specific recommendations for production environments.
 Depending on the requirements for your workload these values may need to be adjusted. 
-{{< /note >}}
+{{}}
 
 - 64-bit processor 4 CPU cores or more, capable of supporting virtualization
 - 8GB or more of RAM

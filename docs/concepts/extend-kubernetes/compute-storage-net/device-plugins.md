@@ -7,19 +7,19 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+
+{{}}
 
 Kubernetes provides a device plugin framework that you can use to advertise system hardware
-resources to the {{< glossary_tooltip term_id="kubelet" >}}.
+resources to the {{}}.
 
 Instead of customizing the code for Kubernetes itself, vendors can implement a
-device plugin that you deploy either manually or as a {{< glossary_tooltip term_id="daemonset" >}}.
+device plugin that you deploy either manually or as a {{}}.
 The targeted devices include GPUs, high-performance NICs, FPGAs, InfiniBand adapters,
 and other similar computing resources that may require vendor specific initialization
 and setup.
 
-<!-- body -->
+
 
 ## Device plugin registration
 
@@ -121,22 +121,22 @@ The general workflow of a device plugin includes the following steps:
    }
    ```
 
-   {{< note >}}
+   {{}}
    Plugins are not required to provide useful implementations for
    `GetPreferredAllocation()` or `PreStartContainer()`. Flags indicating
    the availability of these calls, if any, should be set in the `DevicePluginOptions`
    message sent back by a call to `GetDevicePluginOptions()`. The `kubelet` will
    always call `GetDevicePluginOptions()` to see which optional functions are
    available, before calling any of them directly.
-   {{< /note >}}
+   {{}}
 
 1. The plugin registers itself with the kubelet through the Unix socket at host
    path `/var/lib/kubelet/device-plugins/kubelet.sock`.
 
-   {{< note >}}
+   {{}}
    The ordering of the workflow is important. A plugin MUST start serving gRPC
    service before registering itself with kubelet for successful registration.
-   {{< /note >}}
+   {{}}
 
 1. After successfully registering itself, the device plugin runs in serving mode, during which it keeps
    monitoring device health and reports back to the kubelet upon any device state changes.
@@ -156,12 +156,12 @@ The general workflow of a device plugin includes the following steps:
    * mounts
    * fully-qualified CDI device names
 
-   {{< note >}}
+   {{}}
    The processing of the fully-qualified CDI device names by the Device Manager requires
    that the `DevicePluginCDIDevices` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
    is enabled for both the kubelet and the kube-apiserver. This was added as an alpha feature in Kubernetes
    v1.28 and graduated to beta in v1.29.
-   {{< /note >}}
+   {{}}
 
 ### Handling kubelet restarts
 
@@ -178,8 +178,8 @@ or manually.
 The canonical directory `/var/lib/kubelet/device-plugins` requires privileged access,
 so a device plugin must run in a privileged security context.
 If you're deploying a device plugin as a DaemonSet, `/var/lib/kubelet/device-plugins`
-must be mounted as a {{< glossary_tooltip term_id="volume" >}}
-in the plugin's [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
+must be mounted as a {{}}
+in the plugin's [PodSpec](/docs/reference/generated/kubernetes-api/{{}}/#podspec-v1-core).
 
 If you choose the DaemonSet approach you can rely on Kubernetes to: place the device plugin's
 Pod onto Nodes, to restart the daemon Pod after failure, and to help automate upgrades.
@@ -193,11 +193,11 @@ Beta graduation of this feature. Because of this, kubelet upgrades should be sea
 but there still may be changes in the API before stabilization making upgrades not
 guaranteed to be non-breaking.
 
-{{< note >}}
+{{}}
 Although the Device Manager component of Kubernetes is a generally available feature,
 the _device plugin API_ is not stable. For information on the device plugin API and
 version compatibility, read [Device Plugin API versions](/docs/reference/node/device-plugin-api-versions/).
-{{< /note >}}
+{{}}
 
 As a project, Kubernetes recommends that device plugin developers:
 
@@ -211,7 +211,7 @@ of the device allocations during the upgrade.
 
 ## Monitoring device plugin resources
 
-{{< feature-state for_k8s_version="v1.28" state="stable" >}}
+{{}}
 
 In order to monitor resources provided by device plugins, monitoring agents need to be able to
 discover the set of devices that are in-use on the node and obtain metadata to describe which
@@ -316,7 +316,7 @@ message CDIDevice {
     string name = 1;
 }
 ```
-{{< note >}}
+{{}}
 cpu_ids in the `ContainerResources` in the `List` endpoint correspond to exclusive CPUs allocated
 to a particular container. If the goal is to evaluate CPUs that belong to the shared pool, the `List`
 endpoint needs to be used in conjunction with the `GetAllocatableResources` endpoint as explained
@@ -324,16 +324,16 @@ below:
 1. Call `GetAllocatableResources` to get a list of all the allocatable CPUs
 2. Call `GetCpuIds` on all `ContainerResources` in the system
 3. Subtract out all of the CPUs from the `GetCpuIds` calls from the `GetAllocatableResources` call
-{{< /note >}}
+{{}}
 
 ### `GetAllocatableResources` gRPC endpoint {#grpc-endpoint-getallocatableresources}
 
-{{< feature-state state="stable" for_k8s_version="v1.28" >}}
+{{}}
 
 GetAllocatableResources provides information on resources initially available on the worker node.
 It provides more information than kubelet exports to APIServer.
 
-{{< note >}}
+{{}}
 `GetAllocatableResources` should only be used to evaluate [allocatable](/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable)
 resources on a node. If the goal is to evaluate free/unallocated resources it should be used in
 conjunction with the List() endpoint. The result obtained by `GetAllocatableResources` would remain
@@ -343,7 +343,7 @@ it does (for example: hotplug/hotunplug, device health changes), client is expec
 
 However, calling `GetAllocatableResources` endpoint is not sufficient in case of cpu and/or memory
 update and Kubelet needs to be restarted to reflect the correct resource capacity and allocatable.
-{{< /note >}}
+{{}}
 
 ```gRPC
 // AllocatableResourcesResponses contains information about all the devices known by the kubelet
@@ -364,10 +364,10 @@ Monitoring agents for device plugin resources can be deployed as a daemon, or as
 The canonical directory `/var/lib/kubelet/pod-resources` requires privileged access, so monitoring
 agents must run in a privileged security context. If a device monitoring agent is running as a
 DaemonSet, `/var/lib/kubelet/pod-resources` must be mounted as a
-{{< glossary_tooltip term_id="volume" >}} in the device monitoring agent's
-[PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
+{{}} in the device monitoring agent's
+[PodSpec](/docs/reference/generated/kubernetes-api/{{}}/#podspec-v1-core).
 
-{{< note >}}
+{{}}
 
 When accessing the `/var/lib/kubelet/pod-resources/kubelet.sock` from DaemonSet
 or any other app deployed as a container on the host, which is mounting socket as
@@ -381,11 +381,11 @@ and a new socket is created, while directory stays untouched.
 So the original inode for the socket become unusable. Inode to directory
 will continue working.
 
-{{< /note >}}
+{{}}
 
 ### `Get` gRPC endpoint {#grpc-endpoint-get}
 
-{{< feature-state state="alpha" for_k8s_version="v1.27" >}}
+{{}}
 
 The `Get` endpoint provides information on resources of a running Pod. It exposes information
 similar to those described in the `List` endpoint. The `Get` endpoint requires `PodName`
@@ -415,7 +415,7 @@ ensure your kubelet services are started with the following flags:
 
 ## Device plugin integration with the Topology Manager
 
-{{< feature-state for_k8s_version="v1.27" state="stable" >}}
+{{}}
 
 The Topology Manager is a Kubelet component that allows resources to be co-ordinated in a Topology
 aligned manner. In order to do this, the Device Plugin API was extended to include a

@@ -5,13 +5,13 @@ weight: 130
 ---
 
 
-<!-- overview -->
+
 
 This page shows how to configure quotas for API objects, including
 PersistentVolumeClaims and Services. A quota restricts the number of
 objects, of a particular type, that can be created in a namespace.
 You specify quotas in a
-[ResourceQuota](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcequota-v1-core)
+[ResourceQuota](/docs/reference/generated/kubernetes-api/{{}}/#resourcequota-v1-core)
 object.
 
 
@@ -20,12 +20,12 @@ object.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
 
-<!-- steps -->
+
 
 ## Create a namespace
 
@@ -121,18 +121,18 @@ used: persistentvolumeclaims=1, limited: persistentvolumeclaims=1
 These are the strings used to identify API resources that can be constrained
 by quotas:
 
-<table>
-<tr><th>String</th><th>API Object</th></tr>
-<tr><td>"pods"</td><td>Pod</td></tr>
-<tr><td>"services"</td><td>Service</td></tr>
-<tr><td>"replicationcontrollers"</td><td>ReplicationController</td></tr>
-<tr><td>"resourcequotas"</td><td>ResourceQuota</td></tr>
-<tr><td>"secrets"</td><td>Secret</td></tr>
-<tr><td>"configmaps"</td><td>ConfigMap</td></tr>
-<tr><td>"persistentvolumeclaims"</td><td>PersistentVolumeClaim</td></tr>
-<tr><td>"services.nodeports"</td><td>Service of type NodePort</td></tr>
-<tr><td>"services.loadbalancers"</td><td>Service of type LoadBalancer</td></tr>
-</table>
+
+StringAPI Object
+"pods"Pod
+"services"Service
+"replicationcontrollers"ReplicationController
+"resourcequotas"ResourceQuota
+"secrets"Secret
+"configmaps"ConfigMap
+"persistentvolumeclaims"PersistentVolumeClaim
+"services.nodeports"Service of type NodePort
+"services.loadbalancers"Service of type LoadBalancer
+
 
 ## Clean up
 

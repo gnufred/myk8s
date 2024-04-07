@@ -8,7 +8,7 @@ description: >
   Together, these two ways of exposing Pod and container fields are called the downward API.
 ---
 
-<!-- overview -->
+
 
 It is sometimes useful for a container to have information about itself, without
 being overly coupled to Kubernetes. The _downward API_ allows containers to consume
@@ -29,7 +29,7 @@ In Kubernetes, there are two ways to expose Pod and container fields to a runnin
 Together, these two ways of exposing Pod and container fields are called the
 _downward API_.
 
-<!-- body -->
+
 
 ## Available fields
 
@@ -52,25 +52,25 @@ via either mechanism are:
 : the pod's name
 
 `metadata.namespace`
-: the pod's {{< glossary_tooltip text="namespace" term_id="namespace" >}}
+: the pod's {{}}
 
 `metadata.uid`
 : the pod's unique ID
 
-`metadata.annotations['<KEY>']`
-: the value of the pod's {{< glossary_tooltip text="annotation" term_id="annotation" >}} named `<KEY>` (for example, `metadata.annotations['myannotation']`)
+`metadata.annotations['']`
+: the value of the pod's {{}} named `` (for example, `metadata.annotations['myannotation']`)
 
-`metadata.labels['<KEY>']`
-: the text value of the pod's {{< glossary_tooltip text="label" term_id="label" >}} named `<KEY>` (for example, `metadata.labels['mylabel']`)
+`metadata.labels['']`
+: the text value of the pod's {{}} named `` (for example, `metadata.labels['mylabel']`)
 
 The following information is available through environment variables
 **but not as a downwardAPI volume fieldRef**:
 
 `spec.serviceAccountName`
-: the name of the pod's {{< glossary_tooltip text="service account" term_id="service-account" >}}
+: the name of the pod's {{}}
 
 `spec.nodeName`
-: the name of the {{< glossary_tooltip term_id="node" text="node">}} where the Pod is executing
+: the name of the {{}} where the Pod is executing
 
 `status.hostIP`
 : the primary IP address of the node to which the Pod is assigned

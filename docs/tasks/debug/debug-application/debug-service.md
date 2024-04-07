@@ -7,14 +7,14 @@ title: Debug Services
 weight: 20
 ---
 
-<!-- overview -->
+
 An issue that comes up rather frequently for new installations of Kubernetes is
 that a Service is not working properly.  You've run your Pods through a
 Deployment (or other workload controller) and created a Service, but you
 get no response when you try to access it.  This document will hopefully help
 you to figure out what's going wrong.
 
-<!-- body -->
+
 
 ## Running commands in a Pod
 
@@ -25,15 +25,15 @@ sees.  The simplest way to do this is to run an interactive busybox Pod:
 kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
 ```
 
-{{< note >}}
+{{}}
 If you don't see a command prompt, try pressing enter.
-{{< /note >}}
+{{}}
 
 If you already have a running Pod that you prefer to use, you can run a
 command in it using:
 
 ```shell
-kubectl exec <POD-NAME> -c <CONTAINER-NAME> -- <COMMAND>
+kubectl exec  -c  -- 
 ```
 
 ## Setup
@@ -186,7 +186,7 @@ kubectl get svc hostnames
 ```
 ```none
 NAME        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-hostnames   ClusterIP   10.0.1.175   <none>        80/TCP    5s
+hostnames   ClusterIP   10.0.1.175           80/TCP    5s
 ```
 
 Now you know that the Service exists.
@@ -272,9 +272,9 @@ own cluster.
 
 You can also try this from a Node in the cluster:
 
-{{< note >}}
+{{}}
 10.0.0.10 is the cluster's DNS Service IP, yours might be different.
-{{< /note >}}
+{{}}
 
 ```shell
 nslookup hostnames.default.svc.cluster.local 10.0.0.10
@@ -455,7 +455,7 @@ hostnames   10.244.0.5:9376,10.244.0.6:9376,10.244.0.7:9376
 ```
 
 This confirms that the endpoints controller has found the correct Pods for
-your Service.  If the `ENDPOINTS` column is `<none>`, you should check that
+your Service.  If the `ENDPOINTS` column is ``, you should check that
 the `spec.selector` field of your Service actually selects for
 `metadata.labels` values on your Pods.  A common mistake is to have a typo or
 other error, such as the Service selecting for `app=hostnames`, but the
@@ -470,9 +470,9 @@ Let's check again that the Pods are actually working - you can bypass the
 Service mechanism and go straight to the Pods, as listed by the Endpoints
 above.
 
-{{< note >}}
+{{}}
 These commands use the Pod port (9376), rather than the Service port (80).
-{{< /note >}}
+{{}}
 
 From within a Pod:
 
@@ -571,8 +571,8 @@ iptables-save | grep hostnames
 ```
 
 For each port of each Service, there should be 1 rule in `KUBE-SERVICES` and
-one `KUBE-SVC-<hash>` chain.  For each Pod endpoint, there should be a small
-number of rules in that `KUBE-SVC-<hash>` and one `KUBE-SEP-<hash>` chain with
+one `KUBE-SVC-` chain.  For each Pod endpoint, there should be a small
+number of rules in that `KUBE-SVC-` and one `KUBE-SEP-` chain with
 a small number of rules in it.  The exact rules will vary based on your exact
 config (including node-ports and load-balancers).
 

@@ -12,10 +12,10 @@ tags:
 ---
  Immutable Infrastructure refers to computer infrastructure (virtual machines, containers, network appliances) that cannot be changed once deployed.
 
-<!--more-->
+
 
 Immutability can be enforced by an automated process that overwrites unauthorized changes or through a system that won’t allow changes in the first place.
-{{< glossary_tooltip text="Containers" term_id="container" >}} are a good example of immutable infrastructure because persistent changes to containers
+{{}} are a good example of immutable infrastructure because persistent changes to containers
 can only be made by creating a new version of the container or recreating the existing container from its image.
 
 By preventing or identifying unauthorized changes, immutable infrastructures make it easier to identify and mitigate security risks. 

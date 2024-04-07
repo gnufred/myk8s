@@ -8,9 +8,9 @@ content_type: task
 weight: 270
 ---
 
-<!-- overview -->
 
-{{< glossary_definition term_id="etcd" length="all" prepend="etcd is a ">}}
+
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
@@ -20,7 +20,7 @@ guide on a cluster with at least two nodes that are not acting as control plane
 nodes. If you do not already have a cluster, you can create one by using
 [minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/).
 
-<!-- steps -->
+
 
 ## Prerequisites
 
@@ -95,7 +95,7 @@ client URLs: `http://$IP1:2379`, `http://$IP2:2379`, `http://$IP3:2379`,
 2. Start the Kubernetes API servers with the flag
    `--etcd-servers=$IP1:2379,$IP2:2379,$IP3:2379,$IP4:2379,$IP5:2379`.
 
-   Make sure the `IP<n>` variables are set to your client IP addresses.
+   Make sure the `IP` variables are set to your client IP addresses.
 
 ### Multi-node etcd cluster with load balancer
 
@@ -159,9 +159,9 @@ access it. To give Kubernetes API servers the access, configure them with the
 flags `--etcd-certfile=k8sclient.cert`, `--etcd-keyfile=k8sclient.key` and
 `--etcd-cafile=ca.cert`.
 
-{{< note >}}
+{{}}
 etcd authentication is not planned for Kubernetes.
-{{< /note >}}
+{{}}
 
 ## Replacing a failed etcd member
 
@@ -312,8 +312,8 @@ the endpoint, certificates and key as shown below:
 
 ```shell
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
-  --cacert=<trusted-ca-file> --cert=<cert-file> --key=<key-file> \
-  snapshot save <backup-file-location>
+  --cacert= --cert= --key= \
+  snapshot save 
 ```
 where `trusted-ca-file`, `cert-file` and `key-file` can be obtained from the description of the etcd Pod.
 
@@ -345,18 +345,18 @@ either be a snapshot file from a previous backup operation, or from a remaining
 When restoring the cluster, use the `--data-dir` option to specify to which folder the cluster should be restored:
 
 ```shell
-ETCDCTL_API=3 etcdctl --data-dir <data-dir-location> snapshot restore snapshot.db
+ETCDCTL_API=3 etcdctl --data-dir  snapshot restore snapshot.db
 ```
-where `<data-dir-location>` is a directory that will be created during the restore process.
+where `` is a directory that will be created during the restore process.
 
 Yet another example would be to first export the `ETCDCTL_API` environment variable:
 
 ```shell
 export ETCDCTL_API=3
-etcdctl --data-dir <data-dir-location> snapshot restore snapshot.db
+etcdctl --data-dir  snapshot restore snapshot.db
 ```
 
-If `<data-dir-location>` is the same folder as before, delete it and stop the etcd process before restoring the cluster. Otherwise, change etcd configuration and restart the etcd process after restoration to have it use the new data directory.
+If `` is the same folder as before, delete it and stop the etcd process before restoring the cluster. Otherwise, change etcd configuration and restart the etcd process after restoration to have it use the new data directory.
 
 For more information and examples on restoring a cluster from a snapshot file, see
 [etcd disaster recovery documentation](https://etcd.io/docs/current/op-guide/recovery/#restoring-a-cluster).
@@ -376,7 +376,7 @@ current state. Although the scheduled pods might continue to run, no new pods
 can be scheduled. In such cases, recover the etcd cluster and potentially
 reconfigure Kubernetes API servers to fix the issue.
 
-{{< note >}}
+{{}}
 If any API servers are running in your cluster, you should not attempt to
 restore instances of etcd. Instead, follow these steps to restore etcd:
 
@@ -388,16 +388,16 @@ We also recommend restarting any components (e.g. `kube-scheduler`,
 `kube-controller-manager`, `kubelet`) to ensure that they don't rely on some
 stale data. Note that in practice, the restore takes a bit of time.  During the
 restoration, critical components will lose leader lock and restart themselves.
-{{< /note >}}
+{{}}
 
 ## Upgrading etcd clusters
 
 
 For more details on etcd upgrade, please refer to the [etcd upgrades](https://etcd.io/docs/latest/upgrades/) documentation.
 
-{{< note >}}
+{{}}
 Before you start an upgrade, please back up your etcd cluster first.
-{{< /note >}}
+{{}}
 
 ## Maintaining etcd clusters
 
@@ -405,7 +405,7 @@ For more details on etcd maintenance, please refer to the [etcd maintenance](htt
 
 {{% thirdparty-content single="true" %}}
 
-{{< note >}}
+{{}}
 Defragmentation is an expensive operation, so it should be executed as infrequently
 as possible. On the other hand, it's also necessary to make sure any etcd member
 will not exceed the storage quota. The Kubernetes project recommends that when
@@ -414,4 +414,4 @@ you perform defragmentation, you use a tool such as [etcd-defrag](https://github
 You can also run the defragmentation tool as a Kubernetes CronJob, to make sure that
 defragmentation happens regularly. See [`etcd-defrag-cronjob.yaml`](https://github.com/ahrtr/etcd-defrag/blob/main/doc/etcd-defrag-cronjob.yaml)
 for details. 
-{{< /note >}}
+{{}}

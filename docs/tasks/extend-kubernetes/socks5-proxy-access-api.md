@@ -4,28 +4,28 @@ content_type: task
 weight: 42
 min-kubernetes-server-version: v1.24
 ---
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.24" state="stable" >}}
+
+{{}}
 
 This page shows how to use a SOCKS5 proxy to access the API of a remote Kubernetes cluster.
 This is useful when the cluster you want to access does not expose its API directly on the public internet.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 You need SSH client software (the `ssh` tool), and an SSH service running on the remote server.
 You must be able to log in to the SSH service on the remote server.
 
-<!-- steps -->
+
 
 ## Task context
 
-{{< note >}}
+{{}}
 This example tunnels traffic using SSH, with the SSH client and server acting as a SOCKS proxy.
 You can instead use any other kind of [SOCKS5](https://en.wikipedia.org/wiki/SOCKS#SOCKS5) proxies.
-{{</ note >}}
+{{}}
 
 Figure 1 represents what you're going to achieve in this task.
 
@@ -35,18 +35,18 @@ Figure 1 represents what you're going to achieve in this task.
   the remote server. The HTTPS traffic between the client and the Kubernetes API will flow over the SOCKS5
   tunnel, which is itself tunnelled over SSH.
 
-{{< mermaid >}}
+{{}}
 graph LR;
 
   subgraph local[Local client machine]
-  client([client])-. local <br> traffic .->  local_ssh[Local SSH <br> SOCKS5 proxy];
+  client([client])-. local  traffic .->  local_ssh[Local SSH  SOCKS5 proxy];
   end
-  local_ssh[SSH <br>SOCKS5 <br> proxy]-- SSH Tunnel -->sshd
+  local_ssh[SSH SOCKS5  proxy]-- SSH Tunnel -->sshd
   
   subgraph remote[Remote server]
-  sshd[SSH <br> server]-- local traffic -->service1;
+  sshd[SSH  server]-- local traffic -->service1;
   end
-  client([client])-. proxied HTTPs traffic <br> going through the proxy .->service1[Kubernetes API];
+  client([client])-. proxied HTTPs traffic  going through the proxy .->service1[Kubernetes API];
 
   classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
   classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
@@ -54,7 +54,7 @@ graph LR;
   class ingress,service1,service2,pod1,pod2,pod3,pod4 k8s;
   class client plain;
   class cluster cluster;
-{{</ mermaid >}}
+{{}}
 Figure 1. SOCKS5 tutorial components
 
 ## Using ssh to create a SOCKS5 proxy
@@ -91,7 +91,7 @@ apiVersion: v1
 clusters:
 - cluster:
     certificate-authority-data: LRMEMMW2 # shortened for readability 
-    server: https://<API_SERVER_IP_ADDRESS>:6443  # the "Kubernetes API" server, in other words the IP address of kubernetes-remote-server.example
+    server: https://:6443  # the "Kubernetes API" server, in other words the IP address of kubernetes-remote-server.example
     proxy-url: socks5://localhost:1080   # the "SSH SOCKS5 proxy" in the diagram above
   name: default
 contexts:
@@ -121,7 +121,7 @@ NAMESPACE     NAME                                     READY   STATUS      RESTA
 kube-system   coredns-85cb69466-klwq8                  1/1     Running     0          5m46s
 ```
 
-{{< note >}}
+{{}}
 - Before `kubectl` 1.24, most `kubectl` commands worked when using a socks proxy, except `kubectl exec`.
 - `kubectl` supports both `HTTPS_PROXY` and `https_proxy` environment variables. These are used by other 
   programs that support SOCKS, such as `curl`. Therefore in some cases it 
@@ -136,7 +136,7 @@ kube-system   coredns-85cb69466-klwq8                  1/1     Running     0    
   (such as an ssh bastion) to resolve the k8s API server domain name, instead of resolving it on the system running
   `kubectl`. Note also that with `socks5h`, a k8s API server URL like `https://localhost:6443/api` does not refer 
   to your local client computer. Instead, it refers to `localhost` as known on the proxy server (eg the ssh bastion).
-{{</ note >}}
+{{}}
 
 
 ## Clean up

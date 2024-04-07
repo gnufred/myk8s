@@ -10,16 +10,7 @@ weight: 10
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 
@@ -30,19 +21,19 @@ Quantity is a fixed-point representation of a number. It provides convenient mar
 
 The serialization format is:
 
-``` \<quantity>        ::= \<signedNumber>\<suffix>
+``` \        ::= \\
 
-	(Note that \<suffix> may be empty, from the "" case in \<decimalSI>.)
+	(Note that \ may be empty, from the "" case in \.)
 
-\<digit>           ::= 0 | 1 | ... | 9 \<digits>          ::= \<digit> | \<digit>\<digits> \<number>          ::= \<digits> | \<digits>.\<digits> | \<digits>. | .\<digits> \<sign>            ::= "+" | "-" \<signedNumber>    ::= \<number> | \<sign>\<number> \<suffix>          ::= \<binarySI> | \<decimalExponent> | \<decimalSI> \<binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei
+\           ::= 0 | 1 | ... | 9 \          ::= \ | \\ \          ::= \ | \.\ | \. | .\ \            ::= "+" | "-" \    ::= \ | \\ \          ::= \ | \ | \ \        ::= Ki | Mi | Gi | Ti | Pi | Ei
 
 	(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)
 
-\<decimalSI>       ::= m | "" | k | M | G | T | P | E
+\       ::= m | "" | k | M | G | T | P | E
 
 	(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)
 
-\<decimalExponent> ::= "e" \<signedNumber> | "E" \<signedNumber> ```
+\ ::= "e" \ | "E" \ ```
 
 No matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.
 
@@ -64,7 +55,7 @@ Non-canonical values will still parse as long as they are well formed, but will 
 
 This format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation.
 
-<hr>
+
 
 
 

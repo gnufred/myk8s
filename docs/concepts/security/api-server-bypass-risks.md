@@ -6,13 +6,13 @@ content_type: concept
 weight: 90
 ---
 
-<!-- overview -->
+
 
 The Kubernetes API server is the main point of entry to a cluster for external parties
 (users and services) interacting with it.
 
 As part of this role, the API server has several key built-in security controls, such as
-audit logging and {{< glossary_tooltip text="admission controllers" term_id="admission-controller" >}}.
+audit logging and {{}}.
 However, there are ways to modify the configuration
 or content of the cluster that bypass these controls.
 
@@ -20,11 +20,11 @@ This page describes the ways in which the security controls built into the
 Kubernetes API server can be bypassed, so that cluster operators
 and security architects can ensure that these bypasses are appropriately restricted.
 
-<!-- body -->
+
 
 ## Static Pods {#static-pods}
 
-The {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} on each node loads and
+The {{}} on each node loads and
 directly manages any manifests that are stored in a named directory or fetched from
 a specific URL as [*static Pods*](/docs/tasks/configure-pod-container/static-pod) in
 your cluster. The API server doesn't manage these static Pods. An attacker with write
@@ -36,7 +36,7 @@ you can't configure a static Pod to mount a Secret from the cluster. However, th
 take other security sensitive actions, such as using `hostPath` mounts from the underlying
 node.
 
-By default, the kubelet creates a {{< glossary_tooltip text="mirror pod" term_id="mirror-pod">}}
+By default, the kubelet creates a {{}}
 so that the static Pods are visible in the Kubernetes API. However, if the attacker uses an invalid
 namespace name when creating the Pod, it will not be visible in the Kubernetes API and can only
 be discovered by tooling that has access to the affected host(s).

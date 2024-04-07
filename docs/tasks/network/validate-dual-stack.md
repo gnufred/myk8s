@@ -8,7 +8,7 @@ title: Validate IPv4/IPv6 dual-stack
 content_type: task
 ---
 
-<!-- overview -->
+
 This document shares how to validate IPv4/IPv6 dual-stack enabled Kubernetes clusters.
 
 
@@ -19,14 +19,14 @@ This document shares how to validate IPv4/IPv6 dual-stack enabled Kubernetes clu
 * A [network plugin](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) that supports dual-stack networking.
 * [Dual-stack enabled](/docs/concepts/services-networking/dual-stack/) cluster
 
-{{< version-check >}}
+{{}}
 
-{{< note >}}
+{{}}
 While you can validate with an earlier version, the feature is only GA and officially supported since v1.23.
-{{< /note >}}
+{{}}
 
 
-<!-- steps -->
+
 
 ## Validate addressing
 
@@ -183,16 +183,16 @@ Create the following Service that explicitly defines `PreferDualStack` in `.spec
 
 {{% code_sample file="service/networking/dual-stack-preferred-svc.yaml" %}}
 
-{{< note >}}
+{{}}
 The `kubectl get svc` command will only show the primary IP in the `CLUSTER-IP` field.
 
 ```shell
 kubectl get svc -l app.kubernetes.io/name=MyApp
 
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
-my-service   ClusterIP   10.0.216.242   <none>        80/TCP    5s
+my-service   ClusterIP   10.0.216.242           80/TCP    5s
 ```
-{{< /note >}}
+{{}}
 
 Validate that the Service gets cluster IPs from the IPv4 and IPv6 address blocks using `kubectl describe`. You may then validate access to the service via the IPs and ports.
 
@@ -204,18 +204,18 @@ kubectl describe svc -l app.kubernetes.io/name=MyApp
 Name:              my-service
 Namespace:         default
 Labels:            app.kubernetes.io/name=MyApp
-Annotations:       <none>
+Annotations:       
 Selector:          app.kubernetes.io/name=MyApp
 Type:              ClusterIP
 IP Family Policy:  PreferDualStack
 IP Families:       IPv4,IPv6
 IP:                10.0.216.242
 IPs:               10.0.216.242,2001:db8:fd00::af55
-Port:              <unset>  80/TCP
+Port:                80/TCP
 TargetPort:        9376/TCP
-Endpoints:         <none>
+Endpoints:         
 Session Affinity:  None
-Events:            <none>
+Events:            
 ```
 
 ### Create a dual-stack load balanced Service

@@ -6,7 +6,7 @@ content_type: tutorial
 weight: 30
 ---
 
-<!-- overview -->
+
 This tutorial shows you how to run [Apache Cassandra](https://cassandra.apache.org/) on Kubernetes.
 Cassandra, a database, needs persistent storage to provide data durability (application _state_).
 In this example, a custom Cassandra seed provider lets the database discover new Cassandra instances as they join the Cassandra cluster.
@@ -15,41 +15,41 @@ In this example, a custom Cassandra seed provider lets the database discover new
 For more information on the features used in this tutorial, see
 [StatefulSet](/docs/concepts/workloads/controllers/statefulset/).
 
-{{< note >}}
+{{}}
 Cassandra and Kubernetes both use the term _node_ to mean a member of a cluster. In this
 tutorial, the Pods that belong to the StatefulSet are Cassandra nodes and are members
 of the Cassandra cluster (called a _ring_). When those Pods run in your Kubernetes cluster,
 the Kubernetes control plane schedules those Pods onto Kubernetes
-{{< glossary_tooltip text="Nodes" term_id="node" >}}.
+{{}}.
 
 When a Cassandra node starts, it uses a _seed list_ to bootstrap discovery of other
 nodes in the ring.
 This tutorial deploys a custom Cassandra seed provider that lets the database discover
 new Cassandra Pods as they appear inside your Kubernetes cluster.
-{{< /note >}}
+{{}}
 
 
 ## {{% heading "objectives" %}}
 
-* Create and validate a Cassandra headless {{< glossary_tooltip text="Service" term_id="service" >}}.
-* Use a {{< glossary_tooltip term_id="StatefulSet" >}} to create a Cassandra ring.
+* Create and validate a Cassandra headless {{}}.
+* Use a {{}} to create a Cassandra ring.
 * Validate the StatefulSet.
 * Modify the StatefulSet.
-* Delete the StatefulSet and its {{< glossary_tooltip text="Pods" term_id="pod" >}}.
+* Delete the StatefulSet and its {{}}.
 
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 To complete this tutorial, you should already have a basic familiarity with
-{{< glossary_tooltip text="Pods" term_id="pod" >}},
-{{< glossary_tooltip text="Services" term_id="service" >}}, and
-{{< glossary_tooltip text="StatefulSets" term_id="StatefulSet" >}}.
+{{}},
+{{}}, and
+{{}}.
 
 ### Additional Minikube setup instructions
 
-{{< caution >}}
+{{}}
 [Minikube](https://minikube.sigs.k8s.io/docs/) defaults to 2048MB of memory and 2 CPU.
 Running Minikube with the default resource configuration results in insufficient resource
 errors during this tutorial. To avoid these errors, start Minikube with the following settings:
@@ -57,14 +57,14 @@ errors during this tutorial. To avoid these errors, start Minikube with the foll
 ```shell
 minikube start --memory 5120 --cpus=4
 ```
-{{< /caution >}}
+{{}}
 
 
-<!-- lessoncontent -->
+
 ## Creating a headless Service for Cassandra {#creating-a-cassandra-headless-service}
 
-In Kubernetes, a {{< glossary_tooltip text="Service" term_id="service" >}} describes a set of
-{{< glossary_tooltip text="Pods" term_id="pod" >}} that perform the same task.
+In Kubernetes, a {{}} describes a set of
+{{}} that perform the same task.
 
 The following Service is used for DNS lookups between Cassandra Pods and clients within your cluster:
 
@@ -89,7 +89,7 @@ The response is
 
 ```
 NAME        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
-cassandra   ClusterIP   None         <none>        9042/TCP   45s
+cassandra   ClusterIP   None                 9042/TCP   45s
 ```
 
 If you don't see a Service named `cassandra`, that means creation failed. Read
@@ -100,10 +100,10 @@ for help troubleshooting common issues.
 
 The StatefulSet manifest, included below, creates a Cassandra ring that consists of three Pods.
 
-{{< note >}}
+{{}}
 This example uses the default provisioner for Minikube.
 Please update the following StatefulSet for the cloud you are working with.
-{{< /note >}}
+{{}}
 
 {{% code_sample file="application/cassandra/cassandra-statefulset.yaml" %}}
 
@@ -241,10 +241,10 @@ Use `kubectl edit` to modify the size of a Cassandra StatefulSet.
 Deleting or scaling a StatefulSet down does not delete the volumes associated with the StatefulSet.
 This setting is for your safety because your data is more valuable than automatically purging all related StatefulSet resources.
 
-{{< warning >}}
+{{}}
 Depending on the storage class and reclaim policy, deleting the *PersistentVolumeClaims* may cause the associated volumes
 to also be deleted. Never assume you'll be able to access data if its volume claims are deleted.
-{{< /warning >}}
+{{}}
 
 1. Run the following commands (chained together into a single command) to delete everything in the Cassandra StatefulSet:
 

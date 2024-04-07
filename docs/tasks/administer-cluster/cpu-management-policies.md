@@ -10,9 +10,9 @@ min-kubernetes-server-version: v1.26
 weight: 140
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+
+{{}}
 
 Kubernetes keeps many aspects of how pods execute on nodes abstracted
 from the user. This is by design.  However, some workloads require
@@ -29,12 +29,12 @@ documentation.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 If you are running an older version of Kubernetes, please look at the documentation for the version you are actually running.
 
 
-<!-- steps -->
+
 
 ## CPU Management Policies
 
@@ -115,16 +115,16 @@ The `static` policy allows containers in `Guaranteed` pods with integer CPU
 `requests` access to exclusive CPUs on the node. This exclusivity is enforced
 using the [cpuset cgroup controller](https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt).
 
-{{< note >}}
+{{}}
 System services such as the container runtime and the kubelet itself can continue to run on these exclusive CPUs.  The exclusivity only extends to other pods.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 CPU Manager doesn't support offlining and onlining of
 CPUs at runtime. Also, if the set of online CPUs changes on the node,
 the node must be drained and CPU manager manually reset by deleting the
 state file `cpu_manager_state` in the kubelet root directory.
-{{< /note >}}
+{{}}
 
 This policy manages a shared pool of CPUs that initially contains all CPUs in the
 node. The amount of exclusively allocatable CPUs is equal to the total
@@ -140,12 +140,12 @@ CPU `requests` also run on CPUs in the shared pool. Only containers that are
 both part of a `Guaranteed` pod and have integer CPU `requests` are assigned
 exclusive CPUs.
 
-{{< note >}}
+{{}}
 The kubelet requires a CPU reservation greater than zero be made
 using either `--kube-reserved` and/or `--system-reserved` or `--reserved-cpus` when
 the static policy is enabled. This is because zero CPU reservation would allow the shared
 pool to become empty.
-{{< /note >}}
+{{}}
 
 As `Guaranteed` pods whose containers fit the requirements for being statically
 assigned are scheduled to the node, CPUs are removed from the shared pool and

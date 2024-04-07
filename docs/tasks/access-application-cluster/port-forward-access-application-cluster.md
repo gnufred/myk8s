@@ -5,7 +5,7 @@ weight: 40
 min-kubernetes-server-version: v1.10
 ---
 
-<!-- overview -->
+
 
 This page shows how to use `kubectl port-forward` to connect to a MongoDB
 server running in a Kubernetes cluster. This type of connection can be useful
@@ -13,10 +13,10 @@ for database debugging.
 
 ## {{% heading "prerequisites" %}}
 
-* {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+* {{}} {{}}
 * Install [MongoDB Shell](https://www.mongodb.com/try/download/shell).
 
-<!-- steps -->
+
 
 ## Creating MongoDB deployment and service
 
@@ -94,7 +94,7 @@ for database debugging.
 
    ```
    NAME    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)     AGE
-   mongo   ClusterIP   10.96.41.183   <none>        27017/TCP   11s
+   mongo   ClusterIP   10.96.41.183           27017/TCP   11s
    ```
 
 3. Verify that the MongoDB server is running in the Pod, and listening on port 27017:
@@ -153,9 +153,9 @@ for database debugging.
    Forwarding from [::1]:28015 -> 27017
    ```
 
-   {{< note >}}
+   {{}}
    `kubectl port-forward` does not return. To continue with the exercises, you will need to open another terminal.
-   {{< /note >}}
+   {{}}
 
 2. Start the MongoDB command line interface:
 
@@ -193,7 +193,7 @@ Forwarding from 127.0.0.1:63753 -> 27017
 Forwarding from [::1]:63753 -> 27017
 ```
 
-<!-- discussion -->
+
 
 ## Discussion
 
@@ -201,11 +201,11 @@ Connections made to local port 28015 are forwarded to port 27017 of the Pod that
 is running the MongoDB server. With this connection in place, you can use your
 local workstation to debug the database that is running in the Pod.
 
-{{< note >}}
+{{}}
 `kubectl port-forward` is implemented for TCP ports only.
 The support for UDP protocol is tracked in
 [issue 47862](https://github.com/kubernetes/kubernetes/issues/47862).
-{{< /note >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

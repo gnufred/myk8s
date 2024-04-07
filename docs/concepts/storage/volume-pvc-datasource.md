@@ -9,18 +9,18 @@ content_type: concept
 weight: 70
 ---
 
-<!-- overview -->
+
 
 This document describes the concept of cloning existing CSI Volumes in Kubernetes.
 Familiarity with [Volumes](/docs/concepts/storage/volumes) is suggested.
 
-<!-- body -->
+
 
 ## Introduction
 
-The {{< glossary_tooltip text="CSI" term_id="csi" >}} Volume Cloning feature adds
-support for specifying existing {{< glossary_tooltip text="PVC" term_id="persistent-volume-claim" >}}s
-in the `dataSource` field to indicate a user would like to clone a {{< glossary_tooltip term_id="volume" >}}.
+The {{}} Volume Cloning feature adds
+support for specifying existing {{}}s
+in the `dataSource` field to indicate a user would like to clone a {{}}.
 
 A Clone is defined as a duplicate of an existing Kubernetes Volume that can be
 consumed as any standard Volume would be.  The only difference is that upon
@@ -67,10 +67,10 @@ spec:
     name: pvc-1
 ```
 
-{{< note >}}
+{{}}
 You must specify a capacity value for `spec.resources.requests.storage`, and the
 value you specify must be the same or larger than the capacity of the source volume.
-{{< /note >}}
+{{}}
 
 The result is a new PVC with the name `clone-of-pvc-1` that has the exact same
 content as the specified source `pvc-1`.

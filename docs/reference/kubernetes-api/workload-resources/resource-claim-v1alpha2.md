@@ -10,16 +10,7 @@ weight: 15
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: resource.k8s.io/v1alpha2`
 
@@ -32,7 +23,7 @@ ResourceClaim describes which resources are needed by a resource consumer. Its s
 
 This is an alpha type and requires enabling the DynamicResourceAllocation feature gate.
 
-<hr>
+
 
 - **apiVersion**: resource.k8s.io/v1alpha2
 
@@ -40,15 +31,15 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
 - **kind**: ResourceClaim
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object metadata
 
-- **spec** (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaimSpec" >}}">ResourceClaimSpec</a>), required
+- **spec** (}}">ResourceClaimSpec), required
 
   Spec describes the desired attributes of a resource that then needs to be allocated. It can only be set once when creating the ResourceClaim.
 
-- **status** (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaimStatus" >}}">ResourceClaimStatus</a>)
+- **status** (}}">ResourceClaimStatus)
 
   Status describes whether the resource is available and with which attributes.
 
@@ -60,7 +51,7 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
 
 ResourceClaimSpec defines how a resource is to be allocated.
 
-<hr>
+
 
 - **resourceClassName** (string), required
 
@@ -76,7 +67,7 @@ ResourceClaimSpec defines how a resource is to be allocated.
   
   The object must be in the same namespace as the ResourceClaim.
 
-  <a name="ResourceClaimParametersReference"></a>
+  
   *ResourceClaimParametersReference contains enough information to let you locate the parameters for a ResourceClaim. The object must be in the same namespace as the ResourceClaim.*
 
   - **parametersRef.kind** (string), required
@@ -99,13 +90,13 @@ ResourceClaimSpec defines how a resource is to be allocated.
 
 ResourceClaimStatus tracks whether the resource has been allocated and what the resulting attributes are.
 
-<hr>
+
 
 - **allocation** (AllocationResult)
 
   Allocation is set by the resource driver once a resource or set of resources has been allocated successfully. If this is not specified, the resources have not been allocated yet.
 
-  <a name="AllocationResult"></a>
+  
   *AllocationResult contains attributes of an allocated resource.*
 
   - **allocation.availableOnNodes** (NodeSelector)
@@ -114,21 +105,21 @@ ResourceClaimStatus tracks whether the resource has been allocated and what the 
     
     Setting this field is optional. If null, the resource is available everywhere.
 
-    <a name="NodeSelector"></a>
+    
     *A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms.*
 
     - **allocation.availableOnNodes.nodeSelectorTerms** ([]NodeSelectorTerm), required
 
       Required. A list of node selector terms. The terms are ORed.
 
-      <a name="NodeSelectorTerm"></a>
+      
       *A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.*
 
-      - **allocation.availableOnNodes.nodeSelectorTerms.matchExpressions** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+      - **allocation.availableOnNodes.nodeSelectorTerms.matchExpressions** ([]}}">NodeSelectorRequirement)
 
         A list of node selector requirements by node's labels.
 
-      - **allocation.availableOnNodes.nodeSelectorTerms.matchFields** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+      - **allocation.availableOnNodes.nodeSelectorTerms.matchFields** ([]}}">NodeSelectorRequirement)
 
         A list of node selector requirements by node's fields.
 
@@ -140,7 +131,7 @@ ResourceClaimStatus tracks whether the resource has been allocated and what the 
     
     Setting this field is optional. It has a maximum size of 32 entries. If null (or empty), it is assumed this allocation will be processed by a single kubelet plugin with no ResourceHandle data attached. The name of the kubelet plugin invoked will match the DriverName set in the ResourceClaimStatus this AllocationResult is embedded in.
 
-    <a name="ResourceHandle"></a>
+    
     *ResourceHandle holds opaque resource data for processing by a specific kubelet plugin.*
 
     - **allocation.resourceHandles.data** (string)
@@ -177,7 +168,7 @@ ResourceClaimStatus tracks whether the resource has been allocated and what the 
   
   There can be at most 32 such reservations. This may get increased in the future, but not reduced.
 
-  <a name="ResourceClaimConsumerReference"></a>
+  
   *ResourceClaimConsumerReference contains enough information to let you locate the consumer of a ResourceClaim. The user must be a resource in the same namespace as the ResourceClaim.*
 
   - **reservedFor.name** (string), required
@@ -204,7 +195,7 @@ ResourceClaimStatus tracks whether the resource has been allocated and what the 
 
 ResourceClaimList is a collection of claims.
 
-<hr>
+
 
 - **apiVersion**: resource.k8s.io/v1alpha2
 
@@ -212,11 +203,11 @@ ResourceClaimList is a collection of claims.
 - **kind**: ResourceClaimList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata
 
-- **items** ([]<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>), required
+- **items** ([]}}">ResourceClaim), required
 
   Items is the list of resource claims.
 
@@ -228,7 +219,7 @@ ResourceClaimList is a collection of claims.
 
 
 
-<hr>
+
 
 
 
@@ -251,19 +242,19 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
 401: Unauthorized
 
@@ -284,19 +275,19 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
 401: Unauthorized
 
@@ -312,69 +303,69 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaimList" >}}">ResourceClaimList</a>): OK
+200 (}}">ResourceClaimList): OK
 
 401: Unauthorized
 
@@ -390,64 +381,64 @@ GET /apis/resource.k8s.io/v1alpha2/resourceclaims
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaimList" >}}">ResourceClaimList</a>): OK
+200 (}}">ResourceClaimList): OK
 
 401: Unauthorized
 
@@ -463,43 +454,43 @@ POST /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>, required
+- **body**: }}">ResourceClaim, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): Created
+201 (}}">ResourceClaim): Created
 
-202 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): Accepted
+202 (}}">ResourceClaim): Accepted
 
 401: Unauthorized
 
@@ -520,41 +511,41 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>, required
+- **body**: }}">ResourceClaim, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): Created
+201 (}}">ResourceClaim): Created
 
 401: Unauthorized
 
@@ -575,41 +566,41 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>, required
+- **body**: }}">ResourceClaim, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): Created
+201 (}}">ResourceClaim): Created
 
 401: Unauthorized
 
@@ -630,46 +621,46 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): Created
+201 (}}">ResourceClaim): Created
 
 401: Unauthorized
 
@@ -690,46 +681,46 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): Created
+201 (}}">ResourceClaim): Created
 
 401: Unauthorized
 
@@ -750,41 +741,41 @@ DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{nam
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): OK
+200 (}}">ResourceClaim): OK
 
-202 (<a href="{{< ref "../workload-resources/resource-claim-v1alpha2#ResourceClaim" >}}">ResourceClaim</a>): Accepted
+202 (}}">ResourceClaim): Accepted
 
 401: Unauthorized
 
@@ -800,79 +791,79 @@ DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

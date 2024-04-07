@@ -10,16 +10,7 @@ weight: 8
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: apps/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 DaemonSet represents the configuration of a daemon set.
 
-<hr>
+
 
 - **apiVersion**: apps/v1
 
@@ -38,15 +29,15 @@ DaemonSet represents the configuration of a daemon set.
 - **kind**: DaemonSet
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSetSpec" >}}">DaemonSetSpec</a>)
+- **spec** (}}">DaemonSetSpec)
 
   The desired behavior of this daemon set. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
-- **status** (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSetStatus" >}}">DaemonSetStatus</a>)
+- **status** (}}">DaemonSetStatus)
 
   The current status of this daemon set. This data may be out of date by some window of time. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
@@ -58,13 +49,13 @@ DaemonSet represents the configuration of a daemon set.
 
 DaemonSetSpec is the specification of a daemon set.
 
-<hr>
 
-- **selector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>), required
+
+- **selector** (}}">LabelSelector), required
 
   A label query over pods that are managed by the daemon set. Must match in order to be controlled. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
 
-- **template** (<a href="{{< ref "../workload-resources/pod-template-v1#PodTemplateSpec" >}}">PodTemplateSpec</a>), required
+- **template** (}}">PodTemplateSpec), required
 
   An object that describes the pod that will be created. The DaemonSet will create exactly one copy of this pod on every node that matches the template's node selector (or on every node if no node selector is specified). The only allowed template.spec.restartPolicy value is "Always". More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
 
@@ -76,7 +67,7 @@ DaemonSetSpec is the specification of a daemon set.
 
   An update strategy to replace existing DaemonSet pods with new pods.
 
-  <a name="DaemonSetUpdateStrategy"></a>
+  
   *DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.*
 
   - **updateStrategy.type** (string)
@@ -87,21 +78,21 @@ DaemonSetSpec is the specification of a daemon set.
 
     Rolling update config params. Present only if type = "RollingUpdate".
 
-    <a name="RollingUpdateDaemonSet"></a>
+    
     *Spec to control the desired behavior of daemon set rolling update.*
 
     - **updateStrategy.rollingUpdate.maxSurge** (IntOrString)
 
       The maximum number of nodes with an existing available DaemonSet pod that can have an updated DaemonSet pod during during an update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up to a minimum of 1. Default value is 0. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their a new pod created before the old pod is marked as deleted. The update starts by launching new pods on 30% of nodes. Once an updated pod is available (Ready for at least minReadySeconds) the old DaemonSet pod on that node is marked deleted. If the old pod becomes unavailable for any reason (Ready transitions to false, is evicted, or is drained) an updated pod is immediatedly created on that node without considering surge limits. Allowing surge implies the possibility that the resources consumed by the daemonset on any given node can double if the readiness check fails, and so resource intensive daemonsets should take into account that they may cause evictions during disruption.
 
-      <a name="IntOrString"></a>
+      
       *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
     - **updateStrategy.rollingUpdate.maxUnavailable** (IntOrString)
 
       The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0 if MaxSurge is 0 Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update.
 
-      <a name="IntOrString"></a>
+      
       *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
 - **revisionHistoryLimit** (int32)
@@ -116,7 +107,7 @@ DaemonSetSpec is the specification of a daemon set.
 
 DaemonSetStatus represents the current status of a daemon set.
 
-<hr>
+
 
 - **numberReady** (int32), required
 
@@ -156,7 +147,7 @@ DaemonSetStatus represents the current status of a daemon set.
   
   Represents the latest available observations of a DaemonSet's current state.
 
-  <a name="DaemonSetCondition"></a>
+  
   *DaemonSetCondition describes the state of a DaemonSet at a certain point.*
 
   - **conditions.status** (string), required
@@ -171,7 +162,7 @@ DaemonSetStatus represents the current status of a daemon set.
 
     Last time the condition transitioned from one status to another.
 
-    <a name="Time"></a>
+    
     *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
   - **conditions.message** (string)
@@ -194,7 +185,7 @@ DaemonSetStatus represents the current status of a daemon set.
 
 DaemonSetList is a collection of daemon sets.
 
-<hr>
+
 
 - **apiVersion**: apps/v1
 
@@ -202,11 +193,11 @@ DaemonSetList is a collection of daemon sets.
 - **kind**: DaemonSetList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>), required
+- **items** ([]}}">DaemonSet), required
 
   A list of daemon sets.
 
@@ -218,7 +209,7 @@ DaemonSetList is a collection of daemon sets.
 
 
 
-<hr>
+
 
 
 
@@ -241,19 +232,19 @@ GET /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): OK
+200 (}}">DaemonSet): OK
 
 401: Unauthorized
 
@@ -274,19 +265,19 @@ GET /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): OK
+200 (}}">DaemonSet): OK
 
 401: Unauthorized
 
@@ -302,69 +293,69 @@ GET /apis/apps/v1/namespaces/{namespace}/daemonsets
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSetList" >}}">DaemonSetList</a>): OK
+200 (}}">DaemonSetList): OK
 
 401: Unauthorized
 
@@ -380,64 +371,64 @@ GET /apis/apps/v1/daemonsets
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSetList" >}}">DaemonSetList</a>): OK
+200 (}}">DaemonSetList): OK
 
 401: Unauthorized
 
@@ -453,43 +444,43 @@ POST /apis/apps/v1/namespaces/{namespace}/daemonsets
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>, required
+- **body**: }}">DaemonSet, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): OK
+200 (}}">DaemonSet): OK
 
-201 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): Created
+201 (}}">DaemonSet): Created
 
-202 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): Accepted
+202 (}}">DaemonSet): Accepted
 
 401: Unauthorized
 
@@ -510,41 +501,41 @@ PUT /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>, required
+- **body**: }}">DaemonSet, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): OK
+200 (}}">DaemonSet): OK
 
-201 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): Created
+201 (}}">DaemonSet): Created
 
 401: Unauthorized
 
@@ -565,41 +556,41 @@ PUT /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>, required
+- **body**: }}">DaemonSet, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): OK
+200 (}}">DaemonSet): OK
 
-201 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): Created
+201 (}}">DaemonSet): Created
 
 401: Unauthorized
 
@@ -620,46 +611,46 @@ PATCH /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): OK
+200 (}}">DaemonSet): OK
 
-201 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): Created
+201 (}}">DaemonSet): Created
 
 401: Unauthorized
 
@@ -680,46 +671,46 @@ PATCH /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): OK
+200 (}}">DaemonSet): OK
 
-201 (<a href="{{< ref "../workload-resources/daemon-set-v1#DaemonSet" >}}">DaemonSet</a>): Created
+201 (}}">DaemonSet): Created
 
 401: Unauthorized
 
@@ -740,41 +731,41 @@ DELETE /apis/apps/v1/namespaces/{namespace}/daemonsets/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
-202 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): Accepted
+202 (}}">Status): Accepted
 
 401: Unauthorized
 
@@ -790,79 +781,79 @@ DELETE /apis/apps/v1/namespaces/{namespace}/daemonsets
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

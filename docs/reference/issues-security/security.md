@@ -10,10 +10,10 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
+
 This page describes Kubernetes security and disclosure information.
 
-<!-- body -->
+
 ## Security Announcements
 
 Join the [kubernetes-security-announce](https://groups.google.com/forum/#!forum/kubernetes-security-announce)

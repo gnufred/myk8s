@@ -5,7 +5,7 @@ content_type: task
 no_list: true
 ---
 
-<!-- overview -->
+
 
 This section presents information you need to know when migrating from
 dockershim to other container runtimes.

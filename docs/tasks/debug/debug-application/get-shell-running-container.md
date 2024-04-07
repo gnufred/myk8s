@@ -6,7 +6,7 @@ title: Get a Shell to a Running Container
 content_type: task
 ---
 
-<!-- overview -->
+
 
 This page shows how to use `kubectl exec` to get a shell to a
 running container.
@@ -17,12 +17,12 @@ running container.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 
 
 
-<!-- steps -->
+
 
 ## Getting a shell to a container
 
@@ -49,9 +49,9 @@ Get a shell to the running container:
 kubectl exec --stdin --tty shell-demo -- /bin/bash
 ```
 
-{{< note >}}
+{{}}
 The double dash (`--`) separates the arguments you want to pass to the command from the kubectl arguments.
-{{< /note >}}
+{{}}
 
 In your shell, list the root directory:
 
@@ -132,7 +132,7 @@ kubectl exec shell-demo -- cat /proc/1/mounts
 
 
 
-<!-- discussion -->
+
 
 ## Opening a shell when a Pod has more than one container
 
@@ -146,9 +146,9 @@ shell to the _main-app_ container.
 kubectl exec -i -t my-pod --container main-app -- /bin/bash
 ```
 
-{{< note >}}
+{{}}
 The short options `-i` and `-t` are the same as the long options `--stdin` and `--tty`
-{{< /note >}}
+{{}}
 
 
 ## {{% heading "whatsnext" %}}

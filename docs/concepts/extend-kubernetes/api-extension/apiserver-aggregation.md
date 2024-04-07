@@ -8,7 +8,7 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
+
 
 The aggregation layer allows Kubernetes to be extended with additional APIs, beyond what is
 offered by the core Kubernetes APIs.
@@ -17,10 +17,10 @@ The additional APIs can either be ready-made solutions such as a
 
 The aggregation layer is different from
 [Custom Resources](/docs/concepts/extend-kubernetes/api-extension/custom-resources/),
-which are a way to make the {{< glossary_tooltip term_id="kube-apiserver" text="kube-apiserver" >}}
+which are a way to make the {{}}
 recognise new kinds of object.
 
-<!-- body -->
+
 
 ## Aggregation layer
 
@@ -33,7 +33,7 @@ registered APIService.
 The most common way to implement the APIService is to run an *extension API server* in Pod(s) that
 run in your cluster. If you're using the extension API server to manage resources in your cluster,
 the extension API server (also written as "extension-apiserver") is typically paired with one or
-more {{< glossary_tooltip text="controllers" term_id="controller" >}}. The apiserver-builder
+more {{}}. The apiserver-builder
 library provides a skeleton for both extension API servers and the associated controller(s).
 
 ### Response latency

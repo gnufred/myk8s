@@ -10,16 +10,7 @@ weight: 4
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: networking.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc.
 
-<hr>
+
 
 - **apiVersion**: networking.k8s.io/v1
 
@@ -38,15 +29,15 @@ Ingress is a collection of rules that allow inbound connections to reach the end
 - **kind**: Ingress
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../service-resources/ingress-v1#IngressSpec" >}}">IngressSpec</a>)
+- **spec** (}}">IngressSpec)
 
   spec is the desired state of the Ingress. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
-- **status** (<a href="{{< ref "../service-resources/ingress-v1#IngressStatus" >}}">IngressStatus</a>)
+- **status** (}}">IngressStatus)
 
   status is the current state of the Ingress. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
@@ -58,9 +49,9 @@ Ingress is a collection of rules that allow inbound connections to reach the end
 
 IngressSpec describes the Ingress the user wishes to exist.
 
-<hr>
 
-- **defaultBackend** (<a href="{{< ref "../service-resources/ingress-v1#IngressBackend" >}}">IngressBackend</a>)
+
+- **defaultBackend** (}}">IngressBackend)
 
   defaultBackend is the backend that should handle requests that don't match any rule. If Rules are not specified, DefaultBackend must be specified. If DefaultBackend is not set, the handling of requests that do not match any of the rules will be up to the Ingress controller.
 
@@ -74,7 +65,7 @@ IngressSpec describes the Ingress the user wishes to exist.
   
   rules is a list of host rules used to configure the Ingress. If unspecified, or no rule matches, all traffic is sent to the default backend.
 
-  <a name="IngressRule"></a>
+  
   *IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue.*
 
   - **rules.host** (string)
@@ -91,8 +82,8 @@ IngressSpec describes the Ingress the user wishes to exist.
   - **rules.http** (HTTPIngressRuleValue)
 
 
-    <a name="HTTPIngressRuleValue"></a>
-    *HTTPIngressRuleValue is a list of http selectors pointing to backends. In the example: http://<host>/<path>?<searchpart> -> backend where where parts of the url correspond to RFC 3986, this resource will be used to match against everything after the last '/' and before the first '?' or '#'.*
+    
+    *HTTPIngressRuleValue is a list of http selectors pointing to backends. In the example: http:///? -> backend where where parts of the url correspond to RFC 3986, this resource will be used to match against everything after the last '/' and before the first '?' or '#'.*
 
     - **rules.http.paths** ([]HTTPIngressPath), required
 
@@ -100,10 +91,10 @@ IngressSpec describes the Ingress the user wishes to exist.
       
       paths is a collection of paths that map requests to backends.
 
-      <a name="HTTPIngressPath"></a>
+      
       *HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the backend.*
 
-      - **rules.http.paths.backend** (<a href="{{< ref "../service-resources/ingress-v1#IngressBackend" >}}">IngressBackend</a>), required
+      - **rules.http.paths.backend** (}}">IngressBackend), required
 
         backend defines the referenced service endpoint to which the traffic will be forwarded to.
 
@@ -131,7 +122,7 @@ IngressSpec describes the Ingress the user wishes to exist.
   
   tls represents the TLS configuration. Currently the Ingress only supports a single TLS port, 443. If multiple members of this list specify different hosts, they will be multiplexed on the same port according to the hostname specified through the SNI TLS extension, if the ingress controller fulfilling the ingress supports SNI.
 
-  <a name="IngressTLS"></a>
+  
   *IngressTLS describes the transport layer security associated with an ingress.*
 
   - **tls.hosts** ([]string)
@@ -152,9 +143,9 @@ IngressSpec describes the Ingress the user wishes to exist.
 
 IngressBackend describes all endpoints for a given service and port.
 
-<hr>
 
-- **resource** (<a href="{{< ref "../common-definitions/typed-local-object-reference#TypedLocalObjectReference" >}}">TypedLocalObjectReference</a>)
+
+- **resource** (}}">TypedLocalObjectReference)
 
   resource is an ObjectRef to another Kubernetes resource in the namespace of the Ingress object. If resource is specified, a service.Name and service.Port must not be specified. This is a mutually exclusive setting with "Service".
 
@@ -162,7 +153,7 @@ IngressBackend describes all endpoints for a given service and port.
 
   service references a service as a backend. This is a mutually exclusive setting with "Resource".
 
-  <a name="IngressServiceBackend"></a>
+  
   *IngressServiceBackend references a Kubernetes Service as a Backend.*
 
   - **service.name** (string), required
@@ -173,7 +164,7 @@ IngressBackend describes all endpoints for a given service and port.
 
     port of the referenced service. A port name or port number is required for a IngressServiceBackend.
 
-    <a name="ServiceBackendPort"></a>
+    
     *ServiceBackendPort is the service port being referenced.*
 
     - **service.port.name** (string)
@@ -192,20 +183,20 @@ IngressBackend describes all endpoints for a given service and port.
 
 IngressStatus describe the current state of the Ingress.
 
-<hr>
+
 
 - **loadBalancer** (IngressLoadBalancerStatus)
 
   loadBalancer contains the current status of the load-balancer.
 
-  <a name="IngressLoadBalancerStatus"></a>
+  
   *IngressLoadBalancerStatus represents the status of a load-balancer.*
 
   - **loadBalancer.ingress** ([]IngressLoadBalancerIngress)
 
     ingress is a list containing ingress points for the load-balancer.
 
-    <a name="IngressLoadBalancerIngress"></a>
+    
     *IngressLoadBalancerIngress represents the status of a load-balancer ingress point.*
 
     - **loadBalancer.ingress.hostname** (string)
@@ -222,7 +213,7 @@ IngressStatus describe the current state of the Ingress.
       
       ports provides information about the ports exposed by this LoadBalancer.
 
-      <a name="IngressPortStatus"></a>
+      
       *IngressPortStatus represents the error condition of a service port*
 
       - **loadBalancer.ingress.ports.port** (int32), required
@@ -248,9 +239,9 @@ IngressStatus describe the current state of the Ingress.
 
 IngressList is a collection of Ingress.
 
-<hr>
 
-- **items** ([]<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>), required
+
+- **items** ([]}}">Ingress), required
 
   items is the list of Ingress.
 
@@ -262,7 +253,7 @@ IngressList is a collection of Ingress.
 
   Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
@@ -274,7 +265,7 @@ IngressList is a collection of Ingress.
 
 
 
-<hr>
+
 
 
 
@@ -297,19 +288,19 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): OK
+200 (}}">Ingress): OK
 
 401: Unauthorized
 
@@ -330,19 +321,19 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): OK
+200 (}}">Ingress): OK
 
 401: Unauthorized
 
@@ -358,69 +349,69 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#IngressList" >}}">IngressList</a>): OK
+200 (}}">IngressList): OK
 
 401: Unauthorized
 
@@ -436,64 +427,64 @@ GET /apis/networking.k8s.io/v1/ingresses
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#IngressList" >}}">IngressList</a>): OK
+200 (}}">IngressList): OK
 
 401: Unauthorized
 
@@ -509,43 +500,43 @@ POST /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>, required
+- **body**: }}">Ingress, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): OK
+200 (}}">Ingress): OK
 
-201 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): Created
+201 (}}">Ingress): Created
 
-202 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): Accepted
+202 (}}">Ingress): Accepted
 
 401: Unauthorized
 
@@ -566,41 +557,41 @@ PUT /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>, required
+- **body**: }}">Ingress, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): OK
+200 (}}">Ingress): OK
 
-201 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): Created
+201 (}}">Ingress): Created
 
 401: Unauthorized
 
@@ -621,41 +612,41 @@ PUT /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>, required
+- **body**: }}">Ingress, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): OK
+200 (}}">Ingress): OK
 
-201 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): Created
+201 (}}">Ingress): Created
 
 401: Unauthorized
 
@@ -676,46 +667,46 @@ PATCH /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): OK
+200 (}}">Ingress): OK
 
-201 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): Created
+201 (}}">Ingress): Created
 
 401: Unauthorized
 
@@ -736,46 +727,46 @@ PATCH /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): OK
+200 (}}">Ingress): OK
 
-201 (<a href="{{< ref "../service-resources/ingress-v1#Ingress" >}}">Ingress</a>): Created
+201 (}}">Ingress): Created
 
 401: Unauthorized
 
@@ -796,41 +787,41 @@ DELETE /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
-202 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): Accepted
+202 (}}">Status): Accepted
 
 401: Unauthorized
 
@@ -846,79 +837,79 @@ DELETE /apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

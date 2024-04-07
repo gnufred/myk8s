@@ -4,7 +4,7 @@ content_type: concept
 weight: 70
 ---
 
-_Field selectors_ let you select Kubernetes {{< glossary_tooltip text="objects" term_id="object" >}} based on the
+_Field selectors_ let you select Kubernetes {{}} based on the
 value of one or more resource fields. Here are some examples of field selector queries:
 
 * `metadata.name=my-service`
@@ -17,9 +17,9 @@ This `kubectl` command selects all Pods for which the value of the [`status.phas
 kubectl get pods --field-selector status.phase=Running
 ```
 
-{{< note >}}
+{{}}
 Field selectors are essentially resource *filters*. By default, no selectors/filters are applied, meaning that all resources of the specified type are selected. This makes the `kubectl` queries `kubectl get pods` and `kubectl get pods --field-selector ""` equivalent.
-{{< /note >}}
+{{}}
 
 ## Supported fields
 
@@ -39,10 +39,10 @@ You can use the `=`, `==`, and `!=` operators with field selectors (`=` and `==`
 ```shell
 kubectl get services  --all-namespaces --field-selector metadata.namespace!=default
 ```
-{{< note >}}
+{{}}
 [Set-based operators](/docs/concepts/overview/working-with-objects/labels/#set-based-requirement)
 (`in`, `notin`, `exists`) are not supported for field selectors. 
-{{< /note >}}
+{{}}
 
 ## Chained selectors
 

@@ -9,15 +9,15 @@ weight: 40
 min-kubernetes-server-version: v1.22
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.19" state="stable" >}}
+
+{{}}
 
 Seccomp stands for secure computing mode and has been a feature of the Linux
 kernel since version 2.6.12. It can be used to sandbox the privileges of a
 process, restricting the calls it is able to make from userspace into the
 kernel. Kubernetes lets you automatically apply seccomp profiles loaded onto a
-{{< glossary_tooltip text="node" term_id="node" >}} to your Pods and containers.
+{{}} to your Pods and containers.
 
 Identifying the privileges required for your workloads can be difficult. In this
 tutorial, you will go through how to load seccomp profiles into a local
@@ -55,13 +55,13 @@ for the version you are using.
 The tutorial also uses the `curl` tool for downloading examples to your computer.
 You can adapt the steps to use a different tool if you prefer.
 
-{{< note >}}
+{{}}
 It is not possible to apply a seccomp profile to a container running with
 `privileged: true` set in the container's `securityContext`. Privileged containers always
 run as `Unconfined`.
-{{< /note >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Download example seccomp profiles {#download-profiles}
 
@@ -69,17 +69,17 @@ The contents of these profiles will be explored later on, but for now go ahead
 and download them into a directory named `profiles/` so that they can be loaded
 into the cluster.
 
-{{< tabs name="tab_with_code" >}}
-{{< tab name="audit.json" >}}
+{{}}
+{{}}
 {{% code_sample file="pods/security/seccomp/profiles/audit.json" %}}
-{{< /tab >}}
-{{< tab name="violation.json" >}}
+{{}}
+{{}}
 {{% code_sample file="pods/security/seccomp/profiles/violation.json" %}}
-{{< /tab >}}
-{{< tab name="fine-grained.json" >}}
+{{}}
+{{}}
 {{% code_sample file="pods/security/seccomp/profiles/fine-grained.json" %}}
-{{< /tab >}}
-{{< /tabs >}}
+{{}}
+{{}}
 
 Run these commands:
 
@@ -114,10 +114,10 @@ curl -L -O https://k8s.io/examples/pods/security/seccomp/kind.yaml
 You can set a specific Kubernetes version by setting the node's container image.
 See [Nodes](https://kind.sigs.k8s.io/docs/user/configuration/#nodes) within the
 kind documentation about configuration for more details on this.
-This tutorial assumes you are using Kubernetes {{< param "version" >}}.
+This tutorial assumes you are using Kubernetes {{}}.
 
 As a beta feature, you can configure Kubernetes to use the profile that the
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+{{}}
 prefers by default, rather than falling back to `Unconfined`.
 If you want to try that, see
 [enable the use of `RuntimeDefault` as the default seccomp profile for all workloads](#enable-the-use-of-runtimedefault-as-the-default-seccomp-profile-for-all-workloads)
@@ -167,11 +167,11 @@ Most container runtimes provide a sane set of default syscalls that are allowed
 or not. You can adopt these defaults for your workload by setting the seccomp
 type in the security context of a pod or container to `RuntimeDefault`.
 
-{{< note >}}
+{{}}
 If you have the `seccompDefault` [configuration](/docs/reference/config-api/kubelet-config.v1beta1/)
 enabled, then Pods use the `RuntimeDefault` seccomp profile whenever
 no other seccomp profile is specified. Otherwise, the default is `Unconfined`.
-{{< /note >}}
+{{}}
 
 Here's a manifest for a Pod that requests the `RuntimeDefault` seccomp profile
 for all its containers:
@@ -208,13 +208,13 @@ Here's a manifest for that Pod:
 
 {{% code_sample file="pods/security/seccomp/ga/audit-pod.yaml" %}}
 
-{{< note >}}
+{{}}
 Older versions of Kubernetes allowed you to configure seccomp
-behavior using {{< glossary_tooltip text="annotations" term_id="annotation" >}}.
-Kubernetes {{< skew currentVersion >}} only supports using fields within
+behavior using {{}}.
+Kubernetes {{}} only supports using fields within
 `.spec.securityContext` to configure seccomp, and this tutorial explains that
 approach.
-{{< /note >}}
+{{}}
 
 Create the Pod in the cluster:
 
@@ -235,7 +235,7 @@ audit-pod   1/1     Running   0          30s
 ```
 
 In order to be able to interact with this endpoint exposed by this
-container, create a NodePort {{< glossary_tooltip text="Service" term_id="service" >}}
+container, create a NodePort {{}}
 that allows access to the endpoint from inside the kind control plane container.
 
 ```shell
@@ -251,7 +251,7 @@ kubectl get service audit-pod
 The output is similar to:
 ```
 NAME        TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-audit-pod   NodePort   10.111.36.142   <none>        5678:32373/TCP   72s
+audit-pod   NodePort   10.111.36.142           5678:32373/TCP   72s
 ```
 
 Now you can use `curl` to access that endpoint from inside the kind control plane container,
@@ -395,7 +395,7 @@ kubectl get service fine-pod
 The output is similar to:
 ```
 NAME        TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-fine-pod    NodePort   10.111.36.142   <none>        5678:32373/TCP   72s
+fine-pod    NodePort   10.111.36.142           5678:32373/TCP   72s
 ```
 
 Use `curl` to access that endpoint from inside the kind control plane container:
@@ -424,7 +424,7 @@ kubectl delete pod fine-pod --wait --now
 
 ## Enable the use of `RuntimeDefault` as the default seccomp profile for all workloads
 
-{{< feature-state state="stable" for_k8s_version="v1.27" >}}
+{{}}
 
 To use seccomp profile defaulting, you must run the kubelet with the
 `--seccomp-default`
@@ -438,14 +438,14 @@ of security defaults while preserving the functionality of the workload. It is
 possible that the default profiles differ between container runtimes and their
 release versions, for example when comparing those from CRI-O and containerd.
 
-{{< note >}}
+{{}}
 Enabling the feature will neither change the Kubernetes
 `securityContext.seccompProfile` API field nor add the deprecated annotations of
 the workload. This provides users the possibility to rollback anytime without
 actually changing the workload configuration. Tools like
 [`crictl inspect`](https://github.com/kubernetes-sigs/cri-tools) can be used to
 verify which seccomp profile is being used by a container.
-{{< /note >}}
+{{}}
 
 Some workloads may require a lower amount of syscall restrictions than others.
 This means that they can fail during runtime even with the `RuntimeDefault`
@@ -464,12 +464,12 @@ You can find more detailed information about a possible upgrade and downgrade st
 in the related Kubernetes Enhancement Proposal (KEP):
 [Enable seccomp by default](https://github.com/kubernetes/enhancements/tree/9a124fd29d1f9ddf2ff455c49a630e3181992c25/keps/sig-node/2413-seccomp-by-default#upgrade--downgrade-strategy).
 
-Kubernetes {{< skew currentVersion >}} lets you configure the seccomp profile
+Kubernetes {{}} lets you configure the seccomp profile
 that applies when the spec for a Pod doesn't define a specific seccomp profile.
 However, you still need to enable this defaulting for each node where you would
 like to use it.
 
-If you are running a Kubernetes {{< skew currentVersion >}} cluster and want to
+If you are running a Kubernetes {{}} cluster and want to
 enable the feature, either run the kubelet with the `--seccomp-default` command
 line flag, or enable it through the [kubelet configuration
 file](/docs/tasks/administer-cluster/kubelet-config-file/). To enable the

@@ -11,11 +11,11 @@ content_type: concept
 weight: 110
 ---
 
-<!-- overview -->
+
 
 This page provides an storage overview specific to the Windows operating system.
 
-<!-- body -->
+
 
 ## Persistent storage {#storage}
 
@@ -45,7 +45,7 @@ As a result, the following storage functionality is not supported on Windows nod
 * NFS based storage/volume support
 * Expanding the mounted volume (resizefs)
 
-Kubernetes {{< glossary_tooltip text="volumes" term_id="volume" >}} enable complex
+Kubernetes {{}} enable complex
 applications, with data persistence and Pod volume sharing requirements, to be deployed
 on Kubernetes. Management of persistent volumes associated with a specific storage
 back-end or protocol includes actions such as provisioning/de-provisioning/resizing

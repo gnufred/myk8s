@@ -10,16 +10,7 @@ weight: 12
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 
@@ -28,7 +19,7 @@ guide. You can file document formatting bugs against the
 
 Status is a return value for calls that don't return other objects.
 
-<hr>
+
 
 - **apiVersion** (string)
 
@@ -42,14 +33,14 @@ Status is a return value for calls that don't return other objects.
 
   Extended data associated with the reason.  Each reason may define its own extended details. This field is optional and the data returned is not guaranteed to conform to any schema except that defined by the reason type.
 
-  <a name="StatusDetails"></a>
+  
   *StatusDetails is a set of additional properties that MAY be set by the server to provide additional information about a response. The Reason field of a Status object defines what attributes will be set. Clients must ignore fields that do not match the defined type of each attribute, and should assume that any attribute may be empty, invalid, or under defined.*
 
   - **details.causes** ([]StatusCause)
 
     The Causes array includes more details associated with the StatusReason failure. Not all StatusReasons may provide detailed causes.
 
-    <a name="StatusCause"></a>
+    
     *StatusCause provides more information about an api.Status failure, including cases when multiple errors are encountered.*
 
     - **details.causes.field** (string)
@@ -96,7 +87,7 @@ Status is a return value for calls that don't return other objects.
 
   A human-readable description of the status of this operation.
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 

@@ -4,9 +4,9 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.18" state="stable" >}}
+
+{{}}
 
 This page shows how to configure
 [Group Managed Service Accounts](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview) (GMSA)
@@ -63,7 +63,7 @@ The [YAML template](https://github.com/kubernetes-sigs/windows-gmsa/blob/master/
 used by the script may also be used to deploy the webhooks and associated objects
 manually (with appropriate substitutions for the parameters)
 
-<!-- steps -->
+
 
 ## Configure GMSAs and Windows nodes in Active Directory
 

@@ -16,22 +16,22 @@ card:
     title: Securing a cluster
 ---
 
-<!-- overview -->
+
 
 The cluster administration overview is for anyone creating or administering a Kubernetes cluster.
 It assumes some familiarity with core Kubernetes [concepts](/docs/concepts/).
 
-<!-- body -->
+
 
 ## Planning a cluster
 
 See the guides in [Setup](/docs/setup/) for examples of how to plan, set up, and configure
 Kubernetes clusters. The solutions listed in this article are called *distros*.
 
-{{< note  >}}
+{{}}
 Not all distros are actively maintained. Choose distros which have been tested with a recent
 version of Kubernetes.
-{{< /note >}}
+{{}}
 
 Before choosing a guide, here are some considerations:
 

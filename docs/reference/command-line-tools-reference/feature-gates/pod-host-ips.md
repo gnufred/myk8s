@@ -14,5 +14,5 @@ stages:
     defaultValue: true
     fromVersion: "1.29"
 ---
-Enable the `status.hostIPs` field for pods and the {{< glossary_tooltip term_id="downward-api" text="downward API" >}}.
+Enable the `status.hostIPs` field for pods and the {{}}.
 The field lets you expose host IP addresses to workloads.

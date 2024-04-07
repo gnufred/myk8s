@@ -4,7 +4,7 @@ content_type: task
 weight: 120
 ---
 
-<!-- overview -->
+
 
 This page shows how to use a Volume to communicate between two Containers running
 in the same Pod. See also how to allow processes to communicate by
@@ -13,9 +13,9 @@ between containers.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ##  Creating a Pod that runs two Containers
 
@@ -108,7 +108,7 @@ The output shows that nginx serves a web page written by the debian container:
 Hello from the debian container
 ```
 
-<!-- discussion -->
+
 
 ## Discussion
 
@@ -135,7 +135,7 @@ the shared Volume is lost.
 
 * See [Configure a Pod to share process namespace between containers in a Pod](/docs/tasks/configure-pod-container/share-process-namespace/)
 
-* See [Volume](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core).
+* See [Volume](/docs/reference/generated/kubernetes-api/{{}}/#volume-v1-core).
 
-* See [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core).
+* See [Pod](/docs/reference/generated/kubernetes-api/{{}}/#pod-v1-core).
 

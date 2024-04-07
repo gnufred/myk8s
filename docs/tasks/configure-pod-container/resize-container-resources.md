@@ -6,9 +6,9 @@ min-kubernetes-server-version: 1.27
 ---
 
 
-<!-- overview -->
 
-{{< feature-state state="alpha" for_k8s_version="v1.27" >}}
+
+{{}}
 
 This page assumes that you are familiar with [Quality of Service](/docs/tasks/configure-pod-container/quality-service-pod/)
 for Kubernetes Pods.
@@ -43,7 +43,7 @@ For in-place resize of pod resources:
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 ## Container Resize Policies
@@ -60,10 +60,10 @@ The following restart policies can be specified for resizing CPU and memory:
 
 If `resizePolicy[*].restartPolicy` is not specified, it defaults to `NotRequired`.
 
-{{< note >}}
+{{}}
 If the Pod's `restartPolicy` is `Never`, container's resize restart policy must be
 set to `NotRequired` for all Containers in the Pod.
-{{< /note >}}
+{{}}
 
 Below example shows a Pod whose Container's CPU can be resized without restart, but
 resizing memory requires the container to be restarted.
@@ -92,12 +92,12 @@ spec:
         cpu: "700m"
 ```
 
-{{< note >}}
+{{}}
 In the above example, if desired requests or limits for both CPU _and_ memory
 have changed, the container will be restarted in order to resize its memory.
-{{< /note >}}
+{{}}
 
-<!-- steps -->
+
 
 
 ## Create a pod with resource requests and limits
@@ -174,10 +174,10 @@ Let's say the CPU requirements have increased, and 0.8 CPU is now desired. This
 is typically determined, and may be programmatically applied, by an entity such as
 [VerticalPodAutoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) (VPA).
 
-{{< note >}}
+{{}}
 While you can change a Pod's requests and limits to express new desired
 resources, you cannot change the QoS class in which the Pod was created.
-{{< /note >}}
+{{}}
 
 Now, patch the Pod's Container with CPU requests & limits both set to `800m`:
 

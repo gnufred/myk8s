@@ -10,16 +10,7 @@ weight: 3
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: networking.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 NetworkPolicy describes what network traffic is allowed for a set of Pods
 
-<hr>
+
 
 - **apiVersion**: networking.k8s.io/v1
 
@@ -38,11 +29,11 @@ NetworkPolicy describes what network traffic is allowed for a set of Pods
 - **kind**: NetworkPolicy
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicySpec" >}}">NetworkPolicySpec</a>)
+- **spec** (}}">NetworkPolicySpec)
 
   spec represents the specification of the desired behavior for this NetworkPolicy.
 
@@ -54,9 +45,9 @@ NetworkPolicy describes what network traffic is allowed for a set of Pods
 
 NetworkPolicySpec provides the specification of a NetworkPolicy
 
-<hr>
 
-- **podSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>), required
+
+- **podSelector** (}}">LabelSelector), required
 
   podSelector selects the pods to which this NetworkPolicy object applies. The array of ingress rules is applied to any pods selected by this field. Multiple network policies can select the same set of pods. In this case, the ingress rules for each are combined additively. This field is NOT optional and follows standard label selector semantics. An empty podSelector matches all pods in this namespace.
 
@@ -68,21 +59,21 @@ NetworkPolicySpec provides the specification of a NetworkPolicy
 
   ingress is a list of ingress rules to be applied to the selected pods. Traffic is allowed to a pod if there are no NetworkPolicies selecting the pod (and cluster policy otherwise allows the traffic), OR if the traffic source is the pod's local node, OR if the traffic matches at least one ingress rule across all of the NetworkPolicy objects whose podSelector matches the pod. If this field is empty then this NetworkPolicy does not allow any traffic (and serves solely to ensure that the pods it selects are isolated by default)
 
-  <a name="NetworkPolicyIngressRule"></a>
+  
   *NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.*
 
   - **ingress.from** ([]NetworkPolicyPeer)
 
     from is a list of sources which should be able to access the pods selected for this rule. Items in this list are combined using a logical OR operation. If this field is empty or missing, this rule matches all sources (traffic not restricted by source). If this field is present and contains at least one item, this rule allows traffic only if the traffic matches at least one item in the from list.
 
-    <a name="NetworkPolicyPeer"></a>
+    
     *NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed*
 
     - **ingress.from.ipBlock** (IPBlock)
 
       ipBlock defines policy on a particular IPBlock. If this field is set then neither of the other fields can be.
 
-      <a name="IPBlock"></a>
+      
       *IPBlock describes a particular CIDR (Ex. "192.168.1.0/24","2001:db8::/64") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.*
 
       - **ingress.from.ipBlock.cidr** (string), required
@@ -93,13 +84,13 @@ NetworkPolicySpec provides the specification of a NetworkPolicy
 
         except is a slice of CIDRs that should not be included within an IPBlock Valid examples are "192.168.1.0/24" or "2001:db8::/64" Except values will be rejected if they are outside the cidr range
 
-    - **ingress.from.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **ingress.from.namespaceSelector** (}}">LabelSelector)
 
       namespaceSelector selects namespaces using cluster-scoped labels. This field follows standard label selector semantics; if present but empty, it selects all namespaces.
       
       If podSelector is also set, then the NetworkPolicyPeer as a whole selects the pods matching podSelector in the namespaces selected by namespaceSelector. Otherwise it selects all pods in the namespaces selected by namespaceSelector.
 
-    - **ingress.from.podSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **ingress.from.podSelector** (}}">LabelSelector)
 
       podSelector is a label selector which selects pods. This field follows standard label selector semantics; if present but empty, it selects all pods.
       
@@ -109,14 +100,14 @@ NetworkPolicySpec provides the specification of a NetworkPolicy
 
     ports is a list of ports which should be made accessible on the pods selected for this rule. Each item in this list is combined using a logical OR. If this field is empty or missing, this rule matches all ports (traffic not restricted by port). If this field is present and contains at least one item, then this rule allows traffic only if the traffic matches at least one port in the list.
 
-    <a name="NetworkPolicyPort"></a>
+    
     *NetworkPolicyPort describes a port to allow traffic on*
 
     - **ingress.ports.port** (IntOrString)
 
       port represents the port on the given protocol. This can either be a numerical or named port on a pod. If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.
 
-      <a name="IntOrString"></a>
+      
       *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
     - **ingress.ports.endPort** (int32)
@@ -131,21 +122,21 @@ NetworkPolicySpec provides the specification of a NetworkPolicy
 
   egress is a list of egress rules to be applied to the selected pods. Outgoing traffic is allowed if there are no NetworkPolicies selecting the pod (and cluster policy otherwise allows the traffic), OR if the traffic matches at least one egress rule across all of the NetworkPolicy objects whose podSelector matches the pod. If this field is empty then this NetworkPolicy limits all outgoing traffic (and serves solely to ensure that the pods it selects are isolated by default). This field is beta-level in 1.8
 
-  <a name="NetworkPolicyEgressRule"></a>
+  
   *NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to. This type is beta-level in 1.8*
 
   - **egress.to** ([]NetworkPolicyPeer)
 
     to is a list of destinations for outgoing traffic of pods selected for this rule. Items in this list are combined using a logical OR operation. If this field is empty or missing, this rule matches all destinations (traffic not restricted by destination). If this field is present and contains at least one item, this rule allows traffic only if the traffic matches at least one item in the to list.
 
-    <a name="NetworkPolicyPeer"></a>
+    
     *NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed*
 
     - **egress.to.ipBlock** (IPBlock)
 
       ipBlock defines policy on a particular IPBlock. If this field is set then neither of the other fields can be.
 
-      <a name="IPBlock"></a>
+      
       *IPBlock describes a particular CIDR (Ex. "192.168.1.0/24","2001:db8::/64") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule.*
 
       - **egress.to.ipBlock.cidr** (string), required
@@ -156,13 +147,13 @@ NetworkPolicySpec provides the specification of a NetworkPolicy
 
         except is a slice of CIDRs that should not be included within an IPBlock Valid examples are "192.168.1.0/24" or "2001:db8::/64" Except values will be rejected if they are outside the cidr range
 
-    - **egress.to.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **egress.to.namespaceSelector** (}}">LabelSelector)
 
       namespaceSelector selects namespaces using cluster-scoped labels. This field follows standard label selector semantics; if present but empty, it selects all namespaces.
       
       If podSelector is also set, then the NetworkPolicyPeer as a whole selects the pods matching podSelector in the namespaces selected by namespaceSelector. Otherwise it selects all pods in the namespaces selected by namespaceSelector.
 
-    - **egress.to.podSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **egress.to.podSelector** (}}">LabelSelector)
 
       podSelector is a label selector which selects pods. This field follows standard label selector semantics; if present but empty, it selects all pods.
       
@@ -172,14 +163,14 @@ NetworkPolicySpec provides the specification of a NetworkPolicy
 
     ports is a list of destination ports for outgoing traffic. Each item in this list is combined using a logical OR. If this field is empty or missing, this rule matches all ports (traffic not restricted by port). If this field is present and contains at least one item, then this rule allows traffic only if the traffic matches at least one port in the list.
 
-    <a name="NetworkPolicyPort"></a>
+    
     *NetworkPolicyPort describes a port to allow traffic on*
 
     - **egress.ports.port** (IntOrString)
 
       port represents the port on the given protocol. This can either be a numerical or named port on a pod. If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.
 
-      <a name="IntOrString"></a>
+      
       *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
     - **egress.ports.endPort** (int32)
@@ -198,7 +189,7 @@ NetworkPolicySpec provides the specification of a NetworkPolicy
 
 NetworkPolicyList is a list of NetworkPolicy objects.
 
-<hr>
+
 
 - **apiVersion**: networking.k8s.io/v1
 
@@ -206,11 +197,11 @@ NetworkPolicyList is a list of NetworkPolicy objects.
 - **kind**: NetworkPolicyList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>), required
+- **items** ([]}}">NetworkPolicy), required
 
   items is a list of schema objects.
 
@@ -222,7 +213,7 @@ NetworkPolicyList is a list of NetworkPolicy objects.
 
 
 
-<hr>
+
 
 
 
@@ -245,19 +236,19 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): OK
+200 (}}">NetworkPolicy): OK
 
 401: Unauthorized
 
@@ -273,69 +264,69 @@ GET /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicyList" >}}">NetworkPolicyList</a>): OK
+200 (}}">NetworkPolicyList): OK
 
 401: Unauthorized
 
@@ -351,64 +342,64 @@ GET /apis/networking.k8s.io/v1/networkpolicies
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicyList" >}}">NetworkPolicyList</a>): OK
+200 (}}">NetworkPolicyList): OK
 
 401: Unauthorized
 
@@ -424,43 +415,43 @@ POST /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>, required
+- **body**: }}">NetworkPolicy, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): OK
+200 (}}">NetworkPolicy): OK
 
-201 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): Created
+201 (}}">NetworkPolicy): Created
 
-202 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): Accepted
+202 (}}">NetworkPolicy): Accepted
 
 401: Unauthorized
 
@@ -481,41 +472,41 @@ PUT /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>, required
+- **body**: }}">NetworkPolicy, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): OK
+200 (}}">NetworkPolicy): OK
 
-201 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): Created
+201 (}}">NetworkPolicy): Created
 
 401: Unauthorized
 
@@ -536,46 +527,46 @@ PATCH /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): OK
+200 (}}">NetworkPolicy): OK
 
-201 (<a href="{{< ref "../policy-resources/network-policy-v1#NetworkPolicy" >}}">NetworkPolicy</a>): Created
+201 (}}">NetworkPolicy): Created
 
 401: Unauthorized
 
@@ -596,41 +587,41 @@ DELETE /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
-202 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): Accepted
+202 (}}">Status): Accepted
 
 401: Unauthorized
 
@@ -646,79 +637,79 @@ DELETE /apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

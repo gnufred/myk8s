@@ -12,7 +12,7 @@ content_type: task
 weight: 50
 ---
 
-<!-- overview -->
+
 
 This task shows how to scale a StatefulSet. Scaling a StatefulSet refers to
 increasing or decreasing the number of replicas.
@@ -29,7 +29,7 @@ increasing or decreasing the number of replicas.
 - You should perform scaling only when you are confident that your stateful application
   cluster is completely healthy.
 
-<!-- steps -->
+
 
 ## Scaling StatefulSets
 
@@ -38,13 +38,13 @@ increasing or decreasing the number of replicas.
 First, find the StatefulSet you want to scale.
 
 ```shell
-kubectl get statefulsets <stateful-set-name>
+kubectl get statefulsets 
 ```
 
 Change the number of replicas of your StatefulSet:
 
 ```shell
-kubectl scale statefulsets <stateful-set-name> --replicas=<new-replicas>
+kubectl scale statefulsets  --replicas=
 ```
 
 ### Make in-place updates on your StatefulSets
@@ -57,19 +57,19 @@ If your StatefulSet was initially created with `kubectl apply`,
 update `.spec.replicas` of the StatefulSet manifests, and then do a `kubectl apply`:
 
 ```shell
-kubectl apply -f <stateful-set-file-updated>
+kubectl apply -f 
 ```
 
 Otherwise, edit that field with `kubectl edit`:
 
 ```shell
-kubectl edit statefulsets <stateful-set-name>
+kubectl edit statefulsets 
 ```
 
 Or use `kubectl patch`:
 
 ```shell
-kubectl patch statefulsets <stateful-set-name> -p '{"spec":{"replicas":<new-replicas>}}'
+kubectl patch statefulsets  -p '{"spec":{"replicas":}}'
 ```
 
 ## Troubleshooting

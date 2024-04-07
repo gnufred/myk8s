@@ -6,11 +6,11 @@ title: kubeadm reset
 content_type: concept
 weight: 60
 ---
-<!-- overview -->
+
 Performs a best effort revert of changes made by `kubeadm init` or `kubeadm join`.
 
-<!-- body -->
-{{< include "generated/kubeadm_reset.md" >}}
+
+{{}}
 
 ### Reset workflow {#reset-workflow}
 

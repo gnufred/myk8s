@@ -5,7 +5,7 @@ weight: 110
 min-kubernetes-server-version: 1.19
 ---
 
-<!-- overview -->
+
 
 An [Ingress](/docs/concepts/services-networking/ingress/) is an API object that defines rules
 which allow external access to services in a cluster. An
@@ -20,7 +20,7 @@ This page shows you how to set up a simple Ingress which routes requests to Serv
 This tutorial assumes that you are using `minikube` to run a local Kubernetes cluster.
 Visit [Install tools](/docs/tasks/tools/#minikube) to learn how to install `minikube`.
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 If you are using an older Kubernetes version, switch to the documentation for that version.
 
 ### Create a minikube cluster
@@ -28,7 +28,7 @@ If you are using an older Kubernetes version, switch to the documentation for th
 If you haven't already set up a cluster locally, run `minikube start` to create a cluster.
 
 
-<!-- steps -->
+
 
 ## Enable the Ingress controller
 
@@ -44,9 +44,9 @@ If you haven't already set up a cluster locally, run `minikube start` to create 
    kubectl get pods -n ingress-nginx
    ```
 
-   {{< note >}}
+   {{}}
    It can take up to a minute before you see these pods running OK.
-   {{< /note >}}
+   {{}}
 
    The output is similar to:
 
@@ -93,7 +93,7 @@ If you haven't already set up a cluster locally, run `minikube start` to create 
 
    ```none
    NAME      TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-   web       NodePort   10.104.133.249   <none>        8080:31637/TCP   12m
+   web       NodePort   10.104.133.249           8080:31637/TCP   12m
    ```
 
 1. Visit the Service via NodePort:
@@ -150,15 +150,15 @@ The following manifest defines an Ingress that sends traffic to your Service via
    kubectl get ingress
    ```
 
-   {{< note >}}
+   {{}}
    This can take a couple of minutes.
-   {{< /note >}}
+   {{}}
 
    You should see an IPv4 address in the `ADDRESS` column; for example:
 
    ```none
    NAME              CLASS    HOSTS              ADDRESS        PORTS   AGE
-   example-ingress   <none>   hello-world.info   172.17.0.15    80      38s
+   example-ingress      hello-world.info   172.17.0.15    80      38s
    ```
 
 
@@ -191,9 +191,9 @@ The following manifest defines an Ingress that sends traffic to your Service via
      172.17.0.15 hello-world.info
      ```
 
-     {{< note >}}
+     {{}}
      Change the IP address to match the output from `minikube ip`.
-     {{< /note >}}
+     {{}}
 
      After you make this change, your web browser sends requests for
      `hello-world.info` URLs to Minikube.
@@ -281,10 +281,10 @@ The following manifest defines an Ingress that sends traffic to your Service via
    Hostname: web2-75cd47646f-t8cjk
    ```
 
-   {{< note >}}
+   {{}}
    If you did the optional step to update `/etc/hosts`, you can also visit `hello-world.info` and
    `hello-world.info/v2` from your browser.
-   {{< /note >}}
+   {{}}
 
 ## {{% heading "whatsnext" %}}
 

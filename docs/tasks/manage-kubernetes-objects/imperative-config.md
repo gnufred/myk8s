@@ -4,7 +4,7 @@ content_type: task
 weight: 40
 ---
 
-<!-- overview -->
+
 Kubernetes objects can be created, updated, and deleted by using the `kubectl`
 command-line tool along with an object configuration file written in YAML or JSON.
 This document explains how to define and manage objects using configuration files.
@@ -15,11 +15,11 @@ This document explains how to define and manage objects using configuration file
 
 Install [`kubectl`](/docs/tasks/tools/).
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
-<!-- steps -->
+
 
 ## Trade-offs
 
@@ -35,14 +35,14 @@ for a discussion of the advantages and disadvantage of each kind of object manag
 ## How to create objects
 
 You can use `kubectl create -f` to create an object from a configuration file.
-Refer to the [kubernetes API reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+Refer to the [kubernetes API reference](/docs/reference/generated/kubernetes-api/{{}}/)
 for details.
 
-* `kubectl create -f <filename|url>`
+* `kubectl create -f `
 
 ## How to update objects
 
-{{< warning >}}
+{{}}
 Updating objects with the `replace` command drops all
 parts of the spec not specified in the configuration file.  This
 should not be used with objects whose specs are partially managed
@@ -50,38 +50,38 @@ by the cluster, such as Services of type `LoadBalancer`, where
 the `externalIPs` field is managed independently from the configuration
 file.  Independently managed fields must be copied to the configuration
 file to prevent `replace` from dropping them.
-{{< /warning >}}
+{{}}
 
 You can use `kubectl replace -f` to update a live object according to a
 configuration file.
 
-* `kubectl replace -f <filename|url>`
+* `kubectl replace -f `
 
 ## How to delete objects
 
 You can use `kubectl delete -f` to delete an object that is described in a
 configuration file.
 
-* `kubectl delete -f <filename|url>`
+* `kubectl delete -f `
 
-{{< note >}}
+{{}}
 If configuration file has specified the `generateName` field in the `metadata`
 section instead of the `name` field, you cannot delete the object using
-`kubectl delete -f <filename|url>`.
+`kubectl delete -f `.
 You will have to use other flags for deleting the object. For example:
 
 ```shell
-kubectl delete <type> <name>
-kubectl delete <type> -l <label>
+kubectl delete  
+kubectl delete  -l 
 ```
-{{< /note >}}
+{{}}
 
 ## How to view an object
 
 You can use `kubectl get -f` to view information about an object that is
 described in a configuration file.
 
-* `kubectl get -f <filename|url> -o yaml`
+* `kubectl get -f  -o yaml`
 
 The `-o yaml` flag specifies that the full object configuration is printed.
 Use `kubectl get -h` to see a list of options.
@@ -112,7 +112,7 @@ object is created. This is particularly useful for tutorials and tasks
 that point to a configuration file that could be modified by the reader.
 
 ```shell
-kubectl create -f <url> --edit
+kubectl create -f  --edit
 ```
 
 ## Migrating from imperative commands to imperative object configuration
@@ -123,7 +123,7 @@ several manual steps.
 1. Export the live object to a local object configuration file:
 
     ```shell
-    kubectl get <kind>/<name> -o yaml > <kind>_<name>.yaml
+    kubectl get / -o yaml > _.yaml
     ```
 
 1. Manually remove the status field from the object configuration file.
@@ -131,14 +131,14 @@ several manual steps.
 1. For subsequent object management, use `replace` exclusively.
 
     ```shell
-    kubectl replace -f <kind>_<name>.yaml
+    kubectl replace -f _.yaml
     ```
 
 ## Defining controller selectors and PodTemplate labels
 
-{{< warning >}}
+{{}}
 Updating selectors on controllers is strongly discouraged.
-{{< /warning >}}
+{{}}
 
 The recommended approach is to define a single, immutable PodTemplate label
 used only by the controller selector with no other semantic meaning.
@@ -163,6 +163,6 @@ template:
 * [Managing Kubernetes Objects Using Imperative Commands](/docs/tasks/manage-kubernetes-objects/imperative-command/)
 * [Declarative Management of Kubernetes Objects Using Configuration Files](/docs/tasks/manage-kubernetes-objects/declarative-config/)
 * [Kubectl Command Reference](/docs/reference/generated/kubectl/kubectl-commands/)
-* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{}}/)
 
 

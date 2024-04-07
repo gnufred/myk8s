@@ -4,31 +4,31 @@ content_type: task
 weight: 80
 ---
 
-<!-- overview -->
+
 
 This page shows how to create an external load balancer.
 
-When creating a {{< glossary_tooltip text="Service" term_id="service" >}}, you have
+When creating a {{}}, you have
 the option of automatically creating a cloud load balancer. This provides an
 externally-accessible IP address that sends traffic to the correct port on your cluster
 nodes,
 _provided your cluster runs in a supported environment and is configured with
 the correct cloud load balancer provider package_.
 
-You can also use an {{< glossary_tooltip term_id="ingress" >}} in place of Service.
+You can also use an {{}} in place of Service.
 For more information, check the [Ingress](/docs/concepts/services-networking/ingress/)
 documentation.
 
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 Your cluster must be running in a cloud or other environment that already has support
 for configuring external load balancers.
 
 
-<!-- steps -->
+
 
 ## Create a Service
 
@@ -69,7 +69,7 @@ kubectl expose deployment example --port=8765 --target-port=9376 \
 
 This command creates a new Service using the same selectors as the referenced
 resource (in the case of the example above, a
-{{< glossary_tooltip text="Deployment" term_id="deployment" >}} named `example`).
+{{}} named `example`).
 
 For more information, including optional flags, refer to the
 [`kubectl expose` reference](/docs/reference/generated/kubectl/kubectl-commands/#expose).
@@ -89,31 +89,31 @@ which should produce output similar to:
 Name:                     example-service
 Namespace:                default
 Labels:                   app=example
-Annotations:              <none>
+Annotations:              
 Selector:                 app=example
 Type:                     LoadBalancer
-IP Families:              <none>
+IP Families:              
 IP:                       10.3.22.96
 IPs:                      10.3.22.96
 LoadBalancer Ingress:     192.0.2.89
-Port:                     <unset>  8765/TCP
+Port:                       8765/TCP
 TargetPort:               9376/TCP
-NodePort:                 <unset>  30593/TCP
+NodePort:                   30593/TCP
 Endpoints:                172.17.0.3:9376
 Session Affinity:         None
 External Traffic Policy:  Cluster
-Events:                   <none>
+Events:                   
 ```
 
 The load balancer's IP address is listed next to `LoadBalancer Ingress`.
 
-{{< note >}}
+{{}}
 If you are running your service on Minikube, you can find the assigned IP address and port with:
 
 ```bash
 minikube service example-service --url
 ```
-{{< /note >}}
+{{}}
 
 ## Preserving the client source IP
 
@@ -164,14 +164,14 @@ With each target weighted equally in terms of sending traffic to Nodes, external
 traffic is not equally load balanced across different Pods. The external load balancer
 is unaware of the number of Pods on each node that are used as a target.
 
-Where `NumServicePods <<  NumNodes` or `NumServicePods >> NumNodes`, a fairly close-to-equal
+Where `NumServicePods > NumNodes`, a fairly close-to-equal
 distribution will be seen, even without weights.
 
 Internal pod to pod traffic should behave similar to ClusterIP services, with equal probability across all pods.
 
 ## Garbage collecting load balancers
 
-{{< feature-state for_k8s_version="v1.17" state="stable" >}}
+{{}}
 
 In usual case, the correlating load balancer resources in cloud provider should
 be cleaned up soon after a LoadBalancer type Service is deleted. But it is known

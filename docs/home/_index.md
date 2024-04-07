@@ -15,11 +15,11 @@ menu:
     title: "Documentation"
     weight: 20
     post: >
-      <p>Learn how to use Kubernetes with conceptual, tutorial, and reference documentation. You can even <a href="/editdocs/" data-auto-burger-exclude data-proofer-ignore>help contribute to the docs</a>!</p>
+      Learn how to use Kubernetes with conceptual, tutorial, and reference documentation. You can even help contribute to the docs!
 description: >
   Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized applications. The open source project is hosted by the Cloud Native Computing Foundation.
 overview: >
-  Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized applications. The open source project is hosted by the Cloud Native Computing Foundation (<a href="https://www.cncf.io/about">CNCF</a>).
+  Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized applications. The open source project is hosted by the Cloud Native Computing Foundation (CNCF).
 cards:
 - name: concepts
   title: "Understand Kubernetes"

@@ -10,10 +10,10 @@ aka:
 tags:
 - operation
 ---
-API-initiated eviction is the process by which you use the [Eviction API](/docs/reference/generated/kubernetes-api/{{<param "version">}}/#create-eviction-pod-v1-core)
+API-initiated eviction is the process by which you use the [Eviction API](/docs/reference/generated/kubernetes-api/{{}}/#create-eviction-pod-v1-core)
 to create an `Eviction` object that triggers graceful pod termination.
 
-<!--more-->
+
 
 You can request eviction either by directly calling the Eviction API 
 using a client of the kube-apiserver, like the `kubectl drain` command. 

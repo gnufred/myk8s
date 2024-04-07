@@ -8,7 +8,7 @@ weight: 120
 ---
 
 
-<!-- overview -->
+
 
 In Kubernetes, [Services](/docs/concepts/services-networking/service/) are an abstract way to expose
 an application running on a set of Pods. Services
@@ -16,7 +16,7 @@ can have a cluster-scoped virtual IP address (using a Service of `type: ClusterI
 Clients can connect using that virtual IP address, and Kubernetes then load-balances traffic to that
 Service across the different backing Pods.
 
-<!-- body -->
+
 
 ## How Service ClusterIPs are allocated?
 
@@ -92,54 +92,54 @@ risk of collision.
 This example uses the IP address range: 10.96.0.0/24 (CIDR notation) for the IP addresses
 of Services.
 
-Range Size: 2<sup>8</sup> - 2 = 254  
+Range Size: 28 - 2 = 254  
 Band Offset: `min(max(16, 256/16), 256)` = `min(16, 256)` = 16  
 Static band start: 10.96.0.1  
 Static band end: 10.96.0.16  
 Range end: 10.96.0.254   
 
-{{< mermaid >}}
+{{}}
 pie showData
     title 10.96.0.0/24
     "Static" : 16
     "Dynamic" : 238
-{{< /mermaid >}}
+{{}}
 
 ### Example 2 {#allocation-example-2}
 
 This example uses the IP address range: 10.96.0.0/20 (CIDR notation) for the IP addresses
 of Services.
 
-Range Size: 2<sup>12</sup> - 2 = 4094  
+Range Size: 212 - 2 = 4094  
 Band Offset: `min(max(16, 4096/16), 256)` = `min(256, 256)` = 256  
 Static band start: 10.96.0.1  
 Static band end: 10.96.1.0  
 Range end: 10.96.15.254  
 
-{{< mermaid >}}
+{{}}
 pie showData
     title 10.96.0.0/20
     "Static" : 256
     "Dynamic" : 3838
-{{< /mermaid >}}
+{{}}
 
 ### Example 3 {#allocation-example-3}
 
 This example uses the IP address range: 10.96.0.0/16 (CIDR notation) for the IP addresses
 of Services.
 
-Range Size: 2<sup>16</sup> - 2 = 65534  
+Range Size: 216 - 2 = 65534  
 Band Offset: `min(max(16, 65536/16), 256)` = `min(4096, 256)` = 256  
 Static band start: 10.96.0.1  
 Static band ends: 10.96.1.0  
 Range end: 10.96.255.254  
 
-{{< mermaid >}}
+{{}}
 pie showData
     title 10.96.0.0/16
     "Static" : 256
     "Dynamic" : 65278
-{{< /mermaid >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

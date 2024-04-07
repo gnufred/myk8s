@@ -8,16 +8,16 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.24" state="stable" >}}
+
+{{}}
 
 When you run a Pod on a Node, the Pod itself takes an amount of system resources. These
 resources are additional to the resources needed to run the container(s) inside the Pod.
 In Kubernetes, _Pod Overhead_ is a way to account for the resources consumed by the Pod
 infrastructure on top of the container requests & limits.
 
-<!-- body -->
+
 
 In Kubernetes, the Pod's overhead is set at
 [admission](/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks)
@@ -104,8 +104,7 @@ When the kube-scheduler is deciding which node should run a new Pod, the schedul
 `overhead` as well as the sum of container requests for that Pod. For this example, the scheduler adds the
 requests and the overhead, then looks for a node that has 2.25 CPU and 320 MiB of memory available.
 
-Once a Pod is scheduled to a node, the kubelet on that node creates a new {{< glossary_tooltip
-text="cgroup" term_id="cgroup" >}} for the Pod. It is within this pod that the underlying
+Once a Pod is scheduled to a node, the kubelet on that node creates a new {{}} for the Pod. It is within this pod that the underlying
 container runtime will create containers.
 
 If the resource has a limit defined for each container (Guaranteed QoS or Burstable QoS with limits defined),

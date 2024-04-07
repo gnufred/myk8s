@@ -7,10 +7,10 @@ description: >-
 ---
 
 
-<!-- overview -->
+
 
 This page shows how to set a quota for the total number of Pods that can run
-in a {{< glossary_tooltip text="Namespace" term_id="namespace" >}}. You specify quotas in a
+in a {{}}. You specify quotas in a
 [ResourceQuota](/docs/reference/kubernetes-api/policy-resources/resource-quota-v1/)
 object.
 
@@ -20,11 +20,11 @@ object.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You must have access to create namespaces in your cluster.
 
-<!-- steps -->
+
 
 ## Create a namespace
 
@@ -67,7 +67,7 @@ status:
     pods: "0"
 ```
 
-Here is an example manifest for a {{< glossary_tooltip term_id="deployment" >}}:
+Here is an example manifest for a {{}}:
 
 {{% code_sample file="admin/resource/quota-pod-deployment.yaml" %}}
 
@@ -106,7 +106,7 @@ lastUpdateTime: 2021-04-02T20:57:05Z
 
 In this task you have defined a ResourceQuota that limited the total number of Pods, but
 you could also limit the total number of other kinds of object. For example, you
-might decide to limit how many {{< glossary_tooltip text="CronJobs" term_id="cronjob" >}}
+might decide to limit how many {{}}
 that can live in a single namespace.
 
 ## Clean up

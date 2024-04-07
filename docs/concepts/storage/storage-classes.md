@@ -9,7 +9,7 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
+
 
 This document describes the concept of a StorageClass in Kubernetes. Familiarity
 with [volumes](/docs/concepts/storage/volumes/) and
@@ -24,7 +24,7 @@ represent.
 The Kubernetes concept of a storage class is similar to “profiles” in some other
 storage system designs.
 
-<!-- body -->
+
 
 ## StorageClass objects
 
@@ -59,11 +59,11 @@ annotation to true on more than one StorageClass in your cluster, and you then
 create a PersistentVolumeClaim with no `storageClassName` set, Kubernetes
 uses the most recently created default StorageClass.
 
-{{< note >}}
+{{}}
 You should try to only have one StorageClass in your cluster that is
 marked as the default. The reason that Kubernetes allows you to have
 multiple default StorageClasses is to allow for seamless migration.
-{{< /note >}}
+{{}}
 
 You can create a PersistentVolumeClaim without specifying a `storageClassName`
 for the new PVC, and you can do so even when no default StorageClass exists
@@ -140,7 +140,7 @@ storage.
 The following types of volumes support volume expansion, when the underlying
 StorageClass has the field `allowVolumeExpansion` set to true.
 
-{{< table caption = "Table of Volume types and the version of Kubernetes they require"  >}}
+{{}}
 
 | Volume type          | Required Kubernetes version for volume expansion |
 | :------------------- | :----------------------------------------------- |
@@ -150,11 +150,11 @@ StorageClass has the field `allowVolumeExpansion` set to true.
 | Portworx             | 1.11                                             |
 | rbd                  | 1.11                                             |
 
-{{< /table >}}
+{{}}
 
-{{< note >}}
+{{}}
 You can only use the volume expansion feature to grow a Volume, not to shrink it.
-{{< /note >}}
+{{}}
 
 ## Mount options
 
@@ -196,13 +196,13 @@ The following plugins support `WaitForFirstConsumer` with pre-created Persistent
 - CSI volumes, provided that the specific CSI driver supports this
 - [`local`](#local)
 
-{{< note >}}
+{{}}
 If you choose to use `WaitForFirstConsumer`, do not use `nodeName` in the Pod spec
 to specify node affinity.
 If `nodeName` is used in this case, the scheduler will be bypassed and PVC will remain in `pending` state.
 
 Instead, you can use node selector for `kubernetes.io/hostname`:
-{{< /note >}}
+{{}}
 
 ```yaml
 apiVersion: v1
@@ -266,10 +266,9 @@ exceed 256 KiB.
 
 ### AWS EBS
 
-<!-- maintenance note: OK to remove all mention of awsElasticBlockStore once the v1.27 release of
-Kubernetes has gone out of support -->
 
-Kubernetes {{< skew currentVersion >}} does not include a `awsElasticBlockStore` volume type.
+
+Kubernetes {{}} does not include a `awsElasticBlockStore` volume type.
 
 The AWSElasticBlockStore in-tree storage driver was deprecated in the Kubernetes v1.19 release
 and then removed entirely in the v1.27 release.
@@ -417,11 +416,11 @@ which you try out for persistent volume management inside Kubernetes for vSphere
 
 ### Ceph RBD (deprecated) {#ceph-rbd}
 
-{{< note >}}
-{{< feature-state state="deprecated" for_k8s_version="v1.28" >}}
+{{}}
+{{}}
 This internal provisioner of Ceph RBD is deprecated. Please use
 [CephFS RBD CSI driver](https://github.com/ceph/ceph-csi).
-{{< /note >}}
+{{}}
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -472,10 +471,9 @@ parameters:
 
 ### Azure Disk
 
-<!-- maintenance note: OK to remove all mention of azureDisk once the v1.27 release of
-Kubernetes has gone out of support -->
 
-Kubernetes {{< skew currentVersion >}} does not include a `azureDisk` volume type.
+
+Kubernetes {{}} does not include a `azureDisk` volume type.
 
 The `azureDisk` in-tree storage driver was deprecated in the Kubernetes v1.19 release
 and then removed entirely in the v1.27 release.
@@ -507,7 +505,7 @@ parameters:
 - `secretNamespace`: the namespace of the secret that contains the Azure Storage
   Account Name and Key. Default is the same as the Pod.
 - `secretName`: the name of the secret that contains the Azure Storage Account Name and
-  Key. Default is `azure-storage-account-<accountName>-secret`
+  Key. Default is `azure-storage-account--secret`
 - `readOnly`: a flag indicating whether the storage will be mounted as read only.
   Defaults to false which means a read/write mount. This setting will impact the
   `ReadOnly` setting in VolumeMounts as well.
@@ -568,7 +566,7 @@ provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 ```
 
-Local volumes do not support dynamic provisioning in Kubernetes {{< skew currentVersion >}};
+Local volumes do not support dynamic provisioning in Kubernetes {{}};
 however a StorageClass should still be created to delay volume binding until a Pod is actually
 scheduled to the appropriate node. This is specified by the `WaitForFirstConsumer` volume
 binding mode.

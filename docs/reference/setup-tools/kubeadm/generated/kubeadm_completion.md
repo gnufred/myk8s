@@ -1,13 +1,4 @@
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 Output shell completion code for the specified shell (bash or zsh)
@@ -48,56 +39,48 @@ printf "\n# Bash completion support\nsource $(brew --prefix)/etc/bash_completion
 source $HOME/.bash_profile
 
 # Load the kubeadm completion code for bash into the current shell
-source <(kubeadm completion bash)
-
-# Write bash completion code to a file and source it from .bash_profile
-kubeadm completion bash > ~/.kube/kubeadm_completion.bash.inc
+source  ~/.kube/kubeadm_completion.bash.inc
 printf "\n# Kubeadm shell completion\nsource '$HOME/.kube/kubeadm_completion.bash.inc'\n" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 # Load the kubeadm completion code for zsh[1] into the current shell
-source <(kubeadm completion zsh)
-```
+source 
 
-### Options
 
-   <table style="width: 100%; table-layout: fixed;">
-<colgroup>
-<col span="1" style="width: 10px;" />
-<col span="1" />
-</colgroup>
-<tbody>
 
-<tr>
-<td colspan="2">-h, --help</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>help for completion</p></td>
-</tr>
 
-</tbody>
-</table>
+
+
+
+-h, --help
+
+
+help for completion
+
+
+
+
 
 
 
 ### Options inherited from parent commands
 
-   <table style="width: 100%; table-layout: fixed;">
-<colgroup>
-<col span="1" style="width: 10px;" />
-<col span="1" />
-</colgroup>
-<tbody>
+   
 
-<tr>
-<td colspan="2">--rootfs string</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>[EXPERIMENTAL] The path to the 'real' host root filesystem.</p></td>
-</tr>
 
-</tbody>
-</table>
+
+
+
+
+
+--rootfs string
+
+
+[EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+
+
+
 
 
 

@@ -6,7 +6,7 @@ content_type: concept
 weight: 90
 ---
 
-<!-- overview -->
+
 
 Selecting the appropriate authentication mechanism(s) is a crucial aspect of securing your cluster.
 Kubernetes provides several built-in mechanisms, each with its own strengths and weaknesses that 
@@ -25,7 +25,7 @@ recommended to use external authentication sources such as OIDC. The internal au
 mechanisms, such as client certificates and service account tokens, described below, are not 
 suitable for this use-case.
 
-<!-- body -->
+
 
 ## X.509 client certificate authentication {#x509-client-certificate-authentication}
 

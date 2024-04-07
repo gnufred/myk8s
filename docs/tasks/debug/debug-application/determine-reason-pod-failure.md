@@ -4,7 +4,7 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 
 This page shows how to write and read a Container termination message.
 
@@ -18,9 +18,9 @@ the general
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Writing and reading a termination message
 
@@ -126,7 +126,7 @@ is empty and the container exited with an error. The log output is limited to
 ## {{% heading "whatsnext" %}}
 
 * See the `terminationMessagePath` field in
-  [Container](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core).
+  [Container](/docs/reference/generated/kubernetes-api/{{}}/#container-v1-core).
 * See [ImagePullBackOff](/docs/concepts/containers/images/#imagepullbackoff) in [Images](/docs/concepts/containers/images/).
 * Learn about [retrieving logs](/docs/concepts/cluster-administration/logging/).
 * Learn about [Go templates](https://pkg.go.dev/text/template).

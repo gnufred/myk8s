@@ -7,7 +7,7 @@ description: Extend kubectl by creating and installing kubectl plugins.
 content_type: task
 ---
 
-<!-- overview -->
+
 
 This guide demonstrates how to install and write extensions for [kubectl](/docs/reference/kubectl/kubectl/). By thinking of core `kubectl` commands as essential building blocks for interacting with a Kubernetes cluster, a cluster administrator can think
 of plugins as a means of utilizing these building blocks to create more complex behavior. Plugins extend `kubectl` with new sub-commands, allowing for new and custom features not included in the main distribution of `kubectl`.
@@ -16,7 +16,7 @@ of plugins as a means of utilizing these building blocks to create more complex 
 
 You need to have a working `kubectl` binary installed.
 
-<!-- steps -->
+
 
 ## Installing kubectl plugins
 
@@ -26,11 +26,11 @@ You can also discover and install kubectl plugins available in the open source
 using [Krew](https://krew.dev/). Krew is a plugin manager maintained by
 the Kubernetes SIG CLI community.
 
-{{< caution >}}
+{{}}
 Kubectl plugins available via the Krew [plugin index](https://krew.sigs.k8s.io/plugins/)
 are not audited for security. You should install and run third-party plugins at your
 own risk, since they are arbitrary programs running on your machine.
-{{< /caution >}}
+{{}}
 
 ### Discovering plugins
 
@@ -123,7 +123,7 @@ kubectl foo config
 ```
 
 ```
-/home/<user>/.kube/config
+/home//.kube/config
 ```
 
 ```shell
@@ -143,11 +143,11 @@ For example, a plugin that wishes to be invoked whenever the command `kubectl fo
 
 #### Flags and argument handling
 
-{{< note >}}
+{{}}
 The plugin mechanism does _not_ create any custom, plugin-specific values or environment variables for a plugin process.
 
 An older kubectl plugin mechanism provided environment variables such as `KUBECTL_PLUGINS_CURRENT_NAMESPACE`; that no longer happens.
-{{< /note >}}
+{{}}
 
 kubectl plugins must parse and validate all of the arguments passed to them.
 See [using the command line runtime package](#using-the-command-line-runtime-package) for details of a Go library aimed at plugin authors.

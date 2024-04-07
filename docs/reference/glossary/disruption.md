@@ -10,12 +10,12 @@ tags:
 - fundamental
 ---
  Disruptions are events that lead to one or more
-{{< glossary_tooltip term_id="pod" text="Pods" >}} going out of service.
+{{}} going out of service.
 A disruption has consequences for workload resources, such as
-{{< glossary_tooltip term_id="deployment" >}}, that rely on the affected
+{{}}, that rely on the affected
 Pods.
 
-<!--more-->
+
 
 If you, as cluster operator, destroy a Pod that belongs to an application,
 Kubernetes terms that a _voluntary disruption_. If a Pod goes offline

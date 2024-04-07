@@ -14,22 +14,21 @@ description: >-
 ---
 
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.21" state="stable" >}}
+
+{{}}
 
 Kubernetes' _EndpointSlice_ API provides a way to track network endpoints
 within a Kubernetes cluster. EndpointSlices offer a more scalable and extensible
 alternative to [Endpoints](/docs/concepts/services-networking/service/#endpoints).
 
-<!-- body -->
+
 
 ## EndpointSlice API {#endpointslice-resource}
 
 In Kubernetes, an EndpointSlice contains references to a set of network
 endpoints. The control plane automatically creates EndpointSlices
-for any Kubernetes Service that has a {{< glossary_tooltip text="selector"
-term_id="selector" >}} specified. These EndpointSlices include
+for any Kubernetes Service that has a {{}} specified. These EndpointSlices include
 references to all the Pods that match the Service selector. EndpointSlices group
 network endpoints together by unique combinations of protocol, port number, and
 Service name.
@@ -64,11 +63,11 @@ endpoints:
 By default, the control plane creates and manages EndpointSlices to have no
 more than 100 endpoints each. You can configure this with the
 `--max-endpoints-per-slice`
-{{< glossary_tooltip text="kube-controller-manager" term_id="kube-controller-manager" >}}
+{{}}
 flag, up to a maximum of 1000.
 
 EndpointSlices can act as the source of truth for
-{{< glossary_tooltip term_id="kube-proxy" text="kube-proxy" >}} when it comes to
+{{}} when it comes to
 how to route internal traffic.
 
 ### Address types
@@ -99,13 +98,13 @@ Services will always have the `ready` condition set to `true`.
 
 #### Serving
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+{{}}
 
 The `serving` condition is almost identical to the `ready` condition. The difference is that
 consumers of the EndpointSlice API should check the `serving` condition if they care about pod readiness while
 the pod is also terminating.
 
-{{< note >}}
+{{}}
 
 Although `serving` is almost identical to `ready`, it was added to prevent breaking the existing meaning
 of `ready`. It may be unexpected for existing clients if `ready` could be `true` for terminating
@@ -114,11 +113,11 @@ EndpointSlice API to begin with. For this reason, `ready` is _always_ `false` fo
 endpoints, and a new condition `serving` was added in v1.20 so that clients can track readiness
 for terminating pods independent of the existing semantics for `ready`.
 
-{{< /note >}}
+{{}}
 
 #### Terminating
 
-{{< feature-state for_k8s_version="v1.22" state="beta" >}}
+{{}}
 
 `Terminating` is a condition that indicates whether an endpoint is terminating.
 For pods, this is any pod that has a deletion timestamp set.
@@ -133,7 +132,7 @@ per endpoint fields on EndpointSlices:
 * `nodeName` - The name of the Node this endpoint is on.
 * `zone` - The zone this endpoint is in.
 
-{{< note >}}
+{{}}
 In the v1 API, the per endpoint `topology` was effectively removed in favor of
 the dedicated fields `nodeName` and `zone`.
 
@@ -143,19 +142,19 @@ Instead, the v1 API supports setting individual `nodeName` and `zone` fields.
 These fields are automatically translated between API versions. For example, the
 value of the `"topology.kubernetes.io/zone"` key in the `topology` field in
 the v1beta1 API is accessible as the `zone` field in the v1 API.
-{{< /note >}}
+{{}}
 
 ### Management
 
 Most often, the control plane (specifically, the endpoint slice
-{{< glossary_tooltip text="controller" term_id="controller" >}}) creates and
+{{}}) creates and
 manages EndpointSlice objects. There are a variety of other use cases for
 EndpointSlices, such as service mesh implementations, that could result in other
 entities or controllers managing additional sets of EndpointSlices.
 
 To ensure that multiple entities can manage EndpointSlices without interfering
 with each other, Kubernetes defines the
-{{< glossary_tooltip term_id="label" text="label" >}}
+{{}}
 `endpointslice.kubernetes.io/managed-by`, which indicates the entity managing
 an EndpointSlice.
 The endpoint slice controller sets `endpointslice-controller.k8s.io` as the value
@@ -235,20 +234,20 @@ than one EndpointSlice at the same time. This naturally occurs as changes to
 different EndpointSlice objects can arrive at the Kubernetes client watch / cache
 at different times.
 
-{{< note >}}
+{{}}
 Clients of the EndpointSlice API must iterate through all the existing EndpointSlices
 associated to a Service and build a complete list of unique network endpoints. It is
 important to mention that endpoints may be duplicated in different EndpointSlices.
 
 You can find a reference implementation for how to perform this endpoint aggregation
 and deduplication as part of the `EndpointSliceCache` code within `kube-proxy`.
-{{< /note >}}
+{{}}
 
 ## Comparison with Endpoints {#motivation}
 
 The original Endpoints API provided a simple and straightforward way of
 tracking network endpoints in Kubernetes. As Kubernetes clusters
-and {{< glossary_tooltip text="Services" term_id="service" >}} grew to handle
+and {{}} grew to handle
 more traffic and to send more traffic to more backend Pods, the
 limitations of that original API became more visible.
 Most notably, those included challenges with scaling to larger numbers of

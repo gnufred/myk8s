@@ -8,10 +8,10 @@ description: >-
 ---
 
 
-<!-- overview -->
+
 
 This page shows how to set minimum and maximum values for memory used by containers
-running in a {{< glossary_tooltip text="namespace" term_id="namespace" >}}. 
+running in a {{}}. 
 You specify minimum and maximum memory values in a
 [LimitRange](/docs/reference/kubernetes-api/policy-resources/limit-range-v1/)
 object. If a Pod does not meet the constraints imposed by the LimitRange,
@@ -22,13 +22,13 @@ it cannot be created in the namespace.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You must have access to create namespaces in your cluster.
 
 Each node in your cluster must have at least 1 GiB of memory available for Pods.
 
-<!-- steps -->
+
 
 ## Create a namespace
 

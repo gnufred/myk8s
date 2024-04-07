@@ -7,7 +7,7 @@ content_type: concept
 weight: 80
 ---
 
-<!-- overview -->
+
 
 System component logs record events happening in cluster, which can be very useful for debugging.
 You can configure log verbosity to see more or less detail.
@@ -15,14 +15,14 @@ Logs can be as coarse-grained as showing errors within a component, or as fine-g
 step-by-step traces of events (like HTTP access logs, pod state changes, controller actions, or
 scheduler decisions).
 
-<!-- body -->
 
-{{< warning >}}
+
+{{}}
 In contrast to the command line flags described here, the *log
 output* itself does *not* fall under the Kubernetes API stability guarantees:
 individual log entries and their formatting may change from one release
 to the next!
-{{< /warning >}}
+{{}}
 
 ## Klog
 
@@ -60,7 +60,7 @@ node release archives.
 
 This table shows how `kube-log-runner` invocations correspond to shell redirection:
 
-| Usage                                    | POSIX shell (such as bash) | `kube-log-runner <options> <cmd>`                           |
+| Usage                                    | POSIX shell (such as bash) | `kube-log-runner  `                           |
 | -----------------------------------------|----------------------------|-------------------------------------------------------------|
 | Merge stderr and stdout, write to stdout | `2>&1`                     | `kube-log-runner` (default behavior)                        |
 | Redirect both into log file              | `1>>/tmp/log 2>&1`         | `kube-log-runner -log-file=/tmp/log`                        |
@@ -84,14 +84,14 @@ which has a line break.
 
 ### Structured Logging
 
-{{< feature-state for_k8s_version="v1.23" state="beta" >}}
+{{}}
 
-{{< warning >}}
+{{}}
 Migration to structured log messages is an ongoing process. Not all log messages are structured in
 this version. When parsing log files, you must also handle unstructured log messages.
 
 Log formatting and value serialization are subject to change.
-{{< /warning>}}
+{{}}
 
 Structured logging introduces a uniform structure in log messages allowing for programmatic
 extraction of information. You can store and process structured logs with less effort and cost.
@@ -102,7 +102,7 @@ The default formatting of structured log messages is as text, with a format that
 compatible with traditional klog:
 
 ```
-<klog header> "<message>" <key1>="<value1>" <key2>="<value2>" ...
+ "" ="" ="" ...
 ```
 
 Example:
@@ -122,7 +122,7 @@ second line.}
 
 ### Contextual Logging
 
-{{< feature-state for_k8s_version="v1.24" state="alpha" >}}
+{{}}
 
 Contextual logging builds on top of structured logging. It is primarily about
 how developers use logging calls: code based on that concept is more flexible
@@ -171,9 +171,9 @@ I0404 18:03:31.171962  452150 logger.go:95] "another runtime" duration="1m0s"
 
 ### JSON log format
 
-{{< feature-state for_k8s_version="v1.19" state="alpha" >}}
+{{}}
 
-{{<warning >}}
+{{}}
 JSON output does not support many standard klog flags. For list of unsupported klog flags, see the
 [Command line tool reference](/docs/reference/command-line-tools-reference/).
 
@@ -181,7 +181,7 @@ Not all logs are guaranteed to be written in JSON format (for example, during pr
 If you intend to parse logs, make sure you can handle log lines that are not JSON as well.
 
 Field names and JSON serialization are subject to change.
-{{< /warning >}}
+{{}}
 
 The `--logging-format=json` flag changes the format of logs from klog native format to JSON format.
 Example of JSON log format (pretty printed):
@@ -208,10 +208,10 @@ Keys with special meaning:
 
 List of components currently supporting JSON format:
 
-* {{< glossary_tooltip term_id="kube-controller-manager" text="kube-controller-manager" >}}
-* {{< glossary_tooltip term_id="kube-apiserver" text="kube-apiserver" >}}
-* {{< glossary_tooltip term_id="kube-scheduler" text="kube-scheduler" >}}
-* {{< glossary_tooltip term_id="kubelet" text="kubelet" >}}
+* {{}}
+* {{}}
+* {{}}
+* {{}}
 
 ### Log verbosity level
 
@@ -225,7 +225,7 @@ There are two types of system components: those that run in a container and thos
 that do not run in a container. For example:
 
 * The Kubernetes scheduler and kube-proxy run in a container.
-* The kubelet and {{<glossary_tooltip term_id="container-runtime" text="container runtime">}}
+* The kubelet and {{}}
   do not run in containers.
 
 On machines with systemd, the kubelet and container runtime write to journald.
@@ -238,7 +238,7 @@ The `logrotate` tool rotates logs daily, or once the log size is greater than 10
 
 ## Log query
 
-{{< feature-state feature_gate_name="NodeLogQuery" >}}
+{{}}
 
 To help with debugging issues on nodes, Kubernetes v1.27 introduced a feature that allows viewing logs of services
 running on the node. To use the feature, ensure that the `NodeLogQuery`
@@ -260,13 +260,13 @@ You can also fetch files, provided that the files are in a directory that the ku
 fetches. For example, you can fetch a log from `/var/log` on a Linux node:
 
 ```shell
-kubectl get --raw "/api/v1/nodes/<insert-node-name-here>/proxy/logs/?query=/<insert-log-file-name-here>"
+kubectl get --raw "/api/v1/nodes//proxy/logs/?query=/"
 ```
 
 The kubelet uses heuristics to retrieve logs. This helps if you are not aware whether a given system service is
 writing logs to the operating system's native logger like journald or to a log file in `/var/log/`. The heuristics
 first checks the native logger and if that is not available attempts to retrieve the first logs from
-`/var/log/<servicename>` or `/var/log/<servicename>.log` or `/var/log/<servicename>/<servicename>.log`.
+`/var/log/` or `/var/log/.log` or `/var/log//.log`.
 
 The complete list of options that can be used are:
 

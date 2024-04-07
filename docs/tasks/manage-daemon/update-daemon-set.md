@@ -6,14 +6,14 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 This page shows how to perform a rolling update on a DaemonSet.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## DaemonSet Update Strategy
 
@@ -160,11 +160,11 @@ kubectl get pods -l name=fluentd-elasticsearch -o wide -n kube-system
 Once you've found those nodes, delete some non-DaemonSet pods from the node to
 make room for new DaemonSet pods.
 
-{{< note >}}
+{{}}
 This will cause service disruption when deleted pods are not controlled by any controllers or pods are not
 replicated. This does not respect [PodDisruptionBudget](/docs/tasks/run-application/configure-pdb/)
 either.
-{{< /note >}}
+{{}}
 
 #### Broken rollout
 

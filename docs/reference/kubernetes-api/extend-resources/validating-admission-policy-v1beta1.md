@@ -10,16 +10,7 @@ weight: 4
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: admissionregistration.k8s.io/v1beta1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.
 
-<hr>
+
 
 - **apiVersion**: admissionregistration.k8s.io/v1beta1
 
@@ -38,7 +29,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
 - **kind**: ValidatingAdmissionPolicy
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
 
@@ -46,7 +37,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
 
   Specification of the desired behavior of the ValidatingAdmissionPolicy.
 
-  <a name="ValidatingAdmissionPolicySpec"></a>
+  
   *ValidatingAdmissionPolicySpec is the specification of the desired behavior of the AdmissionPolicy.*
 
   - **spec.auditAnnotations** ([]AuditAnnotation)
@@ -55,7 +46,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
     
     auditAnnotations contains CEL expressions which are used to produce audit annotations for the audit event of the API request. validations and auditAnnotations may not both be empty; a least one of validations or auditAnnotations is required.
 
-    <a name="AuditAnnotation"></a>
+    
     *AuditAnnotation describes how to produce an audit annotation for an API request.*
 
     - **spec.auditAnnotations.key** (string), required
@@ -105,7 +96,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
          - If failurePolicy=Fail, reject the request
          - If failurePolicy=Ignore, the policy is skipped
 
-    <a name="MatchCondition"></a>
+    
     *MatchCondition represents a condition which must be fulfilled for a request to be sent to a webhook.*
 
     - **spec.matchConditions.expression** (string), required
@@ -130,7 +121,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
 
     MatchConstraints specifies what resources this policy is designed to validate. The AdmissionPolicy cares about a request if it matches _all_ Constraints. However, in order to prevent clusters from being put into an unstable state that cannot be recovered from via the API ValidatingAdmissionPolicy cannot match ValidatingAdmissionPolicy and ValidatingAdmissionPolicyBinding. Required.
 
-    <a name="MatchResources"></a>
+    
     *MatchResources decides whether to run the admission control policy on an object based on whether it meets the match criteria. The exclude rules take precedence over include rules (if a resource matches both, it is excluded)*
 
     - **spec.matchConstraints.excludeResourceRules** ([]NamedRuleWithOperations)
@@ -139,7 +130,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
       
       ExcludeResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy should not care about. The exclude rules take precedence over include rules (if a resource matches both, it is excluded)
 
-      <a name="NamedRuleWithOperations"></a>
+      
       *NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.*
 
       - **spec.matchConstraints.excludeResourceRules.apiGroups** ([]string)
@@ -192,7 +183,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
       
       Defaults to "Equivalent"
 
-    - **spec.matchConstraints.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **spec.matchConstraints.namespaceSelector** (}}">LabelSelector)
 
       NamespaceSelector decides whether to run the admission control policy on an object based on whether the namespace for that object matches the selector. If the object itself is a namespace, the matching is performed on object.metadata.labels. If the object is another cluster scoped resource, it never skips the policy.
       
@@ -226,7 +217,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
       
       Default to the empty LabelSelector, which matches everything.
 
-    - **spec.matchConstraints.objectSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **spec.matchConstraints.objectSelector** (}}">LabelSelector)
 
       ObjectSelector decides whether to run the validation based on if the object has matching labels. objectSelector is evaluated against both the oldObject and newObject that would be sent to the cel validation, and is considered to match if either object matches the selector. A null object (oldObject in the case of create, or newObject in the case of delete) or an object that cannot have labels (like a DeploymentRollback or a PodProxyOptions object) is not considered to match. Use the object selector only if the webhook is opt-in, because end users may skip the admission webhook by setting the labels. Default to the empty LabelSelector, which matches everything.
 
@@ -236,7 +227,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
       
       ResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy matches. The policy cares about an operation if it matches _any_ Rule.
 
-      <a name="NamedRuleWithOperations"></a>
+      
       *NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.*
 
       - **spec.matchConstraints.resourceRules.apiGroups** ([]string)
@@ -283,7 +274,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
 
     ParamKind specifies the kind of resources used to parameterize this policy. If absent, there are no parameters for this policy and the param CEL variable will not be provided to validation expressions. If ParamKind refers to a non-existent kind, this policy definition is mis-configured and the FailurePolicy is applied. If paramKind is specified but paramRef is unset in ValidatingAdmissionPolicyBinding, the params variable will be null.
 
-    <a name="ParamKind"></a>
+    
     *ParamKind is a tuple of Group Kind and Version.*
 
     - **spec.paramKind.apiVersion** (string)
@@ -300,7 +291,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
     
     Validations contain CEL expressions which is used to apply the validation. Validations and AuditAnnotations may not both be empty; a minimum of one Validations or AuditAnnotations is required.
 
-    <a name="Validation"></a>
+    
     *Validation specifies the CEL expression which is used to apply the validation.*
 
     - **spec.validations.expression** (string), required
@@ -354,7 +345,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
     
     The expression of a variable can refer to other variables defined earlier in the list but not those after. Thus, Variables must be sorted by the order of first appearance and acyclic.
 
-    <a name="Variable"></a>
+    
     *Variable is the definition of a variable that is used for composition. A variable is defined as a named expression.*
 
     - **spec.variables.expression** (string), required
@@ -369,7 +360,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
 
   The status of the ValidatingAdmissionPolicy, including warnings that are useful to determine if the policy behaves in the expected way. Populated by the system. Read-only.
 
-  <a name="ValidatingAdmissionPolicyStatus"></a>
+  
   *ValidatingAdmissionPolicyStatus represents the status of an admission validation policy.*
 
   - **status.conditions** ([]Condition)
@@ -378,14 +369,14 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
     
     The conditions represent the latest available observations of a policy's current state.
 
-    <a name="Condition"></a>
+    
     *Condition contains details for one aspect of the current state of this API Resource.*
 
     - **status.conditions.lastTransitionTime** (Time), required
 
       lastTransitionTime is the last time the condition transitioned from one status to another. This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
 
-      <a name="Time"></a>
+      
       *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
     - **status.conditions.message** (string), required
@@ -416,7 +407,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
 
     The results of type checking for each expression. Presence of this field indicates the completion of the type checking.
 
-    <a name="TypeChecking"></a>
+    
     *TypeChecking contains results of type checking the expressions in the ValidatingAdmissionPolicy*
 
     - **status.typeChecking.expressionWarnings** ([]ExpressionWarning)
@@ -425,7 +416,7 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
       
       The type checking warnings for each expression.
 
-      <a name="ExpressionWarning"></a>
+      
       *ExpressionWarning is a warning information that targets a specific expression.*
 
       - **status.typeChecking.expressionWarnings.fieldRef** (string), required
@@ -444,13 +435,13 @@ ValidatingAdmissionPolicy describes the definition of an admission validation po
 
 ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 
-<hr>
+
 
 - **apiVersion** (string)
 
   APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
 
-- **items** ([]<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>)
+- **items** ([]}}">ValidatingAdmissionPolicy)
 
   List of ValidatingAdmissionPolicy.
 
@@ -458,7 +449,7 @@ ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 
   Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
@@ -474,7 +465,7 @@ For a given admission request, each binding will cause its policy to be evaluate
 
 The CEL expressions of a policy must have a computed CEL cost below the maximum CEL budget. Each evaluation of the policy is given an independent CEL cost budget. Adding/removing policies, bindings, or params can not affect whether a given (policy, binding, param) combination is within its own CEL budget.
 
-<hr>
+
 
 - **apiVersion** (string)
 
@@ -484,7 +475,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
 
   Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
 
@@ -492,14 +483,14 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
 
   Specification of the desired behavior of the ValidatingAdmissionPolicyBinding.
 
-  <a name="ValidatingAdmissionPolicyBindingSpec"></a>
+  
   *ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.*
 
   - **spec.matchResources** (MatchResources)
 
     MatchResources declares what resources match this binding and will be validated by it. Note that this is intersected with the policy's matchConstraints, so only requests that are matched by the policy can be selected by this. If this is unset, all resources matched by the policy are validated by this binding When resourceRules is unset, it does not constrain resource matching. If a resource is matched by the other fields of this object, it will be validated. Note that this is differs from ValidatingAdmissionPolicy matchConstraints, where resourceRules are required.
 
-    <a name="MatchResources"></a>
+    
     *MatchResources decides whether to run the admission control policy on an object based on whether it meets the match criteria. The exclude rules take precedence over include rules (if a resource matches both, it is excluded)*
 
     - **spec.matchResources.excludeResourceRules** ([]NamedRuleWithOperations)
@@ -508,7 +499,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
       
       ExcludeResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy should not care about. The exclude rules take precedence over include rules (if a resource matches both, it is excluded)
 
-      <a name="NamedRuleWithOperations"></a>
+      
       *NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.*
 
       - **spec.matchResources.excludeResourceRules.apiGroups** ([]string)
@@ -561,7 +552,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
       
       Defaults to "Equivalent"
 
-    - **spec.matchResources.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **spec.matchResources.namespaceSelector** (}}">LabelSelector)
 
       NamespaceSelector decides whether to run the admission control policy on an object based on whether the namespace for that object matches the selector. If the object itself is a namespace, the matching is performed on object.metadata.labels. If the object is another cluster scoped resource, it never skips the policy.
       
@@ -595,7 +586,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
       
       Default to the empty LabelSelector, which matches everything.
 
-    - **spec.matchResources.objectSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **spec.matchResources.objectSelector** (}}">LabelSelector)
 
       ObjectSelector decides whether to run the validation based on if the object has matching labels. objectSelector is evaluated against both the oldObject and newObject that would be sent to the cel validation, and is considered to match if either object matches the selector. A null object (oldObject in the case of create, or newObject in the case of delete) or an object that cannot have labels (like a DeploymentRollback or a PodProxyOptions object) is not considered to match. Use the object selector only if the webhook is opt-in, because end users may skip the admission webhook by setting the labels. Default to the empty LabelSelector, which matches everything.
 
@@ -605,7 +596,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
       
       ResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy matches. The policy cares about an operation if it matches _any_ Rule.
 
-      <a name="NamedRuleWithOperations"></a>
+      
       *NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.*
 
       - **spec.matchResources.resourceRules.apiGroups** ([]string)
@@ -652,7 +643,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
 
     paramRef specifies the parameter resource used to configure the admission control policy. It should point to a resource of the type specified in ParamKind of the bound ValidatingAdmissionPolicy. If the policy specifies a ParamKind and the resource referred to by ParamRef does not exist, this binding is considered mis-configured and the FailurePolicy of the ValidatingAdmissionPolicy applied. If the policy does not specify a ParamKind then this field is ignored, and the rules are evaluated without a param.
 
-    <a name="ParamRef"></a>
+    
     *ParamRef describes how to locate the params to be used as input to expressions of rules applied by a policy binding.*
 
     - **spec.paramRef.name** (string)
@@ -681,7 +672,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
       
       Required
 
-    - **spec.paramRef.selector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **spec.paramRef.selector** (}}">LabelSelector)
 
       selector can be used to match multiple param objects based on their labels. Supply selector: {} to match all resources of the ParamKind.
       
@@ -725,7 +716,7 @@ The CEL expressions of a policy must have a computed CEL cost below the maximum 
 
 
 
-<hr>
+
 
 
 
@@ -748,14 +739,14 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (}}">ValidatingAdmissionPolicy): OK
 
 401: Unauthorized
 
@@ -776,14 +767,14 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (}}">ValidatingAdmissionPolicy): OK
 
 401: Unauthorized
 
@@ -799,64 +790,64 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicyList" >}}">ValidatingAdmissionPolicyList</a>): OK
+200 (}}">ValidatingAdmissionPolicyList): OK
 
 401: Unauthorized
 
@@ -870,40 +861,40 @@ POST /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, required
+- **body**: }}">ValidatingAdmissionPolicy, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (}}">ValidatingAdmissionPolicy): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (}}">ValidatingAdmissionPolicy): Created
 
-202 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Accepted
+202 (}}">ValidatingAdmissionPolicy): Accepted
 
 401: Unauthorized
 
@@ -922,38 +913,38 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
   name of the ValidatingAdmissionPolicy
 
 
-- **body**: <a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, required
+- **body**: }}">ValidatingAdmissionPolicy, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (}}">ValidatingAdmissionPolicy): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (}}">ValidatingAdmissionPolicy): Created
 
 401: Unauthorized
 
@@ -972,38 +963,38 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
   name of the ValidatingAdmissionPolicy
 
 
-- **body**: <a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, required
+- **body**: }}">ValidatingAdmissionPolicy, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (}}">ValidatingAdmissionPolicy): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (}}">ValidatingAdmissionPolicy): Created
 
 401: Unauthorized
 
@@ -1022,43 +1013,43 @@ PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{na
   name of the ValidatingAdmissionPolicy
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (}}">ValidatingAdmissionPolicy): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (}}">ValidatingAdmissionPolicy): Created
 
 401: Unauthorized
 
@@ -1077,43 +1068,43 @@ PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{na
   name of the ValidatingAdmissionPolicy
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (}}">ValidatingAdmissionPolicy): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (}}">ValidatingAdmissionPolicy): Created
 
 401: Unauthorized
 
@@ -1132,38 +1123,38 @@ DELETE /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{n
   name of the ValidatingAdmissionPolicy
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
-202 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): Accepted
+202 (}}">Status): Accepted
 
 401: Unauthorized
 
@@ -1177,76 +1168,76 @@ DELETE /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

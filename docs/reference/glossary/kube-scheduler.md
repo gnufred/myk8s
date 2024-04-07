@@ -11,11 +11,11 @@ tags:
 - architecture
 ---
 Control plane component that watches for newly created
-{{< glossary_tooltip term_id="pod" text="Pods" >}} with no assigned
-{{< glossary_tooltip term_id="node" text="node">}}, and selects a node for them
+{{}} with no assigned
+{{}}, and selects a node for them
 to run on.
 
-<!--more-->
+
 
 Factors taken into account for scheduling decisions include:
 individual and collective resource requirements, hardware/software/policy

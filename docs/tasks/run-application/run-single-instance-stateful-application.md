@@ -4,7 +4,7 @@ content_type: tutorial
 weight: 20
 ---
 
-<!-- overview -->
+
 
 This page shows you how to run a single-instance stateful application
 in Kubernetes using a PersistentVolume and a Deployment. The
@@ -18,11 +18,11 @@ application is MySQL.
 
 ## {{% heading "prerequisites" %}}
 
-- {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+- {{}} {{}}
 
-- {{< include "default-storage-class-prereqs.md" >}}
+- {{}}
 
-<!-- lessoncontent -->
+
 
 ## Deploy MySQL
 
@@ -92,7 +92,7 @@ for a secure solution.
      ----          ------  ------
      Available     False   MinimumReplicasUnavailable
      Progressing   True    ReplicaSetUpdated
-   OldReplicaSets:       <none>
+   OldReplicaSets:       
    NewReplicaSet:        mysql-63082529 (1/1 replicas created)
    Events:
      FirstSeen    LastSeen    Count    From                SubobjectPath    Type        Reason            Message
@@ -127,12 +127,12 @@ for a secure solution.
    StorageClass:
    Status:       Bound
    Volume:       mysql-pv-volume
-   Labels:       <none>
+   Labels:       
    Annotations:    pv.kubernetes.io/bind-completed=yes
                    pv.kubernetes.io/bound-by-controller=yes
    Capacity:     20Gi
    Access Modes: RWO
-   Events:       <none>
+   Events:       
    ```
 
 ## Accessing the MySQL instance

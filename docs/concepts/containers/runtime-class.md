@@ -8,16 +8,16 @@ weight: 30
 hide_summary: true # Listed separately in section index
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.20" state="stable" >}}
+
+{{}}
 
 This page describes the RuntimeClass resource and runtime selection mechanism.
 
 RuntimeClass is a feature for selecting the container runtime configuration. The container runtime
 configuration is used to run a Pod's containers.
 
-<!-- body -->
+
 
 ## Motivation
 
@@ -42,11 +42,11 @@ The configurations available through RuntimeClass are Container Runtime Interfac
 implementation dependent. See the corresponding documentation ([below](#cri-configuration)) for your
 CRI implementation for how to configure.
 
-{{< note >}}
+{{}}
 RuntimeClass assumes a homogeneous node configuration across the cluster by default (which means
 that all nodes are configured the same way with respect to container runtimes). To support
 heterogeneous node configurations, see [Scheduling](#scheduling) below.
-{{< /note >}}
+{{}}
 
 The configurations have a corresponding `handler` name, referenced by the RuntimeClass. The
 handler must be a valid [DNS label name](/docs/concepts/overview/working-with-objects/names/#dns-label-names).
@@ -74,11 +74,11 @@ handler: myconfiguration
 The name of a RuntimeClass object must be a valid
 [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
-{{< note >}}
+{{}}
 It is recommended that RuntimeClass write operations (create/update/patch/delete) be
 restricted to the cluster administrator. This is typically the default. See
 [Authorization Overview](/docs/reference/access-authn-authz/authorization/) for more details.
-{{< /note >}}
+{{}}
 
 ## Usage
 
@@ -108,7 +108,7 @@ to the behavior when the RuntimeClass feature is disabled.
 
 For more details on setting up CRI runtimes, see [CRI installation](/docs/setup/production-environment/container-runtimes/).
 
-#### {{< glossary_tooltip term_id="containerd" >}}
+#### {{}}
 
 Runtime handlers are configured through containerd's configuration at
 `/etc/containerd/config.toml`. Valid handlers are configured under the runtimes section:
@@ -120,7 +120,7 @@ Runtime handlers are configured through containerd's configuration at
 See containerd's [config documentation](https://github.com/containerd/containerd/blob/main/docs/cri/config.md)
 for more details:
 
-#### {{< glossary_tooltip term_id="cri-o" >}}
+#### {{}}
 
 Runtime handlers are configured through CRI-O's configuration at `/etc/crio/crio.conf`. Valid
 handlers are configured under the
@@ -135,7 +135,7 @@ See CRI-O's [config documentation](https://github.com/cri-o/cri-o/blob/master/do
 
 ## Scheduling
 
-{{< feature-state for_k8s_version="v1.16" state="beta" >}}
+{{}}
 
 By specifying the `scheduling` field for a RuntimeClass, you can set constraints to
 ensure that Pods running with this RuntimeClass are scheduled to nodes that support it.
@@ -157,7 +157,7 @@ To learn more about configuring the node selector and tolerations, see
 
 ### Pod Overhead
 
-{{< feature-state for_k8s_version="v1.24" state="stable" >}}
+{{}}
 
 You can specify _overhead_ resources that are associated with running a Pod. Declaring overhead allows
 the cluster (including the scheduler) to account for it when making decisions about Pods and resources.

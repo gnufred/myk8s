@@ -4,16 +4,16 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
-{{< feature-state for_k8s_version="v1.29" state="beta" >}}
+
+{{}}
 
 Sidecar containers are the secondary containers that run along with the main
-application container within the same {{< glossary_tooltip text="Pod" term_id="pod" >}}.
+application container within the same {{}}.
 These containers are used to enhance or to extend the functionality of the main application
 container by providing additional services, or functionality such as logging, monitoring,
 security, or data synchronization, without directly altering the primary application code.
 
-<!-- body -->
+
 
 ## Enabling sidecar containers
 
@@ -87,10 +87,10 @@ together to provide additional functionality.
 
 ## Resource sharing within containers
 
-{{< comment >}}
+{{}}
 This section is also present in the [init containers](/docs/concepts/workloads/pods/init-containers/) page.
 If you're editing this section, change both places.
-{{< /comment >}}
+{{}}
 
 Given the order of execution for init, sidecar and app containers, the following rules
 for resource usage apply:

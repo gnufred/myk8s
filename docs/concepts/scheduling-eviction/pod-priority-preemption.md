@@ -7,9 +7,9 @@ content_type: concept
 weight: 90
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.14" state="stable" >}}
+
+{{}}
 
 [Pods](/docs/concepts/workloads/pods/) can have _priority_. Priority indicates the
 importance of a Pod relative to other Pods. If a Pod cannot be scheduled, the
@@ -18,10 +18,10 @@ pending Pod possible.
 
 
 
-<!-- body -->
 
 
-{{< warning >}}
+
+{{}}
 In a cluster where not all users are trusted, a malicious user could create Pods
 at the highest possible priorities, causing other Pods to be evicted/not get
 scheduled.
@@ -30,7 +30,7 @@ high priorities.
 
 See [limit Priority Class consumption by default](/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default)
 for details.
-{{< /warning >}}
+{{}}
 
 ## How to use priority and preemption
 
@@ -45,11 +45,11 @@ To use priority and preemption:
 
 Keep reading for more information about these steps.
 
-{{< note >}}
+{{}}
 Kubernetes already ships with two PriorityClasses:
 `system-cluster-critical` and `system-node-critical`.
 These are common classes and are used to [ensure that critical components are always scheduled first](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/).
-{{< /note >}}
+{{}}
 
 ## PriorityClass
 
@@ -105,7 +105,7 @@ description: "This priority class should be used for XYZ service pods only."
 
 ## Non-preempting PriorityClass {#non-preempting-priority-class}
 
-{{< feature-state for_k8s_version="v1.24" state="stable" >}}
+{{}}
 
 Pods with `preemptionPolicy: Never` will be placed in the scheduling queue
 ahead of lower-priority pods,
@@ -246,15 +246,15 @@ A Node is considered for preemption only when the answer to this question is
 yes: "If all the Pods with lower priority than the pending Pod are removed from
 the Node, can the pending Pod be scheduled on the Node?"
 
-{{< note >}}
+{{}}
 Preemption does not necessarily remove all lower-priority
 Pods. If the pending Pod can be scheduled by removing fewer than all
 lower-priority Pods, then only a portion of the lower-priority Pods are removed.
 Even so, the answer to the preceding question must be yes. If the answer is no,
 the Node is not considered for preemption.
-{{< /note >}}
+{{}}
 
-If a pending Pod has inter-pod {{< glossary_tooltip text="affinity" term_id="affinity" >}}
+If a pending Pod has inter-pod {{}}
 to one or more of the lower-priority Pods on the Node, the inter-Pod affinity
 rule cannot be satisfied in the absence of those lower-priority Pods. In this case,
 the scheduler does not preempt any Pods on the Node. Instead, it looks for another
@@ -345,7 +345,7 @@ the scheduler chooses a node with the lowest priority.
 
 ## Interactions between Pod priority and quality of service {#interactions-of-pod-priority-and-qos}
 
-Pod priority and {{< glossary_tooltip text="QoS class" term_id="qos-class" >}}
+Pod priority and {{}}
 are two orthogonal features with few interactions and no default restrictions on
 setting the priority of a Pod based on its QoS classes. The scheduler's
 preemption logic does not consider QoS when choosing preemption targets.

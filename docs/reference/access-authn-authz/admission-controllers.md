@@ -12,11 +12,11 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
+
 This page provides an overview of Admission Controllers.
 
 
-<!-- body -->
+
 ## What are they?
 
 An _admission controller_ is a piece of code that intercepts requests to the
@@ -31,7 +31,7 @@ controllers can also block custom verbs, such as a request connect to a Pod via
 an API server proxy. Admission controllers do _not_ (and cannot) block requests
 to read (**get**, **watch** or **list**) objects.
 
-The admission controllers in Kubernetes {{< skew currentVersion >}} consist of the
+The admission controllers in Kubernetes {{}} consist of the
 [list](#what-does-each-admission-controller-do) below, are compiled into the
 `kube-apiserver` binary, and may only be configured by the cluster
 administrator. In that list, there are two special controllers:
@@ -75,13 +75,13 @@ admission control plugins:
 kube-apiserver --enable-admission-plugins=NamespaceLifecycle,LimitRanger ...
 ```
 
-{{< note >}}
+{{}}
 Depending on the way your Kubernetes cluster is deployed and how the API server is
 started, you may need to apply the settings in different ways. For example, you may
 have to modify the systemd unit file if the API server is deployed as a systemd
 service, you may modify the manifest file for the API server if Kubernetes is deployed
 in a self-hosted way.
-{{< /note >}}
+{{}}
 
 ## How do I turn off an admission controller?
 
@@ -99,24 +99,24 @@ To see which admission plugins are enabled:
 kube-apiserver -h | grep enable-admission-plugins
 ```
 
-In Kubernetes {{< skew currentVersion >}}, the default ones are:
+In Kubernetes {{}}, the default ones are:
 
 ```shell
 CertificateApproval, CertificateSigning, CertificateSubjectRestriction, DefaultIngressClass, DefaultStorageClass, DefaultTolerationSeconds, LimitRanger, MutatingAdmissionWebhook, NamespaceLifecycle, PersistentVolumeClaimResize, PodSecurity, Priority, ResourceQuota, RuntimeClass, ServiceAccount, StorageObjectInUseProtection, TaintNodesByCondition, ValidatingAdmissionPolicy, ValidatingAdmissionWebhook
 ```
 
-{{< note >}}
+{{}}
 The [`ValidatingAdmissionPolicy`](#validatingadmissionpolicy) admission plugin is enabled
 by default, but is only active if you enable the `ValidatingAdmissionPolicy`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) **and**
 the `admissionregistration.k8s.io/v1alpha1` API.
-{{< /note >}}
+{{}}
 
 ## What does each admission controller do?
 
 ### AlwaysAdmit {#alwaysadmit}
 
-{{< feature-state for_k8s_version="v1.13" state="deprecated" >}}
+{{}}
 
 **Type**: Validating.
 
@@ -125,7 +125,7 @@ its behavior is the same as if there were no admission controller at all.
 
 ### AlwaysDeny {#alwaysdeny}
 
-{{< feature-state for_k8s_version="v1.13" state="deprecated" >}}
+{{}}
 
 **Type**: Validating.
 
@@ -238,7 +238,7 @@ This admission controller is disabled by default.
 
 ### EventRateLimit {#eventratelimit}
 
-{{< feature-state for_k8s_version="v1.13" state="alpha" >}}
+{{}}
 
 **Type**: Validating.
 
@@ -345,7 +345,7 @@ plugins:
   - name: ImagePolicyWebhook
     configuration:
       imagePolicy:
-        kubeConfigFile: <path-to-kubeconfig-file>
+        kubeConfigFile: 
         allowTTL: 50
         denyTTL: 50
         retryBackoff: 500
@@ -386,14 +386,14 @@ When faced with an admission decision, the API Server POSTs a JSON serialized
 This object contains fields describing the containers being admitted, as well as
 any pod annotations that match `*.image-policy.k8s.io/*`.
 
-{{< note >}}
+{{}}
 The webhook API objects are subject to the same versioning compatibility rules
 as other Kubernetes API objects. Implementers should be aware of looser compatibility
 promises for alpha objects and check the `apiVersion` field of the request to
 ensure correct deserialization.
 Additionally, the API Server must enable the `imagepolicy.k8s.io/v1alpha1` API extensions
 group (`--runtime-config=imagepolicy.k8s.io/v1alpha1=true`).
-{{< /note >}}
+{{}}
 
 An example request body:
 
@@ -552,7 +552,7 @@ running this admission controller.
 **Type**: Validating.
 
 This admission controller limits the `Node` and `Pod` objects a kubelet can modify. In order to be limited by this admission controller,
-kubelets must use credentials in the `system:nodes` group, with a username in the form `system:node:<nodeName>`.
+kubelets must use credentials in the `system:nodes` group, with a username in the form `system:node:`.
 Such kubelets will only be allowed to modify their own `Node` API object, and only modify `Pod` API objects that are bound to their node.
 kubelets are not allowed to update or remove taints from their `Node` API object.
 
@@ -593,7 +593,7 @@ subresource of the referenced *owner* can change it.
 
 ### PersistentVolumeClaimResize {#persistentvolumeclaimresize}
 
-{{< feature-state for_k8s_version="v1.24" state="stable" >}}
+{{}}
 
 **Type**: Validating.
 
@@ -624,7 +624,7 @@ For more information about persistent volume claims, see [PersistentVolumeClaims
 
 ### PersistentVolumeLabel {#persistentvolumelabel}
 
-{{< feature-state for_k8s_version="v1.13" state="deprecated" >}}
+{{}}
 
 **Type**: Mutating.
 
@@ -635,13 +635,13 @@ region and/or zone.
 If the admission controller doesn't support automatic labelling your PersistentVolumes, you
 may need to add the labels manually to prevent pods from mounting volumes from
 a different zone. PersistentVolumeLabel is **deprecated** as labeling for persistent volumes has been taken over by
-the {{< glossary_tooltip text="cloud-controller-manager" term_id="cloud-controller-manager" >}}.
+the {{}}.
 
 This admission controller is disabled by default.
 
 ### PodNodeSelector {#podnodeselector}
 
-{{< feature-state for_k8s_version="v1.5" state="alpha" >}}
+{{}}
 
 **Type**: Validating.
 
@@ -702,14 +702,14 @@ This admission controller has the following behavior:
 4. Evaluate the pod's node selector against the namespace-specific allowed selector defined the
    plugin configuration file. Conflicts result in rejection.
 
-{{< note >}}
+{{}}
 PodNodeSelector allows forcing pods to run on specifically labeled nodes. Also see the PodTolerationRestriction
 admission plugin, which allows preventing pods from running on specifically tainted nodes.
-{{< /note >}}
+{{}}
 
 ### PodSecurity {#podsecurity}
 
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+{{}}
 
 **Type**: Validating.
 
@@ -725,7 +725,7 @@ PodSecurity replaced an older admission controller named PodSecurityPolicy.
 
 ### PodTolerationRestriction {#podtolerationrestriction}
 
-{{< feature-state for_k8s_version="v1.7" state="alpha" >}}
+{{}}
 
 **Type**: Mutating and Validating.
 
@@ -796,9 +796,9 @@ for more information.
 
 **Type**: Validating.
 
-{{< feature-state for_k8s_version="v1.27" state="deprecated" >}}
+{{}}
 
-{{< caution >}}
+{{}}
 The Kubernetes project recommends that you **do not use** the
 `SecurityContextDeny` admission controller.
 
@@ -817,7 +817,7 @@ The [Pod Security Admission](/docs/concepts/security/pod-security-admission/)
 plugin enforcing the [Pod Security Standards](/docs/concepts/security/pod-security-standards/)
 `Restricted` profile captures what this plugin was trying to achieve in a better
 and up-to-date way.
-{{< /caution >}}
+{{}}
 
 This admission controller will deny any Pod that attempts to set the following
 [SecurityContext](/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context)
@@ -865,7 +865,7 @@ for more detailed information.
 
 **Type**: Mutating.
 
-This admission controller {{< glossary_tooltip text="taints" term_id="taint" >}} newly created
+This admission controller {{}} newly created
 Nodes as `NotReady` and `NoSchedule`. That tainting avoids a race condition that could cause Pods
 to be scheduled on new Nodes before their taints were updated to accurately reflect their reported
 conditions.

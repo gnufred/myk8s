@@ -8,7 +8,7 @@ content_type: concept
 weight: 70
 ---
 
-<!-- overview -->
+
 
 System component metrics can give a better look into what is happening inside them. Metrics are
 particularly useful for building dashboards and alerts.
@@ -16,7 +16,7 @@ particularly useful for building dashboards and alerts.
 Kubernetes components emit metrics in [Prometheus format](https://prometheus.io/docs/instrumenting/exposition_formats/).
 This format is structured plain text, designed so that people and machines can both read it.
 
-<!-- body -->
+
 
 ## Metrics in Kubernetes
 
@@ -25,21 +25,21 @@ don't expose endpoint by default, it can be enabled using `--bind-address` flag.
 
 Examples of those components:
 
-* {{< glossary_tooltip term_id="kube-controller-manager" text="kube-controller-manager" >}}
-* {{< glossary_tooltip term_id="kube-proxy" text="kube-proxy" >}}
-* {{< glossary_tooltip term_id="kube-apiserver" text="kube-apiserver" >}}
-* {{< glossary_tooltip term_id="kube-scheduler" text="kube-scheduler" >}}
-* {{< glossary_tooltip term_id="kubelet" text="kubelet" >}}
+* {{}}
+* {{}}
+* {{}}
+* {{}}
+* {{}}
 
 In a production environment you may want to configure [Prometheus Server](https://prometheus.io/)
 or some other metrics scraper to periodically gather these metrics and make them available in some
 kind of time series database.
 
-Note that {{< glossary_tooltip term_id="kubelet" text="kubelet" >}} also exposes metrics in
+Note that {{}} also exposes metrics in
 `/metrics/cadvisor`, `/metrics/resource` and `/metrics/probes` endpoints. Those metrics do not
 have the same lifecycle.
 
-If your cluster uses {{< glossary_tooltip term_id="rbac" text="RBAC" >}}, reading metrics requires
+If your cluster uses {{}}, reading metrics requires
 authorization via a user, group or ServiceAccount with a ClusterRole that allows accessing
 `/metrics`. For example:
 
@@ -146,7 +146,7 @@ cloudprovider_gce_api_request_duration_seconds { request = "list_disk"}
 
 ### kube-scheduler metrics
 
-{{< feature-state for_k8s_version="v1.21" state="beta" >}}
+{{}}
 
 The scheduler exposes optional metrics that reports the requested resources and the desired limits
 of all running pods. These metrics can be used to build capacity planning dashboards, assess
@@ -187,13 +187,13 @@ limit resource use, you can use the `--allow-label-value` command line option to
 configure an allow-list of label values for a metric.
 
 In alpha stage, the flag can only take in a series of mappings as metric label allow-list.
-Each mapping is of the format `<metric_name>,<label_name>=<allowed_labels>` where 
-`<allowed_labels>` is a comma-separated list of acceptable label names.
+Each mapping is of the format `,=` where 
+`` is a comma-separated list of acceptable label names.
                                                                                            
 The overall format looks like:
 
 ```
---allow-label-value <metric_name>,<label_name>='<allow_value1>, <allow_value2>...', <metric_name2>,<label_name>='<allow_value1>, <allow_value2>...', ...
+--allow-label-value ,=', ...', ,=', ...', ...
 ```
 
 Here is an example:

@@ -5,23 +5,23 @@ weight: 100
 min-kubernetes-server-version: 1.21
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.23" state="stable" >}}
+
+{{}}
 
 Your Kubernetes cluster includes [dual-stack](/docs/concepts/services-networking/dual-stack/)
 networking, which means that cluster networking lets you use either address family.
 In a cluster, the control plane can assign both an IPv4 address and an IPv6 address to a single
-{{< glossary_tooltip text="Pod" term_id="pod" >}} or a {{< glossary_tooltip text="Service" term_id="service" >}}.
+{{}} or a {{}}.
 
-<!-- body -->
+
 
 ## {{% heading "prerequisites" %}}
 
-You need to have installed the {{< glossary_tooltip text="kubeadm" term_id="kubeadm" >}} tool,
+You need to have installed the {{}} tool,
 following the steps from [Installing kubeadm](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/).
 
-For each server that you want to use as a {{< glossary_tooltip text="node" term_id="node" >}},
+For each server that you want to use as a {{}},
 make sure it allows IPv6 forwarding. On Linux, you can set this by running run
 `sysctl -w net.ipv6.conf.all.forwarding=1` as the root user on each server.
 
@@ -33,11 +33,11 @@ You don't have to route the cluster's IP address ranges to the public internet.
 The size of the IP address allocations should be suitable for the number of Pods and
 Services that you are planning to run.
 
-{{< note >}}
+{{}}
 If you are upgrading an existing cluster with the `kubeadm upgrade` command,
 `kubeadm` does not support making modifications to the pod IP address range
 (“cluster CIDR”) nor to the cluster's Service address range (“Service CIDR”).
-{{< /note >}}
+{{}}
 
 ### Create a dual-stack cluster
 
@@ -84,9 +84,9 @@ kubeadm init --config=kubeadm-config.yaml
 The kube-controller-manager flags `--node-cidr-mask-size-ipv4|--node-cidr-mask-size-ipv6`
 are set with default values. See [configure IPv4/IPv6 dual stack](/docs/concepts/services-networking/dual-stack#configure-ipv4-ipv6-dual-stack).
 
-{{< note >}}
+{{}}
 The `--apiserver-advertise-address` flag does not support dual-stack.
-{{< /note >}}
+{{}}
 
 ### Join a node to dual-stack cluster
 
@@ -143,10 +143,10 @@ kubeadm join --config=kubeadm-config.yaml
 
 ### Create a single-stack cluster
 
-{{< note >}}
+{{}}
 Dual-stack support doesn't mean that you need to use dual-stack addressing.
 You can deploy a single-stack cluster that has the dual-stack networking feature enabled.
-{{< /note >}}
+{{}}
 
 To make things more clear, here is an example kubeadm
 [configuration file](/docs/reference/config-api/kubeadm-config.v1beta3/)

@@ -4,12 +4,12 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
 
-On Linux, {{< glossary_tooltip text="control groups" term_id="cgroup" >}}
+
+On Linux, {{}}
 constrain resources that are allocated to processes.
 
-The {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} and the
+The {{}} and the
 underlying container runtime need to interface with cgroups to enforce
 [resource management for pods and containers](/docs/concepts/configuration/manage-resources-containers/) which
 includes cpu/memory requests and limits for containerized workloads.
@@ -17,11 +17,11 @@ includes cpu/memory requests and limits for containerized workloads.
 There are two versions of cgroups in Linux: cgroup v1 and cgroup v2. cgroup v2 is
 the new generation of the `cgroup` API.
 
-<!-- body -->
+
 
 
 ## What is cgroup v2? {#cgroup-v2}
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+{{}}
 
 cgroup v2 is the next version of the Linux `cgroup` API. cgroup v2 provides a
 unified control system with enhanced resource management
@@ -64,7 +64,7 @@ cgroup v2 has the following requirements:
 
 For a list of Linux distributions that use cgroup v2, refer to the [cgroup v2 documentation](https://github.com/opencontainers/runc/blob/main/docs/cgroup-v2.md)
 
-<!-- the list should be kept in sync with https://github.com/opencontainers/runc/blob/main/docs/cgroup-v2.md -->
+
 * Container Optimized OS (since M97)
 * Ubuntu (since 21.10, 22.04+ recommended)
 * Debian GNU/Linux (since Debian 11 bullseye)

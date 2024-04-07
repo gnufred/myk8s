@@ -9,10 +9,10 @@ aka:
 tags:
 - fundamental
 ---
- A {{< glossary_tooltip text="pod" term_id="pod" >}} object that a {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} uses
- to represent a {{< glossary_tooltip text="static pod" term_id="static-pod" >}}
+ A {{}} object that a {{}} uses
+ to represent a {{}}
 
-<!--more--> 
+ 
 
 When the kubelet finds a static pod in its configuration, it automatically tries to
 create a Pod object on the Kubernetes API server for it. This means that the pod

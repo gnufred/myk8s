@@ -8,17 +8,17 @@ content_type: task
 weight: 390
 ---
  
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.18" state="stable" >}}
+
+{{}}
 
 This page provides an overview of NodeLocal DNSCache feature in Kubernetes.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
- <!-- steps -->
+ 
 
 ## Introduction
 
@@ -60,17 +60,17 @@ hostnames ("`cluster.local`" suffix by default).
 This is the path followed by DNS Queries after NodeLocal DNSCache is enabled:
 
 
-{{< figure src="/images/docs/nodelocaldns.svg" alt="NodeLocal DNSCache flow" title="Nodelocal DNSCache flow" caption="This image shows how NodeLocal DNSCache handles DNS queries." class="diagram-medium" >}}
+{{}}
 
 ## Configuration
 
-{{< note >}}
+{{}}
 The local listen IP address for NodeLocal DNSCache can be any address that
 can be guaranteed to not collide with any existing IP in your cluster.
 It's recommended to use an address with a local scope, for example,
 from the 'link-local' range '169.254.0.0/16' for IPv4 or from the
 'Unique Local Address' range in IPv6 'fd00::/8'.
-{{< /note >}}
+{{}}
 
 This feature can be enabled using the following steps:
 
@@ -88,11 +88,11 @@ This feature can be enabled using the following steps:
 
   ```shell
   kubedns=`kubectl get svc kube-dns -n kube-system -o jsonpath={.spec.clusterIP}`
-  domain=<cluster-domain>
-  localdns=<node-local-address>
+  domain=
+  localdns=
   ```
 
-  `<cluster-domain>` is "`cluster.local`" by default. `<node-local-address>` is the
+  `` is "`cluster.local`" by default. `` is the
   local listen IP address chosen for NodeLocal DNSCache.
 
   * If kube-proxy is running in IPTABLES mode:
@@ -104,7 +104,7 @@ This feature can be enabled using the following steps:
     `__PILLAR__CLUSTER__DNS__` and `__PILLAR__UPSTREAM__SERVERS__` will be populated by
     the `node-local-dns` pods.
     In this mode, the `node-local-dns` pods listen on both the kube-dns service IP
-    as well as `<node-local-address>`, so pods can look up DNS records using either IP address.
+    as well as ``, so pods can look up DNS records using either IP address.
 
   * If kube-proxy is running in IPVS mode:
 
@@ -112,7 +112,7 @@ This feature can be enabled using the following steps:
     sed -i "s/__PILLAR__LOCAL__DNS__/$localdns/g; s/__PILLAR__DNS__DOMAIN__/$domain/g; s/,__PILLAR__DNS__SERVER__//g; s/__PILLAR__CLUSTER__DNS__/$kubedns/g" nodelocaldns.yaml
     ```
 
-    In this mode, the `node-local-dns` pods listen only on `<node-local-address>`.
+    In this mode, the `node-local-dns` pods listen only on ``.
     The `node-local-dns` interface cannot bind the kube-dns cluster IP since the
     interface used for IPVS loadbalancing already uses this address.
     `__PILLAR__UPSTREAM__SERVERS__` will be populated by the node-local-dns pods.
@@ -120,17 +120,17 @@ This feature can be enabled using the following steps:
 * Run `kubectl create -f nodelocaldns.yaml`
 
 * If using kube-proxy in IPVS mode, `--cluster-dns` flag to kubelet needs to be modified
-  to use `<node-local-address>` that NodeLocal DNSCache is listening on.
+  to use `` that NodeLocal DNSCache is listening on.
   Otherwise, there is no need to modify the value of the `--cluster-dns` flag,
   since NodeLocal DNSCache listens on both the kube-dns service IP as well as
-  `<node-local-address>`.
+  ``.
 
 Once enabled, the `node-local-dns` Pods will run in the `kube-system` namespace
 on each of the cluster nodes. This Pod runs [CoreDNS](https://github.com/coredns/coredns)
 in cache mode, so all CoreDNS metrics exposed by the different plugins will
 be available on a per-node basis.
 
-You can disable this feature by removing the DaemonSet, using `kubectl delete -f <manifest>`.
+You can disable this feature by removing the DaemonSet, using `kubectl delete -f `.
 You should also revert any changes you made to the kubelet configuration.
 
 ## StubDomains and Upstream server Configuration

@@ -9,23 +9,23 @@ content_type: concept
 weight: 10
 ---
 
-<!-- overview -->
+
 
 By default, containers run with unbounded [compute resources](/docs/concepts/configuration/manage-resources-containers/) on a Kubernetes cluster.
 Using  Kubernetes [resource quotas](/docs/concepts/policy/resource-quotas/),
 administrators (also termed _cluster operators_) can restrict consumption and creation
 of cluster resources (such as CPU time, memory, and persistent storage) within a specified
-{{< glossary_tooltip text="namespace" term_id="namespace" >}}.
-Within a namespace, a {{< glossary_tooltip text="Pod" term_id="Pod" >}} can consume as much CPU and memory as is allowed by the ResourceQuotas that apply to that namespace. As a cluster operator, or as a namespace-level administrator, you might also be concerned about making sure that a single object cannot monopolize all available resources within a namespace.
+{{}}.
+Within a namespace, a {{}} can consume as much CPU and memory as is allowed by the ResourceQuotas that apply to that namespace. As a cluster operator, or as a namespace-level administrator, you might also be concerned about making sure that a single object cannot monopolize all available resources within a namespace.
 
-A LimitRange is a policy to constrain the resource allocations (limits and requests) that you can specify for each applicable object kind (such as Pod or {{< glossary_tooltip text="PersistentVolumeClaim" term_id="persistent-volume-claim" >}}) in a namespace.
+A LimitRange is a policy to constrain the resource allocations (limits and requests) that you can specify for each applicable object kind (such as Pod or {{}}) in a namespace.
 
-<!-- body -->
+
 
 A _LimitRange_ provides constraints that can:
 
 - Enforce minimum and maximum compute resources usage per Pod or Container in a namespace.
-- Enforce minimum and maximum storage request per {{< glossary_tooltip text="PersistentVolumeClaim" term_id="persistent-volume-claim" >}} in a namespace.
+- Enforce minimum and maximum storage request per {{}} in a namespace.
 - Enforce a ratio between request and limit for a resource in a namespace.
 - Set default request/limit for compute resources in a namespace and automatically inject them to Containers at runtime.
 

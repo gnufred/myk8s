@@ -4,10 +4,10 @@ content_type: concept
 weight: 90
 ---
 
-{{< caution >}}
+{{}}
 `kubeadm alpha` provides a preview of a set of features made available for gathering feedback
  from the community. Please try it out and give us feedback!
-{{< /caution >}}
+{{}}
 
 Currently there are no experimental commands under `kubeadm alpha`.
 

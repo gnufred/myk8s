@@ -4,7 +4,7 @@ content_type: tutorial
 weight: 60
 ---
 
-<!-- overview -->
+
 
 This page shows how to create a Kubernetes Service object that external
 clients can use to access an application running in a cluster. The Service
@@ -12,7 +12,7 @@ provides load balancing for an application that has two running instances.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 ## {{% heading "objectives" %}}
 
@@ -20,7 +20,7 @@ provides load balancing for an application that has two running instances.
 - Create a Service object that exposes a node port.
 - Use the Service object to access the running application.
 
-<!-- lessoncontent -->
+
 
 ## Creating a service for an application running in two pods
 
@@ -36,11 +36,11 @@ Here is the configuration file for the application Deployment:
    ```
 
    The preceding command creates a
-   {{< glossary_tooltip text="Deployment" term_id="deployment" >}}
+   {{}}
    and an associated
-   {{< glossary_tooltip term_id="replica-set" text="ReplicaSet" >}}.
+   {{}}.
    The ReplicaSet has two
-   {{< glossary_tooltip text="Pods" term_id="pod" >}}
+   {{}}
    each of which runs the Hello World application.
 
 1. Display information about the Deployment:
@@ -75,16 +75,16 @@ Here is the configuration file for the application Deployment:
    Name:                   example-service
    Namespace:              default
    Labels:                 run=load-balancer-example
-   Annotations:            <none>
+   Annotations:            
    Selector:               run=load-balancer-example
    Type:                   NodePort
    IP:                     10.32.0.16
-   Port:                   <unset> 8080/TCP
+   Port:                    8080/TCP
    TargetPort:             8080/TCP
-   NodePort:               <unset> 31496/TCP
+   NodePort:                31496/TCP
    Endpoints:              10.200.1.4:8080,10.200.2.5:8080
    Session Affinity:       None
-   Events:                 <none>
+   Events:                 
    ```
 
    Make a note of the NodePort value for the Service. For example,
@@ -120,11 +120,11 @@ Here is the configuration file for the application Deployment:
 1. Use the node address and node port to access the Hello World application:
 
    ```shell
-   curl http://<public-node-ip>:<node-port>
+   curl http://:
    ```
 
-   where `<public-node-ip>` is the public IP address of your node,
-   and `<node-port>` is the NodePort value for your service. The
+   where `` is the public IP address of your node,
+   and `` is the NodePort value for your service. The
    response to a successful request is a hello message:
 
    ```none

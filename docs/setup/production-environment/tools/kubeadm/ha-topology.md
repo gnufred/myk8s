@@ -6,7 +6,7 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 
 This page explains the two options for configuring the topology of your highly available (HA) Kubernetes clusters.
 
@@ -17,14 +17,14 @@ You can set up an HA cluster:
 
 You should carefully consider the advantages and disadvantages of each topology before setting up an HA cluster.
 
-{{< note >}}
+{{}}
 kubeadm bootstraps the etcd cluster statically. Read the etcd [Clustering Guide](https://github.com/etcd-io/etcd/blob/release-3.4/Documentation/op-guide/clustering.md#static)
 for more details.
-{{< /note >}}
+{{}}
 
 
 
-<!-- body -->
+
 
 ## Stacked etcd topology
 

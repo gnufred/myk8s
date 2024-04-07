@@ -10,16 +10,7 @@ weight: 9
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: storage.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need to create the CSINode object directly. As long as they use the node-driver-registrar sidecar container, the kubelet will automatically populate the CSINode object for the CSI driver as part of kubelet plugin registration. CSINode has the same name as a node. If the object is missing, it means either there are no CSI Drivers available on the node, or the Kubelet version is low enough that it doesn't create this object. CSINode has an OwnerReference that points to the corresponding node object.
 
-<hr>
+
 
 - **apiVersion**: storage.k8s.io/v1
 
@@ -38,11 +29,11 @@ CSINode holds information about all CSI drivers installed on a node. CSI drivers
 - **kind**: CSINode
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. metadata.name must be the Kubernetes node name.
 
-- **spec** (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINodeSpec" >}}">CSINodeSpec</a>), required
+- **spec** (}}">CSINodeSpec), required
 
   spec is the specification of CSINode
 
@@ -54,7 +45,7 @@ CSINode holds information about all CSI drivers installed on a node. CSI drivers
 
 CSINodeSpec holds information about the specification of all CSI drivers installed on a node
 
-<hr>
+
 
 - **drivers** ([]CSINodeDriver), required
 
@@ -62,7 +53,7 @@ CSINodeSpec holds information about the specification of all CSI drivers install
   
   drivers is a list of information of all CSI Drivers existing on a node. If all drivers in the list are uninstalled, this can become empty.
 
-  <a name="CSINodeDriver"></a>
+  
   *CSINodeDriver holds information about the specification of one CSI driver installed on a node*
 
   - **drivers.name** (string), required
@@ -77,7 +68,7 @@ CSINodeSpec holds information about the specification of all CSI drivers install
 
     allocatable represents the volume resources of a node that are available for scheduling. This field is beta.
 
-    <a name="VolumeNodeResources"></a>
+    
     *VolumeNodeResources is a set of resource limits for scheduling of volumes.*
 
     - **drivers.allocatable.count** (int32)
@@ -96,7 +87,7 @@ CSINodeSpec holds information about the specification of all CSI drivers install
 
 CSINodeList is a collection of CSINode objects.
 
-<hr>
+
 
 - **apiVersion**: storage.k8s.io/v1
 
@@ -104,11 +95,11 @@ CSINodeList is a collection of CSINode objects.
 - **kind**: CSINodeList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>), required
+- **items** ([]}}">CSINode), required
 
   items is the list of CSINode
 
@@ -120,7 +111,7 @@ CSINodeList is a collection of CSINode objects.
 
 
 
-<hr>
+
 
 
 
@@ -143,14 +134,14 @@ GET /apis/storage.k8s.io/v1/csinodes/{name}
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): OK
+200 (}}">CSINode): OK
 
 401: Unauthorized
 
@@ -166,64 +157,64 @@ GET /apis/storage.k8s.io/v1/csinodes
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINodeList" >}}">CSINodeList</a>): OK
+200 (}}">CSINodeList): OK
 
 401: Unauthorized
 
@@ -237,40 +228,40 @@ POST /apis/storage.k8s.io/v1/csinodes
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>, required
+- **body**: }}">CSINode, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): OK
+200 (}}">CSINode): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): Created
+201 (}}">CSINode): Created
 
-202 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): Accepted
+202 (}}">CSINode): Accepted
 
 401: Unauthorized
 
@@ -289,38 +280,38 @@ PUT /apis/storage.k8s.io/v1/csinodes/{name}
   name of the CSINode
 
 
-- **body**: <a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>, required
+- **body**: }}">CSINode, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): OK
+200 (}}">CSINode): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): Created
+201 (}}">CSINode): Created
 
 401: Unauthorized
 
@@ -339,43 +330,43 @@ PATCH /apis/storage.k8s.io/v1/csinodes/{name}
   name of the CSINode
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): OK
+200 (}}">CSINode): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): Created
+201 (}}">CSINode): Created
 
 401: Unauthorized
 
@@ -394,38 +385,38 @@ DELETE /apis/storage.k8s.io/v1/csinodes/{name}
   name of the CSINode
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): OK
+200 (}}">CSINode): OK
 
-202 (<a href="{{< ref "../config-and-storage-resources/csi-node-v1#CSINode" >}}">CSINode</a>): Accepted
+202 (}}">CSINode): Accepted
 
 401: Unauthorized
 
@@ -439,76 +430,76 @@ DELETE /apis/storage.k8s.io/v1/csinodes
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

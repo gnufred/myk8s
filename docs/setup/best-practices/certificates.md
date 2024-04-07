@@ -6,7 +6,7 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 
 Kubernetes requires PKI certificates for authentication over TLS.
 If you install Kubernetes with [kubeadm](/docs/reference/setup-tools/kubeadm/), the certificates
@@ -15,7 +15,7 @@ You can also generate your own certificates -- for example, to keep your private
 by not storing them on the API server.
 This page explains the certificates that your cluster requires.
 
-<!-- body -->
+
 
 ## How certificates are used by your cluster
 
@@ -32,10 +32,10 @@ Kubernetes requires PKI for the following operations:
 * Client certificate/kubeconfig for the scheduler to talk to the API server.
 * Client and server certificates for the [front-proxy](/docs/tasks/extend-kubernetes/configure-aggregation-layer/)
 
-{{< note >}}
+{{}}
 `front-proxy` certificates are required only if you run kube-proxy to support
 [an extension API server](/docs/tasks/extend-kubernetes/setup-extension-api-server/).
-{{< /note >}}
+{{}}
 
 etcd also implements mutual TLS to authenticate clients and peers.
 
@@ -87,19 +87,19 @@ Required certificates:
 
 | Default CN                    | Parent CA                 | O (in Subject) | kind             | hosts (SAN)                                         |
 |-------------------------------|---------------------------|----------------|------------------|-----------------------------------------------------|
-| kube-etcd                     | etcd-ca                   |                | server, client   | `<hostname>`, `<Host_IP>`, `localhost`, `127.0.0.1` |
-| kube-etcd-peer                | etcd-ca                   |                | server, client   | `<hostname>`, `<Host_IP>`, `localhost`, `127.0.0.1` |
+| kube-etcd                     | etcd-ca                   |                | server, client   | ``, ``, `localhost`, `127.0.0.1` |
+| kube-etcd-peer                | etcd-ca                   |                | server, client   | ``, ``, `localhost`, `127.0.0.1` |
 | kube-etcd-healthcheck-client  | etcd-ca                   |                | client           |                                                     |
 | kube-apiserver-etcd-client    | etcd-ca                   |                | client           |                                                     |
-| kube-apiserver                | kubernetes-ca             |                | server           | `<hostname>`, `<Host_IP>`, `<advertise_IP>`, `[1]`  |
+| kube-apiserver                | kubernetes-ca             |                | server           | ``, ``, ``, `[1]`  |
 | kube-apiserver-kubelet-client | kubernetes-ca             | system:masters | client           |                                                     |
 | front-proxy-client            | kubernetes-front-proxy-ca |                | client           |                                                     |
 
-{{< note >}}
+{{}}
 Instead of using the super-user group `system:masters` for `kube-apiserver-kubelet-client`
 a less privileged group can be used. kubeadm uses the `kubeadm:cluster-admins` group for
 that purpose.
-{{< /note >}}
+{{}}
 
 [1]: any other IP or DNS name you contact your cluster on (as used by [kubeadm](/docs/reference/setup-tools/kubeadm/)
 the load balancer stable IP and/or DNS name, `kubernetes`, `kubernetes.default`, `kubernetes.default.svc`,
@@ -114,12 +114,12 @@ type:
 | server | digital signature, key encipherment, server auth                                |
 | client | digital signature, key encipherment, client auth                                |
 
-{{< note >}}
+{{}}
 Hosts/SAN listed above are the recommended ones for getting a working cluster; if required by a
 specific setup, it is possible to add additional SANs on all the server certificates.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 For kubeadm users only:
 
 * The scenario where you are copying to your cluster CA certificates without private keys is
@@ -128,7 +128,7 @@ For kubeadm users only:
   `kube-etcd`, `kube-etcd-peer` and `kube-etcd-healthcheck-client` certificates are not generated
   in case of external etcd.
 
-{{< /note >}}
+{{}}
 
 ### Certificate paths
 
@@ -192,20 +192,20 @@ You must manually configure these administrator account and service accounts:
 
 | filename                | credential name            | Default CN                          | O (in Subject)         |
 |-------------------------|----------------------------|-------------------------------------|------------------------|
-| admin.conf              | default-admin              | kubernetes-admin                    | `<admin-group>`        |
+| admin.conf              | default-admin              | kubernetes-admin                    | ``        |
 | super-admin.conf        | default-super-admin        | kubernetes-super-admin              | system:masters         |
-| kubelet.conf            | default-auth               | system:node:`<nodeName>` (see note) | system:nodes           |
+| kubelet.conf            | default-auth               | system:node:`` (see note) | system:nodes           |
 | controller-manager.conf | default-controller-manager | system:kube-controller-manager      |                        |
 | scheduler.conf          | default-scheduler          | system:kube-scheduler               |                        |
 
-{{< note >}}
-The value of `<nodeName>` for `kubelet.conf` **must** match precisely the value of the node name
+{{}}
+The value of `` for `kubelet.conf` **must** match precisely the value of the node name
 provided by the kubelet as it registers with the apiserver. For further details, read the
 [Node Authorization](/docs/reference/access-authn-authz/node/).
-{{< /note >}}
+{{}}
 
-{{< note >}}
-In the above example `<admin-group>` is implementation specific. Some tools sign the
+{{}}
+In the above example `` is implementation specific. Some tools sign the
 certificate in the default `admin.conf` to be part of the `system:masters` group.
 `system:masters` is a break-glass, super user group can bypass the authorization
 layer of Kubernetes, such as RBAC. Also some tools do not generate a separate
@@ -218,17 +218,17 @@ This file is generated on all kubeadm managed control plane machines.
 
 Another is in `super-admin.conf` that has `Subject: O = system:masters, CN = kubernetes-super-admin`.
 This file is generated only on the node where `kubeadm init` was called.
-{{< /note >}}
+{{}}
 
 1. For each config, generate an x509 cert/key pair with the given CN and O.
 
 1. Run `kubectl` as follows for each config:
 
 ```
-KUBECONFIG=<filename> kubectl config set-cluster default-cluster --server=https://<host ip>:6443 --certificate-authority <path-to-kubernetes-ca> --embed-certs
-KUBECONFIG=<filename> kubectl config set-credentials <credential-name> --client-key <path-to-key>.pem --client-certificate <path-to-cert>.pem --embed-certs
-KUBECONFIG=<filename> kubectl config set-context default-system --cluster default-cluster --user <credential-name>
-KUBECONFIG=<filename> kubectl config use-context default-system
+KUBECONFIG= kubectl config set-cluster default-cluster --server=https://:6443 --certificate-authority  --embed-certs
+KUBECONFIG= kubectl config set-credentials  --client-key .pem --client-certificate .pem --embed-certs
+KUBECONFIG= kubectl config set-context default-system --cluster default-cluster --user 
+KUBECONFIG= kubectl config use-context default-system
 ```
 
 These files are used as follows:

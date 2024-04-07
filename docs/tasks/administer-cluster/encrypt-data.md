@@ -7,36 +7,36 @@ content_type: task
 weight: 210
 ---
 
-<!-- overview -->
+
 
 All of the APIs in Kubernetes that let you write persistent API resource data support
 at-rest encryption. For example, you can enable at-rest encryption for
-{{< glossary_tooltip text="Secrets" term_id="secret" >}}.
+{{}}.
 This at-rest encryption is additional to any system-level encryption for the
 etcd cluster or for the filesystem(s) on hosts where you are running the
 kube-apiserver.
 
 This page shows how to enable and configure encryption of API data at rest.
 
-{{< note >}}
+{{}}
 This task covers encryption for resource data stored using the
-{{< glossary_tooltip text="Kubernetes API" term_id="kubernetes-api" >}}. For example, you can
+{{}}. For example, you can
 encrypt Secret objects, including the key-value data they contain.
 
 If you want to encrypt data in filesystems that are mounted into containers, you instead need
 to either:
 
 - use a storage integration that provides encrypted
-  {{< glossary_tooltip text="volumes" term_id="volume" >}}
+  {{}}
 - encrypt the data within your own application
-{{< /note >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
-* {{< include "task-tutorial-prereqs.md" >}}
+* {{}}
 
 * This task assumes that you are running the Kubernetes API server as a
-  {{< glossary_tooltip text="static pod" term_id="static-pod" >}} on each control
+  {{}} on each control
   plane node.
 
 * Your cluster's control plane **must** use etcd v3.x (major version 3, any minor version).
@@ -45,10 +45,10 @@ to either:
 
 * To use a wildcard to match resources, your cluster must be running Kubernetes v1.27 or newer.
 
-{{< version-check >}}
+{{}}
 
 
-<!-- steps -->
+
 
 ## Determine whether encryption at rest is already enabled {#determining-whether-encryption-at-rest-is-already-enabled}
 
@@ -72,18 +72,18 @@ you already have at-rest encryption enabled. However, that check does not tell y
 a previous migration to encrypted storage has succeeded. If you are not sure, see
 [ensure all relevant data are encrypted](#ensure-all-secrets-are-encrypted).
 
-{{< caution >}}
+{{}}
 **IMPORTANT:** For high-availability configurations (with two or more control plane nodes), the
 encryption configuration file must be the same! Otherwise, the `kube-apiserver` component cannot
 decrypt data stored in the etcd.
-{{< /caution >}}
+{{}}
 
 ## Understanding the encryption at rest configuration
 
-<!-- note to localizers: the highlight is to make the initial comment obvious -->
-<!-- you can use as many lines as makes sense for your target localization    -->
 
-{{< highlight yaml "linenos=false,hl_lines=2-5" >}}
+
+
+{{}}
 ---
 #
 # CAUTION: this is an example configuration.
@@ -136,7 +136,7 @@ resources:
           keys:
           - name: key3
             secret: c2VjcmV0IGlzIHNlY3VyZSwgSSB0aGluaw==
-{{< /highlight  >}}
+{{}}
 
 Each `resources` array item is a separate config and contains a complete configuration. The
 `resources.resources` field is an array of Kubernetes resource names (`resource` or `resource.group`)
@@ -160,13 +160,13 @@ data. If no provider can read the stored data due to a mismatch in format or sec
 is returned which prevents clients from accessing that resource.
 
 `EncryptionConfiguration` supports the use of wildcards to specify the resources that should be encrypted.
-Use '`*.<group>`' to encrypt all resources within a group (for eg '`*.apps`' in above example) or '`*.*`'
+Use '`*.`' to encrypt all resources within a group (for eg '`*.apps`' in above example) or '`*.*`'
 to encrypt all resources. '`*.`' can be used to encrypt all resource in the core group. '`*.*`' will
 encrypt all resources, even custom resources that are added after API server start.
 
-{{< note >}} Use of wildcards that overlap within the same resource list or across multiple entries are not allowed
+{{}} Use of wildcards that overlap within the same resource list or across multiple entries are not allowed
 since part of the configuration would be ineffective. The `resources` list's processing order and precedence
-are determined by the order it's listed in the configuration. {{< /note >}}
+are determined by the order it's listed in the configuration. {{}}
 
 If you have a wildcard covering resources and want to opt out of at-rest encryption for a particular kind
 of resource, you achieve that by adding a separate `resources` array item with the name of the resource that
@@ -197,11 +197,11 @@ to give it precedence.
 For more detailed information about the `EncryptionConfiguration` struct, please refer to the
 [encryption configuration API](/docs/reference/config-api/apiserver-encryption.v1/).
 
-{{< caution >}}
+{{}}
 If any resource is not readable via the encryption config (because keys were changed),
 the only recourse is to delete that key from the underlying etcd directly. Calls that attempt to
 read that resource will fail until it is deleted or a valid decryption key is provided.
-{{< /caution >}}
+{{}}
 
 ### Available providers {#providers}
 
@@ -210,105 +210,103 @@ need to select which provider(s) you will use.
 
 The following table describes each available provider.
 
-<!-- localization note: if it makes sense to adapt this table to work for your localization,
-     please do that. Each sentence in the English original should have a direct equivalent in the adapted
-     layout, although this may not always be possible -->
-<table class="complex-layout">
-<caption style="display: none;">Providers for Kubernetes encryption at rest</caption>
-<thead>
-  <tr>
-  <th>Name</th>
-  <th>Encryption</th>
-  <th>Strength</th>
-  <th>Speed</th>
-  <th>Key length</th>
-  </tr>
-</thead>
-<tbody id="encryption-providers-identity">
-  <!-- list identity first, even when the remaining rows are sorted alphabetically -->
-  <tr>
-  <th rowspan="2" scope="row"><tt>identity</tt></th>
-  <td><strong>None</strong></td>
-  <td>N/A</td>
-  <td>N/A</td>
-  <td>N/A</td>
-  </tr>
-  <tr>
-  <td colspan="4">Resources written as-is without encryption. When set as the first provider, the resource will be decrypted as new values are written. Existing encrypted resources are <strong>not</strong> automatically overwritten with the plaintext data.
-   The <tt>identity</tt> provider is the default if you do not specify otherwise.</td>
-  </tr>
-</tbody>
-<tbody id="encryption-providers-that-encrypt">
-  <tr>
-  <th rowspan="2" scope="row"><tt>aescbc</tt></th>
-  <td>AES-CBC with <a href="https://datatracker.ietf.org/doc/html/rfc2315">PKCS#7</a> padding</td>
-  <td>Weak</td>
-  <td>Fast</td>
-  <td>32-byte</td>
-  </tr>
-  <tr>
-  <td colspan="4">Not recommended due to CBC's vulnerability to padding oracle attacks. Key material accessible from control plane host.</td>
-  </tr>
-  <tr>
-  <th rowspan="2" scope="row"><tt>aesgcm</tt></th>
-  <td>AES-GCM with random nonce</td>
-  <td>Must be rotated every 200,000 writes</td>
-  <td>Fastest</td>
-  <td>16, 24, or 32-byte</td>
-  </tr>
-  <tr>
-  <td colspan="4">Not recommended for use except when an automated key rotation scheme is implemented. Key material accessible from control plane host.</td>
-  </tr>
-  <tr>
-  <th rowspan="2" scope="row"><tt>kms</tt> v1 <em>(deprecated since Kubernetes v1.28)</em></th>
-  <td>Uses envelope encryption scheme with DEK per resource.</td>
-  <td>Strongest</td>
-  <td>Slow (<em>compared to <tt>kms</tt> version 2</em>)</td>
-  <td>32-bytes</td>
-  </tr>
-  <tr>
-  <td colspan="4">
+
+
+Providers for Kubernetes encryption at rest
+
+  
+  Name
+  Encryption
+  Strength
+  Speed
+  Key length
+  
+
+
+  
+  
+  identity
+  None
+  N/A
+  N/A
+  N/A
+  
+  
+  Resources written as-is without encryption. When set as the first provider, the resource will be decrypted as new values are written. Existing encrypted resources are not automatically overwritten with the plaintext data.
+   The identity provider is the default if you do not specify otherwise.
+  
+
+
+  
+  aescbc
+  AES-CBC with PKCS#7 padding
+  Weak
+  Fast
+  32-byte
+  
+  
+  Not recommended due to CBC's vulnerability to padding oracle attacks. Key material accessible from control plane host.
+  
+  
+  aesgcm
+  AES-GCM with random nonce
+  Must be rotated every 200,000 writes
+  Fastest
+  16, 24, or 32-byte
+  
+  
+  Not recommended for use except when an automated key rotation scheme is implemented. Key material accessible from control plane host.
+  
+  
+  kms v1 (deprecated since Kubernetes v1.28)
+  Uses envelope encryption scheme with DEK per resource.
+  Strongest
+  Slow (compared to kms version 2)
+  32-bytes
+  
+  
+  
     Data is encrypted by data encryption keys (DEKs) using AES-GCM;
     DEKs are encrypted by key encryption keys (KEKs) according to
     configuration in Key Management Service (KMS).
     Simple key rotation, with a new DEK generated for each encryption, and
     KEK rotation controlled by the user.
-    <br />
-    Read how to <a href="/docs/tasks/administer-cluster/kms-provider#configuring-the-kms-provider-kms-v1">configure the KMS V1 provider</a>.
-    </td>
-  </tr>
-  <tr>
-  <th rowspan="2" scope="row"><tt>kms</tt> v2 </th>
-  <td>Uses envelope encryption scheme with DEK per API server.</td>
-  <td>Strongest</td>
-  <td>Fast</td>
-  <td>32-bytes</td>
-  </tr>
-  <tr>
-  <td colspan="4">
+    
+    Read how to configure the KMS V1 provider.
+    
+  
+  
+  kms v2 
+  Uses envelope encryption scheme with DEK per API server.
+  Strongest
+  Fast
+  32-bytes
+  
+  
+  
     Data is encrypted by data encryption keys (DEKs) using AES-GCM; DEKs
     are encrypted by key encryption keys (KEKs) according to configuration
     in Key Management Service (KMS).
     Kubernetes generates a new DEK per encryption from a secret seed.
-    The seed is rotated whenever the KEK is rotated.<br/>
+    The seed is rotated whenever the KEK is rotated.
     A good choice if using a third party tool for key management.
     Available as stable from Kubernetes v1.29.
-    <br />
-    Read how to <a href="/docs/tasks/administer-cluster/kms-provider#configuring-the-kms-provider-kms-v2">configure the KMS V2 provider</a>.
-    </td>
-  </tr>
-  <tr>
-  <th rowspan="2" scope="row"><tt>secretbox</tt></th>
-  <td>XSalsa20 and Poly1305</td>
-  <td>Strong</td>
-  <td>Faster</td>
-  <td>32-byte</td>
-  </tr>
-  <tr>
-  <td colspan="4">Uses relatively new encryption technologies that may not be considered acceptable in environments that require high levels of review. Key material accessible from control plane host.</td>
-  </tr>
-</tbody>
-</table>
+    
+    Read how to configure the KMS V2 provider.
+    
+  
+  
+  secretbox
+  XSalsa20 and Poly1305
+  Strong
+  Faster
+  32-byte
+  
+  
+  Uses relatively new encryption technologies that may not be considered acceptable in environments that require high levels of review. Key material accessible from control plane host.
+  
+
+
 
 The `identity` provider is the default if you do not specify otherwise. **The `identity` provider does not
 encrypt stored data and provides _no_ additional confidentiality protection.**
@@ -355,7 +353,7 @@ The following steps assume that you are not using KMS, and therefore the steps a
 assume that you need to generate an encryption key. If you already have an encryption key,
 skip to [Write an encryption configuration file](#write-an-encryption-configuration-file).
 
-{{< caution >}}
+{{}}
 Storing the raw encryption key in the EncryptionConfig only moderately improves your security posture,
 compared to no encryption.
 
@@ -367,11 +365,11 @@ To learn about setting
 up encryption at rest using KMS, see
 [Using a KMS provider for data encryption](/docs/tasks/administer-cluster/kms-provider/).
 The KMS provider plugin that you use may also come with additional specific documentation.
-{{< /caution >}}
+{{}}
 
 Start by generating a new encryption key, and then encode it using base64:
 
-{{< tabs name="generate_encryption_key" >}}
+{{}}
 {{% tab name="Linux" %}}
 Generate a 32-byte random key and base64 encode it. You can use this command:
 ```shell
@@ -383,8 +381,7 @@ use your PC's built-in hardware entropy source. Not all Linux
 devices provide a hardware random generator.
 {{% /tab %}}
 {{% tab name="macOS" %}}
-<!-- localization note: this is similar to the Linux tab and the wording
-should match wherever the English text does -->
+
 Generate a 32-byte random key and base64 encode it. You can use this command:
 ```shell
 head -c 32 /dev/urandom | base64
@@ -398,13 +395,13 @@ Generate a 32-byte random key and base64 encode it. You can use this command:
 [Convert]::ToBase64String((1..32|%{[byte](Get-Random -Max 256)}))
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 
-{{< note >}}
+{{}}
 Keep the encryption key confidential, including whilst you generate it and
 ideally even after you are no longer actively using it.
-{{< /note >}}
+{{}}
 
 ### Replicate the encryption key
 
@@ -417,12 +414,12 @@ so that you're relying on KMS encryption.
 
 ### Write an encryption configuration file
 
-{{< caution >}}
+{{}}
 The encryption configuration file may contain keys that can decrypt content in etcd.
 If the configuration file contains any key material, you must properly
 restrict permissions on all your control plane hosts so only the user
 who runs the kube-apiserver can read this configuration.
-{{< /caution >}}
+{{}}
 
 Create a new encryption configuration file. The contents should be similar to:
 
@@ -440,7 +437,7 @@ resources:
           keys:
             - name: key1
               # See the following text for more details about the secret value
-              secret: <BASE 64 ENCODED SECRET>
+              secret: 
       - identity: {} # this fallback allows reading unencrypted secrets;
                      # for example, during initial migration
 ```
@@ -495,10 +492,10 @@ You will need to mount the new encryption config file to the `kube-apiserver` st
 
 1. Restart your API server.
 
-{{< caution >}}
+{{}}
 Your config file contains keys that can decrypt the contents in etcd, so you must properly restrict
 permissions on your control-plane nodes so only the user who runs the `kube-apiserver` can read it.
-{{< /caution >}}
+{{}}
 
 You now have encryption in place for **one** control plane host. A typical
 Kubernetes cluster has multiple control plane hosts, so there is more to do.
@@ -597,13 +594,13 @@ kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 The command above reads all Secrets and then updates them with the same data, in order to
 apply server side encryption.
 
-{{< note >}}
+{{}}
 If an error occurs due to a conflicting write, retry the command.
 It is safe to run that command more than once.
 
 For larger clusters, you may wish to subdivide the Secrets by namespace,
 or script an update.
-{{< /note >}}
+{{}}
 
 ## Prevent plain text retrieval {#cleanup-all-secrets-encrypted}
 
@@ -611,7 +608,7 @@ If you want to make sure that the only access to a particular API kind is done u
 encryption, you can remove the API server's ability to read that API's backing data
 as plaintext.
 
-{{< warning >}}
+{{}}
 Making this change prevents the API server from retrieving resources that are marked
 as encrypted at rest, but are actually stored in the clear.
 
@@ -619,12 +616,12 @@ When you have configured encryption at rest for an API (for example: the API kin
 `Secret`, representing `secrets` resources in the core API group), you **must** ensure
 that all those resources in this cluster really are encrypted at rest. Check this before
 you carry on with the next steps.
-{{< /warning >}}
+{{}}
 
 Once all Secrets in your cluster are encrypted, you can remove the `identity`
 part of the encryption configuration. For example:
 
-{{< highlight yaml "linenos=false,hl_lines=12" >}}
+{{}}
 ---
 apiVersion: apiserver.config.k8s.io/v1
 kind: EncryptionConfiguration
@@ -635,9 +632,9 @@ resources:
       - aescbc:
           keys:
             - name: key1
-              secret: <BASE 64 ENCODED SECRET>
+              secret: 
       - identity: {} # REMOVE THIS LINE
-{{< /highlight >}}
+{{}}
 
 …and then restart each API server in turn. This change prevents the API server
 from accessing a plain-text Secret, even by accident.
@@ -685,7 +682,7 @@ resources:
       - aescbc:
           keys:
             - name: key1
-              secret: <BASE 64 ENCODED SECRET> # keep this in place
+              secret:  # keep this in place
                                                # make sure it comes after "identity"
 ```
 
@@ -703,7 +700,7 @@ don't use encryption, you can remove the encryption settings from the
 
 You can configure automatic reloading of encryption provider configuration.
 That setting determines whether the
-{{< glossary_tooltip text="API server" term_id="kube-apiserver" >}} should
+{{}} should
 load the file you specify for `--encryption-provider-config` only once at
 startup, or automatically whenever you change that file. Enabling this option
 allows you to change the keys for encryption at rest without restarting the

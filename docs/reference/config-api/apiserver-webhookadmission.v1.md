@@ -4,7 +4,7 @@ content_type: tool-reference
 package: apiserver.config.k8s.io/v1
 auto_generated: true
 ---
-<p>Package v1 is the v1 version of the API.</p>
+Package v1 is the v1 version of the API.
 
 
 ## Resource Types 
@@ -17,24 +17,24 @@ auto_generated: true
     
 
 
-<p>WebhookAdmission provides configuration for the webhook admission controller.</p>
+WebhookAdmission provides configuration for the webhook admission controller.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.config.k8s.io/v1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>WebhookAdmission</code></td></tr>
+apiVersionstringapiserver.config.k8s.io/v1
+kindstringWebhookAdmission
     
   
-<tr><td><code>kubeConfigFile</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>KubeConfigFile is the path to the kubeconfig file.</p>
-</td>
-</tr>
-</tbody>
-</table>
+kubeConfigFile [Required]
+string
+
+
+   KubeConfigFile is the path to the kubeconfig file.
+
+
+
+
   

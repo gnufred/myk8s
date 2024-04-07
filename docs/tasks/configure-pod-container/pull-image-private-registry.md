@@ -3,10 +3,10 @@ title: Pull an Image from a Private Registry
 weight: 130
 ---
 
-<!-- overview -->
+
 
 This page shows how to create a Pod that uses a
-{{< glossary_tooltip text="Secret" term_id="secret" >}} to pull an image
+{{}} to pull an image
 from a private container image registry or repository. There are many private
 registries in use. This task uses [Docker Hub](https://www.docker.com/products/docker-hub)
 as an example registry.
@@ -15,14 +15,14 @@ as an example registry.
 
 ## {{% heading "prerequisites" %}}
 
-* {{< include "task-tutorial-prereqs.md" >}}
+* {{}}
 
 * To do this exercise, you need the `docker` command line tool, and a
   [Docker ID](https://docs.docker.com/docker-id/) for which you know the password.
 * If you are using a different private container registry, you need the command
   line tool for that registry and any login information for the registry.
 
-<!-- steps -->
+
 
 ## Log in to Docker Hub
 
@@ -59,11 +59,11 @@ The output contains a section similar to this:
 }
 ```
 
-{{< note >}}
+{{}}
 If you use a Docker credentials store, you won't see that `auth` entry but a `credsStore` entry with the name of the store as value.
 In that case, you can create a secret directly.
 See [Create a Secret by providing credentials on the command line](#create-a-secret-by-providing-credentials-on-the-command-line).
-{{< /note >}}
+{{}}
 
 ## Create a Secret based on existing credentials {#registry-secret-existing-credentials}
 
@@ -75,7 +75,7 @@ that credential into Kubernetes:
 
 ```shell
 kubectl create secret generic regcred \
-    --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
+    --from-file=.dockerconfigjson= \
     --type=kubernetes.io/dockerconfigjson
 ```
 
@@ -110,24 +110,24 @@ the base64 encoded string in the data was successfully decoded, but could not be
 Create this Secret, naming it `regcred`:
 
 ```shell
-kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+kubectl create secret docker-registry regcred --docker-server= --docker-username= --docker-password= --docker-email=
 ```
 
 where:
 
-* `<your-registry-server>` is your Private Docker Registry FQDN.
+* `` is your Private Docker Registry FQDN.
   Use `https://index.docker.io/v1/` for DockerHub.
-* `<your-name>` is your Docker username.
-* `<your-pword>` is your Docker password.
-* `<your-email>` is your Docker email.
+* `` is your Docker username.
+* `` is your Docker password.
+* `` is your Docker email.
 
 You have successfully set your Docker credentials in the cluster as a Secret called `regcred`.
 
-{{< note >}}
+{{}}
 Typing secrets on the command line may store them in your shell history unprotected, and
 those secrets might also be visible to other users on your PC during the time that
 `kubectl` is running.
-{{< /note >}}
+{{}}
 
 
 ## Inspecting the Secret `regcred`
@@ -195,7 +195,7 @@ Download the above file onto your computer:
 curl -L -o my-private-reg-pod.yaml https://k8s.io/examples/pods/private-reg-pod.yaml
 ```
 
-In file `my-private-reg-pod.yaml`, replace `<your-private-image>` with the path to an image in a private registry such as:
+In file `my-private-reg-pod.yaml`, replace `` with the path to an image in a private registry such as:
 
 ```none
 your.private.registry.example.com/janedoe/jdoe-private:v1
@@ -212,12 +212,12 @@ kubectl apply -f my-private-reg-pod.yaml
 kubectl get pod private-reg
 ```
 
-{{< note >}}
+{{}}
 To use image pull secrets for a Pod (or a Deployment, or other object that
 has a pod template that you are using), you need to make sure that the appropriate
 Secret does exist in the right namespace. The namespace to use is the same
 namespace where you defined the Pod.
-{{< /note >}}
+{{}}
 
 Also, in case the Pod fails to start with the status `ImagePullBackOff`, view the Pod events:
 
@@ -235,13 +235,13 @@ Make sure that the Secret you have specified exists, and that its name is spelle
 Events:
   ...  Reason                           ...  Message
        ------                                -------
-  ...  FailedToRetrieveImagePullSecret  ...  Unable to retrieve some image pull secrets (<regcred>); attempting to pull the image may not succeed.
+  ...  FailedToRetrieveImagePullSecret  ...  Unable to retrieve some image pull secrets (); attempting to pull the image may not succeed.
 ```
 
 ## {{% heading "whatsnext" %}}
 
 * Learn more about [Secrets](/docs/concepts/configuration/secret/)
-  * or read the API reference for {{< api-reference page="config-and-storage-resources/secret-v1" >}}
+  * or read the API reference for {{}}
 * Learn more about [using a private registry](/docs/concepts/containers/images/#using-a-private-registry).
 * Learn more about [adding image pull secrets to a service account](/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account).
 * See [kubectl create secret docker-registry](/docs/reference/generated/kubectl/kubectl-commands/#-em-secret-docker-registry-em-).

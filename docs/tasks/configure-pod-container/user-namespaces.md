@@ -6,8 +6,8 @@ weight: 210
 min-kubernetes-server-version: v1.25
 ---
 
-<!-- overview -->
-{{< feature-state for_k8s_version="v1.25" state="alpha" >}}
+
+{{}}
 
 This page shows how to configure a user namespace for pods. This allows you to
 isolate the user running inside the container from the one in the host.
@@ -32,10 +32,10 @@ this is true when user namespaces are used.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 {{% thirdparty-content single="true" %}}
-<!-- if adding another runtime in the future, omit the single setting -->
+
 
 * The node OS needs to be Linux
 * You need to exec commands in the host
@@ -43,11 +43,11 @@ this is true when user namespaces are used.
 * You need to enable the `UserNamespacesSupport`
   [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 
-{{< note >}}
+{{}}
 The feature gate to enable user namespaces was previously named
 `UserNamespacesStatelessPodsSupport`, when only stateless pods were supported.
 Only Kubernetes v1.25 through to v1.27 recognise `UserNamespacesStatelessPodsSupport`.
-{{</ note >}}
+{{}}
 
 The cluster that you're using **must** include at least one node that meets the
 [requirements](/docs/concepts/workloads/pods/user-namespaces/#before-you-begin)
@@ -61,7 +61,7 @@ Please note that **if your container runtime doesn't support user namespaces, th
 `hostUsers` field in the pod spec will be silently ignored and the pod will be
 created without user namespaces.**
 
-<!-- steps -->
+
 
 ## Run a Pod that uses a user namespace {#create-pod}
 

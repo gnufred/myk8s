@@ -6,18 +6,18 @@ title: Container Runtimes
 content_type: concept
 weight: 20
 ---
-<!-- overview -->
+
 
 {{% dockershim-removal %}}
 
 You need to install a
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+{{}}
 into each node in the cluster so that Pods can run there. This page outlines
 what is involved and describes related tasks for setting up nodes.
 
-Kubernetes {{< skew currentVersion >}} requires that you use a runtime that
+Kubernetes {{}} requires that you use a runtime that
 conforms with the
-{{< glossary_tooltip term_id="cri" text="Container Runtime Interface">}} (CRI).
+{{}} (CRI).
 
 See [CRI version support](#cri-versions) for more information.
 
@@ -29,7 +29,7 @@ Kubernetes.
 - [Docker Engine](#docker)
 - [Mirantis Container Runtime](#mcr)
 
-{{< note >}}
+{{}}
 Kubernetes releases before v1.24 included a direct integration with Docker Engine,
 using a component named _dockershim_. That special direct integration is no longer
 part of Kubernetes (this removal was
@@ -40,11 +40,11 @@ You can read
 to understand how this removal might affect you. To learn about migrating from using dockershim, see
 [Migrating from dockershim](/docs/tasks/administer-cluster/migrating-from-dockershim/).
 
-If you are running a version of Kubernetes other than v{{< skew currentVersion >}},
+If you are running a version of Kubernetes other than v{{}},
 check the documentation for that version.
-{{< /note >}}
+{{}}
 
-<!-- body -->
+
 ## Install and configure prerequisites
 
 The following steps apply common settings for Kubernetes nodes on Linux.
@@ -60,45 +60,10 @@ or the documentation for your specific container runtime.
 Execute the below mentioned instructions:
 
 ```bash
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-overlay
-br_netfilter
-EOF
-
-sudo modprobe overlay
-sudo modprobe br_netfilter
-
-# sysctl params required by setup, params persist across reboots
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-iptables  = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward                 = 1
-EOF
-
-# Apply sysctl params without reboot
-sudo sysctl --system
-```
-
-Verify that the `br_netfilter`, `overlay` modules are loaded by running the following commands:
-
-```bash
-lsmod | grep br_netfilter
-lsmod | grep overlay
-```
-
-Verify that the `net.bridge.bridge-nf-call-iptables`, `net.bridge.bridge-nf-call-ip6tables`, and
-`net.ipv4.ip_forward` system variables are set to `1` in your `sysctl` config by running the following command:
-
-```bash
-sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
-```
-
-## cgroup drivers
-
-On Linux, {{< glossary_tooltip text="control groups" term_id="cgroup" >}}
+cat }}
 are used to constrain resources that are allocated to processes.
 
-Both the {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} and the
+Both the {{}} and the
 underlying container runtime need to interface with control groups to enforce
 [resource management for pods and containers](/docs/concepts/configuration/manage-resources-containers/)
 and set resources such as cpu/memory requests and limits. To interface with control
@@ -152,10 +117,10 @@ kind: KubeletConfiguration
 cgroupDriver: systemd
 ```
 
-{{< note >}}
+{{}}
 Starting with v1.22 and later, when creating a cluster with kubeadm, if the user does not set
 the `cgroupDriver` field under `KubeletConfiguration`, kubeadm defaults it to `systemd`.
-{{< /note >}}
+{{}}
 
 In Kubernetes v1.28, with the `KubeletCgroupDriverFromCRI`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
@@ -170,7 +135,7 @@ the documentation for your container runtime for instructions. For example:
 *  [containerd](#containerd-systemd)
 *  [CRI-O](#cri-o)
 
-{{< caution >}}
+{{}}
 Changing the cgroup driver of a Node that has joined a cluster is a sensitive operation.
 If the kubelet has created Pods using the semantics of one cgroup driver, changing the container
 runtime to another cgroup driver can cause errors when trying to re-create the Pod sandbox
@@ -178,7 +143,7 @@ for such existing Pods. Restarting the kubelet may not solve such errors.
 
 If you have automation that makes it feasible, replace the node with another using the updated
 configuration, or reinstall it using automation.
-{{< /caution >}}
+{{}}
 
 
 ### Migrating to the `systemd` driver in kubeadm managed clusters
@@ -207,14 +172,14 @@ To install containerd on your system, follow the instructions on
 [getting started with containerd](https://github.com/containerd/containerd/blob/main/docs/getting-started.md).
 Return to this step once you've created a valid `config.toml` configuration file.
 
-{{< tabs name="Finding your config.toml file" >}}
+{{}}
 {{% tab name="Linux" %}}
 You can find this file under the path `/etc/containerd/config.toml`.
 {{% /tab %}}
 {{% tab name="Windows" %}}
 You can find this file under the path `C:\Program Files\containerd\config.toml`.
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 On Linux the default CRI socket for containerd is `/run/containerd/containerd.sock`.
 On Windows the default CRI endpoint is `npipe://./pipe/containerd-containerd`.
@@ -232,7 +197,7 @@ To use the `systemd` cgroup driver in `/etc/containerd/config.toml` with `runc`,
 
 The `systemd` cgroup driver is recommended if you use [cgroup v2](/docs/concepts/architecture/cgroups).
 
-{{< note >}}
+{{}}
 If you installed containerd from a package (for example, RPM or `.deb`), you may find
 that the CRI integration plugin is disabled by default.
 
@@ -246,7 +211,7 @@ incompatible configuration parameters. Consider resetting the containerd configu
 with `containerd config default > /etc/containerd/config.toml` as specified in
 [getting-started.md](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#advanced-topics)
 and then set the configuration parameters specified above accordingly.
-{{< /note >}}
+{{}}
 
 If you apply this change, make sure to restart containerd:
 
@@ -323,11 +288,11 @@ This config option supports live configuration reload to apply this change: `sys
 
 ### Docker Engine {#docker}
 
-{{< note >}}
+{{}}
 These instructions assume that you are using the
 [`cri-dockerd`](https://mirantis.github.io/cri-dockerd/) adapter to integrate
 Docker Engine with Kubernetes.
-{{< /note >}}
+{{}}
 
 1. On each of your nodes, install Docker for your Linux distribution as per
   [Install Docker Engine](https://docs.docker.com/engine/install/#server).

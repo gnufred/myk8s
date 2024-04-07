@@ -9,9 +9,9 @@ weight: 10
 ---
 
 
-<!-- overview -->
 
-Kubernetes {{< skew currentVersion >}} supports [Container Network Interface](https://github.com/containernetworking/cni)
+
+Kubernetes {{}} supports [Container Network Interface](https://github.com/containernetworking/cni)
 (CNI) plugins for cluster networking. You must use a CNI plugin that is compatible with your
 cluster and that suits your needs. Different plugins are available (both open- and closed- source)
 in the wider Kubernetes ecosystem.
@@ -25,7 +25,7 @@ releases of the CNI specification. The Kubernetes project recommends using a plu
 compatible with the [v1.0.0](https://github.com/containernetworking/cni/blob/spec-v1.0.0/SPEC.md)
 CNI specification (plugins can be compatible with multiple spec versions).
 
-<!-- body -->
+
 
 ## Installation
 
@@ -33,7 +33,7 @@ A Container Runtime, in the networking context, is a daemon on a node configured
 Services for kubelet. In particular, the Container Runtime must be configured to load the CNI
 plugins required to implement the Kubernetes network model.
 
-{{< note >}}
+{{}}
 Prior to Kubernetes 1.24, the CNI plugins could also be managed by the kubelet using the
 `cni-bin-dir` and `network-plugin` command-line parameters.
 These command-line parameters were removed in Kubernetes 1.24, with management of the CNI no
@@ -41,7 +41,7 @@ longer in scope for kubelet.
 
 See [Troubleshooting CNI plugin-related errors](/docs/tasks/administer-cluster/migrating-from-dockershim/troubleshooting-cni-plugin-related-errors/)
 if you are facing issues following the removal of dockershim.
-{{< /note >}}
+{{}}
 
 For specific information about how a Container Runtime manages the CNI plugins, see the
 documentation for that Container Runtime, for example:

@@ -7,19 +7,19 @@ title: Extend Service IP Ranges
 content_type: task
 ---
 
-<!-- overview -->
-{{< feature-state state="alpha" for_k8s_version="v1.29" >}}
+
+{{}}
 
 This document shares how to extend the existing Service IP range assigned to a cluster.
 
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-{{< version-check >}}
+{{}}
 
-<!-- steps -->
+
 
 ## API
 
@@ -45,7 +45,7 @@ kubectl get service kubernetes
 ```
 ```
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   17d
+kubernetes   ClusterIP   10.96.0.1            443/TCP   17d
 ```
 
 The default Service, in this case, uses the ClusterIP 10.96.0.1, that has the corresponding IPAddress object.
@@ -58,7 +58,7 @@ NAME        PARENTREF
 10.96.0.1   services/default/kubernetes
 ```
 
-The ServiceCIDRs are protected with {{<glossary_tooltip text="finalizers" term_id="finalizer">}}, to avoid leaving Service ClusterIPs orphans;
+The ServiceCIDRs are protected with {{}}, to avoid leaving Service ClusterIPs orphans;
 the finalizer is only removed if there is another subnet that contains the existing IPAddresses or
 there are no IPAddresses belonging to the subnet.
 

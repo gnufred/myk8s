@@ -6,7 +6,7 @@ title: Debug Running Pods
 content_type: task
 ---
 
-<!-- overview -->
+
 
 This page explains how to debug Pods running (or crashing) on a Node.
 
@@ -14,7 +14,7 @@ This page explains how to debug Pods running (or crashing) on a Node.
 ## {{% heading "prerequisites" %}}
 
 
-* Your {{< glossary_tooltip text="Pod" term_id="pod" >}} should already be
+* Your {{}} should already be
   scheduled and running. If your Pod is not yet running, start with [Debugging
   Pods](/docs/tasks/debug/debug-application/).
 * For some of the advanced debugging steps you need to know on which Node the
@@ -63,7 +63,7 @@ Node:         kube-worker-1/192.168.0.113
 Start Time:   Thu, 17 Feb 2022 16:51:01 -0500
 Labels:       app=nginx
               pod-template-hash=67d4bdd6f5
-Annotations:  <none>
+Annotations:  
 Status:       Running
 IP:           10.88.0.3
 IPs:
@@ -87,7 +87,7 @@ Containers:
     Requests:
       cpu:        500m
       memory:     128Mi
-    Environment:  <none>
+    Environment:  
     Mounts:
       /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-bgsgp (ro)
 Conditions:
@@ -101,10 +101,10 @@ Volumes:
     Type:                    Projected (a volume that contains injected data from multiple sources)
     TokenExpirationSeconds:  3607
     ConfigMapName:           kube-root-ca.crt
-    ConfigMapOptional:       <nil>
+    ConfigMapOptional:       
     DownwardAPI:             true
 QoS Class:                   Guaranteed
-Node-Selectors:              <none>
+Node-Selectors:              
 Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
 Events:
@@ -347,7 +347,7 @@ kubectl logs --previous ${POD_NAME} ${CONTAINER_NAME}
 
 ## Debugging with container exec {#container-exec}
 
-If the {{< glossary_tooltip text="container image" term_id="image" >}} includes
+If the {{}} includes
 debugging utilities, as is the case with images built from Linux and Windows OS
 base images, you can run commands inside a specific container with
 `kubectl exec`:
@@ -356,9 +356,9 @@ base images, you can run commands inside a specific container with
 kubectl exec ${POD_NAME} -c ${CONTAINER_NAME} -- ${CMD} ${ARG1} ${ARG2} ... ${ARGN}
 ```
 
-{{< note >}}
+{{}}
 `-c ${CONTAINER_NAME}` is optional. You can omit it for Pods that only contain a single container.
-{{< /note >}}
+{{}}
 
 As an example, to look at the logs from a running Cassandra pod, you might run
 
@@ -378,9 +378,9 @@ For more details, see [Get a Shell to a Running Container](
 
 ## Debugging with an ephemeral debug container {#ephemeral-container}
 
-{{< feature-state state="stable" for_k8s_version="v1.25" >}}
+{{}}
 
-{{< glossary_tooltip text="Ephemeral containers" term_id="ephemeral-container" >}}
+{{}}
 are useful for interactive troubleshooting when `kubectl exec` is insufficient
 because a container has crashed or a container image doesn't include debugging
 utilities, such as with [distroless images](
@@ -430,13 +430,12 @@ here because `kubectl run` does not enable [process namespace sharing](
 /docs/tasks/configure-pod-container/share-process-namespace/) in the pod it
 creates.
 
-{{< note >}}
-The `--target` parameter must be supported by the {{< glossary_tooltip
-text="Container Runtime" term_id="container-runtime" >}}. When not supported,
+{{}}
+The `--target` parameter must be supported by the {{}}. When not supported,
 the Ephemeral Container may not be started, or it may be started with an
 isolated process namespace so that `ps` does not reveal processes in other
 containers.
-{{< /note >}}
+{{}}
 
 You can view the state of the newly created ephemeral container using `kubectl describe`:
 
@@ -451,14 +450,14 @@ Ephemeral Containers:
     Container ID:   docker://b888f9adfd15bd5739fefaa39e1df4dd3c617b9902082b1cfdc29c4028ffb2eb
     Image:          busybox
     Image ID:       docker-pullable://busybox@sha256:1828edd60c5efd34b2bf5dd3282ec0cc04d47b2ff9caa0b6d4f07a21d1c08084
-    Port:           <none>
-    Host Port:      <none>
+    Port:           
+    Host Port:      
     State:          Running
       Started:      Wed, 12 Feb 2020 14:25:42 +0100
     Ready:          False
     Restart Count:  0
-    Environment:    <none>
-    Mounts:         <none>
+    Environment:    
+    Mounts:         
 ...
 ```
 
@@ -503,7 +502,7 @@ If you don't see a command prompt, try pressing enter.
 root@myapp-debug:/#
 ```
 
-{{< note >}}
+{{}}
 * `kubectl debug` automatically generates a container name if you don't choose
   one using the `--container` flag.
 * The `-i` flag causes `kubectl debug` to attach to the new container by
@@ -513,7 +512,7 @@ root@myapp-debug:/#
   from the other containers in the Pod. For more information about how this
   works, see [Share Process Namespace between Containers in a Pod](
   /docs/tasks/configure-pod-container/share-process-namespace/).
-{{< /note >}}
+{{}}
 
 Don't forget to clean up the debugging Pod when you're finished with it:
 
@@ -564,14 +563,14 @@ If you don't see a command prompt, try pressing enter.
 Now you have an interactive shell that you can use to perform tasks like
 checking filesystem paths or running the container command manually.
 
-{{< note >}}
+{{}}
 * To change the command of a specific container you must
   specify its name using `--container` or `kubectl debug` will instead
   create a new container to run the command you specified.
 * The `-i` flag causes `kubectl debug` to attach to the container by default.
   You can prevent this by specifying `--attach=false`. If your session becomes
   disconnected you can reattach using `kubectl attach`.
-{{< /note >}}
+{{}}
 
 Don't forget to clean up the debugging Pod when you're finished with it:
 

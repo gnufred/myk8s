@@ -5,14 +5,14 @@ weight: 50
 min-kubernetes-server-version: v1.6
 ---
 
-<!-- overview -->
+
 
 This page shows how to securely inject sensitive data, such as passwords and
 encryption keys, into Pods.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 ### Convert your secret data to a base-64 representation
 
@@ -27,11 +27,11 @@ echo -n '39528$vdg7Jb' | base64
 The output shows that the base-64 representation of your username is `bXktYXBw`,
 and the base-64 representation of your password is `Mzk1MjgkdmRnN0pi`.
 
-{{< caution >}}
+{{}}
 Use a local tool trusted by your OS to decrease the security risks of external tools.
-{{< /caution >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Create a Secret
 
@@ -70,8 +70,8 @@ username and password:
    ```
    Name:       test-secret
    Namespace:  default
-   Labels:     <none>
-   Annotations:    <none>
+   Labels:     
+   Annotations:    
 
    Type:   Opaque
 
@@ -232,13 +232,13 @@ spec:
 The Secret is mounted on `/etc/foo`; all the files created by the
 secret volume mount have permission `0400`.
 
-{{< note >}}
+{{}}
 If you're defining a Pod or a Pod template using JSON, beware that the JSON
 specification doesn't support octal literals for numbers because JSON considers
 `0400` to be the _decimal_ value `400`. In JSON, use decimal values for the
 `defaultMode` instead. If you're writing YAML, you can write the `defaultMode`
 in octal.
-{{< /note >}}
+{{}}
 
 ## Define container environment variables using Secret data
 
@@ -314,9 +314,9 @@ secrets change.
 
 ## Configure all key-value pairs in a Secret as container environment variables
 
-{{< note >}}
+{{}}
 This functionality is available in Kubernetes v1.6 and later.
-{{< /note >}}
+{{}}
 
 - Create a Secret containing multiple key-value pairs
 
@@ -377,7 +377,7 @@ another Pod which consumes a secret with test environment credentials.
    secret "test-db-secret" created
    ```
 
-   {{< note >}}
+   {{}}
    Special characters such as `$`, `\`, `*`, `=`, and `!` will be interpreted by your
    [shell](https://en.wikipedia.org/wiki/Shell_(computing)) and require escaping.
 
@@ -389,12 +389,12 @@ another Pod which consumes a secret with test environment credentials.
    ```
 
    You do not need to escape special characters in passwords from files (`--from-file`).
-   {{< /note >}}
+   {{}}
 
 1. Create the Pod manifests:
 
    ```shell
-   cat <<EOF > pod.yaml
+   cat  pod.yaml
    apiVersion: v1
    kind: List
    items:
@@ -437,10 +437,10 @@ another Pod which consumes a secret with test environment credentials.
    EOF
    ```
 
-   {{< note >}}
+   {{}}
    How the specs for the two Pods differ only in one field; this facilitates creating Pods
    with different capabilities from a common Pod template.
-   {{< /note >}}
+   {{}}
 
 1. Apply all those objects on the API server by running:
 
@@ -479,9 +479,9 @@ spec:
 
 ### References
 
-- [Secret](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#secret-v1-core)
-- [Volume](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core)
-- [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core)
+- [Secret](/docs/reference/generated/kubernetes-api/{{}}/#secret-v1-core)
+- [Volume](/docs/reference/generated/kubernetes-api/{{}}/#volume-v1-core)
+- [Pod](/docs/reference/generated/kubernetes-api/{{}}/#pod-v1-core)
 
 ## {{% heading "whatsnext" %}}
 

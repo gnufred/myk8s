@@ -10,16 +10,7 @@ weight: 2
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 
@@ -28,13 +19,13 @@ guide. You can file document formatting bugs against the
 
 A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
 
-<hr>
+
 
 - **matchExpressions** ([]LabelSelectorRequirement)
 
   matchExpressions is a list of label selector requirements. The requirements are ANDed.
 
-  <a name="LabelSelectorRequirement"></a>
+  
   *A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.*
 
   - **matchExpressions.key** (string), required

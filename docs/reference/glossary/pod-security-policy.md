@@ -11,9 +11,9 @@ tags:
 - core-object
 - fundamental
 ---
- Enables fine-grained authorization of {{< glossary_tooltip term_id="pod" >}} creation and updates.
+ Enables fine-grained authorization of {{}} creation and updates.
 
-<!--more--> 
+ 
 
 A cluster-level resource that controls security sensitive aspects of the Pod specification. The `PodSecurityPolicy` objects define a set of conditions that a Pod must run with in order to be accepted into the system, as well as defaults for the related fields. Pod Security Policy control is implemented as an optional admission controller.
 

@@ -5,13 +5,12 @@ min-kubernetes-server-version: v1.18
 weight: 110
 ---
 
-<!-- overview -->
 
-{{< feature-state state="stable"  for_k8s_version="v1.29" >}}
+
+{{}}
 
 Controlling the behavior of the Kubernetes API server in an overload situation
-is a key task for cluster administrators. The {{< glossary_tooltip
-term_id="kube-apiserver" text="kube-apiserver" >}} has some controls available
+is a key task for cluster administrators. The {{}} has some controls available
 (i.e. the `--max-requests-inflight` and `--max-mutating-requests-inflight`
 command-line flags) to limit the amount of outstanding work that will be
 accepted, preventing a flood of inbound requests from overloading and
@@ -24,14 +23,14 @@ and isolates requests in a more fine-grained way. It also introduces
 a limited amount of queuing, so that no requests are rejected in cases
 of very brief bursts.  Requests are dispatched from queues using a
 fair queuing technique so that, for example, a poorly-behaved
-{{< glossary_tooltip text="controller" term_id="controller" >}} need not
+{{}} need not
 starve others (even at the same priority level).
 
 This feature is designed to work well with standard controllers, which
 use informers and react to failures of API requests with exponential
 back-off, and other clients that also work this way.
 
-{{< caution >}}
+{{}}
 Some requests classified as "long-running"&mdash;such as remote
 command execution or log tailing&mdash;are not subject to the API
 Priority and Fairness filter. This is also true for the
@@ -39,9 +38,9 @@ Priority and Fairness filter. This is also true for the
 feature enabled. API Priority and Fairness _does_ apply to **watch**
 requests. When API Priority and Fairness is disabled, **watch** requests
 are not subject to the `--max-requests-inflight` limit.
-{{< /caution >}}
+{{}}
 
-<!-- body -->
+
 
 ## Enabling/Disabling API Priority and Fairness
 
@@ -51,7 +50,7 @@ and is enabled by default.  See
 for a general explanation of the available kube-apiserver command-line 
 options and how to enable and disable them.  The name of the 
 command-line option for APF is "--enable-priority-and-fairness".  This feature
-also involves an {{<glossary_tooltip term_id="api-group" text="API Group" >}} 
+also involves an {{}} 
 with: (a) a stable `v1` version, introduced in 1.29, and 
 enabled by default (b) a `v1beta3` version, enabled by default, and
 deprecated in v1.29.  You can
@@ -156,8 +155,7 @@ many instances should authenticate with distinct usernames
 
 After classifying a request into a flow, the API Priority and Fairness
 feature then may assign the request to a queue.  This assignment uses
-a technique known as {{< glossary_tooltip term_id="shuffle-sharding"
-text="shuffle sharding" >}}, which makes relatively efficient use of
+a technique known as {{}}, which makes relatively efficient use of
 queues to insulate low-intensity flows from high-intensity flows.
 
 The details of the queuing algorithm are tunable for each priority level, and
@@ -175,10 +173,10 @@ server.
 ## Resources
 
 The flow control API involves two kinds of resources.
-[PriorityLevelConfigurations](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#prioritylevelconfiguration-v1-flowcontrol-apiserver-k8s-io)
+[PriorityLevelConfigurations](/docs/reference/generated/kubernetes-api/{{}}/#prioritylevelconfiguration-v1-flowcontrol-apiserver-k8s-io)
 define the available priority levels, the share of the available concurrency
 budget that each can handle, and allow for fine-tuning queuing behavior.
-[FlowSchemas](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#flowschema-v1-flowcontrol-apiserver-k8s-io)
+[FlowSchemas](/docs/reference/generated/kubernetes-api/{{}}/#flowschema-v1-flowcontrol-apiserver-k8s-io)
 are used to classify individual inbound requests, matching each to a
 single PriorityLevelConfiguration.
 
@@ -200,13 +198,13 @@ down the total amount of traffic to a server by restarting
 PriorityLevelConfigurations will see their maximum allowed concurrency
 go up (or down) by the same fraction.
 
-{{< caution >}}
+{{}}
 In the versions before `v1beta3` the relevant
 PriorityLevelConfiguration field is named "assured concurrency shares"
 rather than "nominal concurrency shares".  Also, in Kubernetes release
 1.25 and earlier there were no periodic adjustments: the
 nominal/assured limits were always applied without adjustment.
-{{< /caution >}}
+{{}}
 
 The bounds on how much concurrency a priority level may lend and how
 much it may borrow are expressed in the PriorityLevelConfiguration as
@@ -221,14 +219,14 @@ seats for which demand recently appeared and then jointly fairly
 responding to the recent seat demand on the priority levels, within
 the bounds just described.
 
-{{< caution >}}
+{{}}
 With the Priority and Fairness feature enabled, the total concurrency limit for
 the server is set to the sum of `--max-requests-inflight` and
 `--max-mutating-requests-inflight`. There is no longer any distinction made
 between mutating and non-mutating requests; if you want to treat them
 separately for a given resource, make separate FlowSchemas that match the
 mutating and non-mutating verbs respectively.
-{{< /caution >}}
+{{}}
 
 When the volume of inbound requests assigned to a single
 PriorityLevelConfiguration is more than its permitted concurrency level, the
@@ -254,14 +252,14 @@ priority level. Details of the algorithm can be read in the
   different flows and the overall concurrency available to a single flow in an
   overload situation.
 
-  {{< note >}}
+  {{}}
   A larger `handSize` makes it less likely for two individual flows to collide
   (and therefore for one to be able to starve the other), but more likely that
   a small number of flows can dominate the apiserver. A larger `handSize` also
   potentially increases the amount of latency that a single high-traffic flow
   can cause. The maximum number of queued requests possible from a
   single flow is `handSize * queueLengthLimit`.
-  {{< /note >}}
+  {{}}
 
 Following is a table showing an interesting collection of shuffle
 sharding configurations, showing for each the probability that a
@@ -269,7 +267,7 @@ given mouse (low-intensity flow) is squished by the elephants (high-intensity fl
 an illustrative collection of numbers of elephants. See
 https://play.golang.org/p/Gi0PLgVHiUg , which computes this table.
 
-{{< table caption = "Example Shuffle Sharding Configurations" >}}
+{{}}
 HandSize | Queues | 1 elephant | 4 elephants | 16 elephants
 |----------|-----------|------------|----------------|--------------------|
 | 12 | 32 | 4.428838398950118e-09 | 0.11431348830099144 | 0.9935089607656024 |
@@ -283,7 +281,7 @@ HandSize | Queues | 1 elephant | 4 elephants | 16 elephants
 | 6 | 256 | 2.7134626662687968e-12 | 2.9516464018476436e-07 | 0.0008895654642000348 |
 | 6 | 512 | 4.116062922897309e-14 | 4.982983350480894e-09 | 2.26025764343413e-05 |
 | 6 | 1024 | 6.337324016514285e-16 | 8.09060164312957e-11 | 4.517408062903668e-07 |
-{{< /table >}}
+{{}}
 
 ### FlowSchema
 
@@ -292,14 +290,14 @@ priority level. Every inbound request is tested against FlowSchemas,
 starting with those with the numerically lowest `matchingPrecedence` and
 working upward. The first match wins.
 
-{{< caution >}}
+{{}}
 Only the first matching FlowSchema for a given request matters. If multiple
 FlowSchemas match a single inbound request, it will be assigned based on the one
 with the highest `matchingPrecedence`. If multiple FlowSchemas with equal
 `matchingPrecedence` match the same request, the one with lexicographically
 smaller `name` will win, but it's better not to rely on this, and instead to
 ensure that no two FlowSchemas have the same `matchingPrecedence`.
-{{< /caution >}}
+{{}}
 
 A FlowSchema matches a given request if at least one of its `rules`
 matches. A rule matches if at least one of its `subjects` *and* at least
@@ -456,14 +454,14 @@ where other traffic can crowd them out.
 If you add the following additional FlowSchema, this exempts those
 requests from rate limiting.
 
-{{< caution >}}
+{{}}
 Making this change also allows any hostile party to then send
 health-check requests that match this FlowSchema, at any volume they
 like.  If you have a web traffic filter or similar external security
 mechanism to protect your cluster's API server from general internet
 traffic, you can configure rules to block any health check requests
 that originate from outside your cluster.
-{{< /caution >}}
+{{}}
 
 {{% code_sample file="priority-and-fairness/health-for-strangers.yaml" %}}
 
@@ -471,12 +469,12 @@ that originate from outside your cluster.
 
 ### Metrics
 
-{{< note >}}
+{{}}
 In versions of Kubernetes before v1.20, the labels `flow_schema` and
 `priority_level` were inconsistently named `flowSchema` and `priorityLevel`,
 respectively. If you're running Kubernetes versions v1.19 and earlier, you
 should refer to the documentation for your version.
-{{< /note >}}
+{{}}
 
 When you enable the API Priority and Fairness feature, the kube-apiserver
 exports additional metrics. Monitoring these can help you determine whether your
@@ -523,12 +521,12 @@ poorly-behaved workloads that may be harming system health.
   `flow_schema`, `priority_level`, and `execute`. The `execute` label
   indicates whether the request has started executing.
 
-  {{< note >}}
+  {{}}
   Since each FlowSchema always assigns requests to a single
   PriorityLevelConfiguration, you can add the histograms for all the
   FlowSchemas for one priority level to get the effective histogram for
   requests assigned to that priority level.
-  {{< /note >}}
+  {{}}
 
 * `apiserver_flowcontrol_nominal_limit_seats` is a gauge vector
   holding each priority level's nominal concurrency limit, computed
@@ -593,14 +591,14 @@ poorly-behaved workloads that may be harming system health.
   reporting the length of the queue immediately after the request was added.
   Note that this produces different statistics than an unbiased survey would.
 
-  {{< note >}}
+  {{}}
   An outlier value in a histogram here means it is likely that a single flow
   (i.e., requests by one user or for one namespace, depending on
   configuration) is flooding the API server, and being throttled. By contrast,
   if one priority level's histogram shows that all queues for that priority
   level are longer than those for other priority levels, it may be appropriate
   to increase that PriorityLevelConfiguration's concurrency shares.
-  {{< /note >}}
+  {{}}
 
 * `apiserver_flowcontrol_request_concurrency_limit` is the same as
   `apiserver_flowcontrol_nominal_limit_seats`.  Before the

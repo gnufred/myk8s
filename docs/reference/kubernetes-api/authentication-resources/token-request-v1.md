@@ -10,16 +10,7 @@ weight: 2
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: authentication.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 TokenRequest requests a token for a given service account.
 
-<hr>
+
 
 - **apiVersion**: authentication.k8s.io/v1
 
@@ -38,15 +29,15 @@ TokenRequest requests a token for a given service account.
 - **kind**: TokenRequest
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../authentication-resources/token-request-v1#TokenRequestSpec" >}}">TokenRequestSpec</a>), required
+- **spec** (}}">TokenRequestSpec), required
 
   Spec holds information about the request being evaluated
 
-- **status** (<a href="{{< ref "../authentication-resources/token-request-v1#TokenRequestStatus" >}}">TokenRequestStatus</a>)
+- **status** (}}">TokenRequestStatus)
 
   Status is filled in by the server and indicates whether the token can be authenticated.
 
@@ -58,7 +49,7 @@ TokenRequest requests a token for a given service account.
 
 TokenRequestSpec contains client provided parameters of a token request.
 
-<hr>
+
 
 - **audiences** ([]string), required
 
@@ -68,7 +59,7 @@ TokenRequestSpec contains client provided parameters of a token request.
 
   BoundObjectRef is a reference to an object that the token will be bound to. The token will only be valid for as long as the bound object exists. NOTE: The API server's TokenReview endpoint will validate the BoundObjectRef, but other audiences may not. Keep ExpirationSeconds small if you want prompt revocation.
 
-  <a name="BoundObjectReference"></a>
+  
   *BoundObjectReference is a reference to an object that a token is bound to.*
 
   - **boundObjectRef.apiVersion** (string)
@@ -99,13 +90,13 @@ TokenRequestSpec contains client provided parameters of a token request.
 
 TokenRequestStatus is the result of a token request.
 
-<hr>
+
 
 - **expirationTimestamp** (Time), required
 
   ExpirationTimestamp is the time of expiration of the returned token.
 
-  <a name="Time"></a>
+  
   *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
 - **token** (string), required
@@ -120,7 +111,7 @@ TokenRequestStatus is the result of a token request.
 
 
 
-<hr>
+
 
 
 
@@ -143,43 +134,43 @@ POST /api/v1/namespaces/{namespace}/serviceaccounts/{name}/token
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../authentication-resources/token-request-v1#TokenRequest" >}}">TokenRequest</a>, required
+- **body**: }}">TokenRequest, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/token-request-v1#TokenRequest" >}}">TokenRequest</a>): OK
+200 (}}">TokenRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/token-request-v1#TokenRequest" >}}">TokenRequest</a>): Created
+201 (}}">TokenRequest): Created
 
-202 (<a href="{{< ref "../authentication-resources/token-request-v1#TokenRequest" >}}">TokenRequest</a>): Accepted
+202 (}}">TokenRequest): Accepted
 
 401: Unauthorized
 

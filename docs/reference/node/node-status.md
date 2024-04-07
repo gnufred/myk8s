@@ -3,7 +3,7 @@ content_type: reference
 title: Node Status
 weight: 80
 ---
-<!-- overview -->
+
 
 The status of a [node](/docs/concepts/architecture/nodes/) in Kubernetes is a critical
 aspect of managing a Kubernetes cluster. In this article, we'll cover the basics of
@@ -21,7 +21,7 @@ A Node's status contains the following information:
 You can use `kubectl` to view a Node's status and other details:
 
 ```shell
-kubectl describe node <insert-node-name-here>
+kubectl describe node 
 ```
 
 Each section of the output is described below.
@@ -40,7 +40,7 @@ The usage of these fields varies depending on your cloud provider or bare metal 
 
 The `conditions` field describes the status of all `Running` nodes. Examples of conditions include:
 
-{{< table caption = "Node conditions, and a description of when each condition applies." >}}
+{{}}
 | Node Condition       | Description |
 |----------------------|-------------|
 | `Ready`              | `True` if the node is healthy and ready to accept pods, `False` if the node is not healthy and is not accepting pods, and `Unknown` if the node controller has not heard from the node in the last `node-monitor-grace-period` (default is 40 seconds) |
@@ -48,13 +48,13 @@ The `conditions` field describes the status of all `Running` nodes. Examples of 
 | `MemoryPressure`     | `True` if pressure exists on the node memory—that is, if the node memory is low; otherwise `False` |
 | `PIDPressure`        | `True` if pressure exists on the processes—that is, if there are too many processes on the node; otherwise `False` |
 | `NetworkUnavailable` | `True` if the network for the node is not correctly configured, otherwise `False` |
-{{< /table >}}
+{{}}
 
-{{< note >}}
+{{}}
 If you use command-line tools to print details of a cordoned Node, the Condition includes
 `SchedulingDisabled`. `SchedulingDisabled` is not a Condition in the Kubernetes API; instead,
 cordoned nodes are marked Unschedulable in their spec.
-{{< /note >}}
+{{}}
 
 In the Kubernetes API, a node's condition is represented as part of the `.status`
 of the Node resource. For example, the following JSON structure describes a healthy node:
@@ -81,7 +81,7 @@ or a `node.kubernetes.io/not-ready` taint, for a `False` status, to be added to 
 
 These taints affect pending pods as the scheduler takes the Node's taints into consideration when
 assigning a pod to a Node. Existing pods scheduled to the node may be evicted due to the application
-of `NoExecute` taints. Pods may also have {{< glossary_tooltip text="tolerations" term_id="toleration" >}} that let
+of `NoExecute` taints. Pods may also have {{}} that let
 them schedule to and continue running on a Node even though it has a specific taint.
 
 See [Taint Based Evictions](/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-based-evictions) and
@@ -119,7 +119,7 @@ For nodes there are two forms of heartbeats:
 * updates to the `.status` of a Node
 * [Lease](/docs/concepts/architecture/leases/) objects
   within the `kube-node-lease`
-  {{< glossary_tooltip term_id="namespace" text="namespace">}}.
+  {{}}.
   Each Node has an associated Lease object.
 
 Compared to updates to `.status` of a Node, a Lease is a lightweight resource.

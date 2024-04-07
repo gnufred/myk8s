@@ -8,9 +8,9 @@ content_type: task
 weight: 250
 ---
 
-<!-- overview -->
 
-{{< glossary_definition term_id="cloud-controller-manager" length="all" prepend="The cloud-controller-manager is">}}
+
+{{}}
 
 ## Background
 
@@ -70,7 +70,7 @@ authorization mode grants permissions to `kube-controller-manager` and
 `cloud-controller-manager` components, please grant the needed access in a way that
 matches the mode.
 
-<!-- steps -->
+
 
 ### Grant access to Migration Lease
 

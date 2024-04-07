@@ -7,7 +7,7 @@ content_type: concept
 weight: 15
 ---
 
-<!-- overview -->
+
 
 For Kubernetes, the _Metrics API_ offers a basic set of metrics to support automatic scaling and
 similar use cases.  This API makes information available about resource usage for node and pod,
@@ -23,43 +23,43 @@ You can also view the resource metrics using the
 [`kubectl top`](/docs/reference/generated/kubectl/kubectl-commands#top)
 command.
 
-{{< note >}}
+{{}}
 The Metrics API, and the metrics pipeline that it enables, only offers the minimum
 CPU and memory metrics to enable automatic scaling using HPA and / or VPA.
 If you would like to provide a more complete set of metrics, you can complement
 the simpler Metrics API by deploying a second
 [metrics pipeline](/docs/tasks/debug/debug-cluster/resource-usage-monitoring/#full-metrics-pipeline)
 that uses the _Custom Metrics API_.
-{{< /note >}}
+{{}}
 
 
 Figure 1 illustrates the architecture of the resource metrics pipeline.
 
-{{< mermaid >}}
+{{}}
 flowchart RL
 subgraph cluster[Cluster]
 direction RL
-S[ <br><br> ]
-A[Metrics-<br>Server]
+S[  ]
+A[Metrics-Server]
 subgraph B[Nodes]
 direction TB
 D[cAdvisor] --> C[kubelet]
-E[Container<br>runtime] --> D
-E1[Container<br>runtime] --> D
+E[Containerruntime] --> D
+E1[Containerruntime] --> D
 P[pod data] -.- C
 end
-L[API<br>server]
+L[APIserver]
 W[HPA]
-C ---->|node level<br>resource metrics| A -->|metrics<br>API| L --> W
+C ---->|node levelresource metrics| A -->|metricsAPI| L --> W
 end
-L ---> K[kubectl<br>top]
+L ---> K[kubectltop]
 classDef box fill:#fff,stroke:#000,stroke-width:1px,color:#000;
 class W,B,P,K,cluster,D,E,E1 box
 classDef spacewhite fill:#ffffff,stroke:#fff,stroke-width:0px,color:#000
 class S spacewhite
 classDef k8s fill:#326ce5,stroke:#fff,stroke-width:1px,color:#fff;
 class A,L,C k8s
-{{< /mermaid >}}
+{{}}
 
 Figure 1. Resource Metrics Pipeline
 
@@ -79,18 +79,18 @@ The architecture components, from right to left in the figure, consist of the fo
   workload autoscaling. To make this work in your cluster, you need an API extension server that
   provides the Metrics API.
 
-  {{< note >}}
+  {{}}
   cAdvisor supports reading metrics from cgroups, which works with typical container runtimes on Linux.
   If you use a container runtime that uses another resource isolation mechanism, for example
   virtualization, then that container runtime must support
   [CRI Container Metrics](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/cri-container-stats.md)
   in order for metrics to be available to the kubelet.
-  {{< /note >}}
+  {{}}
 
-<!-- body -->
+
 
 ## Metrics API
-{{< feature-state for_k8s_version="1.8" state="beta" >}}
+{{}}
 
 The metrics-server implements the Metrics API. This API allows you to access CPU and memory usage
 for the nodes and pods in your cluster. Its primary role is to feed resource usage metrics to K8s
@@ -178,10 +178,10 @@ the [metrics-server repository](https://github.com/kubernetes-sigs/metrics-serve
 [resource metrics API](https://github.com/kubernetes/metrics#resource-metrics-api).
 
 
-{{< note >}}
+{{}}
 You must deploy the metrics-server or alternative adapter that serves the Metrics API to be able
 to access it.
-{{< /note >}}
+{{}}
 
 ## Measuring resource usage
 

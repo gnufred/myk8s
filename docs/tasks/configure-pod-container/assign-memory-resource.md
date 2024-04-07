@@ -4,7 +4,7 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 
 This page shows how to assign a memory *request* and a memory *limit* to a
 Container. A Container is guaranteed to have as much memory as it requests,
@@ -16,7 +16,7 @@ but is not allowed to use more memory than its limit.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 Each node in your cluster must have at least 300 MiB of memory.
 
@@ -49,7 +49,7 @@ v1beta1.metrics.k8s.io
 
 
 
-<!-- steps -->
+
 
 ## Create a namespace
 
@@ -118,7 +118,7 @@ Pod's 200 MiB limit.
 
 ```
 NAME                        CPU(cores)   MEMORY(bytes)
-memory-demo                 <something>  162856960
+memory-demo                   162856960
 ```
 
 Delete your Pod:
@@ -310,7 +310,7 @@ could use all of the memory available on the Node where it is running which in t
 
 * The Container is running in a namespace that has a default memory limit, and the
 Container is automatically assigned the default limit. Cluster administrators can use a
-[LimitRange](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#limitrange-v1-core)
+[LimitRange](/docs/reference/generated/kubernetes-api/{{}}/#limitrange-v1-core)
 to specify a default value for the memory limit.
 
 ## Motivation for memory requests and limits

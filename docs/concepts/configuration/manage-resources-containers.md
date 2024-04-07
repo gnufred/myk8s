@@ -9,20 +9,20 @@ feature:
     Mix critical and best-effort workloads in order to drive up utilization and save even more resources.
 ---
 
-<!-- overview -->
 
-When you specify a {{< glossary_tooltip term_id="pod" >}}, you can optionally specify how much of each resource a 
-{{< glossary_tooltip text="container" term_id="container" >}} needs. The most common resources to specify are CPU and memory 
+
+When you specify a {{}}, you can optionally specify how much of each resource a 
+{{}} needs. The most common resources to specify are CPU and memory 
 (RAM); there are others.
 
 When you specify the resource _request_ for containers in a Pod, the
-{{< glossary_tooltip text="kube-scheduler" term_id="kube-scheduler" >}} uses this information to decide which node to place the Pod on. 
-When you specify a resource _limit_ for a container, the {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} enforces those 
+{{}} uses this information to decide which node to place the Pod on. 
+When you specify a resource _limit_ for a container, the {{}} enforces those 
 limits so that the running container is not allowed to use more of that resource 
 than the limit you set. The kubelet also reserves at least the _request_ amount of 
 that system resource specifically for that container to use.
 
-<!-- body -->
+
 
 ## Requests and limits
 
@@ -35,7 +35,7 @@ a Pod scheduled to a Node with 8GiB of memory and no other Pods, then the contai
 more RAM.
 
 If you set a `memory` limit of 4GiB for that container, the kubelet (and
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}) enforce the limit.
+{{}}) enforce the limit.
 The runtime prevents the container from using more than the configured resource limit. For example:
 when a process in the container tries to consume more than the allowed amount of memory,
 the system kernel terminates the process that attempted the allocation, with an out of memory
@@ -45,11 +45,11 @@ Limits can be implemented either reactively (the system intervenes once it sees 
 or by enforcement (the system prevents the container from ever exceeding the limit). Different
 runtimes can have different ways to implement the same restrictions.
 
-{{< note >}}
+{{}}
 If you specify a limit for a resource, but do not specify any request, and no admission-time
 mechanism has applied a default request for that resource, then Kubernetes copies the limit
 you specified and uses it as the requested value for the resource.
-{{< /note >}}
+{{}}
 
 ## Resource types
 
@@ -64,10 +64,10 @@ For example, on a system where the default page size is 4KiB, you could specify 
 `hugepages-2Mi: 80Mi`. If the container tries allocating over 40 2MiB huge pages (a
 total of 80 MiB), that allocation fails.
 
-{{< note >}}
+{{}}
 You cannot overcommit `hugepages-*` resources.
 This is different from the `memory` and `cpu` resources.
-{{< /note >}}
+{{}}
 
 CPU and memory are collectively referred to as *compute resources*, or *resources*. Compute
 resources are measurable quantities that can be requested, allocated, and
@@ -83,10 +83,10 @@ including the following:
 
 * `spec.containers[].resources.limits.cpu`
 * `spec.containers[].resources.limits.memory`
-* `spec.containers[].resources.limits.hugepages-<size>`
+* `spec.containers[].resources.limits.hugepages-`
 * `spec.containers[].resources.requests.cpu`
 * `spec.containers[].resources.requests.memory`
-* `spec.containers[].resources.requests.hugepages-<size>`
+* `spec.containers[].resources.requests.hugepages-`
 
 Although you can only specify requests and limits for individual containers,
 it is also useful to think about the overall resource requests and limits for
@@ -114,7 +114,7 @@ CPU resource is always specified as an absolute amount of resource, never as a r
 `500m` CPU represents the roughly same amount of computing power whether that container
 runs on a single-core, dual-core, or 48-core machine.
 
-{{< note >}}
+{{}}
 Kubernetes doesn't allow you to specify CPU resources with a precision finer than
 `1m` or `0.001` CPU. To avoid accidentally using an invalid CPU quantity, it's useful to specify CPU units using the milliCPU form 
 instead of the decimal form when using less than 1 CPU unit. 
@@ -123,7 +123,7 @@ For example, you have a Pod that uses `5m` or `0.005` CPU and would like to decr
 its CPU resources. By using the decimal form, it's harder to spot that `0.0005` CPU
 is an invalid value, while by using the milliCPU form, it's easier to spot that
 `0.5m` is an invalid value.
-{{< /note >}}
+{{}}
 
 ### Memory resource units {#meaning-of-memory}
 
@@ -145,7 +145,7 @@ or 400 megabytes (`400M`).
 
 The following Pod has two containers. Both containers are defined with a request for
 0.25 CPU
-and 64MiB (2<sup>26</sup> bytes) of memory. Each container has a limit of 0.5
+and 64MiB (226 bytes) of memory. Each container has a limit of 0.5
 CPU and 128MiB of memory. You can say the Pod has a request of 0.5 CPU and 128
 MiB of memory, and a limit of 1 CPU and 256MiB of memory.
 
@@ -196,7 +196,7 @@ When the kubelet starts a container as part of a Pod, the kubelet passes that co
 requests and limits for memory and CPU to the container runtime.
 
 On Linux, the container runtime typically configures
-kernel {{< glossary_tooltip text="cgroups" term_id="cgroup" >}} that apply and enforce the
+kernel {{}} that apply and enforce the
 limits you defined.
 
 - The CPU limit defines a hard ceiling on how much CPU time that the container can use.
@@ -219,7 +219,7 @@ limits you defined.
 
 If a container exceeds its memory request and the node that it runs on becomes short of
 memory overall, it is likely that the Pod the container belongs to will be
-{{< glossary_tooltip text="evicted" term_id="eviction" >}}.
+{{}}.
 
 A container might or might not be allowed to exceed its CPU limit for extended periods of time.
 However, container runtimes don't terminate Pods or containers for excessive CPU usage.
@@ -239,8 +239,8 @@ directly or from your monitoring tools.
 
 ## Local ephemeral storage
 
-<!-- feature gate LocalStorageCapacityIsolation -->
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+
+{{}}
 
 Nodes have local ephemeral storage, backed by
 locally-attached writeable devices or, sometimes, by RAM.
@@ -249,20 +249,20 @@ locally-attached writeable devices or, sometimes, by RAM.
 Pods use ephemeral local storage for scratch space, caching, and for logs.
 The kubelet can provide scratch space to Pods using local ephemeral storage to
 mount [`emptyDir`](/docs/concepts/storage/volumes/#emptydir)
- {{< glossary_tooltip term_id="volume" text="volumes" >}} into containers.
+ {{}} into containers.
 
 The kubelet also uses this kind of storage to hold
 [node-level container logs](/docs/concepts/cluster-administration/logging/#logging-at-the-node-level),
 container images, and the writable layers of running containers.
 
-{{< caution >}}
+{{}}
 If a node fails, the data in its ephemeral storage can be lost.
 Your applications cannot expect any performance SLAs (disk IOPS for example)
 from local ephemeral storage.
-{{< /caution >}}
+{{}}
 
 
-{{< note >}}
+{{}}
 To make the resource quota work on ephemeral-storage, two things need to be done:
 
 * An admin sets the resource quota for ephemeral-storage in a namespace.
@@ -271,7 +271,7 @@ To make the resource quota work on ephemeral-storage, two things need to be done
 If the user doesn't specify the ephemeral-storage resource limit in the Pod spec,
 the resource quota is not enforced on ephemeral-storage.
 
-{{< /note >}}
+{{}}
 
 Kubernetes lets you track, reserve and limit the amount
 of ephemeral local storage a Pod can consume.
@@ -279,7 +279,7 @@ of ephemeral local storage a Pod can consume.
 ### Configurations for local ephemeral storage
 
 Kubernetes supports two ways to configure local ephemeral storage on a node:
-{{< tabs name="local_storage_configurations" >}}
+{{}}
 {{% tab name="Single filesystem" %}}
 In this configuration, you place all different kinds of ephemeral local data
 (`emptyDir` volumes, writeable layers, container images, logs) into one filesystem.
@@ -319,7 +319,7 @@ The first filesystem does not hold any image layers or writeable layers.
 Your node can have as many other filesystems, not used for Kubernetes,
 as you like.
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 The kubelet can measure how much local storage it is using. It does this provided
 that you have set up the node using one of the supported configurations for local
@@ -328,14 +328,14 @@ ephemeral storage.
 If you have a different configuration, then the kubelet does not apply resource
 limits for ephemeral local storage.
 
-{{< note >}}
+{{}}
 The kubelet tracks `tmpfs` emptyDir volumes as container memory use, rather
 than as local ephemeral storage.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 The kubelet will only track the root filesystem for ephemeral storage. OS layouts that mount a separate disk to `/var/lib/kubelet` or `/var/lib/containers` will not report ephemeral storage correctly.
-{{< /note >}}
+{{}}
 
 ### Setting requests and limits for local ephemeral storage
 
@@ -428,30 +428,30 @@ the local ephemeral storage usage from all containers and also the Pod's `emptyD
 volumes exceeds the overall Pod storage limit, then the kubelet also marks the Pod
 for eviction.
 
-{{< caution >}}
+{{}}
 If the kubelet is not measuring local ephemeral storage, then a Pod
 that exceeds its local storage limit will not be evicted for breaching
 local storage resource limits.
 
 However, if the filesystem space for writeable container layers, node-level logs,
 or `emptyDir` volumes falls low, the node
-{{< glossary_tooltip text="taints" term_id="taint" >}} itself as short on local storage
+{{}} itself as short on local storage
 and this taint triggers eviction for any Pods that don't specifically tolerate the taint.
 
 See the supported [configurations](#configurations-for-local-ephemeral-storage)
 for ephemeral local storage.
-{{< /caution >}}
+{{}}
 
 The kubelet supports different ways to measure Pod storage use:
 
-{{< tabs name="resource-emphemeralstorage-measurement" >}}
+{{}}
 {{% tab name="Periodic scanning" %}}
 The kubelet performs regular, scheduled checks that scan each
 `emptyDir` volume, container log directory, and writeable container layer.
 
 The scan measures how much space is used.
 
-{{< note >}}
+{{}}
 In this mode, the kubelet does not track open file descriptors
 for deleted files.
 
@@ -459,11 +459,11 @@ If you (or a container) create a file inside an `emptyDir` volume,
 something then opens that file, and you delete the file while it is
 still open, then the inode for the deleted file stays until you close
 that file but the kubelet does not categorize the space as in use.
-{{< /note >}}
+{{}}
 {{% /tab %}}
 {{% tab name="Filesystem project quota" %}}
 
-{{< feature-state for_k8s_version="v1.15" state="alpha" >}}
+{{}}
 
 Project quotas are an operating-system level feature for managing
 storage use on filesystems. With Kubernetes, you can enable project
@@ -471,9 +471,9 @@ quotas for monitoring storage use. Make sure that the filesystem
 backing the `emptyDir` volumes, on the node, provides project quota support.
 For example, XFS and ext4fs offer project quotas.
 
-{{< note >}}
+{{}}
 Project quotas let you monitor storage use; they do not enforce limits.
-{{< /note >}}
+{{}}
 
 Kubernetes uses project IDs starting from `1048576`. The IDs in use are
 registered in `/etc/projects` and `/etc/projid`. If project IDs in
@@ -512,7 +512,7 @@ If you want to use project quotas, you should:
   mount option is named `prjquota`.
 
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## Extended resources
 
@@ -563,12 +563,12 @@ curl --header "Content-Type: application/json-patch+json" \
 http://k8s-master:8080/api/v1/nodes/k8s-node-1/status
 ```
 
-{{< note >}}
+{{}}
 In the preceding request, `~1` is the encoding for the character `/`
 in the patch path. The operation path value in JSON-Patch is interpreted as a
 JSON-Pointer. For more details, see
 [IETF RFC 6901, section 3](https://tools.ietf.org/html/rfc6901#section-3).
-{{< /note >}}
+{{}}
 
 #### Cluster-level extended resources
 
@@ -595,7 +595,7 @@ extender.
   "apiVersion": "v1",
   "extenders": [
     {
-      "urlPrefix":"<extender-endpoint>",
+      "urlPrefix":"",
       "bindVerb": "bind",
       "managedResources": [
         {
@@ -618,18 +618,18 @@ The API server restricts quantities of extended resources to whole numbers.
 Examples of _valid_ quantities are `3`, `3000m` and `3Ki`. Examples of
 _invalid_ quantities are `0.5` and `1500m`.
 
-{{< note >}}
+{{}}
 Extended resources replace Opaque Integer Resources.
 Users can use any domain name prefix other than `kubernetes.io` which is reserved.
-{{< /note >}}
+{{}}
 
 To consume an extended resource in a Pod, include the resource name as a key
 in the `spec.containers[].resources.limits` map in the container spec.
 
-{{< note >}}
+{{}}
 Extended resources cannot be overcommitted, so request and limit
 must be equal if both are present in a container spec.
-{{< /note >}}
+{{}}
 
 A Pod is scheduled only if all of the resource requests are satisfied, including
 CPU, memory and any extended resources. The Pod remains in the `PENDING` state

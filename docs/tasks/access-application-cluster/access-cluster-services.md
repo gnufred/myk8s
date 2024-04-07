@@ -4,14 +4,14 @@ content_type: task
 weight: 140
 ---
 
-<!-- overview -->
+
 This page shows how to connect to services running on the Kubernetes cluster.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Accessing services running on the cluster
 
@@ -76,10 +76,10 @@ at `https://192.0.2.1/api/v1/namespaces/kube-system/services/elasticsearch-loggi
 if suitable credentials are passed, or through a kubectl proxy at, for example:
 `http://localhost:8080/api/v1/namespaces/kube-system/services/elasticsearch-logging/proxy/`.
 
-{{< note >}}
+{{}}
 See [Access Clusters Using the Kubernetes API](/docs/tasks/administer-cluster/access-cluster-api/#accessing-the-kubernetes-api)
 for how to pass credentials or use kubectl proxy.
-{{< /note >}}
+{{}}
 
 #### Manually constructing apiserver proxy URLs
 
@@ -91,14 +91,14 @@ If you haven't specified a name for your port, you don't have to specify *port_n
 use the port number in place of the *port_name* for both named and unnamed ports.
 
 By default, the API server proxies to your service using HTTP. To use HTTPS, prefix the service name with `https:`:
-`http://<kubernetes_master_address>/api/v1/namespaces/<namespace_name>/services/<service_name>/proxy`
+`http:///api/v1/namespaces//services//proxy`
 
-The supported formats for the `<service_name>` segment of the URL are:
+The supported formats for the `` segment of the URL are:
 
-* `<service_name>` - proxies to the default or unnamed port using http
-* `<service_name>:<port_name>` - proxies to the specified port name or port number using http
-* `https:<service_name>:` - proxies to the default or unnamed port using https (note the trailing colon)
-* `https:<service_name>:<port_name>` - proxies to the specified port name or port number using https
+* `` - proxies to the default or unnamed port using http
+* `:` - proxies to the specified port name or port number using http
+* `https::` - proxies to the default or unnamed port using https (note the trailing colon)
+* `https::` - proxies to the specified port name or port number using https
 
 ##### Examples
 

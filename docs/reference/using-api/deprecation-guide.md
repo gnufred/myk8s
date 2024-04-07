@@ -9,14 +9,14 @@ weight: 45
 content_type: reference
 ---
 
-<!-- overview -->
+
 
 As the Kubernetes API evolves, APIs are periodically reorganized or upgraded.
 When APIs evolve, the old API is deprecated and eventually removed.
 This page contains information you need to know when migrating from
 deprecated API versions to newer and more stable API versions.
 
-<!-- body -->
+
 
 ## Removed APIs by release
 
@@ -381,7 +381,7 @@ The **extensions/v1beta1** API version of PodSecurityPolicy is no longer served 
 You can test your clusters by starting an API server with specific API versions disabled
 to simulate upcoming removals. Add the following flag to the API server startup arguments:
 
-`--runtime-config=<group>/<version>=false`
+`--runtime-config=/=false`
 
 For example:
 
@@ -399,7 +399,7 @@ to locate use of deprecated APIs.
 
   You can use the `kubectl convert` command to automatically convert an existing object:
 
-  `kubectl convert -f <file> --output-version <group>/<version>`.
+  `kubectl convert -f  --output-version /`.
 
   For example, to convert an older Deployment to `apps/v1`, you can run:
 
@@ -408,7 +408,7 @@ to locate use of deprecated APIs.
   This conversion may use non-ideal default values. To learn more about a specific
   resource, check the Kubernetes [API reference](/docs/reference/kubernetes-api/).
   
-  {{< note >}}
+  {{}}
   The `kubectl convert` tool is not installed by default, although
   in fact it once was part of `kubectl` itself. For more details, you can read the
   [deprecation and removal issue](https://github.com/kubernetes/kubectl/issues/725)
@@ -419,4 +419,4 @@ to locate use of deprecated APIs.
   [Linux](/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin),
   [macOS](/docs/tasks/tools/install-kubectl-macos/#install-kubectl-convert-plugin), or
   [Windows](/docs/tasks/tools/install-kubectl-windows/#install-kubectl-convert-plugin).
-  {{< /note >}}
+  {{}}

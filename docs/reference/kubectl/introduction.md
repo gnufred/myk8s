@@ -28,9 +28,9 @@ declarative files called Resource Config used with the Kubectl *Apply* command.
 This command reads a local (or remote) file structure and modifies cluster state to
 reflect the declared intent.
 
-{{< alert color="success" title="Apply" >}}
+{{}}
 Apply is the preferred mechanism for managing Resources in a Kubernetes cluster.
-{{< /alert >}}
+{{}}
 
 ## Printing state about Workloads
 
@@ -65,7 +65,7 @@ generating and modifying Resources.
 - Setting fields on Resources
 - Editing (live) Resources in a text editor
 
-{{< alert color="warning" title="Porcelain For Dev Only" >}}
+{{}}
 Porcelain commands are time saving for experimenting with workloads in a dev cluster, but shouldn't
 be used for production.
-{{< /alert >}}
+{{}}

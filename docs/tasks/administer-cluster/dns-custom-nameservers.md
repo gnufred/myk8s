@@ -8,41 +8,41 @@ min-kubernetes-server-version: v1.12
 weight: 160
 ---
 
-<!-- overview -->
+
 This page explains how to configure your DNS
-{{< glossary_tooltip text="Pod(s)" term_id="pod" >}} and customize the
+{{}} and customize the
 DNS resolution process in your cluster.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 Your cluster must be running the CoreDNS add-on.
 
 {{% version-check %}}
 
-<!-- steps -->
+
 
 ## Introduction
 
 DNS is a built-in Kubernetes service launched automatically
 using the _addon manager_ [cluster add-on](http://releases.k8s.io/master/cluster/addons/README.md).
 
-{{< note >}}
+{{}}
 The CoreDNS Service is named `kube-dns` in the `metadata.name` field.  
 The intent is to ensure greater interoperability with workloads that relied on
 the legacy `kube-dns` Service name to resolve addresses internal to the cluster.
 Using a Service named `kube-dns` abstracts away the implementation detail of
 which DNS provider is running behind that common name.
-{{< /note >}}
+{{}}
 
 If you are running CoreDNS as a Deployment, it will typically be exposed as
 a Kubernetes Service with a static IP address.
 The kubelet passes DNS resolver information to each container with the
-`--cluster-dns=<dns-service-ip>` flag.
+`--cluster-dns=` flag.
 
 DNS names also need domains. You configure the local domain in the kubelet
-with the flag `--cluster-domain=<default-local-domain>`.
+with the flag `--cluster-domain=`.
 
 The DNS server supports forward lookups (A and AAAA records), port lookups (SRV records),
 reverse IP address lookups (PTR records), and more. For more information, see
@@ -68,7 +68,7 @@ complying with the [DNS specifications](https://github.com/kubernetes/dns/blob/m
 CoreDNS is a DNS server that is modular and pluggable, with plugins adding new functionalities.
 The CoreDNS server can be configured by maintaining a [Corefile](https://coredns.io/2017/07/23/corefile-explained/),
 which is the CoreDNS configuration file. As a cluster administrator, you can modify the
-{{< glossary_tooltip text="ConfigMap" term_id="configmap" >}} for the CoreDNS Corefile to
+{{}} for the CoreDNS Corefile to
 change how DNS service discovery behaves for that cluster.
 
 In Kubernetes, CoreDNS is installed with the following default Corefile configuration:
@@ -191,10 +191,10 @@ data:
     }
 ```
 
-{{< note >}}
+{{}}
 CoreDNS does not support FQDNs for stub-domains and nameservers (eg: "ns.foo.com").
 During translation, all FQDN nameservers will be omitted from the CoreDNS config.
-{{< /note >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

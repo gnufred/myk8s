@@ -8,37 +8,37 @@ card:
   title: Configure access to clusters
 ---
 
-<!-- overview -->
+
 
 This page shows how to configure access to multiple clusters by using
 configuration files. After your clusters, users, and contexts are defined in
 one or more configuration files, you can quickly switch between clusters by using the
 `kubectl config use-context` command.
 
-{{< note >}}
+{{}}
 A file that is used to configure access to a cluster is sometimes called
 a *kubeconfig file*. This is a generic way of referring to configuration files.
 It does not mean that there is a file named `kubeconfig`.
-{{< /note >}}
+{{}}
 
 
-{{< warning >}}
+{{}}
 Only use kubeconfig files from trusted sources. Using a specially-crafted kubeconfig
 file could result in malicious code execution or file exposure.
 If you must use an untrusted kubeconfig file, inspect it carefully first, much as you would a shell script.
-{{< /warning>}}
+{{}}
 
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-To check that {{< glossary_tooltip text="kubectl" term_id="kubectl" >}} is installed,
+To check that {{}} is installed,
 run `kubectl version --client`. The kubectl version should be
 [within one minor version](/releases/version-skew-policy/#kubectl) of your
 cluster's API server.
 
-<!-- steps -->
+
 
 ## Define clusters, users, and contexts
 
@@ -89,20 +89,20 @@ kubectl config --kubeconfig=config-demo set-cluster test --server=https://5.6.7.
 
 Add user details to your configuration file:
 
-{{< caution >}}
+{{}}
 Storing passwords in Kubernetes client config is risky. A better alternative would be to use a credential plugin and store them separately. See: [client-go credential plugins](/docs/reference/access-authn-authz/authentication/#client-go-credential-plugins)
-{{< /caution >}}
+{{}}
 
 ```shell
 kubectl config --kubeconfig=config-demo set-credentials developer --client-certificate=fake-cert-file --client-key=fake-key-seefile
 kubectl config --kubeconfig=config-demo set-credentials experimenter --username=exp --password=some-password
 ```
 
-{{< note >}}
-- To delete a user you can run `kubectl --kubeconfig=config-demo config unset users.<name>`
-- To remove a cluster, you can run `kubectl --kubeconfig=config-demo config unset clusters.<name>`
-- To remove a context, you can run `kubectl --kubeconfig=config-demo config unset contexts.<name>`
-{{< /note >}}
+{{}}
+- To delete a user you can run `kubectl --kubeconfig=config-demo config unset users.`
+- To remove a cluster, you can run `kubectl --kubeconfig=config-demo config unset clusters.`
+- To remove a context, you can run `kubectl --kubeconfig=config-demo config unset contexts.`
+{{}}
 
 Add context details to your configuration file:
 
@@ -385,7 +385,7 @@ kubectl config view
 
 ## Clean up
 
-Return your `KUBECONFIG` environment variable to its original value. For example:<br>
+Return your `KUBECONFIG` environment variable to its original value. For example:
 
 ### Linux
 

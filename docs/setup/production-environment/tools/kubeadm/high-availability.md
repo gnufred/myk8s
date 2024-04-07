@@ -6,7 +6,7 @@ content_type: task
 weight: 60
 ---
 
-<!-- overview -->
+
 
 This page explains two different approaches to setting up a highly available Kubernetes
 cluster using kubeadm:
@@ -24,30 +24,27 @@ in the kubeadm [issue tracker](https://github.com/kubernetes/kubeadm/issues/new)
 
 See also the [upgrade documentation](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
 
-{{< caution >}}
+{{}}
 This page does not address running your cluster on a cloud provider. In a cloud
 environment, neither approach documented here works with Service objects of type
 LoadBalancer, or with dynamic PersistentVolumes.
-{{< /caution >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
 The prerequisites depend on which topology you have selected for your cluster's
 control plane:
 
-{{< tabs name="prerequisite_tabs" >}}
+{{}}
 {{% tab name="Stacked etcd" %}}
-<!--
-    note to reviewers: these prerequisites should match the start of the
-    external etc tab
--->
+
 
 You need:
 
 - Three or more machines that meet [kubeadm's minimum requirements](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) for
   the control-plane nodes. Having an odd number of control plane nodes can help
   with leader selection in the case of machine or zone failure.
-  - including a {{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}, already set up and working
+  - including a {{}}, already set up and working
 - Three or more machines that meet [kubeadm's minimum
   requirements](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) for the workers
   - including a container runtime, already set up and working
@@ -62,16 +59,13 @@ _See [Stacked etcd topology](/docs/setup/production-environment/tools/kubeadm/ha
 
 {{% /tab %}}
 {{% tab name="External etcd" %}}
-<!--
-    note to reviewers: these prerequisites should match the start of the
-    stacked etc tab
--->
+
 You need:
 
 - Three or more machines that meet [kubeadm's minimum requirements](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) for
   the control-plane nodes. Having an odd number of control plane nodes can help
   with leader selection in the case of machine or zone failure.
-  - including a {{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}, already set up and working
+  - including a {{}}, already set up and working
 - Three or more machines that meet [kubeadm's minimum
   requirements](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) for the workers
   - including a container runtime, already set up and working
@@ -82,7 +76,7 @@ You need:
 - SSH access from one device to all nodes in the system
 - `kubeadm` and `kubelet` already installed on all machines.
 
-<!-- end of shared prerequisites -->
+
 
 And you also need:
 - Three or more additional machines, that will become etcd cluster members.
@@ -93,7 +87,7 @@ And you also need:
 
 _See [External etcd topology](/docs/setup/production-environment/tools/kubeadm/ha-topology/#external-etcd-topology) for context._
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ### Container images
 
@@ -107,16 +101,16 @@ To manage Kubernetes once your cluster is set up, you should
 to install the `kubectl` tool on each control plane node, as this can be
 helpful for troubleshooting.
 
-<!-- steps -->
+
 
 ## First steps for both methods
 
 ### Create load balancer for kube-apiserver
 
-{{< note >}}
+{{}}
 There are many configurations for load balancers. The following example is only one
 option. Your cluster requirements may need a different configuration.
-{{< /note >}}
+{{}}
 
 1. Create a kube-apiserver load balancer with a name that resolves to DNS.
 
@@ -142,7 +136,7 @@ option. Your cluster requirements may need a different configuration.
    connection:
 
    ```shell
-   nc -v <LOAD_BALANCER_IP> <PORT>
+   nc -v  
    ```
 
    A connection refused error is expected because the API server is not yet
@@ -171,19 +165,19 @@ option. Your cluster requirements may need a different configuration.
      control-plane nodes manually or using automation tools, please remove this flag and refer to [Manual
      certificate distribution](#manual-certs) section below.
 
-   {{< note >}}
+   {{}}
    The `kubeadm init` flags `--config` and `--certificate-key` cannot be mixed, therefore if you want
    to use the [kubeadm configuration](/docs/reference/config-api/kubeadm-config.v1beta3/)
    you must add the `certificateKey` field in the appropriate config locations
    (under `InitConfiguration` and `JoinConfiguration: controlPlane`).
-   {{< /note >}}
+   {{}}
 
-   {{< note >}}
+   {{}}
    Some CNI network plugins require additional configuration, for example specifying the pod IP CIDR, while others do not.
    See the [CNI network documentation](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
    To add a pod CIDR pass the flag `--pod-network-cidr`, or if you are using a kubeadm configuration file
    set the `podSubnet` field under the `networking` object of `ClusterConfiguration`.
-   {{< /note >}}
+   {{}}
 
    The output looks similar to:
 
@@ -220,23 +214,23 @@ option. Your cluster requirements may need a different configuration.
 
    The certificate key is a hex encoded string that is an AES key of size 32 bytes.
 
-   {{< note >}}
+   {{}}
    The `kubeadm-certs` Secret and the decryption key expire after two hours.
-   {{< /note >}}
+   {{}}
 
-   {{< caution >}}
+   {{}}
    As stated in the command output, the certificate key gives access to cluster sensitive data, keep it secret!
-   {{< /caution >}}
+   {{}}
 
 1. Apply the CNI plugin of your choice:
    [Follow these instructions](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network)
    to install the CNI provider. Make sure the configuration corresponds to the Pod CIDR specified in the
    kubeadm configuration file (if applicable).
 
-   {{< note >}}
+   {{}}
    You must pick a network plugin that suits your use case and deploy it before you move on to next step.
    If you don't do this, you will not be able to launch your cluster properly.
-   {{< /note >}}
+   {{}}
 
 1. Type the following and watch the pods of the control plane components get started:
 
@@ -306,11 +300,11 @@ in the kubeadm config file.
        keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
    ```
 
-   {{< note >}}
+   {{}}
    The difference between stacked etcd and external etcd here is that the external etcd setup requires
    a configuration file with the etcd endpoints under the `external` object for `etcd`.
    In the case of the stacked etcd topology, this is managed automatically.
-   {{< /note >}}
+   {{}}
 
    - Replace the following variables in the config template with the appropriate values for your cluster:
 
@@ -328,10 +322,10 @@ The following steps are similar to the stacked etcd setup:
 
 1. Apply the CNI plugin of your choice.
 
-   {{< note >}}
+   {{}}
    You must pick a network plugin that suits your use case and deploy it before you move on to next step.
    If you don't do this, you will not be able to launch your cluster properly.
-   {{< /note >}}
+   {{}}
 
 ### Steps for the rest of the control plane nodes
 
@@ -415,11 +409,11 @@ SSH is required if you want to control all nodes from a single machine.
    done
     ```
 
-   {{< caution >}}
+   {{}}
    Copy only the certificates in the above list. kubeadm will take care of generating the rest of the certificates
    with the required SANs for the joining control-plane instances. If you copy all the certificates by mistake,
    the creation of additional nodes could fail due to a lack of required SANs.
-   {{< /caution >}}
+   {{}}
 
 1. Then on each joining control plane node you have to run the following script before running `kubeadm join`.
    This script will move the previously copied certificates from the home directory to `/etc/kubernetes/pki`:

@@ -12,7 +12,7 @@ tags:
 ---
  A whole-number representation of small or large numbers using [SI](https://en.wikipedia.org/wiki/International_System_of_Units) suffixes.
 
-<!--more-->
+
 
 Quantities are representations of small or large numbers using a compact,
 whole-number notation with SI suffixes.  Fractional numbers are represented

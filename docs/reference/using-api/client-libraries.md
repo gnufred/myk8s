@@ -6,12 +6,12 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
+
 This page contains an overview of the client libraries for using the Kubernetes
 API from various programming languages.
 
 
-<!-- body -->
+
 To write applications using the [Kubernetes REST API](/docs/reference/using-api/),
 you do not need to implement the API calls and request/response types yourself.
 You can use a client library for the programming language you are using.

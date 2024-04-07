@@ -8,7 +8,7 @@ content_type: task
 weight: 110
 ---
 
-<!-- overview -->
+
 
 A security context defines privilege and access control settings for
 a Pod or Container. Security context settings include, but are not limited to:
@@ -41,20 +41,20 @@ a Pod or Container. Security context settings include, but are not limited to:
 * `readOnlyRootFilesystem`: Mounts the container's root filesystem as read-only.
 
 The above bullets are not a complete set of security context settings -- please see
-[SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)
+[SecurityContext](/docs/reference/generated/kubernetes-api/{{}}/#securitycontext-v1-core)
 for a comprehensive list.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Set the security context for a Pod
 
 To specify security settings for a Pod, include the `securityContext` field
 in the Pod specification. The `securityContext` field is a
-[PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core) object.
+[PodSecurityContext](/docs/reference/generated/kubernetes-api/{{}}/#podsecuritycontext-v1-core) object.
 The security settings that you specify for a Pod apply to all Containers in the Pod.
 Here is a configuration file for a Pod that has a `securityContext` and an `emptyDir` volume:
 
@@ -158,7 +158,7 @@ exit
 
 ## Configure volume permission and ownership change policy for Pods
 
-{{< feature-state for_k8s_version="v1.23" state="stable" >}}
+{{}}
 
 By default, Kubernetes recursively changes ownership and permissions for the contents of each
 volume to match the `fsGroup` specified in a Pod's `securityContext` when that volume is
@@ -188,16 +188,16 @@ securityContext:
   fsGroupChangePolicy: "OnRootMismatch"
 ```
 
-{{< note >}}
+{{}}
 This field has no effect on ephemeral volume types such as
 [`secret`](/docs/concepts/storage/volumes/#secret),
 [`configMap`](/docs/concepts/storage/volumes/#configmap),
 and [`emptydir`](/docs/concepts/storage/volumes/#emptydir).
-{{< /note >}}
+{{}}
 
 ## Delegating volume permission and ownership change to CSI driver
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+{{}}
 
 If you deploy a [Container Storage Interface (CSI)](https://github.com/container-storage-interface/spec/blob/master/spec.md)
 driver which supports the `VOLUME_MOUNT_GROUP` `NodeServiceCapability`, the
@@ -213,7 +213,7 @@ provided `fsGroup`, resulting in a volume that is readable/writable by the
 
 To specify security settings for a Container, include the `securityContext` field
 in the Container manifest. The `securityContext` field is a
-[SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core) object.
+[SecurityContext](/docs/reference/generated/kubernetes-api/{{}}/#securitycontext-v1-core) object.
 Security settings that you specify for a Container apply only to
 the individual Container, and they override settings made at the Pod level when
 there is overlap. Container settings do not affect the Pod's Volumes.
@@ -378,20 +378,19 @@ bits 12 and 25 are set. Bit 12 is `CAP_NET_ADMIN`, and bit 25 is `CAP_SYS_TIME`.
 See [capability.h](https://github.com/torvalds/linux/blob/master/include/uapi/linux/capability.h)
 for definitions of the capability constants.
 
-{{< note >}}
+{{}}
 Linux capability constants have the form `CAP_XXX`.
 But when you list capabilities in your container manifest, you must
 omit the `CAP_` portion of the constant.
 For example, to add `CAP_SYS_TIME`, include `SYS_TIME` in your list of capabilities.
-{{< /note >}}
+{{}}
 
 ## Set the Seccomp Profile for a Container
 
 To set the Seccomp profile for a Container, include the `seccompProfile` field
 in the `securityContext` section of your Pod or Container manifest. The
 `seccompProfile` field is a
-[SeccompProfile](/docs/reference/generated/kubernetes-api/{{< param "version"
->}}/#seccompprofile-v1-core) object consisting of `type` and `localhostProfile`.
+[SeccompProfile](/docs/reference/generated/kubernetes-api/{{}}/#seccompprofile-v1-core) object consisting of `type` and `localhostProfile`.
 Valid options for `type` include `RuntimeDefault`, `Unconfined`, and
 `Localhost`. `localhostProfile` must only be set if `type: Localhost`. It
 indicates the path of the pre-configured profile on the node, relative to the
@@ -409,7 +408,7 @@ securityContext:
 ```
 
 Here is an example that sets the Seccomp profile to a pre-configured file at
-`<kubelet-root-dir>/seccomp/my-profiles/profile-allow.json`:
+`/seccomp/my-profiles/profile-allow.json`:
 
 ```yaml
 ...
@@ -424,7 +423,7 @@ securityContext:
 To assign SELinux labels to a Container, include the `seLinuxOptions` field in
 the `securityContext` section of your Pod or Container manifest. The
 `seLinuxOptions` field is an
-[SELinuxOptions](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#selinuxoptions-v1-core)
+[SELinuxOptions](/docs/reference/generated/kubernetes-api/{{}}/#selinuxoptions-v1-core)
 object. Here's an example that applies an SELinux level:
 
 ```yaml
@@ -434,18 +433,18 @@ securityContext:
     level: "s0:c123,c456"
 ```
 
-{{< note >}}
+{{}}
 To assign SELinux labels, the SELinux security module must be loaded on the host operating system.
-{{< /note >}}
+{{}}
 
 ### Efficient SELinux volume relabeling
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+{{}}
 
 By default, the container runtime recursively assigns SELinux label to all
 files on all Pod volumes. To speed up this process, Kubernetes can change the
 SELinux label of a volume instantly by using a mount option
-`-o context=<label>`.
+`-o context=`.
 
 To benefit from this speedup, all these conditions must be met:
 
@@ -456,7 +455,7 @@ To benefit from this speedup, all these conditions must be met:
   have `seLinuxOptions` set.
 * The corresponding PersistentVolume must be either:
   * A volume that uses the legacy in-tree `iscsi`, `rbd` or `fc` volume type.
-  * Or a volume that uses a {{< glossary_tooltip text="CSI" term_id="csi" >}} driver.
+  * Or a volume that uses a {{}} driver.
     The CSI driver must announce that it supports mounting with `-o context` by setting
     `spec.seLinuxMount: true` in its CSIDriver instance.
 
@@ -465,14 +464,14 @@ runtime  recursively changes the SELinux label for all inodes (files and directo
 in the volume.
 The more files and directories in the volume, the longer that relabelling takes.
 
-{{< note >}}
-<!-- remove after Kubernetes v1.30 is released -->
+{{}}
+
 If you are running Kubernetes v1.25, refer to the v1.25 version of this task page:
 [Configure a Security Context for a Pod or Container](https://v1-25.docs.kubernetes.io/docs/tasks/configure-pod-container/security-context/) (v1.25).  
 There is an important note in that documentation about a situation where the kubelet
 can lose track of volume labels after restart. This deficiency has been fixed
 in Kubernetes 1.26.
-{{< /note >}}
+{{}}
 
 ## Discussion
 
@@ -491,10 +490,10 @@ applied to Volumes as follows:
   [Multi-Category Security (MCS)](https://selinuxproject.org/page/NB_MLS)
   label given to all Containers in the Pod as well as the Volumes.
 
-{{< warning >}}
+{{}}
 After you specify an MCS label for a Pod, all Pods with the same label can access the Volume.
 If you need inter-Pod protection, you must assign a unique MCS label to each Pod.
-{{< /warning >}}
+{{}}
 
 ## Clean up
 
@@ -509,8 +508,8 @@ kubectl delete pod security-context-demo-4
 
 ## {{% heading "whatsnext" %}}
 
-* [PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)
-* [SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)
+* [PodSecurityContext](/docs/reference/generated/kubernetes-api/{{}}/#podsecuritycontext-v1-core)
+* [SecurityContext](/docs/reference/generated/kubernetes-api/{{}}/#securitycontext-v1-core)
 * [CRI Plugin Config Guide](https://github.com/containerd/containerd/blob/main/docs/cri/config.md)
 * [Security Contexts design document](https://git.k8s.io/design-proposals-archive/auth/security_context.md)
 * [Ownership Management design document](https://git.k8s.io/design-proposals-archive/storage/volume-ownership-management.md)

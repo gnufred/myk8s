@@ -4,16 +4,16 @@ content_type: tutorial
 weight: 70
 ---
 
-<!-- overview -->
+
 
 This task shows how to create a _frontend_ and a _backend_ microservice. The backend 
 microservice is a hello greeter. The frontend exposes the backend using nginx and a 
-Kubernetes {{< glossary_tooltip term_id="service" >}} object.
+Kubernetes {{}} object.
 
 ## {{% heading "objectives" %}}
 
 * Create and run a sample `hello` backend microservice using a 
-  {{< glossary_tooltip term_id="deployment" >}} object.
+  {{}} object.
 * Use a Service object to send traffic to the backend microservice's multiple replicas.
 * Create and run a `nginx` frontend microservice, also using a Deployment object.
 * Configure the frontend microservice to send traffic to the backend microservice. 
@@ -22,14 +22,14 @@ Kubernetes {{< glossary_tooltip term_id="service" >}} object.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 This task uses
 [Services with external load balancers](/docs/tasks/access-application-cluster/create-external-load-balancer/), which
 require a supported environment. If your environment does not support this, you can use a Service of type
 [NodePort](/docs/concepts/services-networking/service/#type-nodeport) instead.
 
-<!-- lessoncontent -->
+
 
 ## Creating the backend using a Deployment
 
@@ -73,15 +73,15 @@ Pod Template:
    hello:
     Image:              "gcr.io/google-samples/hello-go-gke:1.0"
     Port:               80/TCP
-    Environment:        <none>
-    Mounts:             <none>
-  Volumes:              <none>
+    Environment:        
+    Mounts:             
+  Volumes:              
 Conditions:
   Type          Status  Reason
   ----          ------  ------
   Available     True    MinimumReplicasAvailable
   Progressing   True    NewReplicaSetAvailable
-OldReplicaSets:                 <none>
+OldReplicaSets:                 
 NewReplicaSet:                  hello-3621623197 (3/3 replicas created)
 Events:
 ...
@@ -92,7 +92,7 @@ Events:
 The key to sending requests from a frontend to a backend is the backend
 Service. A Service creates a persistent IP address and DNS name entry
 so that the backend microservice can always be reached. A Service uses
-{{< glossary_tooltip text="selectors" term_id="selector" >}} to find
+{{}} to find
 the Pods that it routes traffic to.
 
 First, explore the Service configuration file:
@@ -151,13 +151,13 @@ deployment.apps/frontend created
 service/frontend created
 ```
 
-{{< note >}}
+{{}}
 The nginx configuration is baked into the
 [container image](/examples/service/access/Dockerfile). A better way to do this would
 be to use a
 [ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/),
 so that you can change the configuration more easily.
-{{< /note >}}
+{{}}
 
 ## Interact with the frontend Service
 
@@ -169,11 +169,11 @@ kubectl get service frontend --watch
 ```
 
 This displays the configuration for the `frontend` Service and watches for
-changes. Initially, the external IP is listed as `<pending>`:
+changes. Initially, the external IP is listed as ``:
 
 ```
 NAME       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)  AGE
-frontend   LoadBalancer   10.51.252.116   <pending>     80/TCP   10s
+frontend   LoadBalancer   10.51.252.116        80/TCP   10s
 ```
 
 As soon as an external IP is provisioned, however, the configuration updates

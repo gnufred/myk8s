@@ -3,13 +3,13 @@ title: Articles on dockershim Removal and on Using CRI-compatible Runtimes
 content_type: reference
 weight: 20
 ---
-<!-- overview -->
+
 This is a list of articles and other pages that are either
 about the Kubernetes' deprecation and removal of _dockershim_,
 or about using CRI-compatible container runtimes,
 in connection with that removal.
 
-<!-- body -->
+
 
 ## Kubernetes project
 
@@ -34,7 +34,7 @@ You can provide feedback via the GitHub issue [**Dockershim removal feedback & i
 
 ## External sources {#third-party}
 
-<!-- sort these alphabetically -->
+
 
 * Amazon Web Services EKS documentation: [Amazon EKS is ending support for Dockershim](https://docs.aws.amazon.com/eks/latest/userguide/dockershim-deprecation.html)
 

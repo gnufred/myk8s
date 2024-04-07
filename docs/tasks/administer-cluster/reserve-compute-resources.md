@@ -9,7 +9,7 @@ min-kubernetes-server-version: 1.8
 weight: 290
 ---
 
-<!-- overview -->
+
 
 Kubernetes nodes can be scheduled to `Capacity`. Pods can consume all the
 available capacity on a node by default. This is an issue because nodes
@@ -25,12 +25,12 @@ on each node.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 Your Kubernetes server must be at or later than version 1.17 to use
 the kubelet command line option `--reserved-cpus` to set an
 [explicitly reserved CPU list](#explicitly-reserved-cpu-list).
 
-<!-- steps -->
+
 
 ## Node Allocatable
 
@@ -131,7 +131,7 @@ with `.slice` appended.
 
 ### Explicitly Reserved CPU List
 
-{{< feature-state for_k8s_version="v1.17" state="stable" >}}
+{{}}
 
 **Kubelet Flag**: `--reserved-cpus=0-3`
 **KubeletConfiguration Flag**: `reservedSystemCPUs: 0-3`
@@ -155,67 +155,7 @@ For example: in Centos, you can do this using the tuned toolset.
 
 ### Eviction Thresholds
 
-**Kubelet Flag**: `--eviction-hard=[memory.available<500Mi]`
-
-Memory pressure at the node level leads to System OOMs which affects the entire
-node and all pods running on it. Nodes can go offline temporarily until memory
-has been reclaimed. To avoid (or reduce the probability of) system OOMs kubelet
-provides [out of resource](/docs/concepts/scheduling-eviction/node-pressure-eviction/)
-management. Evictions are
-supported for `memory` and `ephemeral-storage` only. By reserving some memory via
-`--eviction-hard` flag, the `kubelet` attempts to evict pods whenever memory
-availability on the node drops below the reserved value. Hypothetically, if
-system daemons did not exist on a node, pods cannot use more than `capacity -
-eviction-hard`. For this reason, resources reserved for evictions are not
-available for pods.
-
-### Enforcing Node Allocatable
-
-**Kubelet Flag**: `--enforce-node-allocatable=pods[,][system-reserved][,][kube-reserved]`
-
-The scheduler treats 'Allocatable' as the available `capacity` for pods.
-
-`kubelet` enforce 'Allocatable' across pods by default. Enforcement is performed
-by evicting pods whenever the overall usage across all pods exceeds
-'Allocatable'. More details on eviction policy can be found
-on the [node pressure eviction](/docs/concepts/scheduling-eviction/node-pressure-eviction/)
-page. This enforcement is controlled by
-specifying `pods` value to the kubelet flag `--enforce-node-allocatable`.
-
-Optionally, `kubelet` can be made to enforce `kube-reserved` and
-`system-reserved` by specifying `kube-reserved` & `system-reserved` values in
-the same flag. Note that to enforce `kube-reserved` or `system-reserved`,
-`--kube-reserved-cgroup` or `--system-reserved-cgroup` needs to be specified
-respectively.
-
-## General Guidelines
-
-System daemons are expected to be treated similar to 
-[Guaranteed pods](/docs/tasks/configure-pod-container/quality-service-pod/#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed). 
-System daemons can burst within their bounding control groups and this behavior needs
-to be managed as part of kubernetes deployments. For example, `kubelet` should
-have its own control group and share `kube-reserved` resources with the
-container runtime. However, Kubelet cannot burst and use up all available Node
-resources if `kube-reserved` is enforced.
-
-Be extra careful while enforcing `system-reserved` reservation since it can lead
-to critical system services being CPU starved, OOM killed, or unable
-to fork on the node. The
-recommendation is to enforce `system-reserved` only if a user has profiled their
-nodes exhaustively to come up with precise estimates and is confident in their
-ability to recover if any process in that group is oom-killed.
-
-* To begin with enforce 'Allocatable' on `pods`.
-* Once adequate monitoring and alerting is in place to track kube system
-  daemons, attempt to enforce `kube-reserved` based on usage heuristics.
-* If absolutely necessary, enforce `system-reserved` over time.
-
-The resource requirements of kube system daemons may grow over time as more and
-more features are added. Over time, kubernetes project will attempt to bring
-down utilization of node system daemons, but that is not a priority as of now.
-So expect a drop in `Allocatable` capacity in future releases.
-
-<!-- discussion -->
+**Kubelet Flag**: `--eviction-hard=[memory.available
 
 ## Example Scenario
 

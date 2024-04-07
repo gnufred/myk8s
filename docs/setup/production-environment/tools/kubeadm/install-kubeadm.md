@@ -8,14 +8,14 @@ card:
   title: Install the kubeadm setup tool
 ---
 
-<!-- overview -->
 
-<img src="/images/kubeadm-stacked-color.png" align="right" width="150px"></img>
+
+
 This page shows how to install the `kubeadm` toolbox.
 For information on how to create a cluster with kubeadm once you have performed this installation process,
 see the [Creating a cluster with kubeadm](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) page.
 
-{{< doc-versions-list "installation guide" >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
@@ -33,15 +33,15 @@ see the [Creating a cluster with kubeadm](/docs/setup/production-environment/too
     will disable swapping temporarily. To make this change persistent across reboots, make sure swap is disabled in
     config files like `/etc/fstab`, `systemd.swap`, depending how it was configured on your system.
 
-{{< note >}}
+{{}}
 The `kubeadm` installation is done via binaries that use dynamic linking and assumes that your target system provides `glibc`.
 This is a reasonable assumption on many Linux distributions (including Debian, Ubuntu, Fedora, CentOS, etc.)
 but it is not always the case with custom and lightweight distributions which don't include `glibc` by default, such as Alpine Linux.
 The expectation is that the distribution either includes `glibc` or a [compatibility layer](https://wiki.alpinelinux.org/wiki/Running_glibc_programs)
 that provides the expected symbols.
-{{< /note >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Verify the MAC address and product_uuid are unique for every node {#verify-mac-address}
 
@@ -75,10 +75,10 @@ documentation for the plugins about what port(s) those need.
 ## Installing a container runtime {#installing-runtime}
 
 To run containers in Pods, Kubernetes uses a
-{{< glossary_tooltip term_id="container-runtime" text="container runtime" >}}.
+{{}}.
 
 By default, Kubernetes uses the
-{{< glossary_tooltip term_id="cri" text="Container Runtime Interface">}} (CRI)
+{{}} (CRI)
 to interface with your chosen container runtime.
 
 If you don't specify a runtime, kubeadm automatically tries to detect an installed
@@ -90,40 +90,40 @@ and will request that you specify which one you want to use.
 See [container runtimes](/docs/setup/production-environment/container-runtimes/)
 for more information.
 
-{{< note >}}
+{{}}
 Docker Engine does not implement the [CRI](/docs/concepts/architecture/cri/)
 which is a requirement for a container runtime to work with Kubernetes.
 For that reason, an additional service [cri-dockerd](https://mirantis.github.io/cri-dockerd/)
 has to be installed. cri-dockerd is a project based on the legacy built-in
 Docker Engine support that was [removed](/dockershim) from the kubelet in version 1.24.
-{{< /note >}}
+{{}}
 
 The tables below include the known endpoints for supported operating systems:
 
-{{< tabs name="container_runtime" >}}
+{{}}
 {{% tab name="Linux" %}}
 
-{{< table caption="Linux container runtimes" >}}
+{{}}
 | Runtime                            | Path to Unix domain socket                   |
 |------------------------------------|----------------------------------------------|
 | containerd                         | `unix:///var/run/containerd/containerd.sock` |
 | CRI-O                              | `unix:///var/run/crio/crio.sock`             |
 | Docker Engine (using cri-dockerd)  | `unix:///var/run/cri-dockerd.sock`           |
-{{< /table >}}
+{{}}
 
 {{% /tab %}}
 
 {{% tab name="Windows" %}}
 
-{{< table caption="Windows container runtimes" >}}
+{{}}
 | Runtime                            | Path to Windows named pipe                   |
 |------------------------------------|----------------------------------------------|
 | containerd                         | `npipe:////./pipe/containerd-containerd`     |
 | Docker Engine (using cri-dockerd)  | `npipe:////./pipe/cri-dockerd`               |
-{{< /table >}}
+{{}}
 
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## Installing kubeadm, kubelet and kubectl
 
@@ -146,11 +146,11 @@ but not vice versa.
 
 For information about installing `kubectl`, see [Install and set up kubectl](/docs/tasks/tools/).
 
-{{< warning >}}
+{{}}
 These instructions exclude all Kubernetes packages from any system upgrades.
 This is because kubeadm and Kubernetes require
 [special attention to upgrade](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
-{{</ warning >}}
+{{}}
 
 For more information on version skews, see:
 
@@ -159,16 +159,16 @@ For more information on version skews, see:
 
 {{% legacy-repos-deprecation %}}
 
-{{< note >}}
+{{}}
 There's a dedicated package repository for each Kubernetes minor version. If you want to install
-a minor version other than v{{< skew currentVersion >}}, please see the installation guide for
+a minor version other than v{{}}, please see the installation guide for
 your desired minor version.
-{{< /note >}}
+{{}}
 
-{{< tabs name="k8s_install" >}}
+{{}}
 {{% tab name="Debian-based distributions" %}}
 
-These instructions are for Kubernetes v{{< skew currentVersion >}}.
+These instructions are for Kubernetes v{{}}.
 
 1. Update the `apt` package index and install packages needed to use the Kubernetes `apt` repository:
 
@@ -184,22 +184,22 @@ These instructions are for Kubernetes v{{< skew currentVersion >}}.
    ```shell
    # If the directory `/etc/apt/keyrings` does not exist, it should be created before the curl command, read the note below.
    # sudo mkdir -p -m 755 /etc/apt/keyrings
-   curl -fsSL https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+   curl -fsSL https://pkgs.k8s.io/core:/stable:/{{}}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
    ```
 
-{{< note >}}
+{{}}
 In releases older than Debian 12 and Ubuntu 22.04, directory `/etc/apt/keyrings` does not exist by default, and it should be created before the curl command.
-{{< /note >}}
+{{}}
 
 3. Add the appropriate Kubernetes `apt` repository. Please note that this repository have packages
-   only for Kubernetes {{< skew currentVersion >}}; for other Kubernetes minor versions, you need to
+   only for Kubernetes {{}}; for other Kubernetes minor versions, you need to
    change the Kubernetes minor version in the URL to match your desired minor version
    (you should also check that you are reading the documentation for the version of Kubernetes
    that you plan to install).
 
    ```shell
    # This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
-   echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{}}/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
    ```
 
 4. Update the `apt` package index, install kubelet, kubeadm and kubectl, and pin their version:
@@ -221,7 +221,7 @@ In releases older than Debian 12 and Ubuntu 22.04, directory `/etc/apt/keyrings`
 
 1. Set SELinux to `permissive` mode:
 
-   These instructions are for Kubernetes {{< skew currentVersion >}}.
+   These instructions are for Kubernetes {{}}.
 
    ```shell
    # Set SELinux in permissive mode (effectively disabling it)
@@ -229,20 +229,20 @@ In releases older than Debian 12 and Ubuntu 22.04, directory `/etc/apt/keyrings`
    sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
    ```
 
-{{< caution >}}
+{{}}
 - Setting SELinux in permissive mode by running `setenforce 0` and `sed ...`
 effectively disables it. This is required to allow containers to access the host
 filesystem; for example, some cluster network plugins require that. You have to
 do this until SELinux support is improved in the kubelet.
 - You can leave SELinux enabled if you know how to configure it but it may require
 settings that are not supported by kubeadm.
-{{< /caution >}}
+{{}}
 
 2. Add the Kubernetes `yum` repository. The `exclude` parameter in the
    repository definition ensures that the packages related to Kubernetes are
    not upgraded upon running `yum update` as there's a special procedure that
    must be followed for upgrading Kubernetes. Please note that this repository
-   have packages only for Kubernetes {{< skew currentVersion >}}; for other
+   have packages only for Kubernetes {{}}; for other
    Kubernetes minor versions, you need to change the Kubernetes minor version
    in the URL to match your desired minor version (you should also check that
    you are reading the documentation for the version of Kubernetes that you
@@ -250,13 +250,10 @@ settings that are not supported by kubeadm.
 
    ```shell
    # This overwrites any existing configuration in /etc/yum.repos.d/kubernetes.repo
-   cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
-   [kubernetes]
-   name=Kubernetes
-   baseurl=https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/rpm/
+   cat }}/rpm/
    enabled=1
    gpgcheck=1
-   gpgkey=https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/rpm/repodata/repomd.xml.key
+   gpgkey=https://pkgs.k8s.io/core:/stable:/{{}}/rpm/repodata/repomd.xml.key
    exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
    EOF
    ```
@@ -287,10 +284,10 @@ curl -L "https://github.com/containernetworking/plugins/releases/download/${CNI_
 
 Define the directory to download command files:
 
-{{< note >}}
+{{}}
 The `DOWNLOAD_DIR` variable must be set to a writable directory.
 If you are running Flatcar Container Linux, set `DOWNLOAD_DIR="/opt/bin"`.
-{{< /note >}}
+{{}}
 
 ```bash
 DOWNLOAD_DIR="/usr/local/bin"
@@ -320,10 +317,10 @@ sudo mkdir -p /usr/lib/systemd/system/kubelet.service.d
 curl -sSL "https://raw.githubusercontent.com/kubernetes/release/${RELEASE_VERSION}/cmd/krel/templates/latest/kubeadm/10-kubeadm.conf" | sed "s:/usr/bin:${DOWNLOAD_DIR}:g" | sudo tee /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
 ```
 
-{{< note >}}
+{{}}
 Please refer to the note in the [Before you begin](#before-you-begin) section for Linux distributions
 that do not include `glibc` by default.
-{{< /note >}}
+{{}}
 
 Install `kubectl` by following the instructions on [Install Tools page](/docs/tasks/tools/#kubectl).
 
@@ -333,14 +330,14 @@ Optionally, enable the kubelet service before running kubeadm:
 sudo systemctl enable --now kubelet
 ```
 
-{{< note >}}
+{{}}
 The Flatcar Container Linux distribution mounts the `/usr` directory as a read-only filesystem.
 Before bootstrapping your cluster, you need to take additional steps to configure a writable directory.
 See the [Kubeadm Troubleshooting guide](/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#usr-mounted-read-only)
 to learn how to set up a writable directory.
-{{< /note >}}
+{{}}
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 The kubelet is now restarting every few seconds, as it waits in a crashloop for
 kubeadm to tell it what to do.
@@ -351,11 +348,11 @@ Both the container runtime and the kubelet have a property called
 ["cgroup driver"](/docs/setup/production-environment/container-runtimes/#cgroup-drivers), which is important
 for the management of cgroups on Linux machines.
 
-{{< warning >}}
+{{}}
 Matching the container runtime and kubelet cgroup drivers is required or otherwise the kubelet process will fail.
 
 See [Configuring a cgroup driver](/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/) for more details.
-{{< /warning >}}
+{{}}
 
 ## Troubleshooting
 

@@ -4,13 +4,13 @@ content_type: concept
 weight: 10
 ---
 
-<!-- overview -->
 
-In Kubernetes, _scheduling_ refers to making sure that {{< glossary_tooltip text="Pods" term_id="pod" >}}
-are matched to {{< glossary_tooltip text="Nodes" term_id="node" >}} so that
-{{< glossary_tooltip term_id="kubelet" >}} can run them.
 
-<!-- body -->
+In Kubernetes, _scheduling_ refers to making sure that {{}}
+are matched to {{}} so that
+{{}} can run them.
+
+
 
 ## Scheduling overview {#scheduling}
 
@@ -28,7 +28,7 @@ page will help you learn about scheduling.
 
 [kube-scheduler](/docs/reference/command-line-tools-reference/kube-scheduler/)
 is the default scheduler for Kubernetes and runs as part of the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}}.
+{{}}.
 kube-scheduler is designed so that, if you want and need to, you can
 write your own scheduling component and use that instead.
 

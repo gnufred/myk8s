@@ -4,9 +4,9 @@ content_type: task
 weight: 70
 ---
 
-<!-- overview -->
 
-{{< feature-state state="stable" >}}
+
+{{}}
 
 This page shows how to assign extended resources to a Container.
 
@@ -16,7 +16,7 @@ This page shows how to assign extended resources to a Container.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 Before you do this exercise, do the exercise in
 [Advertise Extended Resources for a Node](/docs/tasks/administer-cluster/extended-resource-node/).
@@ -25,7 +25,7 @@ That will configure one of your Nodes to advertise a dongle resource.
 
 
 
-<!-- steps -->
+
 
 ## Assign an extended resource to a Pod
 

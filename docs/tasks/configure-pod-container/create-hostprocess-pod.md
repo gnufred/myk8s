@@ -5,9 +5,9 @@ weight: 50
 min-kubernetes-server-version: 1.23
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+
+{{}}
 
 Windows HostProcess containers enable you to run containerized
 workloads on a Windows host. These containers operate as
@@ -44,23 +44,23 @@ privileges needed by Windows nodes.
 
 ## {{% heading "prerequisites" %}}
 
-<!-- change this when graduating to stable -->
 
-This task guide is specific to Kubernetes v{{< skew currentVersion >}}.
-If you are not running Kubernetes v{{< skew currentVersion >}}, check the documentation for
+
+This task guide is specific to Kubernetes v{{}}.
+If you are not running Kubernetes v{{}}, check the documentation for
 that version of Kubernetes.
 
-In Kubernetes {{< skew currentVersion >}}, the HostProcess container feature is enabled by default. The kubelet will
+In Kubernetes {{}}, the HostProcess container feature is enabled by default. The kubelet will
 communicate with containerd directly by passing the hostprocess flag via CRI. You can use the
 latest version of containerd (v1.6+) to run HostProcess containers.
 [How to install containerd.](/docs/setup/production-environment/container-runtimes/#containerd)
 
 ## Limitations
 
-These limitations are relevant for Kubernetes v{{< skew currentVersion >}}:
+These limitations are relevant for Kubernetes v{{}}:
 
 - HostProcess containers require containerd 1.6 or higher
-  {{< glossary_tooltip text="container runtime" term_id="container-runtime" >}} and
+  {{}} and
   containerd 1.7 is recommended.
 - HostProcess pods can only contain HostProcess containers. This is a current limitation
   of the Windows OS; non-privileged Windows containers cannot share a vNIC with the host IP namespace.
@@ -86,62 +86,62 @@ that HostProcess pods run in alignment with the privileged profile.
 When running under the privileged policy, here are
 the configurations which need to be set to enable the creation of a HostProcess pod:
 
-<table>
-  <caption style="display: none">Privileged policy specification</caption>
-  <thead>
-    <tr>
-      <th>Control</th>
-      <th>Policy</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="white-space: nowrap"><a href="/docs/concepts/security/pod-security-standards"><tt>securityContext.windowsOptions.hostProcess</tt></a></td>
-      <td>
-        <p>Windows pods offer the ability to run <a href="/docs/tasks/configure-pod-container/create-hostprocess-pod">
-        HostProcess containers</a> which enables privileged access to the Windows node. </p>
-        <p><strong>Allowed Values</strong></p>
-        <ul>
-          <li><code>true</code></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="white-space: nowrap"><a href="/docs/concepts/security/pod-security-standards"><tt>hostNetwork</tt></a></td>
-      <td>
-        <p>Pods container HostProcess containers must use the host's network namespace.</p>
-        <p><strong>Allowed Values</strong></p>
-        <ul>
-          <li><code>true</code></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="white-space: nowrap"><a href="/docs/tasks/configure-pod-container/configure-runasusername/"><tt>securityContext.windowsOptions.runAsUserName</tt></a></td>
-      <td>
-        <p>Specification of which user the HostProcess container should run as is required for the pod spec.</p>
-        <p><strong>Allowed Values</strong></p>
-        <ul>
-          <li><code>NT AUTHORITY\SYSTEM</code></li>
-          <li><code>NT AUTHORITY\Local service</code></li>
-          <li><code>NT AUTHORITY\NetworkService</code></li>
-          <li>Local usergroup names (see below)</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="white-space: nowrap"><a href="/docs/concepts/security/pod-security-standards"><tt>runAsNonRoot</tt></a></td>
-      <td>
-        <p>Because HostProcess containers have privileged access to the host, the <tt>runAsNonRoot</tt> field cannot be set to true.</p>
-        <p><strong>Allowed Values</strong></p>
-        <ul>
-          <li>Undefined/Nil</li>
-          <li><code>false</code></li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+  Privileged policy specification
+  
+    
+      Control
+      Policy
+    
+  
+  
+    
+      securityContext.windowsOptions.hostProcess
+      
+        Windows pods offer the ability to run 
+        HostProcess containers which enables privileged access to the Windows node. 
+        Allowed Values
+        
+          true
+        
+      
+    
+    
+      hostNetwork
+      
+        Pods container HostProcess containers must use the host's network namespace.
+        Allowed Values
+        
+          true
+        
+      
+    
+    
+      securityContext.windowsOptions.runAsUserName
+      
+        Specification of which user the HostProcess container should run as is required for the pod spec.
+        Allowed Values
+        
+          NT AUTHORITY\SYSTEM
+          NT AUTHORITY\Local service
+          NT AUTHORITY\NetworkService
+          Local usergroup names (see below)
+        
+      
+    
+    
+      runAsNonRoot
+      
+        Because HostProcess containers have privileged access to the host, the runAsNonRoot field cannot be set to true.
+        Allowed Values
+        
+          Undefined/Nil
+          false
+        
+      
+    
+  
+
 
 ### Example manifest (excerpt) {#manifest-example}
 
@@ -231,9 +231,9 @@ This provides a number a benefits including eliminating the need to manage passw
 An initial HostProcess container running as a service account can be used to
 prepare the user groups for later HostProcess containers.
 
-{{< note >}}
+{{}}
 Running HostProcess containers as local user accounts requires containerd v1.7+
-{{< /note >}}
+{{}}
 
 Example:
 

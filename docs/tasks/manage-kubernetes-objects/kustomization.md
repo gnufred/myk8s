@@ -4,7 +4,7 @@ content_type: task
 weight: 20
 ---
 
-<!-- overview -->
+
 
 [Kustomize](https://github.com/kubernetes-sigs/kustomize) is a standalone tool
 to customize Kubernetes objects
@@ -15,13 +15,13 @@ supports the management of Kubernetes objects using a kustomization file.
 To view Resources found in a directory containing a kustomization file, run the following command:
 
 ```shell
-kubectl kustomize <kustomization_directory>
+kubectl kustomize 
 ```
 
 To apply those Resources, run `kubectl apply` with `--kustomize` or `-k` flag:
 
 ```shell
-kubectl apply -k <kustomization_directory>
+kubectl apply -k 
 ```
 
 
@@ -31,11 +31,11 @@ kubectl apply -k <kustomization_directory>
 
 Install [`kubectl`](/docs/tasks/tools/).
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
-<!-- steps -->
+
 
 ## Overview of Kustomize
 
@@ -56,11 +56,11 @@ To generate a ConfigMap from a file, add an entry to the `files` list in `config
 
 ```shell
 # Create a application.properties file
-cat <<EOF >application.properties
+cat application.properties
 FOO=Bar
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 configMapGenerator:
 - name: example-configmap-1
   files:
@@ -90,11 +90,11 @@ To generate a ConfigMap from an env file, add an entry to the `envs` list in `co
 
 ```shell
 # Create a .env file
-cat <<EOF >.env
+cat .env
 FOO=Bar
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 configMapGenerator:
 - name: example-configmap-1
   envs:
@@ -119,14 +119,14 @@ metadata:
   name: example-configmap-1-42cfbf598f
 ```
 
-{{< note >}}
+{{}}
 Each variable in the `.env` file becomes a separate key in the ConfigMap that you generate. This is different from the previous example which embeds a file named `application.properties` (and all its entries) as the value for a single key.
-{{< /note >}}
+{{}}
 
 ConfigMaps can also be generated from literal key-value pairs. To generate a ConfigMap from a literal key-value pair, add an entry to the `literals` list in configMapGenerator. Here is an example of generating a ConfigMap with a data item from a key-value pair:
 
 ```shell
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 configMapGenerator:
 - name: example-configmap-2
   literals:
@@ -157,11 +157,11 @@ This is an example deployment that uses a generated ConfigMap:
 
 ```yaml
 # Create a application.properties file
-cat <<EOF >application.properties
+cat application.properties
 FOO=Bar
 EOF
 
-cat <<EOF >deployment.yaml
+cat deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -189,7 +189,7 @@ spec:
           name: example-configmap-1
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 resources:
 - deployment.yaml
 configMapGenerator:
@@ -249,12 +249,12 @@ You can generate Secrets from files or literal key-value pairs. To generate a Se
 
 ```shell
 # Create a password.txt file
-cat <<EOF >./password.txt
+cat ./password.txt
 username=admin
 password=secret
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 secretGenerator:
 - name: example-secret-1
   files:
@@ -277,7 +277,7 @@ type: Opaque
 To generate a Secret from a literal key-value pair, add an entry to `literals` list in `secretGenerator`. Here is an example of generating a Secret with a data item from a key-value pair:
 
 ```shell
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 secretGenerator:
 - name: example-secret-2
   literals:
@@ -303,12 +303,12 @@ Like ConfigMaps, generated Secrets can be used in Deployments by referring to th
 
 ```shell
 # Create a password.txt file
-cat <<EOF >./password.txt
+cat ./password.txt
 username=admin
 password=secret
 EOF
 
-cat <<EOF >deployment.yaml
+cat deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -336,7 +336,7 @@ spec:
           secretName: example-secret-1
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 resources:
 - deployment.yaml
 secretGenerator:
@@ -351,7 +351,7 @@ EOF
 The generated ConfigMaps and Secrets have a content hash suffix appended. This ensures that a new ConfigMap or Secret is generated when the contents are changed. To disable the behavior of appending a suffix, one can use `generatorOptions`. Besides that, it is also possible to specify cross-cutting options for generated ConfigMaps and Secrets.
 
 ```shell
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 configMapGenerator:
 - name: example-configmap-3
   literals:
@@ -394,7 +394,7 @@ Here is an example:
 
 ```shell
 # Create a deployment.yaml
-cat <<EOF >./deployment.yaml
+cat ./deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -415,7 +415,7 @@ spec:
         image: nginx
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 namespace: my-namespace
 namePrefix: dev-
 nameSuffix: "-001"
@@ -469,7 +469,7 @@ Here is an example of an NGINX application comprised of a Deployment and a Servi
 
 ```shell
 # Create a deployment.yaml file
-cat <<EOF > deployment.yaml
+cat  deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -492,7 +492,7 @@ spec:
 EOF
 
 # Create a service.yaml file
-cat <<EOF > service.yaml
+cat  service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -508,7 +508,7 @@ spec:
 EOF
 
 # Create a kustomization.yaml composing them
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 resources:
 - deployment.yaml
 - service.yaml
@@ -524,7 +524,7 @@ mechanisms through `patchesStrategicMerge` and `patchesJson6902`. `patchesStrate
 
 ```shell
 # Create a deployment.yaml file
-cat <<EOF > deployment.yaml
+cat  deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -547,7 +547,7 @@ spec:
 EOF
 
 # Create a patch increase_replicas.yaml
-cat <<EOF > increase_replicas.yaml
+cat  increase_replicas.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -557,7 +557,7 @@ spec:
 EOF
 
 # Create another patch set_memory.yaml
-cat <<EOF > set_memory.yaml
+cat  set_memory.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -572,7 +572,7 @@ spec:
             memory: 512Mi
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 resources:
 - deployment.yaml
 patchesStrategicMerge:
@@ -616,7 +616,7 @@ through `patchesJson6902`.
 
 ```shell
 # Create a deployment.yaml file
-cat <<EOF > deployment.yaml
+cat  deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -639,14 +639,14 @@ spec:
 EOF
 
 # Create a json patch
-cat <<EOF > patch.yaml
+cat  patch.yaml
 - op: replace
   path: /spec/replicas
   value: 3
 EOF
 
 # Create a kustomization.yaml
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 resources:
 - deployment.yaml
 
@@ -688,7 +688,7 @@ In addition to patches, Kustomize also offers customizing container images or in
 without creating patches. For example, you can change the image used inside containers by specifying the new image in `images` field in `kustomization.yaml`.
 
 ```shell
-cat <<EOF > deployment.yaml
+cat  deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -710,7 +710,7 @@ spec:
         - containerPort: 80
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 resources:
 - deployment.yaml
 images:
@@ -749,7 +749,7 @@ not recommended to hard code the Service name in the command argument. For this 
 
 ```shell
 # Create a deployment.yaml file (quoting the here doc delimiter)
-cat <<'EOF' > deployment.yaml
+cat  deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -771,7 +771,7 @@ spec:
 EOF
 
 # Create a service.yaml file
-cat <<EOF > service.yaml
+cat  service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -786,7 +786,7 @@ spec:
     run: my-nginx
 EOF
 
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 namePrefix: dev-
 nameSuffix: "-001"
 
@@ -844,7 +844,7 @@ Here is an example of a base:
 # Create a directory to hold the base
 mkdir base
 # Create a base/deployment.yaml
-cat <<EOF > base/deployment.yaml
+cat  base/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -865,7 +865,7 @@ spec:
 EOF
 
 # Create a base/service.yaml file
-cat <<EOF > base/service.yaml
+cat  base/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -880,7 +880,7 @@ spec:
     run: my-nginx
 EOF
 # Create a base/kustomization.yaml
-cat <<EOF > base/kustomization.yaml
+cat  base/kustomization.yaml
 resources:
 - deployment.yaml
 - service.yaml
@@ -892,14 +892,14 @@ in different overlays. Here are two overlays using the same base.
 
 ```shell
 mkdir dev
-cat <<EOF > dev/kustomization.yaml
+cat  dev/kustomization.yaml
 resources:
 - ../base
 namePrefix: dev-
 EOF
 
 mkdir prod
-cat <<EOF > prod/kustomization.yaml
+cat  prod/kustomization.yaml
 resources:
 - ../base
 namePrefix: prod-
@@ -912,14 +912,14 @@ Use `--kustomize` or `-k` in `kubectl` commands to recognize Resources managed b
 Note that `-k` should point to a kustomization directory, such as
 
 ```shell
-kubectl apply -k <kustomization directory>/
+kubectl apply -k /
 ```
 
 Given the following `kustomization.yaml`,
 
 ```shell
 # Create a deployment.yaml file
-cat <<EOF > deployment.yaml
+cat  deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -942,7 +942,7 @@ spec:
 EOF
 
 # Create a kustomization.yaml
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 namePrefix: dev-
 commonLabels:
   app: my-nginx
@@ -1010,4 +1010,4 @@ deployment.apps "dev-my-nginx" deleted
 * [Kustomize](https://github.com/kubernetes-sigs/kustomize)
 * [Kubectl Book](https://kubectl.docs.kubernetes.io)
 * [Kubectl Command Reference](/docs/reference/generated/kubectl/kubectl-commands/)
-* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{}}/)

@@ -11,7 +11,7 @@ card:
   weight: 50
 ---
 
-<!-- overview -->
+
 
 Each container that you run is repeatable; the standardization from having
 dependencies included means that you get the same behavior wherever you
@@ -20,13 +20,13 @@ run it.
 Containers decouple applications from the underlying host infrastructure.
 This makes deployment easier in different cloud or OS environments.
 
-Each {{< glossary_tooltip text="node" term_id="node" >}} in a Kubernetes
+Each {{}} in a Kubernetes
 cluster runs the containers that form the
 [Pods](/docs/concepts/workloads/pods/) assigned to that node.
 Containers in a Pod are co-located and co-scheduled to run on the same node.
 
 
-<!-- body -->
+
 
 ## Container images
 A [container image](/docs/concepts/containers/images/) is a ready-to-run
@@ -44,7 +44,7 @@ updated image.
 
 ## Container runtimes
 
-{{< glossary_definition term_id="container-runtime" length="all" >}}
+{{}}
 
 Usually, you can allow your cluster to pick the default container runtime
 for a Pod. If you need to use more than one container runtime in your cluster,

@@ -13,17 +13,17 @@ description: >-
   Superseded by the Deployment and ReplicaSet APIs.
 ---
 
-<!-- overview -->
 
-{{< note >}}
+
+{{}}
 A [`Deployment`](/docs/concepts/workloads/controllers/deployment/) that configures a [`ReplicaSet`](/docs/concepts/workloads/controllers/replicaset/) is now the recommended way to set up replication.
-{{< /note >}}
+{{}}
 
 A _ReplicationController_ ensures that a specified number of pod replicas are running at any one
 time. In other words, a ReplicationController makes sure that a pod or a homogeneous set of pods is
 always up and available.
 
-<!-- body -->
+
 
 ## How a ReplicationController works
 
@@ -74,7 +74,7 @@ Name:        nginx
 Namespace:   default
 Selector:    app=nginx
 Labels:      app=nginx
-Annotations:    <none>
+Annotations:    
 Replicas:    3 current / 3 desired
 Pods Status: 0 Running / 3 Waiting / 0 Succeeded / 0 Failed
 Pod Template:
@@ -83,9 +83,9 @@ Pod Template:
    nginx:
     Image:              nginx
     Port:               80/TCP
-    Environment:        <none>
-    Mounts:             <none>
-  Volumes:              <none>
+    Environment:        
+    Mounts:             
+  Volumes:              
 Events:
   FirstSeen       LastSeen     Count    From                        SubobjectPath    Type      Reason              Message
   ---------       --------     -----    ----                        -------------    ----      ------              -------
@@ -137,7 +137,7 @@ A ReplicationController also needs a [`.spec` section](https://git.k8s.io/commun
 
 The `.spec.template` is the only required field of the `.spec`.
 
-The `.spec.template` is a [pod template](/docs/concepts/workloads/pods/#pod-templates). It has exactly the same schema as a {{< glossary_tooltip text="Pod" term_id="pod" >}}, except it is nested and does not have an `apiVersion` or `kind`.
+The `.spec.template` is a [pod template](/docs/concepts/workloads/pods/#pod-templates). It has exactly the same schema as a {{}}, except it is nested and does not have an `apiVersion` or `kind`.
 
 In addition to required fields for a Pod, a pod template in a ReplicationController must specify appropriate
 labels and an appropriate restart policy. For labels, make sure not to overlap with other controllers. See [pod selector](#pod-selector).
@@ -260,7 +260,7 @@ The ReplicationController is intended to be a composable building-block primitiv
 
 Replication controller is a top-level resource in the Kubernetes REST API. More details about the
 API object can be found at:
-[ReplicationController API object](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#replicationcontroller-v1-core).
+[ReplicationController API object](/docs/reference/generated/kubernetes-api/{{}}/#replicationcontroller-v1-core).
 
 ## Alternatives to ReplicationController
 
@@ -296,5 +296,5 @@ safe to terminate when the machine is otherwise ready to be rebooted/shutdown.
 * Learn about [Deployment](/docs/concepts/workloads/controllers/deployment/), the replacement
   for ReplicationController.
 * `ReplicationController` is part of the Kubernetes REST API.
-  Read the {{< api-reference page="workload-resources/replication-controller-v1" >}}
+  Read the {{}}
   object definition to understand the API for replication controllers.

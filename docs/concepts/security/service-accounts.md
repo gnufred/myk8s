@@ -9,13 +9,13 @@ content_type: concept
 weight: 25
 ---
 
-<!-- overview -->
+
 
 This page introduces the ServiceAccount object in Kubernetes, providing
 information about how service accounts work, use cases, limitations,
 alternatives, and links to resources for additional guidance.
 
-<!-- body -->
+
 
 ## What are service accounts? {#what-are-service-accounts}
 
@@ -30,7 +30,7 @@ Service accounts exist as ServiceAccount objects in the API server. Service
 accounts have the following properties:
 
 * **Namespaced:** Each service account is bound to a Kubernetes
-  {{<glossary_tooltip text="namespace" term_id="namespace">}}. Every namespace
+  {{}}. Every namespace
   gets a [`default` ServiceAccount](#default-service-accounts) upon creation.
 
 * **Lightweight:** Service accounts exist in the cluster and are
@@ -49,7 +49,7 @@ data. You can authenticate as a user account using multiple methods. Some
 Kubernetes distributions might add custom extension APIs to represent user
 accounts in the API server.
 
-{{< table caption="Comparison between service accounts and users" >}}
+{{}}
 
 | Description | ServiceAccount | User or group |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ accounts in the API server.
 | Access control | Kubernetes RBAC or other [authorization mechanisms](/docs/reference/access-authn-authz/authorization/#authorization-modules) | Kubernetes RBAC or other identity and access management mechanisms |
 | Intended use | Workloads, automation | People |
 
-{{< /table >}}
+{{}}
 
 ### Default service accounts {#default-service-accounts}
 
@@ -67,7 +67,7 @@ service accounts in each namespace get no permissions by default other than the
 [default API discovery permissions](/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings)
 that Kubernetes grants to all authenticated principals if role-based access control (RBAC) is enabled.
 If you delete the `default` ServiceAccount object in a namespace, the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}}
+{{}}
 replaces it with a new one.
 
 If you deploy a Pod in a namespace, and you don't
@@ -155,7 +155,7 @@ To prevent Kubernetes from automatically injecting
 credentials for a specified ServiceAccount or the `default` ServiceAccount, set the
 `automountServiceAccountToken` field in your Pod specification to `false`.
 
-<!-- OK to remove this historical detail after Kubernetes 1.31 is released -->
+
 
 In versions earlier than 1.22, Kubernetes provides a long-lived, static token
 to the Pod as a Secret.
@@ -188,7 +188,7 @@ following methods:
   ServiceAccounts. `LegacyServiceAccountTokenNoAutoGeneration` is enabled
   by default; in other words, Kubernetes does not create these tokens.
 
-{{< note >}}
+{{}}
 For applications running outside your Kubernetes cluster, you might be considering
 creating a long-lived ServiceAccount token that is stored in a Secret. This allows authentication, but the Kubernetes project recommends you avoid this approach.
 Long-lived bearer tokens represent a security risk as, once disclosed, the token
@@ -197,7 +197,7 @@ application can authenticate using a well-protected private key `and` a certific
 or using a custom mechanism such as an [authentication webhook](/docs/reference/access-authn-authz/authentication/#webhook-token-authentication) that you implement yourself.
 
 You can also use TokenRequest to obtain short-lived tokens for your external application.
-{{< /note >}}
+{{}}
 
 ### Restricting access to Secrets {#enforce-mountable-secrets}
 
@@ -232,14 +232,14 @@ By understanding and enforcing these restrictions, cluster administrators can ma
 ## Authenticating service account credentials {#authenticating-credentials}
 
 ServiceAccounts use signed
-{{<glossary_tooltip term_id="jwt" text="JSON Web Tokens">}}  (JWTs)
+{{}}  (JWTs)
 to authenticate to the Kubernetes API server, and to any other system where a
 trust relationship exists. Depending on how the token was issued
 (either time-limited using a `TokenRequest` or using a legacy mechanism with
 a Secret), a ServiceAccount token might also have an expiry time, an audience,
 and a time after which the token *starts* being valid. When a client that is
 acting as a ServiceAccount tries to communicate with the Kubernetes API server,
-the client includes an `Authorization: Bearer <token>` header with the HTTP
+the client includes an `Authorization: Bearer ` header with the HTTP
 request. The API server checks the validity of that bearer token as follows:
 
 1. Checks the token signature.
@@ -255,7 +255,7 @@ for an example of a bound pod service account token's JWT schema and payload.
 
 For tokens issued using the `TokenRequest` API, the API server also checks that
 the specific object reference that is using the ServiceAccount still exists,
-matching by the {{< glossary_tooltip term_id="uid" text="unique ID" >}} of that
+matching by the {{}} of that
 object. For legacy tokens that are mounted as Secrets in Pods, the API server
 checks the token against the Secret.
 

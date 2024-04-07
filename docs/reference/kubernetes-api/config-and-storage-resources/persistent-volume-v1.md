@@ -10,16 +10,7 @@ weight: 5
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
 
-<hr>
+
 
 - **apiVersion**: v1
 
@@ -38,15 +29,15 @@ PersistentVolume (PV) is a storage resource provisioned by an administrator. It 
 - **kind**: PersistentVolume
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolumeSpec" >}}">PersistentVolumeSpec</a>)
+- **spec** (}}">PersistentVolumeSpec)
 
   spec defines a specification of a persistent volume owned by the cluster. Provisioned by an administrator. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
 
-- **status** (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolumeStatus" >}}">PersistentVolumeStatus</a>)
+- **status** (}}">PersistentVolumeStatus)
 
   status represents the current information/status for the persistent volume. Populated by the system. Read-only. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
 
@@ -58,17 +49,17 @@ PersistentVolume (PV) is a storage resource provisioned by an administrator. It 
 
 PersistentVolumeSpec is the specification of a persistent volume.
 
-<hr>
+
 
 - **accessModes** ([]string)
 
   accessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
 
-- **capacity** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
+- **capacity** (map[string]}}">Quantity)
 
   capacity is the description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
 
-- **claimRef** (<a href="{{< ref "../common-definitions/object-reference#ObjectReference" >}}">ObjectReference</a>)
+- **claimRef** (}}">ObjectReference)
 
   claimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim. Expected to be non-nil when bound. claim.VolumeName is the authoritative bind between PV and PVC. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding
 
@@ -80,28 +71,28 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   nodeAffinity defines constraints that limit what nodes this volume can be accessed from. This field influences the scheduling of pods that use this volume.
 
-  <a name="VolumeNodeAffinity"></a>
+  
   *VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.*
 
   - **nodeAffinity.required** (NodeSelector)
 
     required specifies hard node constraints that must be met.
 
-    <a name="NodeSelector"></a>
+    
     *A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms.*
 
     - **nodeAffinity.required.nodeSelectorTerms** ([]NodeSelectorTerm), required
 
       Required. A list of node selector terms. The terms are ORed.
 
-      <a name="NodeSelectorTerm"></a>
+      
       *A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.*
 
-      - **nodeAffinity.required.nodeSelectorTerms.matchExpressions** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+      - **nodeAffinity.required.nodeSelectorTerms.matchExpressions** ([]}}">NodeSelectorRequirement)
 
         A list of node selector requirements by node's labels.
 
-      - **nodeAffinity.required.nodeSelectorTerms.matchFields** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+      - **nodeAffinity.required.nodeSelectorTerms.matchFields** ([]}}">NodeSelectorRequirement)
 
         A list of node selector requirements by node's fields.
 
@@ -126,7 +117,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   hostPath represents a directory on the host. Provisioned by a developer or tester. This is useful for single-node development and testing only! On-host storage is not supported in any way and WILL NOT WORK in a multi-node cluster. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
 
-  <a name="HostPathVolumeSource"></a>
+  
   *Represents a host path mapped into a pod. Host path volumes do not support ownership management or SELinux relabeling.*
 
   - **hostPath.path** (string), required
@@ -141,7 +132,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   local represents directly-attached storage with node affinity
 
-  <a name="LocalVolumeSource"></a>
+  
   *Local represents directly-attached storage with node affinity (Beta feature)*
 
   - **local.path** (string), required
@@ -159,7 +150,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   awsElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
 
-  <a name="AWSElasticBlockStoreVolumeSource"></a>
+  
   *Represents a Persistent Disk resource in AWS.
   
   An AWS EBS disk must exist before mounting to a container. The disk must also be in the same AWS zone as the kubelet. An AWS EBS disk can only be mounted as read/write once. AWS EBS volumes support ownership management and SELinux relabeling.*
@@ -184,7 +175,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
 
-  <a name="AzureDiskVolumeSource"></a>
+  
   *AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.*
 
   - **azureDisk.diskName** (string), required
@@ -215,7 +206,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   azureFile represents an Azure File Service mount on the host and bind mount to the pod.
 
-  <a name="AzureFilePersistentVolumeSource"></a>
+  
   *AzureFile represents an Azure File Service mount on the host and bind mount to the pod.*
 
   - **azureFile.secretName** (string), required
@@ -238,7 +229,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
 
-  <a name="CephFSPersistentVolumeSource"></a>
+  
   *Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling.*
 
   - **cephfs.monitors** ([]string), required
@@ -261,7 +252,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **cephfs.secretRef.name** (string)
@@ -280,7 +271,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
 
-  <a name="CinderPersistentVolumeSource"></a>
+  
   *Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling.*
 
   - **cinder.volumeID** (string), required
@@ -299,7 +290,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     secretRef is Optional: points to a secret object containing parameters used to connect to OpenStack.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **cinder.secretRef.name** (string)
@@ -314,7 +305,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   csi represents storage that is handled by an external CSI driver (Beta feature).
 
-  <a name="CSIPersistentVolumeSource"></a>
+  
   *Represents storage that is managed by an external CSI volume driver (Beta feature)*
 
   - **csi.driver** (string), required
@@ -329,7 +320,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     controllerExpandSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerExpandVolume call. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **csi.controllerExpandSecretRef.name** (string)
@@ -344,7 +335,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     controllerPublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerPublishVolume and ControllerUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **csi.controllerPublishSecretRef.name** (string)
@@ -363,7 +354,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     nodeExpandSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodeExpandVolume call. This is a beta field which is enabled default by CSINodeExpandSecret feature gate. This field is optional, may be omitted if no secret is required. If the secret object contains more than one secret, all secrets are passed.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **csi.nodeExpandSecretRef.name** (string)
@@ -378,7 +369,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     nodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **csi.nodePublishSecretRef.name** (string)
@@ -393,7 +384,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     nodeStageSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodeStageVolume and NodeStageVolume and NodeUnstageVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **csi.nodeStageSecretRef.name** (string)
@@ -416,7 +407,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
 
-  <a name="FCVolumeSource"></a>
+  
   *Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre Channel volumes support ownership management and SELinux relabeling.*
 
   - **fc.fsType** (string)
@@ -443,7 +434,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   flexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin.
 
-  <a name="FlexPersistentVolumeSource"></a>
+  
   *FlexPersistentVolumeSource represents a generic persistent volume resource that is provisioned/attached using an exec based plugin.*
 
   - **flexVolume.driver** (string), required
@@ -466,7 +457,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     secretRef is Optional: SecretRef is reference to the secret object containing sensitive information to pass to the plugin scripts. This may be empty if no secret object is specified. If the secret object contains more than one secret, all secrets are passed to the plugin scripts.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **flexVolume.secretRef.name** (string)
@@ -481,7 +472,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running
 
-  <a name="FlockerVolumeSource"></a>
+  
   *Represents a Flocker volume mounted by the Flocker agent. One and only one of datasetName and datasetUUID should be set. Flocker volumes do not support ownership management or SELinux relabeling.*
 
   - **flocker.datasetName** (string)
@@ -496,7 +487,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   gcePersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-  <a name="GCEPersistentDiskVolumeSource"></a>
+  
   *Represents a Persistent Disk resource in Google Compute Engine.
   
   A GCE PD must exist before mounting to a container. The disk must also be in the same GCE project and zone as the kubelet. A GCE PD can only be mounted as read/write once or read-only many times. GCE PDs support ownership management and SELinux relabeling.*
@@ -521,7 +512,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   glusterfs represents a Glusterfs volume that is attached to a host and exposed to the pod. Provisioned by an admin. More info: https://examples.k8s.io/volumes/glusterfs/README.md
 
-  <a name="GlusterfsPersistentVolumeSource"></a>
+  
   *Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling.*
 
   - **glusterfs.endpoints** (string), required
@@ -544,7 +535,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   iscsi represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin.
 
-  <a name="ISCSIPersistentVolumeSource"></a>
+  
   *ISCSIPersistentVolumeSource represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling.*
 
   - **iscsi.iqn** (string), required
@@ -573,7 +564,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   - **iscsi.initiatorName** (string)
 
-    initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface \<target portal>:\<volume name> will be created for the connection.
+    initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface \:\ will be created for the connection.
 
   - **iscsi.iscsiInterface** (string)
 
@@ -591,7 +582,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     secretRef is the CHAP Secret for iSCSI target and initiator authentication
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **iscsi.secretRef.name** (string)
@@ -606,7 +597,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   nfs represents an NFS mount on the host. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 
-  <a name="NFSVolumeSource"></a>
+  
   *Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do not support ownership management or SELinux relabeling.*
 
   - **nfs.path** (string), required
@@ -625,7 +616,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
 
-  <a name="PhotonPersistentDiskVolumeSource"></a>
+  
   *Represents a Photon Controller persistent disk resource.*
 
   - **photonPersistentDisk.pdID** (string), required
@@ -640,7 +631,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   portworxVolume represents a portworx volume attached and mounted on kubelets host machine
 
-  <a name="PortworxVolumeSource"></a>
+  
   *PortworxVolumeSource represents a Portworx volume resource.*
 
   - **portworxVolume.volumeID** (string), required
@@ -659,7 +650,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   quobyte represents a Quobyte mount on the host that shares a pod's lifetime
 
-  <a name="QuobyteVolumeSource"></a>
+  
   *Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte volumes do not support ownership management or SELinux relabeling.*
 
   - **quobyte.registry** (string), required
@@ -690,7 +681,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   rbd represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md
 
-  <a name="RBDPersistentVolumeSource"></a>
+  
   *Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling.*
 
   - **rbd.image** (string), required
@@ -721,7 +712,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     secretRef is name of the authentication secret for RBDUser. If provided overrides keyring. Default is nil. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **rbd.secretRef.name** (string)
@@ -740,7 +731,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
 
-  <a name="ScaleIOPersistentVolumeSource"></a>
+  
   *ScaleIOPersistentVolumeSource represents a persistent ScaleIO volume*
 
   - **scaleIO.gateway** (string), required
@@ -751,7 +742,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     secretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail.
 
-    <a name="SecretReference"></a>
+    
     *SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace*
 
     - **scaleIO.secretRef.name** (string)
@@ -798,7 +789,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   storageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod More info: https://examples.k8s.io/volumes/storageos/README.md
 
-  <a name="StorageOSPersistentVolumeSource"></a>
+  
   *Represents a StorageOS persistent volume resource.*
 
   - **storageos.fsType** (string)
@@ -809,7 +800,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
     readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
 
-  - **storageos.secretRef** (<a href="{{< ref "../common-definitions/object-reference#ObjectReference" >}}">ObjectReference</a>)
+  - **storageos.secretRef** (}}">ObjectReference)
 
     secretRef specifies the secret to use for obtaining the StorageOS API credentials.  If not specified, default values will be attempted.
 
@@ -825,7 +816,7 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
   vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
 
-  <a name="VsphereVirtualDiskVolumeSource"></a>
+  
   *Represents a vSphere volume resource.*
 
   - **vsphereVolume.volumePath** (string), required
@@ -850,13 +841,13 @@ PersistentVolumeSpec is the specification of a persistent volume.
 
 PersistentVolumeStatus is the current status of a persistent volume.
 
-<hr>
+
 
 - **lastPhaseTransitionTime** (Time)
 
   lastPhaseTransitionTime is the time the phase transitioned from one to another and automatically resets to current time everytime a volume phase transitions. This is an alpha field and requires enabling PersistentVolumeLastPhaseTransitionTime feature.
 
-  <a name="Time"></a>
+  
   *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
 - **message** (string)
@@ -879,7 +870,7 @@ PersistentVolumeStatus is the current status of a persistent volume.
 
 PersistentVolumeList is a list of PersistentVolume items.
 
-<hr>
+
 
 - **apiVersion**: v1
 
@@ -887,11 +878,11 @@ PersistentVolumeList is a list of PersistentVolume items.
 - **kind**: PersistentVolumeList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
-- **items** ([]<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>), required
+- **items** ([]}}">PersistentVolume), required
 
   items is a list of persistent volumes. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
 
@@ -903,7 +894,7 @@ PersistentVolumeList is a list of PersistentVolume items.
 
 
 
-<hr>
+
 
 
 
@@ -926,14 +917,14 @@ GET /api/v1/persistentvolumes/{name}
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
 401: Unauthorized
 
@@ -954,14 +945,14 @@ GET /api/v1/persistentvolumes/{name}/status
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
 401: Unauthorized
 
@@ -977,64 +968,64 @@ GET /api/v1/persistentvolumes
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolumeList" >}}">PersistentVolumeList</a>): OK
+200 (}}">PersistentVolumeList): OK
 
 401: Unauthorized
 
@@ -1048,40 +1039,40 @@ POST /api/v1/persistentvolumes
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>, required
+- **body**: }}">PersistentVolume, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): Created
+201 (}}">PersistentVolume): Created
 
-202 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): Accepted
+202 (}}">PersistentVolume): Accepted
 
 401: Unauthorized
 
@@ -1100,38 +1091,38 @@ PUT /api/v1/persistentvolumes/{name}
   name of the PersistentVolume
 
 
-- **body**: <a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>, required
+- **body**: }}">PersistentVolume, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): Created
+201 (}}">PersistentVolume): Created
 
 401: Unauthorized
 
@@ -1150,38 +1141,38 @@ PUT /api/v1/persistentvolumes/{name}/status
   name of the PersistentVolume
 
 
-- **body**: <a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>, required
+- **body**: }}">PersistentVolume, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): Created
+201 (}}">PersistentVolume): Created
 
 401: Unauthorized
 
@@ -1200,43 +1191,43 @@ PATCH /api/v1/persistentvolumes/{name}
   name of the PersistentVolume
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): Created
+201 (}}">PersistentVolume): Created
 
 401: Unauthorized
 
@@ -1255,43 +1246,43 @@ PATCH /api/v1/persistentvolumes/{name}/status
   name of the PersistentVolume
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): Created
+201 (}}">PersistentVolume): Created
 
 401: Unauthorized
 
@@ -1310,38 +1301,38 @@ DELETE /api/v1/persistentvolumes/{name}
   name of the PersistentVolume
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): OK
+200 (}}">PersistentVolume): OK
 
-202 (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>): Accepted
+202 (}}">PersistentVolume): Accepted
 
 401: Unauthorized
 
@@ -1355,76 +1346,76 @@ DELETE /api/v1/persistentvolumes
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

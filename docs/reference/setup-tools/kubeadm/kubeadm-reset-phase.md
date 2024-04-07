@@ -13,33 +13,33 @@ and behind the scene both use the same code.
 
 ## kubeadm reset phase {#cmd-reset-phase}
 
-{{< tabs name="tab-phase" >}}
-{{< tab name="phase" include="generated/kubeadm_reset_phase.md" />}}
-{{< /tabs >}}
+{{}}
+{{}}
+{{}}
 
 ## kubeadm reset phase preflight {#cmd-reset-phase-preflight}
 
 Using this phase you can execute preflight checks on a node that is being reset.
 
-{{< tabs name="tab-preflight" >}}
-{{< tab name="preflight" include="generated/kubeadm_reset_phase_preflight.md" />}}
-{{< /tabs >}}
+{{}}
+{{}}
+{{}}
 
 ## kubeadm reset phase remove-etcd-member {#cmd-reset-phase-remove-etcd-member}
 
 Using this phase you can remove this control-plane node's etcd member from the etcd cluster.
 
-{{< tabs name="tab-remove-etcd-member" >}}
-{{< tab name="remove-etcd-member" include="generated/kubeadm_reset_phase_remove-etcd-member.md" />}}
-{{< /tabs >}}
+{{}}
+{{}}
+{{}}
 
 ## kubeadm reset phase cleanup-node {#cmd-reset-phase-cleanup-node}
 
 Using this phase you can perform cleanup on this node.
 
-{{< tabs name="tab-cleanup-node" >}}
-{{< tab name="cleanup-node" include="generated/kubeadm_reset_phase_cleanup-node.md" />}}
-{{< /tabs >}}
+{{}}
+{{}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

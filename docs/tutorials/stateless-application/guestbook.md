@@ -13,7 +13,7 @@ min-kubernetes-server-version: v1.14
 source: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 ---
 
-<!-- overview -->
+
 This tutorial shows you how to build and deploy a simple _(not production
 ready)_, multi-tier web application using Kubernetes and
 [Docker](https://www.docker.com/). This example consists of the following
@@ -32,11 +32,11 @@ components:
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-{{< version-check >}}
+{{}}
 
-<!-- lessoncontent -->
+
 
 ## Start up the Redis Database
 
@@ -51,10 +51,7 @@ The manifest file, included below, specifies a Deployment controller that runs a
 1. Launch a terminal window in the directory you downloaded the manifest files.
 1. Apply the Redis Deployment from the `redis-leader-deployment.yaml` file:
 
-   <!---
-   for local testing of the content via relative file path
-   kubectl apply -f ./content/en/examples/application/guestbook/redis-leader-deployment.yaml
-   -->
+   
 
    ```shell
    kubectl apply -f https://k8s.io/examples/application/guestbook/redis-leader-deployment.yaml
@@ -90,10 +87,7 @@ Pods.
 
 1. Apply the Redis Service from the following `redis-leader-service.yaml` file:
 
-   <!---
-   for local testing of the content via relative file path
-   kubectl apply -f ./content/en/examples/application/guestbook/redis-leader-service.yaml
-   -->
+   
 
    ```shell
    kubectl apply -f https://k8s.io/examples/application/guestbook/redis-leader-service.yaml
@@ -109,15 +103,15 @@ Pods.
 
    ```
    NAME           TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
-   kubernetes     ClusterIP   10.0.0.1     <none>        443/TCP    1m
-   redis-leader   ClusterIP   10.103.78.24 <none>        6379/TCP   16s
+   kubernetes     ClusterIP   10.0.0.1             443/TCP    1m
+   redis-leader   ClusterIP   10.103.78.24         6379/TCP   16s
    ```
 
-{{< note >}}
+{{}}
 This manifest file creates a Service named `redis-leader` with a set of labels
 that match the labels previously defined, so the Service routes network
 traffic to the Redis Pod.
-{{< /note >}}
+{{}}
 
 ### Set up Redis followers
 
@@ -128,10 +122,7 @@ and meet traffic demands by adding a few Redis followers, or replicas.
 
 1. Apply the Redis Deployment from the following `redis-follower-deployment.yaml` file:
 
-   <!---
-   for local testing of the content via relative file path
-   kubectl apply -f ./content/en/examples/application/guestbook/redis-follower-deployment.yaml
-   -->
+   
 
    ```shell
    kubectl apply -f https://k8s.io/examples/application/guestbook/redis-follower-deployment.yaml
@@ -162,10 +153,7 @@ read data. To make the Redis followers discoverable, you must set up another
 
 1. Apply the Redis Service from the following `redis-follower-service.yaml` file:
 
-   <!---
-   for local testing of the content via relative file path
-   kubectl apply -f ./content/en/examples/application/guestbook/redis-follower-service.yaml
-   -->
+   
 
    ```shell
    kubectl apply -f https://k8s.io/examples/application/guestbook/redis-follower-service.yaml
@@ -181,16 +169,16 @@ read data. To make the Redis followers discoverable, you must set up another
 
    ```
    NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-   kubernetes       ClusterIP   10.96.0.1       <none>        443/TCP    3d19h
-   redis-follower   ClusterIP   10.110.162.42   <none>        6379/TCP   9s
-   redis-leader     ClusterIP   10.103.78.24    <none>        6379/TCP   6m10s
+   kubernetes       ClusterIP   10.96.0.1               443/TCP    3d19h
+   redis-follower   ClusterIP   10.110.162.42           6379/TCP   9s
+   redis-leader     ClusterIP   10.103.78.24            6379/TCP   6m10s
    ```
 
-{{< note >}}
+{{}}
 This manifest file creates a Service named `redis-follower` with a set of
 labels that match the labels previously defined, so the Service routes network
 traffic to the Redis Pod.
-{{< /note >}}
+{{}}
 
 ## Set up and Expose the Guestbook Frontend
 
@@ -209,10 +197,7 @@ jQuery-Ajax-based UX.
 
 1. Apply the frontend Deployment from the `frontend-deployment.yaml` file:
 
-   <!---
-   for local testing of the content via relative file path
-   kubectl apply -f ./content/en/examples/application/guestbook/frontend-deployment.yaml
-   -->
+   
 
    ```shell
    kubectl apply -f https://k8s.io/examples/application/guestbook/frontend-deployment.yaml
@@ -247,20 +232,17 @@ from outside the Kubernetes cluster. However a Kubernetes user can use
 `kubectl port-forward` to access the service even though it uses a
 `ClusterIP`.
 
-{{< note >}}
+{{}}
 Some cloud providers, like Google Compute Engine or Google Kubernetes Engine,
 support external load balancers. If your cloud provider supports load
 balancers and you want to use it, uncomment `type: LoadBalancer`.
-{{< /note >}}
+{{}}
 
 {{% code_sample file="application/guestbook/frontend-service.yaml" %}}
 
 1. Apply the frontend Service from the `frontend-service.yaml` file:
 
-   <!---
-   for local testing of the content via relative file path
-   kubectl apply -f ./content/en/examples/application/guestbook/frontend-service.yaml
-   -->
+   
 
    ```shell
    kubectl apply -f https://k8s.io/examples/application/guestbook/frontend-service.yaml
@@ -276,10 +258,10 @@ balancers and you want to use it, uncomment `type: LoadBalancer`.
 
    ```
    NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-   frontend         ClusterIP   10.97.28.230    <none>        80/TCP     19s
-   kubernetes       ClusterIP   10.96.0.1       <none>        443/TCP    3d19h
-   redis-follower   ClusterIP   10.110.162.42   <none>        6379/TCP   5m48s
-   redis-leader     ClusterIP   10.103.78.24    <none>        6379/TCP   11m
+   frontend         ClusterIP   10.97.28.230            80/TCP     19s
+   kubernetes       ClusterIP   10.96.0.1               443/TCP    3d19h
+   redis-follower   ClusterIP   10.110.162.42           6379/TCP   5m48s
+   redis-leader     ClusterIP   10.103.78.24            6379/TCP   11m
    ```
 
 ### Viewing the Frontend Service via `kubectl port-forward`
@@ -319,11 +301,11 @@ you need to find the IP address to view your Guestbook.
 
 1. Copy the external IP address, and load the page in your browser to view your guestbook.
 
-{{< note >}}
+{{}}
 Try adding some guestbook entries by typing in a message, and clicking Submit.
 The message you typed appears in the frontend. This message indicates that
 data is successfully added to Redis through the Services you created earlier.
-{{< /note >}}
+{{}}
 
 ## Scale the Web Frontend
 

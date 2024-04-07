@@ -21,10 +21,10 @@ and for specific prerequisite follow
 ## Drain the node 
 
 ```shell
-kubectl drain <node-to-drain> --ignore-daemonsets
+kubectl drain  --ignore-daemonsets
 ```
 
-Replace `<node-to-drain>` with the name of your node you are draining.
+Replace `` with the name of your node you are draining.
 
 ## Stop the Docker daemon
 
@@ -38,7 +38,7 @@ systemctl disable docker.service --now
 Follow the [guide](/docs/setup/production-environment/container-runtimes/#containerd)
 for detailed steps to install containerd.
 
-{{< tabs name="tab-cri-containerd-installation" >}}
+{{}}
 {{% tab name="Linux" %}}
 
 1. Install the `containerd.io` package from the official Docker repositories. 
@@ -94,7 +94,7 @@ then run the following commands:
    ```
 
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## Configure the kubelet to use containerd as its container runtime
 
@@ -106,7 +106,7 @@ an annotation in the Node object for that host. To change it you can execute the
 on a machine that has the kubeadm `/etc/kubernetes/admin.conf` file.
 
 ```shell
-kubectl edit no <node-name>
+kubectl edit no 
 ```
 
 This will start a text editor where you can edit the Node object.
@@ -135,7 +135,7 @@ Run `kubectl get nodes -o wide` and containerd appears as the runtime for the no
 
 If the node appears healthy, remove Docker.
 
-{{< tabs name="tab-remove-docker-engine" >}}
+{{}}
 {{% tab name="CentOS" %}}
 
 ```shell
@@ -160,19 +160,19 @@ sudo dnf remove docker-ce docker-ce-cli
 sudo apt-get purge docker-ce docker-ce-cli
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 The preceding commands don't remove images, containers, volumes, or customized configuration files on your host.
 To delete them, follow Docker's instructions to [Uninstall Docker Engine](https://docs.docker.com/engine/install/ubuntu/#uninstall-docker-engine).
 
-{{< caution >}}
+{{}}
 Docker's instructions for uninstalling Docker Engine create a risk of deleting containerd. Be careful when executing commands.
-{{< /caution >}}
+{{}}
 
 ## Uncordon the node 
 
 ```shell
-kubectl uncordon <node-to-uncordon>
+kubectl uncordon 
 ```
 
-Replace `<node-to-uncordon>` with the name of your node you previously drained.
+Replace `` with the name of your node you previously drained.

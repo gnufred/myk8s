@@ -4,7 +4,7 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
+
 
 {{% alert title="Removed feature" color="warning" %}}
 PodSecurityPolicy was [deprecated](/blog/2021/04/08/kubernetes-1-21-release-announcement/#podsecuritypolicy-deprecation)
@@ -21,5 +21,5 @@ For a migration guide, see [Migrate from PodSecurityPolicy to the Built-In PodSe
 For more information on the removal of this API,
 see [PodSecurityPolicy Deprecation: Past, Present, and Future](/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/).
 
-If you are not running Kubernetes v{{< skew currentVersion >}}, check the documentation for
+If you are not running Kubernetes v{{}}, check the documentation for
 your version of Kubernetes.

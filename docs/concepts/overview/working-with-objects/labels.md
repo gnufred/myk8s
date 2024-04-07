@@ -6,10 +6,10 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
+
 
 _Labels_ are key/value pairs that are attached to
-{{< glossary_tooltip text="objects" term_id="object" >}} such as Pods.
+{{}} such as Pods.
 Labels are intended to be used to specify identifying attributes of objects
 that are meaningful and relevant to users, but do not directly imply semantics
 to the core system. Labels can be used to organize and to select subsets of
@@ -30,7 +30,7 @@ Labels allow for efficient queries and watches and are ideal for use in UIs
 and CLIs. Non-identifying information should be recorded using
 [annotations](/docs/concepts/overview/working-with-objects/annotations/).
 
-<!-- body -->
+
 
 ## Motivation
 
@@ -116,16 +116,16 @@ The semantics of empty or non-specified selectors are dependent on the context,
 and API types that use selectors should document the validity and meaning of
 them.
 
-{{< note >}}
+{{}}
 For some API types, such as ReplicaSets, the label selectors of two instances must
 not overlap within a namespace, or the controller can see that as conflicting
 instructions and fail to determine how many replicas should be present.
-{{< /note >}}
+{{}}
 
-{{< caution >}}
+{{}}
 For both equality-based and set-based conditions there is no logical _OR_ (`||`) operator.
 Ensure your filter statements are structured accordingly.
-{{< /caution >}}
+{{}}
 
 ### _Equality-based_ requirement
 
@@ -341,14 +341,14 @@ kubectl get pods -Lapp -Ltier -Lrole
 
 ```none
 NAME                           READY  STATUS    RESTARTS   AGE   APP         TIER       ROLE
-guestbook-fe-4nlpb             1/1    Running   0          1m    guestbook   frontend   <none>
-guestbook-fe-ght6d             1/1    Running   0          1m    guestbook   frontend   <none>
-guestbook-fe-jpy62             1/1    Running   0          1m    guestbook   frontend   <none>
+guestbook-fe-4nlpb             1/1    Running   0          1m    guestbook   frontend   
+guestbook-fe-ght6d             1/1    Running   0          1m    guestbook   frontend   
+guestbook-fe-jpy62             1/1    Running   0          1m    guestbook   frontend   
 guestbook-redis-master-5pg3b   1/1    Running   0          1m    guestbook   backend    master
 guestbook-redis-replica-2q2yf  1/1    Running   0          1m    guestbook   backend    replica
 guestbook-redis-replica-qgazl  1/1    Running   0          1m    guestbook   backend    replica
-my-nginx-divi2                 1/1    Running   0          29m   nginx       <none>     <none>
-my-nginx-o0ef1                 1/1    Running   0          29m   nginx       <none>     <none>
+my-nginx-divi2                 1/1    Running   0          29m   nginx            
+my-nginx-o0ef1                 1/1    Running   0          29m   nginx            
 ```
 
 ```shell

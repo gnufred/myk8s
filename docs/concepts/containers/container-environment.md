@@ -7,14 +7,14 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
+
 
 This page describes the resources available to Containers in the Container environment. 
 
 
 
 
-<!-- body -->
+
 
 ## Container environment
 
@@ -46,12 +46,12 @@ For a service named *foo* that maps to a Container named *bar*,
 the following variables are defined:
 
 ```shell
-FOO_SERVICE_HOST=<the host the service is running on>
-FOO_SERVICE_PORT=<the port the service is running on>
+FOO_SERVICE_HOST=
+FOO_SERVICE_PORT=
 ```
 
 Services have dedicated IP addresses and are available to the Container via DNS,
-if [DNS addon](https://releases.k8s.io/v{{< skew currentPatchVersion >}}/cluster/addons/dns/) is enabled. 
+if [DNS addon](https://releases.k8s.io/v{{}}/cluster/addons/dns/) is enabled. 
 
 
 

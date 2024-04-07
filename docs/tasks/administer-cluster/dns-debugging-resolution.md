@@ -8,29 +8,29 @@ min-kubernetes-server-version: v1.6
 weight: 170
 ---
 
-<!-- overview -->
+
 This page provides hints on diagnosing DNS problems.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}  
+{{}}  
 Your cluster must be configured to use the CoreDNS
-{{< glossary_tooltip text="addon" term_id="addons" >}} or its precursor,
+{{}} or its precursor,
 kube-dns.  
 
 {{% version-check %}}
 
-<!-- steps -->
+
 
 ### Create a simple Pod to use as a test environment
 
 {{% code_sample file="admin/dns/dnsutils.yaml" %}}
 
-{{< note >}}
+{{}}
 This example creates a pod in the `default` namespace. DNS name resolution for 
 services depends on the namespace of the pod. For more information, review
 [DNS for Services and Pods](/docs/concepts/services-networking/dns-pod-service/#what-things-get-dns-names). 
-{{< /note >}}
+{{}}
 
 Use that manifest to create a Pod:
 
@@ -46,7 +46,7 @@ kubectl get pods dnsutils
 ```
 ```
 NAME      READY     STATUS    RESTARTS   AGE
-dnsutils   1/1       Running   0          <some-time>
+dnsutils   1/1       Running   0          
 ```
 
 Once that Pod is running, you can exec `nslookup` in that environment.
@@ -124,9 +124,9 @@ coredns-7b96bf9f76-mvmmt   1/1       Running   0           1h
 ...
 ```
 
-{{< note >}}
+{{}}
 The value for label `k8s-app` is `kube-dns` for both CoreDNS and kube-dns deployments.
-{{< /note >}}
+{{}}
 
 
 If you see that no CoreDNS Pod is running or that the Pod has failed/completed,
@@ -165,13 +165,13 @@ kubectl get svc --namespace=kube-system
 ```
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)             AGE
 ...
-kube-dns     ClusterIP   10.0.0.10      <none>        53/UDP,53/TCP        1h
+kube-dns     ClusterIP   10.0.0.10              53/UDP,53/TCP        1h
 ...
 ```
 
-{{< note >}}
+{{}}
 The service name is `kube-dns` for both CoreDNS and kube-dns deployments.
-{{< /note >}}
+{{}}
 
 
 
@@ -203,7 +203,7 @@ in the Kubernetes GitHub repository.
 ### Are DNS queries being received/processed?
 
 You can verify if queries are being received by CoreDNS by adding the `log` plugin to the CoreDNS configuration (aka Corefile).
-The CoreDNS Corefile is held in a {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}} named `coredns`. To edit it, use the command:
+The CoreDNS Corefile is held in a {{}} named `coredns`. To edit it, use the command:
 
 ```
 kubectl -n kube-system edit configmap coredns
@@ -255,9 +255,7 @@ linux/amd64, go1.10.3, 2e322f6
 ```
 ### Does CoreDNS have sufficient permissions?
 
-CoreDNS must be able to list {{< glossary_tooltip text="service"
-term_id="service" >}} and {{< glossary_tooltip text="endpoint"
-term_id="endpoint" >}} related resources to properly resolve service names.
+CoreDNS must be able to list {{}} and {{}} related resources to properly resolve service names.
 
 Sample error message:
 ```
@@ -311,12 +309,12 @@ the namespace of the service.
 
 This query is limited to the pod's namespace:
 ```shell
-kubectl exec -i -t dnsutils -- nslookup <service-name>
+kubectl exec -i -t dnsutils -- nslookup 
 ```
 
 This query specifies the namespace:
 ```shell
-kubectl exec -i -t dnsutils -- nslookup <service-name>.<namespace>
+kubectl exec -i -t dnsutils -- nslookup .
 ```
 
 To learn more about name resolution, see 

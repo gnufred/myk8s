@@ -6,14 +6,14 @@ content_type: concept
 weight: 10
 ---
 
-<!-- overview -->
+
 This document highlights and consolidates configuration best practices that are introduced
 throughout the user guide, Getting Started documentation, and examples.
 
 This is a living document. If you think of something that is not on this list but might be useful
 to others, please don't hesitate to file an issue or submit a PR.
 
-<!-- body -->
+
 ## General Configuration Tips
 
 - When defining configurations, specify the latest stable API version.
@@ -37,7 +37,7 @@ to others, please don't hesitate to file an issue or submit a PR.
 
 - Put object descriptions in annotations, to allow better introspection.
 
-{{< note >}}
+{{}}
 There is a breaking change introduced in the [YAML 1.2](https://yaml.org/spec/1.2.0/#id2602744)
 boolean values specification with respect to [YAML 1.1](https://yaml.org/spec/1.1/#id864510).
 This is a known [issue](https://github.com/kubernetes/kubernetes/issues/34146) in Kubernetes.
@@ -52,7 +52,7 @@ any strings that may be confused with booleans, such as **"yes"** or **"no"**.
 Besides booleans, there are additional specifications changes between YAML versions. Please refer
 to the [YAML Specification Changes](https://spec.yaml.io/main/spec/1.2.2/ext/changes) documentation
 for a comprehensive list.
-{{< /note >}}
+{{}}
 
 ## "Naked" Pods versus ReplicaSets, Deployments, and Jobs {#naked-pods-vs-replicasets-deployments-and-jobs}
 
@@ -76,8 +76,8 @@ for a comprehensive list.
   all containers will get the following variables in their initial environment:
 
   ```shell
-  FOO_SERVICE_HOST=<the host the Service is running on>
-  FOO_SERVICE_PORT=<the port the Service is running on>
+  FOO_SERVICE_HOST=
+  FOO_SERVICE_PORT=
   ```
 
   *This does imply an ordering requirement* - any `Service` that a `Pod` wants to access must be
@@ -90,8 +90,7 @@ for a comprehensive list.
   able to do name resolution of `Services` automatically.
 
 - Don't specify a `hostPort` for a Pod unless it is absolutely necessary. When you bind a Pod to a
-  `hostPort`, it limits the number of places the Pod can be scheduled, because each <`hostIP`,
-  `hostPort`, `protocol`> combination must be unique. If you don't specify the `hostIP` and
+  `hostPort`, it limits the number of places the Pod can be scheduled, because each  combination must be unique. If you don't specify the `hostIP` and
   `protocol` explicitly, Kubernetes will use `0.0.0.0` as the default `hostIP` and `TCP` as the
   default `protocol`.
 
@@ -141,8 +140,8 @@ for a comprehensive list.
 
 ## Using kubectl
 
-- Use `kubectl apply -f <directory>`. This looks for Kubernetes configuration in all `.yaml`,
-  `.yml`, and `.json` files in `<directory>` and passes it to `apply`.
+- Use `kubectl apply -f `. This looks for Kubernetes configuration in all `.yaml`,
+  `.yml`, and `.json` files in `` and passes it to `apply`.
 
 - Use label selectors for `get` and `delete` operations instead of specific object names. See the
   sections on [label selectors](/docs/concepts/overview/working-with-objects/labels/#label-selectors)

@@ -6,7 +6,7 @@ content_type: task
 weight: 60
 ---
 
-<!-- overview -->
+
 
 This page shows how to use Weave Net for NetworkPolicy.
 
@@ -15,7 +15,7 @@ This page shows how to use Weave Net for NetworkPolicy.
 You need to have a Kubernetes cluster. Follow the
 [kubeadm getting started guide](/docs/reference/setup-tools/kubeadm/) to bootstrap one.
 
-<!-- steps -->
+
 
 ## Install the Weave Net addon
 

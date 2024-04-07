@@ -6,17 +6,16 @@ content_type: concept
 weight: 70
 ---
 
-<!-- overview -->
 
-{{<glossary_definition prepend="In Kubernetes, a Secret is an object that"
-term_id="secret" length="all">}}
+
+{{}}
 
 The following good practices are intended for both cluster administrators and
 application developers. Use these guidelines to improve the security of your
 sensitive information in Secret objects, as well as to more effectively manage
 your Secrets.
 
-<!-- body -->
+
 
 ## Cluster administrators
 
@@ -25,15 +24,14 @@ improve the security of confidential information in the cluster.
 
 ### Configure encryption at rest
 
-By default, Secret objects are stored unencrypted in {{<glossary_tooltip
-term_id="etcd" text="etcd">}}. You should configure encryption of your Secret
+By default, Secret objects are stored unencrypted in {{}}. You should configure encryption of your Secret
 data in `etcd`. For instructions, refer to
 [Encrypt Secret Data at Rest](/docs/tasks/administer-cluster/encrypt-data/).
 
 ### Configure least-privilege access to Secrets {#least-privilege-secrets}
 
 When planning your access control mechanism, such as Kubernetes
-{{<glossary_tooltip term_id="rbac" text="Role-based Access Control">}} [(RBAC)](/docs/reference/access-authn-authz/rbac/),
+{{}} [(RBAC)](/docs/reference/access-authn-authz/rbac/),
 consider the following guidelines for access to `Secret` objects. You should
 also follow the other guidelines in
 [RBAC good practices](/docs/concepts/security/rbac-good-practices).
@@ -46,10 +44,10 @@ also follow the other guidelines in
   more complex access control, such as restricting access to Secrets with
   specific annotations, consider using third-party authorization mechanisms.
 
-{{< caution >}}
+{{}}
 Granting `list` access to Secrets implicitly lets the subject fetch the
 contents of the Secrets.
-{{< /caution >}}
+{{}}
 
 A user who can create a Pod that uses a Secret can also see the value of that
 Secret. Even if cluster policies do not allow a user to read the Secret
@@ -112,11 +110,11 @@ to an untrusted party.
 ### Avoid sharing Secret manifests
 
 If you configure a Secret through a
-{{< glossary_tooltip text="manifest" term_id="manifest" >}}, with the secret
+{{}}, with the secret
 data encoded as base64, sharing this file or checking it in to a source
 repository means the secret is available to everyone who can read the manifest.
 
-{{< caution >}}
+{{}}
 Base64 encoding is _not_ an encryption method, it provides no additional
 confidentiality over plain text.
-{{< /caution >}}
+{{}}

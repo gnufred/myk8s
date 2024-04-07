@@ -10,16 +10,7 @@ weight: 3
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 Volume represents a named volume in a pod that may be accessed by any container in the pod.
 
-<hr>
+
 
 - **name** (string), required
 
@@ -45,7 +36,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   persistentVolumeClaimVolumeSource represents a reference to a PersistentVolumeClaim in the same namespace. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
 
-  <a name="PersistentVolumeClaimVolumeSource"></a>
+  
   *PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace. This volume finds the bound PV and mounts that volume for the pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around another type of volume that is owned by someone else (the system).*
 
   - **persistentVolumeClaim.claimName** (string), required
@@ -63,7 +54,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   configMap represents a configMap that should populate this volume
 
-  <a name="ConfigMapVolumeSource"></a>
+  
   *Adapts a ConfigMap into a volume.
   
   The contents of the target ConfigMap's Data field will be presented in a volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths. ConfigMap volumes support ownership management and SELinux relabeling.*
@@ -80,7 +71,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     defaultMode is optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.
 
-  - **configMap.items** ([]<a href="{{< ref "../config-and-storage-resources/volume#KeyToPath" >}}">KeyToPath</a>)
+  - **configMap.items** ([]}}">KeyToPath)
 
     items if unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the ConfigMap, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'.
 
@@ -88,7 +79,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   secret represents a secret that should populate this volume. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret
 
-  <a name="SecretVolumeSource"></a>
+  
   *Adapts a Secret into a volume.
   
   The contents of the target Secret's Data field will be presented in a volume as files using the keys in the Data field as the file names. Secret volumes support ownership management and SELinux relabeling.*
@@ -105,7 +96,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     defaultMode is Optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.
 
-  - **secret.items** ([]<a href="{{< ref "../config-and-storage-resources/volume#KeyToPath" >}}">KeyToPath</a>)
+  - **secret.items** ([]}}">KeyToPath)
 
     items If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'.
 
@@ -113,14 +104,14 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   downwardAPI represents downward API about the pod that should populate this volume
 
-  <a name="DownwardAPIVolumeSource"></a>
+  
   *DownwardAPIVolumeSource represents a volume containing downward API info. Downward API volumes support ownership management and SELinux relabeling.*
 
   - **downwardAPI.defaultMode** (int32)
 
     Optional: mode bits to use on created files by default. Must be a Optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.
 
-  - **downwardAPI.items** ([]<a href="{{< ref "../config-and-storage-resources/volume#DownwardAPIVolumeFile" >}}">DownwardAPIVolumeFile</a>)
+  - **downwardAPI.items** ([]}}">DownwardAPIVolumeFile)
 
     Items is a list of downward API volume file
 
@@ -128,7 +119,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   projected items for all in one resources secrets, configmaps, and downward API
 
-  <a name="ProjectedVolumeSource"></a>
+  
   *Represents a projected volume source*
 
   - **projected.defaultMode** (int32)
@@ -139,14 +130,14 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     sources is the list of volume projections
 
-    <a name="VolumeProjection"></a>
+    
     *Projection that may be projected along with other supported volume types*
 
     - **projected.sources.configMap** (ConfigMapProjection)
 
       configMap information about the configMap data to project
 
-      <a name="ConfigMapProjection"></a>
+      
       *Adapts a ConfigMap into a projected volume.
       
       The contents of the target ConfigMap's Data field will be presented in a projected volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths. Note that this is identical to a configmap volume source without the default mode.*
@@ -159,7 +150,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
         optional specify whether the ConfigMap or its keys must be defined
 
-      - **projected.sources.configMap.items** ([]<a href="{{< ref "../config-and-storage-resources/volume#KeyToPath" >}}">KeyToPath</a>)
+      - **projected.sources.configMap.items** ([]}}">KeyToPath)
 
         items if unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the ConfigMap, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'.
 
@@ -167,10 +158,10 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
       downwardAPI information about the downwardAPI data to project
 
-      <a name="DownwardAPIProjection"></a>
+      
       *Represents downward API info for projecting into a projected volume. Note that this is identical to a downwardAPI volume source without the default mode.*
 
-      - **projected.sources.downwardAPI.items** ([]<a href="{{< ref "../config-and-storage-resources/volume#DownwardAPIVolumeFile" >}}">DownwardAPIVolumeFile</a>)
+      - **projected.sources.downwardAPI.items** ([]}}">DownwardAPIVolumeFile)
 
         Items is a list of DownwardAPIVolume file
 
@@ -178,7 +169,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
       secret information about the secret data to project
 
-      <a name="SecretProjection"></a>
+      
       *Adapts a secret into a projected volume.
       
       The contents of the target Secret's Data field will be presented in a projected volume as files using the keys in the Data field as the file names. Note that this is identical to a secret volume source without the default mode.*
@@ -191,7 +182,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
         optional field specify whether the Secret or its key must be defined
 
-      - **projected.sources.secret.items** ([]<a href="{{< ref "../config-and-storage-resources/volume#KeyToPath" >}}">KeyToPath</a>)
+      - **projected.sources.secret.items** ([]}}">KeyToPath)
 
         items if unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'.
 
@@ -199,7 +190,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
       serviceAccountToken is information about the serviceAccountToken data to project
 
-      <a name="ServiceAccountTokenProjection"></a>
+      
       *ServiceAccountTokenProjection represents a projected service account token volume. This projection can be used to insert a service account token into the pods runtime filesystem for use against APIs (Kubernetes API Server or otherwise).*
 
       - **projected.sources.serviceAccountToken.path** (string), required
@@ -221,14 +212,14 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   emptyDir represents a temporary directory that shares a pod's lifetime. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
 
-  <a name="EmptyDirVolumeSource"></a>
+  
   *Represents an empty directory for a pod. Empty directory volumes support ownership management and SELinux relabeling.*
 
   - **emptyDir.medium** (string)
 
     medium represents what type of storage medium should back this directory. The default is "" which means to use the node's default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
 
-  - **emptyDir.sizeLimit** (<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
+  - **emptyDir.sizeLimit** (}}">Quantity)
 
     sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
 
@@ -236,7 +227,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   hostPath represents a pre-existing file or directory on the host machine that is directly exposed to the container. This is generally used for system agents or other privileged things that are allowed to see the host machine. Most containers will NOT need this. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
 
-  <a name="HostPathVolumeSource"></a>
+  
   *Represents a host path mapped into a pod. Host path volumes do not support ownership management or SELinux relabeling.*
 
   - **hostPath.path** (string), required
@@ -254,7 +245,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   awsElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
 
-  <a name="AWSElasticBlockStoreVolumeSource"></a>
+  
   *Represents a Persistent Disk resource in AWS.
   
   An AWS EBS disk must exist before mounting to a container. The disk must also be in the same AWS zone as the kubelet. An AWS EBS disk can only be mounted as read/write once. AWS EBS volumes support ownership management and SELinux relabeling.*
@@ -279,7 +270,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
 
-  <a name="AzureDiskVolumeSource"></a>
+  
   *AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.*
 
   - **azureDisk.diskName** (string), required
@@ -310,7 +301,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   azureFile represents an Azure File Service mount on the host and bind mount to the pod.
 
-  <a name="AzureFileVolumeSource"></a>
+  
   *AzureFile represents an Azure File Service mount on the host and bind mount to the pod.*
 
   - **azureFile.secretName** (string), required
@@ -329,7 +320,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
 
-  <a name="CephFSVolumeSource"></a>
+  
   *Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling.*
 
   - **cephfs.monitors** ([]string), required
@@ -348,7 +339,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     secretFile is Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
 
-  - **cephfs.secretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+  - **cephfs.secretRef** (}}">LocalObjectReference)
 
     secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
 
@@ -360,7 +351,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
 
-  <a name="CinderVolumeSource"></a>
+  
   *Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling.*
 
   - **cinder.volumeID** (string), required
@@ -375,7 +366,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
 
-  - **cinder.secretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+  - **cinder.secretRef** (}}">LocalObjectReference)
 
     secretRef is optional: points to a secret object containing parameters used to connect to OpenStack.
 
@@ -383,7 +374,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature).
 
-  <a name="CSIVolumeSource"></a>
+  
   *Represents a source location of a volume to mount, managed by an external CSI driver*
 
   - **csi.driver** (string), required
@@ -394,7 +385,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     fsType to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the empty value is passed to the associated CSI driver which will determine the default filesystem to apply.
 
-  - **csi.nodePublishSecretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+  - **csi.nodePublishSecretRef** (}}">LocalObjectReference)
 
     nodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and  may be empty if no secret is required. If the secret object contains more than one secret, all secret references are passed.
 
@@ -423,12 +414,12 @@ Volume represents a named volume in a pod that may be accessed by any container 
   
   A pod can use both types of ephemeral volumes and persistent volumes at the same time.
 
-  <a name="EphemeralVolumeSource"></a>
+  
   *Represents an ephemeral volume that is handled by a normal storage driver.*
 
   - **ephemeral.volumeClaimTemplate** (PersistentVolumeClaimTemplate)
 
-    Will be used to create a stand-alone PVC to provision the volume. The pod in which this EphemeralVolumeSource is embedded will be the owner of the PVC, i.e. the PVC will be deleted together with the pod.  The name of the PVC will be `\<pod name>-\<volume name>` where `\<volume name>` is the name from the `PodSpec.Volumes` array entry. Pod validation will reject the pod if the concatenated name is not valid for a PVC (for example, too long).
+    Will be used to create a stand-alone PVC to provision the volume. The pod in which this EphemeralVolumeSource is embedded will be the owner of the PVC, i.e. the PVC will be deleted together with the pod.  The name of the PVC will be `\-\` where `\` is the name from the `PodSpec.Volumes` array entry. Pod validation will reject the pod if the concatenated name is not valid for a PVC (for example, too long).
     
     An existing PVC with that name that is not owned by the pod will *not* be used for the pod to avoid using an unrelated volume by mistake. Starting the pod is then blocked until the unrelated PVC is removed. If such a pre-created PVC is meant to be used by the pod, the PVC has to updated with an owner reference to the pod once the pod exists. Normally this should not be necessary, but it may be useful when manually reconstructing a broken cluster.
     
@@ -436,14 +427,14 @@ Volume represents a named volume in a pod that may be accessed by any container 
     
     Required, must not be nil.
 
-    <a name="PersistentVolumeClaimTemplate"></a>
+    
     *PersistentVolumeClaimTemplate is used to produce PersistentVolumeClaim objects as part of an EphemeralVolumeSource.*
 
-    - **ephemeral.volumeClaimTemplate.spec** (<a href="{{< ref "../config-and-storage-resources/persistent-volume-claim-v1#PersistentVolumeClaimSpec" >}}">PersistentVolumeClaimSpec</a>), required
+    - **ephemeral.volumeClaimTemplate.spec** (}}">PersistentVolumeClaimSpec), required
 
       The specification for the PersistentVolumeClaim. The entire content is copied unchanged into the PVC that gets created from this template. The same fields as in a PersistentVolumeClaim are also valid here.
 
-    - **ephemeral.volumeClaimTemplate.metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+    - **ephemeral.volumeClaimTemplate.metadata** (}}">ObjectMeta)
 
       May contain labels and annotations that will be copied into the PVC when creating it. No other fields are allowed and will be rejected during validation.
 
@@ -451,7 +442,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
 
-  <a name="FCVolumeSource"></a>
+  
   *Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre Channel volumes support ownership management and SELinux relabeling.*
 
   - **fc.fsType** (string)
@@ -478,7 +469,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   flexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin.
 
-  <a name="FlexVolumeSource"></a>
+  
   *FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin.*
 
   - **flexVolume.driver** (string), required
@@ -497,7 +488,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     readOnly is Optional: defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
 
-  - **flexVolume.secretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+  - **flexVolume.secretRef** (}}">LocalObjectReference)
 
     secretRef is Optional: secretRef is reference to the secret object containing sensitive information to pass to the plugin scripts. This may be empty if no secret object is specified. If the secret object contains more than one secret, all secrets are passed to the plugin scripts.
 
@@ -505,7 +496,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
 
-  <a name="FlockerVolumeSource"></a>
+  
   *Represents a Flocker volume mounted by the Flocker agent. One and only one of datasetName and datasetUUID should be set. Flocker volumes do not support ownership management or SELinux relabeling.*
 
   - **flocker.datasetName** (string)
@@ -520,7 +511,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   gcePersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-  <a name="GCEPersistentDiskVolumeSource"></a>
+  
   *Represents a Persistent Disk resource in Google Compute Engine.
   
   A GCE PD must exist before mounting to a container. The disk must also be in the same GCE project and zone as the kubelet. A GCE PD can only be mounted as read/write once or read-only many times. GCE PDs support ownership management and SELinux relabeling.*
@@ -545,7 +536,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/glusterfs/README.md
 
-  <a name="GlusterfsVolumeSource"></a>
+  
   *Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling.*
 
   - **glusterfs.endpoints** (string), required
@@ -564,7 +555,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   iscsi represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://examples.k8s.io/volumes/iscsi/README.md
 
-  <a name="ISCSIVolumeSource"></a>
+  
   *Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling.*
 
   - **iscsi.iqn** (string), required
@@ -593,7 +584,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   - **iscsi.initiatorName** (string)
 
-    initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface \<target portal>:\<volume name> will be created for the connection.
+    initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface \:\ will be created for the connection.
 
   - **iscsi.iscsiInterface** (string)
 
@@ -607,7 +598,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false.
 
-  - **iscsi.secretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+  - **iscsi.secretRef** (}}">LocalObjectReference)
 
     secretRef is the CHAP Secret for iSCSI target and initiator authentication
 
@@ -615,7 +606,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   nfs represents an NFS mount on the host that shares a pod's lifetime More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 
-  <a name="NFSVolumeSource"></a>
+  
   *Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do not support ownership management or SELinux relabeling.*
 
   - **nfs.path** (string), required
@@ -634,7 +625,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
 
-  <a name="PhotonPersistentDiskVolumeSource"></a>
+  
   *Represents a Photon Controller persistent disk resource.*
 
   - **photonPersistentDisk.pdID** (string), required
@@ -649,7 +640,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   portworxVolume represents a portworx volume attached and mounted on kubelets host machine
 
-  <a name="PortworxVolumeSource"></a>
+  
   *PortworxVolumeSource represents a Portworx volume resource.*
 
   - **portworxVolume.volumeID** (string), required
@@ -668,7 +659,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   quobyte represents a Quobyte mount on the host that shares a pod's lifetime
 
-  <a name="QuobyteVolumeSource"></a>
+  
   *Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte volumes do not support ownership management or SELinux relabeling.*
 
   - **quobyte.registry** (string), required
@@ -699,7 +690,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   rbd represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md
 
-  <a name="RBDVolumeSource"></a>
+  
   *Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling.*
 
   - **rbd.image** (string), required
@@ -726,7 +717,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
 
-  - **rbd.secretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+  - **rbd.secretRef** (}}">LocalObjectReference)
 
     secretRef is name of the authentication secret for RBDUser. If provided overrides keyring. Default is nil. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
 
@@ -738,14 +729,14 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
 
-  <a name="ScaleIOVolumeSource"></a>
+  
   *ScaleIOVolumeSource represents a persistent ScaleIO volume*
 
   - **scaleIO.gateway** (string), required
 
     gateway is the host address of the ScaleIO API Gateway.
 
-  - **scaleIO.secretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>), required
+  - **scaleIO.secretRef** (}}">LocalObjectReference), required
 
     secretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail.
 
@@ -785,7 +776,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
 
-  <a name="StorageOSVolumeSource"></a>
+  
   *Represents a StorageOS persistent volume resource.*
 
   - **storageos.fsType** (string)
@@ -796,7 +787,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
     readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
 
-  - **storageos.secretRef** (<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+  - **storageos.secretRef** (}}">LocalObjectReference)
 
     secretRef specifies the secret to use for obtaining the StorageOS API credentials.  If not specified, default values will be attempted.
 
@@ -812,7 +803,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
 
-  <a name="VsphereVirtualDiskVolumeSource"></a>
+  
   *Represents a vSphere volume resource.*
 
   - **vsphereVolume.volumePath** (string), required
@@ -838,7 +829,7 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
   gitRepo represents a git repository at a particular revision. DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir into the Pod's container.
 
-  <a name="GitRepoVolumeSource"></a>
+  
   *Represents a volume that is populated with the contents of a git repository. Git repo volumes do not support ownership management. Git repo volumes support SELinux relabeling.
   
   DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir into the Pod's container.*
@@ -861,13 +852,13 @@ Volume represents a named volume in a pod that may be accessed by any container 
 
 DownwardAPIVolumeFile represents information to create the file containing the pod field
 
-<hr>
+
 
 - **path** (string), required
 
   Required: Path is  the relative path name of the file to be created. Must not be absolute or contain the '..' path. Must be utf-8 encoded. The first item of the relative path must not start with '..'
 
-- **fieldRef** (<a href="{{< ref "../common-definitions/object-field-selector#ObjectFieldSelector" >}}">ObjectFieldSelector</a>)
+- **fieldRef** (}}">ObjectFieldSelector)
 
   Required: Selects a field of the pod: only annotations, labels, name and namespace are supported.
 
@@ -875,7 +866,7 @@ DownwardAPIVolumeFile represents information to create the file containing the p
 
   Optional: mode bits used to set permissions on this file, must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. If not specified, the volume defaultMode will be used. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.
 
-- **resourceFieldRef** (<a href="{{< ref "../common-definitions/resource-field-selector#ResourceFieldSelector" >}}">ResourceFieldSelector</a>)
+- **resourceFieldRef** (}}">ResourceFieldSelector)
 
   Selects a resource of the container: only resources limits and requests (limits.cpu, limits.memory, requests.cpu and requests.memory) are currently supported.
 
@@ -887,7 +878,7 @@ DownwardAPIVolumeFile represents information to create the file containing the p
 
 Maps a string key to a path within a volume.
 
-<hr>
+
 
 - **key** (string), required
 

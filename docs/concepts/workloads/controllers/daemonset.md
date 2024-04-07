@@ -16,7 +16,7 @@ weight: 40
 hide_summary: true # Listed separately in section index
 ---
 
-<!-- overview -->
+
 
 A _DaemonSet_ ensures that all (or some) Nodes run a copy of a Pod.  As nodes are added to the
 cluster, Pods are added to them.  As nodes are removed from the cluster, those Pods are garbage
@@ -32,7 +32,7 @@ In a simple case, one DaemonSet, covering all nodes, would be used for each type
 A more complex setup might use multiple DaemonSets for a single type of daemon, but with
 different flags and/or different memory and cpu requests for different hardware types.
 
-<!-- body -->
+
 
 ## Writing a DaemonSet Spec
 
@@ -68,7 +68,7 @@ section.
 The `.spec.template` is one of the required fields in `.spec`.
 
 The `.spec.template` is a [pod template](/docs/concepts/workloads/pods/#pod-templates).
-It has exactly the same schema as a {{< glossary_tooltip text="Pod" term_id="pod" >}},
+It has exactly the same schema as a {{}},
 except it is nested and does not have an `apiVersion` or `kind`.
 
 In addition to required fields for a Pod, a Pod template in a DaemonSet has to specify appropriate
@@ -121,12 +121,12 @@ the existing Pods based on the
 [priority](/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority)
 of the new Pod.
 
-{{< note >}}
+{{}}
 If it's important that the DaemonSet pod run on each node, it's often desirable
 to set the `.spec.template.spec.priorityClassName` of the DaemonSet to a
 [PriorityClass](/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass)
 with a higher priority to ensure that this eviction occurs.
-{{< /note >}}
+{{}}
 
 The user can specify a different scheduler for the Pods of the DaemonSet, by
 setting the `.spec.template.spec.schedulerName` field of the DaemonSet.
@@ -151,10 +151,9 @@ nodeAffinity:
 
 ### Taints and tolerations
 
-The DaemonSet controller automatically adds a set of {{< glossary_tooltip
-text="tolerations" term_id="toleration" >}} to DaemonSet Pods:
+The DaemonSet controller automatically adds a set of {{}} to DaemonSet Pods:
 
-{{< table caption="Tolerations for DaemonSet pods" >}}
+{{}}
 
 | Toleration key                                                                                                        | Effect       | Details                                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -166,7 +165,7 @@ text="tolerations" term_id="toleration" >}} to DaemonSet Pods:
 | [`node.kubernetes.io/unschedulable`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-unschedulable)   | `NoSchedule` | DaemonSet Pods can be scheduled onto nodes that are unschedulable.                                                                            |
 | [`node.kubernetes.io/network-unavailable`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-network-unavailable) | `NoSchedule` | **Only added for DaemonSet Pods that request host networking**, i.e., Pods having `spec.hostNetwork: true`. Such DaemonSet Pods can be scheduled onto nodes with unavailable network.|
 
-{{< /table >}}
+{{}}
 
 You can add your own tolerations to the Pods of a DaemonSet as well, by
 defining these in the Pod template of the DaemonSet.
@@ -260,7 +259,7 @@ For example, [network plugins](/docs/concepts/extend-kubernetes/compute-storage-
 
 * Learn about [Pods](/docs/concepts/workloads/pods).
   * Learn about [static Pods](#static-pods), which are useful for running Kubernetes
-    {{< glossary_tooltip text="control plane" term_id="control-plane" >}} components.
+    {{}} components.
 * Find out how to use DaemonSets
   * [Perform a rolling update on a DaemonSet](/docs/tasks/manage-daemon/update-daemon-set/)
   * [Perform a rollback on a DaemonSet](/docs/tasks/manage-daemon/rollback-daemon-set/)
@@ -269,5 +268,5 @@ For example, [network plugins](/docs/concepts/extend-kubernetes/compute-storage-
 * Learn about [device plugins](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/) and
   [add ons](/docs/concepts/cluster-administration/addons/), which often run as DaemonSets.
 * `DaemonSet` is a top-level resource in the Kubernetes REST API.
-  Read the {{< api-reference page="workload-resources/daemon-set-v1" >}}
+  Read the {{}}
   object definition to understand the API for daemon sets.

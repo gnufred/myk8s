@@ -6,8 +6,8 @@ weight: 160
 min-kubernetes-server-version: v1.25
 ---
 
-<!-- overview -->
-{{< feature-state for_k8s_version="v1.25" state="alpha" >}}
+
+{{}}
 
 This page explains how user namespaces are used in Kubernetes pods. A user
 namespace isolates the user running inside the container from the one
@@ -26,7 +26,7 @@ mitigate some future vulnerabilities too.
 
 [KEP-vulns]: https://github.com/kubernetes/enhancements/tree/217d790720c5aef09b8bd4d6ca96284a0affe6c2/keps/sig-node/127-user-namespaces#motivation
 
-<!-- body -->
+
 ## {{% heading "prerequisites" %}}
 
 {{% thirdparty-content %}}
@@ -47,15 +47,15 @@ Some popular filesystems that support idmap mounts in Linux 6.3 are: btrfs,
 ext4, xfs, fat, tmpfs, overlayfs.
 
 In addition, support is needed in the 
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+{{}}
 to use this feature with Kubernetes pods:
 
 * CRI-O: version 1.25 (and later) supports user namespaces for containers.
 
-containerd v1.7 is not compatible with the userns support in Kubernetes v1.27 to v{{< skew latestVersion >}}.
+containerd v1.7 is not compatible with the userns support in Kubernetes v1.27 to v{{}}.
 Kubernetes v1.25 and v1.26 used an earlier implementation that **is** compatible with containerd v1.7,
 in terms of userns support.
-If you are using a version of Kubernetes other than {{< skew currentVersion >}},
+If you are using a version of Kubernetes other than {{}},
 check the documentation for that version of Kubernetes for the most relevant information.
 If there is a newer release of containerd than v1.7 available for use, also check the containerd
 documentation for compatibility information.
@@ -154,7 +154,7 @@ host's file owner/group.
 
 ## Integration with Pod security admission checks
 
-{{< feature-state state="alpha" for_k8s_version="v1.29" >}}
+{{}}
 
 For Linux Pods that enable user namespaces, Kubernetes relaxes the application of
 [Pod Security Standards](/docs/concepts/security/pod-security-standards) in a controlled way.

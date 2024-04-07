@@ -10,12 +10,12 @@ description: >-
   Your workload can discover Services within your cluster using DNS;
   this page explains how that works.
 ---
-<!-- overview -->
+
 
 Kubernetes creates DNS records for Services and Pods. You can contact
 Services with consistent DNS names instead of IP addresses. 
 
-<!-- body -->
+
 
 Kubernetes publishes information about Pods and Services which is used
 to program DNS.  Kubelet configures Pods' DNS so that running containers
@@ -47,7 +47,7 @@ are used to expand queries. To learn more about DNS queries, see
 
 ```
 nameserver 10.32.0.10
-search <namespace>.svc.cluster.local svc.cluster.local cluster.local
+search .svc.cluster.local svc.cluster.local cluster.local
 options ndots:5
 ```
 
@@ -187,20 +187,20 @@ to `"busybox-subdomain"`, the first Pod will see its own FQDN as
 A and/or AAAA records at that name, pointing to the Pod's IP. Both Pods "`busybox1`" and
 "`busybox2`" will have their own address records.
 
-An {{<glossary_tooltip term_id="endpoint-slice" text="EndpointSlice">}} can specify
+An {{}} can specify
 the DNS hostname for any endpoint addresses, along with its IP.
 
-{{< note >}}
+{{}}
 Because A and AAAA records are not created for Pod names, `hostname` is required for the Pod's A or AAAA
 record to be created. A Pod with no `hostname` but with `subdomain` will only create the
 A or AAAA record for the headless Service (`busybox-subdomain.my-namespace.svc.cluster-domain.example`),
 pointing to the Pods' IP addresses. Also, the Pod needs to be ready in order to have a
 record unless `publishNotReadyAddresses=True` is set on the Service.
-{{< /note >}}
+{{}}
 
 ### Pod's setHostnameAsFQDN field {#pod-sethostnameasfqdn-field}
 
-{{< feature-state for_k8s_version="v1.22" state="stable" >}}
+{{}}
 
 When a Pod is configured to have fully qualified domain name (FQDN), its
 hostname is the short hostname. For example, if you have a Pod with the fully
@@ -210,11 +210,11 @@ then by default the `hostname` command inside that Pod returns `busybox-1` and  
 
 When you set `setHostnameAsFQDN: true` in the Pod spec, the kubelet writes the Pod's FQDN into the hostname for that Pod's namespace. In this case, both `hostname` and `hostname --fqdn` return the Pod's FQDN.
 
-{{< note >}}
+{{}}
 In Linux, the hostname field of the kernel (the `nodename` field of `struct utsname`) is limited to 64 characters.
 
 If a Pod enables this feature and its FQDN is longer than 64 character, it will fail to start. The Pod will remain in `Pending` status (`ContainerCreating` as seen by `kubectl`) generating error events, such as Failed to construct FQDN from Pod hostname and cluster domain, FQDN `long-FQDN` is too long (64 characters is the max, 70 characters requested). One way of improving user experience for this scenario is to create an [admission webhook controller](/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks) to control FQDN size when users create top level objects, for example, Deployment.
-{{< /note >}}
+{{}}
 
 ### Pod's DNS Policy
 
@@ -242,10 +242,10 @@ following Pod-specific DNS policies. These policies are specified in the
   `dnsConfig` field in the Pod Spec.
   See [Pod's DNS config](#pod-dns-config) subsection below.
 
-{{< note >}}
+{{}}
 "Default" is not the default DNS policy. If `dnsPolicy` is not
 explicitly specified, then "ClusterFirst" is used.
-{{< /note >}}
+{{}}
 
 
 The example below shows a Pod with its DNS policy set to
@@ -272,7 +272,7 @@ spec:
 
 ### Pod's DNS Config {#pod-dns-config}
 
-{{< feature-state for_k8s_version="v1.14" state="stable" >}}
+{{}}
 
 Pod's DNS Config allows users more control on the DNS settings for a Pod.
 
@@ -325,14 +325,14 @@ options ndots:5
 
 ## DNS search domain list limits
 
-{{< feature-state for_k8s_version="1.28" state="stable" >}}
+{{}}
 
 Kubernetes itself does not limit the DNS Config until the length of the search
 domain list exceeds 32 or the total length of all search domains exceeds 2048.
 This limit applies to the node's resolver configuration file, the Pod's DNS
 Config, and the merged DNS Config respectively.
 
-{{< note >}}
+{{}}
 Some container runtimes of earlier versions may have their own restrictions on
 the number of DNS search domains. Depending on the container runtime
 environment, the pods with a large number of DNS search domains may get stuck in
@@ -340,7 +340,7 @@ the pending state.
 
 It is known that containerd v1.5.5 or earlier and CRI-O v1.21 or earlier have
 this problem.
-{{< /note >}}
+{{}}
 
 ## DNS resolution on Windows nodes {#dns-windows}
 

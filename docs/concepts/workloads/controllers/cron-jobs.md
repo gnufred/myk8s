@@ -14,11 +14,11 @@ weight: 80
 hide_summary: true # Listed separately in section index
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.21" state="stable" >}}
 
-A _CronJob_ creates {{< glossary_tooltip term_id="job" text="Jobs" >}} on a repeating schedule.
+{{}}
+
+A _CronJob_ creates {{}} on a repeating schedule.
 
 CronJob is meant for performing regular scheduled actions such as backups, report generation,
 and so on. One CronJob object is like one line of a _crontab_ (cron table) file on a
@@ -39,7 +39,7 @@ characters.  This is because the CronJob controller will automatically append
 11 characters to the name you provide and there is a constraint that the
 length of a Job name is no more than 63 characters.
 
-<!-- body -->
+
 ## Example
 
 This example CronJob manifest prints the current time and a hello message every minute:
@@ -71,16 +71,16 @@ The format also includes extended "Vixie cron" step values. As explained in the
 [FreeBSD manual](https://www.freebsd.org/cgi/man.cgi?crontab%285%29):
 
 > Step values can be used in conjunction with ranges. Following a range
-> with `/<number>` specifies skips of the number's value through the
+> with `/` specifies skips of the number's value through the
 > range. For example, `0-23/2` can be used in the hours field to specify
 > command execution every other hour (the alternative in the V7 standard is
 > `0,2,4,6,8,10,12,14,16,18,20,22`). Steps are also permitted after an
 > asterisk, so if you want to say "every two hours", just use `*/2`.
 
-{{< note >}}
+{{}}
 A question mark (`?`) in the schedule has the same meaning as an asterisk `*`, that is,
 it stands for any of available value for a given field.
-{{< /note >}}
+{{}}
 
 Other than the standard syntax, some macros like `@monthly` can also be used:
 
@@ -100,8 +100,8 @@ The `.spec.jobTemplate` defines a template for the Jobs that the CronJob creates
 It has exactly the same schema as a [Job](/docs/concepts/workloads/controllers/job/), except that
 it is nested and does not have an `apiVersion` or `kind`.
 You can specify common metadata for the templated Jobs, such as
-{{< glossary_tooltip text="labels" term_id="label" >}} or
-{{< glossary_tooltip text="annotations" term_id="annotation" >}}.
+{{}} or
+{{}}.
 For information about writing a Job `.spec`, see [Writing a Job Spec](/docs/concepts/workloads/controllers/job/#writing-a-job-spec).
 
 ### Deadline for delayed Job start {#starting-deadline}
@@ -153,11 +153,11 @@ If you do set that field to true, all subsequent executions are suspended (they 
 scheduled, but the CronJob controller does not start the Jobs to run the tasks) until
 you unsuspend the CronJob.
 
-{{< caution >}}
+{{}}
 Executions that are suspended during their scheduled time count as missed Jobs.
 When `.spec.suspend` changes from `true` to `false` on an existing CronJob without a
 [starting deadline](#starting-deadline), the missed Jobs are scheduled immediately.
-{{< /caution >}}
+{{}}
 
 ### Jobs history limits
 
@@ -170,9 +170,9 @@ For another way to clean up Jobs automatically, see [Clean up finished Jobs auto
 
 ### Time zones
 
-{{< feature-state for_k8s_version="v1.27" state="stable" >}}
+{{}}
 
-For CronJobs with no time zone specified, the {{< glossary_tooltip term_id="kube-controller-manager" text="kube-controller-manager" >}}
+For CronJobs with no time zone specified, the {{}}
 interprets schedules relative to its local time zone.
 
 You can specify a time zone for a CronJob by setting `.spec.timeZone` to the name
@@ -215,12 +215,12 @@ If `startingDeadlineSeconds` is set to a large value or left unset (the default)
 and if `concurrencyPolicy` is set to `Allow`, the Jobs will always run
 at least once.
 
-{{< caution >}}
+{{}}
 If `startingDeadlineSeconds` is set to a value less than 10 seconds, the CronJob may not be scheduled. This is because the CronJob controller checks things every 10 seconds.
-{{< /caution >}}
+{{}}
 
 
-For every CronJob, the CronJob {{< glossary_tooltip term_id="controller" >}} checks how many schedules it missed in the duration from its last scheduled time until now. If there are more than 100 missed schedules, then it does not start the Job and logs the error.
+For every CronJob, the CronJob {{}} checks how many schedules it missed in the duration from its last scheduled time until now. If there are more than 100 missed schedules, then it does not start the Job and logs the error.
 
 ```
 Cannot determine if job needs to be started. Too many missed start time (> 100). Set or decrease .spec.startingDeadlineSeconds or check clock skew.
@@ -252,5 +252,5 @@ the Job in turn is responsible for the management of the Pods it represents.
   of a CronJob manifest,
   see [Running automated tasks with CronJobs](/docs/tasks/job/automated-tasks-with-cron-jobs/).
 * `CronJob` is part of the Kubernetes REST API.
-  Read the {{< api-reference page="workload-resources/cron-job-v1" >}}
+  Read the {{}}
   API reference for more details.

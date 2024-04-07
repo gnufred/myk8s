@@ -4,11 +4,11 @@ weight: 20
 content_type: concept
 ---
 
-<!-- overview -->
+
 
 This topic discusses multiple ways to interact with clusters.
 
-<!-- body -->
+
 
 ## Accessing for the first time with kubectl
 
@@ -90,21 +90,7 @@ Use `kubectl apply` and `kubectl describe secret...` to create a token for the d
 First, create the Secret, requesting a token for the default ServiceAccount:
 
 ```shell
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Secret
-metadata:
-  name: default-token
-  annotations:
-    kubernetes.io/service-account.name: default
-type: kubernetes.io/service-account-token
-EOF
-```
-
-Next, wait for the token controller to populate the Secret with a token:
-
-```shell
-while ! kubectl describe secret default-token | grep -E '^token' >/dev/null; do
+kubectl apply -f - /dev/null; do
   echo "waiting for token..." >&2
   sleep 1
 done
@@ -181,7 +167,7 @@ client libraries.
 
 ### Go client
 
-* To get the library, run the following command: `go get k8s.io/client-go@kubernetes-<kubernetes-version-number>`,
+* To get the library, run the following command: `go get k8s.io/client-go@kubernetes-`,
   see [INSTALL.md](https://github.com/kubernetes/client-go/blob/master/INSTALL.md#for-the-casual-user)
   for detailed installation instructions. See
   [https://github.com/kubernetes/client-go](https://github.com/kubernetes/client-go#compatibility-matrix)

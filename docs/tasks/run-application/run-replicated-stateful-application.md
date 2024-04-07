@@ -11,23 +11,23 @@ content_type: tutorial
 weight: 30
 ---
 
-<!-- overview -->
+
 
 This page shows how to run a replicated stateful application using a
-{{< glossary_tooltip term_id="statefulset" >}}.
+{{}}.
 This application is a replicated MySQL database. The example topology has a
 single primary server and multiple replicas, using asynchronous row-based
 replication.
 
-{{< note >}}
+{{}}
 **This is not a production configuration**. MySQL settings remain on insecure defaults to keep the focus
 on general patterns for running stateful applications in Kubernetes.
-{{< /note >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
-- {{< include "task-tutorial-prereqs.md" >}}
-- {{< include "default-storage-class-prereqs.md" >}}
+- {{}}
+- {{}}
 - This tutorial assumes you are familiar with
   [PersistentVolumes](/docs/concepts/storage/persistent-volumes/)
   and [StatefulSets](/docs/concepts/workloads/controllers/statefulset/),
@@ -45,7 +45,7 @@ on general patterns for running stateful applications in Kubernetes.
 - Observe resistance to downtime.
 - Scale the StatefulSet up and down.
 
-<!-- lessoncontent -->
+
 
 ## Deploy MySQL
 
@@ -83,10 +83,10 @@ kubectl apply -f https://k8s.io/examples/application/mysql/mysql-services.yaml
 ```
 
 The headless Service provides a home for the DNS entries that the StatefulSet
-{{< glossary_tooltip text="controllers" term_id="controller" >}} creates for each
+{{}} creates for each
 Pod that's part of the set.
 Because the headless Service is named `mysql`, the Pods are accessible by
-resolving `<pod-name>.mysql` from within any other Pod in the same Kubernetes
+resolving `.mysql` from within any other Pod in the same Kubernetes
 cluster and namespace.
 
 The client Service, called `mysql-read`, is a normal Service with its own
@@ -126,10 +126,10 @@ mysql-2   2/2       Running   0          1m
 
 Press **Ctrl+C** to cancel the watch.
 
-{{< note >}}
+{{}}
 If you don't see any progress, make sure you have a dynamic PersistentVolume
 provisioner enabled, as mentioned in the [prerequisites](#before-you-begin).
-{{< /note >}}
+{{}}
 
 This manifest uses a variety of techniques for managing stateful Pods as part of
 a StatefulSet. The next section highlights some of these techniques to explain
@@ -142,7 +142,7 @@ ordinal index.
 It waits until each Pod reports being Ready before starting the next one.
 
 In addition, the controller assigns each Pod a unique, stable name of the form
-`<statefulset-name>-<ordinal-index>`, which results in Pods named `mysql-0`,
+`-`, which results in Pods named `mysql-0`,
 `mysql-1`, and `mysql-2`.
 
 The Pod template in the above StatefulSet manifest takes advantage of these
@@ -227,158 +227,17 @@ by running a temporary container with the `mysql:5.7` image and running the
 
 ```shell
 kubectl run mysql-client --image=mysql:5.7 -i --rm --restart=Never --\
-  mysql -h mysql-0.mysql <<EOF
-CREATE DATABASE test;
-CREATE TABLE test.messages (message VARCHAR(250));
-INSERT INTO test.messages VALUES ('hello');
-EOF
-```
+  mysql -h mysql-0.mysql ` with the name of the Node you found in the last step.
 
-Use the hostname `mysql-read` to send test queries to any server that reports
-being Ready:
-
-```shell
-kubectl run mysql-client --image=mysql:5.7 -i -t --rm --restart=Never --\
-  mysql -h mysql-read -e "SELECT * FROM test.messages"
-```
-
-You should get output like this:
-
-```
-Waiting for pod default/mysql-client to be running, status is Pending, pod ready: false
-+---------+
-| message |
-+---------+
-| hello   |
-+---------+
-pod "mysql-client" deleted
-```
-
-To demonstrate that the `mysql-read` Service distributes connections across
-servers, you can run `SELECT @@server_id` in a loop:
-
-```shell
-kubectl run mysql-client-loop --image=mysql:5.7 -i -t --rm --restart=Never --\
-  bash -ic "while sleep 1; do mysql -h mysql-read -e 'SELECT @@server_id,NOW()'; done"
-```
-
-You should see the reported `@@server_id` change randomly, because a different
-endpoint might be selected upon each connection attempt:
-
-```
-+-------------+---------------------+
-| @@server_id | NOW()               |
-+-------------+---------------------+
-|         100 | 2006-01-02 15:04:05 |
-+-------------+---------------------+
-+-------------+---------------------+
-| @@server_id | NOW()               |
-+-------------+---------------------+
-|         102 | 2006-01-02 15:04:06 |
-+-------------+---------------------+
-+-------------+---------------------+
-| @@server_id | NOW()               |
-+-------------+---------------------+
-|         101 | 2006-01-02 15:04:07 |
-+-------------+---------------------+
-```
-
-You can press **Ctrl+C** when you want to stop the loop, but it's useful to keep
-it running in another window so you can see the effects of the following steps.
-
-## Simulate Pod and Node failure {#simulate-pod-and-node-downtime}
-
-To demonstrate the increased availability of reading from the pool of replicas
-instead of a single server, keep the `SELECT @@server_id` loop from above
-running while you force a Pod out of the Ready state.
-
-### Break the Readiness probe
-
-The [readiness probe](/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes)
-for the `mysql` container runs the command `mysql -h 127.0.0.1 -e 'SELECT 1'`
-to make sure the server is up and able to execute queries.
-
-One way to force this readiness probe to fail is to break that command:
-
-```shell
-kubectl exec mysql-2 -c mysql -- mv /usr/bin/mysql /usr/bin/mysql.off
-```
-
-This reaches into the actual container's filesystem for Pod `mysql-2` and
-renames the `mysql` command so the readiness probe can't find it.
-After a few seconds, the Pod should report one of its containers as not Ready,
-which you can check by running:
-
-```shell
-kubectl get pod mysql-2
-```
-
-Look for `1/2` in the `READY` column:
-
-```
-NAME      READY     STATUS    RESTARTS   AGE
-mysql-2   1/2       Running   0          3m
-```
-
-At this point, you should see your `SELECT @@server_id` loop continue to run,
-although it never reports `102` anymore.
-Recall that the `init-mysql` script defined `server-id` as `100 + $ordinal`,
-so server ID `102` corresponds to Pod `mysql-2`.
-
-Now repair the Pod and it should reappear in the loop output
-after a few seconds:
-
-```shell
-kubectl exec mysql-2 -c mysql -- mv /usr/bin/mysql.off /usr/bin/mysql
-```
-
-### Delete Pods
-
-The StatefulSet also recreates Pods if they're deleted, similar to what a
-ReplicaSet does for stateless Pods.
-
-```shell
-kubectl delete pod mysql-2
-```
-
-The StatefulSet controller notices that no `mysql-2` Pod exists anymore,
-and creates a new one with the same name and linked to the same
-PersistentVolumeClaim.
-You should see server ID `102` disappear from the loop output for a while
-and then return on its own.
-
-### Drain a Node
-
-If your Kubernetes cluster has multiple Nodes, you can simulate Node downtime
-(such as when Nodes are upgraded) by issuing a
-[drain](/docs/reference/generated/kubectl/kubectl-commands/#drain).
-
-First determine which Node one of the MySQL Pods is on:
-
-```shell
-kubectl get pod mysql-2 -o wide
-```
-
-The Node name should show up in the last column:
-
-```
-NAME      READY     STATUS    RESTARTS   AGE       IP            NODE
-mysql-2   2/2       Running   0          15m       10.244.5.27   kubernetes-node-9l2t
-```
-
-Then, drain the Node by running the following command, which cordons it so
-no new Pods may schedule there, and then evicts any existing Pods.
-Replace `<node-name>` with the name of the Node you found in the last step.
-
-{{< caution >}}
+{{}}
 Draining a Node can impact other workloads and applications
 running on the same node. Only perform the following step in a test
 cluster.
-{{< /caution >}}
+{{}}
 
 ```shell
 # See above advice about impact on other workloads
-kubectl drain <node-name> --force --delete-emptydir-data --ignore-daemonsets
+kubectl drain  --force --delete-emptydir-data --ignore-daemonsets
 ```
 
 Now you can watch as the Pod reschedules on a different Node:
@@ -393,8 +252,8 @@ It should look something like this:
 NAME      READY   STATUS          RESTARTS   AGE       IP            NODE
 mysql-2   2/2     Terminating     0          15m       10.244.1.56   kubernetes-node-9l2t
 [...]
-mysql-2   0/2     Pending         0          0s        <none>        kubernetes-node-fjlm
-mysql-2   0/2     Init:0/2        0          0s        <none>        kubernetes-node-fjlm
+mysql-2   0/2     Pending         0          0s                kubernetes-node-fjlm
+mysql-2   0/2     Init:0/2        0          0s                kubernetes-node-fjlm
 mysql-2   0/2     Init:1/2        0          20s       10.244.5.32   kubernetes-node-fjlm
 mysql-2   0/2     PodInitializing 0          21s       10.244.5.32   kubernetes-node-fjlm
 mysql-2   1/2     Running         0          22s       10.244.5.32   kubernetes-node-fjlm
@@ -407,7 +266,7 @@ And again, you should see server ID `102` disappear from the
 Now uncordon the Node to return it to a normal state:
 
 ```shell
-kubectl uncordon <node-name>
+kubectl uncordon 
 ```
 
 ## Scaling the number of replicas
@@ -453,13 +312,13 @@ Scaling back down is also seamless:
 kubectl scale statefulset mysql --replicas=3
 ```
 
-{{< note >}}
+{{}}
 Although scaling up creates new PersistentVolumeClaims
 automatically, scaling down does not automatically delete these PVCs.
 
 This gives you the choice to keep those initialized PVCs around to make
 scaling back up quicker, or to extract data before deleting them.
-{{< /note >}}
+{{}}
 
 You can see this by running:
 

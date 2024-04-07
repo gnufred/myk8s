@@ -7,7 +7,7 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
+
 
 This page describes how kubelet managed Containers can use the Container lifecycle hook framework
 to run code triggered by events during their management lifecycle.
@@ -15,7 +15,7 @@ to run code triggered by events during their management lifecycle.
 
 
 
-<!-- body -->
+
 
 ## Overview
 

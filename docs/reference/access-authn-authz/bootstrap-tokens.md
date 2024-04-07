@@ -6,9 +6,9 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.18" state="stable" >}}
+
+{{}}
 
 Bootstrap tokens are a simple bearer token that is meant to be used when
 creating new clusters or joining new nodes to an existing cluster.  It was built
@@ -18,7 +18,7 @@ work, via RBAC policy, with the
 [Kubelet TLS Bootstrapping](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/) system.
 
 
-<!-- body -->
+
 ## Bootstrap Tokens Overview
 
 Bootstrap Tokens are defined with a specific type
@@ -55,7 +55,7 @@ authenticate requests against the API server.
 Authorization: Bearer 07401b.f395accd246ae52d
 ```
 
-Tokens authenticate as the username `system:bootstrap:<token id>` and are members
+Tokens authenticate as the username `system:bootstrap:` and are members
 of the group `system:bootstrappers`.  Additional groups may be specified in the
 token's Secret.
 
@@ -78,7 +78,7 @@ Here is what the secret looks like.
 apiVersion: v1
 kind: Secret
 metadata:
-  # Name MUST be of form "bootstrap-token-<token id>"
+  # Name MUST be of form "bootstrap-token-"
   name: bootstrap-token-07401b
   namespace: kube-system
 
@@ -104,7 +104,7 @@ stringData:
 ```
 
 The type of the secret must be `bootstrap.kubernetes.io/token` and the name must
-be `bootstrap-token-<token id>`.  It must also exist in the `kube-system`
+be `bootstrap-token-`.  It must also exist in the `kube-system`
 namespace.
 
 The `usage-bootstrap-*` members indicate what this secret is intended to be used
@@ -157,7 +157,7 @@ data:
     apiVersion: v1
     clusters:
     - cluster:
-        certificate-authority-data: <really long certificate data>
+        certificate-authority-data: 
         server: https://10.138.0.2:6443
       name: ""
     contexts: []
@@ -179,12 +179,12 @@ verify the JWS using the `HS256` scheme (HMAC-SHA256) with the full token (e.g.
 `07401b.f395accd246ae52d`) as the shared secret.  Users _must_ verify that HS256
 is used.
 
-{{< warning >}}
+{{}}
 Any party with a bootstrapping token can create a valid signature for that
 token. When using ConfigMap signing it's discouraged to share the same token with
 many clients, since a compromised client can potentially man-in-the middle another
 client relying on the signature to bootstrap TLS trust.
-{{< /warning >}}
+{{}}
 
 Consult the [kubeadm implementation details](/docs/reference/setup-tools/kubeadm/implementation-details/)
 section for more information.

@@ -7,7 +7,7 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 
 A _ServiceAccount_ provides an identity for processes that run in a Pod.
 
@@ -20,11 +20,11 @@ This task guide explains some of the concepts behind ServiceAccounts. The
 guide also explains how to obtain or revoke tokens that represent
 ServiceAccounts.
 
-<!-- body -->
+
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 To be able to follow these steps exactly, ensure you have a namespace named
 `examplens`.
@@ -62,7 +62,7 @@ for a number of reasons:
 
 ## Bound service account token volume mechanism {#bound-service-account-token-volume}
 
-{{< feature-state feature_gate_name="BoundServiceAccountTokenVolume" >}}
+{{}}
 
 By default, the Kubernetes control plane (specifically, the
 [ServiceAccount admission controller](#serviceaccount-admission-controller)) 
@@ -73,7 +73,7 @@ Here's an example of how that looks for a launched Pod:
 
 ```yaml
 ...
-  - name: kube-api-access-<random-suffix>
+  - name: kube-api-access-
     projected:
       sources:
         - serviceAccountToken:
@@ -109,11 +109,11 @@ each source also represents a single path within that volume. The three sources 
 
 Any container within the Pod that mounts this particular volume can access the above information.
 
-{{< note >}}
+{{}}
 There is no specific mechanism to invalidate a token issued via TokenRequest. If you no longer
 trust a bound service account token for a Pod, you can delete that Pod. Deleting a Pod expires
 its bound service account tokens.
-{{< /note >}}
+{{}}
 
 ## Manual Secret management for ServiceAccounts
 
@@ -121,7 +121,7 @@ Versions of Kubernetes before v1.22 automatically created credentials for access
 the Kubernetes API. This older mechanism was based on creating token Secrets that
 could then be mounted into running Pods.
 
-In more recent versions, including Kubernetes v{{< skew currentVersion >}}, API credentials
+In more recent versions, including Kubernetes v{{}}, API credentials
 are [obtained directly](#bound-service-account-token-volume) using the
 [TokenRequest](/docs/reference/kubernetes-api/authentication-resources/token-request-v1/) API,
 and are mounted into Pods using a projected volume.
@@ -132,11 +132,11 @@ You can still [manually create](/docs/tasks/configure-pod-container/configure-se
 
 Once you manually create a Secret and link it to a ServiceAccount, the Kubernetes control plane automatically populates the token into that Secret.
 
-{{< note >}}
+{{}}
 Although the manual mechanism for creating a long-lived ServiceAccount token exists,
 using [TokenRequest](/docs/reference/kubernetes-api/authentication-resources/token-request-v1/)
 to obtain short-lived API access tokens is recommended instead.
-{{< /note >}}
+{{}}
 
 ## Auto-generated legacy ServiceAccount token clean up {#auto-generated-legacy-serviceaccount-token-clean-up}
 
@@ -166,7 +166,7 @@ purged by the control plane.
 If users use an invalidated auto-generated token, the token validator will
 
 1. add an audit annotation for the key-value pair
-  `authentication.k8s.io/legacy-token-invalidated: <secret name>/<namespace>`,
+  `authentication.k8s.io/legacy-token-invalidated: /`,
 1. increment the `invalid_legacy_auto_token_uses_total` metric count,
 1. update the Secret label `kubernetes.io/legacy-token-last-used` with the new
    date,
@@ -237,7 +237,7 @@ it does the following when a Pod is created:
 1. Provided that neither the ServiceAccount's `automountServiceAccountToken` field nor the
    Pod's `automountServiceAccountToken` field is set to `false`:
    - the admission controller mutates the incoming Pod, adding an extra
-     {{< glossary_tooltip text="volume" term_id="volume" >}} that contains
+     {{}} that contains
      a token for API access.
    - the admission controller adds a `volumeMount` to each container in the Pod,
      skipping any containers that already have a volume mount defined for the path
@@ -249,7 +249,7 @@ it does the following when a Pod is created:
 
 ### Legacy ServiceAccount token tracking controller
 
-{{< feature-state feature_gate_name="LegacyServiceAccountTokenTracking" >}}
+{{}}
 
 This controller generates a ConfigMap called
 `kube-system/kube-apiserver-legacy-service-account-token-tracking` in the
@@ -258,7 +258,7 @@ account tokens began to be monitored by the system.
 
 ### Legacy ServiceAccount token cleaner
 
-{{< feature-state feature_gate_name="LegacyServiceAccountTokenCleanUp" >}}
+{{}}
 
 The legacy ServiceAccount token cleaner runs as part of the
 `kube-controller-manager` and checks every 24 hours to see if any auto-generated
@@ -285,16 +285,16 @@ The cleaner marks a Secret invalid by adding a label called
 as the value. If an invalid Secret is not used in a *specified amount of time*,
 the cleaner will delete it.
 
-{{< note >}}
+{{}}
 All the *specified amount of time* above defaults to one year. The cluster
 administrator can configure this value through the
 `--legacy-service-account-token-clean-up-period` command line argument for the
 `kube-controller-manager` component.
-{{< /note >}}
+{{}}
 
 ### TokenRequest API
 
-{{< feature-state for_k8s_version="v1.22" state="stable" >}}
+{{}}
 
 You use the [TokenRequest](/docs/reference/kubernetes-api/authentication-resources/token-request-v1/)
 subresource of a ServiceAccount to obtain a time-bound token for that ServiceAccount.
@@ -315,7 +315,7 @@ Here's an example of how that looks for a launched Pod:
 
 ```yaml
 ...
-  - name: kube-api-access-<random-suffix>
+  - name: kube-api-access-
     projected:
       defaultMode: 420 # decimal equivalent of octal 0644
       sources:
@@ -351,11 +351,11 @@ Any container within the Pod that mounts this volume can access the above inform
 
 ## Create additional API tokens {#create-token}
 
-{{< caution >}}
+{{}}
 Only create long-lived API tokens if the [token request](#tokenrequest-api) mechanism
 is not suitable. The token request mechanism provides time-limited tokens; because these
 expire, they represent a lower risk to information security.
-{{< /caution >}}
+{{}}
 
 To create a non-expiring, persisted API token for a ServiceAccount, create a
 Secret of type `kubernetes.io/service-account-token` with an annotation
@@ -383,7 +383,7 @@ The output is similar to:
 ```
 Name:           mysecretname
 Namespace:      examplens
-Labels:         <none>
+Labels:         
 Annotations:    kubernetes.io/service-account.name=myserviceaccount
                 kubernetes.io/service-account.uid=8a85c4c4-8483-11e9-bc42-526af7764f64
 
@@ -399,11 +399,11 @@ token:          ...
 If you launch a new Pod into the `examplens` namespace, it can use the `myserviceaccount`
 service-account-token Secret that you just created.
 
-{{< caution >}}
+{{}}
 Do not reference manually created Secrets in the `secrets` field of a
 ServiceAccount. Or the manually created Secrets will be cleaned if it is not used for a long
 time. Please refer to [auto-generated legacy ServiceAccount token clean up](#auto-generated-legacy-serviceaccount-token-clean-up).
-{{< /caution >}}
+{{}}
 
 ## Delete/invalidate a ServiceAccount token {#delete-token}
 

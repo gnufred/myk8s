@@ -7,9 +7,9 @@ content_type: concept
 weight: 65
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.27" state="alpha" >}}
+
+{{}}
 
 Dynamic resource allocation is an API for requesting and sharing resources
 between pods and containers inside a pod. It is a generalization of the
@@ -20,19 +20,18 @@ initialization.
 
 ## {{% heading "prerequisites" %}}
 
-Kubernetes v{{< skew currentVersion >}} includes cluster-level API support for
+Kubernetes v{{}} includes cluster-level API support for
 dynamic resource allocation, but it [needs to be
 enabled](#enabling-dynamic-resource-allocation) explicitly.  You also must
 install a resource driver for specific resources that are meant to be managed
-using this API.  If you are not running Kubernetes v{{< skew currentVersion>}},
+using this API.  If you are not running Kubernetes v{{}},
 check the documentation for that version of Kubernetes.
 
-<!-- body -->
+
 
 ## API
 
-The `resource.k8s.io/v1alpha2` {{< glossary_tooltip text="API group"
-term_id="api-group" >}} provides four types:
+The `resource.k8s.io/v1alpha2` {{}} provides four types:
 
 ResourceClass
 : Defines which resource driver handles a certain kind of
@@ -57,8 +56,7 @@ PodSchedulingContext
   for a Pod.
 
 Parameters for ResourceClass and ResourceClaim are stored in separate objects,
-typically using the type defined by a {{< glossary_tooltip
-term_id="CustomResourceDefinition" text="CRD" >}} that was created when
+typically using the type defined by a {{}} that was created when
 installing a resource driver.
 
 The `core/v1` `PodSpec` defines ResourceClaims that are needed for a Pod in a
@@ -162,7 +160,7 @@ gets scheduled onto one node and then cannot run there, which is bad because
 such a pending Pod also blocks all other resources like RAM or CPU that were
 set aside for it.
 
-{{< note >}}
+{{}}
 
 Scheduling of pods which use ResourceClaims is going to be slower because of
 the additional communication that is required. Beware that this may also impact
@@ -170,7 +168,7 @@ pods that don't use ResourceClaims because only one pod at a time gets
 scheduled, blocking API calls are made while handling a pod with
 ResourceClaims, and thus scheduling the next pod gets delayed.
 
-{{< /note >}}
+{{}}
 
 
 ## Monitoring resources
@@ -218,8 +216,7 @@ the `.spec.nodeName` field and to use a node selector instead.
 Dynamic resource allocation is an *alpha feature* and only enabled when the
 `DynamicResourceAllocation` [feature
 gate](/docs/reference/command-line-tools-reference/feature-gates/) and the
-`resource.k8s.io/v1alpha2` {{< glossary_tooltip text="API group"
-term_id="api-group" >}} are enabled. For details on that, see the
+`resource.k8s.io/v1alpha2` {{}} are enabled. For details on that, see the
 `--feature-gates` and `--runtime-config` [kube-apiserver
 parameters](/docs/reference/command-line-tools-reference/kube-apiserver/).
 kube-scheduler, kube-controller-manager and kubelet also need the feature gate.

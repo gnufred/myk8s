@@ -12,15 +12,15 @@ content_type: concept
 weight: 90
 ---
 
-<!-- overview -->
+
 
 In Kubernetes, a _HorizontalPodAutoscaler_ automatically updates a workload resource (such as
-a {{< glossary_tooltip text="Deployment" term_id="deployment" >}} or
-{{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}), with the
+a {{}} or
+{{}}), with the
 aim of automatically scaling the workload to match demand.
 
 Horizontal scaling means that the response to increased load is to deploy more
-{{< glossary_tooltip text="Pods" term_id="pod" >}}.
+{{}}.
 This is different from _vertical_ scaling, which for Kubernetes would mean
 assigning more resources (for example: memory or CPU) to the Pods that are already
 running for the workload.
@@ -30,24 +30,24 @@ the HorizontalPodAutoscaler instructs the workload resource (the Deployment, Sta
 or other similar resource) to scale back down.
 
 Horizontal pod autoscaling does not apply to objects that can't be scaled (for example:
-a {{< glossary_tooltip text="DaemonSet" term_id="daemonset" >}}.)
+a {{}}.)
 
 The HorizontalPodAutoscaler is implemented as a Kubernetes API resource and a
-{{< glossary_tooltip text="controller" term_id="controller" >}}.
+{{}}.
 The resource determines the behavior of the controller.
 The horizontal pod autoscaling controller, running within the Kubernetes
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}}, periodically adjusts the
+{{}}, periodically adjusts the
 desired scale of its target (for example, a Deployment) to match observed metrics such as average
 CPU utilization, average memory utilization, or any other custom metric you specify.
 
 There is [walkthrough example](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) of using
 horizontal pod autoscaling.
 
-<!-- body -->
+
 
 ## How does a HorizontalPodAutoscaler work?
 
-{{< mermaid >}}
+{{}}
 graph BT
 
 hpa[Horizontal Pod Autoscaler] --> scale[Scale]
@@ -68,7 +68,7 @@ class hpa hpa;
 class rc rc;
 class scale scale;
 class pod1,pod2,pod3 pod
-{{< /mermaid >}}
+{{}}
 
 Figure 1. HorizontalPodAutoscaler controls the scale of a Deployment and its ReplicaSet
 
@@ -110,7 +110,7 @@ or the custom metrics API (for all other metrics).
   comparison is made.
 
 The common use for HorizontalPodAutoscaler is to configure it to fetch metrics from
-{{< glossary_tooltip text="aggregated APIs" term_id="aggregation-layer" >}}
+{{}}
 (`metrics.k8s.io`, `custom.metrics.k8s.io`, or `external.metrics.k8s.io`). The `metrics.k8s.io` API is
 usually provided by an add-on named Metrics Server, which needs to be launched separately.
 For more information about resource metrics, see
@@ -225,7 +225,7 @@ memory and custom metrics. The new fields introduced in
 When you create a HorizontalPodAutoscaler API object, make sure the name specified is a valid
 [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 More details about the API object can be found at
-[HorizontalPodAutoscaler Object](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#horizontalpodautoscaler-v2-autoscaling).
+[HorizontalPodAutoscaler Object](/docs/reference/generated/kubernetes-api/{{}}/#horizontalpodautoscaler-v2-autoscaling).
 
 ## Stability of workload scale {#flapping}
 
@@ -269,16 +269,16 @@ target at 60%. Utilization is the ratio between the current usage of resource to
 resources of the pod. See [Algorithm](#algorithm-details) for more details about how the utilization
 is calculated and averaged.
 
-{{< note >}}
+{{}}
 Since the resource usages of all the containers are summed up the total pod utilization may not
 accurately represent the individual container resource usage. This could lead to situations where
 a single container might be running with high usage and the HPA will not scale out because the overall
 pod usage is still within acceptable limits.
-{{< /note >}}
+{{}}
 
 ### Container resource metrics
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+{{}}
 
 The HorizontalPodAutoscaler API also supports a container metric source where the HPA can track the
 resource usage of individual containers across a set of Pods, in order to scale the target resource.
@@ -306,7 +306,7 @@ containerResource:
 In the above example the HPA controller scales the target such that the average utilization of the cpu
 in the `application` container of all the pods is 60%.
 
-{{< note >}}
+{{}}
 If you change the name of a container that a HorizontalPodAutoscaler is tracking, you can
 make that change in a specific order to ensure scaling remains available and effective
 whilst the change is being applied. Before you update the resource that defines the container
@@ -316,11 +316,11 @@ throughout the update process.
 
 Once you have rolled out the container name change to the workload resource, tidy up by removing
 the old container name from the HPA specification.
-{{< /note >}}
+{{}}
 
 ## Scaling on custom metrics
 
-{{< feature-state for_k8s_version="v1.23" state="stable" >}}
+{{}}
 
 (the `autoscaling/v2beta2` API version previously provided this ability as a beta feature)
 
@@ -333,7 +333,7 @@ See [Support for metrics APIs](#support-for-metrics-apis) for the requirements.
 
 ## Scaling on multiple metrics
 
-{{< feature-state for_k8s_version="v1.23" state="stable" >}}
+{{}}
 
 (the `autoscaling/v2beta2` API version previously provided this ability as a beta feature)
 
@@ -374,7 +374,7 @@ and [the walkthrough for using external metrics](/docs/tasks/run-application/hor
 
 ## Configurable scaling behavior
 
-{{< feature-state for_k8s_version="v1.23" state="stable" >}}
+{{}}
 
 (the `autoscaling/v2beta2` API version previously provided this ability as a beta feature)
 
@@ -559,7 +559,7 @@ replica count or HPA's minimum replica count.
 
 When an HPA is enabled, it is recommended that the value of `spec.replicas` of
 the Deployment and / or StatefulSet be removed from their
-{{< glossary_tooltip text="manifest(s)" term_id="manifest" >}}. If this isn't done, any time
+{{}}. If this isn't done, any time
 a change to that object is applied, for example via `kubectl apply -f
 deployment.yaml`, this will instruct Kubernetes to scale the current number of Pods
 to the value of the `spec.replicas` key. This may not be
@@ -573,10 +573,10 @@ deployment application afterwards will behave as normal and respect a rolling
 update configuration as desired. You can avoid this degradation by choosing one of the following two
 methods based on how you are modifying your deployments:
 
-{{< tabs name="fix_replicas_instructions" >}}
+{{}}
 {{% tab name="Client Side Apply (this is the default)" %}}
 
-1. `kubectl apply edit-last-applied deployment/<deployment_name>`
+1. `kubectl apply edit-last-applied deployment/`
 2. In the editor, remove `spec.replicas`. When you save and exit the editor, `kubectl`
    applies the update. No changes to Pod counts happen at this step.
 3. You can now remove `spec.replicas` from the manifest. If you use source code management,
@@ -592,7 +592,7 @@ you can follow the [transferring ownership](/docs/reference/using-api/server-sid
 guidelines, which cover this exact use case.
 
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

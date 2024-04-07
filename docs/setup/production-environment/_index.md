@@ -4,7 +4,7 @@ description: Create a production-quality Kubernetes cluster
 weight: 30
 no_list: true
 ---
-<!-- overview -->
+
 
 A production-quality Kubernetes cluster requires planning and preparation.
 If your Kubernetes cluster is to run critical workloads, it must be configured to be resilient.
@@ -13,7 +13,7 @@ or to promote an existing cluster for production use.
 If you're already familiar with production setup and want the links, skip to
 [What's next](#what-s-next).
 
-<!-- body -->
+
 
 ## Production considerations
 
@@ -31,7 +31,7 @@ are influenced by the following issues:
   has a single point of failure. Creating a highly available cluster means considering:
   - Separating the control plane from the worker nodes.
   - Replicating the control plane components on multiple nodes.
-  - Load balancing traffic to the cluster’s {{< glossary_tooltip term_id="kube-apiserver" text="API server" >}}.
+  - Load balancing traffic to the cluster’s {{}}.
   - Having enough worker nodes available, or able to quickly become available, as changing workloads warrant it.
 
 - *Scale*: If you expect your production Kubernetes environment to receive a stable amount of

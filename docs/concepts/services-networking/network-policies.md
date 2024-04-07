@@ -16,12 +16,12 @@ description: >-
   Your cluster must use a network plugin that supports NetworkPolicy enforcement.
 ---
 
-<!-- overview -->
+
 
 If you want to control traffic flow at the IP address or port level for TCP, UDP, and SCTP protocols,
 then you might consider using Kubernetes NetworkPolicies for particular applications in your cluster.
 NetworkPolicies are an application-centric construct which allow you to specify how a
-{{< glossary_tooltip text="pod" term_id="pod">}} is allowed to communicate with various network
+{{}} is allowed to communicate with various network
 "entities" (we use the word "entity" here to avoid overloading the more common terms such as
 "endpoints" and "services", which have specific Kubernetes connotations) over the network.
 NetworkPolicies apply to a connection with a pod on one or both ends, and are not relevant to
@@ -36,12 +36,12 @@ three identifiers:
    regardless of the IP address of the Pod or the node)
 
 When defining a pod- or namespace-based NetworkPolicy, you use a
-{{< glossary_tooltip text="selector" term_id="selector">}} to specify what traffic is allowed to
+{{}} to specify what traffic is allowed to
 and from the Pod(s) that match the selector.
 
 Meanwhile, when IP-based NetworkPolicies are created, we define policies based on IP blocks (CIDR ranges).
 
-<!-- body -->
+
 ## Prerequisites
 
 Network policies are implemented by the [network plugin](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/).
@@ -82,17 +82,17 @@ either side does not allow the connection, it will not happen.
 
 ## The NetworkPolicy resource {#networkpolicy-resource}
 
-See the [NetworkPolicy](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#networkpolicy-v1-networking-k8s-io)
+See the [NetworkPolicy](/docs/reference/generated/kubernetes-api/{{}}/#networkpolicy-v1-networking-k8s-io)
 reference for a full definition of the resource.
 
 An example NetworkPolicy might look like this:
 
 {{% code_sample file="service/networking/networkpolicy.yaml" %}}
 
-{{< note >}}
+{{}}
 POSTing this to the API server for your cluster will have no effect unless your chosen networking
 solution supports network policy.
-{{< /note >}}
+{{}}
 
 __Mandatory Fields__: As with all other Kubernetes config, a NetworkPolicy needs `apiVersion`,
 `kind`, and `metadata` fields. For general information about working with config files, see
@@ -189,7 +189,7 @@ Namespace with the label `role=client`, *or* from any Pod in any namespace with 
 
 When in doubt, use `kubectl describe` to see how Kubernetes has interpreted the policy.
 
-<a name="behavior-of-ipblock-selectors"></a>
+
 **ipBlock**: This selects particular IP CIDR ranges to allow as ingress sources or egress
 destinations. These should be cluster-external IPs, since Pod IPs are ephemeral and unpredictable.
 
@@ -267,10 +267,10 @@ NetworkPolicy is defined for [layer 4](https://en.wikipedia.org/wiki/OSI_model#L
 connections (TCP, UDP, and optionally SCTP). For all the other protocols, the behaviour may vary
 across network plugins.
 
-{{< note >}}
-You must be using a {{< glossary_tooltip text="CNI" term_id="cni" >}} plugin that supports SCTP
+{{}}
+You must be using a {{}} plugin that supports SCTP
 protocol NetworkPolicies.
-{{< /note >}}
+{{}}
 
 When a `deny all` network policy is defined, it is only guaranteed to deny TCP, UDP and SCTP
 connections. For other protocols, such as ARP or ICMP, the behaviour is undefined.
@@ -280,7 +280,7 @@ network plugins and denied by others.
 
 ## Targeting a range of ports
 
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+{{}}
 
 When writing a NetworkPolicy, you can target a range of ports instead of a single port.
 
@@ -298,13 +298,13 @@ The following restrictions apply when using this field:
 * `endPort` can only be defined if `port` is also defined.
 * Both ports must be numeric.
 
-{{< note >}}
-Your cluster must be using a {{< glossary_tooltip text="CNI" term_id="cni" >}} plugin that
+{{}}
+Your cluster must be using a {{}} plugin that
 supports the `endPort` field in NetworkPolicy specifications.
 If your [network plugin](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)
 does not support the `endPort` field and you specify a NetworkPolicy with that,
 the policy will be applied only for the single `port` field.
-{{< /note >}}
+{{}}
 
 ## Targeting multiple namespaces by label
 
@@ -338,11 +338,11 @@ spec:
           values: ["frontend", "backend"]
 ```
 
-{{< note >}}
+{{}}
 It is not possible to directly specify the name of the namespaces in a NetworkPolicy.
 You must use a `namespaceSelector` with `matchLabels` or `matchExpressions` to select the
 namespaces based on their labels.
-{{< /note >}}
+{{}}
 
 ## Targeting a Namespace by its name
 
@@ -354,10 +354,10 @@ standardized label to target a specific namespace.
 
 ## Pod lifecycle
 
-{{< note >}}
+{{}}
 The following applies to clusters with a conformant networking plugin and a conformant implementation of
 NetworkPolicy.
-{{< /note >}}
+{{}}
 
 When a new NetworkPolicy object is created, it may take some time for a network plugin
 to handle the new object. If a pod that is affected by a NetworkPolicy
@@ -437,7 +437,7 @@ from a `hostNetwork` Pod using an `ipBlock` rule.
 
 ## What you can't do with network policies (at least, not yet)
 
-As of Kubernetes {{< skew currentVersion >}}, the following functionality does not exist in the
+As of Kubernetes {{}}, the following functionality does not exist in the
 NetworkPolicy API, but you might be able to implement workarounds using Operating System
 components (such as SELinux, OpenVSwitch, IPTables, and so on) or Layer 7 technologies (Ingress
 controllers, Service Mesh implementations) or admission controllers. In case you are new to
@@ -450,7 +450,7 @@ implemented using the NetworkPolicy API.
 - Node specific policies (you can use CIDR notation for these, but you cannot target nodes by
   their Kubernetes identities specifically).
 - Targeting of services by name (you can, however, target pods or namespaces by their
-  {{< glossary_tooltip text="labels" term_id="label" >}}, which is often a viable workaround).
+  {{}}, which is often a viable workaround).
 - Creation or management of "Policy requests" that are fulfilled by a third party.
 - Default policies which are applied to all namespaces or pods (there are some third party
   Kubernetes distributions and projects which can do this).

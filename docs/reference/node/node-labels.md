@@ -4,8 +4,8 @@ title: Node Labels Populated By The Kubelet
 weight: 40
 ---
 
-Kubernetes {{< glossary_tooltip text="nodes" term_id="node" >}} come pre-populated
-with a standard set of {{< glossary_tooltip text="labels" term_id="label" >}}.
+Kubernetes {{}} come pre-populated
+with a standard set of {{}}.
 
 You can also set your own labels on nodes, either through the kubelet configuration or
 using the Kubernetes API.
@@ -24,11 +24,11 @@ The preset labels that Kubernetes sets on nodes are:
 * [`topology.kubernetes.io/zone`](/docs/reference/labels-annotations-taints/#topologykubernetesiozone)
   (if known to the kubelet &ndash; Kubernetes may not have this information to set the label)
 
-{{<note>}}
+{{}}
 The value of these labels is cloud provider specific and is not guaranteed to be reliable.
 For example, the value of `kubernetes.io/hostname` may be the same as the node name in some environments
 and a different value in other environments.
-{{</note>}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

@@ -10,16 +10,7 @@ weight: 3
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: authorization.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 SelfSubjectRulesReview enumerates the set of actions the current user can perform within a namespace. The returned list of actions may be incomplete depending on the server's authorization mode, and any errors experienced during the evaluation. SelfSubjectRulesReview should be used by UIs to show/hide actions, or to quickly let an end user reason about their permissions. It should NOT Be used by external systems to drive authorization decisions as this raises confused deputy, cache lifetime/revocation, and correctness concerns. SubjectAccessReview, and LocalAccessReview are the correct way to defer authorization decisions to the API server.
 
-<hr>
+
 
 - **apiVersion**: authorization.k8s.io/v1
 
@@ -38,11 +29,11 @@ SelfSubjectRulesReview enumerates the set of actions the current user can perfor
 - **kind**: SelfSubjectRulesReview
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../authorization-resources/self-subject-rules-review-v1#SelfSubjectRulesReviewSpec" >}}">SelfSubjectRulesReviewSpec</a>), required
+- **spec** (}}">SelfSubjectRulesReviewSpec), required
 
   Spec holds information about the request being evaluated.
 
@@ -50,7 +41,7 @@ SelfSubjectRulesReview enumerates the set of actions the current user can perfor
 
   Status is filled in by the server and indicates the set of actions a user can perform.
 
-  <a name="SubjectRulesReviewStatus"></a>
+  
   *SubjectRulesReviewStatus contains the result of a rules check. This check can be incomplete depending on the set of authorizers the server is configured with and any errors experienced during evaluation. Because authorization rules are additive, if a rule appears in a list it's safe to assume the subject has that permission, even if that list is incomplete.*
 
   - **status.incomplete** (boolean), required
@@ -61,7 +52,7 @@ SelfSubjectRulesReview enumerates the set of actions the current user can perfor
 
     NonResourceRules is the list of actions the subject is allowed to perform on non-resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
 
-    <a name="NonResourceRule"></a>
+    
     *NonResourceRule holds information that describes a rule for the non-resource*
 
     - **status.nonResourceRules.verbs** ([]string), required
@@ -76,7 +67,7 @@ SelfSubjectRulesReview enumerates the set of actions the current user can perfor
 
     ResourceRules is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
 
-    <a name="ResourceRule"></a>
+    
     *ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.*
 
     - **status.resourceRules.verbs** ([]string), required
@@ -108,7 +99,7 @@ SelfSubjectRulesReview enumerates the set of actions the current user can perfor
 
 SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
 
-<hr>
+
 
 - **namespace** (string)
 
@@ -122,7 +113,7 @@ SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
 
 
 
-<hr>
+
 
 
 
@@ -138,40 +129,40 @@ POST /apis/authorization.k8s.io/v1/selfsubjectrulesreviews
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../authorization-resources/self-subject-rules-review-v1#SelfSubjectRulesReview" >}}">SelfSubjectRulesReview</a>, required
+- **body**: }}">SelfSubjectRulesReview, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authorization-resources/self-subject-rules-review-v1#SelfSubjectRulesReview" >}}">SelfSubjectRulesReview</a>): OK
+200 (}}">SelfSubjectRulesReview): OK
 
-201 (<a href="{{< ref "../authorization-resources/self-subject-rules-review-v1#SelfSubjectRulesReview" >}}">SelfSubjectRulesReview</a>): Created
+201 (}}">SelfSubjectRulesReview): Created
 
-202 (<a href="{{< ref "../authorization-resources/self-subject-rules-review-v1#SelfSubjectRulesReview" >}}">SelfSubjectRulesReview</a>): Accepted
+202 (}}">SelfSubjectRulesReview): Accepted
 
 401: Unauthorized
 

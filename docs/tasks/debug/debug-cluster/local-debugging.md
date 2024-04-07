@@ -3,7 +3,7 @@ title: Developing and debugging services locally using telepresence
 content_type: task
 ---
 
-<!-- overview -->
+
 
 {{% thirdparty-content %}}
 
@@ -29,7 +29,7 @@ running on a remote cluster locally.
 * [Telepresence](https://www.telepresence.io/docs/latest/quick-start/) is installed
 
 
-<!-- steps -->
+
 
 ## Connecting your local machine to a remote Kubernetes cluster
  
@@ -41,7 +41,7 @@ $ telepresence connect
  
 Launching Telepresence Daemon
 ...
-Connected to context default (https://<cluster public IP>)
+Connected to context default (https://)
 ```
 
 You can curl services using the Kubernetes syntax e.g. `curl -ik https://kubernetes.default`

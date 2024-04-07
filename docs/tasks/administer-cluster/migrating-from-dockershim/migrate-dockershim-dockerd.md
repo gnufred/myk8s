@@ -11,7 +11,7 @@ instead of dockershim. You should follow these steps in these scenarios:
 
  * You want to switch away from dockershim and still use Docker Engine to run
     containers in Kubernetes.
- * You want to upgrade to Kubernetes v{{< skew currentVersion >}} and your
+ * You want to upgrade to Kubernetes v{{}} and your
     existing cluster relies on dockershim, in which case you must migrate 
     from dockershim and `cri-dockerd` is one of your options.
 
@@ -23,12 +23,12 @@ In Kubernetes 1.23 and earlier, you could use Docker Engine with Kubernetes,
 relying on a built-in component of Kubernetes named _dockershim_.
 The dockershim component was removed in the Kubernetes 1.24 release; however,
 a third-party replacement, `cri-dockerd`, is available. The `cri-dockerd` adapter
-lets you use Docker Engine through the {{<glossary_tooltip term_id="cri" text="Container Runtime Interface">}}.
+lets you use Docker Engine through the {{}}.
 
-{{<note>}}
+{{}}
 If you already use `cri-dockerd`, you aren't affected by the dockershim removal.
 Before you begin, [Check whether your nodes use the dockershim](/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/).
-{{</note>}}
+{{}}
 
 If you want to migrate to `cri-dockerd` so that you can continue using Docker
 Engine as your container runtime, you should do the following for each affected
@@ -56,14 +56,14 @@ to `cri-dockerd`.
 1.  Cordon the node to stop new Pods scheduling on it:
 
     ```shell
-    kubectl cordon <NODE_NAME>
+    kubectl cordon 
     ```
-    Replace `<NODE_NAME>` with the name of the node.
+    Replace `` with the name of the node.
 
 1.  Drain the node to safely evict running Pods: 
 
     ```shell
-    kubectl drain <NODE_NAME> \
+    kubectl drain  \
         --ignore-daemonsets
     ```
 
@@ -85,13 +85,13 @@ in the control plane. To modify this socket for each affected node:
 1.  Edit the YAML representation of the `Node` object:
 
     ```shell
-    KUBECONFIG=/path/to/admin.conf kubectl edit no <NODE_NAME>
+    KUBECONFIG=/path/to/admin.conf kubectl edit no 
     ```
     Replace the following:
     
     *   `/path/to/admin.conf`: the path to the kubectl configuration file,
         `admin.conf`.
-    *   `<NODE_NAME>`: the name of the node you want to modify.
+    *   ``: the name of the node you want to modify.
 
 1.  Change `kubeadm.alpha.kubernetes.io/cri-socket` from
     `/var/run/dockershim.sock` to `unix:///var/run/cri-dockerd.sock`.
@@ -114,7 +114,7 @@ The `--container-runtime-endpoint` flag for the kubelet should be `unix:///var/r
 Uncordon the node to let Pods schedule on it: 
 
 ```shell
-kubectl uncordon <NODE_NAME>
+kubectl uncordon 
 ```
 
 ## {{% heading "whatsnext" %}}

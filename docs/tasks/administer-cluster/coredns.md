@@ -7,23 +7,23 @@ content_type: task
 weight: 380
 ---
 
-<!-- overview -->
+
 This page describes the CoreDNS upgrade process and how to install CoreDNS instead of kube-dns.
 
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
-<!-- steps -->
+
 
 ## About CoreDNS
 
 [CoreDNS](https://coredns.io) is a flexible, extensible DNS server
 that can serve as the Kubernetes cluster DNS.
 Like Kubernetes, the CoreDNS project is hosted by the
-{{< glossary_tooltip text="CNCF" term_id="cncf" >}}.
+{{}}.
 
 You can use CoreDNS instead of kube-dns in your cluster by replacing
 kube-dns in an existing deployment, or by using tools like kubeadm
@@ -39,7 +39,7 @@ For manual deployment or replacement of kube-dns, see the documentation at the
 ### Upgrading an existing cluster with kubeadm
 
 In Kubernetes version 1.21, kubeadm removed its support for `kube-dns` as a DNS application.
-For `kubeadm` v{{< skew currentVersion >}}, the only supported cluster DNS application
+For `kubeadm` v{{}}, the only supported cluster DNS application
 is CoreDNS.
 
 You can move to CoreDNS when you use `kubeadm` to upgrade a cluster that is

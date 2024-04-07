@@ -8,7 +8,7 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
+
 The Kubernetes API is a resource-based (RESTful) programmatic interface
 provided via HTTP. It supports retrieving, creating, updating, and deleting
 primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE,
@@ -26,7 +26,7 @@ effectively cache, track, and synchronize the state of resources.
 You can view the [API reference](/docs/reference/kubernetes-api/) online,
 or read on to learn about the API in general.
 
-<!-- body -->
+
 ## Kubernetes API terminology {#standard-api-terminology}
 
 Kubernetes generally leverages common RESTful terminology to describe the
@@ -39,7 +39,7 @@ API concepts:
 * For some resource types, the API includes one or more *sub-resources*, which are represented as URI paths below the resource
 
 Most Kubernetes API resource types are
-{{< glossary_tooltip text="objects" term_id="object" >}} –
+{{}} –
 they represent a concrete instance of a concept on the cluster, like a
 pod or namespace. A smaller number of API resource types are *virtual* in
 that they often represent operations on objects, rather than objects, such
@@ -52,10 +52,10 @@ as a permission check
 ### Object names
 
 All objects you can create via the API have a unique object
-{{< glossary_tooltip text="name" term_id="name" >}} to allow idempotent creation and
+{{}} to allow idempotent creation and
 retrieval, except that virtual resource types may not have unique names if they are
 not retrievable, or do not rely on idempotency.
-Within a {{< glossary_tooltip text="namespace" term_id="namespace" >}}, only one object
+Within a {{}}, only one object
 of a given kind can have a given name at a time. However, if you delete the object,
 you can make a new object with the same name. Some objects are not namespaced (for
 example: Nodes), and so their names must be unique across the whole cluster.
@@ -229,7 +229,7 @@ the API server will send any `BOOKMARK` event even when requested.
 
 ## Streaming lists
 
-{{< feature-state for_k8s_version="v1.27" state="alpha" >}}
+{{}}
 
 On large clusters, retrieving the collection of some resource types may result in
 a significant increase of resource usage (primarily RAM) on the control plane.
@@ -282,12 +282,12 @@ Content-Type: application/json
   "object": {"kind": "Pod", "apiVersion": "v1", "metadata": {"resourceVersion": "10245"} }
 }
 ...
-<followed by regular watch stream starting from resourceVersion="10245">
+
 ```
 
 ## Response compression
 
-{{< feature-state for_k8s_version="v1.16" state="beta" >}}
+{{}}
 
 `APIResponseCompression` is an option that allows the API server to compress the responses for **get**
 and **list** requests, reducing the network bandwidth and improving the performance of large-scale clusters.
@@ -317,7 +317,7 @@ The `content-encoding` header indicates that the response is compressed with `gz
 
 ## Retrieving large results sets in chunks
 
-{{< feature-state for_k8s_version="v1.29" state="stable" >}}
+{{}}
 
 On large clusters, retrieving the collection of some resource types may result in
 very large responses that can impact the server and client. For instance, a cluster
@@ -423,7 +423,7 @@ on the full set without missing any updates.
 
 `remainingItemCount` is the number of subsequent items in the collection that are not
 included in this response. If the **list** request contained label or field
-{{< glossary_tooltip text="selectors" term_id="selector">}} then the number of
+{{}} then the number of
 remaining items is unknown and the API server does not include a `remainingItemCount`
 field in its response.
 If the **list** is complete (either because it is not chunking, or because this is the
@@ -512,13 +512,13 @@ items:
     namespace: kube-system
 ```
 
-{{< note >}}
+{{}}
 Keep in mind that the Kubernetes API does not have a `kind` named `List`.
 
 `kind: List` is a client-side, internal implementation detail for processing
 collections that might be of different kinds of object. Avoid depending on
 `kind: List` in automation or other code.
-{{< /note >}}
+{{}}
 
 ## Receiving resources as Tables
 
@@ -588,7 +588,7 @@ Content-Type: application/json
 ```
 
 Not all API resource types support a Table response; for example, a
-{{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinitions" >}}
+{{}}
 might not define field-to-table mappings, and an APIService that
 [extends the core Kubernetes API](/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
 might not serve Table responses at all. If you are implementing a client that
@@ -655,9 +655,9 @@ For example:
 
 Not all API resource types support Protobuf; specifically, Protobuf isn't available for
 resources that are defined as
-{{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinitions" >}}
+{{}}
 or are served via the
-{{< glossary_tooltip text="aggregation layer" term_id="aggregation-layer" >}}.
+{{}}.
 As a client, if you might need to work with extension types you should specify multiple
 content types in the request `Accept` header to support fallback to JSON.
 For example:
@@ -703,12 +703,12 @@ An encoded Protobuf message with the following IDL:
   }
 ```
 
-{{< note >}}
+{{}}
 Clients that receive a response in `application/vnd.kubernetes.protobuf` that does
 not match the expected prefix should reject the response, as future versions may need
 to alter the serialization format in an incompatible way and will do so by changing
 the prefix.
-{{< /note >}}
+{{}}
 
 ## Resource deletion
 
@@ -780,14 +780,13 @@ an HTTP request.
 These situations are:
 
 1. The field is unrecognized because it is not in the resource's OpenAPI schema. (One
-   exception to this is for {{< glossary_tooltip
-   term_id="CustomResourceDefinition" text="CRDs" >}} that explicitly choose not to prune unknown
+   exception to this is for {{}} that explicitly choose not to prune unknown
    fields via `x-kubernetes-preserve-unknown-fields`).
 2. The field is duplicated in the object.
 
 ### Validation for unrecognized or duplicate fields {#setting-the-field-validation-level}
 
-{{< feature-state for_k8s_version="v1.27" state="stable" >}}
+{{}}
 
 From 1.25 onward, unrecognized or duplicate fields in an object are detected via
 validation on the server when you use HTTP verbs that can submit data (`POST`, `PUT`, and `PATCH`). Possible levels of
@@ -813,7 +812,7 @@ detected.
 
 The field validation level is set by the `fieldValidation` query parameter.
 
-{{< note >}}
+{{}}
 If you submit a request that specifies an unrecognized field, and that is also invalid for
 a different reason (for example, the request provides a string value where the API expects
 an integer for a known field), then the API server responds with a 400 Bad Request error, but will
@@ -821,7 +820,7 @@ not provide any information on unknown or duplicate fields (only which fatal
 error it encountered first).
 
 You always receive an error response in this case, no matter what field validation level you requested.
-{{< /note >}}
+{{}}
 
 Tools that submit requests to the server (such as `kubectl`), might set their own
 defaults that are different from the `Warn` validation level that the API server uses
@@ -837,16 +836,16 @@ When kubectl cannot connect to an API server with field validation (API servers
 prior to Kubernetes 1.27), it will fall back to using client-side validation.
 Client-side validation will be removed entirely in a future version of kubectl.
 
-{{< note >}}
+{{}}
 
 Prior to Kubernetes 1.25  `kubectl --validate` was used to toggle client-side validation on or off as
 a boolean flag.
 
-{{< /note >}}
+{{}}
 
 ## Dry-run
 
- {{< feature-state for_k8s_version="v1.18" state="stable" >}}
+ {{}}
 
 When you use HTTP verbs that can modify resources (`POST`, `PUT`, `PATCH`, and
 `DELETE`), you can submit your request in a _dry run_ mode. Dry run mode helps to
@@ -871,7 +870,7 @@ string, working as an enum, and the only accepted values are:
 
 
 When you set `?dryRun=All`, any relevant
-{{< glossary_tooltip text="admission controllers" term_id="admission-controller" >}}
+{{}}
 are run, validating admission controllers check the request post-mutation, merge is
 performed on `PATCH`, fields are defaulted, and schema validation occurs. The changes
 are not persisted to the underlying storage, but the final object which would have
@@ -881,15 +880,15 @@ If the non-dry-run version of a request would trigger an admission controller th
 side effects, the request will be failed rather than risk an unwanted side effect. All
 built in admission control plugins support dry-run. Additionally, admission webhooks can
 declare in their
-[configuration object](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#validatingwebhook-v1-admissionregistration-k8s-io)
+[configuration object](/docs/reference/generated/kubernetes-api/{{}}/#validatingwebhook-v1-admissionregistration-k8s-io)
 that they do not have side effects, by setting their `sideEffects` field to `None`.
 
-{{< note >}}
+{{}}
 If a webhook actually does have side effects, then the `sideEffects` field should be
 set to "NoneOnDryRun". That change is appropriate provided that the webhook is also
 be modified to understand the `DryRun` field in AdmissionReview, and to prevent side
 effects on any request marked as dry runs.
-{{< /note >}}
+{{}}
 
 Here is an example dry-run request that uses `?dryRun=All`:
 
@@ -924,7 +923,7 @@ a dry-run request, you must be authorized to make the non-dry-run request.
 
 For example, to run a dry-run **patch** for a Deployment, you must be authorized
 to perform that **patch**. Here is an example of a rule for Kubernetes
-{{< glossary_tooltip text="RBAC" term_id="rbac">}} that allows patching
+{{}} that allows patching
 Deployments:
 
 ```yaml
@@ -990,12 +989,12 @@ corresponding HTTP `Content-Type` header:
   You can only use Strategic Merge Patch with built-in APIs, or with aggregated
   API servers that have special support for it. You cannot use
   `application/strategic-merge-patch+json` with any API
-  defined using a {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}}.
+  defined using a {{}}.
   
-  {{< note >}}
+  {{}}
   The Kubernetes _server side apply_ mechanism has superseded Strategic Merge
   Patch.
-  {{< /note >}}
+  {{}}
 
 
 Kubernetes' [Server Side Apply](/docs/reference/using-api/server-side-apply/)
@@ -1090,9 +1089,9 @@ resource versions for greater-than or less-than relationships).
 Clients find resource versions in resources, including the resources from the response
 stream for a **watch**, or when using **list** to enumerate resources.
 
-[v1.meta/ObjectMeta](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#objectmeta-v1-meta) - The `metadata.resourceVersion` of a resource instance identifies the resource version the instance was last modified at.
+[v1.meta/ObjectMeta](/docs/reference/generated/kubernetes-api/{{}}/#objectmeta-v1-meta) - The `metadata.resourceVersion` of a resource instance identifies the resource version the instance was last modified at.
 
-[v1.meta/ListMeta](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#listmeta-v1-meta) - The `metadata.resourceVersion` of a resource collection (the response to a **list**) identifies the resource version at which the collection was constructed.
+[v1.meta/ListMeta](/docs/reference/generated/kubernetes-api/{{}}/#listmeta-v1-meta) - The `metadata.resourceVersion` of a resource collection (the response to a **list**) identifies the resource version at which the collection was constructed.
 
 ### `resourceVersion` parameters in query strings {#the-resourceversion-parameter}
 
@@ -1137,24 +1136,24 @@ Setting the `resourceVersionMatch` parameter without setting `resourceVersion` i
 This table explains the behavior of **list** requests with various combinations of
 `resourceVersion` and `resourceVersionMatch`:
 
-{{< table caption="resourceVersionMatch and paging parameters for list" >}}
+{{}}
 
 | resourceVersionMatch param            | paging params                 | resourceVersion not set | resourceVersion="0"                       | resourceVersion="{value other than 0}" |
 |---------------------------------------|-------------------------------|-----------------------|-------------------------------------------|----------------------------------------|
 | _unset_            | _limit unset_                   | Most Recent           | Any                                       | Not older than                         |
-| _unset_            | limit=\<n\>, _continue unset_     | Most Recent           | Any                                       | Exact                                  |
-| _unset_            | limit=\<n\>, continue=\<token\> | Continue Token, Exact | Invalid, treated as Continue Token, Exact | Invalid, HTTP `400 Bad Request`        |
+| _unset_            | limit=\, _continue unset_     | Most Recent           | Any                                       | Exact                                  |
+| _unset_            | limit=\, continue=\ | Continue Token, Exact | Invalid, treated as Continue Token, Exact | Invalid, HTTP `400 Bad Request`        |
 | `resourceVersionMatch=Exact`        | _limit unset_                 | Invalid               | Invalid                                   | Exact                                  |
-| `resourceVersionMatch=Exact`        | limit=\<n\>, _continue unset_ | Invalid               | Invalid                                   | Exact                                  |
+| `resourceVersionMatch=Exact`        | limit=\, _continue unset_ | Invalid               | Invalid                                   | Exact                                  |
 | `resourceVersionMatch=NotOlderThan` | _limit unset_                 | Invalid               | Any                                       | Not older than                         |
-| `resourceVersionMatch=NotOlderThan` | limit=\<n\>, _continue unset_ | Invalid               | Any                                       | Not older than                         |
+| `resourceVersionMatch=NotOlderThan` | limit=\, _continue unset_ | Invalid               | Any                                       | Not older than                         |
 
-{{< /table >}}
+{{}}
 
-{{< note >}}
+{{}}
 If your cluster's API server does not honor the `resourceVersionMatch` parameter,
 the behavior is the same as if you did not set it.
-{{< /note >}}
+{{}}
 
 The meaning of the **get** and **list** semantics are:
 
@@ -1189,15 +1188,15 @@ Continue Token, Exact
   tokens_ are responsible for keeping track of the initially provided resource version for all paginated
   **list** calls after the initial paginated **list**.
 
-{{< note >}}
+{{}}
 When you **list** resources and receive a collection response, the response includes the
-[list metadata](/docs/reference/generated/kubernetes-api/v{{<skew currentVersion >}}/#listmeta-v1-meta)
+[list metadata](/docs/reference/generated/kubernetes-api/v{{}}/#listmeta-v1-meta)
 of the collection as well as
-[object metadata](/docs/reference/generated/kubernetes-api/v{{<skew currentVersion >}}/#objectmeta-v1-meta)
+[object metadata](/docs/reference/generated/kubernetes-api/v{{}}/#objectmeta-v1-meta)
 for each item in that collection. For individual objects found within a collection response,
 `.metadata.resourceVersion` tracks when that object was last updated, and not how up-to-date
 the object is when served.
-{{< /note >}}
+{{}}
 
 When using `resourceVersionMatch=NotOlderThan` and limit is set, clients must
 handle HTTP 410 "Gone" responses. For example, the client might retry with a
@@ -1214,21 +1213,21 @@ For **watch**, the semantics of resource version are:
 
 **watch:**
 
-{{< table caption="resourceVersion for watch" >}}
+{{}}
 
 | resourceVersion unset               | resourceVersion="0"        | resourceVersion="{value other than 0}" |
 |-------------------------------------|----------------------------|----------------------------------------|
 | Get State and Start at Most Recent  | Get State and Start at Any | Start at Exact                         |
 
-{{< /table >}}
+{{}}
 
 The meaning of those **watch** semantics are:
 
 Get State and Start at Any
-: {{< caution >}} Watches initialized this way may return arbitrarily stale
+: {{}} Watches initialized this way may return arbitrarily stale
   data. Please review this semantic before using it, and favor the other semantics
   where possible.
-  {{< /caution >}}
+  {{}}
   Start a **watch** at any resource version; the most recent resource version
   available is preferred, but not required. Any starting resource version is
   allowed. It is possible for the **watch** to start at a much older resource

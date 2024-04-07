@@ -7,9 +7,9 @@ content_type: concept
 weight: 100
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.10" state="stable" >}}
+
+{{}}
 
 `kubeadm init` and `kubeadm join` together provides a nice user experience for creating a
 best-practice but bare Kubernetes cluster from scratch.
@@ -18,7 +18,7 @@ However, it might not be obvious _how_ kubeadm does that.
 This document provides additional details on what happen under the hood, with the aim of sharing
 knowledge on Kubernetes cluster best practices.
 
-<!-- body -->
+
 
 ## Core design principles
 
@@ -35,8 +35,8 @@ The cluster that `kubeadm init` and `kubeadm join` set up should be:
 - **User-friendly**: The user should not have to run anything more than a couple of commands:
   - `kubeadm init`
   - `export KUBECONFIG=/etc/kubernetes/admin.conf`
-  - `kubectl apply -f <network-of-choice.yaml>`
-  - `kubeadm join --token <token> <endpoint>:<port>`
+  - `kubectl apply -f `
+  - `kubeadm join --token  :`
 - **Extendable**:
   - It should _not_ favor any particular network provider. Configuring the cluster network is out-of-scope
   - It should provide the possibility to use a config file for customizing various parameters
@@ -198,7 +198,7 @@ Kubeadm generates kubeconfig files with identities for control plane components:
 
   - Be in the `system:nodes` organization, as required by the
     [Node Authorization](/docs/reference/access-authn-authz/node/) module
-  - Have the Common Name (CN) `system:node:<hostname-lowercased>`
+  - Have the Common Name (CN) `system:node:`
 
 - A kubeconfig file for controller-manager, `/etc/kubernetes/controller-manager.conf`; inside this
   file is embedded a client certificate with controller-manager identity. This client cert should
@@ -455,7 +455,7 @@ Please note that:
 
 `kubeadm init` create a first bootstrap token, either generated automatically or provided by the
 user with the `--token` flag; as documented in bootstrap token specification, token should be
-saved as secrets with name `bootstrap-token-<token-id>` under `kube-system` namespace.
+saved as secrets with name `bootstrap-token-` under `kube-system` namespace.
 
 Please note that:
 

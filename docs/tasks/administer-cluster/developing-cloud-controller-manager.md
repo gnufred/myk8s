@@ -8,15 +8,15 @@ content_type: concept
 weight: 190
 ---
 
-<!-- overview -->
-
-{{< feature-state for_k8s_version="v1.11" state="beta" >}}
-
-{{< glossary_definition term_id="cloud-controller-manager" length="all" prepend="The cloud-controller-manager is">}}
 
 
+{{}}
 
-<!-- body -->
+{{}}
+
+
+
+
 
 ## Background
 
@@ -40,6 +40,6 @@ controller manager as your starting point.
 
 ### In tree
 
-For in-tree cloud providers, you can run the in-tree cloud controller manager as a {{< glossary_tooltip term_id="daemonset" >}} in your cluster. See [Cloud Controller Manager Administration](/docs/tasks/administer-cluster/running-cloud-controller/) for more details.
+For in-tree cloud providers, you can run the in-tree cloud controller manager as a {{}} in your cluster. See [Cloud Controller Manager Administration](/docs/tasks/administer-cluster/running-cloud-controller/) for more details.
 
 

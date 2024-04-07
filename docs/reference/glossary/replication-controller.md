@@ -12,14 +12,14 @@ tags:
 - core-object
 ---
  A workload resource that manages a replicated application, ensuring that
-a specific number of instances of a {{< glossary_tooltip text="Pod" term_id="pod" >}} are running.
+a specific number of instances of a {{}} are running.
 
-<!--more-->
+
 
 The control plane ensures that the defined number of Pods are running, even if some
 Pods fail, if you delete Pods manually, or if too many are started by mistake.
 
-{{< note >}}
+{{}}
 ReplicationController is deprecated. See
-{{< glossary_tooltip text="Deployment" term_id="deployment" >}}, which is similar.
-{{< /note >}}
+{{}}, which is similar.
+{{}}

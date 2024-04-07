@@ -4,7 +4,7 @@ content_type: task
 weight: 20
 ---
 
-<!-- overview -->
+
 
 This page shows how to define dependent environment variables for a container
 in a Kubernetes Pod.
@@ -13,10 +13,10 @@ in a Kubernetes Pod.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 
-<!-- steps -->
+
 
 ## Define an environment dependent variable for a container
 
@@ -78,5 +78,5 @@ is defined or not. This can be seen from the `ESCAPED_REFERENCE` case above.
 
 
 * Learn more about [environment variables](/docs/tasks/inject-data-application/environment-variable-expose-pod-information/).
-* See [EnvVarSource](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core).
+* See [EnvVarSource](/docs/reference/generated/kubernetes-api/{{}}/#envvarsource-v1-core).
 

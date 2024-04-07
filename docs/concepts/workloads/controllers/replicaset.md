@@ -22,12 +22,12 @@ weight: 20
 hide_summary: true # Listed separately in section index
 ---
 
-<!-- overview -->
+
 
 A ReplicaSet's purpose is to maintain a stable set of replica Pods running at any given time. As such, it is often
 used to guarantee the availability of a specified number of identical Pods.
 
-<!-- body -->
+
 
 ## How a ReplicaSet works
 
@@ -43,7 +43,7 @@ ReplicaSet's identifying information within their ownerReferences field. It's th
 knows of the state of the Pods it is maintaining and plans accordingly.
 
 A ReplicaSet identifies new Pods to acquire by using its selector. If there is a Pod that has no
-OwnerReference or the OwnerReference is not a {{< glossary_tooltip term_id="controller" >}} and it
+OwnerReference or the OwnerReference is not a {{}} and it
 matches a ReplicaSet's selector, it will be immediately acquired by said ReplicaSet.
 
 ## When to use a ReplicaSet
@@ -95,7 +95,7 @@ Namespace:    default
 Selector:     tier=frontend
 Labels:       app=guestbook
               tier=frontend
-Annotations:  <none>
+Annotations:  
 Replicas:     3 current / 3 desired
 Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed
 Pod Template:
@@ -103,11 +103,11 @@ Pod Template:
   Containers:
    php-redis:
     Image:        us-docker.pkg.dev/google-samples/containers/gke/gb-frontend:v5
-    Port:         <none>
-    Host Port:    <none>
-    Environment:  <none>
-    Mounts:       <none>
-  Volumes:        <none>
+    Port:         
+    Host Port:    
+    Environment:  
+    Mounts:       
+  Volumes:        
 Events:
   Type    Reason            Age   From                   Message
   ----    ------            ----  ----                   -------
@@ -266,11 +266,11 @@ matchLabels:
 In the ReplicaSet, `.spec.template.metadata.labels` must match `spec.selector`, or it will
 be rejected by the API.
 
-{{< note >}}
+{{}}
 For 2 ReplicaSets specifying the same `.spec.selector` but different
 `.spec.template.metadata.labels` and `.spec.template.spec` fields, each ReplicaSet ignores the
 Pods created by the other ReplicaSet.
-{{< /note >}}
+{{}}
 
 ### Replicas
 
@@ -346,7 +346,7 @@ If all of the above match, then selection is random.
 
 ### Pod deletion cost
 
-{{< feature-state for_k8s_version="v1.22" state="beta" >}}
+{{}}
 
 Using the [`controller.kubernetes.io/pod-deletion-cost`](/docs/reference/labels-annotations-taints/#pod-deletion-cost)
 annotation, users can set a preference regarding which pods to remove first when downscaling a ReplicaSet.
@@ -362,11 +362,11 @@ This feature is beta and enabled by default. You can disable it using the
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 `PodDeletionCost` in both kube-apiserver and kube-controller-manager.
 
-{{< note >}}
+{{}}
 - This is honored on a best-effort basis, so it does not offer any guarantees on pod deletion order.
 - Users should avoid updating the annotation frequently, such as updating it based on a metric value,
   because doing so will generate a significant number of pod updates on the apiserver.
-  {{< /note >}}
+  {{}}
 
 #### Example Use Case
 
@@ -446,7 +446,7 @@ As such, ReplicaSets are preferred over ReplicationControllers
 * [Run a Stateless Application Using a Deployment](/docs/tasks/run-application/run-stateless-application-deployment/),
   which relies on ReplicaSets to work.
 * `ReplicaSet` is a top-level resource in the Kubernetes REST API.
-  Read the {{< api-reference page="workload-resources/replica-set-v1" >}}
+  Read the {{}}
   object definition to understand the API for replica sets.
 * Read about [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) and how
   you can use it to manage application availability during disruptions.

@@ -6,7 +6,7 @@ content_type: task
 weight: 50
 ---
 
-<!-- overview -->
+
 
 This page shows how to use Romana for NetworkPolicy.
 
@@ -14,7 +14,7 @@ This page shows how to use Romana for NetworkPolicy.
 
 Complete steps 1, 2, and 3 of the [kubeadm getting started guide](/docs/reference/setup-tools/kubeadm/).
 
-<!-- steps -->
+
 
 ## Installing Romana with kubeadm
 

@@ -7,18 +7,18 @@ content_type: task
 weight: 340
 ---
 
-<!-- overview -->
-This page shows how to view, work in, and delete {{< glossary_tooltip text="namespaces" term_id="namespace" >}}.
+
+This page shows how to view, work in, and delete {{}}.
 The page also shows how to use Kubernetes namespaces to subdivide your cluster.
 
 ## {{% heading "prerequisites" %}}
 
 * Have an [existing Kubernetes cluster](/docs/setup/).
-* You have a basic understanding of Kubernetes {{< glossary_tooltip text="Pods" term_id="pod" >}},
-  {{< glossary_tooltip term_id="service" text="Services" >}}, and
-  {{< glossary_tooltip text="Deployments" term_id="deployment" >}}.
+* You have a basic understanding of Kubernetes {{}},
+  {{}}, and
+  {{}}.
 
-<!-- steps -->
+
 
 ## Viewing namespaces
 
@@ -48,18 +48,18 @@ Kubernetes starts with four initial namespaces:
 You can also get the summary of a specific namespace using:
 
 ```shell
-kubectl get namespaces <name>
+kubectl get namespaces 
 ```
 
 Or you can get detailed information with:
 
 ```shell
-kubectl describe namespaces <name>
+kubectl describe namespaces 
 ```
 ```console
 Name:           default
-Labels:         <none>
-Annotations:    <none>
+Labels:         
+Annotations:    
 Status:         Active
 
 No resource quota.
@@ -90,9 +90,9 @@ in the API reference.
 
 ## Creating a new namespace
 
-{{< note >}}
+{{}}
 Avoid creating namespace with prefix `kube-`, since it is reserved for Kubernetes system namespaces.
-{{< /note >}}
+{{}}
 
 Create a new YAML file called `my-namespace.yaml` with the contents:
 
@@ -100,7 +100,7 @@ Create a new YAML file called `my-namespace.yaml` with the contents:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: <insert-namespace-name-here>
+  name: 
 ```
 Then run:
 
@@ -111,7 +111,7 @@ kubectl create -f ./my-namespace.yaml
 Alternatively, you can create namespace using below command:
 
 ```shell
-kubectl create namespace <insert-namespace-name-here>
+kubectl create namespace 
 ``` 
 
 The name of your namespace must be a valid
@@ -129,12 +129,12 @@ More information on `finalizers` can be found in the namespace
 Delete a namespace with
 
 ```shell
-kubectl delete namespaces <insert-some-namespace-name>
+kubectl delete namespaces 
 ```
 
-{{< warning >}}
+{{}}
 This deletes _everything_ under the namespace!
-{{< /warning >}}
+{{}}
 
 This delete is asynchronous, so for a time you will see the namespace in the `Terminating` state.
 
@@ -192,7 +192,7 @@ kubectl get namespaces --show-labels
 
 ```console
 NAME          STATUS    AGE       LABELS
-default       Active    32m       <none>
+default       Active    32m       
 development   Active    29s       name=development
 production    Active    23s       name=production
 ```
@@ -272,7 +272,7 @@ the other namespace.
 As the policy support in Kubernetes evolves, we will extend this scenario to show how you can provide different
 authorization rules for each namespace.
 
-<!-- discussion -->
+
 
 ## Understanding the motivation for using namespaces
 
@@ -317,8 +317,8 @@ Use cases include:
 
 When you create a [Service](/docs/concepts/services-networking/service/), it creates a corresponding
 [DNS entry](/docs/concepts/services-networking/dns-pod-service/).
-This entry is of the form `<service-name>.<namespace-name>.svc.cluster.local`, which means
-that if a container uses `<service-name>` it will resolve to the service which
+This entry is of the form `..svc.cluster.local`, which means
+that if a container uses `` it will resolve to the service which
 is local to a namespace.  This is useful for using the same configuration across
 multiple namespaces such as Development, Staging and Production.  If you want to reach
 across namespaces, you need to use the fully qualified domain name (FQDN).

@@ -11,7 +11,7 @@ workloads more securely, and about the essential aspects of keeping a
 Kubernetes cluster secure.
 
 Kubernetes is based on a cloud-native architecture, and draws on advice from the
-{{< glossary_tooltip text="CNCF" term_id="cncf" >}} about good practice for
+{{}} about good practice for
 cloud native information security.
 
 Read [Cloud Native Security and Kubernetes](/docs/concepts/security/cloud-native-security/)
@@ -68,7 +68,7 @@ If you are running a Kubernetes cluster on your own hardware or a different clou
 consult your documentation for security best practices.
 Here are links to some of the popular cloud providers' security documentation:
 
-{{< table caption="Cloud provider security" >}}
+{{}}
 
 IaaS Provider        | Link |
 -------------------- | ------------ |
@@ -81,7 +81,7 @@ Microsoft Azure | https://docs.microsoft.com/en-us/azure/security/azure-security
 Oracle Cloud Infrastructure | https://www.oracle.com/security |
 VMware vSphere | https://www.vmware.com/security/hardening-guides |
 
-{{< /table >}}
+{{}}
 
 ## Policies
 
@@ -117,7 +117,7 @@ Learn about related Kubernetes security topics:
 
 Learn the context:
 
-<!-- if changing this, also edit the front matter of content/en/docs/concepts/security/cloud-native-security.md to match; check the no_list setting -->
+
 * [Cloud Native Security and Kubernetes](/docs/concepts/security/cloud-native-security/)
 
 Get certified:

@@ -4,7 +4,7 @@ content_type: task
 weight: 350
 ---
 
-<!-- overview -->
+
 This page provides an overview of the steps you should follow to upgrade a
 Kubernetes cluster.
 
@@ -13,17 +13,17 @@ and on any subsequent changes.
 
 At a high level, the steps you perform are:
 
-- Upgrade the {{< glossary_tooltip text="control plane" term_id="control-plane" >}}
+- Upgrade the {{}}
 - Upgrade the nodes in your cluster
-- Upgrade clients such as {{< glossary_tooltip text="kubectl" term_id="kubectl" >}}
+- Upgrade clients such as {{}}
 - Adjust manifests and other resources based on the API changes that accompany the
   new Kubernetes version
 
 ## {{% heading "prerequisites" %}}
 
 You must have an existing cluster. This page is about upgrading from Kubernetes
-{{< skew currentVersionAddMinor -1 >}} to Kubernetes {{< skew currentVersion >}}. If your cluster
-is not currently running Kubernetes {{< skew currentVersionAddMinor -1 >}} then please check
+{{}} to Kubernetes {{}}. If your cluster
+is not currently running Kubernetes {{}} then please check
 the documentation for the version of Kubernetes that you plan to upgrade to.
 
 ## Upgrade approaches
@@ -39,10 +39,10 @@ Once you have upgraded the cluster, remember to
 
 ### Manual deployments
 
-{{< caution >}}
+{{}}
 These steps do not account for third-party extensions such as network and storage
 plugins.
-{{< /caution >}}
+{{}}
 
 You should manually update the control plane following this sequence:
 
@@ -56,13 +56,13 @@ At this point you should
 [install the latest version of `kubectl`](/docs/tasks/tools/).
 
 For each node in your cluster, [drain](/docs/tasks/administer-cluster/safely-drain-node/)
-that node and then either replace it with a new node that uses the {{< skew currentVersion >}}
+that node and then either replace it with a new node that uses the {{}}
 kubelet, or upgrade the kubelet on that node and bring the node back into service.
 
-{{< caution >}}
+{{}}
 Draining nodes before upgrading kubelet ensures that pods are re-admitted and containers are
 re-created, which may be necessary to resolve some security issues or other important bugs.
-{{</ caution >}}
+{{}}
 
 ### Other deployments {#upgrade-other}
 

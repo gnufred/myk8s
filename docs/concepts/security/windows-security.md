@@ -9,11 +9,11 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
+
 
 This page describes security considerations and best practices specific to the Windows operating system.
 
-<!-- body -->
+
 
 ## Protection for Secret data on nodes
 
@@ -39,14 +39,14 @@ within Microsoft's _Secure Windows containers_ documentation.
 
 Local users can be added to container images during the container build process.
 
-{{< note >}}
+{{}}
 
 * [Nano Server](https://hub.docker.com/_/microsoft-windows-nanoserver) based images run as
   `ContainerUser` by default
 * [Server Core](https://hub.docker.com/_/microsoft-windows-servercore) based images run as
   `ContainerAdministrator` by default
 
-{{< /note >}}
+{{}}
 
 Windows containers can also run as Active Directory identities by utilizing
 [Group Managed Service Accounts](/docs/tasks/configure-pod-container/configure-gmsa/)

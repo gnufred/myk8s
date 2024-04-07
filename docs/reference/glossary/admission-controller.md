@@ -13,7 +13,7 @@ tags:
 ---
 A piece of code that intercepts requests to the Kubernetes API server prior to persistence of the object.
 
-<!--more-->
+
 
 Admission controllers are configurable for the Kubernetes API server and may be "validating", "mutating", or
 both. Any admission controller may reject the request. Mutating controllers may modify the objects they admit;

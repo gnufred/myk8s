@@ -4,11 +4,11 @@ content_type: concept
 weight: 100
 ---
 
-<!-- overview -->
+
 This page explains proxies used with Kubernetes.
 
 
-<!-- body -->
+
 
 ## Proxies
 

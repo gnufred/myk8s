@@ -6,18 +6,18 @@ title: Schedule GPUs
 description: Configure and schedule GPUs for use as a resource by nodes in a cluster.
 ---
 
-<!-- overview -->
 
-{{< feature-state state="stable" for_k8s_version="v1.26" >}}
+
+{{}}
 
 Kubernetes includes **stable** support for managing AMD and NVIDIA GPUs
 (graphical processing units) across different nodes in your cluster, using
-{{< glossary_tooltip text="device plugins" term_id="device-plugin" >}}.
+{{}}.
 
 This page describes how users can consume GPUs, and outlines
 some of the limitations in the implementation.
 
-<!-- body -->
+
 
 ## Using device plugins
 
@@ -95,7 +95,7 @@ You also need a plugin for NFD that adds appropriate labels to your nodes; these
 labels or they could be vendor specific. Your GPU vendor may provide a third party
 plugin for NFD; check their documentation for more details.
 
-{{< highlight yaml "linenos=false,hl_lines=7-18" >}}
+{{}}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -120,7 +120,7 @@ spec:
       resources:
         limits:
           gpu-vendor.example/example-gpu: 1 # requesting 1 GPU
-{{< /highlight >}}
+{{}}
 
 #### GPU vendor implementations
 

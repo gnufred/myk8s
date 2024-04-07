@@ -11,19 +11,19 @@ min-kubernetes-server-version: 1.16
 weight: 20
 ---
 
-<!-- overview -->
+
 This page shows how to install a
 [custom resource](/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 into the Kubernetes API by creating a
-[CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
+[CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 If you are using an older version of Kubernetes that is still supported, switch to
 the documentation for that version to see advice that is relevant for your cluster.
 
-<!-- steps -->
+
 
 ## Create a CustomResourceDefinition
 
@@ -41,10 +41,10 @@ For example, if you save the following CustomResourceDefinition to `resourcedefi
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  # name must match the spec fields below, and be in the form: <plural>.<group>
+  # name must match the spec fields below, and be in the form: .
   name: crontabs.stable.example.com
 spec:
-  # group name to use for REST API: /apis/<group>/<version>
+  # group name to use for REST API: /apis//
   group: stable.example.com
   # list of versions supported by this CustomResourceDefinition
   versions:
@@ -69,7 +69,7 @@ spec:
   # either Namespaced or Cluster
   scope: Namespaced
   names:
-    # plural name to be used in the URL: /apis/<group>/<version>/<plural>
+    # plural name to be used in the URL: /apis///
     plural: crontabs
     # singular name to be used as an alias on the CLI and for display
     singular: crontab
@@ -327,8 +327,8 @@ CustomResourceDefinition.
 
 ### Field pruning
 
-CustomResourceDefinitions store validated resource data in the cluster's persistence store, {{< glossary_tooltip term_id="etcd" text="etcd">}}.
-As with native Kubernetes resources such as {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}},
+CustomResourceDefinitions store validated resource data in the cluster's persistence store, {{}}.
+As with native Kubernetes resources such as {{}},
 if you specify a field that the API server does not recognize, the unknown field  is _pruned_ (removed) before being persisted.
 
 CRDs converted from `apiextensions.k8s.io/v1beta1` to `apiextensions.k8s.io/v1` might lack
@@ -541,7 +541,7 @@ See [Custom resource definition versioning](/docs/tasks/extend-kubernetes/custom
 for more information about serving multiple versions of your
 CustomResourceDefinition and migrating your objects from one version to another.
 
-<!-- discussion -->
+
 ## Advanced topics
 
 ### Finalizers
@@ -719,7 +719,7 @@ crontab "my-new-cron-object" created
 ```
 ### Validation ratcheting
 
-{{< feature-state state="alpha" for_k8s_version="v1.28" >}}
+{{}}
 
 You need to enable the `CRDValidationRatcheting`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) to
@@ -740,7 +740,7 @@ safely without bumping the version of the object or breaking workflows.
 While most validations placed in the OpenAPIV3 schema of a CRD support
 ratcheting, there are a few exceptions. The following OpenAPIV3 schema 
 validations are not supported by ratcheting under the implementation in Kubernetes
-{{< skew currentVersion >}} and if violated will continue to throw an error as normally:
+{{}} and if violated will continue to throw an error as normally:
 
 - Quantors
   - `allOf`
@@ -777,7 +777,7 @@ validations are not supported by ratcheting under the implementation in Kubernet
 
 ### Validation rules
 
-{{< feature-state state="stable" for_k8s_version="v1.29" >}}
+{{}}
 
 Validation rules use the [Common Expression Language (CEL)](https://github.com/google/cel-spec)
 to validate custom resource values. Validation rules are included in
@@ -799,57 +799,9 @@ For example:
       spec:
         type: object
         x-kubernetes-validations:
-          - rule: "self.minReplicas <= self.replicas"
-            message: "replicas should be greater than or equal to minReplicas."
-          - rule: "self.replicas <= self.maxReplicas"
-            message: "replicas should be smaller than or equal to maxReplicas."
-        properties:
-          ...
-          minReplicas:
-            type: integer
-          replicas:
-            type: integer
-          maxReplicas:
-            type: integer
-        required:
-          - minReplicas
-          - replicas
-          - maxReplicas
-```
-
-will reject a request to create this custom resource:
-
-```yaml
-apiVersion: "stable.example.com/v1"
-kind: CronTab
-metadata:
-  name: my-new-cron-object
-spec:
-  minReplicas: 0
-  replicas: 20
-  maxReplicas: 10
-```
-
-with the response:
-
-```
-The CronTab "my-new-cron-object" is invalid:
-* spec: Invalid value: map[string]interface {}{"maxReplicas":10, "minReplicas":0, "replicas":20}: replicas should be smaller than or equal to maxReplicas.
-```
-
-`x-kubernetes-validations` could have multiple rules.
-The `rule` under `x-kubernetes-validations` represents the expression which will be evaluated by CEL.
-The `message` represents the message displayed when validation fails. If message is unset, the
-above response would be:
-
-```
-The CronTab "my-new-cron-object" is invalid:
-* spec: Invalid value: map[string]interface {}{"maxReplicas":10, "minReplicas":0, "replicas":20}: failed rule: self.replicas <= self.maxReplicas
-```
-
-{{< note >}}
+          - rule: "self.minReplicas }}
 You can quickly test CEL expressions in [CEL Playground](https://playcel.undistro.io).
-{{< /note >}}
+{{}}
 
 Validation rules are compiled when CRDs are created/updated.
 The request of CRDs create/update will fail if compilation of validation rules fail.
@@ -862,7 +814,7 @@ The compilation failure:
   For example, a rule like `self == true` against a field of integer type will get error:
 
   ```none
-  Invalid value: apiextensions.ValidationRule{Rule:"self == true", Message:""}: compilation failed: ERROR: \<input>:1:6: found no matching overload for '_==_' applied to '(int, bool)'
+  Invalid value: apiextensions.ValidationRule{Rule:"self == true", Message:""}: compilation failed: ERROR: \:1:6: found no matching overload for '_==_' applied to '(int, bool)'
   ```
 
 - `no_such_field`: does not contain the desired field.
@@ -871,7 +823,7 @@ The compilation failure:
   the following error:
 
   ```none
-  Invalid value: apiextensions.ValidationRule{Rule:"self.nonExistingField > 0", Message:""}: compilation failed: ERROR: \<input>:1:5: undefined field 'nonExistingField'
+  Invalid value: apiextensions.ValidationRule{Rule:"self.nonExistingField > 0", Message:""}: compilation failed: ERROR: \:1:5: undefined field 'nonExistingField'
   ```
 
 - `invalid argument`: invalid argument to macros.
@@ -879,40 +831,16 @@ The compilation failure:
   For example, a rule like `has(self)` will return error:
 
   ```none
-  Invalid value: apiextensions.ValidationRule{Rule:"has(self)", Message:""}: compilation failed: ERROR: <input>:1:4: invalid argument to has() macro
+  Invalid value: apiextensions.ValidationRule{Rule:"has(self)", Message:""}: compilation failed: ERROR: :1:4: invalid argument to has() macro
   ```
 
 Validation Rules Examples:
 
 | Rule                                                                             | Purpose                                                                           |
 | ----------------                                                                 | ------------                                                                      |
-| `self.minReplicas <= self.replicas && self.replicas <= self.maxReplicas`         | Validate that the three fields defining replicas are ordered appropriately        |
-| `'Available' in self.stateCounts`                                                | Validate that an entry with the 'Available' key exists in a map                   |
-| `(size(self.list1) == 0) != (size(self.list2) == 0)`                             | Validate that one of two lists is non-empty, but not both                         |
-| <code>!('MY_KEY' in self.map1) &#124;&#124; self['MY_KEY'].matches('^[a-zA-Z]*$')</code>               | Validate the value of a map for a specific key, if it is in the map               |
+| `self.minReplicas !('MY_KEY' in self.map1) &#124;&#124; self['MY_KEY'].matches('^[a-zA-Z]*$')               | Validate the value of a map for a specific key, if it is in the map               |
 | `self.envars.filter(e, e.name == 'MY_ENV').all(e, e.value.matches('^[a-zA-Z]*$')` | Validate the 'value' field of a listMap entry where key field 'name' is 'MY_ENV'  |
-| `has(self.expired) && self.created + self.ttl < self.expired`                    | Validate that 'expired' date is after a 'create' date plus a 'ttl' duration       |
-| `self.health.startsWith('ok')`                                                   | Validate a 'health' string field has the prefix 'ok'                              |
-| `self.widgets.exists(w, w.key == 'x' && w.foo < 10)`                             | Validate that the 'foo' property of a listMap item with a key 'x' is less than 10 |
-| `type(self) == string ? self == '100%' : self == 1000`                           | Validate an int-or-string field for both the int and string cases             |
-| `self.metadata.name.startsWith(self.prefix)`                                     | Validate that an object's name has the prefix of another field value              |
-| `self.set1.all(e, !(e in self.set2))`                                            | Validate that two listSets are disjoint                                           |
-| `size(self.names) == size(self.details) && self.names.all(n, n in self.details)` | Validate the 'details' map is keyed by the items in the 'names' listSet           |
-| `size(self.clusters.filter(c, c.name == self.primary)) == 1`                     | Validate that the 'primary' property has one and only one occurrence in the 'clusters' listMap           |
-
-Xref: [Supported evaluation on CEL](https://github.com/google/cel-spec/blob/v0.6.0/doc/langdef.md#evaluation)
-
-- If the Rule is scoped to the root of a resource, it may make field selection into any fields
-  declared in the OpenAPIv3 schema of the CRD as well as `apiVersion`, `kind`, `metadata.name` and
-  `metadata.generateName`. This includes selection of fields in both the `spec` and `status` in the
-  same expression:
-
-  ```none
-    ...
-    openAPIV3Schema:
-      type: object
-      x-kubernetes-validations:
-        - rule: "self.status.availableReplicas >= self.spec.minReplicas"
+| `has(self.expired) && self.created + self.ttl = self.spec.minReplicas"
       properties:
           spec:
             type: object
@@ -1005,46 +933,7 @@ Examples:
 
 |type of the field rule scoped to    | Rule example             |
 | -----------------------| -----------------------|
-| root object            | `self.status.actual <= self.spec.maxDesired` |
-| map of objects         | `self.components['Widget'].priority < 10` |
-| list of integers       | `self.values.all(value, value >= 0 && value < 100)` |
-| string                 | `self.startsWith('kube')` |
-
-
-The `apiVersion`, `kind`, `metadata.name` and `metadata.generateName` are always accessible from
-the root of the object and from any `x-kubernetes-embedded-resource` annotated objects. No other
-metadata properties are accessible.
-
-Unknown data preserved in custom resources via `x-kubernetes-preserve-unknown-fields` is not
-accessible in CEL expressions. This includes:
-
-- Unknown field values that are preserved by object schemas with `x-kubernetes-preserve-unknown-fields`.
-- Object properties where the property schema is of an "unknown type". An "unknown type" is
-  recursively defined as:
-
-  - A schema with no type and x-kubernetes-preserve-unknown-fields set to true
-  - An array where the items schema is of an "unknown type"
-  - An object where the additionalProperties schema is of an "unknown type"
-
-
-Only property names of the form `[a-zA-Z_.-/][a-zA-Z0-9_.-/]*` are accessible.
-Accessible property names are escaped according to the following rules when accessed in the expression:
-
-| escape sequence         | property name equivalent  |
-| ----------------------- | -----------------------|
-| `__underscores__`       | `__`                  |
-| `__dot__`               | `.`                   |
-|`__dash__`               | `-`                   |
-| `__slash__`             | `/`                   |
-| `__{keyword}__`         | [CEL RESERVED keyword](https://github.com/google/cel-spec/blob/v0.6.0/doc/langdef.md#syntax)       |
-
-Note: CEL RESERVED keyword needs to match the exact property name to be escaped (e.g. int in the word sprint would not be escaped).
-
-Examples on escaping:
-
-|property name    | rule with escaped property name     |
-| ----------------| -----------------------             |
-| namespace       | `self.__namespace__ > 0`            |
+| root object            | `self.status.actual = 0 && value  0`            |
 | x-prop          | `self.x__dash__prop > 0`            |
 | redact__d       | `self.redact__underscores__d > 0`   |
 | string          | `self.startsWith('kube')`           |
@@ -1098,12 +987,7 @@ field. For example:
 
 ```yaml
 x-kubernetes-validations:
-- rule: "self.x <= self.maxLimit"
-  messageExpression: '"x exceeded max limit of " + string(self.maxLimit)'
-```
-
-Keep in mind that CEL string concatenation (`+` operator) does not auto-cast to string. If
-you have a non-string scalar, use the `string(<value>)` function to cast the scalar to a string
+- rule: "self.x )` function to cast the scalar to a string
 like shown in the above example.
 
 `messageExpression` must evaluate to a string, and this is checked while the CRD is being written. Note that it is possible
@@ -1137,47 +1021,7 @@ For example:
 
 ```yaml
 x-kubernetes-validations:
-- rule: "self.x <= self.maxLimit"
-  reason: "FieldValueInvalid"
-```
-
-The HTTP status code returned to the caller will match the reason of the first failed validation rule.
-The currently supported reasons are: "FieldValueInvalid", "FieldValueForbidden", "FieldValueRequired", "FieldValueDuplicate".
-If not set or unknown reasons, default to use "FieldValueInvalid".
-
-Setting `reason` is optional.
-
-#### The `fieldPath` field {#field-field-path}
-
-You can specify the field path returned when the validation fails.
-
-For example:
-
-```yaml
-x-kubernetes-validations:
-- rule: "self.foo.test.x <= self.maxLimit"
-  fieldPath: ".foo.test.x"
-```
-
-In the example above, the validation checks the value of field `x` should be less than the value of `maxLimit`.
-If no `fieldPath` specified, when validation fails, the fieldPath would be default to wherever `self` scoped.
-With `fieldPath` specified, the returned error will have `fieldPath` properly refer to the location of field `x`.
-
-The `fieldPath` value must be a relative JSON path that is scoped to the location of this x-kubernetes-validations extension in the schema. 
-Additionally, it should refer to an existing field within the schema.
-For example when validation checks if a specific attribute `foo` under a map `testMap`, you could set
-`fieldPath` to `".testMap.foo"` or `.testMap['foo']'`.
-If the validation requires checking for unique attributes in two lists, the fieldPath can be set to either of the lists. 
-For example, it can be set to `.testList1` or `.testList2`.
-It supports child operation to refer to an existing field currently. 
-Refer to [JSONPath support in Kubernetes](/docs/reference/kubectl/jsonpath/) for more info.
-The `fieldPath` field does not support indexing arrays numerically.
-
-Setting `fieldPath` is optional.
-
-#### The `optionalOldSelf` field {#field-optional-oldself}
-
-{{< feature-state state="alpha" for_k8s_version="v1.29" >}}
+- rule: "self.x }}
 
 The feature [CRDValidationRatcheting](#validation-ratcheting) must be enabled in order to 
 make use of this field.
@@ -1200,7 +1044,7 @@ Example Usage:
 |-----------------------------------------|-------------|
 | `self.foo == "foo" || (oldSelf.hasValue() && oldSelf.value().foo != "foo")` | Ratcheted rule. Once a value is set to "foo", it must stay foo. But if it existed before the "foo" constraint was introduced, it may use any value |
 | [oldSelf.orValue(""), self].all(x, ["OldCase1", "OldCase2"].exists(case, x == case)) || ["NewCase1", "NewCase2"].exists(case, self == case) || ["NewCase"].has(self)` | "Ratcheted validation for removed enum cases if oldSelf used them" |
-| oldSelf.optMap(o, o.size()).orValue(0) < 4 || self.size() >= 4 | Ratcheted validation of newly increased minimum map or list size |
+| oldSelf.optMap(o, o.size()).orValue(0) = 4 | Ratcheted validation of newly increased minimum map or list size |
 
 
 #### Validation functions {#available-validation-functions}
@@ -1250,7 +1094,7 @@ any `set`or `atomic`array parent schemas make it impossible to unambiguously cor
 
 Here are some examples for transition rules:
 
-{{< table caption="Transition rules examples" >}}
+{{}}
 | Use Case                                                          | Rule
 | --------                                                          | --------
 | Immutability                                                      | `self.foo == oldSelf.foo`
@@ -1258,7 +1102,7 @@ Here are some examples for transition rules:
 | Append-only set                                                   | `self.all(element, element in oldSelf)`
 | If previous value was X, new value can only be A or B, not Y or Z | `oldSelf != 'X' \|\| self in ['A', 'B']`
 | Monotonic (non-decreasing) counters                               | `self >= oldSelf`
-{{< /table >}}
+{{}}
 
 #### Resource use by validation functions
 
@@ -1383,9 +1227,9 @@ Avoid nested lists and maps if possible where validation rules are used.
 
 ### Defaulting
 
-{{< note >}}
+{{}}
 To use defaulting, your CustomResourceDefinition must use API version `apiextensions.k8s.io/v1`.
-{{< /note >}}
+{{}}
 
 Defaulting allows to specify default values in the [OpenAPI v3 validation schema](#validation):
 
@@ -1620,9 +1464,9 @@ NAME                 SPEC        REPLICAS   AGE
 my-new-cron-object   * * * * *   1          7s
 ```
 
-{{< note >}}
+{{}}
 The `NAME` column is implicit and does not need to be defined in the CustomResourceDefinition.
-{{< /note >}}
+{{}}
 
 #### Priority
 
@@ -1850,7 +1694,7 @@ resources that have the scale subresource enabled.
 ### Categories
 
 Categories is a list of grouped resources the custom resource belongs to (eg. `all`).
-You can use `kubectl get <category-name>` to list the resources belonging to the category.
+You can use `kubectl get ` to list the resources belonging to the category.
 
 The following example adds `all` in the list of categories in the CustomResourceDefinition
 and illustrates how to output the custom resource using `kubectl get all`.
@@ -1936,7 +1780,7 @@ crontabs/my-new-cron-object   3s
 
 * Read about [custom resources](/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
-* See [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
+* See [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 * Serve [multiple versions](/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) of a
   CustomResourceDefinition.

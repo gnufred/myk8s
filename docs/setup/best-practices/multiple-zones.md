@@ -8,11 +8,11 @@ weight: 20
 content_type: concept
 ---
 
-<!-- overview -->
+
 
 This page describes running Kubernetes across multiple zones.
 
-<!-- body -->
+
 
 ## Background
 
@@ -40,23 +40,23 @@ cluster controller manager) across at least three failure zones.
 If you are running a cloud controller manager then you should
 also replicate this across all the failure zones you selected.
 
-{{< note >}}
+{{}}
 Kubernetes does not provide cross-zone resilience for the API server
 endpoints. You can use various techniques to improve availability for
 the cluster API server, including DNS round-robin, SRV records, or
 a third-party load balancing solution with health checking.
-{{< /note >}}
+{{}}
 
 ## Node behavior
 
 Kubernetes automatically spreads the Pods for
-workload resources (such as {{< glossary_tooltip text="Deployment" term_id="deployment" >}}
-or {{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}})
+workload resources (such as {{}}
+or {{}})
 across different nodes in a cluster. This spreading helps
 reduce the impact of failures.
 
 When nodes start up, the kubelet on each node automatically adds
-{{< glossary_tooltip text="labels" term_id="label" >}} to the Node object
+{{}} to the Node object
 that represents that specific kubelet in the Kubernetes API.
 These labels can include
 [zone information](/docs/reference/labels-annotations-taints/#topologykubernetesiozone).
@@ -67,7 +67,7 @@ in conjunction with
 to control how Pods are spread across your cluster among fault domains:
 regions, zones, and even specific nodes.
 These hints enable the
-{{< glossary_tooltip text="scheduler" term_id="kube-scheduler" >}} to place
+{{}} to place
 Pods for better expected availability, reducing the risk that a correlated
 failure affects your whole workload.
 
@@ -97,7 +97,7 @@ such as Deployment, StatefulSet, or Job.
 
 When persistent volumes are created, Kubernetes automatically adds zone labels 
 to any PersistentVolumes that are linked to a specific zone.
-The {{< glossary_tooltip text="scheduler" term_id="kube-scheduler" >}} then ensures,
+The {{}} then ensures,
 through its `NoVolumeZoneConflict` predicate, that pods which claim a given PersistentVolume
 are only placed into the same zone as that volume.
 
@@ -105,7 +105,7 @@ Please note that the method of adding zone labels can depend on your
 cloud provider and the storage provisioner you’re using. Always refer to the specific 
 documentation for your environment to ensure correct configuration.
 
-You can specify a {{< glossary_tooltip text="StorageClass" term_id="storage-class" >}}
+You can specify a {{}}
 for PersistentVolumeClaims that specifies the failure domains (zones) that the
 storage in that class may use.
 To learn about configuring a StorageClass that is aware of failure domains or zones,
@@ -122,8 +122,8 @@ same zone as the load balancer element processing a given connection.
 Check your cloud provider's documentation for details.
 
 For custom or on-premises deployments, similar considerations apply.
-{{< glossary_tooltip text="Service" term_id="service" >}} and
-{{< glossary_tooltip text="Ingress" term_id="ingress" >}} behavior, including handling
+{{}} and
+{{}} behavior, including handling
 of different failure zones, does vary depending on exactly how your cluster is set up.
 
 ## Fault recovery
@@ -135,7 +135,7 @@ one node able to run Pods in a zone?
 Make sure that any cluster-critical repair work does not rely
 on there being at least one healthy node in your cluster. For example: if all nodes
 are unhealthy, you might need to run a repair Job with a special
-{{< glossary_tooltip text="toleration" term_id="toleration" >}} so that the repair
+{{}} so that the repair
 can complete enough to bring at least one node into service.
 
 Kubernetes doesn't come with an answer for this challenge; however, it's

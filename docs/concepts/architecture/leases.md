@@ -7,15 +7,15 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
+
 
 Distributed systems often have a need for _leases_, which provide a mechanism to lock shared resources
 and coordinate activity between members of a set.
 In Kubernetes, the lease concept is represented by [Lease](/docs/reference/kubernetes-api/cluster-resources/lease-v1/)
-objects in the `coordination.k8s.io` {{< glossary_tooltip text="API Group" term_id="api-group" >}},
+objects in the `coordination.k8s.io` {{}},
 which are used for system-critical capabilities such as node heartbeats and component-level leader election.
 
-<!-- body -->
+
 
 ## Node heartbeats {#node-heart-beats}
 
@@ -36,7 +36,7 @@ instances are on stand-by.
 
 ## API server identity
 
-{{< feature-state feature_gate_name="APIServerIdentity" >}}
+{{}}
 
 Starting in Kubernetes v1.26, each `kube-apiserver` uses the Lease API to publish its identity to the
 rest of the system. While not particularly useful on its own, this provides a mechanism for clients to
@@ -45,7 +45,7 @@ Existence of kube-apiserver leases enables future capabilities that may require 
 each kube-apiserver.
 
 You can inspect Leases owned by each kube-apiserver by checking for lease objects in the `kube-system` namespace
-with the name `kube-apiserver-<sha256-hash>`. Alternatively you can use the label selector `apiserver.kubernetes.io/identity=kube-apiserver`:
+with the name `kube-apiserver-`. Alternatively you can use the label selector `apiserver.kubernetes.io/identity=kube-apiserver`:
 
 ```shell
 kubectl -n kube-system get lease -l apiserver.kubernetes.io/identity=kube-apiserver
@@ -92,7 +92,7 @@ You can disable API server identity leases by disabling the `APIServerIdentity`
 ## Workloads {#custom-workload}
 
 Your own workload can define its own use of Leases. For example, you might run a custom
-{{< glossary_tooltip term_id="controller" text="controller" >}} where a primary or leader member
+{{}} where a primary or leader member
 performs operations that its peers do not. You define a Lease so that the controller replicas can select
 or elect a leader, using the Kubernetes API for coordination.
 If you do use a Lease, it's a good practice to define a name for the Lease that is obviously linked to

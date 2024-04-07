@@ -8,10 +8,10 @@ description: >-
 ---
 
 
-<!-- overview -->
+
 
 This page shows how to set minimum and maximum values for the CPU resources used by containers
-and Pods in a {{< glossary_tooltip text="namespace" term_id="namespace" >}}. You specify minimum
+and Pods in a {{}}. You specify minimum
 and maximum CPU values in a
 [LimitRange](/docs/reference/kubernetes-api/policy-resources/limit-range-v1/)
 object. If a Pod does not meet the constraints imposed by the LimitRange, it cannot be created
@@ -23,7 +23,7 @@ in the namespace.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You must have access to create namespaces in your cluster.
 
@@ -32,7 +32,7 @@ See [meaning of CPU](/docs/concepts/configuration/manage-resources-containers/#m
 to learn what Kubernetes means by “1 CPU”.
 
 
-<!-- steps -->
+
 
 ## Create a namespace
 
@@ -45,7 +45,7 @@ kubectl create namespace constraints-cpu-example
 
 ## Create a LimitRange and a Pod
 
-Here's a manifest for an example {{< glossary_tooltip text="LimitRange" term_id="limitrange" >}}:
+Here's a manifest for an example {{}}:
 
 {{% code_sample file="admin/resource/cpu-constraints.yaml" %}}
 
@@ -88,11 +88,11 @@ of the Kubernetes API creates an equivalent Pod), Kubernetes performs these step
 
 * Verify that every container in that Pod specifies a CPU limit that is less than or equal to 800 millicpu.
 
-{{< note >}}
+{{}}
 When creating a `LimitRange` object, you can specify limits on huge-pages
 or GPUs as well. However, when both `default` and `defaultRequest` are specified
 on these resources, the two values must be the same.
-{{< /note >}}
+{{}}
 
 Here's a manifest for a Pod that has one container. The container manifest
 specifies a CPU request of 500 millicpu and a CPU limit of 800 millicpu. These satisfy the

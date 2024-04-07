@@ -4,12 +4,12 @@ content_type: concept
 weight: 80
 ---
 
-<!-- overview -->
 
-{{<glossary_definition term_id="finalizer" length="long">}}
 
-You can use finalizers to control {{<glossary_tooltip text="garbage collection" term_id="garbage-collection">}}
-of {{< glossary_tooltip text="objects" term_id="object" >}} by alerting {{<glossary_tooltip text="controllers" term_id="controller">}}
+{{}}
+
+You can use finalizers to control {{}}
+of {{}} by alerting {{}}
 to perform specific cleanup tasks before deleting the target resource.
 
 Finalizers don't usually specify the code to execute. Instead, they are
@@ -45,7 +45,7 @@ controller can't delete it because the finalizer exists. When the Pod stops
 using the `PersistentVolume`, Kubernetes clears the `pv-protection` finalizer,
 and the controller deletes the volume.
 
-{{<note>}}
+{{}}
 * When you `DELETE` an object, Kubernetes adds the deletion timestamp for that object and then
 immediately starts to restrict changes to the `.metadata.finalizers` field for the object that is
 now pending deletion. You can remove existing finalizers (deleting an entry from the `finalizers`
@@ -53,17 +53,17 @@ list) but you cannot add a new finalizer. You also cannot modify the `deletionTi
 object once it is set.
 
 * After the deletion is requested, you can not resurrect this object. The only way is to delete it and make a new similar object.
-{{</note>}}
+{{}}
 
 ## Owner references, labels, and finalizers {#owners-labels-finalizers}
 
-Like {{<glossary_tooltip text="labels" term_id="label">}},
+Like {{}},
 [owner references](/docs/concepts/overview/working-with-objects/owners-dependents/)
 describe the relationships between objects in Kubernetes, but are used for a
 different purpose. When a
-{{<glossary_tooltip text="controller" term_id="controller">}} manages objects
+{{}} manages objects
 like Pods, it uses labels to track changes to groups of related objects. For
-example, when a {{<glossary_tooltip text="Job" term_id="job">}} creates one or
+example, when a {{}} creates one or
 more Pods, the Job controller applies labels to those pods and tracks changes to
 any Pods in the cluster with the same label.
 
@@ -81,14 +81,14 @@ longer than expected without being fully deleted. In these situations, you
 should check finalizers and owner references on the target owner and dependent
 objects to troubleshoot the cause. 
 
-{{<note>}}
+{{}}
 In cases where objects are stuck in a deleting state, avoid manually
 removing finalizers to allow deletion to continue. Finalizers are usually added
 to resources for a reason, so forcefully removing them can lead to issues in
 your cluster. This should only be done when the purpose of the finalizer is
 understood and is accomplished in another way (for example, manually cleaning
 up some dependent object).
-{{</note>}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

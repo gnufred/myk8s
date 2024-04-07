@@ -6,10 +6,10 @@ title: Considerations for large clusters
 weight: 10
 ---
 
-A cluster is a set of {{< glossary_tooltip text="nodes" term_id="node" >}} (physical
+A cluster is a set of {{}} (physical
 or virtual machines) running Kubernetes agents, managed by the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}}.
-Kubernetes {{< param "version" >}} supports clusters with up to 5,000 nodes. More specifically,
+{{}}.
+Kubernetes {{}} supports clusters with up to 5,000 nodes. More specifically,
 Kubernetes is designed to accommodate configurations that meet *all* of the following criteria:
 
 * No more than 110 pods per node
@@ -64,7 +64,7 @@ dedicated etcd instance.
 When creating a cluster, you can (using custom tooling):
 
 * start and configure additional etcd instance
-* configure the {{< glossary_tooltip term_id="kube-apiserver" text="API server" >}} to use it for storing events
+* configure the {{}} to use it for storing events
 
 See [Operating etcd clusters for Kubernetes](/docs/tasks/administer-cluster/configure-upgrade-etcd/) and
 [Set up a High Availability etcd cluster with kubeadm](/docs/setup/production-environment/tools/kubeadm/setup-ha-etcd-with-kubeadm/)
@@ -75,7 +75,7 @@ for details on configuring and managing etcd for a large cluster.
 Kubernetes [resource limits](/docs/concepts/configuration/manage-resources-containers/)
 help to minimize the impact of memory leaks and other ways that pods and containers can
 impact on other components. These resource limits apply to
-{{< glossary_tooltip text="addon" term_id="addons" >}} resources just as they apply to application workloads.
+{{}} resources just as they apply to application workloads.
 
 For example, you can set CPU and memory limits for a logging component:
 
@@ -108,8 +108,7 @@ many nodes, consider the following:
   a very large cluster you may also need to raise CPU or memory limits slightly.
   The VerticalPodAutoscaler can run in _recommender_ mode to provide suggested
   figures for requests and limits.
-* Some addons run as one copy per node, controlled by a {{< glossary_tooltip text="DaemonSet"
-  term_id="daemonset" >}}: for example, a node-level log aggregator. Similar to
+* Some addons run as one copy per node, controlled by a {{}}: for example, a node-level log aggregator. Similar to
   the case with horizontally-scaled addons, you may also need to raise CPU or memory
   limits slightly.
 

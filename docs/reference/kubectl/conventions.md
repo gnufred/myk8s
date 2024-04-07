@@ -6,11 +6,11 @@ content_type: concept
 weight: 60
 ---
 
-<!-- overview -->
+
 Recommended usage conventions for `kubectl`.
 
 
-<!-- body -->
+
 
 ## Using `kubectl` in Reusable Scripts
 

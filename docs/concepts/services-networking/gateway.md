@@ -7,14 +7,14 @@ description: >-
 weight: 55
 ---
 
-<!-- overview -->
+
 
 Make network services available by using an extensible, role-oriented, protocol-aware configuration
-mechanism. [Gateway API](https://gateway-api.sigs.k8s.io/) is an {{<glossary_tooltip text="add-on" term_id="addons">}}
+mechanism. [Gateway API](https://gateway-api.sigs.k8s.io/) is an {{}}
 containing API [kinds](https://gateway-api.sigs.k8s.io/references/spec/) that provide dynamic infrastructure
 provisioning and advanced traffic routing.
 
-<!-- body -->
+
 
 ## Design principles
 
@@ -48,7 +48,7 @@ Gateway API has three stable API kinds:
 
 * __HTTPRoute:__ Defines HTTP-specific rules for mapping traffic from a Gateway listener to a
   representation of backend network endpoints. These endpoints are often represented as a
-  {{<glossary_tooltip text="Service" term_id="service">}}.
+  {{}}.
 
 Gateway API is organized into different API kinds that have interdependent relationships to support
 the role-oriented nature of organizations. A Gateway object is associated with exactly one GatewayClass;
@@ -58,7 +58,7 @@ that may be attached to its `listeners`, forming a bidirectional trust model wit
 
 The following figure illustrates the relationships of the three stable Gateway API kinds:
 
-{{< figure src="/docs/images/gateway-kind-relationships.svg" alt="A figure illustrating the relationships of the three stable Gateway API kinds" class="diagram-medium" >}}
+{{}}
 
 ### GatewayClass {#api-kind-gateway-class}
 
@@ -154,7 +154,7 @@ reference for a full definition of this API kind.
 
 Here is a simple example of HTTP traffic being routed to a Service by using a Gateway and an HTTPRoute:
 
-{{< figure src="/docs/images/gateway-request-flow.svg" alt="A diagram that provides an example of HTTP traffic being routed to a Service by using a Gateway and an HTTPRoute" class="diagram-medium" >}}
+{{}}
 
 In this example, the request flow for a Gateway implemented as a reverse proxy is:
 
@@ -198,9 +198,9 @@ follow the installation instructions of your selected implementation. After inst
 implementation, use the [Getting Started](https://gateway-api.sigs.k8s.io/guides/) guide to help
 you quickly start working with Gateway API.
 
-{{< note >}}
+{{}}
 Make sure to review the documentation of your selected implementation to understand any caveats.
-{{< /note >}}
+{{}}
 
 Refer to the [API specification](https://gateway-api.sigs.k8s.io/reference/spec/) for additional
 details of all Gateway API kinds.

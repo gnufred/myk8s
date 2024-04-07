@@ -5,17 +5,17 @@ weight: 10
 description: Creating Secret objects using kubectl command line.
 ---
 
-<!-- overview -->
+
 
 This page shows you how to create, edit, manage, and delete Kubernetes
-{{<glossary_tooltip text="Secrets" term_id="secret">}} using the `kubectl`
+{{}} using the `kubectl`
 command-line tool.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Create a Secret
 
@@ -40,9 +40,9 @@ You must use single quotes `''` to escape special characters such as `$`, `\`,
 `*`, `=`, and `!` in your strings. If you don't, your shell will interpret these
 characters.
 
-{{< note >}}
+{{}}
 The `stringData` field for a Secret does not work well with server-side apply.
-{{< /note >}}
+{{}}
 
 ### Use source files
 
@@ -108,8 +108,8 @@ The output is similar to:
 ```
 Name:            db-user-pass
 Namespace:       default
-Labels:          <none>
-Annotations:     <none>
+Labels:          
+Annotations:     
 
 Type:            Opaque
 
@@ -149,13 +149,13 @@ accidentally, or from being stored in a terminal log.
    S!B\*d$zDsb=
    ```
 
-   {{< caution >}}
+   {{}}
    This is an example for documentation purposes. In practice,
    this method could cause the command with the encoded data to be stored in
    your shell history. Anyone with access to your computer could find the
    command and decode the secret. A better approach is to combine the view and
    decode commands.
-   {{< /caution >}}
+   {{}}
 
    ```shell
    kubectl get secret db-user-pass -o jsonpath='{.data.password}' | base64 --decode
@@ -168,7 +168,7 @@ You can edit an existing `Secret` object unless it is
 Secret, run the following command:
 
 ```shell
-kubectl edit secrets <secret-name>
+kubectl edit secrets 
 ```
 
 This opens your default editor and allows you to update the base64 encoded

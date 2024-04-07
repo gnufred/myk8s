@@ -12,7 +12,7 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 This task shows you how to debug a StatefulSet.
 
 ## {{% heading "prerequisites" %}}
@@ -20,7 +20,7 @@ This task shows you how to debug a StatefulSet.
 * You need to have a Kubernetes cluster, and the kubectl command-line tool must be configured to communicate with your cluster.
 * You should have a StatefulSet running that you want to investigate.
 
-<!-- steps -->
+
 
 ## Debugging a StatefulSet
 

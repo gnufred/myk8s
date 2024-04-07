@@ -5,20 +5,20 @@ min-kubernetes-server-version: 1.22
 weight: 300
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.22" state="alpha" >}}
+
+{{}}
 
 This document describes how to run Kubernetes Node components such as kubelet, CRI, OCI, and CNI
-without root privileges, by using a {{< glossary_tooltip text="user namespace" term_id="userns" >}}.
+without root privileges, by using a {{}}.
 
 This technique is also known as _rootless mode_.
 
-{{< note >}}
+{{}}
 This document describes how to run Kubernetes Node components (and hence pods) as a non-root user.
 
 If you are just looking for how to run a pod as a non-root user, see [SecurityContext](/docs/tasks/configure-pod-container/security-context/).
-{{< /note >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
@@ -30,7 +30,7 @@ If you are just looking for how to run a pod as a non-root user, see [SecurityCo
 * [Ensure that your unprivileged user is listed in `/etc/subuid` and `/etc/subgid`](https://rootlesscontaine.rs/getting-started/common/subuid/)
 * Enable the `KubeletInUserNamespace` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 
-<!-- steps -->
+
 
 ## Running Kubernetes inside Rootless Docker/Podman
 
@@ -89,13 +89,13 @@ See [the Usernetes repo](https://github.com/rootless-containers/usernetes) for t
 
 This section provides hints for running Kubernetes in a user namespace manually.
 
-{{< note >}}
+{{}}
 This section is intended to be read by developers of Kubernetes distributions, not by end users.
-{{< /note >}}
+{{}}
 
 ### Creating a user namespace
 
-The first step is to create a {{< glossary_tooltip text="user namespace" term_id="userns" >}}.
+The first step is to create a {{}}.
 
 If you are trying to run Kubernetes in a user-namespaced container such as
 Rootless Docker/Podman or LXC/LXD, you are all set, and you can go to the next subsection.
@@ -127,10 +127,10 @@ At least, the following directories need to be writable *in* the namespace (not 
 
 In addition to the user namespace, you also need to have a writable cgroup tree with cgroup v2.
 
-{{< note >}}
+{{}}
 Kubernetes support for running Node components in user namespaces requires cgroup v2.
 Cgroup v1 is not supported.
-{{< /note >}}
+{{}}
 
 If you are trying to run Kubernetes in Rootless Docker/Podman or LXC/LXD on a systemd-based host, you are all set.
 
@@ -166,7 +166,7 @@ The implementation can be found in [the `pkg/rootlessports` package](https://git
 The kubelet relies on a container runtime. You should deploy a container runtime such as
 containerd or CRI-O and ensure that it is running within the user namespace before the kubelet starts.
 
-{{< tabs name="cri" >}}
+{{}}
 {{% tab name="containerd" %}}
 
 Running CRI plugin of containerd in a user namespace is supported since containerd 1.4.
@@ -221,7 +221,7 @@ The following configurations are also recommended:
 The default path of the configuration file is `/etc/crio/crio.conf`.
 The path can be specified with `crio --config /path/to/crio/crio.conf`.
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ### Configuring kubelet
 

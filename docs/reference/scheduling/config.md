@@ -4,21 +4,21 @@ content_type: concept
 weight: 20
 ---
 
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+{{}}
 
 You can customize the behavior of the `kube-scheduler` by writing a configuration
 file and passing its path as a command line argument.
 
-<!-- overview -->
 
-<!-- body -->
+
+
 
 A scheduling Profile allows you to configure the different stages of scheduling
-in the {{< glossary_tooltip text="kube-scheduler" term_id="kube-scheduler" >}}.
+in the {{}}.
 Each stage is exposed in an extension point. Plugins provide scheduling behaviors
 by implementing one or more of these extension points.
 
-You can specify scheduling profiles by running `kube-scheduler --config <filename>`,
+You can specify scheduling profiles by running `kube-scheduler --config `,
 using the
 KubeSchedulerConfiguration [v1](/docs/reference/config-api/kube-scheduler-config.v1/)
 struct.
@@ -32,15 +32,15 @@ clientConnection:
   kubeconfig: /etc/srv/kubernetes/kube-scheduler/kubeconfig
 ```
 
-{{< note >}}
+{{}}
 KubeSchedulerConfiguration v1beta3 is deprecated in v1.26 and is removed in v1.29.
 Please migrate KubeSchedulerConfiguration to [v1](/docs/reference/config-api/kube-scheduler-config.v1/).
-{{< /note >}}
+{{}}
 
 ## Profiles
 
 A scheduling Profile allows you to configure the different stages of scheduling
-in the {{< glossary_tooltip text="kube-scheduler" term_id="kube-scheduler" >}}.
+in the {{}}.
 Each stage is exposed in an [extension point](#extension-points).
 [Plugins](#scheduling-plugins) provide scheduling behaviors by implementing one
 or more of these extension points.
@@ -140,13 +140,13 @@ extension points:
   balanced resource usage if the Pod is scheduled there.
   Extension points: `score`.
 - `VolumeBinding`: Checks if the node has or if it can bind the requested
-  {{< glossary_tooltip text="volumes" term_id="volume" >}}.
+  {{}}.
   Extension points: `preFilter`, `filter`, `reserve`, `preBind`, `score`.
-  {{< note >}}
+  {{}}
   `score` extension point is enabled when `VolumeCapacityPriority` feature is
   enabled. It prioritizes the smallest PVs that can fit the requested volume
   size.
-  {{< /note >}}
+  {{}}
 - `VolumeRestrictions`: Checks that volumes mounted in the node satisfy
   restrictions that are specific to the volume provider.
   Extension points: `filter`.
@@ -216,17 +216,17 @@ If a Pod doesn't specify a scheduler name, kube-apiserver will set it to
 `default-scheduler`. Therefore, a profile with this scheduler name should exist
 to get those pods scheduled.
 
-{{< note >}}
+{{}}
 Pod's scheduling events have `.spec.schedulerName` as the ReportingController.
 Events for leader election use the scheduler name of the first profile in the
 list.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 All profiles must use the same plugin in the `queueSort` extension point and have
 the same configuration parameters (if applicable). This is because the scheduler
 only has one pending pods queue.
-{{< /note >}}
+{{}}
 
 ### Plugins that apply to multiple extension points {#multipoint}
 
@@ -412,7 +412,7 @@ as well as its seamless integration with the existing methods for configuring ex
 
 ## Scheduler configuration migrations
 
-{{< tabs name="tab_with_md" >}}
+{{}}
 {{% tab name="v1beta1 → v1beta2" %}}
 * With the v1beta2 configuration version, you can use a new score extension for the
   `NodeResourcesFit` plugin.
@@ -457,7 +457,7 @@ as well as its seamless integration with the existing methods for configuring ex
 * The scheduler plugin `SelectorSpread` is removed, instead, use the `PodTopologySpread` plugin (enabled by default)
 to achieve similar behavior.
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

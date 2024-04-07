@@ -3,17 +3,17 @@ title: Running Pods on Only Some Nodes
 content_type: task
 weight: 30
 ---
-<!-- overview -->
 
-This page demonstrates how can you run {{<glossary_tooltip term_id="pod" text="Pods">}} on only some {{<glossary_tooltip term_id="node" text="Nodes">}} as part of a {{<glossary_tooltip term_id="daemonset" text="DaemonSet">}}
+
+This page demonstrates how can you run {{}} on only some {{}} as part of a {{}}
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 ## Running Pods on only some Nodes
 
-Imagine that you want to run a {{<glossary_tooltip term_id="daemonset" text="DaemonSet">}}, but you only need to run those daemon pods
+Imagine that you want to run a {{}}, but you only need to run those daemon pods
 on nodes that have local solid state (SSD) storage. For example, the Pod might provide cache service to the
 node, and the cache is only useful when low-latency local storage is available.
 
@@ -27,7 +27,7 @@ kubectl label nodes example-node-1 example-node-2 ssd=true
 
 ### Step 2: Create the manifest
 
-Let's create a {{<glossary_tooltip term_id="daemonset" text="DaemonSet">}} which will provision the daemon pods on the SSD labeled {{<glossary_tooltip term_id="node" text="nodes">}} only.
+Let's create a {{}} which will provision the daemon pods on the SSD labeled {{}} only.
 
 
 Next, use a `nodeSelector` to ensure that the DaemonSet only runs Pods on nodes
@@ -55,7 +55,7 @@ The output is similar to:
 
 ```
 NAME                              READY     STATUS    RESTARTS   AGE    IP      NODE
-<daemonset-name><some-hash-01>    1/1       Running   0          13s    .....   example-node-1
-<daemonset-name><some-hash-02>    1/1       Running   0          13s    .....   example-node-2
-<daemonset-name><some-hash-03>    1/1       Running   0          5s     .....   example-node-3
+    1/1       Running   0          13s    .....   example-node-1
+    1/1       Running   0          13s    .....   example-node-2
+    1/1       Running   0          5s     .....   example-node-3
 ```

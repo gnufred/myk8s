@@ -6,10 +6,10 @@ reviewers:
 weight: 50
 ---
 
-<!-- overview -->
+
 
 The `dockershim` component of Kubernetes allows the use of Docker as a Kubernetes's
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}.
+{{}}.
 Kubernetes' built-in `dockershim` component was removed in release v1.24.
 
 This page explains how your cluster could be using Docker as a container runtime,
@@ -51,7 +51,7 @@ dependency on Docker:
 
 A [container runtime](/docs/concepts/containers/#container-runtimes) is software that can
 execute the containers that make up a Kubernetes pod. Kubernetes is responsible for orchestration
-and scheduling of Pods; on each node, the {{< glossary_tooltip text="kubelet" term_id="kubelet" >}}
+and scheduling of Pods; on each node, the {{}}
 uses the container runtime interface as an abstraction so that you can use any compatible
 container runtime.
 
@@ -76,13 +76,13 @@ You cannot get container information using `docker ps` or `docker inspect`
 commands. As you cannot list containers, you cannot get logs, stop containers,
 or execute something inside a container using `docker exec`.
 
-{{< note >}}
+{{}}
 
 If you're running workloads via Kubernetes, the best way to stop a container is through
 the Kubernetes API rather than directly through the container runtime (this advice applies
 for all container runtimes, not only Docker).
 
-{{< /note >}}
+{{}}
 
 You can still pull images or build them using `docker build` command. But images
 built or pulled by Docker would not be visible to container runtime and
@@ -97,8 +97,8 @@ The Kubelet `/metrics/cadvisor` endpoint provides Prometheus metrics,
 as documented in [Metrics for Kubernetes system components](/docs/concepts/cluster-administration/system-metrics/).
 If you install a metrics collector that depends on that endpoint, you might see the following issues:
 
-- The metrics format on the Docker node is `k8s_<container-name>_<pod-name>_<namespace>_<pod-uid>_<restart-count>`
-  but the format on other runtime is different. For example, on containerd node it is `<container-id>`.
+- The metrics format on the Docker node is `k8s_____`
+  but the format on other runtime is different. For example, on containerd node it is ``.
 - Some filesystem metrics are missing, as follows:
   ```
   container_fs_inodes_free

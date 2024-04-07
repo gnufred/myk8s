@@ -11,7 +11,7 @@ stages:
     fromVersion: "1.28"
 ---
 Enable detection of the kubelet cgroup driver
-configuration option from the {{<glossary_tooltip term_id="cri" text="CRI">}}.
+configuration option from the {{}}.
 You can use this feature gate on nodes with a kubelet that supports the feature gate
 and where there is a CRI container runtime that supports the `RuntimeConfig`
 CRI call. If both CRI and kubelet support this feature, the kubelet ignores the

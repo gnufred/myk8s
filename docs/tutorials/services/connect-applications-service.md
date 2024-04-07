@@ -9,7 +9,7 @@ weight: 20
 ---
 
 
-<!-- overview -->
+
 
 ## The Kubernetes model for connecting containers
 
@@ -24,7 +24,7 @@ networking model.
 
 This tutorial uses a simple nginx web server to demonstrate the concept.
 
-<!-- body -->
+
 
 ## Exposing pods to the cluster
 
@@ -99,7 +99,7 @@ with the `run: my-nginx` label, and expose it on an abstracted Service port
 (`targetPort`: is the port the container accepts traffic on, `port`: is the
 abstracted Service port, which can be any port other pods use to access the
 Service).
-View [Service](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core)
+View [Service](/docs/reference/generated/kubernetes-api/{{}}/#service-v1-core)
 API object to see the list of supported fields in service definition.
 Check your Service:
 
@@ -108,15 +108,15 @@ kubectl get svc my-nginx
 ```
 ```
 NAME       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
-my-nginx   ClusterIP   10.0.162.149   <none>        80/TCP    21s
+my-nginx   ClusterIP   10.0.162.149           80/TCP    21s
 ```
 
 As mentioned previously, a Service is backed by a group of Pods. These Pods are
 exposed through
-{{<glossary_tooltip term_id="endpoint-slice" text="EndpointSlices">}}.
+{{}}.
 The Service's selector will be evaluated continuously and the results will be POSTed
 to an EndpointSlice that is connected to the Service using a
-{{< glossary_tooltip text="labels" term_id="label" >}}.
+{{}}.
 When a Pod dies, it is automatically removed from the EndpointSlices that contain it 
 as an endpoint. New Pods that match the Service's selector will automatically get added
 to an EndpointSlice for that Service.
@@ -130,18 +130,18 @@ kubectl describe svc my-nginx
 Name:                my-nginx
 Namespace:           default
 Labels:              run=my-nginx
-Annotations:         <none>
+Annotations:         
 Selector:            run=my-nginx
 Type:                ClusterIP
 IP Family Policy:    SingleStack
 IP Families:         IPv4
 IP:                  10.0.162.149
 IPs:                 10.0.162.149
-Port:                <unset> 80/TCP
+Port:                 80/TCP
 TargetPort:          80/TCP
 Endpoints:           10.244.2.5:80,10.244.3.4:80
 Session Affinity:    None
-Events:              <none>
+Events:              
 ```
 ```shell
 kubectl get endpointslices -l kubernetes.io/service-name=my-nginx
@@ -151,7 +151,7 @@ NAME             ADDRESSTYPE   PORTS   ENDPOINTS               AGE
 my-nginx-7vzhx   IPv4          80      10.244.2.5,10.244.3.4   21s
 ```
 
-You should now be able to curl the nginx Service on `<CLUSTER-IP>:<PORT>` from
+You should now be able to curl the nginx Service on `:` from
 any node in your cluster. Note that the Service IP is completely virtual, it
 never hits the wire. If you're curious about how this works you can read more
 about the [service proxy](/docs/reference/networking/virtual-ips/).
@@ -160,14 +160,14 @@ about the [service proxy](/docs/reference/networking/virtual-ips/).
 
 Kubernetes supports 2 primary modes of finding a Service - environment variables
 and DNS. The former works out of the box while the latter requires the
-[CoreDNS cluster addon](https://releases.k8s.io/v{{< skew currentPatchVersion >}}/cluster/addons/dns/coredns).
+[CoreDNS cluster addon](https://releases.k8s.io/v{{}}/cluster/addons/dns/coredns).
 
-{{< note >}}
+{{}}
 If the service environment variables are not desired (because possible clashing
 with expected program ones, too many variables to process, only using DNS, etc)
 you can disable this mode by setting the `enableServiceLinks` flag to `false` on
-the [pod spec](/docs/reference/generated/kubernetes-api/v{{< skew latestVersion >}}/#pod-v1-core).
-{{< /note >}}
+the [pod spec](/docs/reference/generated/kubernetes-api/v{{}}/#pod-v1-core).
+{{}}
 
 
 ### Environment Variables
@@ -228,7 +228,7 @@ kubectl get services kube-dns --namespace=kube-system
 ```
 ```
 NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)         AGE
-kube-dns   ClusterIP   10.0.0.10    <none>        53/UDP,53/TCP   8m
+kube-dns   ClusterIP   10.0.0.10            53/UDP,53/TCP   8m
 ```
 
 The rest of this section will assume you have a Service with a long lived IP
@@ -318,8 +318,8 @@ The output is similar to:
 ```console
 Name:         nginxconfigmap
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       
+Annotations:  
 
 Data
 ====
@@ -346,7 +346,7 @@ server {
 BinaryData
 ====
 
-Events:  <none>
+Events:  
 ```
 
 Following are the manual steps to follow in case you run into problems running make (on windows for example):
@@ -413,7 +413,7 @@ kubectl get pods -l run=my-nginx -o custom-columns=POD_IP:.status.podIPs
 ```shell
 node $ curl -k https://10.244.3.5
 ...
-<h1>Welcome to nginx!</h1>
+Welcome to nginx!
 ```
 
 Note how we supplied the `-k` parameter to curl in the last step, this is because
@@ -436,7 +436,7 @@ curl-deployment-1515033274-1410r   1/1       Running   0          1m
 ```shell
 kubectl exec curl-deployment-1515033274-1410r -- curl https://my-nginx --cacert /etc/nginx/ssl/tls.crt
 ...
-<title>Welcome to nginx!</title>
+Welcome to nginx!
 ...
 ```
 
@@ -478,9 +478,9 @@ kubectl get nodes -o yaml | grep ExternalIP -C 1
     allocatable:
 ...
 
-$ curl https://<EXTERNAL-IP>:<NODE-PORT> -k
+$ curl https://: -k
 ...
-<h1>Welcome to nginx!</h1>
+Welcome to nginx!
 ```
 
 Let's now recreate the Service to use a cloud load balancer.
@@ -495,9 +495,9 @@ NAME       TYPE           CLUSTER-IP     EXTERNAL-IP        PORT(S)             
 my-nginx   LoadBalancer   10.0.162.149     xx.xxx.xxx.xxx     8080:30163/TCP        21s
 ```
 ```
-curl https://<EXTERNAL-IP> -k
+curl https:// -k
 ...
-<title>Welcome to nginx!</title>
+Welcome to nginx!
 ```
 
 The IP address in the `EXTERNAL-IP` column is the one that is available on the public internet.

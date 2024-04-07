@@ -10,16 +10,7 @@ weight: 4
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: authorization.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 SubjectAccessReview checks whether or not a user or group can perform an action.
 
-<hr>
+
 
 - **apiVersion**: authorization.k8s.io/v1
 
@@ -38,15 +29,15 @@ SubjectAccessReview checks whether or not a user or group can perform an action.
 - **kind**: SubjectAccessReview
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../authorization-resources/subject-access-review-v1#SubjectAccessReviewSpec" >}}">SubjectAccessReviewSpec</a>), required
+- **spec** (}}">SubjectAccessReviewSpec), required
 
   Spec holds information about the request being evaluated
 
-- **status** (<a href="{{< ref "../authorization-resources/subject-access-review-v1#SubjectAccessReviewStatus" >}}">SubjectAccessReviewStatus</a>)
+- **status** (}}">SubjectAccessReviewStatus)
 
   Status is filled in by the server and indicates whether the request is allowed or not
 
@@ -58,7 +49,7 @@ SubjectAccessReview checks whether or not a user or group can perform an action.
 
 SubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
 
-<hr>
+
 
 - **extra** (map[string][]string)
 
@@ -72,7 +63,7 @@ SubjectAccessReviewSpec is a description of the access request.  Exactly one of 
 
   NonResourceAttributes describes information for a non-resource access request
 
-  <a name="NonResourceAttributes"></a>
+  
   *NonResourceAttributes includes the authorization attributes available for non-resource requests to the Authorizer interface*
 
   - **nonResourceAttributes.path** (string)
@@ -87,7 +78,7 @@ SubjectAccessReviewSpec is a description of the access request.  Exactly one of 
 
   ResourceAuthorizationAttributes describes information for a resource access request
 
-  <a name="ResourceAttributes"></a>
+  
   *ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface*
 
   - **resourceAttributes.group** (string)
@@ -134,7 +125,7 @@ SubjectAccessReviewSpec is a description of the access request.  Exactly one of 
 
 SubjectAccessReviewStatus
 
-<hr>
+
 
 - **allowed** (boolean), required
 
@@ -160,7 +151,7 @@ SubjectAccessReviewStatus
 
 
 
-<hr>
+
 
 
 
@@ -176,40 +167,40 @@ POST /apis/authorization.k8s.io/v1/subjectaccessreviews
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../authorization-resources/subject-access-review-v1#SubjectAccessReview" >}}">SubjectAccessReview</a>, required
+- **body**: }}">SubjectAccessReview, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authorization-resources/subject-access-review-v1#SubjectAccessReview" >}}">SubjectAccessReview</a>): OK
+200 (}}">SubjectAccessReview): OK
 
-201 (<a href="{{< ref "../authorization-resources/subject-access-review-v1#SubjectAccessReview" >}}">SubjectAccessReview</a>): Created
+201 (}}">SubjectAccessReview): Created
 
-202 (<a href="{{< ref "../authorization-resources/subject-access-review-v1#SubjectAccessReview" >}}">SubjectAccessReview</a>): Accepted
+202 (}}">SubjectAccessReview): Accepted
 
 401: Unauthorized
 

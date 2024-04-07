@@ -4,7 +4,7 @@ content_type: concept
 weight: 80
 ---
 
-<!-- overview -->
+
 
 This page provides an overview of available configuration options and best practices for cluster
 multi-tenancy.
@@ -20,7 +20,7 @@ _multi-tenancy_.
 While Kubernetes does not have first-class concepts of end users or tenants, it provides several
 features to help manage different tenancy requirements. These are discussed below.
 
-<!-- body -->
+
 ## Use cases
 
 The first step to determining how to share your cluster is understanding your use case, so you can
@@ -77,7 +77,7 @@ cluster. Finally, hybrid architectures are also possible, such as a SaaS provide
 combination of per-customer workloads for sensitive data, combined with multi-tenant shared
 services.
 
-{{< figure src="/images/docs/multi-tenancy.png" title="A cluster showing coexisting tenancy models" class="diagram-large" >}}
+{{}}
 
 ### Isolation
 
@@ -122,7 +122,7 @@ Kubernetes API resources.
 
 ### Namespaces
 
-In Kubernetes, a {{< glossary_tooltip text="Namespace" term_id="namespace" >}} provides a
+In Kubernetes, a {{}} provides a
 mechanism for isolating groups of API resources within a single cluster. This isolation has two
 key dimensions:
 
@@ -228,10 +228,10 @@ Namespace management tools may simplify the creation of default or common networ
 In addition, some of these tools allow you to enforce a consistent set of namespace labels across
 your cluster, ensuring that they are a trusted basis for your policies.
 
-{{< warning >}}
+{{}}
 Network policies require a [CNI plugin](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#cni)
 that supports the implementation of network policies. Otherwise, NetworkPolicy resources will be ignored.
-{{< /warning >}}
+{{}}
 
 More advanced network isolation may be provided by service meshes, which provide OSI Layer 7
 policies based on workload identity, in addition to namespaces. These higher-level policies can

@@ -4,12 +4,12 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 
 When using client certificate authentication, you can generate certificates
 manually through [`easyrsa`](https://github.com/OpenVPN/easy-rsa), [`openssl`](https://github.com/openssl/openssl) or [`cfssl`](https://github.com/cloudflare/cfssl).
 
-<!-- body -->
+
 
 ### easyrsa
 
@@ -86,7 +86,7 @@ manually through [`easyrsa`](https://github.com/OpenVPN/easy-rsa), [`openssl`](h
 
 1. Create a config file for generating a Certificate Signing Request (CSR).
 
-   Be sure to substitute the values marked with angle brackets (e.g. `<MASTER_IP>`)
+   Be sure to substitute the values marked with angle brackets (e.g. ``)
    with real values before saving this to a file (e.g. `csr.conf`).
    Note that the value for `MASTER_CLUSTER_IP` is the service cluster IP for the
    API server as described in previous subsection.
@@ -102,12 +102,12 @@ manually through [`easyrsa`](https://github.com/OpenVPN/easy-rsa), [`openssl`](h
    distinguished_name = dn
 
    [ dn ]
-   C = <country>
-   ST = <state>
-   L = <city>
-   O = <organization>
-   OU = <organization unit>
-   CN = <MASTER_IP>
+   C = 
+   ST = 
+   L = 
+   O = 
+   OU = 
+   CN = 
 
    [ req_ext ]
    subjectAltName = @alt_names
@@ -118,8 +118,8 @@ manually through [`easyrsa`](https://github.com/OpenVPN/easy-rsa), [`openssl`](h
    DNS.3 = kubernetes.default.svc
    DNS.4 = kubernetes.default.svc.cluster
    DNS.5 = kubernetes.default.svc.cluster.local
-   IP.1 = <MASTER_IP>
-   IP.2 = <MASTER_CLUSTER_IP>
+   IP.1 = 
+   IP.2 = 
 
    [ v3_ext ]
    authorityKeyIdentifier=keyid,issuer:always
@@ -219,11 +219,11 @@ Finally, add the same parameters into the API server start parameters.
        "size": 2048
      },
      "names":[{
-       "C": "<country>",
-       "ST": "<state>",
-       "L": "<city>",
-       "O": "<organization>",
-       "OU": "<organization unit>"
+       "C": "",
+       "ST": "",
+       "L": "",
+       "O": "",
+       "OU": ""
      }]
    }
    ```
@@ -236,7 +236,7 @@ Finally, add the same parameters into the API server start parameters.
 
 1. Create a JSON config file for generating keys and certificates for the API
    server, for example, `server-csr.json`. Be sure to replace the values in angle brackets with
-   real values you want to use. The `<MASTER_CLUSTER_IP>` is the service cluster
+   real values you want to use. The `` is the service cluster
    IP for the API server as described in previous subsection.
    The sample below also assumes that you are using `cluster.local` as the default
    DNS domain name.
@@ -246,8 +246,8 @@ Finally, add the same parameters into the API server start parameters.
      "CN": "kubernetes",
      "hosts": [
        "127.0.0.1",
-       "<MASTER_IP>",
-       "<MASTER_CLUSTER_IP>",
+       "",
+       "",
        "kubernetes",
        "kubernetes.default",
        "kubernetes.default.svc",
@@ -259,11 +259,11 @@ Finally, add the same parameters into the API server start parameters.
        "size": 2048
      },
      "names": [{
-       "C": "<country>",
-       "ST": "<state>",
-       "L": "<city>",
-       "O": "<organization>",
-       "OU": "<organization unit>"
+       "C": "",
+       "ST": "",
+       "L": "",
+       "O": "",
+       "OU": ""
      }]
    }
    ```

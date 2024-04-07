@@ -6,11 +6,11 @@ title: Configure Certificate Rotation for the Kubelet
 content_type: task
 ---
 
-<!-- overview -->
+
 This page shows how to enable and configure certificate rotation for the kubelet.
 
 
-{{< feature-state for_k8s_version="v1.19" state="stable" >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
@@ -19,7 +19,7 @@ This page shows how to enable and configure certificate rotation for the kubelet
 
 
 
-<!-- steps -->
+
 
 ## Overview
 

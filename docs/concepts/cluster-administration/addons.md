@@ -4,7 +4,7 @@ content_type: concept
 weight: 150
 ---
 
-<!-- overview -->
+
 
 {{% thirdparty-content %}}
 
@@ -13,7 +13,7 @@ Add-ons extend the functionality of Kubernetes.
 This page lists some of the available add-ons and links to their respective
 installation instructions. The list does not try to be exhaustive.
 
-<!-- body -->
+
 
 ## Networking and Network Policy
 

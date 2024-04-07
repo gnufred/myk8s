@@ -4,12 +4,12 @@ content_type: concept
 weight: 60
 ---
 
-<!-- overview -->
+
 You can use Kubernetes annotations to attach arbitrary non-identifying metadata
-to {{< glossary_tooltip text="objects" term_id="object" >}}.
+to {{}}.
 Clients such as tools and libraries can retrieve this metadata.
 
-<!-- body -->
+
 ## Attaching metadata to objects
 
 You can use either labels or annotations to attach metadata to Kubernetes
@@ -31,10 +31,10 @@ Annotations, like labels, are key/value maps:
 }
 ```
 
-{{<note>}}
+{{}}
 The keys and the values in the map must be strings. In other words, you cannot use
 numeric, boolean, list or other types for either the keys or the values.
-{{</note>}}
+{{}}
 
 Here are some examples of information that could be recorded in annotations:
 

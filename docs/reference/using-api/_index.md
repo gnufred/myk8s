@@ -13,7 +13,7 @@ card:
   title: Overview of API
 ---
 
-<!-- overview -->
+
 
 This section provides reference information for the Kubernetes API.
 
@@ -21,10 +21,10 @@ The REST API is the fundamental fabric of Kubernetes. All operations and
 communications between components, and external user commands are REST API
 calls that the API Server handles. Consequently, everything in the Kubernetes
 platform is treated as an API object and has a corresponding entry in the
-[API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
+[API](/docs/reference/generated/kubernetes-api/{{}}/).
 
-The [Kubernetes API reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
-lists the API for Kubernetes version {{< param "version" >}}.
+The [Kubernetes API reference](/docs/reference/generated/kubernetes-api/{{}}/)
+lists the API for Kubernetes version {{}}.
 
 For general background information, read
 [The Kubernetes API](/docs/concepts/overview/kubernetes-api/).
@@ -76,10 +76,10 @@ Here's a summary of each level:
     required to transition to subsequent beta or stable API versions
     once the beta API version is deprecated and no longer served.
 
-  {{< note >}}
+  {{}}
   Please try beta features and provide feedback. After the features exit beta, it
   may not be practical to make more changes.
-  {{< /note >}}
+  {{}}
 
 - Stable:
   - The version name is `vX` where `X` is an integer.
@@ -101,29 +101,29 @@ There are several API groups in Kubernetes:
 *  The named groups are at REST path `/apis/$GROUP_NAME/$VERSION` and use
    `apiVersion: $GROUP_NAME/$VERSION` (for example, `apiVersion: batch/v1`).
    You can find the full list of supported API groups in
-   [Kubernetes API reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#-strong-api-groups-strong-).
+   [Kubernetes API reference](/docs/reference/generated/kubernetes-api/{{}}/#-strong-api-groups-strong-).
 
 ## Enabling or disabling API groups   {#enabling-or-disabling}
 
 Certain resources and API groups are enabled by default. You can enable or
 disable them by setting `--runtime-config` on the API server.  The
-`--runtime-config` flag accepts comma separated `<key>[=<value>]` pairs
-describing the runtime configuration of the API server. If the `=<value>`
+`--runtime-config` flag accepts comma separated `[=]` pairs
+describing the runtime configuration of the API server. If the `=`
 part is omitted, it is treated as if `=true` is specified. For example:
 
  - to disable `batch/v1`, set `--runtime-config=batch/v1=false`
  - to enable `batch/v2alpha1`, set `--runtime-config=batch/v2alpha1`
  - to enable a specific version of an API, such as `storage.k8s.io/v1beta1/csistoragecapacities`, set `--runtime-config=storage.k8s.io/v1beta1/csistoragecapacities`
 
-{{< note >}}
+{{}}
 When you enable or disable groups or resources, you need to restart the API
 server and controller manager to pick up the `--runtime-config` changes.
-{{< /note >}}
+{{}}
 
 ## Persistence
 
 Kubernetes stores its serialized state in terms of the API resources by writing them into
-{{< glossary_tooltip term_id="etcd" >}}.
+{{}}.
 
 ## {{% heading "whatsnext" %}}
 

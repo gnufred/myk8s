@@ -7,10 +7,10 @@ content_type: concept
 weight: 120
 ---
 
-<!-- overview -->
 
-Kubernetes requires {{< glossary_tooltip text="nodes" term_id="node" >}} in your cluster to
-run {{< glossary_tooltip text="pods" term_id="pod" >}}. This means providing capacity for
+
+Kubernetes requires {{}} in your cluster to
+run {{}}. This means providing capacity for
 the workload Pods and for Kubernetes itself.
 
 You can adjust the amount of resources available in your cluster automatically:
@@ -20,7 +20,7 @@ second is referred to as _vertical scaling_.
 
 Kubernetes can even provide multidimensional automatic scaling for nodes.
 
-<!-- body -->
+
 
 ## Manual node management
 
@@ -96,7 +96,7 @@ when the cluster has space capacity.
 
 For workloads that need to be scaled based on the size of the cluster (for example
 `cluster-dns` or other system components), you can use the
-[_Cluster Proportional Autoscaler_](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler).<br />
+[_Cluster Proportional Autoscaler_](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler).
 
 The Cluster Proportional Autoscaler watches the number of schedulable nodes
 and cores, and scales the number of replicas of the target workload accordingly.

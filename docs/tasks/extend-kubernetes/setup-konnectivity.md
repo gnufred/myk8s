@@ -4,7 +4,7 @@ content_type: task
 weight: 70
 ---
 
-<!-- overview -->
+
 
 The Konnectivity service provides a TCP level proxy for the control plane to cluster
 communication.
@@ -17,7 +17,7 @@ tutorial on a cluster with at least two nodes that are not acting as control
 plane hosts. If you do not already have a cluster, you can create one by using
 [minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/).
 
-<!-- steps -->
+
 
 ## Configure the Konnectivity service
 
@@ -70,8 +70,7 @@ is a reference implementation.
 
 Deploy the Konnectivity server on your control plane node. The provided
 `konnectivity-server.yaml` manifest assumes
-that the Kubernetes components are deployed as a {{< glossary_tooltip text="static Pod"
-term_id="static-pod" >}} in your cluster. If not, you can deploy the Konnectivity
+that the Kubernetes components are deployed as a {{}} in your cluster. If not, you can deploy the Konnectivity
 server as a DaemonSet.
 
 {{% code_sample file="admin/konnectivity/konnectivity-server.yaml" %}}

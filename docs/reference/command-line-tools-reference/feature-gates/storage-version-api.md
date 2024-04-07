@@ -11,4 +11,4 @@ stages:
     fromVersion: "1.20"
 ---
 Enable the
-[storage version API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#storageversion-v1alpha1-internal-apiserver-k8s-io).
+[storage version API](/docs/reference/generated/kubernetes-api/{{}}/#storageversion-v1alpha1-internal-apiserver-k8s-io).

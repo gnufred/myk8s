@@ -4,14 +4,14 @@ content_type: task
 weight: 40
 ---
 
-<!-- overview -->
+
 This page shows how to use an HTTP proxy to access the Kubernetes API.
 
 
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 If you do not already have an application running in your cluster, start
 a Hello world application by entering this command:
@@ -20,7 +20,7 @@ a Hello world application by entering this command:
 kubectl create deployment node-hello --image=gcr.io/google-samples/node-hello:1.0 --port=8080
 ```
 
-<!-- steps -->
+
 
 ## Using kubectl to start a proxy server
 

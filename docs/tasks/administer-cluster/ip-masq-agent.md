@@ -4,14 +4,14 @@ content_type: task
 weight: 230
 ---
 
-<!-- overview -->
+
 This page shows how to configure and enable the `ip-masq-agent`.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- discussion -->
+
 ## IP Masquerade Agent User Guide
 
 The `ip-masq-agent` configures iptables rules to hide a pod's IP address behind the cluster
@@ -91,7 +91,7 @@ will run in your cluster. If you are running in another environment,
 you can add the `ip-masq-agent` [DaemonSet](/docs/concepts/workloads/controllers/daemonset/)
 to your cluster.
 
-<!-- steps -->
+
 
 ## Create an ip-masq-agent
 
@@ -118,7 +118,7 @@ only 10.0.0.0/8 to be considered by the ip-masq-agent, you can create the follow
 [ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/) in a file called
 "config".
 
-{{< note >}}
+{{}}
 It is important that the file is called config since, by default, that will be used as the key
 for lookup by the `ip-masq-agent`:
 
@@ -127,7 +127,7 @@ nonMasqueradeCIDRs:
   - 10.0.0.0/8
 resyncInterval: 60s
 ```
-{{< /note >}}
+{{}}
 
 Run the following command to add the configmap to your cluster:
 

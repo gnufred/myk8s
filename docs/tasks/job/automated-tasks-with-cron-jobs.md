@@ -7,15 +7,15 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
 
-This page shows how to run automated tasks using Kubernetes {{< glossary_tooltip text="CronJob" term_id="cronjob" >}} object.
+
+This page shows how to run automated tasks using Kubernetes {{}} object.
 
 ## {{% heading "prerequisites" %}}
 
-* {{< include "task-tutorial-prereqs.md" >}}
+* {{}}
 
-<!-- steps -->
+
 
 ## Creating a CronJob {#creating-a-cron-job}
 
@@ -45,7 +45,7 @@ The output is similar to this:
 
 ```
 NAME    SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-hello   */1 * * * *   False     0        <none>          10s
+hello   */1 * * * *   False     0                  10s
 ```
 
 As you can see from the results of the command, the cron job has not scheduled or run any jobs yet.
@@ -82,9 +82,9 @@ You should see that the cron job `hello` successfully scheduled a job at the tim
 
 Now, find the pods that the last scheduled job created and view the standard output of one of the pods.
 
-{{< note >}}
+{{}}
 The job name is different from the pod name.
-{{< /note >}}
+{{}}
 
 ```shell
 # Replace "hello-4111706356" with the job name in your system
@@ -104,7 +104,7 @@ Hello from the Kubernetes cluster
 
 ## Deleting a CronJob {#deleting-a-cron-job}
 
-When you don't need a cron job any more, delete it with `kubectl delete cronjob <cronjob name>`:
+When you don't need a cron job any more, delete it with `kubectl delete cronjob `:
 
 ```shell
 kubectl delete cronjob hello

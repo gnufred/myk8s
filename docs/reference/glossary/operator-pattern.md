@@ -11,10 +11,10 @@ tags:
 - architecture
 ---
  The [operator pattern](/docs/concepts/extend-kubernetes/operator/) is a system
-design that links a {{< glossary_tooltip term_id="controller" >}} to one or more custom
+design that links a {{}} to one or more custom
 resources.
 
-<!--more-->
+
 
 You can extend Kubernetes by adding controllers to your cluster, beyond the built-in
 controllers that come as part of Kubernetes itself.

@@ -5,7 +5,7 @@ min-kubernetes-server-version: v1.5
 weight: 40
 ---
 
-<!-- overview -->
+
 
 Applications running in a Kubernetes cluster find and communicate with each
 other, and the outside world, through the Service abstraction. This document
@@ -21,10 +21,10 @@ of Services, and how you can toggle this behavior according to your needs.
 
 This document makes use of the following terms:
 
-{{< comment >}}
+{{}}
 If localizing this section, link to the equivalent Wikipedia pages for
 the target localization.
-{{< /comment >}}
+{{}}
 
 [NAT](https://en.wikipedia.org/wiki/Network_address_translation)
 : Network address translation
@@ -33,24 +33,24 @@ the target localization.
 : Replacing the source IP on a packet; in this page, that usually means replacing with the IP address of a node.
 
 [Destination NAT](https://en.wikipedia.org/wiki/Network_address_translation#DNAT)
-: Replacing the destination IP on a packet; in this page, that usually means replacing with the IP address of a {{< glossary_tooltip term_id="pod" >}}
+: Replacing the destination IP on a packet; in this page, that usually means replacing with the IP address of a {{}}
 
 [VIP](/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
-: A virtual IP address, such as the one assigned to every {{< glossary_tooltip text="Service" term_id="service" >}} in Kubernetes
+: A virtual IP address, such as the one assigned to every {{}} in Kubernetes
 
 [kube-proxy](/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
 : A network daemon that orchestrates Service VIP management on every node
 
 ### Prerequisites
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 The examples use a small nginx webserver that echoes back the source
 IP of requests it receives through an HTTP header. You can create it as follows:
 
-{{< note >}}
+{{}}
 The image in the following command only runs on AMD64 architectures.
-{{< /note >}}
+{{}}
 
 ```shell
 kubectl create deployment source-ip-app --image=registry.k8s.io/echoserver:1.4
@@ -71,7 +71,7 @@ deployment.apps/source-ip-app created
 
 
 
-<!-- lessoncontent -->
+
 
 ## Source IP for Services with `Type=ClusterIP`
 
@@ -87,9 +87,9 @@ kubectl get nodes
 The output is similar to this:
 ```
 NAME                           STATUS     ROLES    AGE     VERSION
-kubernetes-node-6jst   Ready      <none>   2h      v1.13.0
-kubernetes-node-cx31   Ready      <none>   2h      v1.13.0
-kubernetes-node-jj1t   Ready      <none>   2h      v1.13.0
+kubernetes-node-6jst   Ready         2h      v1.13.0
+kubernetes-node-cx31   Ready         2h      v1.13.0
+kubernetes-node-jj1t   Ready         2h      v1.13.0
 ```
 
 Get the proxy mode on one of the nodes (kube-proxy listens on port 10249):
@@ -117,7 +117,7 @@ kubectl get svc clusterip
 The output is similar to:
 ```
 NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
-clusterip    ClusterIP   10.0.170.92   <none>        80/TCP    51s
+clusterip    ClusterIP   10.0.170.92           80/TCP    51s
 ```
 
 And hitting the `ClusterIP` from a pod in the same cluster:
@@ -138,13 +138,13 @@ You can then run a command inside that Pod:
 ip addr
 ```
 ```
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue
+1: lo:  mtu 65536 qdisc noqueue
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
-3: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc noqueue
+3: eth0:  mtu 1460 qdisc noqueue
     link/ether 0a:58:0a:f4:03:08 brd ff:ff:ff:ff:ff:ff
     inet 10.244.3.8/24 scope global eth0
        valid_lft forever preferred_lft forever
@@ -210,7 +210,7 @@ Note that these are not the correct client IPs, they're cluster internal IPs. Th
 
 Visually:
 
-{{< figure src="/docs/images/tutor-service-nodePort-fig01.svg" alt="source IP nodeport figure 01" class="diagram-large" caption="Figure. Source IP Type=NodePort using SNAT" link="https://mermaid.live/edit#pako:eNqNkV9rwyAUxb-K3LysYEqS_WFYKAzat9GHdW9zDxKvi9RoMIZtlH732ZjSbE970cu5v3s86hFqJxEYfHjRNeT5ZcUtIbXRaMNN2hZ5vrYRqt52cSXV-4iMSuwkZiYtyX739EqWaahMQ-V1qPxDVLNOvkYrO6fj2dupWMR2iiT6foOKdEZoS5Q2hmVSStoH7w7IMqXUVOefWoaG3XVftHbGeZYVRbH6ZXJ47CeL2-qhxvt_ucTe1SUlpuMN6CX12XeGpLdJiaMMFFr0rdAyvvfxjHEIDbbIgcVSohKDCRy4PUV06KQIuJU6OA9MCdMjBTEEt_-2NbDgB7xAGy3i97VJPP0ABRmcqg" >}}
+{{}}
 
 
 To avoid this, Kubernetes has a feature to
@@ -256,7 +256,7 @@ This is what happens:
 Visually:
 
 
-{{< figure src="/docs/images/tutor-service-nodePort-fig02.svg" alt="source IP nodeport figure 02" class="diagram-large" caption="Figure. Source IP Type=NodePort preserves client source IP address" link="" >}}
+{{}}
 
 ## Source IP for Services with `Type=LoadBalancer`
 
@@ -357,7 +357,7 @@ No Service Endpoints Found
 ```
 
 A controller running on the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}} is
+{{}} is
 responsible for allocating the cloud load balancer. The same controller also
 allocates HTTP health checks pointing to this port/path on each node. Wait
 about 10 seconds for the 2 nodes without endpoints to fail health checks,

@@ -9,15 +9,15 @@ aliases:
 - master-node-communication
 ---
 
-<!-- overview -->
 
-This document catalogs the communication paths between the {{< glossary_tooltip term_id="kube-apiserver" text="API server" >}}
-and the Kubernetes {{< glossary_tooltip text="cluster" term_id="cluster" length="all" >}}.
+
+This document catalogs the communication paths between the {{}}
+and the Kubernetes {{}}.
 The intent is to allow users to customize their installation to harden the network configuration
 such that the cluster can be run on an untrusted network (or on fully public IPs on a cloud
 provider).
 
-<!-- body -->
+
 
 ## Node to Control Plane
 
@@ -31,17 +31,17 @@ enabled, especially if [anonymous requests](/docs/reference/access-authn-authz/a
 or [service account tokens](/docs/reference/access-authn-authz/authentication/#service-account-tokens)
 are allowed.
 
-Nodes should be provisioned with the public root {{< glossary_tooltip text="certificate" term_id="certificate" >}} for the cluster such that they can
+Nodes should be provisioned with the public root {{}} for the cluster such that they can
 connect securely to the API server along with valid client credentials. A good approach is that the
 client credentials provided to the kubelet are in the form of a client certificate. See
 [kubelet TLS bootstrapping](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/)
 for automated provisioning of kubelet client certificates.
 
-{{< glossary_tooltip text="Pods" term_id="pod" >}} that wish to connect to the API server can do so securely by leveraging a service account so
+{{}} that wish to connect to the API server can do so securely by leveraging a service account so
 that Kubernetes will automatically inject the public root certificate and a valid bearer token
 into the pod when it is instantiated.
 The `kubernetes` service (in `default` namespace) is configured with a virtual IP address that is
-redirected (via `{{< glossary_tooltip text="kube-proxy" term_id="kube-proxy" >}}`) to the HTTPS endpoint on the API server.
+redirected (via `{{}}`) to the HTTPS endpoint on the API server.
 
 The control plane components also communicate with the API server over the secure port.
 
@@ -52,7 +52,7 @@ networks.
 ## Control plane to node
 
 There are two primary communication paths from the control plane (the API server) to the nodes.
-The first is from the API server to the {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} process which runs on each node in the cluster.
+The first is from the API server to the {{}} process which runs on each node in the cluster.
 The second is from the API server to any node, pod, or service through the API server's _proxy_
 functionality.
 
@@ -97,15 +97,15 @@ service through the tunnel.
 This tunnel ensures that the traffic is not exposed outside of the network in which the nodes are
 running.
 
-{{< note >}}
+{{}}
 SSH tunnels are currently deprecated, so you shouldn't opt to use them unless you know what you
 are doing. The [Konnectivity service](#konnectivity-service) is a replacement for this
 communication channel.
-{{< /note >}}
+{{}}
 
 ### Konnectivity service
 
-{{< feature-state for_k8s_version="v1.18" state="beta" >}}
+{{}}
 
 As a replacement to the SSH tunnels, the Konnectivity service provides TCP level proxy for the
 control plane to cluster communication. The Konnectivity service consists of two parts: the

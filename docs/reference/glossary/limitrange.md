@@ -16,8 +16,8 @@ related:
  - container
 
 ---
- Provides constraints to limit resource consumption per {{< glossary_tooltip text="Containers" term_id="container" >}} or {{< glossary_tooltip text="Pods" term_id="pod" >}} in a namespace.
+ Provides constraints to limit resource consumption per {{}} or {{}} in a namespace.
 
-<!--more--> 
+ 
 LimitRange limits the quantity of objects that can be created  by type, 
-as well as the amount of compute resources that may be requested/consumed by individual {{< glossary_tooltip text="Containers" term_id="container" >}} or {{< glossary_tooltip text="Pods" term_id="pod" >}} in a namespace.
+as well as the amount of compute resources that may be requested/consumed by individual {{}} or {{}} in a namespace.

@@ -7,17 +7,17 @@ content_type: reference
 weight: 20
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.29" state="stable" >}}
 
-By default, Kubernetes {{< skew currentVersion >}} publishes Service Level Indicator (SLI) metrics 
+{{}}
+
+By default, Kubernetes {{}} publishes Service Level Indicator (SLI) metrics 
 for each Kubernetes component binary. This metric endpoint is exposed on the serving 
 HTTPS port of each component, at the path `/metrics/slis`. The 
 `ComponentSLIs` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 defaults to enabled for each Kubernetes component as of v1.27.
 
-<!-- body -->
+
 
 ## SLI Metrics
 

@@ -24,6 +24,6 @@ stages:
 removed: true
 ---
 Enable the support to limiting PIDs on the Node.  The parameter
-`pid=<number>` in the `--system-reserved` and `--kube-reserved` options can be specified to
+`pid=` in the `--system-reserved` and `--kube-reserved` options can be specified to
 ensure that the specified number of process IDs will be reserved for the system as a whole and for
  Kubernetes system daemons respectively.

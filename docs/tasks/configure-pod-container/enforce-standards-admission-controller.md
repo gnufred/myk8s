@@ -20,17 +20,17 @@ available.
 
 {{% version-check %}}
 
-If you are not running Kubernetes {{< skew currentVersion >}}, you can switch
+If you are not running Kubernetes {{}}, you can switch
 to viewing this page in the documentation for the Kubernetes version that you
 are running.
 
 ## Configure the Admission Controller
 
-{{< note >}}
+{{}}
 `pod-security.admission.config.k8s.io/v1` configuration requires v1.25+.
 For v1.23 and v1.24, use [v1beta1](https://v1-24.docs.kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/).
 For v1.22, use [v1alpha1](https://v1-22.docs.kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/).
-{{< /note >}}
+{{}}
 
 ```yaml
 apiVersion: apiserver.config.k8s.io/v1
@@ -49,7 +49,7 @@ plugins:
     #
     # Version label values must be one of:
     # - "latest" (default) 
-    # - specific version like "v{{< skew currentVersion >}}"
+    # - specific version like "v{{}}"
     defaults:
       enforce: "privileged"
       enforce-version: "latest"
@@ -66,7 +66,7 @@ plugins:
       namespaces: []
 ```
 
-{{< note >}}
+{{}}
 The above manifest needs to be specified via the `--admission-control-config-file` to kube-apiserver.
-{{< /note >}}
+{{}}
 

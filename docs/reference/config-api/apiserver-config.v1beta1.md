@@ -4,7 +4,7 @@ content_type: tool-reference
 package: apiserver.k8s.io/v1beta1
 auto_generated: true
 ---
-<p>Package v1beta1 is the v1beta1 version of the API.</p>
+Package v1beta1 is the v1beta1 version of the API.
 
 
 ## Resource Types 
@@ -28,85 +28,85 @@ auto_generated: true
 - [TracingConfiguration](#apiserver-k8s-io-v1beta1-TracingConfiguration)
 
 
-<p>TracingConfiguration provides versioned configuration for OpenTelemetry tracing clients.</p>
+TracingConfiguration provides versioned configuration for OpenTelemetry tracing clients.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>endpoint</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Endpoint of the collector this component will report traces to.
+endpoint
+string
+
+
+   Endpoint of the collector this component will report traces to.
 The connection is insecure, and does not currently support TLS.
-Recommended is unset, and endpoint is the otlp grpc default, localhost:4317.</p>
-</td>
-</tr>
-<tr><td><code>samplingRatePerMillion</code><br/>
-<code>int32</code>
-</td>
-<td>
-   <p>SamplingRatePerMillion is the number of samples to collect per million spans.
+Recommended is unset, and endpoint is the otlp grpc default, localhost:4317.
+
+
+samplingRatePerMillion
+int32
+
+
+   SamplingRatePerMillion is the number of samples to collect per million spans.
 Recommended is unset. If unset, sampler respects its parent span's sampling
-rate, but otherwise never samples.</p>
-</td>
-</tr>
-</tbody>
-</table>
+rate, but otherwise never samples.
+
+
+
+
   
 
 ## `EgressSelectorConfiguration`     {#apiserver-k8s-io-v1beta1-EgressSelectorConfiguration}
     
 
 
-<p>EgressSelectorConfiguration provides versioned configuration for egress selector clients.</p>
+EgressSelectorConfiguration provides versioned configuration for egress selector clients.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.k8s.io/v1beta1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>EgressSelectorConfiguration</code></td></tr>
+apiVersionstringapiserver.k8s.io/v1beta1
+kindstringEgressSelectorConfiguration
     
   
-<tr><td><code>egressSelections</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1beta1-EgressSelection"><code>[]EgressSelection</code></a>
-</td>
-<td>
-   <p>connectionServices contains a list of egress selection client configurations</p>
-</td>
-</tr>
-</tbody>
-</table>
+egressSelections [Required]
+[]EgressSelection
+
+
+   connectionServices contains a list of egress selection client configurations
+
+
+
+
 
 ## `TracingConfiguration`     {#apiserver-k8s-io-v1beta1-TracingConfiguration}
     
 
 
-<p>TracingConfiguration provides versioned configuration for tracing clients.</p>
+TracingConfiguration provides versioned configuration for tracing clients.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.k8s.io/v1beta1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>TracingConfiguration</code></td></tr>
+apiVersionstringapiserver.k8s.io/v1beta1
+kindstringTracingConfiguration
     
   
-<tr><td><code>TracingConfiguration</code> <B>[Required]</B><br/>
-<a href="#TracingConfiguration"><code>TracingConfiguration</code></a>
-</td>
-<td>(Members of <code>TracingConfiguration</code> are embedded into this type.)
-   <p>Embed the component config tracing configuration struct</p>
-</td>
-</tr>
-</tbody>
-</table>
+TracingConfiguration [Required]
+TracingConfiguration
+
+(Members of TracingConfiguration are embedded into this type.)
+   Embed the component config tracing configuration struct
+
+
+
+
 
 ## `Connection`     {#apiserver-k8s-io-v1beta1-Connection}
     
@@ -116,31 +116,31 @@ rate, but otherwise never samples.</p>
 - [EgressSelection](#apiserver-k8s-io-v1beta1-EgressSelection)
 
 
-<p>Connection provides the configuration for a single egress selection client.</p>
+Connection provides the configuration for a single egress selection client.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>proxyProtocol</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1beta1-ProtocolType"><code>ProtocolType</code></a>
-</td>
-<td>
-   <p>Protocol is the protocol used to connect from client to the konnectivity server.</p>
-</td>
-</tr>
-<tr><td><code>transport</code><br/>
-<a href="#apiserver-k8s-io-v1beta1-Transport"><code>Transport</code></a>
-</td>
-<td>
-   <p>Transport defines the transport configurations we use to dial to the konnectivity server.
-This is required if ProxyProtocol is HTTPConnect or GRPC.</p>
-</td>
-</tr>
-</tbody>
-</table>
+proxyProtocol [Required]
+ProtocolType
+
+
+   Protocol is the protocol used to connect from client to the konnectivity server.
+
+
+transport
+Transport
+
+
+   Transport defines the transport configurations we use to dial to the konnectivity server.
+This is required if ProxyProtocol is HTTPConnect or GRPC.
+
+
+
+
 
 ## `EgressSelection`     {#apiserver-k8s-io-v1beta1-EgressSelection}
     
@@ -150,32 +150,32 @@ This is required if ProxyProtocol is HTTPConnect or GRPC.</p>
 - [EgressSelectorConfiguration](#apiserver-k8s-io-v1beta1-EgressSelectorConfiguration)
 
 
-<p>EgressSelection provides the configuration for a single egress selection client.</p>
+EgressSelection provides the configuration for a single egress selection client.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>name</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>name is the name of the egress selection.
+name [Required]
+string
+
+
+   name is the name of the egress selection.
 Currently supported values are &quot;controlplane&quot;, &quot;master&quot;, &quot;etcd&quot; and &quot;cluster&quot;
-The &quot;master&quot; egress selector is deprecated in favor of &quot;controlplane&quot;</p>
-</td>
-</tr>
-<tr><td><code>connection</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1beta1-Connection"><code>Connection</code></a>
-</td>
-<td>
-   <p>connection is the exact information used to configure the egress selection</p>
-</td>
-</tr>
-</tbody>
-</table>
+The &quot;master&quot; egress selector is deprecated in favor of &quot;controlplane&quot;
+
+
+connection [Required]
+Connection
+
+
+   connection is the exact information used to configure the egress selection
+
+
+
+
 
 ## `ProtocolType`     {#apiserver-k8s-io-v1beta1-ProtocolType}
     
@@ -186,7 +186,7 @@ The &quot;master&quot; egress selector is deprecated in favor of &quot;controlpl
 - [Connection](#apiserver-k8s-io-v1beta1-Connection)
 
 
-<p>ProtocolType is a set of valid values for Connection.ProtocolType</p>
+ProtocolType is a set of valid values for Connection.ProtocolType
 
 
 
@@ -199,31 +199,31 @@ The &quot;master&quot; egress selector is deprecated in favor of &quot;controlpl
 - [Transport](#apiserver-k8s-io-v1beta1-Transport)
 
 
-<p>TCPTransport provides the information to connect to konnectivity server via TCP</p>
+TCPTransport provides the information to connect to konnectivity server via TCP
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>url</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>URL is the location of the konnectivity server to connect to.
-As an example it might be &quot;https://127.0.0.1:8131&quot;</p>
-</td>
-</tr>
-<tr><td><code>tlsConfig</code><br/>
-<a href="#apiserver-k8s-io-v1beta1-TLSConfig"><code>TLSConfig</code></a>
-</td>
-<td>
-   <p>TLSConfig is the config needed to use TLS when connecting to konnectivity server</p>
-</td>
-</tr>
-</tbody>
-</table>
+url [Required]
+string
+
+
+   URL is the location of the konnectivity server to connect to.
+As an example it might be &quot;https://127.0.0.1:8131&quot;
+
+
+tlsConfig
+TLSConfig
+
+
+   TLSConfig is the config needed to use TLS when connecting to konnectivity server
+
+
+
+
 
 ## `TLSConfig`     {#apiserver-k8s-io-v1beta1-TLSConfig}
     
@@ -233,44 +233,44 @@ As an example it might be &quot;https://127.0.0.1:8131&quot;</p>
 - [TCPTransport](#apiserver-k8s-io-v1beta1-TCPTransport)
 
 
-<p>TLSConfig provides the authentication information to connect to konnectivity server
-Only used with TCPTransport</p>
+TLSConfig provides the authentication information to connect to konnectivity server
+Only used with TCPTransport
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>caBundle</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>caBundle is the file location of the CA to be used to determine trust with the konnectivity server.
+caBundle
+string
+
+
+   caBundle is the file location of the CA to be used to determine trust with the konnectivity server.
 Must be absent/empty if TCPTransport.URL is prefixed with http://
-If absent while TCPTransport.URL is prefixed with https://, default to system trust roots.</p>
-</td>
-</tr>
-<tr><td><code>clientKey</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>clientKey is the file location of the client key to be used in mtls handshakes with the konnectivity server.
+If absent while TCPTransport.URL is prefixed with https://, default to system trust roots.
+
+
+clientKey
+string
+
+
+   clientKey is the file location of the client key to be used in mtls handshakes with the konnectivity server.
 Must be absent/empty if TCPTransport.URL is prefixed with http://
-Must be configured if TCPTransport.URL is prefixed with https://</p>
-</td>
-</tr>
-<tr><td><code>clientCert</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>clientCert is the file location of the client certificate to be used in mtls handshakes with the konnectivity server.
+Must be configured if TCPTransport.URL is prefixed with https://
+
+
+clientCert
+string
+
+
+   clientCert is the file location of the client certificate to be used in mtls handshakes with the konnectivity server.
 Must be absent/empty if TCPTransport.URL is prefixed with http://
-Must be configured if TCPTransport.URL is prefixed with https://</p>
-</td>
-</tr>
-</tbody>
-</table>
+Must be configured if TCPTransport.URL is prefixed with https://
+
+
+
+
 
 ## `Transport`     {#apiserver-k8s-io-v1beta1-Transport}
     
@@ -280,33 +280,33 @@ Must be configured if TCPTransport.URL is prefixed with https://</p>
 - [Connection](#apiserver-k8s-io-v1beta1-Connection)
 
 
-<p>Transport defines the transport configurations we use to dial to the konnectivity server</p>
+Transport defines the transport configurations we use to dial to the konnectivity server
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>tcp</code><br/>
-<a href="#apiserver-k8s-io-v1beta1-TCPTransport"><code>TCPTransport</code></a>
-</td>
-<td>
-   <p>TCP is the TCP configuration for communicating with the konnectivity server via TCP
+tcp
+TCPTransport
+
+
+   TCP is the TCP configuration for communicating with the konnectivity server via TCP
 ProxyProtocol of GRPC is not supported with TCP transport at the moment
-Requires at least one of TCP or UDS to be set</p>
-</td>
-</tr>
-<tr><td><code>uds</code><br/>
-<a href="#apiserver-k8s-io-v1beta1-UDSTransport"><code>UDSTransport</code></a>
-</td>
-<td>
-   <p>UDS is the UDS configuration for communicating with the konnectivity server via UDS
-Requires at least one of TCP or UDS to be set</p>
-</td>
-</tr>
-</tbody>
-</table>
+Requires at least one of TCP or UDS to be set
+
+
+uds
+UDSTransport
+
+
+   UDS is the UDS configuration for communicating with the konnectivity server via UDS
+Requires at least one of TCP or UDS to be set
+
+
+
+
 
 ## `UDSTransport`     {#apiserver-k8s-io-v1beta1-UDSTransport}
     
@@ -316,22 +316,22 @@ Requires at least one of TCP or UDS to be set</p>
 - [Transport](#apiserver-k8s-io-v1beta1-Transport)
 
 
-<p>UDSTransport provides the information to connect to konnectivity server via UDS</p>
+UDSTransport provides the information to connect to konnectivity server via UDS
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>udsName</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>UDSName is the name of the unix domain socket to connect to konnectivity server
-This does not use a unix:// prefix. (Eg: /etc/srv/kubernetes/konnectivity-server/konnectivity-server.socket)</p>
-</td>
-</tr>
-</tbody>
-</table>
+udsName [Required]
+string
+
+
+   UDSName is the name of the unix domain socket to connect to konnectivity server
+This does not use a unix:// prefix. (Eg: /etc/srv/kubernetes/konnectivity-server/konnectivity-server.socket)
+
+
+
+
   

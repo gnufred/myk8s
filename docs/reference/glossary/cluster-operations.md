@@ -13,7 +13,7 @@ tags:
  The work involved in managing a Kubernetes cluster: managing
 day-to-day operations, and co-ordinating upgrades.
 
-<!--more-->
+
 
  Examples of cluster operations work include: deploying new Nodes to
 scale the cluster; performing software upgrades; implementing security

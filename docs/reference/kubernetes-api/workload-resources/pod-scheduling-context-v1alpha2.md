@@ -10,16 +10,7 @@ weight: 14
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: resource.k8s.io/v1alpha2`
 
@@ -32,7 +23,7 @@ PodSchedulingContext objects hold information that is needed to schedule a Pod w
 
 This is an alpha type and requires enabling the DynamicResourceAllocation feature gate.
 
-<hr>
+
 
 - **apiVersion**: resource.k8s.io/v1alpha2
 
@@ -40,15 +31,15 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
 - **kind**: PodSchedulingContext
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object metadata
 
-- **spec** (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextSpec" >}}">PodSchedulingContextSpec</a>), required
+- **spec** (}}">PodSchedulingContextSpec), required
 
   Spec describes where resources for the Pod are needed.
 
-- **status** (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextStatus" >}}">PodSchedulingContextStatus</a>)
+- **status** (}}">PodSchedulingContextStatus)
 
   Status describes where resources for the Pod can be allocated.
 
@@ -60,7 +51,7 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
 
 PodSchedulingContextSpec describes where resources for the Pod are needed.
 
-<hr>
+
 
 - **potentialNodes** ([]string)
 
@@ -82,7 +73,7 @@ PodSchedulingContextSpec describes where resources for the Pod are needed.
 
 PodSchedulingContextStatus describes where resources for the Pod can be allocated.
 
-<hr>
+
 
 - **resourceClaims** ([]ResourceClaimSchedulingStatus)
 
@@ -90,7 +81,7 @@ PodSchedulingContextStatus describes where resources for the Pod can be allocate
   
   ResourceClaims describes resource availability for each pod.spec.resourceClaim entry where the corresponding ResourceClaim uses "WaitForFirstConsumer" allocation mode.
 
-  <a name="ResourceClaimSchedulingStatus"></a>
+  
   *ResourceClaimSchedulingStatus contains information about one particular ResourceClaim with "WaitForFirstConsumer" allocation mode.*
 
   - **resourceClaims.name** (string)
@@ -113,7 +104,7 @@ PodSchedulingContextStatus describes where resources for the Pod can be allocate
 
 PodSchedulingContextList is a collection of Pod scheduling objects.
 
-<hr>
+
 
 - **apiVersion**: resource.k8s.io/v1alpha2
 
@@ -121,11 +112,11 @@ PodSchedulingContextList is a collection of Pod scheduling objects.
 - **kind**: PodSchedulingContextList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata
 
-- **items** ([]<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>), required
+- **items** ([]}}">PodSchedulingContext), required
 
   Items is the list of PodSchedulingContext objects.
 
@@ -137,7 +128,7 @@ PodSchedulingContextList is a collection of Pod scheduling objects.
 
 
 
-<hr>
+
 
 
 
@@ -160,19 +151,19 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
 401: Unauthorized
 
@@ -193,19 +184,19 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
 401: Unauthorized
 
@@ -221,69 +212,69 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextList" >}}">PodSchedulingContextList</a>): OK
+200 (}}">PodSchedulingContextList): OK
 
 401: Unauthorized
 
@@ -299,64 +290,64 @@ GET /apis/resource.k8s.io/v1alpha2/podschedulingcontexts
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextList" >}}">PodSchedulingContextList</a>): OK
+200 (}}">PodSchedulingContextList): OK
 
 401: Unauthorized
 
@@ -372,43 +363,43 @@ POST /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>, required
+- **body**: }}">PodSchedulingContext, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (}}">PodSchedulingContext): Created
 
-202 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Accepted
+202 (}}">PodSchedulingContext): Accepted
 
 401: Unauthorized
 
@@ -429,41 +420,41 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>, required
+- **body**: }}">PodSchedulingContext, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (}}">PodSchedulingContext): Created
 
 401: Unauthorized
 
@@ -484,41 +475,41 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>, required
+- **body**: }}">PodSchedulingContext, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (}}">PodSchedulingContext): Created
 
 401: Unauthorized
 
@@ -539,46 +530,46 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontext
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (}}">PodSchedulingContext): Created
 
 401: Unauthorized
 
@@ -599,46 +590,46 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontext
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (}}">PodSchedulingContext): Created
 
 401: Unauthorized
 
@@ -659,41 +650,41 @@ DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontex
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (}}">PodSchedulingContext): OK
 
-202 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Accepted
+202 (}}">PodSchedulingContext): Accepted
 
 401: Unauthorized
 
@@ -709,79 +700,79 @@ DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontex
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

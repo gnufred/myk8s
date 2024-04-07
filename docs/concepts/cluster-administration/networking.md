@@ -6,18 +6,18 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 Networking is a central part of Kubernetes, but it can be challenging to
 understand exactly how it is expected to work.  There are 4 distinct networking
 problems to address:
 
 1. Highly-coupled container-to-container communications: this is solved by
-   {{< glossary_tooltip text="Pods" term_id="pod" >}} and `localhost` communications.
+   {{}} and `localhost` communications.
 2. Pod-to-Pod communications: this is the primary focus of this document.
 3. Pod-to-Service communications: this is covered by [Services](/docs/concepts/services-networking/service/).
 4. External-to-Service communications: this is also covered by Services.
 
-<!-- body -->
+
 
 Kubernetes is all about sharing machines between applications.  Typically,
 sharing machines requires ensuring that two applications do not try to use the
@@ -41,7 +41,7 @@ from a range of available addresses configured in the following components:
 - The kube-apiserver is configured to assign IP addresses to Services.
 - The kubelet or the cloud-controller-manager is configured to assign IP addresses to Nodes.
 
-{{< figure src="/docs/images/kubernetes-cluster-network.svg" alt="A figure illustrating the different network ranges in a kubernetes cluster" class="diagram-medium" >}}
+{{}}
 
 ## Cluster networking types {#cluster-network-ipfamilies}
 

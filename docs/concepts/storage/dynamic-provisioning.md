@@ -9,7 +9,7 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 
 Dynamic volume provisioning allows storage volumes to be created on-demand.
 Without dynamic provisioning, cluster administrators have to manually make
@@ -19,7 +19,7 @@ to represent them in Kubernetes. The dynamic provisioning feature eliminates
 the need for cluster administrators to pre-provision storage. Instead, it
 automatically provisions storage when it is requested by users.
 
-<!-- body -->
+
 
 ## Background
 

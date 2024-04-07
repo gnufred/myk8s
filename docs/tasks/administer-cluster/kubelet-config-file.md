@@ -7,7 +7,7 @@ content_type: task
 weight: 330
 ---
 
-<!-- overview -->
+
 
 A subset of the kubelet's configuration parameters may be
 set via an on-disk config file, as a substitute for command-line flags.
@@ -15,7 +15,7 @@ set via an on-disk config file, as a substitute for command-line flags.
 Providing parameters via a config file is the recommended approach because
 it simplifies node deployment and configuration management.
 
-<!-- steps -->
+
 
 ## Create the config file
 
@@ -52,22 +52,22 @@ In this example, the kubelet is configured with the following settings:
    - When the image filesystem's available space is less than 15%.
    - When more than 95% of the node's main filesystem's inodes are in use.
 
-{{< note >}}
+{{}}
 In the example, by changing the default value of only one parameter for
 evictionHard, the default values of other parameters will not be inherited and
 will be set to zero. In order to provide custom values, you should provide all
 the threshold values respectively.
-{{< /note >}}
+{{}}
 
 The `imagefs` is an optional filesystem that container runtimes use to store container
 images and container writable layers.
 
 ## Start a kubelet process configured via the config file
 
-{{< note >}}
+{{}}
 If you use kubeadm to initialize your cluster, use the kubelet-config while creating your cluster with `kubeadm init`.
 See [configuring kubelet using kubeadm](/docs/setup/production-environment/tools/kubeadm/kubelet-integration/) for details.
-{{< /note >}}
+{{}}
 
 Start the kubelet with the `--config` flag set to the path of the kubelet's config file.
 The kubelet will then load its config from this file.
@@ -90,13 +90,13 @@ As of Kubernetes v1.28.0, the kubelet has been extended to support a drop-in con
 `--config-dir` flag, and it defaults to `""`, or disabled, by default.
 
 You can only set `--config-dir` if you set the environment variable `KUBELET_CONFIG_DROPIN_DIR_ALPHA` for the kubelet process (the value of that variable does not matter).
-For Kubernetes v{{< skew currentVersion >}}, the kubelet returns an error if you specify `--config-dir` without that variable set, and startup fails.
+For Kubernetes v{{}}, the kubelet returns an error if you specify `--config-dir` without that variable set, and startup fails.
 You cannot specify the drop-in configuration directory using the kubelet configuration file; only the CLI argument `--config-dir` can set it.
 
 One can use the kubelet configuration directory in a similar way to the kubelet config file.
-{{< note >}}
+{{}}
 The suffix of a valid kubelet drop-in configuration file must be `.conf`. For instance: `99-kubelet-address.conf`
-{{< /note >}}
+{{}}
 
 For instance, you may want a baseline kubelet configuration for all nodes, but you may want to customize the `address` field. This can be done as follows:
 
@@ -127,7 +127,7 @@ On startup, the kubelet merges configuration from:
 This produces the same outcome as if you used the [single configuration file](#create-the-config-file) used in the earlier example.
 
 
-<!-- discussion -->
+
 
 ## {{% heading "whatsnext" %}}
 

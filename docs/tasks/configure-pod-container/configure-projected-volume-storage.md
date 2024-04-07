@@ -7,25 +7,25 @@ content_type: task
 weight: 100
 ---
 
-<!-- overview -->
+
 This page shows how to use a [`projected`](/docs/concepts/storage/volumes/#projected) Volume to mount
 several existing volume sources into the same directory. Currently, `secret`, `configMap`, `downwardAPI`,
 and `serviceAccountToken` volumes can be projected.
 
-{{< note >}}
+{{}}
 `serviceAccountToken` is not a volume type.
-{{< /note >}}
+{{}}
 
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
-<!-- steps -->
+
 ## Configure a projected volume for a pod
 
-In this exercise, you create username and password {{< glossary_tooltip text="Secrets" term_id="secret" >}} from local files. You then create a Pod that runs one container, using a [`projected`](/docs/concepts/storage/volumes/#projected) Volume to mount the Secrets into the same shared directory.
+In this exercise, you create username and password {{}} from local files. You then create a Pod that runs one container, using a [`projected`](/docs/concepts/storage/volumes/#projected) Volume to mount the Secrets into the same shared directory.
 
 Here is the configuration file for the Pod:
 

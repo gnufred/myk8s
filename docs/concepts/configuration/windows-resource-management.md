@@ -9,13 +9,13 @@ content_type: concept
 weight: 75
 ---
 
-<!-- overview -->
+
 
 This page outlines the differences in how resources are managed between Linux and Windows.
 
-<!-- body -->
 
-On Linux nodes, {{< glossary_tooltip text="cgroups" term_id="cgroup" >}} are used
+
+On Linux nodes, {{}} are used
 as a pod boundary for resource control. Containers are created within that boundary
 for network, process and file system isolation. The Linux cgroup APIs can be used to
 gather CPU, I/O, and memory use statistics.
@@ -24,7 +24,7 @@ In contrast, Windows uses a [_job object_](https://docs.microsoft.com/windows/wi
 to contain all processes in a container and provide logical isolation from the
 host.
 (Job objects are a Windows process isolation mechanism and are different from
-what Kubernetes refers to as a {{< glossary_tooltip term_id="job" text="Job" >}}).
+what Kubernetes refers to as a {{}}).
 
 There is no way to run a Windows container without the namespace filtering in
 place. This means that system privileges cannot be asserted in the context of the
@@ -64,13 +64,13 @@ memory and CPU resources with the  `--kube-reserved` and/or `--system-reserved` 
 On Windows these values are only used to calculate the node's
 [allocatable](/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable) resources.
 
-{{< caution >}}
+{{}}
 As you deploy workloads, set resource memory and CPU limits on containers.
 This also subtracts from `NodeAllocatable` and helps the cluster-wide scheduler in determining which pods to place on which nodes.
 
 Scheduling pods without limits may over-provision the Windows nodes and in extreme
 cases can cause the nodes to become unhealthy.
-{{< /caution >}}
+{{}}
 
 On Windows, a good practice is to reserve at least 2GiB of memory.
 

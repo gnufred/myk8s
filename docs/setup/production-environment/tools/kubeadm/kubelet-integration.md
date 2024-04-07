@@ -6,11 +6,11 @@ content_type: concept
 weight: 80
 ---
 
-<!-- overview -->
+
 
 {{% dockershim-removal %}}
 
-{{< feature-state for_k8s_version="v1.11" state="stable" >}}
+{{}}
 
 The lifecycle of the kubeadm CLI tool is decoupled from the
 [kubelet](/docs/reference/command-line-tools-reference/kubelet), which is a daemon that runs
@@ -28,7 +28,7 @@ characteristics of a given machine (such as OS, storage, and networking). You ca
 of your kubelets manually, but kubeadm now provides a `KubeletConfiguration` API type for
 [managing your kubelet configurations centrally](#configure-kubelets-using-kubeadm).
 
-<!-- body -->
+
 
 ## Kubelet configuration patterns
 
@@ -85,7 +85,7 @@ networking, or other host-specific parameters. The following list provides a few
   the health of the kubelet.
 
 - To specify the container runtime you must set its endpoint with the
-`--container-runtime-endpoint=<path>` flag.
+`--container-runtime-endpoint=` flag.
 
 The recommended way of applying such instance-specific configuration is by using
 [`KubeletConfiguration` patches](/docs/setup/production-environment/tools/kubeadm/control-plane-flags#patches).
@@ -174,11 +174,11 @@ to override the unit settings configured by `kubeadm`.
 
 Here is what you are likely to find in `/usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf`:
 
-{{< note >}}
+{{}}
 The contents below are just an example. If you don't want to use a package manager
 follow the guide outlined in the ([Without a package manager](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#k8s-install-2))
 section.
-{{< /note >}}
+{{}}
 
 ```none
 [Service]

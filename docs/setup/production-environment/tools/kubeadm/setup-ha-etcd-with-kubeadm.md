@@ -6,15 +6,15 @@ content_type: task
 weight: 70
 ---
 
-<!-- overview -->
 
-{{< note >}}
+
+{{}}
 While kubeadm is being used as the management tool for external etcd nodes
 in this guide, please note that kubeadm does not plan to support certificate rotation
 or upgrades for such nodes. The long-term plan is to empower the tool
 [etcdadm](https://github.com/kubernetes-sigs/etcdadm) to manage these
 aspects.
-{{< /note >}}
+{{}}
 
 By default, kubeadm runs a local etcd instance on each control plane node.
 It is also possible to treat the etcd cluster as external and provision
@@ -37,33 +37,33 @@ etcd cluster of three members that can be used by kubeadm during cluster creatio
 - Some infrastructure to copy files between hosts. For example `ssh` and `scp`
   can satisfy this requirement.
 
-<!-- steps -->
+
 
 ## Setting up the cluster
 
 The general approach is to generate all certs on one node and only distribute
 the _necessary_ files to the other nodes.
 
-{{< note >}}
+{{}}
 kubeadm contains all the necessary cryptographic machinery to generate
 the certificates described below; no other cryptographic tooling is required for
 this example.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 The examples below use IPv4 addresses but you can also configure kubeadm, the kubelet and etcd
 to use IPv6 addresses. Dual-stack is supported by some Kubernetes options, but not by etcd. For more details
 on Kubernetes dual-stack support see [Dual-stack support with kubeadm](/docs/setup/production-environment/tools/kubeadm/dual-stack-support/).
-{{< /note >}}
+{{}}
 
 1. Configure the kubelet to be a service manager for etcd.
 
-   {{< note >}}You must do this on every host where etcd should be running.{{< /note >}}
+   {{}}You must do this on every host where etcd should be running.{{}}
    Since etcd was created first, you must override the service priority by creating a new unit file
    that has higher precedence than the kubeadm-provided kubelet unit file.
 
    ```sh
-   cat << EOF > /etc/systemd/system/kubelet.service.d/kubelet.conf
+   cat  /etc/systemd/system/kubelet.service.d/kubelet.conf
    # Replace "systemd" with the cgroup driver of your container runtime. The default value in the kubelet is "cgroupfs".
    # Replace the value of "containerRuntimeEndpoint" for a different container runtime if needed.
    #
@@ -82,7 +82,7 @@ on Kubernetes dual-stack support see [Dual-stack support with kubeadm](/docs/set
    staticPodPath: /etc/kubernetes/manifests
    EOF
 
-   cat << EOF > /etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
+   cat  /etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
    [Service]
    ExecStart=
    ExecStart=/usr/bin/kubelet --config=/etc/systemd/system/kubelet.service.d/kubelet.conf
@@ -124,7 +124,7 @@ on Kubernetes dual-stack support see [Dual-stack support with kubeadm](/docs/set
    for i in "${!HOSTS[@]}"; do
    HOST=${HOSTS[$i]}
    NAME=${NAMES[$i]}
-   cat << EOF > /tmp/${HOST}/kubeadmcfg.yaml
+   cat  /tmp/${HOST}/kubeadmcfg.yaml
    ---
    apiVersion: "kubeadm.k8s.io/v1beta3"
    kind: InitConfiguration

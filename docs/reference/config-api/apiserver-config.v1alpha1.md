@@ -4,7 +4,7 @@ content_type: tool-reference
 package: apiserver.k8s.io/v1alpha1
 auto_generated: true
 ---
-<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
+Package v1alpha1 is the v1alpha1 version of the API.
 
 
 ## Resource Types 
@@ -29,81 +29,81 @@ auto_generated: true
 - [TracingConfiguration](#apiserver-k8s-io-v1alpha1-TracingConfiguration)
 
 
-<p>TracingConfiguration provides versioned configuration for OpenTelemetry tracing clients.</p>
+TracingConfiguration provides versioned configuration for OpenTelemetry tracing clients.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>endpoint</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Endpoint of the collector this component will report traces to.
+endpoint
+string
+
+
+   Endpoint of the collector this component will report traces to.
 The connection is insecure, and does not currently support TLS.
-Recommended is unset, and endpoint is the otlp grpc default, localhost:4317.</p>
-</td>
-</tr>
-<tr><td><code>samplingRatePerMillion</code><br/>
-<code>int32</code>
-</td>
-<td>
-   <p>SamplingRatePerMillion is the number of samples to collect per million spans.
+Recommended is unset, and endpoint is the otlp grpc default, localhost:4317.
+
+
+samplingRatePerMillion
+int32
+
+
+   SamplingRatePerMillion is the number of samples to collect per million spans.
 Recommended is unset. If unset, sampler respects its parent span's sampling
-rate, but otherwise never samples.</p>
-</td>
-</tr>
-</tbody>
-</table>
+rate, but otherwise never samples.
+
+
+
+
   
 
 ## `AdmissionConfiguration`     {#apiserver-k8s-io-v1alpha1-AdmissionConfiguration}
     
 
 
-<p>AdmissionConfiguration provides versioned configuration for admission controllers.</p>
+AdmissionConfiguration provides versioned configuration for admission controllers.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.k8s.io/v1alpha1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>AdmissionConfiguration</code></td></tr>
+apiVersionstringapiserver.k8s.io/v1alpha1
+kindstringAdmissionConfiguration
     
   
-<tr><td><code>plugins</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-AdmissionPluginConfiguration"><code>[]AdmissionPluginConfiguration</code></a>
-</td>
-<td>
-   <p>Plugins allows specifying a configuration per admission control plugin.</p>
-</td>
-</tr>
-</tbody>
-</table>
+plugins
+[]AdmissionPluginConfiguration
+
+
+   Plugins allows specifying a configuration per admission control plugin.
+
+
+
+
 
 ## `AuthenticationConfiguration`     {#apiserver-k8s-io-v1alpha1-AuthenticationConfiguration}
     
 
 
-<p>AuthenticationConfiguration provides versioned configuration for authentication.</p>
+AuthenticationConfiguration provides versioned configuration for authentication.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.k8s.io/v1alpha1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>AuthenticationConfiguration</code></td></tr>
+apiVersionstringapiserver.k8s.io/v1alpha1
+kindstringAuthenticationConfiguration
     
   
-<tr><td><code>jwt</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-JWTAuthenticator"><code>[]JWTAuthenticator</code></a>
-</td>
-<td>
-   <p>jwt is a list of authenticator to authenticate Kubernetes users using
+jwt [Required]
+[]JWTAuthenticator
+
+
+   jwt is a list of authenticator to authenticate Kubernetes users using
 JWT compliant tokens. The authenticator will attempt to parse a raw ID token,
 verify it's been signed by the configured issuer. The public key to verify the
 signature is discovered from the issuer's public endpoint using OIDC discovery.
@@ -113,87 +113,87 @@ other authenticators may run before or after the JWT authenticators.
 The specific position of JWT authenticators in relation to other
 authenticators is neither defined nor stable across releases.  Since
 each JWT authenticator must have a unique issuer URL, at most one
-JWT authenticator will attempt to cryptographically validate the token.</p>
-</td>
-</tr>
-</tbody>
-</table>
+JWT authenticator will attempt to cryptographically validate the token.
+
+
+
+
 
 ## `AuthorizationConfiguration`     {#apiserver-k8s-io-v1alpha1-AuthorizationConfiguration}
     
 
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.k8s.io/v1alpha1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>AuthorizationConfiguration</code></td></tr>
+apiVersionstringapiserver.k8s.io/v1alpha1
+kindstringAuthorizationConfiguration
     
   
-<tr><td><code>authorizers</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-AuthorizerConfiguration"><code>[]AuthorizerConfiguration</code></a>
-</td>
-<td>
-   <p>Authorizers is an ordered list of authorizers to
+authorizers [Required]
+[]AuthorizerConfiguration
+
+
+   Authorizers is an ordered list of authorizers to
 authorize requests against.
 This is similar to the --authorization-modes kube-apiserver flag
-Must be at least one.</p>
-</td>
-</tr>
-</tbody>
-</table>
+Must be at least one.
+
+
+
+
 
 ## `EgressSelectorConfiguration`     {#apiserver-k8s-io-v1alpha1-EgressSelectorConfiguration}
     
 
 
-<p>EgressSelectorConfiguration provides versioned configuration for egress selector clients.</p>
+EgressSelectorConfiguration provides versioned configuration for egress selector clients.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.k8s.io/v1alpha1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>EgressSelectorConfiguration</code></td></tr>
+apiVersionstringapiserver.k8s.io/v1alpha1
+kindstringEgressSelectorConfiguration
     
   
-<tr><td><code>egressSelections</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-EgressSelection"><code>[]EgressSelection</code></a>
-</td>
-<td>
-   <p>connectionServices contains a list of egress selection client configurations</p>
-</td>
-</tr>
-</tbody>
-</table>
+egressSelections [Required]
+[]EgressSelection
+
+
+   connectionServices contains a list of egress selection client configurations
+
+
+
+
 
 ## `TracingConfiguration`     {#apiserver-k8s-io-v1alpha1-TracingConfiguration}
     
 
 
-<p>TracingConfiguration provides versioned configuration for tracing clients.</p>
+TracingConfiguration provides versioned configuration for tracing clients.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
-<tr><td><code>apiVersion</code><br/>string</td><td><code>apiserver.k8s.io/v1alpha1</code></td></tr>
-<tr><td><code>kind</code><br/>string</td><td><code>TracingConfiguration</code></td></tr>
+apiVersionstringapiserver.k8s.io/v1alpha1
+kindstringTracingConfiguration
     
   
-<tr><td><code>TracingConfiguration</code> <B>[Required]</B><br/>
-<a href="#TracingConfiguration"><code>TracingConfiguration</code></a>
-</td>
-<td>(Members of <code>TracingConfiguration</code> are embedded into this type.)
-   <p>Embed the component config tracing configuration struct</p>
-</td>
-</tr>
-</tbody>
-</table>
+TracingConfiguration [Required]
+TracingConfiguration
+
+(Members of TracingConfiguration are embedded into this type.)
+   Embed the component config tracing configuration struct
+
+
+
+
 
 ## `AdmissionPluginConfiguration`     {#apiserver-k8s-io-v1alpha1-AdmissionPluginConfiguration}
     
@@ -203,40 +203,40 @@ Must be at least one.</p>
 - [AdmissionConfiguration](#apiserver-k8s-io-v1alpha1-AdmissionConfiguration)
 
 
-<p>AdmissionPluginConfiguration provides the configuration for a single plug-in.</p>
+AdmissionPluginConfiguration provides the configuration for a single plug-in.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>name</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Name is the name of the admission controller.
-It must match the registered admission plugin name.</p>
-</td>
-</tr>
-<tr><td><code>path</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Path is the path to a configuration file that contains the plugin's
-configuration</p>
-</td>
-</tr>
-<tr><td><code>configuration</code><br/>
-<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/runtime#Unknown"><code>k8s.io/apimachinery/pkg/runtime.Unknown</code></a>
-</td>
-<td>
-   <p>Configuration is an embedded configuration object to be used as the plugin's
-configuration. If present, it will be used instead of the path to the configuration file.</p>
-</td>
-</tr>
-</tbody>
-</table>
+name [Required]
+string
+
+
+   Name is the name of the admission controller.
+It must match the registered admission plugin name.
+
+
+path
+string
+
+
+   Path is the path to a configuration file that contains the plugin's
+configuration
+
+
+configuration
+k8s.io/apimachinery/pkg/runtime.Unknown
+
+
+   Configuration is an embedded configuration object to be used as the plugin's
+configuration. If present, it will be used instead of the path to the configuration file.
+
+
+
+
 
 ## `AuthorizerConfiguration`     {#apiserver-k8s-io-v1alpha1-AuthorizerConfiguration}
     
@@ -247,43 +247,43 @@ configuration. If present, it will be used instead of the path to the configurat
 
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>type</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Type refers to the type of the authorizer
+type [Required]
+string
+
+
+   Type refers to the type of the authorizer
 &quot;Webhook&quot; is supported in the generic API server
 Other API servers may support additional authorizer
-types like Node, RBAC, ABAC, etc.</p>
-</td>
-</tr>
-<tr><td><code>name</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Name used to describe the webhook
+types like Node, RBAC, ABAC, etc.
+
+
+name [Required]
+string
+
+
+   Name used to describe the webhook
 This is explicitly used in monitoring machinery for metrics
-Note: Names must be DNS1123 labels like <code>myauthorizername</code> or
-subdomains like <code>myauthorizer.example.domain</code>
-Required, with no default</p>
-</td>
-</tr>
-<tr><td><code>webhook</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-WebhookConfiguration"><code>WebhookConfiguration</code></a>
-</td>
-<td>
-   <p>Webhook defines the configuration for a Webhook authorizer
+Note: Names must be DNS1123 labels like myauthorizername or
+subdomains like myauthorizer.example.domain
+Required, with no default
+
+
+webhook [Required]
+WebhookConfiguration
+
+
+   Webhook defines the configuration for a Webhook authorizer
 Must be defined when Type=Webhook
-Must not be defined when Type!=Webhook</p>
-</td>
-</tr>
-</tbody>
-</table>
+Must not be defined when Type!=Webhook
+
+
+
+
 
 ## `ClaimMappings`     {#apiserver-k8s-io-v1alpha1-ClaimMappings}
     
@@ -293,84 +293,84 @@ Must not be defined when Type!=Webhook</p>
 - [JWTAuthenticator](#apiserver-k8s-io-v1alpha1-JWTAuthenticator)
 
 
-<p>ClaimMappings provides the configuration for claim mapping</p>
+ClaimMappings provides the configuration for claim mapping
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>username</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-PrefixedClaimOrExpression"><code>PrefixedClaimOrExpression</code></a>
-</td>
-<td>
-   <p>username represents an option for the username attribute.
+username [Required]
+PrefixedClaimOrExpression
+
+
+   username represents an option for the username attribute.
 The claim's value must be a singular string.
 Same as the --oidc-username-claim and --oidc-username-prefix flags.
-If username.expression is set, the expression must produce a string value.</p>
-<p>In the flag based approach, the --oidc-username-claim and --oidc-username-prefix are optional. If --oidc-username-claim is not set,
+If username.expression is set, the expression must produce a string value.
+In the flag based approach, the --oidc-username-claim and --oidc-username-prefix are optional. If --oidc-username-claim is not set,
 the default value is &quot;sub&quot;. For the authentication config, there is no defaulting for claim or prefix. The claim and prefix must be set explicitly.
 For claim, if --oidc-username-claim was not set with legacy flag approach, configure username.claim=&quot;sub&quot; in the authentication config.
 For prefix:
 (1) --oidc-username-prefix=&quot;-&quot;, no prefix was added to the username. For the same behavior using authentication config,
 set username.prefix=&quot;&quot;
 (2) --oidc-username-prefix=&quot;&quot; and  --oidc-username-claim != &quot;email&quot;, prefix was &quot;&lt;value of --oidc-issuer-url&gt;#&quot;. For the same
-behavior using authentication config, set username.prefix=&quot;<!-- raw HTML omitted -->#&quot;
-(3) --oidc-username-prefix=&quot;<!-- raw HTML omitted -->&quot;. For the same behavior using authentication config, set username.prefix=&quot;<!-- raw HTML omitted -->&quot;</p>
-</td>
-</tr>
-<tr><td><code>groups</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-PrefixedClaimOrExpression"><code>PrefixedClaimOrExpression</code></a>
-</td>
-<td>
-   <p>groups represents an option for the groups attribute.
+behavior using authentication config, set username.prefix=&quot;#&quot;
+(3) --oidc-username-prefix=&quot;&quot;. For the same behavior using authentication config, set username.prefix=&quot;&quot;
+
+
+groups
+PrefixedClaimOrExpression
+
+
+   groups represents an option for the groups attribute.
 The claim's value must be a string or string array claim.
 If groups.claim is set, the prefix must be specified (and can be the empty string).
 If groups.expression is set, the expression must produce a string or string array value.
-&quot;&quot;, [], and null values are treated as the group mapping not being present.</p>
-</td>
-</tr>
-<tr><td><code>uid</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-ClaimOrExpression"><code>ClaimOrExpression</code></a>
-</td>
-<td>
-   <p>uid represents an option for the uid attribute.
+&quot;&quot;, [], and null values are treated as the group mapping not being present.
+
+
+uid
+ClaimOrExpression
+
+
+   uid represents an option for the uid attribute.
 Claim must be a singular string claim.
-If uid.expression is set, the expression must produce a string value.</p>
-</td>
-</tr>
-<tr><td><code>extra</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-ExtraMapping"><code>[]ExtraMapping</code></a>
-</td>
-<td>
-   <p>extra represents an option for the extra attribute.
+If uid.expression is set, the expression must produce a string value.
+
+
+extra
+[]ExtraMapping
+
+
+   extra represents an option for the extra attribute.
 expression must produce a string or string array value.
-If the value is empty, the extra mapping will not be present.</p>
-<p>hard-coded extra key/value</p>
-<ul>
-<li>key: &quot;foo&quot;
+If the value is empty, the extra mapping will not be present.
+hard-coded extra key/value
+
+key: &quot;foo&quot;
 valueExpression: &quot;'bar'&quot;
-This will result in an extra attribute - foo: [&quot;bar&quot;]</li>
-</ul>
-<p>hard-coded key, value copying claim value</p>
-<ul>
-<li>key: &quot;foo&quot;
+This will result in an extra attribute - foo: [&quot;bar&quot;]
+
+hard-coded key, value copying claim value
+
+key: &quot;foo&quot;
 valueExpression: &quot;claims.some_claim&quot;
-This will result in an extra attribute - foo: [value of some_claim]</li>
-</ul>
-<p>hard-coded key, value derived from claim value</p>
-<ul>
-<li>key: &quot;admin&quot;
+This will result in an extra attribute - foo: [value of some_claim]
+
+hard-coded key, value derived from claim value
+
+key: &quot;admin&quot;
 valueExpression: '(has(claims.is_admin) &amp;&amp; claims.is_admin) ? &quot;true&quot;:&quot;&quot;'
-This will result in:</li>
-<li>if is_admin claim is present and true, extra attribute - admin: [&quot;true&quot;]</li>
-<li>if is_admin claim is present and false or is_admin claim is not present, no extra attribute will be added</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
+This will result in:
+if is_admin claim is present and true, extra attribute - admin: [&quot;true&quot;]
+if is_admin claim is present and false or is_admin claim is not present, no extra attribute will be added
+
+
+
+
+
 
 ## `ClaimOrExpression`     {#apiserver-k8s-io-v1alpha1-ClaimOrExpression}
     
@@ -380,40 +380,40 @@ This will result in:</li>
 - [ClaimMappings](#apiserver-k8s-io-v1alpha1-ClaimMappings)
 
 
-<p>ClaimOrExpression provides the configuration for a single claim or expression.</p>
+ClaimOrExpression provides the configuration for a single claim or expression.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>claim</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>claim is the JWT claim to use.
+claim
+string
+
+
+   claim is the JWT claim to use.
 Either claim or expression must be set.
-Mutually exclusive with expression.</p>
-</td>
-</tr>
-<tr><td><code>expression</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>expression represents the expression which will be evaluated by CEL.</p>
-<p>CEL expressions have access to the contents of the token claims, organized into CEL variable:</p>
-<ul>
-<li>'claims' is a map of claim names to claim values.
+Mutually exclusive with expression.
+
+
+expression
+string
+
+
+   expression represents the expression which will be evaluated by CEL.
+CEL expressions have access to the contents of the token claims, organized into CEL variable:
+
+'claims' is a map of claim names to claim values.
 For example, a variable named 'sub' can be accessed as 'claims.sub'.
-Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.</li>
-</ul>
-<p>Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/</p>
-<p>Mutually exclusive with claim.</p>
-</td>
-</tr>
-</tbody>
-</table>
+Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.
+
+Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+Mutually exclusive with claim.
+
+
+
+
 
 ## `ClaimValidationRule`     {#apiserver-k8s-io-v1alpha1-ClaimValidationRule}
     
@@ -423,63 +423,63 @@ Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.<
 - [JWTAuthenticator](#apiserver-k8s-io-v1alpha1-JWTAuthenticator)
 
 
-<p>ClaimValidationRule provides the configuration for a single claim validation rule.</p>
+ClaimValidationRule provides the configuration for a single claim validation rule.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>claim</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>claim is the name of a required claim.
+claim
+string
+
+
+   claim is the name of a required claim.
 Same as --oidc-required-claim flag.
 Only string claim keys are supported.
-Mutually exclusive with expression and message.</p>
-</td>
-</tr>
-<tr><td><code>requiredValue</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>requiredValue is the value of a required claim.
+Mutually exclusive with expression and message.
+
+
+requiredValue
+string
+
+
+   requiredValue is the value of a required claim.
 Same as --oidc-required-claim flag.
 Only string claim values are supported.
 If claim is set and requiredValue is not set, the claim must be present with a value set to the empty string.
-Mutually exclusive with expression and message.</p>
-</td>
-</tr>
-<tr><td><code>expression</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>expression represents the expression which will be evaluated by CEL.
-Must produce a boolean.</p>
-<p>CEL expressions have access to the contents of the token claims, organized into CEL variable:</p>
-<ul>
-<li>'claims' is a map of claim names to claim values.
+Mutually exclusive with expression and message.
+
+
+expression
+string
+
+
+   expression represents the expression which will be evaluated by CEL.
+Must produce a boolean.
+CEL expressions have access to the contents of the token claims, organized into CEL variable:
+
+'claims' is a map of claim names to claim values.
 For example, a variable named 'sub' can be accessed as 'claims.sub'.
 Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.
-Must return true for the validation to pass.</li>
-</ul>
-<p>Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/</p>
-<p>Mutually exclusive with claim and requiredValue.</p>
-</td>
-</tr>
-<tr><td><code>message</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>message customizes the returned error message when expression returns false.
+Must return true for the validation to pass.
+
+Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+Mutually exclusive with claim and requiredValue.
+
+
+message
+string
+
+
+   message customizes the returned error message when expression returns false.
 message is a literal string.
-Mutually exclusive with claim and requiredValue.</p>
-</td>
-</tr>
-</tbody>
-</table>
+Mutually exclusive with claim and requiredValue.
+
+
+
+
 
 ## `Connection`     {#apiserver-k8s-io-v1alpha1-Connection}
     
@@ -489,31 +489,31 @@ Mutually exclusive with claim and requiredValue.</p>
 - [EgressSelection](#apiserver-k8s-io-v1alpha1-EgressSelection)
 
 
-<p>Connection provides the configuration for a single egress selection client.</p>
+Connection provides the configuration for a single egress selection client.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>proxyProtocol</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-ProtocolType"><code>ProtocolType</code></a>
-</td>
-<td>
-   <p>Protocol is the protocol used to connect from client to the konnectivity server.</p>
-</td>
-</tr>
-<tr><td><code>transport</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-Transport"><code>Transport</code></a>
-</td>
-<td>
-   <p>Transport defines the transport configurations we use to dial to the konnectivity server.
-This is required if ProxyProtocol is HTTPConnect or GRPC.</p>
-</td>
-</tr>
-</tbody>
-</table>
+proxyProtocol [Required]
+ProtocolType
+
+
+   Protocol is the protocol used to connect from client to the konnectivity server.
+
+
+transport
+Transport
+
+
+   Transport defines the transport configurations we use to dial to the konnectivity server.
+This is required if ProxyProtocol is HTTPConnect or GRPC.
+
+
+
+
 
 ## `EgressSelection`     {#apiserver-k8s-io-v1alpha1-EgressSelection}
     
@@ -523,32 +523,32 @@ This is required if ProxyProtocol is HTTPConnect or GRPC.</p>
 - [EgressSelectorConfiguration](#apiserver-k8s-io-v1alpha1-EgressSelectorConfiguration)
 
 
-<p>EgressSelection provides the configuration for a single egress selection client.</p>
+EgressSelection provides the configuration for a single egress selection client.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>name</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>name is the name of the egress selection.
+name [Required]
+string
+
+
+   name is the name of the egress selection.
 Currently supported values are &quot;controlplane&quot;, &quot;master&quot;, &quot;etcd&quot; and &quot;cluster&quot;
-The &quot;master&quot; egress selector is deprecated in favor of &quot;controlplane&quot;</p>
-</td>
-</tr>
-<tr><td><code>connection</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-Connection"><code>Connection</code></a>
-</td>
-<td>
-   <p>connection is the exact information used to configure the egress selection</p>
-</td>
-</tr>
-</tbody>
-</table>
+The &quot;master&quot; egress selector is deprecated in favor of &quot;controlplane&quot;
+
+
+connection [Required]
+Connection
+
+
+   connection is the exact information used to configure the egress selection
+
+
+
+
 
 ## `ExtraMapping`     {#apiserver-k8s-io-v1alpha1-ExtraMapping}
     
@@ -558,44 +558,44 @@ The &quot;master&quot; egress selector is deprecated in favor of &quot;controlpl
 - [ClaimMappings](#apiserver-k8s-io-v1alpha1-ClaimMappings)
 
 
-<p>ExtraMapping provides the configuration for a single extra mapping.</p>
+ExtraMapping provides the configuration for a single extra mapping.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>key</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>key is a string to use as the extra attribute key.
+key [Required]
+string
+
+
+   key is a string to use as the extra attribute key.
 key must be a domain-prefix path (e.g. example.org/foo). All characters before the first &quot;/&quot; must be a valid
 subdomain as defined by RFC 1123. All characters trailing the first &quot;/&quot; must
 be valid HTTP Path characters as defined by RFC 3986.
-key must be lowercase.</p>
-</td>
-</tr>
-<tr><td><code>valueExpression</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>valueExpression is a CEL expression to extract extra attribute value.
+key must be lowercase.
+
+
+valueExpression [Required]
+string
+
+
+   valueExpression is a CEL expression to extract extra attribute value.
 valueExpression must produce a string or string array value.
 &quot;&quot;, [], and null values are treated as the extra mapping not being present.
-Empty string values contained within a string array are filtered out.</p>
-<p>CEL expressions have access to the contents of the token claims, organized into CEL variable:</p>
-<ul>
-<li>'claims' is a map of claim names to claim values.
+Empty string values contained within a string array are filtered out.
+CEL expressions have access to the contents of the token claims, organized into CEL variable:
+
+'claims' is a map of claim names to claim values.
 For example, a variable named 'sub' can be accessed as 'claims.sub'.
-Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.</li>
-</ul>
-<p>Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/</p>
-</td>
-</tr>
-</tbody>
-</table>
+Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.
+
+Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+
+
+
+
 
 ## `Issuer`     {#apiserver-k8s-io-v1alpha1-Issuer}
     
@@ -605,48 +605,48 @@ Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.<
 - [JWTAuthenticator](#apiserver-k8s-io-v1alpha1-JWTAuthenticator)
 
 
-<p>Issuer provides the configuration for a external provider specific settings.</p>
+Issuer provides the configuration for a external provider specific settings.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>url</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>url points to the issuer URL in a format https://url or https://url/path.
+url [Required]
+string
+
+
+   url points to the issuer URL in a format https://url or https://url/path.
 This must match the &quot;iss&quot; claim in the presented JWT, and the issuer returned from discovery.
 Same value as the --oidc-issuer-url flag.
 Used to fetch discovery information unless overridden by discoveryURL.
 Required to be unique.
-Note that egress selection configuration is not used for this network connection.</p>
-</td>
-</tr>
-<tr><td><code>certificateAuthority</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>certificateAuthority contains PEM-encoded certificate authority certificates
+Note that egress selection configuration is not used for this network connection.
+
+
+certificateAuthority
+string
+
+
+   certificateAuthority contains PEM-encoded certificate authority certificates
 used to validate the connection when fetching discovery information.
 If unset, the system verifier is used.
-Same value as the content of the file referenced by the --oidc-ca-file flag.</p>
-</td>
-</tr>
-<tr><td><code>audiences</code> <B>[Required]</B><br/>
-<code>[]string</code>
-</td>
-<td>
-   <p>audiences is the set of acceptable audiences the JWT must be issued to.
+Same value as the content of the file referenced by the --oidc-ca-file flag.
+
+
+audiences [Required]
+[]string
+
+
+   audiences is the set of acceptable audiences the JWT must be issued to.
 At least one of the entries must match the &quot;aud&quot; claim in presented JWTs.
 Same value as the --oidc-client-id flag (though this field supports an array).
-Required to be non-empty.</p>
-</td>
-</tr>
-</tbody>
-</table>
+Required to be non-empty.
+
+
+
+
 
 ## `JWTAuthenticator`     {#apiserver-k8s-io-v1alpha1-JWTAuthenticator}
     
@@ -656,47 +656,47 @@ Required to be non-empty.</p>
 - [AuthenticationConfiguration](#apiserver-k8s-io-v1alpha1-AuthenticationConfiguration)
 
 
-<p>JWTAuthenticator provides the configuration for a single JWT authenticator.</p>
+JWTAuthenticator provides the configuration for a single JWT authenticator.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>issuer</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-Issuer"><code>Issuer</code></a>
-</td>
-<td>
-   <p>issuer contains the basic OIDC provider connection options.</p>
-</td>
-</tr>
-<tr><td><code>claimValidationRules</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-ClaimValidationRule"><code>[]ClaimValidationRule</code></a>
-</td>
-<td>
-   <p>claimValidationRules are rules that are applied to validate token claims to authenticate users.</p>
-</td>
-</tr>
-<tr><td><code>claimMappings</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-ClaimMappings"><code>ClaimMappings</code></a>
-</td>
-<td>
-   <p>claimMappings points claims of a token to be treated as user attributes.</p>
-</td>
-</tr>
-<tr><td><code>userValidationRules</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-UserValidationRule"><code>[]UserValidationRule</code></a>
-</td>
-<td>
-   <p>userValidationRules are rules that are applied to final user before completing authentication.
+issuer [Required]
+Issuer
+
+
+   issuer contains the basic OIDC provider connection options.
+
+
+claimValidationRules
+[]ClaimValidationRule
+
+
+   claimValidationRules are rules that are applied to validate token claims to authenticate users.
+
+
+claimMappings [Required]
+ClaimMappings
+
+
+   claimMappings points claims of a token to be treated as user attributes.
+
+
+userValidationRules
+[]UserValidationRule
+
+
+   userValidationRules are rules that are applied to final user before completing authentication.
 These allow invariants to be applied to incoming identities such as preventing the
 use of the system: prefix that is commonly used by Kubernetes components.
-The validation rules are logically ANDed together and must all return true for the validation to pass.</p>
-</td>
-</tr>
-</tbody>
-</table>
+The validation rules are logically ANDed together and must all return true for the validation to pass.
+
+
+
+
 
 ## `PrefixedClaimOrExpression`     {#apiserver-k8s-io-v1alpha1-PrefixedClaimOrExpression}
     
@@ -706,48 +706,48 @@ The validation rules are logically ANDed together and must all return true for t
 - [ClaimMappings](#apiserver-k8s-io-v1alpha1-ClaimMappings)
 
 
-<p>PrefixedClaimOrExpression provides the configuration for a single prefixed claim or expression.</p>
+PrefixedClaimOrExpression provides the configuration for a single prefixed claim or expression.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>claim</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>claim is the JWT claim to use.
-Mutually exclusive with expression.</p>
-</td>
-</tr>
-<tr><td><code>prefix</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>prefix is prepended to claim's value to prevent clashes with existing names.
+claim
+string
+
+
+   claim is the JWT claim to use.
+Mutually exclusive with expression.
+
+
+prefix
+string
+
+
+   prefix is prepended to claim's value to prevent clashes with existing names.
 prefix needs to be set if claim is set and can be the empty string.
-Mutually exclusive with expression.</p>
-</td>
-</tr>
-<tr><td><code>expression</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>expression represents the expression which will be evaluated by CEL.</p>
-<p>CEL expressions have access to the contents of the token claims, organized into CEL variable:</p>
-<ul>
-<li>'claims' is a map of claim names to claim values.
+Mutually exclusive with expression.
+
+
+expression
+string
+
+
+   expression represents the expression which will be evaluated by CEL.
+CEL expressions have access to the contents of the token claims, organized into CEL variable:
+
+'claims' is a map of claim names to claim values.
 For example, a variable named 'sub' can be accessed as 'claims.sub'.
-Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.</li>
-</ul>
-<p>Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/</p>
-<p>Mutually exclusive with claim and prefix.</p>
-</td>
-</tr>
-</tbody>
-</table>
+Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.
+
+Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+Mutually exclusive with claim and prefix.
+
+
+
+
 
 ## `ProtocolType`     {#apiserver-k8s-io-v1alpha1-ProtocolType}
     
@@ -758,7 +758,7 @@ Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.<
 - [Connection](#apiserver-k8s-io-v1alpha1-Connection)
 
 
-<p>ProtocolType is a set of valid values for Connection.ProtocolType</p>
+ProtocolType is a set of valid values for Connection.ProtocolType
 
 
 
@@ -771,31 +771,31 @@ Nested claims can be accessed using dot notation, e.g. 'claims.email.verified'.<
 - [Transport](#apiserver-k8s-io-v1alpha1-Transport)
 
 
-<p>TCPTransport provides the information to connect to konnectivity server via TCP</p>
+TCPTransport provides the information to connect to konnectivity server via TCP
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>url</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>URL is the location of the konnectivity server to connect to.
-As an example it might be &quot;https://127.0.0.1:8131&quot;</p>
-</td>
-</tr>
-<tr><td><code>tlsConfig</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-TLSConfig"><code>TLSConfig</code></a>
-</td>
-<td>
-   <p>TLSConfig is the config needed to use TLS when connecting to konnectivity server</p>
-</td>
-</tr>
-</tbody>
-</table>
+url [Required]
+string
+
+
+   URL is the location of the konnectivity server to connect to.
+As an example it might be &quot;https://127.0.0.1:8131&quot;
+
+
+tlsConfig
+TLSConfig
+
+
+   TLSConfig is the config needed to use TLS when connecting to konnectivity server
+
+
+
+
 
 ## `TLSConfig`     {#apiserver-k8s-io-v1alpha1-TLSConfig}
     
@@ -805,44 +805,44 @@ As an example it might be &quot;https://127.0.0.1:8131&quot;</p>
 - [TCPTransport](#apiserver-k8s-io-v1alpha1-TCPTransport)
 
 
-<p>TLSConfig provides the authentication information to connect to konnectivity server
-Only used with TCPTransport</p>
+TLSConfig provides the authentication information to connect to konnectivity server
+Only used with TCPTransport
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>caBundle</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>caBundle is the file location of the CA to be used to determine trust with the konnectivity server.
+caBundle
+string
+
+
+   caBundle is the file location of the CA to be used to determine trust with the konnectivity server.
 Must be absent/empty if TCPTransport.URL is prefixed with http://
-If absent while TCPTransport.URL is prefixed with https://, default to system trust roots.</p>
-</td>
-</tr>
-<tr><td><code>clientKey</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>clientKey is the file location of the client key to be used in mtls handshakes with the konnectivity server.
+If absent while TCPTransport.URL is prefixed with https://, default to system trust roots.
+
+
+clientKey
+string
+
+
+   clientKey is the file location of the client key to be used in mtls handshakes with the konnectivity server.
 Must be absent/empty if TCPTransport.URL is prefixed with http://
-Must be configured if TCPTransport.URL is prefixed with https://</p>
-</td>
-</tr>
-<tr><td><code>clientCert</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>clientCert is the file location of the client certificate to be used in mtls handshakes with the konnectivity server.
+Must be configured if TCPTransport.URL is prefixed with https://
+
+
+clientCert
+string
+
+
+   clientCert is the file location of the client certificate to be used in mtls handshakes with the konnectivity server.
 Must be absent/empty if TCPTransport.URL is prefixed with http://
-Must be configured if TCPTransport.URL is prefixed with https://</p>
-</td>
-</tr>
-</tbody>
-</table>
+Must be configured if TCPTransport.URL is prefixed with https://
+
+
+
+
 
 ## `Transport`     {#apiserver-k8s-io-v1alpha1-Transport}
     
@@ -852,33 +852,33 @@ Must be configured if TCPTransport.URL is prefixed with https://</p>
 - [Connection](#apiserver-k8s-io-v1alpha1-Connection)
 
 
-<p>Transport defines the transport configurations we use to dial to the konnectivity server</p>
+Transport defines the transport configurations we use to dial to the konnectivity server
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>tcp</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-TCPTransport"><code>TCPTransport</code></a>
-</td>
-<td>
-   <p>TCP is the TCP configuration for communicating with the konnectivity server via TCP
+tcp
+TCPTransport
+
+
+   TCP is the TCP configuration for communicating with the konnectivity server via TCP
 ProxyProtocol of GRPC is not supported with TCP transport at the moment
-Requires at least one of TCP or UDS to be set</p>
-</td>
-</tr>
-<tr><td><code>uds</code><br/>
-<a href="#apiserver-k8s-io-v1alpha1-UDSTransport"><code>UDSTransport</code></a>
-</td>
-<td>
-   <p>UDS is the UDS configuration for communicating with the konnectivity server via UDS
-Requires at least one of TCP or UDS to be set</p>
-</td>
-</tr>
-</tbody>
-</table>
+Requires at least one of TCP or UDS to be set
+
+
+uds
+UDSTransport
+
+
+   UDS is the UDS configuration for communicating with the konnectivity server via UDS
+Requires at least one of TCP or UDS to be set
+
+
+
+
 
 ## `UDSTransport`     {#apiserver-k8s-io-v1alpha1-UDSTransport}
     
@@ -888,24 +888,24 @@ Requires at least one of TCP or UDS to be set</p>
 - [Transport](#apiserver-k8s-io-v1alpha1-Transport)
 
 
-<p>UDSTransport provides the information to connect to konnectivity server via UDS</p>
+UDSTransport provides the information to connect to konnectivity server via UDS
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>udsName</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>UDSName is the name of the unix domain socket to connect to konnectivity server
-This does not use a unix:// prefix. (Eg: /etc/srv/kubernetes/konnectivity-server/konnectivity-server.socket)</p>
-</td>
-</tr>
-</tbody>
-</table>
+udsName [Required]
+string
+
+
+   UDSName is the name of the unix domain socket to connect to konnectivity server
+This does not use a unix:// prefix. (Eg: /etc/srv/kubernetes/konnectivity-server/konnectivity-server.socket)
+
+
+
+
 
 ## `UserValidationRule`     {#apiserver-k8s-io-v1alpha1-UserValidationRule}
     
@@ -915,39 +915,39 @@ This does not use a unix:// prefix. (Eg: /etc/srv/kubernetes/konnectivity-server
 - [JWTAuthenticator](#apiserver-k8s-io-v1alpha1-JWTAuthenticator)
 
 
-<p>UserValidationRule provides the configuration for a single user info validation rule.</p>
+UserValidationRule provides the configuration for a single user info validation rule.
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>expression</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>expression represents the expression which will be evaluated by CEL.
-Must return true for the validation to pass.</p>
-<p>CEL expressions have access to the contents of UserInfo, organized into CEL variable:</p>
-<ul>
-<li>'user' - authentication.k8s.io/v1, Kind=UserInfo object
+expression [Required]
+string
+
+
+   expression represents the expression which will be evaluated by CEL.
+Must return true for the validation to pass.
+CEL expressions have access to the contents of UserInfo, organized into CEL variable:
+
+'user' - authentication.k8s.io/v1, Kind=UserInfo object
 Refer to https://github.com/kubernetes/api/blob/release-1.28/authentication/v1/types.go#L105-L122 for the definition.
-API documentation: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io</li>
-</ul>
-<p>Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/</p>
-</td>
-</tr>
-<tr><td><code>message</code><br/>
-<code>string</code>
-</td>
-<td>
-   <p>message customizes the returned error message when rule returns false.
-message is a literal string.</p>
-</td>
-</tr>
-</tbody>
-</table>
+API documentation: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io
+
+Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+
+
+message
+string
+
+
+   message customizes the returned error message when rule returns false.
+message is a literal string.
+
+
+
+
 
 ## `WebhookConfiguration`     {#apiserver-k8s-io-v1alpha1-WebhookConfiguration}
     
@@ -958,106 +958,106 @@ message is a literal string.</p>
 
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>authorizedTTL</code> <B>[Required]</B><br/>
-<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration"><code>meta/v1.Duration</code></a>
-</td>
-<td>
-   <p>The duration to cache 'authorized' responses from the webhook
+authorizedTTL [Required]
+meta/v1.Duration
+
+
+   The duration to cache 'authorized' responses from the webhook
 authorizer.
-Same as setting <code>--authorization-webhook-cache-authorized-ttl</code> flag
-Default: 5m0s</p>
-</td>
-</tr>
-<tr><td><code>unauthorizedTTL</code> <B>[Required]</B><br/>
-<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration"><code>meta/v1.Duration</code></a>
-</td>
-<td>
-   <p>The duration to cache 'unauthorized' responses from the webhook
+Same as setting --authorization-webhook-cache-authorized-ttl flag
+Default: 5m0s
+
+
+unauthorizedTTL [Required]
+meta/v1.Duration
+
+
+   The duration to cache 'unauthorized' responses from the webhook
 authorizer.
-Same as setting <code>--authorization-webhook-cache-unauthorized-ttl</code> flag
-Default: 30s</p>
-</td>
-</tr>
-<tr><td><code>timeout</code> <B>[Required]</B><br/>
-<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration"><code>meta/v1.Duration</code></a>
-</td>
-<td>
-   <p>Timeout for the webhook request
+Same as setting --authorization-webhook-cache-unauthorized-ttl flag
+Default: 30s
+
+
+timeout [Required]
+meta/v1.Duration
+
+
+   Timeout for the webhook request
 Maximum allowed value is 30s.
-Required, no default value.</p>
-</td>
-</tr>
-<tr><td><code>subjectAccessReviewVersion</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>The API version of the authorization.k8s.io SubjectAccessReview to
+Required, no default value.
+
+
+subjectAccessReviewVersion [Required]
+string
+
+
+   The API version of the authorization.k8s.io SubjectAccessReview to
 send to and expect from the webhook.
-Same as setting <code>--authorization-webhook-version</code> flag
+Same as setting --authorization-webhook-version flag
 Valid values: v1beta1, v1
-Required, no default value</p>
-</td>
-</tr>
-<tr><td><code>matchConditionSubjectAccessReviewVersion</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>MatchConditionSubjectAccessReviewVersion specifies the SubjectAccessReview
+Required, no default value
+
+
+matchConditionSubjectAccessReviewVersion [Required]
+string
+
+
+   MatchConditionSubjectAccessReviewVersion specifies the SubjectAccessReview
 version the CEL expressions are evaluated against
 Valid values: v1
-Required, no default value</p>
-</td>
-</tr>
-<tr><td><code>failurePolicy</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Controls the authorization decision when a webhook request fails to
+Required, no default value
+
+
+failurePolicy [Required]
+string
+
+
+   Controls the authorization decision when a webhook request fails to
 complete or returns a malformed response or errors evaluating
 matchConditions.
-Valid values:</p>
-<ul>
-<li>NoOpinion: continue to subsequent authorizers to see if one of
-them allows the request</li>
-<li>Deny: reject the request without consulting subsequent authorizers
-Required, with no default.</li>
-</ul>
-</td>
-</tr>
-<tr><td><code>connectionInfo</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-WebhookConnectionInfo"><code>WebhookConnectionInfo</code></a>
-</td>
-<td>
-   <p>ConnectionInfo defines how we talk to the webhook</p>
-</td>
-</tr>
-<tr><td><code>matchConditions</code> <B>[Required]</B><br/>
-<a href="#apiserver-k8s-io-v1alpha1-WebhookMatchCondition"><code>[]WebhookMatchCondition</code></a>
-</td>
-<td>
-   <p>matchConditions is a list of conditions that must be met for a request to be sent to this
+Valid values:
+
+NoOpinion: continue to subsequent authorizers to see if one of
+them allows the request
+Deny: reject the request without consulting subsequent authorizers
+Required, with no default.
+
+
+
+connectionInfo [Required]
+WebhookConnectionInfo
+
+
+   ConnectionInfo defines how we talk to the webhook
+
+
+matchConditions [Required]
+[]WebhookMatchCondition
+
+
+   matchConditions is a list of conditions that must be met for a request to be sent to this
 webhook. An empty list of matchConditions matches all requests.
-There are a maximum of 64 match conditions allowed.</p>
-<p>The exact matching logic is (in order):</p>
-<ol>
-<li>If at least one matchCondition evaluates to FALSE, then the webhook is skipped.</li>
-<li>If ALL matchConditions evaluate to TRUE, then the webhook is called.</li>
-<li>If at least one matchCondition evaluates to an error (but none are FALSE):
-<ul>
-<li>If failurePolicy=Deny, then the webhook rejects the request</li>
-<li>If failurePolicy=NoOpinion, then the error is ignored and the webhook is skipped</li>
-</ul>
-</li>
-</ol>
-</td>
-</tr>
-</tbody>
-</table>
+There are a maximum of 64 match conditions allowed.
+The exact matching logic is (in order):
+
+If at least one matchCondition evaluates to FALSE, then the webhook is skipped.
+If ALL matchConditions evaluate to TRUE, then the webhook is called.
+If at least one matchCondition evaluates to an error (but none are FALSE):
+
+If failurePolicy=Deny, then the webhook rejects the request
+If failurePolicy=NoOpinion, then the error is ignored and the webhook is skipped
+
+
+
+
+
+
+
 
 ## `WebhookConnectionInfo`     {#apiserver-k8s-io-v1alpha1-WebhookConnectionInfo}
     
@@ -1068,36 +1068,36 @@ There are a maximum of 64 match conditions allowed.</p>
 
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>type</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Controls how the webhook should communicate with the server.
-Valid values:</p>
-<ul>
-<li>KubeConfigFile: use the file specified in kubeConfigFile to locate the
-server.</li>
-<li>InClusterConfig: use the in-cluster configuration to call the
+type [Required]
+string
+
+
+   Controls how the webhook should communicate with the server.
+Valid values:
+
+KubeConfigFile: use the file specified in kubeConfigFile to locate the
+server.
+InClusterConfig: use the in-cluster configuration to call the
 SubjectAccessReview API hosted by kube-apiserver. This mode is not
-allowed for kube-apiserver.</li>
-</ul>
-</td>
-</tr>
-<tr><td><code>kubeConfigFile</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>Path to KubeConfigFile for connection info
-Required, if connectionInfo.Type is KubeConfig</p>
-</td>
-</tr>
-</tbody>
-</table>
+allowed for kube-apiserver.
+
+
+
+kubeConfigFile [Required]
+string
+
+
+   Path to KubeConfigFile for connection info
+Required, if connectionInfo.Type is KubeConfig
+
+
+
+
 
 ## `WebhookMatchCondition`     {#apiserver-k8s-io-v1alpha1-WebhookMatchCondition}
     
@@ -1108,22 +1108,22 @@ Required, if connectionInfo.Type is KubeConfig</p>
 
 
 
-<table class="table">
-<thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
-<tbody>
+
+FieldDescription
+
     
   
-<tr><td><code>expression</code> <B>[Required]</B><br/>
-<code>string</code>
-</td>
-<td>
-   <p>expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
+expression [Required]
+string
+
+
+   expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
 CEL expressions have access to the contents of the SubjectAccessReview in v1 version.
 If version specified by subjectAccessReviewVersion in the request variable is v1beta1,
-the contents would be converted to the v1 version before evaluating the CEL expression.</p>
-<p>Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/</p>
-</td>
-</tr>
-</tbody>
-</table>
+the contents would be converted to the v1 version before evaluating the CEL expression.
+Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+
+
+
+
   

@@ -4,7 +4,7 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 
 This page shows how a Pod can use environment variables to expose information
 about itself to containers running in the Pod, using the _downward API_.
@@ -25,9 +25,9 @@ Read more about accessing Services [here](/docs/tutorials/services/connect-appli
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Use Pod fields as values for environment variables
 
@@ -43,10 +43,10 @@ The first element in the array specifies that the `MY_NODE_NAME` environment
 variable gets its value from the Pod's `spec.nodeName` field. Similarly, the
 other environment variables get their names from Pod fields.
 
-{{< note >}}
+{{}}
 The fields in this example are Pod fields. They are not fields of the
 container in the Pod.
-{{< /note >}}
+{{}}
 
 Create the Pod:
 
@@ -168,9 +168,9 @@ The output shows the values of selected environment variables:
 
 Read about Pods, containers and environment variables in the legacy API reference:
 
-* [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
-* [Container](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
-* [EnvVar](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvar-v1-core)
-* [EnvVarSource](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core)
-* [ObjectFieldSelector](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#objectfieldselector-v1-core)
-* [ResourceFieldSelector](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcefieldselector-v1-core)
+* [PodSpec](/docs/reference/generated/kubernetes-api/{{}}/#podspec-v1-core)
+* [Container](/docs/reference/generated/kubernetes-api/{{}}/#container-v1-core)
+* [EnvVar](/docs/reference/generated/kubernetes-api/{{}}/#envvar-v1-core)
+* [EnvVarSource](/docs/reference/generated/kubernetes-api/{{}}/#envvarsource-v1-core)
+* [ObjectFieldSelector](/docs/reference/generated/kubernetes-api/{{}}/#objectfieldselector-v1-core)
+* [ResourceFieldSelector](/docs/reference/generated/kubernetes-api/{{}}/#resourcefieldselector-v1-core)

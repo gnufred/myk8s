@@ -9,11 +9,11 @@ content_type: concept
 weight: 80
 ---
 
-<!-- overview -->
+
 Attribute-based access control (ABAC) defines an access control paradigm whereby access rights are granted
 to users through the use of policies which combine attributes together.
 
-<!-- body -->
+
 ## Policy File Format
 
 To enable `ABAC` mode, specify `--authorization-policy-file=SOME_FILENAME` and `--authorization-mode=ABAC`
@@ -55,14 +55,14 @@ properties:
   - `readonly`, type boolean, when true, means that the Resource-matching policy only applies to get, list,
     and watch operations, Non-resource-matching policy only applies to get operation.
 
-{{< note >}}
+{{}}
 An unset property is the same as a property set to the zero value for its type
 (e.g. empty string, 0, false). However, unset should be preferred for
 readability.
 
 In the future, policies may be expressed in a JSON format, and managed via a
 REST interface.
-{{< /note >}}
+{{}}
 
 ## Authorization Algorithm
 
@@ -139,7 +139,7 @@ kubectl --v=8 version
     {"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"group": "system:unauthenticated", "readonly": true, "nonResourcePath": "*"}}
    ```
 
-[Complete file example](https://releases.k8s.io/v{{< skew currentPatchVersion >}}/pkg/auth/authorizer/abac/example_policy_file.jsonl)
+[Complete file example](https://releases.k8s.io/v{{}}/pkg/auth/authorizer/abac/example_policy_file.jsonl)
 
 ## A quick note on service accounts
 
@@ -147,13 +147,13 @@ Every service account has a corresponding ABAC username, and that service accoun
 according to the naming convention:
 
 ```shell
-system:serviceaccount:<namespace>:<serviceaccountname>
+system:serviceaccount::
 ```
 
 Creating a new namespace leads to the creation of a new service account in the following format:
 
 ```shell
-system:serviceaccount:<namespace>:default
+system:serviceaccount::default
 ```
 
 For example, if you wanted to grant the default service account (in the `kube-system` namespace) full

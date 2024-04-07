@@ -6,11 +6,11 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
-The Kubernetes {{< glossary_tooltip term_id="kube-apiserver" text="API server" >}} provides API endpoints to indicate the current status of the API server.
+
+The Kubernetes {{}} provides API endpoints to indicate the current status of the API server.
 This page describes these API endpoints and explains how you can use them.
 
-<!-- body -->
+
 
 ## API endpoints for health
 
@@ -91,11 +91,11 @@ The output show that the `etcd` check is excluded:
 
 ## Individual health checks
 
-{{< feature-state state="alpha" >}}
+{{}}
 
 Each individual health check exposes an HTTP endpoint and can be checked individually.
-The schema for the individual health checks is `/livez/<healthcheck-name>` or `/readyz/<healthcheck-name>`, where `livez` and `readyz` can be used to indicate if you want to check the liveness or the readiness of the API server, respectively.
-The `<healthcheck-name>` path can be discovered using the `verbose` flag from above and take the path between `[+]` and `ok`.
+The schema for the individual health checks is `/livez/` or `/readyz/`, where `livez` and `readyz` can be used to indicate if you want to check the liveness or the readiness of the API server, respectively.
+The `` path can be discovered using the `verbose` flag from above and take the path between `[+]` and `ok`.
 These individual health checks should not be consumed by machines but can be helpful for a human operator to debug a system:
 
 ```shell

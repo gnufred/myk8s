@@ -16,7 +16,7 @@ tags:
 
 Kubernetes is a CNCF project.
 
-<!--more-->
+
 
 The CNCF is a sub-foundation of [the Linux Foundation](https://www.linuxfoundation.org/).
 Its mission is to make cloud native computing ubiquitous.

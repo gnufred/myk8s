@@ -11,38 +11,36 @@ description: >-
 ---
 
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.23" state="beta" >}}
 
-{{< note >}}
+{{}}
+
+{{}}
 Prior to Kubernetes 1.27, this feature was known as _Topology Aware Hints_.
-{{</ note >}}
+{{}}
 
 _Topology Aware Routing_ adjusts routing behavior to prefer keeping traffic in
 the zone it originated from. In some cases this can help reduce costs or improve
 network performance.
 
-<!-- body -->
+
 
 ## Motivation
 
 Kubernetes clusters are increasingly deployed in multi-zone environments.
 _Topology Aware Routing_ provides a mechanism to help keep traffic within the
-zone it originated from. When calculating the endpoints for a {{<
-glossary_tooltip term_id="Service" >}}, the EndpointSlice controller considers
+zone it originated from. When calculating the endpoints for a {{}}, the EndpointSlice controller considers
 the topology (region and zone) of each endpoint and populates the hints field to
-allocate it to a zone. Cluster components such as {{< glossary_tooltip
-term_id="kube-proxy" text="kube-proxy" >}} can then consume those hints, and use
+allocate it to a zone. Cluster components such as {{}} can then consume those hints, and use
 them to influence how the traffic is routed (favoring topologically closer
 endpoints).
 
 ## Enabling Topology Aware Routing
 
-{{< note >}}
+{{}}
 Prior to Kubernetes 1.27, this behavior was controlled using the
 `service.kubernetes.io/topology-aware-hints` annotation.
-{{</ note >}}
+{{}}
 
 You can enable Topology Aware Routing for a Service by setting the
 `service.kubernetes.io/topology-mode` annotation to `Auto`. When there are
@@ -172,15 +170,13 @@ zone.
   label set. This could be problematic if workloads are also running on those
   nodes.
 
-* The EndpointSlice controller does not take into account {{< glossary_tooltip
-  text="tolerations" term_id="toleration" >}} when deploying or calculating the
+* The EndpointSlice controller does not take into account {{}} when deploying or calculating the
   proportions of each zone. If the Pods backing a Service are limited to a
   subset of Nodes in the cluster, this will not be taken into account.
 
 * This may not work well with autoscaling. For example, if a lot of traffic is
   originating from a single zone, only the endpoints allocated to that zone will
-  be handling that traffic. That could result in {{< glossary_tooltip
-  text="Horizontal Pod Autoscaler" term_id="horizontal-pod-autoscaler" >}}
+  be handling that traffic. That could result in {{}}
   either not picking up on this event, or newly added pods starting in a
   different zone.
 

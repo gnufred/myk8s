@@ -5,25 +5,25 @@ weight: 90
 min-kubernetes-server-version: v1.22
 ---
 
-<!-- overview -->
+
 
 This page shows how to change the access mode on an existing PersistentVolume to
 use `ReadWriteOncePod`.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-{{< note >}}
+{{}}
 The `ReadWriteOncePod` access mode graduated to stable in the Kubernetes v1.29
 release. If you are running a version of Kubernetes older than v1.29, you might
 need to enable a feature gate. Check the documentation for your version of
 Kubernetes.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 The `ReadWriteOncePod` access mode is only supported for
-{{< glossary_tooltip text="CSI" term_id="csi" >}} volumes.
+{{}} volumes.
 To use this volume access mode you will need to update the following
 [CSI sidecars](https://kubernetes-csi.github.io/docs/sidecar-containers.html)
 to these versions or greater:
@@ -31,7 +31,7 @@ to these versions or greater:
 * [csi-provisioner:v3.0.0+](https://github.com/kubernetes-csi/external-provisioner/releases/tag/v3.0.0)
 * [csi-attacher:v3.3.0+](https://github.com/kubernetes-csi/external-attacher/releases/tag/v3.3.0)
 * [csi-resizer:v1.3.0+](https://github.com/kubernetes-csi/external-resizer/releases/tag/v1.3.0)
-{{< /note >}}
+{{}}
 
 ## Why should I use `ReadWriteOncePod`?
 
@@ -45,7 +45,7 @@ for applications that demand strict single-writer access for data safety.
 If ensuring single-writer access is critical for your workloads, consider
 migrating your volumes to `ReadWriteOncePod`.
 
-<!-- steps -->
+
 
 ## Migrating existing PersistentVolumes
 
@@ -57,7 +57,7 @@ In this example, there is already a `ReadWriteOnce` "cat-pictures-pvc"
 PersistentVolumeClaim that is bound to a "cat-pictures-pv" PersistentVolume,
 and a "cat-pictures-writer" Deployment that uses this PersistentVolumeClaim.
 
-{{< note >}}
+{{}}
 If your storage plugin supports
 [Dynamic provisioning](/docs/concepts/storage/dynamic-provisioning/),
 the "cat-picutres-pv" will be created for you, but its name may differ. To get
@@ -66,10 +66,10 @@ your PersistentVolume's name run:
 ```shell
 kubectl get pvc cat-pictures-pvc -o jsonpath='{.spec.volumeName}'
 ```
-{{< /note >}}
+{{}}
 
 And you can view the PVC before you make changes. Either view the manifest
-locally, or run `kubectl get pvc <name-of-pvc> -o yaml`. The output is similar
+locally, or run `kubectl get pvc  -o yaml`. The output is similar
 to:
 
 ```yaml
@@ -150,11 +150,11 @@ After that, replace the PersistentVolume's list of valid access modes to be
 kubectl patch pv cat-pictures-pv -p '{"spec":{"accessModes":["ReadWriteOncePod"]}}'
 ```
 
-{{< note >}}
+{{}}
 The `ReadWriteOncePod` access mode cannot be combined with other access modes.
 Make sure `ReadWriteOncePod` is the only access mode on the PersistentVolume
 when updating, otherwise the request will fail.
-{{< /note >}}
+{{}}
 
 Next you need to modify your PersistentVolumeClaim to set `ReadWriteOncePod` as
 the only access mode. You should also set the PersistentVolumeClaim's

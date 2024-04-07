@@ -5,9 +5,9 @@ min-kubernetes-server-version: v1.26
 weight: 420
 ---
 
-<!-- overview -->
 
-{{< feature-state state="beta" for_k8s_version="v1.26" >}}
+
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
@@ -24,7 +24,7 @@ standalone binaries) by using cosign's keyless signing. To verify a particular
 binary, retrieve it together with its signature and certificate:
 
 ```bash
-URL=https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/linux/amd64
+URL=https://dl.k8s.io/release/v{{}}/bin/linux/amd64
 BINARY=kubectl
 
 FILES=(
@@ -48,7 +48,7 @@ cosign verify-blob "$BINARY" \
   --certificate-oidc-issuer https://accounts.google.com
 ```
 
-{{< note >}}
+{{}}
 Cosign 2.0 requires the `--certificate-identity` and `--certificate-oidc-issuer` options.
 
 To learn more about keyless signing, please refer to [Keyless Signatures](https://docs.sigstore.dev/signing/overview/).
@@ -56,7 +56,7 @@ To learn more about keyless signing, please refer to [Keyless Signatures](https:
 Previous versions of Cosign required that you set `COSIGN_EXPERIMENTAL=1`.
 
 For additional information, please refer to the [sigstore Blog](https://blog.sigstore.dev/cosign-2-0-released/)
-{{< /note >}}
+{{}}
 
 ## Verifying image signatures
 
@@ -67,7 +67,7 @@ Pick one image from this list and verify its signature using
 the `cosign verify` command:
 
 ```shell
-cosign verify registry.k8s.io/kube-apiserver-amd64:v{{< skew currentPatchVersion >}} \
+cosign verify registry.k8s.io/kube-apiserver-amd64:v{{}} \
   --certificate-identity krel-trust@k8s-releng-prod.iam.gserviceaccount.com \
   --certificate-oidc-issuer https://accounts.google.com \
   | jq .
@@ -76,7 +76,7 @@ cosign verify registry.k8s.io/kube-apiserver-amd64:v{{< skew currentPatchVersion
 ### Verifying images for all control plane components
 
 To verify all signed control plane images for the latest stable version
-(v{{< skew currentPatchVersion >}}), please run the following commands:
+(v{{}}), please run the following commands:
 
 ```shell
 curl -Ls "https://sbom.k8s.io/$(curl -Ls https://dl.k8s.io/release/stable.txt)/release" \

@@ -5,7 +5,7 @@ weight: 10
 ---
 
 
-{{< feature-state for_k8s_version="v1.25" state="alpha" >}}
+{{}}
 
 Checkpointing a container is the functionality to create a stateful copy of a
 running container. Once you have a stateful copy of a container, you could
@@ -36,9 +36,9 @@ for more information about how access to the kubelet checkpoint interface is
 controlled.
 
 The kubelet will request a checkpoint from the underlying
-{{<glossary_tooltip term_id="cri" text="CRI">}} implementation. In the checkpoint
+{{}} implementation. In the checkpoint
 request the kubelet will specify the name of the checkpoint archive as
-`checkpoint-<podFullName>-<containerName>-<timestamp>.tar` and also request to
+`checkpoint---.tar` and also request to
 store the checkpoint archive in the `checkpoints` directory below its root
 directory (as defined by `--root-dir`).  This defaults to
 `/var/lib/kubelet/checkpoints`.
@@ -55,21 +55,20 @@ POST /checkpoint/{namespace}/{pod}/{container}
 
 - **namespace** (*in path*): string, required
 
-  {{< glossary_tooltip term_id="namespace" >}}
+  {{}}
 
 - **pod** (*in path*): string, required
 
-  {{< glossary_tooltip term_id="pod" >}}
+  {{}}
 
 - **container** (*in path*): string, required
 
-  {{< glossary_tooltip term_id="container" >}}
+  {{}}
 
 - **timeout** (*in query*): integer
 
   Timeout in seconds to wait until the checkpoint creation is finished.
-  If zero or no timeout is specified the default {{<glossary_tooltip
-  term_id="cri" text="CRI">}} timeout value will be used. Checkpoint
+  If zero or no timeout is specified the default {{}} timeout value will be used. Checkpoint
   creation time depends directly on the used memory of the container.
   The more memory a container uses the more time is required to create
   the corresponding checkpoint.
@@ -88,9 +87,9 @@ POST /checkpoint/{namespace}/{pod}/{container}
 
 500: Internal Server Error (if the CRI implementation does not implement the checkpoint CRI API (see error message for further details))
 
-{{< comment >}}
+{{}}
 TODO: Add more information about return codes once CRI implementation have checkpoint/restore.
       This TODO cannot be fixed before the release, because the CRI implementation need
       the Kubernetes changes to be merged to implement the new ContainerCheckpoint CRI API
       call. We need to wait after the 1.25 release to fix this.
-{{< /comment >}}
+{{}}

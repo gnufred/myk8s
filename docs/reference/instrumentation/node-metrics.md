@@ -29,10 +29,10 @@ Here is the same API call using `curl`:
 curl http://localhost:8080/api/v1/nodes/minikube/proxy/stats/summary
 ```
 
-{{< note >}}
+{{}}
 Beginning with `metrics-server` 0.6.x, `metrics-server` queries the `/metrics/resource`
 kubelet endpoint, and not `/stats/summary`.
-{{< /note >}}
+{{}}
 
 ## Summary metrics API source {#summary-api-source}
 
@@ -40,7 +40,7 @@ By default, Kubernetes fetches node summary metrics data using an embedded
 [cAdvisor](https://github.com/google/cadvisor) that runs within the kubelet. If you 
 enable the `PodAndContainerStatsFromCRI` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) 
 in your cluster, and you use a container runtime that supports statistics access via
-{{< glossary_tooltip term_id="cri" text="Container Runtime Interface">}} (CRI), then
+{{}} (CRI), then
 the kubelet [fetches Pod- and container-level metric data using CRI](/docs/reference/instrumentation/cri-pod-container-metrics), and not via cAdvisor.
 
 ## {{% heading "whatsnext" %}}

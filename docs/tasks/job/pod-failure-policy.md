@@ -5,28 +5,28 @@ min-kubernetes-server-version: v1.25
 weight: 60
 ---
 
-{{< feature-state for_k8s_version="v1.26" state="beta" >}}
+{{}}
 
-<!-- overview -->
+
 
 This document shows you how to use the
 [Pod failure policy](/docs/concepts/workloads/controllers/job#pod-failure-policy),
 in combination with the default
 [Pod backoff failure policy](/docs/concepts/workloads/controllers/job#pod-backoff-failure-policy),
 to improve the control over the handling of container- or Pod-level failure
-within a {{<glossary_tooltip text="Job" term_id="job">}}.
+within a {{}}.
 
 The definition of Pod failure policy may help you to:
 * better utilize the computational resources by avoiding unnecessary Pod retries.
-* avoid Job failures due to Pod disruptions (such {{<glossary_tooltip text="preemption" term_id="preemption" >}},
-{{<glossary_tooltip text="API-initiated eviction" term_id="api-eviction" >}}
-or {{<glossary_tooltip text="taint" term_id="taint" >}}-based eviction).
+* avoid Job failures due to Pod disruptions (such {{}},
+{{}}
+or {{}}-based eviction).
 
 ## {{% heading "prerequisites" %}}
 
 You should already be familiar with the basic use of [Job](/docs/concepts/workloads/controllers/job/).
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 Ensure that the [feature gates](/docs/reference/command-line-tools-reference/feature-gates/)
 `PodDisruptionConditions` and `JobPodFailurePolicy` are both enabled in your cluster.
@@ -77,11 +77,11 @@ With the following example, you can learn how to use Pod failure policy to
 ignore Pod disruptions from incrementing the Pod retry counter towards the
 `.spec.backoffLimit` limit.
 
-{{< caution >}}
+{{}}
 Timing is important for this example, so you may want to read the steps before
 execution. In order to trigger a Pod disruption it is important to drain the
 node while the Pod is running on it (within 90s since the Pod is scheduled).
-{{< /caution >}}
+{{}}
 
 1. Create a Job based on the config:
 
@@ -137,11 +137,11 @@ The cluster automatically cleans up the Pods.
 With the following example, you can learn how to use Pod failure policy to
 avoid unnecessary Pod restarts based on custom Pod Conditions.
 
-{{< note >}}
+{{}}
 The example below works since version 1.27 as it relies on transitioning of
 deleted pods, in the `Pending` phase, to a terminal phase
 (see: [Pod Phase](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)).
-{{< /note >}}
+{{}}
 
 1. First, create a Job based on the config:
 
@@ -182,7 +182,7 @@ deleted pods, in the `Pending` phase, to a terminal phase
 3. Add the custom condition. First prepare the patch by running:
 
    ```sh
-   cat <<EOF > patch.yaml
+   cat  patch.yaml
    status:
      conditions:
      - type: ConfigIssue
@@ -225,10 +225,10 @@ deleted pods, in the `Pending` phase, to a terminal phase
    more detailed information about the Job termination, such as:
    `Pod default/job-pod-failure-policy-config-issue-k6pvp has condition ConfigIssue matching FailJob rule at index 0`.
 
-{{< note >}}
+{{}}
 In a production environment, the steps 3 and 4 should be automated by a
 user-provided controller.
-{{< /note >}}
+{{}}
 
 ### Cleaning up
 

@@ -9,9 +9,9 @@ weight: 10
 ## {{% heading "prerequisites" %}}
 
 You must use a kubectl version that is within one minor version difference of
-your cluster. For example, a v{{< skew currentVersion >}} client can communicate
-with v{{< skew currentVersionAddMinor -1 >}}, v{{< skew currentVersionAddMinor 0 >}},
-and v{{< skew currentVersionAddMinor 1 >}} control planes.
+your cluster. For example, a v{{}} client can communicate
+with v{{}}, v{{}},
+and v{{}} control planes.
 Using the latest compatible version of kubectl helps avoid unforeseen issues.
 
 ## Install kubectl on macOS
@@ -31,45 +31,45 @@ The following methods exist for installing kubectl on macOS:
 
 1. Download the latest release:
 
-   {{< tabs name="download_binary_macos" >}}
-   {{< tab name="Intel" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
-   {{< /tab >}}
-   {{< tab name="Apple Silicon" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
 
-   {{< note >}}
+   {{}}
    To download a specific version, replace the `$(curl -L -s https://dl.k8s.io/release/stable.txt)`
    portion of the command with the specific version.
 
-   For example, to download version {{< skew currentPatchVersion >}} on Intel macOS, type:
+   For example, to download version {{}} on Intel macOS, type:
 
    ```bash
-   curl -LO "https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/darwin/amd64/kubectl"
+   curl -LO "https://dl.k8s.io/release/v{{}}/bin/darwin/amd64/kubectl"
    ```
 
    And for macOS on Apple Silicon, type:
 
    ```bash
-   curl -LO "https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/darwin/arm64/kubectl"
+   curl -LO "https://dl.k8s.io/release/v{{}}/bin/darwin/arm64/kubectl"
    ```
 
-   {{< /note >}}
+   {{}}
 
 1. Validate the binary (optional)
 
    Download the kubectl checksum file:
 
-   {{< tabs name="download_checksum_macos" >}}
-   {{< tab name="Intel" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl.sha256"
-   {{< /tab >}}
-   {{< tab name="Apple Silicon" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl.sha256"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
   
    Validate the kubectl binary against the checksum file:
 
@@ -90,9 +90,9 @@ The following methods exist for installing kubectl on macOS:
    shasum: WARNING: 1 computed checksum did NOT match
    ```
 
-   {{< note >}}
+   {{}}
    Download the same version of the binary and checksum.
-   {{< /note >}}
+   {{}}
 
 1. Make the kubectl binary executable.
 
@@ -107,9 +107,9 @@ The following methods exist for installing kubectl on macOS:
    sudo chown root: /usr/local/bin/kubectl
    ```
 
-   {{< note >}}
+   {{}}
    Make sure `/usr/local/bin` is in your PATH environment variable.
-   {{< /note >}}
+   {{}}
 
 1. Test to ensure the version you installed is up-to-date:
 
@@ -172,7 +172,7 @@ you can install kubectl with Macports.
 
 ## Verify kubectl configuration
 
-{{< include "included/verify-kubectl.md" >}}
+{{}}
 
 ## Optional kubectl configurations and plugins
 
@@ -183,39 +183,39 @@ which can save you a lot of typing.
 
 Below are the procedures to set up autocompletion for Bash, Fish, and Zsh.
 
-{{< tabs name="kubectl_autocompletion" >}}
-{{< tab name="Bash" include="included/optional-kubectl-configs-bash-mac.md" />}}
-{{< tab name="Fish" include="included/optional-kubectl-configs-fish.md" />}}
-{{< tab name="Zsh" include="included/optional-kubectl-configs-zsh.md" />}}
-{{< /tabs >}}
+{{}}
+{{}}
+{{}}
+{{}}
+{{}}
 
 ### Install `kubectl convert` plugin
 
-{{< include "included/kubectl-convert-overview.md" >}}
+{{}}
 
 1. Download the latest release with the command:
 
-   {{< tabs name="download_convert_binary_macos" >}}
-   {{< tab name="Intel" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl-convert"
-   {{< /tab >}}
-   {{< tab name="Apple Silicon" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl-convert"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
 
 1. Validate the binary (optional)
 
    Download the kubectl-convert checksum file:
 
-   {{< tabs name="download_convert_checksum_macos" >}}
-   {{< tab name="Intel" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl-convert.sha256"
-   {{< /tab >}}
-   {{< tab name="Apple Silicon" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl-convert.sha256"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
 
    Validate the kubectl-convert binary against the checksum file:
 
@@ -236,9 +236,9 @@ Below are the procedures to set up autocompletion for Bash, Fish, and Zsh.
    shasum: WARNING: 1 computed checksum did NOT match
    ```
 
-   {{< note >}}
+   {{}}
    Download the same version of the binary and checksum.
-   {{< /note >}}
+   {{}}
 
 1. Make kubectl-convert binary executable
 
@@ -253,9 +253,9 @@ Below are the procedures to set up autocompletion for Bash, Fish, and Zsh.
    sudo chown root: /usr/local/bin/kubectl-convert
    ```
 
-   {{< note >}}
+   {{}}
    Make sure `/usr/local/bin` is in your PATH environment variable.
-   {{< /note >}}
+   {{}}
 
 1. Verify plugin is successfully installed
 
@@ -286,9 +286,9 @@ Depending on how you installed `kubectl`, use one of the following methods.
 1.  Remove the `kubectl` binary:
 
     ```bash
-    sudo rm <path>
+    sudo rm 
     ```
-    Replace `<path>` with the path to the `kubectl` binary from the previous step. For example, `sudo rm /usr/local/bin/kubectl`.
+    Replace `` with the path to the `kubectl` binary from the previous step. For example, `sudo rm /usr/local/bin/kubectl`.
 
 ### Uninstall kubectl using homebrew
 
@@ -300,6 +300,6 @@ brew remove kubectl
   
 ## {{% heading "whatsnext" %}}
 
-{{< include "included/kubectl-whats-next.md" >}}
+{{}}
 
 

@@ -10,16 +10,7 @@ weight: 17
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: resource.k8s.io/v1alpha2`
 
@@ -32,7 +23,7 @@ ResourceClass is used by administrators to influence how resources are allocated
 
 This is an alpha type and requires enabling the DynamicResourceAllocation feature gate.
 
-<hr>
+
 
 - **apiVersion**: resource.k8s.io/v1alpha2
 
@@ -40,7 +31,7 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
 - **kind**: ResourceClass
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object metadata
 
@@ -54,7 +45,7 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
 
   ParametersRef references an arbitrary separate object that may hold parameters that will be used by the driver when allocating a resource that uses this class. A dynamic resource driver can distinguish between parameters stored here and and those stored in ResourceClaimSpec.
 
-  <a name="ResourceClassParametersReference"></a>
+  
   *ResourceClassParametersReference contains enough information to let you locate the parameters for a ResourceClass.*
 
   - **parametersRef.kind** (string), required
@@ -79,21 +70,21 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
   
   Setting this field is optional. If null, all nodes are candidates.
 
-  <a name="NodeSelector"></a>
+  
   *A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms.*
 
   - **suitableNodes.nodeSelectorTerms** ([]NodeSelectorTerm), required
 
     Required. A list of node selector terms. The terms are ORed.
 
-    <a name="NodeSelectorTerm"></a>
+    
     *A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.*
 
-    - **suitableNodes.nodeSelectorTerms.matchExpressions** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+    - **suitableNodes.nodeSelectorTerms.matchExpressions** ([]}}">NodeSelectorRequirement)
 
       A list of node selector requirements by node's labels.
 
-    - **suitableNodes.nodeSelectorTerms.matchFields** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+    - **suitableNodes.nodeSelectorTerms.matchFields** ([]}}">NodeSelectorRequirement)
 
       A list of node selector requirements by node's fields.
 
@@ -105,7 +96,7 @@ This is an alpha type and requires enabling the DynamicResourceAllocation featur
 
 ResourceClassList is a collection of classes.
 
-<hr>
+
 
 - **apiVersion**: resource.k8s.io/v1alpha2
 
@@ -113,11 +104,11 @@ ResourceClassList is a collection of classes.
 - **kind**: ResourceClassList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata
 
-- **items** ([]<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>), required
+- **items** ([]}}">ResourceClass), required
 
   Items is the list of resource classes.
 
@@ -129,7 +120,7 @@ ResourceClassList is a collection of classes.
 
 
 
-<hr>
+
 
 
 
@@ -152,14 +143,14 @@ GET /apis/resource.k8s.io/v1alpha2/resourceclasses/{name}
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): OK
+200 (}}">ResourceClass): OK
 
 401: Unauthorized
 
@@ -175,64 +166,64 @@ GET /apis/resource.k8s.io/v1alpha2/resourceclasses
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClassList" >}}">ResourceClassList</a>): OK
+200 (}}">ResourceClassList): OK
 
 401: Unauthorized
 
@@ -246,40 +237,40 @@ POST /apis/resource.k8s.io/v1alpha2/resourceclasses
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>, required
+- **body**: }}">ResourceClass, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): OK
+200 (}}">ResourceClass): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): Created
+201 (}}">ResourceClass): Created
 
-202 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): Accepted
+202 (}}">ResourceClass): Accepted
 
 401: Unauthorized
 
@@ -298,38 +289,38 @@ PUT /apis/resource.k8s.io/v1alpha2/resourceclasses/{name}
   name of the ResourceClass
 
 
-- **body**: <a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>, required
+- **body**: }}">ResourceClass, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): OK
+200 (}}">ResourceClass): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): Created
+201 (}}">ResourceClass): Created
 
 401: Unauthorized
 
@@ -348,43 +339,43 @@ PATCH /apis/resource.k8s.io/v1alpha2/resourceclasses/{name}
   name of the ResourceClass
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): OK
+200 (}}">ResourceClass): OK
 
-201 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): Created
+201 (}}">ResourceClass): Created
 
 401: Unauthorized
 
@@ -403,38 +394,38 @@ DELETE /apis/resource.k8s.io/v1alpha2/resourceclasses/{name}
   name of the ResourceClass
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): OK
+200 (}}">ResourceClass): OK
 
-202 (<a href="{{< ref "../workload-resources/resource-class-v1alpha2#ResourceClass" >}}">ResourceClass</a>): Accepted
+202 (}}">ResourceClass): Accepted
 
 401: Unauthorized
 
@@ -448,76 +439,76 @@ DELETE /apis/resource.k8s.io/v1alpha2/resourceclasses
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

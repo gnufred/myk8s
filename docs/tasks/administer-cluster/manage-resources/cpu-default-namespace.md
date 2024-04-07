@@ -7,16 +7,16 @@ description: >-
   in that namespace has a CPU resource limit configured.
 ---
 
-<!-- overview -->
+
 
 This page shows how to configure default CPU requests and limits for a
-{{< glossary_tooltip text="namespace" term_id="namespace" >}}.
+{{}}.
 
 A Kubernetes cluster can be divided into namespaces. If you create a Pod within a
 namespace that has a default CPU
 [limit](/docs/concepts/configuration/manage-resources-containers/#requests-and-limits), and any container in that Pod does not specify
 its own CPU limit, then the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}} assigns the default
+{{}} assigns the default
 CPU limit to that container.
 
 Kubernetes assigns a default CPU
@@ -26,14 +26,14 @@ but only under certain conditions that are explained later in this page.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You must have access to create namespaces in your cluster.
 
 If you're not already familiar with what Kubernetes means by 1.0 CPU,
 read [meaning of CPU](/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu).
 
-<!-- steps -->
+
 
 ## Create a namespace
 
@@ -46,7 +46,7 @@ kubectl create namespace default-cpu-example
 
 ## Create a LimitRange and a Pod
 
-Here's a manifest for an example {{< glossary_tooltip text="LimitRange" term_id="limitrange" >}}.
+Here's a manifest for an example {{}}.
 The manifest specifies a default CPU request and a default CPU limit.
 
 {{% code_sample file="admin/resource/cpu-defaults.yaml" %}}
@@ -161,7 +161,7 @@ resources:
 
 ## Motivation for default CPU limits and requests
 
-If your namespace has a CPU {{< glossary_tooltip text="resource quota" term_id="resource-quota" >}}
+If your namespace has a CPU {{}}
 configured,
 it is helpful to have a default value in place for CPU limit.
 Here are two of the restrictions that a CPU resource quota imposes on a namespace:

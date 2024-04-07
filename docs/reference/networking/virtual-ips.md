@@ -4,20 +4,18 @@ content_type: reference
 weight: 50
 ---
 
-<!-- overview -->
-Every {{< glossary_tooltip term_id="node" text="node" >}} in a Kubernetes
-{{< glossary_tooltip term_id="cluster" text="cluster" >}} runs a
+
+Every {{}} in a Kubernetes
+{{}} runs a
 [kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/)
 (unless you have deployed your own alternative component in place of `kube-proxy`).
 
 The `kube-proxy` component is responsible for implementing a _virtual IP_
-mechanism for {{< glossary_tooltip term_id="service" text="Services">}}
+mechanism for {{}}
 of `type` other than
 [`ExternalName`](/docs/concepts/services-networking/service/#externalname).
-Each instance of kube-proxy watches the Kubernetes {{< glossary_tooltip
-term_id="control-plane" text="control plane" >}} for the addition and
-removal of Service and EndpointSlice {{< glossary_tooltip
-term_id="object" text="objects" >}}. For each Service, kube-proxy
+Each instance of kube-proxy watches the Kubernetes {{}} for the addition and
+removal of Service and EndpointSlice {{}}. For each Service, kube-proxy
 calls appropriate APIs (depending on the kube-proxy mode) to configure
 the node to capture traffic to the Service's `clusterIP` and `port`,
 and redirect that traffic to one of the Service's endpoints
@@ -25,7 +23,7 @@ and redirect that traffic to one of the Service's endpoints
 loop ensures that the rules on each node are reliably synchronized with
 the Service and EndpointSlice state as indicated by the API server.
 
-{{< figure src="/images/docs/services-iptables-overview.svg" title="Virtual IP mechanism for Services, using iptables mode" class="diagram-medium" >}}
+{{}}
 
 A question that pops up every now and then is why Kubernetes relies on
 proxying to forward inbound traffic to backends. What about other
@@ -51,16 +49,16 @@ network proxying service on a computer.  Although the `kube-proxy` executable su
 `cleanup` function, this function is not an official feature and thus is only available
 to use as-is.
 
-<a id="example"></a>
+
 Some of the details in this reference refer to an example: the backend
-{{< glossary_tooltip term_id="pod" text="Pods" >}} for a stateless
+{{}} for a stateless
 image-processing workloads, running with
 three replicas. Those replicas are
 fungible&mdash;frontends do not care which backend they use.  While the actual Pods that
 compose the backend set may change, the frontend clients should not need to be aware of that,
 nor should they need to keep track of the set of backends themselves.
 
-<!-- body -->
+
 
 ## Proxy modes
 
@@ -123,7 +121,7 @@ in the kernel when Services (or their EndpointSlices) change. You can adjust the
 behavior of kube-proxy via options in the [`iptables` section](/docs/reference/config-api/kube-proxy-config.v1alpha1/#kubeproxy-config-k8s-io-v1alpha1-KubeProxyIPTablesConfiguration)
 of the
 kube-proxy [configuration file](/docs/reference/config-api/kube-proxy-config.v1alpha1/)
-(which you specify via `kube-proxy --config <path>`):
+(which you specify via `kube-proxy --config `):
 
 ```yaml
 ...
@@ -141,7 +139,7 @@ attempts to resynchronize iptables rules with the kernel. If it is
 every time any Service or Endpoint changes. This works fine in very
 small clusters, but it results in a lot of redundant work when lots of
 things change in a small time period. For example, if you have a
-Service backed by a {{< glossary_tooltip term_id="deployment" text="Deployment" >}}
+Service backed by a {{}}
 with 100 pods, and you delete the
 Deployment, then with `minSyncPeriod: 0s`, kube-proxy would end up
 removing the Service's endpoints from the iptables rules one by one,
@@ -177,7 +175,7 @@ If you were previously overriding `minSyncPeriod`, you should try
 removing that override and letting kube-proxy use the default value
 (`1s`) or at least a smaller value than you were using before upgrading.
 
-If you are not running kube-proxy from Kubernetes {{< skew currentVersion >}}, check
+If you are not running kube-proxy from Kubernetes {{}}, check
 the behavior and associated advice for the version that you are actually running.
 
 ##### `syncPeriod`
@@ -249,20 +247,20 @@ these are:
   waiting for a fast one; if all servers are busy, the algorithm falls back to the `sed`
   behavior.
 
-{{< note >}}
+{{}}
 To run kube-proxy in IPVS mode, you must make IPVS available on
 the node before starting kube-proxy.
 
 When kube-proxy starts in IPVS proxy mode, it verifies whether IPVS
 kernel modules are available. If the IPVS kernel modules are not detected, then kube-proxy
 exits with an error.
-{{< /note >}}
+{{}}
 
-{{< figure src="/images/docs/services-ipvs-overview.svg" title="Virtual IP address mechanism for Services, using IPVS mode" class="diagram-medium" >}}
+{{}}
 
 ### `nftables` proxy mode {#proxy-mode-nftables}
 
-{{< feature-state for_k8s_version="v1.29" state="alpha" >}}
+{{}}
 
 _This proxy mode is only available on Linux nodes._
 
@@ -274,7 +272,7 @@ random.
 The nftables API is the successor to the iptables API, and although it
 is designed to provide better performance and scalability than
 iptables, the kube-proxy nftables mode is still under heavy
-development as of {{< skew currentVersion >}} and is not necessarily
+development as of {{}} and is not necessarily
 expected to outperform the other Linux modes at this time.
 
 ### `kernelspace` proxy mode {#proxy-mode-kernelspace}
@@ -296,7 +294,7 @@ IP address and not the specific backend Pod.
 
 #### Direct server return for `kernelspace` mode {#windows-direct-server-return}
 
-{{< feature-state for_k8s_version="v1.14" state="alpha" >}}
+{{}}
 
 As an alternative to the basic operation, a node that hosts the backend Pod for a Service can
 apply the packet rewriting directly, rather than placing this burden on the node where the client
@@ -325,9 +323,9 @@ You can also set the maximum session sticky time by setting
 `.spec.sessionAffinityConfig.clientIP.timeoutSeconds` appropriately for a Service.
 (the default value is 10800, which works out to be 3 hours).
 
-{{< note >}}
+{{}}
 On Windows, setting the maximum session sticky time for Services is not supported.
-{{< /note >}}
+{{}}
 
 ## IP address assignment to Services
 
@@ -351,12 +349,12 @@ someone else's choice.  That is an isolation failure.
 In order to allow you to choose an IP address for your Services, we must
 ensure that no two Services can collide. Kubernetes does that by allocating each
 Service its own IP address from within the `service-cluster-ip-range`
-CIDR range that is configured for the {{< glossary_tooltip term_id="kube-apiserver" text="API Server" >}}.
+CIDR range that is configured for the {{}}.
 
 ### IP address allocation tracking
 
 To ensure each Service receives a unique IP address, an internal allocator atomically
-updates a global allocation map in {{< glossary_tooltip term_id="etcd" >}}
+updates a global allocation map in {{}}
 prior to creating each Service. The map object must exist in the registry for
 Services to get IP address assignments, otherwise creations will
 fail with a message indicating an IP address could not be allocated.
@@ -369,7 +367,7 @@ IP addresses that are no longer used by any Services.
 
 #### IP address allocation tracking using the Kubernetes API {#ip-address-objects}
 
-{{< feature-state for_k8s_version="v1.27" state="alpha" >}}
+{{}}
 
 If you enable the `MultiCIDRServiceAllocator`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) and the
@@ -380,7 +378,7 @@ Each cluster IP address associated to a Service then references an IPAddress obj
 
 Enabling the feature gate also replaces a background controller with an alternative
 that handles the IPAddress objects and supports migration from the old allocator model.
-Kubernetes {{< skew currentVersion >}} does not support migrating from IPAddress
+Kubernetes {{}} does not support migrating from IPAddress
 objects to the internal allocation map.
 
 One of the main benefits of the revised allocator is that it removes the size limitations
@@ -401,7 +399,7 @@ kubectl get services
 ```
 ```
 NAME         TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   2001:db8:1:2::1   <none>        443/TCP   3d1h
+kubernetes   ClusterIP   2001:db8:1:2::1           443/TCP   3d1h
 ```
 ```shell
 kubectl get ipaddresses
@@ -427,32 +425,7 @@ kubernetes   10.96.0.0/28  17m
 Users can create or delete new ServiceCIDR objects to manage the available IP ranges for Services:
 
 ```shell
-cat <<'EOF' | kubectl apply -f -
-apiVersion: networking.k8s.io/v1alpha1
-kind: ServiceCIDR
-metadata:
-  name: newservicecidr
-spec:
-  cidrs:
-  - 10.96.0.0/24
-EOF
-```
-```
-servicecidr.networking.k8s.io/newcidr1 created
-```
-
-```shell
-kubectl get servicecidrs
-```
-```
-NAME             CIDRS         AGE
-kubernetes       10.96.0.0/28  17m
-newservicecidr   10.96.0.0/24  7m
-```
-
-### IP address ranges for Service virtual IP addresses {#service-ip-static-sub-range}
-
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+cat }}
 
 Kubernetes divides the `ClusterIP` range into two bands, based on
 the size of the configured `service-cluster-ip-range` by using the following formula
@@ -471,7 +444,7 @@ to control how Kubernetes routes traffic to healthy (“ready”) backends.
 
 ### Internal traffic policy
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+{{}}
 
 You can set the `.spec.internalTrafficPolicy` field to control how traffic from
 internal sources is routed. Valid values are `Cluster` and `Local`. Set the field to
@@ -490,7 +463,7 @@ relevant Service.
 
 ### Traffic to terminating endpoints
 
-{{< feature-state for_k8s_version="v1.28" state="stable" >}}
+{{}}
 
 If the `ProxyTerminatingEndpoints`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)

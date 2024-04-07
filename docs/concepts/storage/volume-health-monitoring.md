@@ -9,30 +9,30 @@ content_type: concept
 weight: 100
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.21" state="alpha" >}}
 
-{{< glossary_tooltip text="CSI" term_id="csi" >}} volume health monitoring allows
+{{}}
+
+{{}} volume health monitoring allows
 CSI Drivers to detect abnormal volume conditions from the underlying storage systems
-and report them as events on {{< glossary_tooltip text="PVCs" term_id="persistent-volume-claim" >}}
-or {{< glossary_tooltip text="Pods" term_id="pod" >}}.
+and report them as events on {{}}
+or {{}}.
 
-<!-- body -->
+
 
 ## Volume health monitoring
 
 Kubernetes _volume health monitoring_ is part of how Kubernetes implements the
 Container Storage Interface (CSI). Volume health monitoring feature is implemented
 in two components: an External Health Monitor controller, and the
-{{< glossary_tooltip term_id="kubelet" text="kubelet" >}}.
+{{}}.
 
 If a CSI Driver supports Volume Health Monitoring feature from the controller side,
 an event will be reported on the related
-{{< glossary_tooltip text="PersistentVolumeClaim" term_id="persistent-volume-claim" >}} (PVC)
+{{}} (PVC)
 when an abnormal volume condition is detected on a CSI volume.
 
-The External Health Monitor {{< glossary_tooltip text="controller" term_id="controller" >}}
+The External Health Monitor {{}}
 also watches for node failure events. You can enable node failure monitoring by setting
 the `enable-node-watcher` flag to true. When the external health monitor detects a node
 failure event, the controller reports an Event will be reported on the PVC to indicate
@@ -47,10 +47,10 @@ The count is either 1 or 0. 1 indicates the volume is unhealthy, 0 indicates vol
 is healthy. For more information, please check
 [KEP](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1432-volume-health-monitor#kubelet-metrics-changes).
 
-{{< note >}}
+{{}}
 You need to enable the `CSIVolumeHealth` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 to use this feature from the node side.
-{{< /note >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

@@ -11,10 +11,10 @@ tags:
 - security
 ---
  The `securityContext` field defines privilege and access control settings for
-a {{< glossary_tooltip text="Pod" term_id="pod" >}} or
-{{< glossary_tooltip text="container" term_id="container" >}}.
+a {{}} or
+{{}}.
 
-<!--more-->
+
 
 In a `securityContext`, you can define: the user that processes run as,
 the group that processes run as, and privilege settings.

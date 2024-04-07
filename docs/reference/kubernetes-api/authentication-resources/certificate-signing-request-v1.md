@@ -10,16 +10,7 @@ weight: 4
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: certificates.k8s.io/v1`
 
@@ -36,7 +27,7 @@ Kubelets use this API to obtain:
 
 This API can be used to request client certificates to authenticate to kube-apiserver (with the "kubernetes.io/kube-apiserver-client" signerName), or to obtain certificates from custom non-Kubernetes signers.
 
-<hr>
+
 
 - **apiVersion**: certificates.k8s.io/v1
 
@@ -44,14 +35,14 @@ This API can be used to request client certificates to authenticate to kube-apis
 - **kind**: CertificateSigningRequest
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
 
-- **spec** (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequestSpec" >}}">CertificateSigningRequestSpec</a>), required
+- **spec** (}}">CertificateSigningRequestSpec), required
 
   spec contains the certificate request, and is immutable after creation. Only the request, signerName, expirationSeconds, and usages fields can be set on creation. Other fields are derived by Kubernetes and cannot be modified by users.
 
-- **status** (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequestStatus" >}}">CertificateSigningRequestStatus</a>)
+- **status** (}}">CertificateSigningRequestStatus)
 
   status contains information about whether the request is approved or denied, and the certificate issued by the signer, or the failure condition indicating signer failure.
 
@@ -63,7 +54,7 @@ This API can be used to request client certificates to authenticate to kube-apis
 
 CertificateSigningRequestSpec contains the certificate request.
 
-<hr>
+
 
 - **request** ([]byte), required
 
@@ -155,7 +146,7 @@ CertificateSigningRequestSpec contains the certificate request.
 
 CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of the request, and the issued certificate.
 
-<hr>
+
 
 - **certificate** ([]byte)
 
@@ -190,7 +181,7 @@ CertificateSigningRequestStatus contains conditions used to indicate approved/de
   
   conditions applied to the request. Known conditions are "Approved", "Denied", and "Failed".
 
-  <a name="CertificateSigningRequestCondition"></a>
+  
   *CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object*
 
   - **conditions.status** (string), required
@@ -215,14 +206,14 @@ CertificateSigningRequestStatus contains conditions used to indicate approved/de
 
     lastTransitionTime is the time the condition last transitioned from one status to another. If unset, when a new condition type is added or an existing condition's status is changed, the server defaults this to the current time.
 
-    <a name="Time"></a>
+    
     *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
   - **conditions.lastUpdateTime** (Time)
 
     lastUpdateTime is the time of the last update to this condition
 
-    <a name="Time"></a>
+    
     *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
   - **conditions.message** (string)
@@ -241,7 +232,7 @@ CertificateSigningRequestStatus contains conditions used to indicate approved/de
 
 CertificateSigningRequestList is a collection of CertificateSigningRequest objects
 
-<hr>
+
 
 - **apiVersion**: certificates.k8s.io/v1
 
@@ -249,10 +240,10 @@ CertificateSigningRequestList is a collection of CertificateSigningRequest objec
 - **kind**: CertificateSigningRequestList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
 
-- **items** ([]<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>), required
+- **items** ([]}}">CertificateSigningRequest), required
 
   items is a collection of CertificateSigningRequest objects
 
@@ -264,7 +255,7 @@ CertificateSigningRequestList is a collection of CertificateSigningRequest objec
 
 
 
-<hr>
+
 
 
 
@@ -287,14 +278,14 @@ GET /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
 401: Unauthorized
 
@@ -315,14 +306,14 @@ GET /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/approval
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
 401: Unauthorized
 
@@ -343,14 +334,14 @@ GET /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/status
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
 401: Unauthorized
 
@@ -366,64 +357,64 @@ GET /apis/certificates.k8s.io/v1/certificatesigningrequests
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequestList" >}}">CertificateSigningRequestList</a>): OK
+200 (}}">CertificateSigningRequestList): OK
 
 401: Unauthorized
 
@@ -437,40 +428,40 @@ POST /apis/certificates.k8s.io/v1/certificatesigningrequests
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>, required
+- **body**: }}">CertificateSigningRequest, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Created
+201 (}}">CertificateSigningRequest): Created
 
-202 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Accepted
+202 (}}">CertificateSigningRequest): Accepted
 
 401: Unauthorized
 
@@ -489,38 +480,38 @@ PUT /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}
   name of the CertificateSigningRequest
 
 
-- **body**: <a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>, required
+- **body**: }}">CertificateSigningRequest, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Created
+201 (}}">CertificateSigningRequest): Created
 
 401: Unauthorized
 
@@ -539,38 +530,38 @@ PUT /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/approval
   name of the CertificateSigningRequest
 
 
-- **body**: <a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>, required
+- **body**: }}">CertificateSigningRequest, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Created
+201 (}}">CertificateSigningRequest): Created
 
 401: Unauthorized
 
@@ -589,38 +580,38 @@ PUT /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/status
   name of the CertificateSigningRequest
 
 
-- **body**: <a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>, required
+- **body**: }}">CertificateSigningRequest, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Created
+201 (}}">CertificateSigningRequest): Created
 
 401: Unauthorized
 
@@ -639,43 +630,43 @@ PATCH /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}
   name of the CertificateSigningRequest
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Created
+201 (}}">CertificateSigningRequest): Created
 
 401: Unauthorized
 
@@ -694,43 +685,43 @@ PATCH /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/approval
   name of the CertificateSigningRequest
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Created
+201 (}}">CertificateSigningRequest): Created
 
 401: Unauthorized
 
@@ -749,43 +740,43 @@ PATCH /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/status
   name of the CertificateSigningRequest
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): OK
+200 (}}">CertificateSigningRequest): OK
 
-201 (<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>): Created
+201 (}}">CertificateSigningRequest): Created
 
 401: Unauthorized
 
@@ -804,38 +795,38 @@ DELETE /apis/certificates.k8s.io/v1/certificatesigningrequests/{name}
   name of the CertificateSigningRequest
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
-202 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): Accepted
+202 (}}">Status): Accepted
 
 401: Unauthorized
 
@@ -849,76 +840,76 @@ DELETE /apis/certificates.k8s.io/v1/certificatesigningrequests
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

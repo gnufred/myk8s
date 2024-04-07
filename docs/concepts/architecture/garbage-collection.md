@@ -4,8 +4,8 @@ content_type: concept
 weight: 70
 ---
 
-<!-- overview -->
-{{<glossary_definition term_id="garbage-collection" length="short">}} This
+
+{{}} This
 allows the clean up of resources like the following:
 
 * [Terminated pods](/docs/concepts/workloads/pods/pod-lifecycle/#pod-garbage-collection)
@@ -14,7 +14,7 @@ allows the clean up of resources like the following:
 * [Unused containers and container images](#containers-images)
 * [Dynamically provisioned PersistentVolumes with a StorageClass reclaim policy of Delete](/docs/concepts/storage/persistent-volumes/#delete)
 * [Stale or expired CertificateSigningRequests (CSRs)](/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process)
-* {{<glossary_tooltip text="Nodes" term_id="node">}} deleted in the following scenarios:
+* {{}} deleted in the following scenarios:
   * On a cloud when the cluster uses a [cloud controller manager](/docs/concepts/architecture/cloud-controller/)
   * On-premises when the cluster uses an addon similar to a cloud controller
     manager
@@ -30,14 +30,14 @@ object. In most cases, Kubernetes manages owner references automatically.
 
 Ownership is different from the [labels and selectors](/docs/concepts/overview/working-with-objects/labels/)
 mechanism that some resources also use. For example, consider a
-{{<glossary_tooltip text="Service" term_id="service">}} that creates
+{{}} that creates
 `EndpointSlice` objects. The Service uses *labels* to allow the control plane to
 determine which `EndpointSlice` objects are used for that Service. In addition
 to the labels, each `EndpointSlice` that is managed on behalf of a Service has
 an owner reference. Owner references help different parts of Kubernetes avoid
 interfering with objects they don’t control.
 
-{{< note >}}
+{{}}
 Cross-namespace owner references are disallowed by design.
 Namespaced dependents can specify cluster-scoped or namespaced owners.
 A namespaced owner **must** exist in the same namespace as the dependent.
@@ -53,7 +53,7 @@ or a cluster-scoped dependent with an `ownerReference` referencing a namespaced 
 with a reason of `OwnerRefInvalidNamespace` and an `involvedObject` of the invalid dependent is reported.
 You can check for that kind of Event by running
 `kubectl get events -A --field-selector=reason=OwnerRefInvalidNamespace`.
-{{< /note >}}
+{{}}
 
 ## Cascading deletion {#cascading-deletion}
 
@@ -67,7 +67,7 @@ two types of cascading deletion, as follows:
 * Background cascading deletion
 
 You can also control how and when garbage collection deletes resources that have
-owner references using Kubernetes {{<glossary_tooltip text="finalizers" term_id="finalizer">}}.
+owner references using Kubernetes {{}}.
 
 ### Foreground cascading deletion {#foreground-deletion}
 
@@ -110,7 +110,7 @@ to override this behaviour, see [Delete owner objects and orphan dependents](/do
 
 ## Garbage collection of unused containers and images {#containers-images}
 
-The {{<glossary_tooltip text="kubelet" term_id="kubelet">}} performs garbage
+The {{}} performs garbage
 collection on unused images every two minutes and on unused containers every
 minute. You should avoid using external garbage collection tools, as these can
 break the kubelet behavior and remove containers that should exist.
@@ -125,7 +125,7 @@ resource type.
 
 Kubernetes manages the lifecycle of all images through its *image manager*,
 which is part of the kubelet, with the cooperation of
-{{< glossary_tooltip text="cadvisor" term_id="cadvisor" >}}. The kubelet
+{{}}. The kubelet
 considers the following disk usage limits when making garbage collection
 decisions:
 
@@ -139,7 +139,7 @@ until disk usage reaches the `LowThresholdPercent` value.
 
 #### Garbage collection for unused container images {#image-maximum-age-gc}
 
-{{< feature-state feature_gate_name="ImageMaximumGCAge" >}}
+{{}}
 
 As an alpha feature, you can specify the maximum time a local image can be unused for,
 regardless of disk usage. This is a kubelet setting that you configure for each node.
@@ -175,9 +175,9 @@ downgrade `MaxPerPodContainer` to `1` and evict the oldest containers.
 Additionally, containers owned by pods that have been deleted are removed once
 they are older than `MinAge`.
 
-{{<note>}}
+{{}}
 The kubelet only garbage collects the containers it manages.
-{{</note>}}
+{{}}
 
 ## Configuring garbage collection {#configuring-gc}
 

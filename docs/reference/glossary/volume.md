@@ -11,9 +11,9 @@ tags:
 - core-object
 - fundamental
 ---
- A directory containing data, accessible to the {{< glossary_tooltip text="containers" term_id="container" >}} in a {{< glossary_tooltip term_id="pod" >}}.
+ A directory containing data, accessible to the {{}} in a {{}}.
 
-<!--more-->
+
 
 A Kubernetes volume lives as long as the Pod that encloses it. Consequently, a volume outlives any containers that run within the Pod, and data in the volume is preserved across container restarts.
 

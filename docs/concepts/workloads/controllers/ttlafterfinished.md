@@ -8,18 +8,18 @@ description: >-
   A time-to-live mechanism to clean up old Jobs that have finished execution.
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.23" state="stable" >}}
+
+{{}}
 
 When your Job has finished, it's useful to keep that Job in the API (and not immediately delete the Job)
 so that you can tell whether the Job succeeded or failed.
 
-Kubernetes' TTL-after-finished {{<glossary_tooltip text="controller" term_id="controller">}} provides a
+Kubernetes' TTL-after-finished {{}} provides a
 TTL (time to live) mechanism to limit the lifetime of Job objects that
 have finished execution.
 
-<!-- body -->
+
 
 ## Cleanup for finished Jobs
 
@@ -57,7 +57,7 @@ You can set the TTL seconds at any time. Here are some examples for setting the
   to detect changes to the `.status` of the Job and only set a TTL when the Job
   is being marked as completed.
 * Write your own controller to manage the cleanup TTL for Jobs that match a particular
-  {{< glossary_tooltip term_id="selector" text="selector-selector" >}}.
+  {{}}.
 
 ## Caveats
 

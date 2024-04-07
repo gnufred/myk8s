@@ -11,11 +11,11 @@ content_type: concept
 weight: 45
 ---
 
-<!-- overview -->
 
-In Kubernetes, _namespaces_ provide a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced {{< glossary_tooltip text="objects" term_id="object" >}} _(e.g. Deployments, Services, etc.)_ and not for cluster-wide objects _(e.g. StorageClass, Nodes, PersistentVolumes, etc.)_.
 
-<!-- body -->
+In Kubernetes, _namespaces_ provide a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced {{}} _(e.g. Deployments, Services, etc.)_ and not for cluster-wide objects _(e.g. StorageClass, Nodes, PersistentVolumes, etc.)_.
+
+
 
 ## When to Use Multiple Namespaces
 
@@ -32,12 +32,12 @@ Namespaces are a way to divide cluster resources between multiple users (via [re
 
 It is not necessary to use multiple namespaces to separate slightly different
 resources, such as different versions of the same software: use
-{{< glossary_tooltip text="labels" term_id="label" >}} to distinguish
+{{}} to distinguish
 resources within the same namespace.
 
-{{< note >}}
+{{}}
 For a production cluster, consider _not_ using the `default` namespace. Instead, make other namespaces and use those.
-{{< /note >}}
+{{}}
 
 ## Initial namespaces
 
@@ -60,9 +60,9 @@ Kubernetes starts with four initial namespaces:
 Creation and deletion of namespaces are described in the
 [Admin Guide documentation for namespaces](/docs/tasks/administer-cluster/namespaces).
 
-{{< note >}}
+{{}}
     Avoid creating namespaces with the prefix `kube-`, since it is reserved for Kubernetes system namespaces.
-{{< /note >}}
+{{}}
 
 ### Viewing namespaces
 
@@ -87,8 +87,8 @@ To set the namespace for a current request, use the `--namespace` flag.
 For example:
 
 ```shell
-kubectl run nginx --image=nginx --namespace=<insert-namespace-name-here>
-kubectl get pods --namespace=<insert-namespace-name-here>
+kubectl run nginx --image=nginx --namespace=
+kubectl get pods --namespace=
 ```
 
 ### Setting the namespace preference
@@ -97,7 +97,7 @@ You can permanently save the namespace for all subsequent kubectl commands in th
 context.
 
 ```shell
-kubectl config set-context --current --namespace=<insert-namespace-name-here>
+kubectl config set-context --current --namespace=
 # Validate it
 kubectl config view --minify | grep namespace:
 ```
@@ -106,8 +106,8 @@ kubectl config view --minify | grep namespace:
 
 When you create a [Service](/docs/concepts/services-networking/service/),
 it creates a corresponding [DNS entry](/docs/concepts/services-networking/dns-pod-service/).
-This entry is of the form `<service-name>.<namespace-name>.svc.cluster.local`, which means
-that if a container only uses `<service-name>`, it will resolve to the service which
+This entry is of the form `..svc.cluster.local`, which means
+that if a container only uses ``, it will resolve to the service which
 is local to a namespace.  This is useful for using the same configuration across
 multiple namespaces such as Development, Staging and Production.  If you want to reach
 across namespaces, you need to use the fully qualified domain name (FQDN).
@@ -115,7 +115,7 @@ across namespaces, you need to use the fully qualified domain name (FQDN).
 As a result, all namespace names must be valid
 [RFC 1123 DNS labels](/docs/concepts/overview/working-with-objects/names/#dns-label-names).
 
-{{< warning >}}
+{{}}
 By creating namespaces with the same name as [public top-level
 domains](https://data.iana.org/TLD/tlds-alpha-by-domain.txt), Services in these
 namespaces can have short DNS names that overlap with public DNS records.
@@ -128,7 +128,7 @@ as [admission
 webhooks](/docs/reference/access-authn-authz/extensible-admission-controllers/),
 to block creating any namespace with the name of [public
 TLDs](https://data.iana.org/TLD/tlds-alpha-by-domain.txt).
-{{< /warning >}}
+{{}}
 
 ## Not all objects are in a namespace
 
@@ -150,9 +150,9 @@ kubectl api-resources --namespaced=false
 
 ## Automatic labelling
 
-{{< feature-state for_k8s_version="1.22" state="stable" >}}
+{{}}
 
-The Kubernetes control plane sets an immutable {{< glossary_tooltip text="label" term_id="label" >}}
+The Kubernetes control plane sets an immutable {{}}
 `kubernetes.io/metadata.name` on all namespaces.
 The value of the label is the namespace name.
 

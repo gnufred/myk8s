@@ -4,10 +4,10 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 
 This page shows how to define commands and arguments when you run a container
-in a {{< glossary_tooltip term_id="pod" >}}.
+in a {{}}.
 
 
 
@@ -15,12 +15,12 @@ in a {{< glossary_tooltip term_id="pod" >}}.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
 
-<!-- steps -->
+
 
 ## Define a command and arguments when you create a Pod
 
@@ -35,9 +35,9 @@ override the default command and arguments provided by the container image.
 If you define args, but do not define a command, the default command is used
 with your new arguments.
 
-{{< note >}}
+{{}}
 The `command` field corresponds to `entrypoint` in some container runtimes.
-{{< /note >}}
+{{}}
 
 In this exercise, you create a Pod that runs one container. The configuration
 file for the Pod defines a command and two arguments:
@@ -94,10 +94,10 @@ the techniques available for defining environment variables, including
 and
 [Secrets](/docs/concepts/configuration/secret/).
 
-{{< note >}}
+{{}}
 The environment variable appears in parentheses, `"$(VAR)"`. This is
 required for the variable to be expanded in the `command` or `args` field.
-{{< /note >}}
+{{}}
 
 ## Run a command in a shell
 
@@ -115,4 +115,4 @@ args: ["-c", "while true; do echo hello; sleep 10;done"]
 
 * Learn more about [configuring pods and containers](/docs/tasks/).
 * Learn more about [running commands in a container](/docs/tasks/debug/debug-application/get-shell-running-container/).
-* See [Container](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core).
+* See [Container](/docs/reference/generated/kubernetes-api/{{}}/#container-v1-core).

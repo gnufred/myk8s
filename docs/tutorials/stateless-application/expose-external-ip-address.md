@@ -4,7 +4,7 @@ content_type: tutorial
 weight: 10
 ---
 
-<!-- overview -->
+
 
 This page shows how to create a Kubernetes Service object that exposes an
 external IP address.
@@ -25,7 +25,7 @@ external IP address.
 * Create a Service object that exposes an external IP address.
 * Use the Service object to access the running application.
 
-<!-- lessoncontent -->
+
 
 ## Creating a service for an application running in five pods
 
@@ -37,11 +37,11 @@ external IP address.
    kubectl apply -f https://k8s.io/examples/service/load-balancer-example.yaml
    ```
    The preceding command creates a
-   {{< glossary_tooltip text="Deployment" term_id="deployment" >}}
+   {{}}
    and an associated
-   {{< glossary_tooltip term_id="replica-set" text="ReplicaSet" >}}.
+   {{}}.
    The ReplicaSet has five
-   {{< glossary_tooltip text="Pods" term_id="pod" >}}
+   {{}}
    each of which runs the Hello World application.
 
 1. Display information about the Deployment:
@@ -77,17 +77,17 @@ external IP address.
    my-service   LoadBalancer   10.3.245.137   104.198.205.71   8080/TCP   54s
    ```
 
-   {{< note >}}
+   {{}}
 
    The `type=LoadBalancer` service is backed by external cloud providers, which is not covered in this example, please refer to [this page](/docs/concepts/services-networking/service/#loadbalancer) for the details.
 
-   {{< /note >}}
+   {{}}
 
-   {{< note >}}
+   {{}}
 
-   If the external IP address is shown as \<pending\>, wait for a minute and enter the same command again.
+   If the external IP address is shown as \, wait for a minute and enter the same command again.
 
-   {{< /note >}}
+   {{}}
 
 1. Display detailed information about the Service:
 
@@ -101,16 +101,16 @@ external IP address.
    Name:           my-service
    Namespace:      default
    Labels:         app.kubernetes.io/name=load-balancer-example
-   Annotations:    <none>
+   Annotations:    
    Selector:       app.kubernetes.io/name=load-balancer-example
    Type:           LoadBalancer
    IP:             10.3.245.137
    LoadBalancer Ingress:   104.198.205.71
-   Port:           <unset> 8080/TCP
-   NodePort:       <unset> 32377/TCP
+   Port:            8080/TCP
+   NodePort:        32377/TCP
    Endpoints:      10.0.0.6:8080,10.0.1.6:8080,10.0.1.7:8080 + 2 more...
    Session Affinity:   None
-   Events:         <none>
+   Events:         
    ```
 
    Make a note of the external IP address (`LoadBalancer Ingress`) exposed by
@@ -142,11 +142,11 @@ external IP address.
    World application:
 
    ```shell
-   curl http://<external-ip>:<port>
+   curl http://:
    ```
 
-   where `<external-ip>` is the external IP address (`LoadBalancer Ingress`)
-   of your Service, and `<port>` is the value of `Port` in your Service
+   where `` is the external IP address (`LoadBalancer Ingress`)
+   of your Service, and `` is the value of `Port` in your Service
    description.
    If you are using minikube, typing `minikube service my-service` will
    automatically open the Hello World application in a browser.

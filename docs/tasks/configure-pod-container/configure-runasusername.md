@@ -4,9 +4,9 @@ content_type: task
 weight: 40
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.18" state="stable" >}}
+
+{{}}
 
 This page shows how to use the `runAsUserName` setting for Pods and containers that will run on Windows nodes. This is roughly equivalent of the Linux-specific `runAsUser` setting, allowing you to run applications in a container as a different username than the default.
 
@@ -19,11 +19,11 @@ You need to have a Kubernetes cluster and the kubectl command-line tool must be 
 
 
 
-<!-- steps -->
+
 
 ## Set the Username for a Pod
 
-To specify the username with which to execute the Pod's container processes, include the `securityContext` field ([PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)) in the Pod specification, and within it, the `windowsOptions` ([WindowsSecurityContextOptions](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#windowssecuritycontextoptions-v1-core)) field containing the `runAsUserName` field.
+To specify the username with which to execute the Pod's container processes, include the `securityContext` field ([PodSecurityContext](/docs/reference/generated/kubernetes-api/{{}}/#podsecuritycontext-v1-core)) in the Pod specification, and within it, the `windowsOptions` ([WindowsSecurityContextOptions](/docs/reference/generated/kubernetes-api/{{}}/#windowssecuritycontextoptions-v1-core)) field containing the `runAsUserName` field.
 
 The Windows security context options that you specify for a Pod apply to all Containers and init Containers in the Pod.
 
@@ -63,7 +63,7 @@ ContainerUser
 
 ## Set the Username for a Container
 
-To specify the username with which to execute a Container's processes, include the `securityContext` field ([SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)) in the Container manifest, and within it, the `windowsOptions` ([WindowsSecurityContextOptions](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#windowssecuritycontextoptions-v1-core)) field containing the `runAsUserName` field.
+To specify the username with which to execute a Container's processes, include the `securityContext` field ([SecurityContext](/docs/reference/generated/kubernetes-api/{{}}/#securitycontext-v1-core)) in the Container manifest, and within it, the `windowsOptions` ([WindowsSecurityContextOptions](/docs/reference/generated/kubernetes-api/{{}}/#windowssecuritycontextoptions-v1-core)) field containing the `runAsUserName` field.
 
 The Windows security context options that you specify for a Container apply only to that individual Container, and they override the settings made at the Pod level.
 
@@ -107,9 +107,9 @@ In order to use this feature, the value set in the `runAsUserName` field must be
 
 - The `runAsUserName` field cannot be empty, and it cannot contain control characters (ASCII values: `0x00-0x1F`, `0x7F`)
 - The `DOMAIN` must be either a NetBios name, or a DNS name, each with their own restrictions:
-  - NetBios names: maximum 15 characters, cannot start with `.` (dot), and cannot contain the following characters: `\ / : * ? " < > |`
+  - NetBios names: maximum 15 characters, cannot start with `.` (dot), and cannot contain the following characters: `\ / : * ? "  |`
   - DNS names: maximum 255 characters, contains only alphanumeric characters, dots, and dashes, and it cannot start or end with a `.` (dot) or `-` (dash).
-- The `USER` must have at most 20 characters, it cannot contain *only* dots or spaces, and it cannot contain the following characters: `" / \ [ ] : ; | = , + * ? < > @`.
+- The `USER` must have at most 20 characters, it cannot contain *only* dots or spaces, and it cannot contain the following characters: `" / \ [ ] : ; | = , + * ?  @`.
 
 Examples of acceptable values for the `runAsUserName` field: `ContainerAdministrator`, `ContainerUser`, `NT AUTHORITY\NETWORK SERVICE`, `NT AUTHORITY\LOCAL SERVICE`.
 

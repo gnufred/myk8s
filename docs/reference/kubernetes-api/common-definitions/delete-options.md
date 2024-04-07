@@ -10,16 +10,7 @@ weight: 1
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 
@@ -28,7 +19,7 @@ guide. You can file document formatting bugs against the
 
 DeleteOptions may be provided when deleting an API object.
 
-<hr>
+
 
 - **apiVersion** (string)
 
@@ -54,7 +45,7 @@ DeleteOptions may be provided when deleting an API object.
 
   Must be fulfilled before a deletion is carried out. If not possible, a 409 Conflict status will be returned.
 
-  <a name="Preconditions"></a>
+  
   *Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.*
 
   - **preconditions.resourceVersion** (string)

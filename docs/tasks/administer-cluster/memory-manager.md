@@ -10,12 +10,12 @@ min-kubernetes-server-version: v1.21
 weight: 410
 ---
 
-<!-- overview -->
 
-{{< feature-state state="beta" for_k8s_version="v1.22" >}}
+
+{{}}
 
 The Kubernetes *Memory Manager* enables the feature of guaranteed memory (and hugepages)
-allocation for pods in the `Guaranteed` {{< glossary_tooltip text="QoS class" term_id="qos-class" >}}.
+allocation for pods in the `Guaranteed` {{}}.
 
 The Memory Manager employs hint generation protocol to yield the most suitable NUMA affinity for a pod.
 The Memory Manager feeds the central manager (*Topology Manager*) with these affinity hints.
@@ -28,7 +28,7 @@ The Memory Manager is only pertinent to Linux based hosts.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 To align memory resources with other requested resources in a Pod spec:
 
@@ -161,8 +161,8 @@ Also, avoid the following configurations:
 1. duplicates, i.e. the same NUMA node or memory type, but with a different value;
 1. setting zero limit for any of memory types;
 1. NUMA node IDs that do not exist in the machine hardware;
-1. memory type names different than `memory` or `hugepages-<size>`
-   (hugepages of particular `<size>` should also exist).
+1. memory type names different than `memory` or `hugepages-`
+   (hugepages of particular `` should also exist).
 
 Syntax:
 
@@ -205,14 +205,12 @@ An example of kubelet command-line arguments relevant to the node Allocatable co
 
 * `--kube-reserved=cpu=500m,memory=50Mi`
 * `--system-reserved=cpu=123m,memory=333Mi`
-* `--eviction-hard=memory.available<500Mi`
-
-{{< note >}}
+* `--eviction-hard=memory.available}}
 The default hard eviction threshold is 100MiB, and **not** zero.
 Remember to increase the quantity of memory that you reserve by setting `--reserved-memory`
 by that hard eviction threshold. Otherwise, the kubelet will not start Memory Manager and
 display an error.
-{{< /note >}}
+{{}}
 
 Here is an example of a correct configuration:
 
@@ -309,7 +307,7 @@ NAME         READY   STATUS                  RESTARTS   AGE
 guaranteed   0/1     TopologyAffinityError   0          113s
 ```
 
-Use `kubectl describe pod <id>` or `kubectl get events` to obtain detailed error message:
+Use `kubectl describe pod ` or `kubectl get events` to obtain detailed error message:
 
 ```none
 Warning  TopologyAffinityError  10m   kubelet, dell8  Resources cannot be allocated with Topology locality

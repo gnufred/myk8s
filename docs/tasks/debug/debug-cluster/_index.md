@@ -7,17 +7,17 @@ weight: 20
 no_list: true
 ---
 
-<!-- overview -->
+
 
 This doc is about cluster troubleshooting; we assume you have already ruled out your application as the root cause of the
 problem you are experiencing. See
 the [application troubleshooting guide](/docs/tasks/debug/debug-application/) for tips on application debugging.
 You may also visit the [troubleshooting overview document](/docs/tasks/debug/) for more information.
 
-For troubleshooting {{<glossary_tooltip text="kubectl" term_id="kubectl">}}, refer to
+For troubleshooting {{}}, refer to
 [Troubleshooting kubectl](/docs/tasks/debug/debug-cluster/troubleshoot-kubectl/).
 
-<!-- body -->
+
 
 ## Listing your cluster
 
@@ -53,10 +53,10 @@ kubectl get nodes
 
 ```none
 NAME                     STATUS       ROLES     AGE     VERSION
-kube-worker-1            NotReady     <none>    1h      v1.23.3
-kubernetes-node-bols     Ready        <none>    1h      v1.23.3
-kubernetes-node-st6x     Ready        <none>    1h      v1.23.3
-kubernetes-node-unaj     Ready        <none>    1h      v1.23.3
+kube-worker-1            NotReady         1h      v1.23.3
+kubernetes-node-bols     Ready            1h      v1.23.3
+kubernetes-node-st6x     Ready            1h      v1.23.3
+kubernetes-node-unaj     Ready            1h      v1.23.3
 ```
 
 ```shell
@@ -65,7 +65,7 @@ kubectl describe node kube-worker-1
 
 ```none
 Name:               kube-worker-1
-Roles:              <none>
+Roles:              
 Labels:             beta.kubernetes.io/arch=amd64
                     beta.kubernetes.io/os=linux
                     kubernetes.io/arch=amd64
@@ -80,7 +80,7 @@ Taints:             node.kubernetes.io/unreachable:NoExecute
 Unschedulable:      false
 Lease:
   HolderIdentity:  kube-worker-1
-  AcquireTime:     <unset>
+  AcquireTime:     
   RenewTime:       Thu, 17 Feb 2022 17:13:09 -0500
 Conditions:
   Type                 Status    LastHeartbeatTime                 LastTransitionTime                Reason              Message
@@ -234,7 +234,7 @@ of the relevant log files.  On systemd-based systems, you may need to use `journ
 * `/var/log/kube-apiserver.log` - API Server, responsible for serving the API
 * `/var/log/kube-scheduler.log` - Scheduler, responsible for making scheduling decisions
 * `/var/log/kube-controller-manager.log` - a component that runs most Kubernetes built-in
-  {{<glossary_tooltip text="controllers" term_id="controller">}}, with the notable exception of scheduling
+  {{}}, with the notable exception of scheduling
   (the kube-scheduler handles scheduling).
 
 ### Worker Nodes

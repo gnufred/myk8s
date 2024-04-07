@@ -4,7 +4,7 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
+
 
 In robotics and automation, a _control loop_ is
 a non-terminating loop that regulates the state of a system.
@@ -16,40 +16,40 @@ about your *desired state*. The actual room temperature is the
 *current state*. The thermostat acts to bring the current state
 closer to the desired state, by turning equipment on or off.
 
-{{< glossary_definition term_id="controller" length="short">}}
+{{}}
 
 
 
 
-<!-- body -->
+
 
 ## Controller pattern
 
 A controller tracks at least one Kubernetes resource type.
-These {{< glossary_tooltip text="objects" term_id="object" >}}
+These {{}}
 have a spec field that represents the desired state. The
 controller(s) for that resource are responsible for making the current
 state come closer to that desired state.
 
 The controller might carry the action out itself; more commonly, in Kubernetes,
 a controller will send messages to the
-{{< glossary_tooltip text="API server" term_id="kube-apiserver" >}} that have
+{{}} that have
 useful side effects. You'll see examples of this below.
 
-{{< comment >}}
+{{}}
 Some built-in controllers, such as the namespace controller, act on objects
 that do not have a spec. For simplicity, this page omits explaining that
 detail.
-{{< /comment >}}
+{{}}
 
 ### Control via API server
 
-The {{< glossary_tooltip term_id="job" >}} controller is an example of a
+The {{}} controller is an example of a
 Kubernetes built-in controller. Built-in controllers manage state by
 interacting with the cluster API server.
 
 Job is a Kubernetes resource that runs a
-{{< glossary_tooltip term_id="pod" >}}, or perhaps several Pods, to carry out
+{{}}, or perhaps several Pods, to carry out
 a task and then stop.
 
 (Once [scheduled](/docs/concepts/scheduling-eviction/), Pod objects become part of the
@@ -62,7 +62,7 @@ The Job controller does not run any Pods or containers
 itself. Instead, the Job controller tells the API server to create or remove
 Pods.
 Other components in the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}}
+{{}}
 act on the new information (there are new Pods to schedule and run),
 and eventually the work is done.
 
@@ -84,7 +84,7 @@ In contrast with Job, some controllers need to make changes to
 things outside of your cluster.
 
 For example, if you use a control loop to make sure there
-are enough {{< glossary_tooltip text="Nodes" term_id="node" >}}
+are enough {{}}
 in your cluster, then that controller needs something outside the
 current cluster to set up new Nodes when needed.
 
@@ -131,21 +131,21 @@ It's useful to have simple controllers rather than one, monolithic set of contro
 loops that are interlinked. Controllers can fail, so Kubernetes is designed to
 allow for that.
 
-{{< note >}}
+{{}}
 There can be several controllers that create or update the same kind of object.
 Behind the scenes, Kubernetes controllers make sure that they only pay attention
 to the resources linked to their controlling resource.
 
 For example, you can have Deployments and Jobs; these both create Pods.
 The Job controller does not delete the Pods that your Deployment created,
-because there is information ({{< glossary_tooltip term_id="label" text="labels" >}})
+because there is information ({{}})
 the controllers can use to tell those Pods apart.
-{{< /note >}}
+{{}}
 
 ## Ways of running controllers {#running-controllers}
 
 Kubernetes comes with a set of built-in controllers that run inside
-the {{< glossary_tooltip term_id="kube-controller-manager" >}}. These
+the {{}}. These
 built-in controllers provide important core behaviors.
 
 The Deployment controller and Job controller are examples of controllers that

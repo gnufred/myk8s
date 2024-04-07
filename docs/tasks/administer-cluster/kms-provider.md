@@ -6,29 +6,29 @@ title: Using a KMS provider for data encryption
 content_type: task
 weight: 370
 ---
-<!-- overview -->
+
 This page shows how to configure a Key Management Service (KMS) provider and plugin to enable secret data encryption.
-In Kubernetes {{< skew currentVersion >}} there are two versions of KMS at-rest encryption.
+In Kubernetes {{}} there are two versions of KMS at-rest encryption.
 You should use KMS v2 if feasible because KMS v1 is deprecated (since Kubernetes v1.28) and disabled by default (since Kubernetes v1.29).
 KMS v2 offers significantly better performance characteristics than KMS v1.
 
-{{< caution >}}
+{{}}
 This documentation is for the generally available implementation of KMS v2 (and for the
 deprecated version 1 implementation).
 If you are using any control plane components older than Kubernetes v1.29, please check
 the equivalent page in the documentation for the version of Kubernetes that your cluster
 is running. Earlier releases of Kubernetes had different behavior that may be relevant
 for information security.
-{{< /caution >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 The version of Kubernetes that you need depends on which KMS API version
 you have selected.  Kubernetes recommends using KMS v2.
 
-- If you selected KMS API v2, you should use Kubernetes v{{< skew currentVersion >}}
+- If you selected KMS API v2, you should use Kubernetes v{{}}
   (if you are running a different version of Kubernetes that also supports the v2 KMS
   API, switch to the documentation for that version of Kubernetes).
 - If you selected KMS API v1 to support clusters prior to version v1.27
@@ -36,10 +36,10 @@ you have selected.  Kubernetes recommends using KMS v2.
   any supported Kubernetes version will work.  This API is deprecated as of Kubernetes v1.28.
   Kubernetes does not recommend the use of this API.
 
-{{< version-check >}}
+{{}}
 
 ### KMS v1
-{{< feature-state for_k8s_version="v1.28" state="deprecated" >}}
+{{}}
 
 * Kubernetes version 1.10.0 or later is required
 
@@ -49,11 +49,11 @@ you have selected.  Kubernetes recommends using KMS v2.
 * Your cluster must use etcd v3 or later
 
 ### KMS v2
-{{< feature-state for_k8s_version="v1.29" state="stable" >}}
+{{}}
 
 * Your cluster must use etcd v3 or later
 
-<!-- steps -->
+
 
 ## KMS encryption and per-object encryption keys
 
@@ -121,24 +121,24 @@ you use a proto file to create a stub file that you can use to develop the gRPC 
 #### KMS v1 {#developing-a-kms-plugin-gRPC-server-kms-v1}
 
 * Using Go: Use the functions and data structures in the stub file:
-  [api.pb.go](https://github.com/kubernetes/kms/blob/release-{{< skew currentVersion >}}/apis/v1beta1/api.pb.go)
+  [api.pb.go](https://github.com/kubernetes/kms/blob/release-{{}}/apis/v1beta1/api.pb.go)
   to develop the gRPC server code
 
 * Using languages other than Go: Use the protoc compiler with the proto file:
-  [api.proto](https://github.com/kubernetes/kms/blob/release-{{< skew currentVersion >}}/apis/v1beta1/api.proto)
+  [api.proto](https://github.com/kubernetes/kms/blob/release-{{}}/apis/v1beta1/api.proto)
   to generate a stub file for the specific language
 
 #### KMS v2 {#developing-a-kms-plugin-gRPC-server-kms-v2}
 
 * Using Go: A high level
-  [library](https://github.com/kubernetes/kms/blob/release-{{< skew currentVersion >}}/pkg/service/interface.go)
+  [library](https://github.com/kubernetes/kms/blob/release-{{}}/pkg/service/interface.go)
   is provided to make the process easier.  Low level implementations
   can use the functions and data structures in the stub file:
-  [api.pb.go](https://github.com/kubernetes/kms/blob/release-{{< skew currentVersion >}}/apis/v2/api.pb.go)
+  [api.pb.go](https://github.com/kubernetes/kms/blob/release-{{}}/apis/v2/api.pb.go)
   to develop the gRPC server code
 
 * Using languages other than Go: Use the protoc compiler with the proto file:
-  [api.proto](https://github.com/kubernetes/kms/blob/release-{{< skew currentVersion >}}/apis/v2/api.proto)
+  [api.proto](https://github.com/kubernetes/kms/blob/release-{{}}/apis/v2/api.proto)
   to generate a stub file for the specific language
 
 Then use the functions and data structures in the stub file to develop the server code.
@@ -167,7 +167,7 @@ Then use the functions and data structures in the stub file to develop the serve
   version as `StatusResponse.version`. That status response should also include
   "ok" as `StatusResponse.healthz` and a `key_id` (remote KMS KEK ID) as `StatusResponse.key_id`.
   The Kubernetes project recommends you make your plugin
-  compatible with the stable `v2` KMS API. Kubernetes {{< skew currentVersion >}} also supports the
+  compatible with the stable `v2` KMS API. Kubernetes {{}} also supports the
   `v2beta1` API for KMS; future Kubernetes releases are likely to continue supporting that beta version.
 
   The API server polls the `Status` procedure call approximately every minute when everything is healthy,
@@ -182,7 +182,7 @@ Then use the functions and data structures in the stub file to develop the serve
   results in a distinct response `(ciphertext, key_id, annotations)`.
 
   If the plugin returns a non-empty `annotations` map, all map keys must be fully qualified domain names such as
-  `example.com`. An example use case of `annotation` is `{"kms.example.io/remote-kms-auditid":"<audit ID used by the remote KMS>"}`
+  `example.com`. An example use case of `annotation` is `{"kms.example.io/remote-kms-auditid":""}`
 
   The API server does not perform the `EncryptRequest` procedure call at a high rate.  Plugin implementations should
   still aim to keep each request's latency at under 100 milliseconds.
@@ -225,10 +225,10 @@ Then use the functions and data structures in the stub file to develop the serve
   desired buffer to allow config changes to be processed - a minimum `M` of five minutes is recommend).  Note that no
   API server restart is required to perform KEK rotation.
 
-  {{< caution >}}
+  {{}}
   Because you don't control the number of writes performed with the DEK,
   the Kubernetes project recommends rotating the KEK at least every 90 days.
-  {{< /caution >}}
+  {{}}
 
 * protocol: UNIX domain socket (`unix`)
 
@@ -400,7 +400,7 @@ To switch from a local encryption provider to the `kms` provider and re-encrypt 
          - aescbc:
              keys:
                - name: key1
-                 secret: <BASE 64 ENCODED SECRET>
+                 secret: 
    ```
 
 1. Restart all `kube-apiserver` processes.
@@ -413,8 +413,8 @@ To switch from a local encryption provider to the `kms` provider and re-encrypt 
 
 ## {{% heading "whatsnext" %}}
 
-<!-- preserve legacy hyperlinks -->
-<a id="disabling-encryption-at-rest" />
+
+
 
 If you no longer want to use encryption for data persisted in the Kubernetes API, read
 [decrypt data that are already stored at rest](/docs/tasks/administer-cluster/decrypt-data/).

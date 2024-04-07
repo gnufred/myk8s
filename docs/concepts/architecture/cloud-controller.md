@@ -4,20 +4,20 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
 
-{{< feature-state state="beta" for_k8s_version="v1.11" >}}
+
+{{}}
 
 Cloud infrastructure technologies let you run Kubernetes on public, private, and hybrid clouds.
 Kubernetes believes in automated, API-driven infrastructure without tight coupling between
 components.
 
-{{< glossary_definition term_id="cloud-controller-manager" length="all" prepend="The cloud-controller-manager is">}}
+{{}}
 
 The cloud-controller-manager is structured using a plugin
 mechanism that allows different cloud providers to integrate their platforms with Kubernetes.
 
-<!-- body -->
+
 
 ## Design
 
@@ -25,15 +25,15 @@ mechanism that allows different cloud providers to integrate their platforms wit
 
 The cloud controller manager runs in the control plane as a replicated set of processes
 (usually, these are containers in Pods). Each cloud-controller-manager implements
-multiple {{< glossary_tooltip text="controllers" term_id="controller" >}} in a single
+multiple {{}} in a single
 process.
 
 
-{{< note >}}
+{{}}
 You can also run the cloud controller manager as a Kubernetes
-{{< glossary_tooltip text="addon" term_id="addons" >}} rather than as part
+{{}} rather than as part
 of the control plane.
-{{< /note >}}
+{{}}
 
 ## Cloud controller manager functions {#functions-of-the-ccm}
 
@@ -41,7 +41,7 @@ The controllers inside the cloud controller manager include:
 
 ### Node controller
 
-The node controller is responsible for updating {{< glossary_tooltip text="Node" term_id="node" >}} objects
+The node controller is responsible for updating {{}} objects
 when new servers are created in your cloud infrastructure. The node controller obtains information about the
 hosts running inside your tenancy with the cloud provider. The node controller performs the following functions:
 
@@ -68,7 +68,7 @@ of IP addresses for the Pod network.
 
 ### Service controller
 
-{{< glossary_tooltip text="Services" term_id="service" >}} integrate with cloud
+{{}} integrate with cloud
 infrastructure components such as managed load balancers, IP addresses, network
 packet filtering, and target health checking. The service controller interacts with your
 cloud provider's APIs to set up load balancers and other infrastructure components
@@ -138,7 +138,7 @@ objects, and to ensure secure operation, it requires access to create ServiceAcc
 
 - create
 
-The {{< glossary_tooltip term_id="rbac" text="RBAC" >}} ClusterRole for the cloud
+The {{}} ClusterRole for the cloud
 controller manager looks like:
 
 ```yaml

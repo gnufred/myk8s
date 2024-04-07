@@ -7,14 +7,14 @@ card:
   weight: 60
 ---
 
-<!-- overview -->
+
 This page contains an overview of the various feature gates an administrator
 can specify on different Kubernetes components.
 
 See [feature stages](#feature-stages) for an explanation of the stages for a feature.
 
 
-<!-- body -->
+
 ## Overview
 
 Feature gates are a set of key=value pairs that describe Kubernetes features.
@@ -45,20 +45,20 @@ different Kubernetes components.
 - The [Graduated/Deprecated feature gate table](#feature-gates-for-graduated-or-deprecated-features)
   also lists deprecated and withdrawn features.
 
-{{< note >}}
+{{}}
 For a reference to old feature gates that are removed, please refer to
 [feature gates removed](/docs/reference/command-line-tools-reference/feature-gates-removed/).
-{{< /note >}}
+{{}}
 
-<!-- Want to edit this table? See https://k8s.io/docs/contribute/new-content/new-features/#ready-for-review-feature-gates -->
+
 ### Feature gates for Alpha or Beta features
 
-{{< feature-gate-table include="alpha,beta" caption="Feature gates for features in Alpha or Beta states" >}}
+{{}}
 
-<!-- Want to edit this table? See https://k8s.io/docs/contribute/new-content/new-features/#ready-for-review-feature-gates -->
+
 ### Feature gates for graduated or deprecated features
 
-{{< feature-gate-table include="ga,deprecated" caption="Feature Gates for Graduated or Deprecated Features" >}}
+{{}}
 
 ## Using a feature
 
@@ -89,10 +89,10 @@ A *Beta* feature means:
   incompatible changes in subsequent releases. If you have multiple clusters
   that can be upgraded independently, you may be able to relax this restriction.
 
-{{< note >}}
+{{}}
 Please do try *Beta* features and give feedback on them!
 After they exit beta, it may not be practical for us to make more changes.
-{{< /note >}}
+{{}}
 
 A *General Availability* (GA) feature is also referred to as a *stable* feature. It means:
 
@@ -104,8 +104,8 @@ A *General Availability* (GA) feature is also referred to as a *stable* feature.
 
 Each feature gate is designed for enabling/disabling a specific feature.
 
-<!-- Want to edit this list? See https://k8s.io/docs/contribute/new-content/new-features/#ready-for-review-feature-gates -->
-{{< feature-gate-list include="alpha,beta,ga,deprecated" >}}
+
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

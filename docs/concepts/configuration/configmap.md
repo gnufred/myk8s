@@ -7,18 +7,18 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
 
-{{< glossary_definition term_id="configmap" prepend="A ConfigMap is" length="all" >}}
 
-{{< caution >}}
+{{}}
+
+{{}}
 ConfigMap does not provide secrecy or encryption.
 If the data you want to store are confidential, use a
-{{< glossary_tooltip text="Secret" term_id="secret" >}} rather than a ConfigMap,
+{{}} rather than a ConfigMap,
 or use additional (third party) tools to keep your data private.
-{{< /caution >}}
+{{}}
 
-<!-- body -->
+
 ## Motivation
 
 Use a ConfigMap for setting configuration data separately from application code.
@@ -27,21 +27,21 @@ For example, imagine that you are developing an application that you can run on 
 own computer (for development) and in the cloud (to handle real traffic).
 You write the code to look in an environment variable named `DATABASE_HOST`.
 Locally, you set that variable to `localhost`. In the cloud, you set it to
-refer to a Kubernetes {{< glossary_tooltip text="Service" term_id="service" >}}
+refer to a Kubernetes {{}}
 that exposes the database component to your cluster.
 This lets you fetch a container image running in the cloud and
 debug the exact same code locally if needed.
 
-{{< note >}}
+{{}}
 A ConfigMap is not designed to hold large chunks of data. The data stored in a
 ConfigMap cannot exceed 1 MiB. If you need to store settings that are
 larger than this limit, you may want to consider mounting a volume or use a
 separate database or file service.
-{{< /note >}}
+{{}}
 
 ## ConfigMap object
 
-A ConfigMap is an {{< glossary_tooltip text="API object" term_id="object" >}}
+A ConfigMap is an {{}}
 that lets you store configuration for other objects to use. Unlike most
 Kubernetes objects that have a `spec`, a ConfigMap has `data` and `binaryData`
 fields. These fields accept key-value pairs as their values.  Both the `data`
@@ -63,12 +63,12 @@ definition to create an [immutable ConfigMap](#configmap-immutable).
 
 You can write a Pod `spec` that refers to a ConfigMap and configures the container(s)
 in that Pod based on the data in the ConfigMap. The Pod and the ConfigMap must be in
-the same {{< glossary_tooltip text="namespace" term_id="namespace" >}}.
+the same {{}}.
 
-{{< note >}}
-The `spec` of a {{< glossary_tooltip text="static Pod" term_id="static-pod" >}} cannot refer to a ConfigMap
+{{}}
+The `spec` of a {{}} cannot refer to a ConfigMap
 or any other API objects.
-{{< /note >}}
+{{}}
 
 Here's an example ConfigMap that has some keys with single values,
 and other keys where the value looks like a fragment of a configuration
@@ -105,7 +105,7 @@ a container inside a Pod:
 These different methods lend themselves to different ways of modeling
 the data being consumed.
 For the first three methods, the
-{{< glossary_tooltip text="kubelet" term_id="kubelet" >}} uses the data from
+{{}} uses the data from
 the ConfigMap when it launches container(s) for a Pod.
 
 The fourth method means you have to write code to read the ConfigMap and its data.
@@ -141,8 +141,8 @@ containers running in a Pod in the same namespace. You can also use a
 ConfigMap separately.
 
 For example, you
-might encounter {{< glossary_tooltip text="addons" term_id="addons" >}}
-or {{< glossary_tooltip text="operators" term_id="operator-pattern" >}} that
+might encounter {{}}
+or {{}} that
 adjust their behavior based on a ConfigMap.
 
 ### Using ConfigMaps as files from a Pod
@@ -204,13 +204,13 @@ propagation delay, where the cache propagation delay depends on the chosen cache
 
 ConfigMaps consumed as environment variables are not updated automatically and require a pod restart. 
 
-{{< note >}}
+{{}}
 A container using a ConfigMap as a [subPath](/docs/concepts/storage/volumes#using-subpath) volume mount will not receive ConfigMap updates.
-{{< /note >}}
+{{}}
 
 ## Immutable ConfigMaps {#configmap-immutable}
 
-{{< feature-state for_k8s_version="v1.21" state="stable" >}}
+{{}}
 
 The Kubernetes feature _Immutable Secrets and ConfigMaps_ provides an option to set
 individual Secrets and ConfigMaps as immutable. For clusters that extensively use ConfigMaps

@@ -4,7 +4,7 @@ content_type: task
 weight: 40
 ---
 
-<!-- overview -->
+
 
 This page shows how a Pod can use a
 [`downwardAPI` volume](/docs/concepts/storage/volumes/#downwardapi),
@@ -21,10 +21,10 @@ _downward API_.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 
-<!-- steps -->
+
 
 ## Store Pod fields
 
@@ -44,10 +44,10 @@ The first element specifies that the value of the Pod's
 The second element specifies that the value of the Pod's `annotations`
 field should be stored in a file named `annotations`.
 
-{{< note >}}
+{{}}
 The fields in this example are Pod fields. They are not
 fields of the container in the Pod.
-{{< /note >}}
+{{}}
 
 Create the Pod:
 
@@ -133,11 +133,11 @@ Using symbolic links enables dynamic atomic refresh of the metadata; updates are
 written to a new temporary directory, and the `..data` symlink is updated
 atomically using [rename(2)](http://man7.org/linux/man-pages/man2/rename.2.html).
 
-{{< note >}}
+{{}}
 A container using Downward API as a
 [subPath](/docs/concepts/storage/volumes/#using-subpath) volume mount will not
 receive Downward API updates.
-{{< /note >}}
+{{}}
 
 Exit the shell:
 
@@ -192,7 +192,7 @@ cat /etc/podinfo/cpu_limit
 You can use similar commands to view the `cpu_request`, `mem_limit` and
 `mem_request` files.
 
-<!-- discussion -->
+
 
 ## Project keys to specific paths and file permissions
 
@@ -208,12 +208,12 @@ basis. For more information, see
   can expose using the downward API.
 
 Read about volumes in the legacy API reference:
-* Check the [`Volume`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core)
+* Check the [`Volume`](/docs/reference/generated/kubernetes-api/{{}}/#volume-v1-core)
   API definition which defines a generic volume in a Pod for containers to access.
-* Check the [`DownwardAPIVolumeSource`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#downwardapivolumesource-v1-core)
+* Check the [`DownwardAPIVolumeSource`](/docs/reference/generated/kubernetes-api/{{}}/#downwardapivolumesource-v1-core)
   API definition which defines a volume that contains Downward API information.
-* Check the [`DownwardAPIVolumeFile`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#downwardapivolumefile-v1-core)
+* Check the [`DownwardAPIVolumeFile`](/docs/reference/generated/kubernetes-api/{{}}/#downwardapivolumefile-v1-core)
   API definition which contains references to object or resource fields for
   populating a file in the Downward API volume.
-* Check the [`ResourceFieldSelector`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcefieldselector-v1-core)
+* Check the [`ResourceFieldSelector`](/docs/reference/generated/kubernetes-api/{{}}/#resourcefieldselector-v1-core)
   API definition which specifies the container resources and their output format.

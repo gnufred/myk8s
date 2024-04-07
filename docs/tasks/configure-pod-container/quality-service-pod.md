@@ -5,10 +5,10 @@ weight: 60
 ---
 
 
-<!-- overview -->
+
 
 This page shows how to configure Pods so that they will be assigned particular
-{{< glossary_tooltip text="Quality of Service (QoS) classes" term_id="qos-class" >}}.
+{{}}.
 Kubernetes uses QoS classes to make decisions about evicting Pods when Node resources are exceeded.
 
 
@@ -22,13 +22,13 @@ When Kubernetes creates a Pod it assigns one of these QoS classes to the Pod:
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You also need to be able to create and delete namespaces.
 
 
 
-<!-- steps -->
+
 
 
 ## Create a namespace
@@ -90,14 +90,14 @@ status:
   qosClass: Guaranteed
 ```
 
-{{< note >}}
+{{}}
 If a Container specifies its own memory limit, but does not specify a memory request, Kubernetes
 automatically assigns a memory request that matches the limit. Similarly, if a Container specifies its own
 CPU limit, but does not specify a CPU request, Kubernetes automatically assigns a CPU request that matches
 the limit.
-{{< /note >}}
+{{}}
 
-<!-- 4th level heading to suppress entry in nav -->
+
 #### Clean up {#clean-up-guaranteed}
 
 Delete your Pod:
@@ -148,7 +148,7 @@ status:
   qosClass: Burstable
 ```
 
-<!-- 4th level heading to suppress entry in nav -->
+
 #### Clean up {#clean-up-burstable}
 
 Delete your Pod:
@@ -191,7 +191,7 @@ status:
   qosClass: BestEffort
 ```
 
-<!-- 4th level heading to suppress entry in nav -->
+
 #### Clean up {#clean-up-besteffort}
 
 Delete your Pod:

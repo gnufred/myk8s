@@ -10,16 +10,7 @@ weight: 5
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: certificates.k8s.io/v1alpha1`
 
@@ -34,7 +25,7 @@ ClusterTrustBundle objects are considered to be readable by any authenticated us
 
 It can be optionally associated with a particular assigner, in which case it contains one valid set of trust anchors for that signer. Signers may have multiple associated ClusterTrustBundles; each is an independent set of trust anchors for that signer. Admission control is used to enforce that only users with permissions on the signer can create or modify the corresponding bundle.
 
-<hr>
+
 
 - **apiVersion**: certificates.k8s.io/v1alpha1
 
@@ -42,11 +33,11 @@ It can be optionally associated with a particular assigner, in which case it con
 - **kind**: ClusterTrustBundle
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   metadata contains the object metadata.
 
-- **spec** (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundleSpec" >}}">ClusterTrustBundleSpec</a>), required
+- **spec** (}}">ClusterTrustBundleSpec), required
 
   spec contains the signer (if any) and trust anchors.
 
@@ -58,7 +49,7 @@ It can be optionally associated with a particular assigner, in which case it con
 
 ClusterTrustBundleSpec contains the signer and trust anchors.
 
-<hr>
+
 
 - **trustBundle** (string), required
 
@@ -72,7 +63,7 @@ ClusterTrustBundleSpec contains the signer and trust anchors.
 
   signerName indicates the associated signer, if any.
   
-  In order to create or update a ClusterTrustBundle that sets signerName, you must have the following cluster-scoped permission: group=certificates.k8s.io resource=signers resourceName=\<the signer name> verb=attest.
+  In order to create or update a ClusterTrustBundle that sets signerName, you must have the following cluster-scoped permission: group=certificates.k8s.io resource=signers resourceName=\ verb=attest.
   
   If signerName is not empty, then the ClusterTrustBundle object must be named with the signer name as a prefix (translating slashes to colons). For example, for the signer name `example.com/foo`, valid ClusterTrustBundle object names include `example.com:foo:abc` and `example.com:foo:v1`.
   
@@ -88,7 +79,7 @@ ClusterTrustBundleSpec contains the signer and trust anchors.
 
 ClusterTrustBundleList is a collection of ClusterTrustBundle objects
 
-<hr>
+
 
 - **apiVersion**: certificates.k8s.io/v1alpha1
 
@@ -96,11 +87,11 @@ ClusterTrustBundleList is a collection of ClusterTrustBundle objects
 - **kind**: ClusterTrustBundleList
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   metadata contains the list metadata.
 
-- **items** ([]<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>), required
+- **items** ([]}}">ClusterTrustBundle), required
 
   items is a collection of ClusterTrustBundle objects
 
@@ -112,7 +103,7 @@ ClusterTrustBundleList is a collection of ClusterTrustBundle objects
 
 
 
-<hr>
+
 
 
 
@@ -135,14 +126,14 @@ GET /apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): OK
+200 (}}">ClusterTrustBundle): OK
 
 401: Unauthorized
 
@@ -158,64 +149,64 @@ GET /apis/certificates.k8s.io/v1alpha1/clustertrustbundles
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundleList" >}}">ClusterTrustBundleList</a>): OK
+200 (}}">ClusterTrustBundleList): OK
 
 401: Unauthorized
 
@@ -229,40 +220,40 @@ POST /apis/certificates.k8s.io/v1alpha1/clustertrustbundles
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>, required
+- **body**: }}">ClusterTrustBundle, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): OK
+200 (}}">ClusterTrustBundle): OK
 
-201 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): Created
+201 (}}">ClusterTrustBundle): Created
 
-202 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): Accepted
+202 (}}">ClusterTrustBundle): Accepted
 
 401: Unauthorized
 
@@ -281,38 +272,38 @@ PUT /apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}
   name of the ClusterTrustBundle
 
 
-- **body**: <a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>, required
+- **body**: }}">ClusterTrustBundle, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): OK
+200 (}}">ClusterTrustBundle): OK
 
-201 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): Created
+201 (}}">ClusterTrustBundle): Created
 
 401: Unauthorized
 
@@ -331,43 +322,43 @@ PATCH /apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}
   name of the ClusterTrustBundle
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): OK
+200 (}}">ClusterTrustBundle): OK
 
-201 (<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>): Created
+201 (}}">ClusterTrustBundle): Created
 
 401: Unauthorized
 
@@ -386,38 +377,38 @@ DELETE /apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}
   name of the ClusterTrustBundle
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
-202 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): Accepted
+202 (}}">Status): Accepted
 
 401: Unauthorized
 
@@ -431,76 +422,76 @@ DELETE /apis/certificates.k8s.io/v1alpha1/clustertrustbundles
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

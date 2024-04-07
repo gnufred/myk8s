@@ -4,15 +4,15 @@ content_type: task
 weight: 360
 ---
 
-<!--overview-->
+
 
 This page shows you how to specify the type of
 [cascading deletion](/docs/concepts/architecture/garbage-collection/#cascading-deletion)
-to use in your cluster during {{<glossary_tooltip text="garbage collection" term_id="garbage-collection">}}.
+to use in your cluster during {{}}.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You also need to [create a sample Deployment](/docs/tasks/run-application/run-stateless-application-deployment/#creating-and-exploring-an-nginx-deployment) 
 to experiment with the different types of cascading deletion. You will need to
@@ -46,7 +46,7 @@ apiVersion: v1
 By default, Kubernetes uses [background cascading deletion](/docs/concepts/architecture/garbage-collection/#background-deletion)
 to delete dependents of an object. You can switch to foreground cascading deletion
 using either `kubectl` or the Kubernetes API, depending on the Kubernetes
-version your cluster runs. {{<version-check>}}
+version your cluster runs. {{}}
 
 
 You can delete objects using foreground cascading deletion using `kubectl` or the
@@ -55,7 +55,7 @@ Kubernetes API.
 **Using kubectl**
 
 Run the following command:
-<!--TODO: verify release after which the --cascade flag is switched to a string in https://github.com/kubernetes/kubectl/commit/fd930e3995957b0093ecc4b9fd8b0525d94d3b4e-->
+
 
 ```shell
 kubectl delete deployment nginx-deployment --cascade=foreground
@@ -77,7 +77,7 @@ kubectl delete deployment nginx-deployment --cascade=foreground
        -H "Content-Type: application/json"
    ```
 
-   The output contains a `foregroundDeletion` {{<glossary_tooltip text="finalizer" term_id="finalizer">}}
+   The output contains a `foregroundDeletion` {{}}
    like this:
 
    ```
@@ -101,7 +101,7 @@ kubectl delete deployment nginx-deployment --cascade=foreground
 
 1. [Create a sample Deployment](/docs/tasks/run-application/run-stateless-application-deployment/#creating-and-exploring-an-nginx-deployment).
 1. Use either `kubectl` or the Kubernetes API to delete the Deployment,
-   depending on the Kubernetes version your cluster runs. {{<version-check>}}
+   depending on the Kubernetes version your cluster runs. {{}}
 
 
 You can delete objects using background cascading deletion using `kubectl`
@@ -154,10 +154,10 @@ kubectl delete deployment nginx-deployment --cascade=background
 ## Delete owner objects and orphan dependents {#set-orphan-deletion-policy}
 
 By default, when you tell Kubernetes to delete an object, the
-{{<glossary_tooltip text="controller" term_id="controller">}} also deletes
+{{}} also deletes
 dependent objects. You can make Kubernetes *orphan* these dependents using
 `kubectl` or the Kubernetes API, depending on the Kubernetes version your
-cluster runs. {{<version-check>}}
+cluster runs. {{}}
 
 
 **Using kubectl**

@@ -8,9 +8,9 @@ min-kubernetes-server-version: v1.26
 weight: 120
 ---
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+{{}}
 
-<!-- overview -->
+
 
 Starting from Kubernetes v1.20, the kubelet can dynamically retrieve credentials for a container image registry
 using exec plugins. The kubelet and the exec plugin communicate through stdio (stdin, stdout, and stderr) using
@@ -29,13 +29,13 @@ This guide demonstrates how to configure the kubelet's image credential provider
 ## {{% heading "prerequisites" %}}
 
 * You need a Kubernetes cluster with nodes that support kubelet credential
-  provider plugins. This support is available in Kubernetes {{< skew currentVersion >}};
+  provider plugins. This support is available in Kubernetes {{}};
   Kubernetes v1.24 and v1.25 included this as a beta feature, enabled by default.
 * A working implementation of a credential provider exec plugin. You can build your own plugin or use one provided by cloud providers.
 
-{{< version-check >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Installing Plugins on Nodes
 

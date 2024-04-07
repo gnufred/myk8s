@@ -13,22 +13,22 @@ card:
   weight: 20
 ---
 
-<!-- overview -->
+
 When you deploy Kubernetes, you get a cluster.
-{{< glossary_definition term_id="cluster" length="all" prepend="A Kubernetes cluster consists of">}}
+{{}}
 
 This document outlines the various components you need to have for
 a complete and working Kubernetes cluster.
 
-{{< figure src="/images/docs/components-of-kubernetes.svg" alt="Components of Kubernetes" caption="The components of a Kubernetes cluster" class="diagram-large" >}}
+{{}}
 
-<!-- body -->
+
 ## Control Plane Components
 
 The control plane's components make global decisions about the cluster (for example, scheduling),
 as well as detecting and responding to cluster events (for example, starting up a new
-{{< glossary_tooltip text="pod" term_id="pod">}} when a Deployment's
-`{{< glossary_tooltip text="replicas" term_id="replica" >}}` field is unsatisfied).
+{{}} when a Deployment's
+`{{}}` field is unsatisfied).
 
 Control plane components can be run on any machine in the cluster. However,
 for simplicity, setup scripts typically start all control plane components on
@@ -38,19 +38,19 @@ for an example control plane setup that runs across multiple machines.
 
 ### kube-apiserver
 
-{{< glossary_definition term_id="kube-apiserver" length="all" >}}
+{{}}
 
 ### etcd
 
-{{< glossary_definition term_id="etcd" length="all" >}}
+{{}}
 
 ### kube-scheduler
 
-{{< glossary_definition term_id="kube-scheduler" length="all" >}}
+{{}}
 
 ### kube-controller-manager
 
-{{< glossary_definition term_id="kube-controller-manager" length="all" >}}
+{{}}
 
 There are many different types of controllers. Some examples of them are:
 
@@ -64,7 +64,7 @@ The above is not an exhaustive list.
 
 ### cloud-controller-manager
 
-{{< glossary_definition term_id="cloud-controller-manager" length="short" >}}
+{{}}
 
 The cloud-controller-manager only runs controllers that are specific to your cloud provider.
 If you are running Kubernetes on your own premises, or in a learning environment inside your
@@ -86,20 +86,20 @@ Node components run on every node, maintaining running pods and providing the Ku
 
 ### kubelet
 
-{{< glossary_definition term_id="kubelet" length="all" >}}
+{{}}
 
 ### kube-proxy
 
-{{< glossary_definition term_id="kube-proxy" length="all" >}}
+{{}}
 
 ### Container runtime
 
-{{< glossary_definition term_id="container-runtime" length="all" >}}
+{{}}
 
 ## Addons
 
-Addons use Kubernetes resources ({{< glossary_tooltip term_id="daemonset" >}},
-{{< glossary_tooltip term_id="deployment" >}}, etc)
+Addons use Kubernetes resources ({{}},
+{{}}, etc)
 to implement cluster features. Because these are providing cluster-level features, namespaced resources
 for addons belong within the `kube-system` namespace.
 

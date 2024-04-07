@@ -8,19 +8,19 @@ weight: 35
 min-kubernetes-server-version: 1.25
 ---
 
-<!-- overview -->
+
 
 The [Common Expression Language (CEL)](https://github.com/google/cel-go) is used
 in the Kubernetes API to declare validation rules, policy rules, and other
 constraints or conditions.
 
 CEL expressions are evaluated directly in the
-{{< glossary_tooltip text="API server" term_id="kube-apiserver" >}}, making CEL a
+{{}}, making CEL a
 convenient alternative to out-of-process mechanisms, such as webhooks, for many
 extensibility use cases. Your CEL expressions continue to execute so long as the
 control plane's API server component remains available.
 
-<!-- body -->
+
 
 ## Language overview
 
@@ -45,23 +45,10 @@ variables are available for that field.
 
 Example CEL expressions:
 
-{{< table caption="Examples of CEL expressions and the purpose of each" >}}
+{{}}
 | Rule                                                                               | Purpose                                                                           |
 |------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| `self.minReplicas <= self.replicas && self.replicas <= self.maxReplicas`           | Validate that the three fields defining replicas are ordered appropriately        |
-| `'Available' in self.stateCounts`                                                  | Validate that an entry with the 'Available' key exists in a map                   |
-| `(self.list1.size() == 0) != (self.list2.size() == 0)`                             | Validate that one of two lists is non-empty, but not both                         |
-| `self.envars.filter(e, e.name = 'MY_ENV').all(e, e.value.matches('^[a-zA-Z]*$')`   | Validate the 'value' field of a listMap entry where key field 'name' is 'MY_ENV'  |
-| `has(self.expired) && self.created + self.ttl < self.expired`                      | Validate that 'expired' date is after a 'create' date plus a 'ttl' duration       |
-| `self.health.startsWith('ok')`                                                     | Validate a 'health' string field has the prefix 'ok'                              |
-| `self.widgets.exists(w, w.key == 'x' && w.foo < 10)`                               | Validate that the 'foo' property of a listMap item with a key 'x' is less than 10 |
-| `type(self) == string ? self == '99%' : self == 42`                                | Validate an int-or-string field for both the int and string cases                 |
-| `self.metadata.name == 'singleton'`                                                | Validate that an object's name matches a specific value (making it a singleton)   |
-| `self.set1.all(e, !(e in self.set2))`                                              | Validate that two listSets are disjoint                                           |
-| `self.names.size() == self.details.size() && self.names.all(n, n in self.details)` | Validate the 'details' map is keyed by the items in the 'names' listSet           |
-| `self.details.all(key, key.matches('^[a-zA-Z]*$')`                                 | Validate the keys of the 'details' map                                            |
-| `self.details.all(key, self.details[key].matches('^[a-zA-Z]*$')`                   | Validate the values of the 'details' map                                          |
-{{< /table >}}
+| `self.minReplicas }}
 
 ## CEL options, language features, and libraries
 
@@ -110,14 +97,12 @@ comparable types.
 
 Examples:
 
-{{< table caption="Examples of CEL expressions using list library functions" >}}
+{{}}
 | CEL Expression                                                                     | Purpose                                                   |
 |------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | `names.isSorted()`                                                                 | Verify that a list of names is kept in alphabetical order |
 | `items.map(x, x.weight).sum() == 1.0`                                              | Verify that the "weights" of a list of objects sum to 1.0 |
-| `lowPriorities.map(x, x.priority).max() < highPriorities.map(x, x.priority).min()` | Verify that two sets of priorities do not overlap         |
-| `names.indexOf('should-be-first') == 1`                                            | Require that the first name in a list if a specific value | 
-{{< /table >}}
+| `lowPriorities.map(x, x.priority).max() }}
 
 See the [Kubernetes List Library](https://pkg.go.dev/k8s.io/apiextensions-apiserver/pkg/apiserver/schema/cel/library#Lists)
 godoc for more information.
@@ -130,12 +115,11 @@ regex operations.
 
 Examples:
 
-{{< table caption="Examples of CEL expressions using regex library functions" >}}
+{{}}
 | CEL Expression                                              | Purpose                                                  |
 |-------------------------------------------------------------|----------------------------------------------------------|
 | `"abc 123".find('[0-9]*')`                                  | Find the first number in a string                        |
-| `"1, 2, 3, 4".findAll('[0-9]*').map(x, int(x)).sum() < 100` | Verify that the numbers in a string sum to less than 100 |
-{{< /table >}}
+| `"1, 2, 3, 4".findAll('[0-9]*').map(x, int(x)).sum() }}
 
 See the [Kubernetes regex library](https://pkg.go.dev/k8s.io/apiextensions-apiserver/pkg/apiserver/schema/cel/library#Regex)
 godoc for more information.
@@ -155,12 +139,12 @@ Once parsed via the `url` function, the resulting URL object has `getScheme`,
 
 Examples:
 
-{{< table caption="Examples of CEL expressions using URL library functions" >}}
+{{}}
 | CEL Expression                                                  | Purpose                                        |
 |-----------------------------------------------------------------|------------------------------------------------|
 | `url('https://example.com:80/').getHost()`                      | Get the 'example.com:80' host part of the URL. |
 | `url('https://example.com/path with spaces/').getEscapedPath()` | Returns '/path%20with%20spaces/'               |
-{{< /table >}}
+{{}}
 
 See the [Kubernetes URL library](https://pkg.go.dev/k8s.io/apiextensions-apiserver/pkg/apiserver/schema/cel/library#URLs)
 godoc for more information.
@@ -192,13 +176,13 @@ To perform an authorization check for a service account:
 
 - `Authorizer.serviceAccount(namespace string, name string) Authorizer`
 
-{{< table caption="Examples of CEL expressions using URL library functions" >}}
+{{}}
 | CEL Expression                                                                                               | Purpose                                        |
 |--------------------------------------------------------------------------------------------------------------|------------------------------------------------|
 | `authorizer.group('').resource('pods').namespace('default').check('create').allowed()`                       | Returns true if the principal (user or service account) is allowed create pods in the 'default' namespace. |
 | `authorizer.path('/healthz').check('get').allowed()`                                                         | Checks if the principal (user or service account) is authorized to make HTTP GET requests to the /healthz API path. |
 | `authorizer.serviceAccount('default', 'myserviceaccount').resource('deployments').check('delete').allowed()` | Checks if the service account is authorized to delete deployments. |
-{{< /table >}}
+{{}}
 
 See the [Kubernetes Authz library](https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz)
 godoc for more information.
@@ -215,25 +199,25 @@ Kubernetes 1.28 adds support for manipulating quantity strings (ex 1.5G, 512k, 2
 Once parsed via the `quantity` function, the resulting Quantity object has the 
 following library of member functions:
 
-{{< table caption="Available member functions of a Quantity" >}}
+{{}}
 | Member Function               | CEL Return Value  | Description                                                                                                                                                          |
 |-------------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `isInteger()`                 | bool              | returns true if and only if asInteger is safe to call without an error                                                                                               |
 | `asInteger()`                 | int               | returns a representation of the current value as an int64 if possible or results in an error if conversion would result in overflow or loss of precision.             |
 | `asApproximateFloat()`        | float              | returns a float64 representation of the quantity which may lose precision. If the value of the quantity is outside the range of a float64 +Inf/-Inf will be returned.  |
 | `sign()`                      | int               | Returns `1` if the quantity is positive, `-1` if it is negative. `0` if it is zero                                                                                   |
-| `add(<Quantity>)`             | Quantity          | Returns sum of two quantities                                                                                                                                        |
-| `add(<int>)`                  | Quantity          | Returns sum of quantity and an integer                                                                                                                               | 
-| `sub(<Quantity>)`             | Quantity          | Returns difference between two quantities                                                                                                                            |
-| `sub(<int>)`                  | Quantity          | Returns difference between a quantity and an integer                                                                                                                 |
-| `isLessThan(<Quantity>)`      | bool              | Returns true if and only if the receiver is less than the operand                                                                                                    |
-| `isGreaterThan(<Quantity>)`   | bool              | Returns true if and only if the receiver is greater than the operand                                                                                                 |
-| `compareTo(<Quantity>)`       | int               | Compares receiver to operand and returns 0 if they are equal, 1 if the receiver is greater, or -1 if the receiver is less than the operand                           |
-{{< /table >}}
+| `add()`             | Quantity          | Returns sum of two quantities                                                                                                                                        |
+| `add()`                  | Quantity          | Returns sum of quantity and an integer                                                                                                                               | 
+| `sub()`             | Quantity          | Returns difference between two quantities                                                                                                                            |
+| `sub()`                  | Quantity          | Returns difference between a quantity and an integer                                                                                                                 |
+| `isLessThan()`      | bool              | Returns true if and only if the receiver is less than the operand                                                                                                    |
+| `isGreaterThan()`   | bool              | Returns true if and only if the receiver is greater than the operand                                                                                                 |
+| `compareTo()`       | int               | Compares receiver to operand and returns 0 if they are equal, 1 if the receiver is greater, or -1 if the receiver is less than the operand                           |
+{{}}
 
 Examples:
 
-{{< table caption="Examples of CEL expressions using URL library functions" >}}
+{{}}
 | CEL Expression                                                            | Purpose                                               |
 |---------------------------------------------------------------------------|-------------------------------------------------------|
 | `quantity("500000G").isInteger()`                                         | Test if conversion to integer would throw an error    |
@@ -245,7 +229,7 @@ Examples:
 | `quantity("200M").compareTo(quantity("0.2G"))`                            | Compare two quantities                                |
 | `quantity("150Mi").isGreaterThan(quantity("100Mi"))`                      | Test if a quantity is greater than the receiver       |
 | `quantity("50M").isLessThan(quantity("100M"))`                            | Test if a quantity is less than the receiver          |
-{{< /table >}}
+{{}}
 
 ## Type checking
 
@@ -277,28 +261,14 @@ has(object.namex) ? object.namex == 'special' : request.name == 'special'
 
 ## Type system integration
 
-{{< table caption="Table showing the relationship between OpenAPIv3 types and CEL types" >}}
+{{}}
 | OpenAPIv3 type                                     | CEL type                                                                                                                     |
 |----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| 'object' with Properties                           | object / "message type" (`type(<object>)` evaluates to `selfType<uniqueNumber>.path.to.object.from.self`                     |
+| 'object' with Properties                           | object / "message type" (`type()` evaluates to `selfType.path.to.object.from.self`                     |
 | 'object' with AdditionalProperties                 | map                                                                                                                          |
 | 'object' with x-kubernetes-embedded-type           | object / "message type", 'apiVersion', 'kind', 'metadata.name' and 'metadata.generateName' are implicitly included in schema |
 | 'object' with x-kubernetes-preserve-unknown-fields | object / "message type", unknown fields are NOT accessible in CEL expression                                                 |
-| x-kubernetes-int-or-string                         | union of int or string,  `self.intOrString < 100 \|\| self.intOrString == '50%'` evaluates to true for both `50` and `"50%"` |
-| 'array                                             | list                                                                                                                         |
-| 'array' with x-kubernetes-list-type=map            | list with map based Equality & unique key guarantees                                                                         |
-| 'array' with x-kubernetes-list-type=set            | list with set based Equality & unique entry guarantees                                                                       |
-| 'boolean'                                          | boolean                                                                                                                      |
-| 'number' (all formats)                             | double                                                                                                                       |
-| 'integer' (all formats)                            | int (64)                                                                                                                     |
-| _no equivalent_                                    | uint (64)                                                                                                                    |
-| 'null'                                             | null_type                                                                                                                    |
-| 'string'                                           | string                                                                                                                       |
-| 'string' with format=byte (base64 encoded)         | bytes                                                                                                                        |
-| 'string' with format=date                          | timestamp (google.protobuf.Timestamp)                                                                                        |
-| 'string' with format=datetime                      | timestamp (google.protobuf.Timestamp)                                                                                        |
-| 'string' with format=duration                      | duration (google.protobuf.Duration)                                                                                          |
-{{< /table >}}
+| x-kubernetes-int-or-string                         | union of int or string,  `self.intOrString }}
 
 Also see: [CEL types](https://github.com/google/cel-spec/blob/v0.6.0/doc/langdef.md#values),
 [OpenAPI types](https://swagger.io/specification/#data-types),
@@ -325,7 +295,7 @@ Only Kubernetes resource property names of the form
 names are escaped according to the following rules when accessed in the
 expression:
 
-{{< table caption="Table of CEL identifier escaping rules" >}}
+{{}}
 | escape sequence   | property name equivalent                                                                     |
 |-------------------|----------------------------------------------------------------------------------------------|
 | `__underscores__` | `__`                                                                                         |
@@ -333,7 +303,7 @@ expression:
 | `__dash__`        | `-`                                                                                          |
 | `__slash__`       | `/`                                                                                          |
 | `__{keyword}__`   | [CEL **RESERVED** keyword](https://github.com/google/cel-spec/blob/v0.6.0/doc/langdef.md#syntax) |
-{{< /table >}}
+{{}}
 
 When you escape any of CEL's **RESERVED** keywords you need to match the exact property name
 use the underscore escaping
@@ -341,14 +311,14 @@ use the underscore escaping
 
 Examples on escaping:
 
-{{< table caption="Examples escaped CEL identifiers" >}}
+{{}}
 | property name | rule with escaped property name   |
 |---------------|-----------------------------------|
 | `namespace`   | `self.__namespace__ > 0`          |
 | `x-prop`      | `self.x__dash__prop > 0`          |
 | `redact__d`   | `self.redact__underscores__d > 0` |
 | `string`      | `self.startsWith('kube')`         |
-{{< /table >}}
+{{}}
 
 ## Resource constraints
 

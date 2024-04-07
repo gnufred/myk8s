@@ -4,7 +4,7 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 Kubernetes objects can quickly be created, updated, and deleted directly using
 imperative commands built into the `kubectl` command-line tool. This document
 explains how those commands are organized and how to use them to manage live objects.
@@ -14,11 +14,11 @@ explains how those commands are organized and how to use them to manage live obj
 
 Install [`kubectl`](/docs/tasks/tools/).
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
-<!-- steps -->
+
 
 ## Trade-offs
 
@@ -46,7 +46,7 @@ These commands support more object types and are more explicit about
 their intent, but require users to know the type of objects they intend
 to create.
 
-- `create <objecttype> [<subtype>] <instancename>`
+- `create  [] `
 
 Some objects types have subtypes that you can specify in the `create` command.
 For example, the Service object has several subtypes including ClusterIP,
@@ -54,7 +54,7 @@ LoadBalancer, and NodePort. Here's an example that creates a Service with
 subtype NodePort:
 
 ```shell
-kubectl create service nodeport <myservicename>
+kubectl create service nodeport 
 ```
 
 In the preceding example, the `create service nodeport` command is called
@@ -81,11 +81,11 @@ that must be set:
 The `kubectl` command also supports update commands driven by an aspect of the object.
 Setting this aspect may set different fields for different object types:
 
-- `set` `<field>`: Set an aspect of an object.
+- `set` ``: Set an aspect of an object.
 
-{{< note >}}
+{{}}
 In Kubernetes version 1.5, not every verb-driven command has an associated aspect-driven command.
-{{< /note >}}
+{{}}
 
 The `kubectl` tool supports these additional ways to update a live object directly,
 however they require a better understanding of the Kubernetes object schema.
@@ -99,14 +99,14 @@ For more details on patch strings, see the patch section in
 
 You can use the `delete` command to delete an object from a cluster:
 
-- `delete <type>/<name>`
+- `delete /`
 
-{{< note >}}
+{{}}
 You can use `kubectl delete` for both imperative commands and imperative object
 configuration. The difference is in the arguments passed to the command. To use
 `kubectl delete` as an imperative command, pass the object to be deleted as
 an argument. Here's an example that passes a Deployment object named nginx:
-{{< /note >}}
+{{}}
 
 ```shell
 kubectl delete deployment/nginx
@@ -114,14 +114,14 @@ kubectl delete deployment/nginx
 
 ## How to view an object
 
-{{< comment >}}
+{{}}
 TODO(pwittrock): Uncomment this when implemented.
 
 You can use `kubectl view` to print specific fields of an object.
 
 - `view`: Prints the value of a specific field of an object.
 
-{{< /comment >}}
+{{}}
 
 
 
@@ -168,6 +168,6 @@ kubectl create --edit -f /tmp/srv.yaml
 * [Imperative Management of Kubernetes Objects Using Configuration Files](/docs/tasks/manage-kubernetes-objects/imperative-config/)
 * [Declarative Management of Kubernetes Objects Using Configuration Files](/docs/tasks/manage-kubernetes-objects/declarative-config/)
 * [Kubectl Command Reference](/docs/reference/generated/kubectl/kubectl-commands/)
-* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{}}/)
 
 

@@ -12,7 +12,7 @@ tags:
 A PriorityClass is a named class for the scheduling priority that should be assigned to a Pod
 in that class.
 
-<!--more-->
+
 
 A [PriorityClass](/docs/concepts/scheduling-eviction/pod-priority-preemption/#how-to-use-priority-and-preemption)
 is a non-namespaced object mapping a name to an integer priority, used for a Pod. The name is

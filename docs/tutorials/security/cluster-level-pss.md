@@ -18,7 +18,7 @@ to all namespaces in a cluster.
 To apply Pod Security Standards to specific namespaces, refer to
 [Apply Pod Security Standards at the namespace level](/docs/tutorials/security/ns-level-pss).
 
-If you are running a version of Kubernetes other than v{{< skew currentVersion >}},
+If you are running a version of Kubernetes other than v{{}},
 check the documentation for that version.
 
 ## {{% heading "prerequisites" %}}
@@ -50,7 +50,7 @@ that are most appropriate for your configuration, do the following:
    The output is similar to:
    ```
    Creating cluster "psa-wo-cluster-pss" ...
-   ✓ Ensuring node image (kindest/node:v{{< skew currentPatchVersion >}}) 🖼
+   ✓ Ensuring node image (kindest/node:v{{}}) 🖼
    ✓ Preparing nodes 📦
    ✓ Writing configuration 📜
    ✓ Starting control-plane 🕹️
@@ -186,7 +186,7 @@ following:
 
    ```
    mkdir -p /tmp/pss
-   cat <<EOF > /tmp/pss/cluster-level-pss.yaml
+   cat  /tmp/pss/cluster-level-pss.yaml
    apiVersion: apiserver.config.k8s.io/v1
    kind: AdmissionConfiguration
    plugins:
@@ -208,17 +208,17 @@ following:
    EOF
    ```
 
-   {{< note >}}
+   {{}}
    `pod-security.admission.config.k8s.io/v1` configuration requires v1.25+.
    For v1.23 and v1.24, use [v1beta1](https://v1-24.docs.kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/).
    For v1.22, use [v1alpha1](https://v1-22.docs.kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/).
-   {{< /note >}}
+   {{}}
 
 
 1. Configure the API server to consume this file during cluster creation:
 
    ```
-   cat <<EOF > /tmp/pss/cluster-config.yaml
+   cat  /tmp/pss/cluster-config.yaml
    kind: Cluster
    apiVersion: kind.x-k8s.io/v1alpha4
    nodes:
@@ -251,11 +251,11 @@ following:
    EOF
    ```
 
-   {{<note>}}
+   {{}}
    If you use Docker Desktop with *kind* on macOS, you can
    add `/tmp` as a Shared Directory under the menu item
    **Preferences > Resources > File Sharing**.
-   {{</note>}}
+   {{}}
 
 1. Create a cluster that uses Pod Security Admission to apply
    these Pod Security Standards:
@@ -266,7 +266,7 @@ following:
    The output is similar to this:
    ```
    Creating cluster "psa-with-cluster-pss" ...
-    ✓ Ensuring node image (kindest/node:v{{< skew currentPatchVersion >}}) 🖼
+    ✓ Ensuring node image (kindest/node:v{{}}) 🖼
     ✓ Preparing nodes 📦
     ✓ Writing configuration 📜
     ✓ Starting control-plane 🕹️

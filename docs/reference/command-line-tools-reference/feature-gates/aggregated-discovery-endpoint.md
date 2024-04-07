@@ -14,5 +14,5 @@ stages:
     defaultValue: true
     fromVersion: "1.27"
 ---
-Enable a single HTTP endpoint `/discovery/<version>` which
+Enable a single HTTP endpoint `/discovery/` which
 supports native HTTP caching with ETags containing all APIResources known to the API server.

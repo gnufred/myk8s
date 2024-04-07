@@ -10,34 +10,34 @@ weight: 10
 no_list: true
 ---
 
-<!-- overview -->
+
 
 _Pods_ are the smallest deployable units of computing that you can create and manage in Kubernetes.
 
 A _Pod_ (as in a pod of whales or pea pod) is a group of one or more
-{{< glossary_tooltip text="containers" term_id="container" >}}, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and
+{{}}, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and
 co-scheduled, and run in a shared context. A Pod models an
 application-specific "logical host": it contains one or more application
 containers which are relatively tightly coupled.
 In non-cloud contexts, applications executed on the same physical or virtual machine are analogous to cloud applications executed on the same logical host.
 
 As well as application containers, a Pod can contain
-{{< glossary_tooltip text="init containers" term_id="init-container" >}} that run
+{{}} that run
 during Pod startup. You can also inject
-{{< glossary_tooltip text="ephemeral containers" term_id="ephemeral-container" >}}
+{{}}
 for debugging a running Pod.
 
-<!-- body -->
+
 
 ## What is a Pod?
 
-{{< note >}}
+{{}}
 You need to install a [container runtime](/docs/setup/production-environment/container-runtimes/)
 into each node in the cluster so that Pods can run there.
-{{< /note >}}
+{{}}
 
 The shared context of a Pod is a set of Linux namespaces, cgroups, and
-potentially other facets of isolation - the same things that isolate a {{< glossary_tooltip text="container" term_id="container" >}}. Within a Pod's context, the individual applications may have
+potentially other facets of isolation - the same things that isolate a {{}}. Within a Pod's context, the individual applications may have
 further sub-isolations applied.
 
 A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
@@ -79,10 +79,9 @@ with workload resources.
 
 ### Workload resources for managing pods
 
-Usually you don't need to create Pods directly, even singleton Pods. Instead, create them using workload resources such as {{< glossary_tooltip text="Deployment"
-term_id="deployment" >}} or {{< glossary_tooltip text="Job" term_id="job" >}}.
+Usually you don't need to create Pods directly, even singleton Pods. Instead, create them using workload resources such as {{}} or {{}}.
 If your Pods need to track state, consider the
-{{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}} resource.
+{{}} resource.
 
 
 Each Pod is meant to run a single instance of a given application. If you want to
@@ -90,7 +89,7 @@ scale your application horizontally (to provide more overall resources by runnin
 more instances), you should use multiple Pods, one for each instance. In
 Kubernetes, this is typically referred to as _replication_.
 Replicated Pods are usually created and managed as a group by a workload resource
-and its {{< glossary_tooltip text="controller" term_id="controller" >}}.
+and its {{}}.
 
 See [Pods and controllers](#pods-and-controllers) for more information on how
 Kubernetes uses workload resources, and their controllers, to implement application
@@ -105,16 +104,16 @@ Pods natively provide two kinds of shared resources for their constituent contai
 You'll rarely create individual Pods directly in Kubernetes—even singleton Pods. This
 is because Pods are designed as relatively ephemeral, disposable entities. When
 a Pod gets created (directly by you, or indirectly by a
-{{< glossary_tooltip text="controller" term_id="controller" >}}), the new Pod is
-scheduled to run on a {{< glossary_tooltip term_id="node" >}} in your cluster.
+{{}}), the new Pod is
+scheduled to run on a {{}} in your cluster.
 The Pod remains on that node until the Pod finishes execution, the Pod object is deleted,
 the Pod is *evicted* for lack of resources, or the node fails.
 
-{{< note >}}
+{{}}
 Restarting a container in a Pod should not be confused with restarting a Pod. A Pod
 is not a process, but an environment for running container(s). A Pod persists until
 it is deleted.
-{{< /note >}}
+{{}}
 
 The name of a Pod must be a valid
 [DNS subdomain](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names)
@@ -124,14 +123,14 @@ the name should follow the more restrictive rules for a
 
 ### Pod OS
 
-{{< feature-state state="stable" for_k8s_version="v1.25" >}}
+{{}}
 
 You should set the `.spec.os.name` field to either `windows` or `linux` to indicate the OS on
 which you want the pod to run. These two are the only operating systems supported for now by 
 Kubernetes. In future, this list may be expanded.
 
-In Kubernetes v{{< skew currentVersion >}}, the value you set for this field has no
-effect on {{< glossary_tooltip text="scheduling" term_id="kube-scheduler" >}} of the pods.
+In Kubernetes v{{}}, the value you set for this field has no
+effect on {{}} of the pods.
 Setting the `.spec.os.name` helps to identify the pod OS
 authoritatively and is used for validation. The kubelet refuses to run a Pod where you have
 specified a Pod OS, if this isn't the same as the operating system for the node where
@@ -149,13 +148,13 @@ replacement Pod onto a healthy Node.
 
 Here are some examples of workload resources that manage one or more Pods:
 
-* {{< glossary_tooltip text="Deployment" term_id="deployment" >}}
-* {{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}
-* {{< glossary_tooltip text="DaemonSet" term_id="daemonset" >}}
+* {{}}
+* {{}}
+* {{}}
 
 ### Pod templates
 
-Controllers for {{< glossary_tooltip text="workload" term_id="workload" >}} resources create Pods
+Controllers for {{}} resources create Pods
 from a _pod template_ and manage those Pods on your behalf.
 
 PodTemplates are specifications for creating Pods, and are included in workload resources such as
@@ -200,7 +199,7 @@ Each workload resource implements its own rules for handling changes to the Pod 
 If you want to read more about StatefulSet specifically, read
 [Update strategy](/docs/tutorials/stateful-application/basic-stateful-set/#updating-statefulsets) in the StatefulSet Basics tutorial.
 
-On Nodes, the {{< glossary_tooltip term_id="kubelet" text="kubelet" >}} does not
+On Nodes, the {{}} does not
 directly observe or manage any of the details around pod templates and updates; those
 details are abstracted away. That abstraction and separation of concerns simplifies
 system semantics, and makes it feasible to extend the cluster's behavior without
@@ -215,8 +214,8 @@ template instead of updating or patching the existing Pods.
 Kubernetes doesn't prevent you from managing Pods directly. It is possible to
 update some fields of a running Pod, in place. However, Pod update operations
 like 
-[`patch`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#patch-pod-v1-core), and
-[`replace`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#replace-pod-v1-core)
+[`patch`](/docs/reference/generated/kubernetes-api/{{}}/#patch-pod-v1-core), and
+[`replace`](/docs/reference/generated/kubernetes-api/{{}}/#replace-pod-v1-core)
 have some limitations:
 
 - Most of the metadata about a Pod is immutable. For example, you cannot
@@ -243,7 +242,7 @@ containers.
 ### Storage in Pods {#pod-storage}
 
 A Pod can specify a set of shared storage
-{{< glossary_tooltip text="volumes" term_id="volume" >}}. All containers
+{{}}. All containers
 in the Pod can access the shared volumes, allowing those containers to
 share data. Volumes also allow persistent data in a Pod to survive
 in case one of the containers within needs to be restarted. See
@@ -272,9 +271,9 @@ section.
 
 ## Privileged mode for containers
 
-{{< note >}}
-Your {{< glossary_tooltip text="container runtime" term_id="container-runtime" >}} must support the concept of a privileged container for this setting to be relevant.
-{{< /note >}}
+{{}}
+Your {{}} must support the concept of a privileged container for this setting to be relevant.
+{{}}
 
 Any container in a pod can run in privileged mode to use operating system administrative capabilities
 that would otherwise be inaccessible. This is available for both Windows and Linux.
@@ -288,7 +287,7 @@ capabilities such as manipulating the network stack or accessing hardware device
 
 ### Windows privileged containers
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+{{}}
 
 In Windows, you can create a [Windows HostProcess pod](/docs/tasks/configure-pod-container/create-hostprocess-pod) by setting the 
 `windowsOptions.hostProcess` flag on the security context of the pod spec. All containers in these
@@ -298,27 +297,27 @@ to perform administrative tasks as is done with Linux privileged containers.
 ## Static Pods
 
 _Static Pods_ are managed directly by the kubelet daemon on a specific node,
-without the {{< glossary_tooltip text="API server" term_id="kube-apiserver" >}}
+without the {{}}
 observing them.
 Whereas most Pods are managed by the control plane (for example, a
-{{< glossary_tooltip text="Deployment" term_id="deployment" >}}), for static
+{{}}), for static
 Pods, the kubelet directly supervises each static Pod (and restarts it if it fails).
 
-Static Pods are always bound to one {{< glossary_tooltip term_id="kubelet" >}} on a specific node.
+Static Pods are always bound to one {{}} on a specific node.
 The main use for static Pods is to run a self-hosted control plane: in other words,
 using the kubelet to supervise the individual [control plane components](/docs/concepts/overview/components/#control-plane-components).
 
-The kubelet automatically tries to create a {{< glossary_tooltip text="mirror Pod" term_id="mirror-pod" >}}
+The kubelet automatically tries to create a {{}}
 on the Kubernetes API server for each static Pod.
 This means that the Pods running on a node are visible on the API server,
 but cannot be controlled from there. See the guide [Create static Pods](/docs/tasks/configure-pod-container/static-pod) for more information.
 
-{{< note >}}
+{{}}
 The `spec` of a static Pod cannot refer to other API objects
-(e.g., {{< glossary_tooltip text="ServiceAccount" term_id="service-account" >}},
-{{< glossary_tooltip text="ConfigMap" term_id="configmap" >}},
-{{< glossary_tooltip text="Secret" term_id="secret" >}}, etc).
-{{< /note >}}
+(e.g., {{}},
+{{}},
+{{}}, etc).
+{{}}
 
 ## Pods with multiple containers {#how-pods-manage-multiple-containers}
 
@@ -328,7 +327,7 @@ co-scheduled on the same physical or virtual machine in the cluster. The contain
 can share resources and dependencies, communicate with one another, and coordinate
 when and how they are terminated.
 
-<!--intentionally repeats some text from earlier in the page, with more detail -->
+
 Pods in a Kubernetes cluster are used in two main ways:
 
 * **Pods that run a single container**. The "one-container-per-Pod" model is the
@@ -341,7 +340,7 @@ Pods in a Kubernetes cluster are used in two main ways:
   tightly coupled and need to share resources. These co-located containers
   form a single cohesive unit of service—for example, one container serving data
   stored in a shared volume to the public, while a separate
-  {{< glossary_tooltip text="sidecar container" term_id="sidecar-container" >}}
+  {{}}
   refreshes or updates those files.
   The Pod wraps these containers, storage resources, and an ephemeral network
   identity together as a single unit.
@@ -351,16 +350,16 @@ acts as a web server for files in a shared volume, and a separate
 [sidecar container](/docs/concepts/workloads/pods/sidecar-containers/)
 that updates those files from a remote source, as in the following diagram:
 
-{{< figure src="/images/docs/pod.svg" alt="Pod creation diagram" class="diagram-medium" >}}
+{{}}
 
-Some Pods have {{< glossary_tooltip text="init containers" term_id="init-container" >}}
-as well as {{< glossary_tooltip text="app containers" term_id="app-container" >}}.
+Some Pods have {{}}
+as well as {{}}.
 By default, init containers run and complete before the app containers are started.
 
 You can also have [sidecar containers](/docs/concepts/workloads/pods/sidecar-containers/)
 that provide auxiliary services to the main application Pod (for example: a service mesh).
 
-{{< feature-state for_k8s_version="v1.29" state="beta" >}}
+{{}}
 
 Enabled by default, the `SidecarContainers` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 allows you to specify `restartPolicy: Always` for init containers.
@@ -389,12 +388,12 @@ in the Pod Lifecycle documentation.
   configure different Pods with different container runtime configurations.
 * Read about [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) and how you can use it to manage application availability during disruptions.
 * Pod is a top-level resource in the Kubernetes REST API.
-  The {{< api-reference page="workload-resources/pod-v1" >}}
+  The {{}}
   object definition describes the object in detail.
 * [The Distributed System Toolkit: Patterns for Composite Containers](/blog/2015/06/the-distributed-system-toolkit-patterns/) explains common layouts for Pods with more than one container.
 * Read about [Pod topology spread constraints](/docs/concepts/scheduling-eviction/topology-spread-constraints/)
 
-To understand the context for why Kubernetes wraps a common Pod API in other resources (such as {{< glossary_tooltip text="StatefulSets" term_id="statefulset" >}} or {{< glossary_tooltip text="Deployments" term_id="deployment" >}}), you can read about the prior art, including:
+To understand the context for why Kubernetes wraps a common Pod API in other resources (such as {{}} or {{}}), you can read about the prior art, including:
 
 * [Aurora](https://aurora.apache.org/documentation/latest/reference/configuration/#job-schema)
 * [Borg](https://research.google.com/pubs/pub43438.html)

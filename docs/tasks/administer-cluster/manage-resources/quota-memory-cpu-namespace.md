@@ -7,10 +7,10 @@ description: >-
 ---
 
 
-<!-- overview -->
+
 
 This page shows how to set quotas for the total amount memory and CPU that
-can be used by all Pods running in a {{< glossary_tooltip text="namespace" term_id="namespace" >}}.
+can be used by all Pods running in a {{}}.
 You specify quotas in a
 [ResourceQuota](/docs/reference/kubernetes-api/policy-resources/resource-quota-v1/)
 object.
@@ -20,14 +20,14 @@ object.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You must have access to create namespaces in your cluster.
 
 Each node in your cluster must have at least 1 GiB of memory.
 
 
-<!-- steps -->
+
 
 ## Create a namespace
 

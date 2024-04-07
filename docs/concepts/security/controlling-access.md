@@ -7,10 +7,10 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 This page provides an overview of controlling access to the Kubernetes API.
 
-<!-- body -->
+
 Users access the [Kubernetes API](/docs/concepts/overview/kubernetes-api/) using `kubectl`,
 client libraries, or by making REST requests.  Both human users and
 [Kubernetes service accounts](/docs/tasks/configure-pod-container/configure-service-account/) can be

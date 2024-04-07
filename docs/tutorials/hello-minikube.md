@@ -7,13 +7,13 @@ menu:
     title: "Get Started"
     weight: 10
     post: >
-      <p>Ready to get your hands dirty? Build a simple Kubernetes cluster that runs a sample app.</p>
+      Ready to get your hands dirty? Build a simple Kubernetes cluster that runs a sample app.
 card:
   name: tutorials
   weight: 10
 ---
 
-<!-- overview -->
+
 
 This tutorial shows you how to run a sample app on Kubernetes using minikube.
 The tutorial provides a container image that uses NGINX to echo back all the requests.
@@ -29,15 +29,15 @@ The tutorial provides a container image that uses NGINX to echo back all the req
 
 This tutorial assumes that you have already set up `minikube`.
 See __Step 1__ in [minikube start](https://minikube.sigs.k8s.io/docs/start/) for installation instructions.
-{{< note >}}
+{{}}
 Only execute the instructions in __Step 1, Installation__. The rest is covered on this page.  
-{{< /note >}}
+{{}}
 
 You also need to install `kubectl`.
 See [Install tools](/docs/tasks/tools/#kubectl) for installation instructions.
 
 
-<!-- lessoncontent -->
+
 
 ## Create a minikube cluster
 
@@ -49,7 +49,7 @@ minikube start
 
 Open the Kubernetes dashboard. You can do this two different ways:
 
-{{< tabs name="dashboard" >}}
+{{}}
 {{% tab name="Launch a browser" %}}
 Open a **new** terminal, and run:
 ```shell
@@ -59,7 +59,7 @@ minikube dashboard
 
 Now, switch back to the terminal where you ran `minikube start`.
 
-{{< note >}}
+{{}}
 The `dashboard` command enables the dashboard add-on and opens the proxy in the default web browser.
 You can create Kubernetes resources on the dashboard such as Deployment and Service.
 
@@ -71,7 +71,7 @@ The `dashboard` command creates a temporary proxy to make the dashboard accessib
 To stop the proxy, run `Ctrl+C` to exit the process.
 After the command exits, the dashboard remains running in the Kubernetes cluster.
 You can run the `dashboard` command again to create another proxy to access the dashboard.
-{{< /note >}}
+{{}}
 
 {{% /tab %}}
 {{% tab name="URL copy and paste" %}}
@@ -88,7 +88,7 @@ minikube dashboard --url
 Now, you can use this URL and switch back to the terminal where you ran `minikube start`.
 
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## Create a Deployment
 
@@ -159,9 +159,9 @@ recommended way to manage the creation and scaling of Pods.
    ```
 
 
-{{< note >}}
+{{}}
 For more information about `kubectl` commands, see the [kubectl overview](/docs/reference/kubectl/).
-{{< /note >}}
+{{}}
 
 ## Create a Service
 
@@ -192,8 +192,8 @@ Kubernetes [*Service*](/docs/concepts/services-networking/service/).
 
     ```
     NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-    hello-node   LoadBalancer   10.108.144.78   <pending>     8080:30369/TCP   21s
-    kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          23m
+    hello-node   LoadBalancer   10.108.144.78        8080:30369/TCP   21s
+    kubernetes   ClusterIP      10.96.0.1               443/TCP          23m
     ```
 
     On cloud providers that support load balancers,
@@ -211,7 +211,7 @@ Kubernetes [*Service*](/docs/concepts/services-networking/service/).
 
 ## Enable addons
 
-The minikube tool includes a set of built-in {{< glossary_tooltip text="addons" term_id="addons" >}} that can be enabled, disabled and opened in the local Kubernetes environment.
+The minikube tool includes a set of built-in {{}} that can be enabled, disabled and opened in the local Kubernetes environment.
 
 1. List the currently supported addons:
 
@@ -276,10 +276,10 @@ The minikube tool includes a set of built-in {{< glossary_tooltip text="addons" 
     pod/storage-provisioner                     1/1       Running   0          34m
 
     NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
-    service/metrics-server         ClusterIP   10.96.241.45    <none>        80/TCP              26s
-    service/kube-dns               ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP       34m
-    service/monitoring-grafana     NodePort    10.99.24.54     <none>        80:30002/TCP        26s
-    service/monitoring-influxdb    ClusterIP   10.111.169.94   <none>        8083/TCP,8086/TCP   26s
+    service/metrics-server         ClusterIP   10.96.241.45            80/TCP              26s
+    service/kube-dns               ClusterIP   10.96.0.10              53/UDP,53/TCP       34m
+    service/monitoring-grafana     NodePort    10.99.24.54             80:30002/TCP        26s
+    service/monitoring-influxdb    ClusterIP   10.111.169.94           8083/TCP,8086/TCP   26s
     ```
 
 1. Check the output from `metrics-server`:

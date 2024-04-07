@@ -18,7 +18,7 @@ card:
     title: Production environment  
 ---
 
-<!-- overview -->
+
 
 This section lists the different ways to set up and run Kubernetes.
 When you install Kubernetes, choose an installation type based on: ease of maintenance, security,
@@ -27,7 +27,7 @@ control, available resources, and expertise required to operate and manage a clu
 You can [download Kubernetes](/releases/download/) to deploy a Kubernetes cluster
 on a local machine, into the cloud, or for your own datacenter.
 
-Several [Kubernetes components](/docs/concepts/overview/components/) such as {{< glossary_tooltip text="kube-apiserver" term_id="kube-apiserver" >}} or {{< glossary_tooltip text="kube-proxy" term_id="kube-proxy" >}} can also be
+Several [Kubernetes components](/docs/concepts/overview/components/) such as {{}} or {{}} can also be
 deployed as [container images](/releases/download/#container-images) within the cluster.
 
 It is **recommended** to run Kubernetes components as container images wherever
@@ -39,7 +39,7 @@ If you don't want to manage a Kubernetes cluster yourself, you could pick a mana
 There are also other standardized and custom solutions across a wide range of cloud and
 bare metal environments.
 
-<!-- body -->
+
 
 ## Learning environment
 
@@ -64,7 +64,7 @@ for deploying Kubernetes is [kubeadm](/docs/setup/production-environment/tools/k
 - Select a [container runtime](/docs/setup/production-environment/container-runtimes/) for your new cluster
 - Learn about [best practices](/docs/setup/best-practices/) for cluster setup
 
-Kubernetes is designed for its {{< glossary_tooltip term_id="control-plane" text="control plane" >}} to
+Kubernetes is designed for its {{}} to
 run on Linux. Within your cluster you can run applications on Linux or other operating systems, including
 Windows.
 

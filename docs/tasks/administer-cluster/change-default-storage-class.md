@@ -4,15 +4,15 @@ content_type: task
 weight: 90
 ---
 
-<!-- overview -->
+
 This page shows how to change the default Storage Class that is used to
 provision volumes for PersistentVolumeClaims that have no special requirements.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Why change the default storage class?
 

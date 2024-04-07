@@ -4,7 +4,7 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 Kubernetes objects can be created, updated, and deleted by storing multiple
 object configuration files in a directory and using `kubectl apply` to
 recursively create and update those objects as needed. This method
@@ -16,9 +16,9 @@ preview of what changes `apply` will make.
 
 Install [`kubectl`](/docs/tasks/tools/).
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Trade-offs
 
@@ -58,16 +58,16 @@ Use `kubectl apply` to create all objects, except those that already exist,
 defined by configuration files in a specified directory:
 
 ```shell
-kubectl apply -f <directory>
+kubectl apply -f 
 ```
 
 This sets the `kubectl.kubernetes.io/last-applied-configuration: '{...}'`
 annotation on each object. The annotation contains the contents of the object
 configuration file that was used to create the object.
 
-{{< note >}}
+{{}}
 Add the `-R` flag to recursively process directories.
-{{< /note >}}
+{{}}
 
 Here's an example of an object configuration file:
 
@@ -79,7 +79,7 @@ Run `kubectl diff` to print the object that will be created:
 kubectl diff -f https://k8s.io/examples/application/simple_deployment.yaml
 ```
 
-{{< note >}}
+{{}}
 `diff` uses [server-side dry-run](/docs/reference/using-api/api-concepts/#dry-run),
 which needs to be enabled on `kube-apiserver`.
 
@@ -88,7 +88,7 @@ it requires granting `PATCH`, `CREATE`, and `UPDATE` permissions.
 See [Dry-Run Authorization](/docs/reference/using-api/api-concepts#dry-run-authorization)
 for details.
 
-{{< /note >}}
+{{}}
 
 Create the object using `kubectl apply`:
 
@@ -153,13 +153,13 @@ if those objects already exist. This approach accomplishes the following:
 2. Clears fields removed from the configuration file in the live configuration.
 
 ```shell
-kubectl diff -f <directory>
-kubectl apply -f <directory>
+kubectl diff -f 
+kubectl apply -f 
 ```
 
-{{< note >}}
+{{}}
 Add the `-R` flag to recursively process directories.
-{{< /note >}}
+{{}}
 
 Here's an example configuration file:
 
@@ -171,10 +171,10 @@ Create the object using `kubectl apply`:
 kubectl apply -f https://k8s.io/examples/application/simple_deployment.yaml
 ```
 
-{{< note >}}
+{{}}
 For purposes of illustration, the preceding command refers to a single
 configuration file instead of a directory.
-{{< /note >}}
+{{}}
 
 Print the live configuration using `kubectl get`:
 
@@ -346,33 +346,33 @@ spec:
   # ...
 ```
 
-{{< warning >}}
+{{}}
 Mixing `kubectl apply` with the imperative object configuration commands
 `create` and `replace` is not supported. This is because `create`
 and `replace` do not retain the `kubectl.kubernetes.io/last-applied-configuration`
 that `kubectl apply` uses to compute updates.
-{{< /warning >}}
+{{}}
 
 ## How to delete objects
 
 There are two approaches to delete objects managed by `kubectl apply`.
 
-### Recommended: `kubectl delete -f <filename>`
+### Recommended: `kubectl delete -f `
 
 Manually deleting objects using the imperative command is the recommended
 approach, as it is more explicit about what is being deleted, and less likely
 to result in the user deleting something unintentionally:
 
 ```shell
-kubectl delete -f <filename>
+kubectl delete -f 
 ```
 
-### Alternative: `kubectl apply -f <directory> --prune`
+### Alternative: `kubectl apply -f  --prune`
 
 As an alternative to `kubectl delete`, you can use `kubectl apply` to identify objects to be deleted after
 their manifests have been removed from a directory in the local filesystem.
 
-In Kubernetes {{< skew currentVersion >}}, there are two pruning modes available in kubectl apply:
+In Kubernetes {{}}, there are two pruning modes available in kubectl apply:
 
 - Allowlist-based pruning: This mode has existed since kubectl v1.5 but is still
   in alpha due to usability, correctness and performance issues with its design.
@@ -381,18 +381,18 @@ In Kubernetes {{< skew currentVersion >}}, there are two pruning modes available
   that kubectl can use to accurately and efficiently track set membership across **apply**
   operations. This mode was introduced in alpha in kubectl v1.27 as a replacement for allowlist-based pruning.
 
-{{< tabs name="kubectl_apply_prune" >}}
+{{}}
 {{% tab name="Allow list" %}}
 
-{{< feature-state for_k8s_version="v1.5" state="alpha" >}}
+{{}}
 
-{{< warning >}}
+{{}}
 Take care when using `--prune` with `kubectl apply` in allow list mode. Which
 objects are pruned depends on the values of the `--prune-allowlist`, `--selector`
 and `--namespace` flags, and relies on dynamic discovery of the objects in scope.
 Especially if flag values are changed between invocations, this can lead to objects
 being unexpectedly deleted or retained.
-{{< /warning >}}
+{{}}
 
 To use allowlist-based pruning, add the following flags to your `kubectl apply` invocation:
 
@@ -411,26 +411,26 @@ manifest in the directory, and it has a `kubectl.kubernetes.io/last-applied-conf
 it is deleted.
 
 ```shell
-kubectl apply -f <directory> --prune -l <labels> --prune-allowlist=<gvk-list>
+kubectl apply -f  --prune -l  --prune-allowlist=
 ```
 
-{{< warning >}}
+{{}}
 Apply with prune should only be run against the root directory
 containing the object manifests. Running against sub-directories
 can cause objects to be unintentionally deleted if they were previously applied, 
 have the labels given (if any), and do not appear in the subdirectory.
-{{< /warning >}}
+{{}}
 
 {{% /tab %}}
 
 {{% tab name="Apply set" %}}
 
-{{< feature-state for_k8s_version="v1.27" state="alpha" >}}
+{{}}
 
-{{< caution >}}
+{{}}
 `kubectl apply --prune --applyset` is in alpha, and backwards incompatible
 changes might be introduced in subsequent releases.
-{{< /caution >}}
+{{}}
 
 To use ApplySet-based pruning, set the `KUBECTL_APPLYSET=true` environment variable,
 and add the following flags to your `kubectl apply` invocation:
@@ -440,11 +440,11 @@ and add the following flags to your `kubectl apply` invocation:
   efficiently track set membership across `apply` operations.
 
 ```shell
-KUBECTL_APPLYSET=true kubectl apply -f <directory> --prune --applyset=<name>
+KUBECTL_APPLYSET=true kubectl apply -f  --prune --applyset=
 ```
 
 By default, the type of the ApplySet parent object used is a Secret. However,
-ConfigMaps can also be used in the format: `--applyset=configmaps/<name>`.
+ConfigMaps can also be used in the format: `--applyset=configmaps/`.
 When using a Secret or ConfigMap, kubectl will create the object if it does not already exist.
 
 It is also possible to use custom resources as ApplySet parent objects. To enable
@@ -452,15 +452,15 @@ this, label the Custom Resource Definition (CRD) that defines the resource you w
 to use with the following: `applyset.kubernetes.io/is-parent-type: true`. Then, create
 the object you want to use as an ApplySet parent (kubectl does not do this automatically
 for custom resources). Finally, refer to that object in the applyset flag as follows:
-`--applyset=<resource>.<group>/<name>` (for example, `widgets.custom.example.com/widget-name`).
+`--applyset=./` (for example, `widgets.custom.example.com/widget-name`).
 
-With ApplySet-based pruning, kubectl adds the `applyset.kubernetes.io/part-of=<parentID>`
+With ApplySet-based pruning, kubectl adds the `applyset.kubernetes.io/part-of=`
 label to each object in the set before they are sent to the server. For performance reasons,
 it also collects the list of resource types and namespaces that the set contains and adds
 these in annotations on the live parent object. Finally, at the end of the apply operation,
 it queries the API server for objects of those types in those namespaces
 (or in the cluster scope, as applicable) that belong to the set, as defined by the
-`applyset.kubernetes.io/part-of=<parentID>` label.
+`applyset.kubernetes.io/part-of=` label.
 
 Caveats and restrictions:
 
@@ -473,23 +473,23 @@ Caveats and restrictions:
 
 {{% /tab %}}
 
-{{< /tabs >}}
+{{}}
 
 ## How to view an object
 
 You can use `kubectl get` with `-o yaml` to view the configuration of a live object:
 
 ```shell
-kubectl get -f <filename|url> -o yaml
+kubectl get -f  -o yaml
 ```
 
 ## How apply calculates differences and merges changes
 
-{{< caution >}}
+{{}}
 A *patch* is an update operation that is scoped to specific fields of an object
 instead of the entire object. This enables updating only a specific set of fields
 on an object without reading the object first.
-{{< /caution >}}
+{{}}
 
 When `kubectl apply` updates the live configuration for an object,
 it does so by sending a patch request to the API server. The
@@ -641,9 +641,9 @@ and merged.
 
 Primitive fields are replaced or cleared.
 
-{{< note >}}
+{{}}
 `-` is used for "not applicable" because the value is not used.
-{{< /note >}}
+{{}}
 
 | Field in object configuration file  | Field in live object configuration | Field in last-applied-configuration | Action                                    |
 |-------------------------------------|------------------------------------|-------------------------------------|-------------------------------------------|
@@ -656,9 +656,9 @@ Primitive fields are replaced or cleared.
 
 Fields that represent maps are merged by comparing each of the subfields or elements of the map:
 
-{{< note >}}
+{{}}
 `-` is used for "not applicable" because the value is not used.
-{{< /note >}}
+{{}}
 
 | Key in object configuration file    | Key in live object configuration   | Field in last-applied-configuration | Action                           |
 |-------------------------------------|------------------------------------|-------------------------------------|----------------------------------|
@@ -784,14 +784,14 @@ by `name`.
 
 As of Kubernetes 1.5, merging lists of primitive elements is not supported.
 
-{{< note >}}
+{{}}
 Which of the above strategies is chosen for a given field is controlled by
 the `patchStrategy` tag in [types.go](https://github.com/kubernetes/api/blob/d04500c8c3dda9c980b668c57abc2ca61efcf5c4/core/v1/types.go#L2748)
 If no `patchStrategy` is specified for a field of type list, then
 the list is replaced.
-{{< /note >}}
+{{}}
 
-{{< comment >}}
+{{}}
 TODO(pwittrock): Uncomment this for 1.6
 
 - Treat the list as a set of primitives.  Replace or delete individual
@@ -800,7 +800,7 @@ TODO(pwittrock): Uncomment this for 1.6
 **Example:** Using apply to update the `finalizers` field of ObjectMeta
 keeps elements added to the live configuration.  Ordering of finalizers
 is lost.
-{{< /comment >}}
+{{}}
 
 ## Default field values
 
@@ -995,17 +995,17 @@ an imperative writer requires manual steps:
 Kubernetes objects should be managed using only one method at a time.
 Switching from one method to another is possible, but is a manual process.
 
-{{< note >}}
+{{}}
 It is OK to use imperative deletion with declarative management.
-{{< /note >}}
+{{}}
 
-{{< comment >}}
+{{}}
 TODO(pwittrock): We need to make using imperative commands with
 declarative object configuration work so that it doesn't write the
 fields to the annotation, and instead.  Then add this bullet point.
 
 - using imperative commands with declarative configuration to manage where each manages different fields.
-{{< /comment >}}
+{{}}
 
 ### Migrating from imperative command management to declarative object configuration
 
@@ -1015,43 +1015,43 @@ configuration involves several manual steps:
 1. Export the live object to a local configuration file:
 
    ```shell
-   kubectl get <kind>/<name> -o yaml > <kind>_<name>.yaml
+   kubectl get / -o yaml > _.yaml
    ```
 
 1. Manually remove the `status` field from the configuration file.
 
-   {{< note >}}
+   {{}}
    This step is optional, as `kubectl apply` does not update the status field
    even if it is present in the configuration file.
-   {{< /note >}}
+   {{}}
 
 1. Set the `kubectl.kubernetes.io/last-applied-configuration` annotation on the object:
 
    ```shell
-   kubectl replace --save-config -f <kind>_<name>.yaml
+   kubectl replace --save-config -f _.yaml
    ```
 
 1. Change processes to use `kubectl apply` for managing the object exclusively.
 
-{{< comment >}}
+{{}}
 TODO(pwittrock): Why doesn't export remove the status field?  Seems like it should.
-{{< /comment >}}
+{{}}
 
 ### Migrating from imperative object configuration to declarative object configuration
 
 1. Set the `kubectl.kubernetes.io/last-applied-configuration` annotation on the object:
 
    ```shell
-   kubectl replace --save-config -f <kind>_<name>.yaml
+   kubectl replace --save-config -f _.yaml
    ```
 
 1. Change processes to use `kubectl apply` for managing the object exclusively.
 
 ## Defining controller selectors and PodTemplate labels
 
-{{< warning >}}
+{{}}
 Updating selectors on controllers is strongly discouraged.
-{{< /warning >}}
+{{}}
 
 The recommended approach is to define a single, immutable PodTemplate label
 used only by the controller selector with no other semantic meaning.
@@ -1073,4 +1073,4 @@ template:
 * [Managing Kubernetes Objects Using Imperative Commands](/docs/tasks/manage-kubernetes-objects/imperative-command/)
 * [Imperative Management of Kubernetes Objects Using Configuration Files](/docs/tasks/manage-kubernetes-objects/imperative-config/)
 * [Kubectl Command Reference](/docs/reference/generated/kubectl/kubectl-commands/)
-* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{}}/)

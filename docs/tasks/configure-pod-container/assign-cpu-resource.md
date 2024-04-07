@@ -4,7 +4,7 @@ content_type: task
 weight: 20
 ---
 
-<!-- overview -->
+
 
 This page shows how to assign a CPU *request* and a CPU *limit* to
 a container. Containers cannot use more CPU than the configured limit.
@@ -17,7 +17,7 @@ allocated as much CPU as it requests.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 Your cluster must have at least 1 CPU available for use to run the task examples.
 
@@ -26,7 +26,7 @@ A few of the steps on this page require you to run the
 service in your cluster. If you have the metrics-server
 running, you can skip those steps.
 
-If you are running {{< glossary_tooltip term_id="minikube" >}}, run the
+If you are running {{}}, run the
 following command to enable metrics-server:
 
 ```shell
@@ -52,11 +52,11 @@ v1beta1.metrics.k8s.io
 
 
 
-<!-- steps -->
+
 
 ## Create a namespace
 
-Create a {{< glossary_tooltip term_id="namespace" >}} so that the resources you
+Create a {{}} so that the resources you
 create in this exercise are isolated from the rest of your cluster.
 
 ```shell
@@ -116,15 +116,15 @@ slightly less than the limit of 1 CPU specified in the Pod configuration.
 
 ```
 NAME                        CPU(cores)   MEMORY(bytes)
-cpu-demo                    974m         <something>
+cpu-demo                    974m         
 ```
 
 Recall that by setting `-cpu "2"`, you configured the Container to attempt to use 2 CPUs, but the Container is only being allowed to use about 1 CPU. The container's CPU use is being throttled, because the container is attempting to use more CPU resources than its limit.
 
-{{< note >}}
+{{}}
 Another possible explanation for the CPU use being below 1.0 is that the Node might not have
 enough CPU resources available. Recall that the prerequisites for this exercise require your cluster to have at least 1 CPU available for use. If your Container runs on a Node that has only 1 CPU, the Container cannot use more than 1 CPU regardless of the CPU limit specified for the Container.
-{{< /note >}}
+{{}}
 
 ## CPU units
 
@@ -219,7 +219,7 @@ could use all of the CPU resources available on the Node where it is running.
 
 * The Container is running in a namespace that has a default CPU limit, and the
 Container is automatically assigned the default limit. Cluster administrators can use a
-[LimitRange](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#limitrange-v1-core/)
+[LimitRange](/docs/reference/generated/kubernetes-api/{{}}/#limitrange-v1-core/)
 to specify a default value for the CPU limit.
 
 ## If you specify a CPU limit but do not specify a CPU request

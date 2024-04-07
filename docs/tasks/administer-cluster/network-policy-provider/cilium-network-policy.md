@@ -7,7 +7,7 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 This page shows how to use Cilium for NetworkPolicy.
 
 For background on Cilium, read the [Introduction to Cilium](https://docs.cilium.io/en/stable/overview/intro).
@@ -16,11 +16,11 @@ For background on Cilium, read the [Introduction to Cilium](https://docs.cilium.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
-<!-- steps -->
+
 ## Deploying Cilium on Minikube for Basic Testing
 
 To get familiar with Cilium easily you can follow the
@@ -88,7 +88,7 @@ production DaemonSet files.
 
 
 
-<!-- discussion -->
+
 ##  Understanding Cilium components
 
 Deploying a cluster with Cilium adds Pods to the `kube-system` namespace. To see

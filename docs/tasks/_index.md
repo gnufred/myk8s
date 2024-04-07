@@ -5,7 +5,7 @@ weight: 50
 content_type: concept
 ---
 
-<!-- overview -->
+
 
 This section of the Kubernetes documentation contains pages that
 show how to do individual tasks. A task page shows how to do a

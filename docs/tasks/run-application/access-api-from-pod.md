@@ -4,15 +4,15 @@ content_type: task
 weight: 120
 ---
 
-<!-- overview -->
+
 
 This guide demonstrates how to access the Kubernetes API from within a pod.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Accessing the API from within a Pod
 
@@ -51,12 +51,12 @@ environment variables. The API server's in-cluster address is also published to 
 Service named `kubernetes` in the `default` namespace so that pods may reference
 `kubernetes.default.svc` as a DNS name for the local API server.
 
-{{< note >}}
+{{}}
 Kubernetes does not guarantee that the API server has a valid certificate for
 the hostname `kubernetes.default.svc`;
 however, the control plane **is** expected to present a valid certificate for the
 hostname or IP address that `$KUBERNETES_SERVICE_HOST` represents.
-{{< /note >}}
+{{}}
 
 The recommended way to authenticate to the API server is with a
 [service account](/docs/tasks/configure-pod-container/configure-service-account/)

@@ -4,10 +4,10 @@ content_type: concept
 weight: 110
 ---
 
-{{< glossary_definition term_id="api-eviction" length="short" >}} </br>
+{{}} 
 
 You can request eviction by calling the Eviction API directly, or programmatically
-using a client of the {{<glossary_tooltip term_id="kube-apiserver" text="API server">}}, like the `kubectl drain` command. This
+using a client of the {{}}, like the `kubectl drain` command. This
 creates an `Eviction` object, which causes the API server to terminate the Pod.
 
 API-initiated evictions respect your configured [`PodDisruptionBudgets`](/docs/tasks/run-application/configure-pdb/)
@@ -23,11 +23,11 @@ You can use a [Kubernetes language client](/docs/tasks/administer-cluster/access
 to access the Kubernetes API and create an `Eviction` object. To do this, you
 POST the attempted operation, similar to the following example:
 
-{{< tabs name="Eviction_example" >}}
+{{}}
 {{% tab name="policy/v1" %}}
-{{< note >}}
+{{}}
 `policy/v1` Eviction is available in v1.22+. Use `policy/v1beta1` with prior releases.
-{{< /note >}}
+{{}}
 
 ```json
 {
@@ -41,9 +41,9 @@ POST the attempted operation, similar to the following example:
 ```
 {{% /tab %}}
 {{% tab name="policy/v1beta1" %}}
-{{< note >}}
+{{}}
 Deprecated in v1.22 in favor of `policy/v1`
-{{< /note >}}
+{{}}
 
 ```json
 {
@@ -56,7 +56,7 @@ Deprecated in v1.22 in favor of `policy/v1`
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 Alternatively, you can attempt an eviction operation by accessing the API using
 `curl` or `wget`, similar to the following example:
@@ -73,7 +73,7 @@ checks and responds in one of the following ways:
 * `200 OK`: the eviction is allowed, the `Eviction` subresource is created, and
   the Pod is deleted, similar to sending a `DELETE` request to the Pod URL.
 * `429 Too Many Requests`: the eviction is not currently allowed because of the
-  configured {{<glossary_tooltip term_id="pod-disruption-budget" text="PodDisruptionBudget">}}.
+  configured {{}}.
   You may be able to attempt the eviction again later. You might also see this
   response because of API rate limiting.
 * `500 Internal Server Error`: the eviction is not allowed because there is a
@@ -88,12 +88,12 @@ If the API server allows the eviction, the Pod is deleted as follows:
 1. The `Pod` resource in the API server is updated with a deletion timestamp,
    after which the API server considers the `Pod` resource to be terminated. The
    `Pod` resource is also marked with the configured grace period.
-1. The {{<glossary_tooltip term_id="kubelet" text="kubelet">}} on the node where the local Pod is running notices that the `Pod`
+1. The {{}} on the node where the local Pod is running notices that the `Pod`
    resource is marked for termination and starts to gracefully shut down the
    local Pod.
 1. While the kubelet is shutting the Pod down, the control plane removes the Pod
-   from {{<glossary_tooltip term_id="endpoint" text="Endpoint">}} and
-   {{<glossary_tooltip term_id="endpoint-slice" text="EndpointSlice">}}
+   from {{}} and
+   {{}}
    objects. As a result, controllers no longer consider the Pod as a valid object.
 1. After the grace period for the Pod expires, the kubelet forcefully terminates
    the local Pod.

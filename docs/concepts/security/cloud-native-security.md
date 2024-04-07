@@ -11,7 +11,7 @@ description: >
 ---
 
 Kubernetes is based on a cloud-native architecture, and draws on advice from the
-{{< glossary_tooltip text="CNCF" term_id="cncf" >}} about good practice for
+{{}} about good practice for
 cloud native information security.
 
 Read on through this page for an overview of how Kubernetes is designed to
@@ -19,10 +19,10 @@ help you deploy a secure cloud native platform.
 
 ## Cloud native information security
 
-{{< comment >}}
+{{}}
 There are localized versions available of this whitepaper; if you can link to one of those
 when localizing, that's even better.
-{{< /comment >}}
+{{}}
 
 The CNCF [white paper](https://github.com/cncf/tag-security/tree/main/security-whitepaper)
 on cloud native security defines security controls and practices that are
@@ -111,13 +111,13 @@ pay special attention to restricting misuse there.
 
 ### Runtime protection: compute {#protection-runtime-compute}
 
-{{< glossary_tooltip text="Containers" term_id="container" >}} provide two
+{{}} provide two
 things: isolation between different applications, and a mechanism to combine
 those isolated applications to run on the same host computer. Those two
 aspects, isolation and aggregation, mean that runtime security involves
 trade-offs and finding an appropriate balance.
 
-Kubernetes relies on a {{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+Kubernetes relies on a {{}}
 to actually set up and run containers. The Kubernetes project does
 not recommend a specific container runtime and you should make sure that
 the runtime(s) that you choose meet your information security needs.
@@ -141,7 +141,7 @@ To protect your compute at runtime, you can:
    Use [node isolation](/docs/concepts/scheduling-eviction/assign-pod-node/#node-isolation-restriction)
    mechanisms, either from Kubernetes itself or from the ecosystem, to ensure that
    Pods with different trust contexts are run on separate sets of nodes.
-1. Use a {{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+1. Use a {{}}
    that provides security restrictions.
 1. On Linux nodes, use a Linux security module such as [AppArmor](/docs/tutorials/security/apparmor/) (beta)
    or [seccomp](/docs/tutorials/security/seccomp/).

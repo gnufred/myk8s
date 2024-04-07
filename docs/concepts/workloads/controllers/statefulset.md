@@ -18,14 +18,14 @@ weight: 30
 hide_summary: true # Listed separately in section index
 ---
 
-<!-- overview -->
+
 
 StatefulSet is the workload API object used to manage stateful applications.
 
-{{< glossary_definition term_id="statefulset" length="all" >}}
+{{}}
 
 
-<!-- body -->
+
 
 ## Using StatefulSets
 
@@ -119,11 +119,11 @@ spec:
           storage: 1Gi
 ```
 
-{{< note >}}
+{{}}
 This example uses the `ReadWriteOnce` access mode, for simplicity. For
 production use, the Kubernetes project recommends using the `ReadWriteOncePod`
 access mode instead.
-{{< /note >}}
+{{}}
 
 In the above example:
 
@@ -151,7 +151,7 @@ Provisioner.
 
 ### Minimum ready seconds
 
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+{{}}
 
 `.spec.minReadySeconds` is an optional field that specifies the minimum number of seconds for which a newly
 created Pod should be running and ready without any of its containers crashing, for it to be considered available.
@@ -174,7 +174,7 @@ will also add a pod label with this index: `apps.kubernetes.io/pod-index`.
 
 ### Start ordinal
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+{{}}
 
 `.spec.ordinals` is an optional field that allows you to configure the integer
 ordinals assigned to each Pod. It defaults to nil. You must enable the
@@ -225,10 +225,10 @@ Cluster Domain | Service (ns/name) | StatefulSet (ns/name)  | StatefulSet Domain
  cluster.local | foo/nginx         | foo/web           | nginx.foo.svc.cluster.local     | web-{0..N-1}.nginx.foo.svc.cluster.local     | web-{0..N-1} |
  kube.local    | foo/nginx         | foo/web           | nginx.foo.svc.kube.local        | web-{0..N-1}.nginx.foo.svc.kube.local        | web-{0..N-1} |
 
-{{< note >}}
+{{}}
 Cluster Domain will be set to `cluster.local` unless
 [otherwise configured](/docs/concepts/services-networking/dns-pod-service/).
-{{< /note >}}
+{{}}
 
 ### Stable Storage
 
@@ -243,16 +243,16 @@ This must be done manually.
 
 ### Pod Name Label
 
-When the StatefulSet {{<glossary_tooltip text="controller" term_id="controller">}} creates a Pod,
+When the StatefulSet {{}} creates a Pod,
 it adds a label, `statefulset.kubernetes.io/pod-name`, that is set to the name of
 the Pod. This label allows you to attach a Service to a specific Pod in
 the StatefulSet.
 
 ### Pod index label
 
-{{< feature-state for_k8s_version="v1.28" state="beta" >}}
+{{}}
 
-When the StatefulSet {{<glossary_tooltip text="controller" term_id="controller">}} creates a Pod,
+When the StatefulSet {{}} creates a Pod,
 the new Pod is labelled with `apps.kubernetes.io/pod-index`. The value of this label is the ordinal index of
 the Pod. This label allows you to route traffic to a particular pod index, filter logs/metrics
 using the pod index label, and more. Note the feature gate `PodIndexLabel` must be enabled for this
@@ -342,7 +342,7 @@ update, roll out a canary, or perform a phased roll out.
 
 ### Maximum unavailable Pods
 
-{{< feature-state for_k8s_version="v1.24" state="alpha" >}}
+{{}}
 
 You can control the maximum number of Pods that can be unavailable during an update
 by specifying the `.spec.updateStrategy.rollingUpdate.maxUnavailable` field.
@@ -354,12 +354,12 @@ This field applies to all Pods in the range `0` to `replicas - 1`. If there is a
 unavailable Pod in the range `0` to `replicas - 1`, it will be counted towards
 `maxUnavailable`.
 
-{{< note >}}
+{{}}
 The `maxUnavailable` field is in Alpha stage and it is honored only by API servers
 that are running with the `MaxUnavailableStatefulSet`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 enabled.
-{{< /note >}}
+{{}}
 
 ### Forced rollback
 
@@ -384,7 +384,7 @@ StatefulSet will then begin to recreate the Pods using the reverted template.
 
 ## PersistentVolumeClaim retention
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+{{}}
 
 The optional `.spec.persistentVolumeClaimRetentionPolicy` field controls if
 and how PVCs are deleted during the lifecycle of a StatefulSet. You must enable the
@@ -433,10 +433,9 @@ spec:
 ...
 ```
 
-The StatefulSet {{<glossary_tooltip text="controller" term_id="controller">}} adds
+The StatefulSet {{}} adds
 [owner references](/docs/concepts/overview/working-with-objects/owners-dependents/#owner-references-in-object-specifications)
-to its PVCs, which are then deleted by the {{<glossary_tooltip text="garbage collector"
-term_id="garbage-collection">}} after the Pod is terminated. This enables the Pod to
+to its PVCs, which are then deleted by the {{}} after the Pod is terminated. This enables the Pod to
 cleanly unmount all volumes before the PVCs are deleted (and before the backing PV and
 volume are deleted, depending on the retain policy).  When you set the `whenDeleted`
 policy to `Delete`, an owner reference to the StatefulSet instance is placed on all PVCs
@@ -473,7 +472,7 @@ that you previously did.
 If a [HorizontalPodAutoscaler](/docs/tasks/run-application/horizontal-pod-autoscale/)
 (or any similar API for horizontal scaling) is managing scaling for a
 Statefulset, don't set `.spec.replicas`. Instead, allow the Kubernetes
-{{<glossary_tooltip text="control plane" term_id="control-plane" >}} to manage
+{{}} to manage
 the `.spec.replicas` field automatically.
 
 ## {{% heading "whatsnext" %}}
@@ -488,7 +487,7 @@ the `.spec.replicas` field automatically.
   * Learn how to [configure a Pod to use a volume for storage](/docs/tasks/configure-pod-container/configure-volume-storage/).
   * Learn how to [configure a Pod to use a PersistentVolume for storage](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/).
 * `StatefulSet` is a top-level resource in the Kubernetes REST API.
-  Read the {{< api-reference page="workload-resources/stateful-set-v1" >}}
+  Read the {{}}
   object definition to understand the API for stateful sets.
 * Read about [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) and how
   you can use it to manage application availability during disruptions.

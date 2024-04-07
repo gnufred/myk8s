@@ -5,7 +5,7 @@ content_type: tutorial
 weight: 10
 ---
 
-<!-- overview -->
+
 
 This page shows how to run an application using a Kubernetes Deployment object.
 
@@ -17,9 +17,9 @@ This page shows how to run an application using a Kubernetes Deployment object.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- lessoncontent -->
+
 
 ## Creating and exploring an nginx deployment
 
@@ -60,15 +60,15 @@ a Deployment that runs the nginx:1.14.2 Docker image:
        nginx:
        Image:              nginx:1.14.2
        Port:               80/TCP
-       Environment:        <none>
-       Mounts:             <none>
-     Volumes:              <none>
+       Environment:        
+       Mounts:             
+     Volumes:              
    Conditions:
      Type          Status  Reason
      ----          ------  ------
      Available     True    MinimumReplicasAvailable
      Progressing   True    NewReplicaSetAvailable
-   OldReplicaSets:   <none>
+   OldReplicaSets:   
    NewReplicaSet:    nginx-deployment-1771418926 (2/2 replicas created)
    No events.
    ```
@@ -90,10 +90,10 @@ a Deployment that runs the nginx:1.14.2 Docker image:
 1. Display information about a Pod:
 
    ```shell
-   kubectl describe pod <pod-name>
+   kubectl describe pod 
    ```
 
-   where `<pod-name>` is the name of one of your Pods.
+   where `` is the name of one of your Pods.
 
 ## Updating the deployment
 

@@ -9,18 +9,18 @@ content_type: concept
 no_list: true
 ---
 
-<!-- overview -->
+
 
 This section of the Kubernetes documentation contains references.
 
-<!-- body -->
+
 
 ## API Reference
 
 * [Glossary](/docs/reference/glossary/) -  a comprehensive, standardized list of Kubernetes terminology
 
 * [Kubernetes API Reference](/docs/reference/kubernetes-api/)
-* [One-page API Reference for Kubernetes {{< param "version" >}}](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [One-page API Reference for Kubernetes {{}}](/docs/reference/generated/kubernetes-api/{{}}/)
 * [Using The Kubernetes API](/docs/reference/using-api/) - overview of the API for Kubernetes.
 * [API access control](/docs/reference/access-authn-authz/) - details on how Kubernetes controls API access
 * [Well-Known Labels, Annotations and Taints](/docs/reference/labels-annotations-taints/)

@@ -7,7 +7,7 @@ min-kubernetes-server-version: v1.8
 content_type: task
 weight: 180
 ---
-<!-- overview -->
+
 This document helps you get started using the Kubernetes [NetworkPolicy API](/docs/concepts/services-networking/network-policies/) to declare network policies that govern how pods communicate with each other.
 
 {{% thirdparty-content %}}
@@ -15,7 +15,7 @@ This document helps you get started using the Kubernetes [NetworkPolicy API](/do
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 Make sure you've configured a network provider with network policy support. There are a number of network providers that support NetworkPolicy, including:
 
@@ -26,7 +26,7 @@ Make sure you've configured a network provider with network policy support. Ther
 * [Romana](/docs/tasks/administer-cluster/network-policy-provider/romana-network-policy/)
 * [Weave Net](/docs/tasks/administer-cluster/network-policy-provider/weave-network-policy/)
 
-<!-- steps -->
+
 
 ## Create an `nginx` deployment and expose it via a service
 
@@ -57,8 +57,8 @@ kubectl get svc,pod
 
 ```none
 NAME                        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
-service/kubernetes          10.100.0.1    <none>        443/TCP    46m
-service/nginx               10.100.0.16   <none>        80/TCP     33s
+service/kubernetes          10.100.0.1            443/TCP    46m
+service/nginx               10.100.0.16           80/TCP     33s
 
 NAME                        READY         STATUS        RESTARTS   AGE
 pod/nginx-701339712-e0qfq   1/1           Running       0          35s
@@ -92,9 +92,9 @@ To limit the access to the `nginx` service so that only Pods with the label `acc
 The name of a NetworkPolicy object must be a valid
 [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
-{{< note >}}
+{{}}
 NetworkPolicy includes a `podSelector` which selects the grouping of Pods to which the policy applies. You can see this policy selects Pods with the label `app=nginx`. The label was automatically added to the Pod in the `nginx` Deployment. An empty `podSelector` selects all pods in the namespace.
-{{< /note >}}
+{{}}
 
 ## Assign the policy to the service
 

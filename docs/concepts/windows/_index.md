@@ -6,7 +6,7 @@ description: >-
   Kubernetes supports nodes that run Microsoft Windows.
 ---
 
-Kubernetes supports worker {{< glossary_tooltip text="nodes" term_id="node" >}}
+Kubernetes supports worker {{}}
 running either Linux or Microsoft Windows.
 
 {{% thirdparty-content single="true" %}}

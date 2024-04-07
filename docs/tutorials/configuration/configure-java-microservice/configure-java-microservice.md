@@ -4,7 +4,7 @@ content_type: tutorial
 weight: 10
 ---
 
-<!-- overview -->
+
 
 In this tutorial you will learn how and why to externalize your microservice’s configuration.
 Specifically, you will learn how to use Kubernetes ConfigMaps and Secrets to set environment
@@ -60,7 +60,7 @@ runtime could be used instead.
 * Create a Kubernetes ConfigMap and Secret
 * Inject microservice configuration using MicroProfile Config
   
-<!-- lessoncontent -->
+
 
 ## Example: Externalizing config using MicroProfile, ConfigMaps and Secrets
 

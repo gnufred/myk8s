@@ -8,7 +8,7 @@ min-kubernetes-server-version: v1.22
 weight: 260
 ---
 
-<!-- overview -->
+
 
 This page describes the process of migrating from PodSecurityPolicies to the built-in PodSecurity
 admission controller. This can be done effectively using a combination of dry-run and `audit` and
@@ -19,14 +19,14 @@ admission controller. This can be done effectively using a combination of dry-ru
 {{% version-check %}}
 
 If you are currently running a version of Kubernetes other than
-{{< skew currentVersion >}}, you may want to switch to viewing this
+{{}}, you may want to switch to viewing this
 page in the documentation for the version of Kubernetes that you
 are actually running.
 
 This page assumes you are already familiar with the basic [Pod Security Admission](/docs/concepts/security/pod-security-admission/)
 concepts.
 
-<!-- body -->
+
 
 ## Overall approach
 
@@ -34,7 +34,7 @@ There are multiple strategies you can take for migrating from PodSecurityPolicy 
 Admission. The following steps are one possible migration path, with a goal of minimizing both the
 risks of a production outage and of a security gap.
 
-<!-- Keep section header numbering in sync with this list. -->
+
 0. Decide whether Pod Security Admission is the right fit for your use case.
 1. Review namespace permissions
 2. Simplify & standardize PodSecurityPolicies
@@ -116,11 +116,11 @@ reference) are:
 - `.spec.defaultAddCapabilities` - Although technically a mutating & validating field, these should
   be merged into `.spec.allowedCapabilities` which performs the same validation without mutation.
 
-{{< caution >}}
+{{}}
 Removing these could result in workloads missing required configuration, and cause problems. See
 [Rollout the updated policies](#psp-update-rollout) below for advice on how to roll these changes
 out safely.
-{{< /caution >}}
+{{}}
 
 ### 2.b. Eliminate options not covered by the Pod Security Standards {#eliminate-non-standard-options}
 
@@ -142,12 +142,12 @@ reference with "no opinion") are:
 
 You can also remove the following fields, that are related to POSIX / UNIX group controls.
 
-{{< caution >}}
+{{}}
 If any of these use the `MustRunAs` strategy they may be mutating! Removing these could result in
 workloads not setting the required groups, and cause problems. See
 [Rollout the updated policies](#psp-update-rollout) below for advice on how to roll these changes
 out safely.
-{{< /caution >}}
+{{}}
 
 - `.spec.runAsGroup`
 - `.spec.supplementalGroups`
@@ -239,10 +239,10 @@ There are several ways to choose a Pod Security level for your namespace:
    whether they are sufficiently permissive for existing workloads, and chose the least-privileged
    valid level.
 
-{{< caution >}}
+{{}}
 Options 2 & 3 above are based on _existing_ pods, and may miss workloads that aren't currently
 running, such as CronJobs, scale-to-zero workloads, or other workloads that haven't rolled out.
-{{< /caution >}}
+{{}}
 
 ### 3.b. Verify the Pod Security level {#verify-pss-level}
 
@@ -283,7 +283,7 @@ kubectl label --overwrite ns $NAMESPACE pod-security.kubernetes.io/enforce=$LEVE
 ### 3.d. Bypass PodSecurityPolicy {#bypass-psp}
 
 Finally, you can effectively bypass PodSecurityPolicy at the namespace level by binding the fully
-{{< example file="policy/privileged-psp.yaml" >}}privileged PSP{{< /example >}} to all service
+{{}}privileged PSP{{}} to all service
 accounts in the namespace.
 
 ```sh

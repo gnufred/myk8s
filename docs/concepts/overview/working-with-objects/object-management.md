@@ -4,20 +4,20 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
+
 The `kubectl` command-line tool supports several different ways to create and manage
-Kubernetes {{< glossary_tooltip text="objects" term_id="object" >}}. This document provides an overview of the different
+Kubernetes {{}}. This document provides an overview of the different
 approaches. Read the [Kubectl book](https://kubectl.docs.kubernetes.io) for
 details of managing objects by Kubectl.
 
-<!-- body -->
+
 
 ## Management techniques
 
-{{< warning >}}
+{{}}
 A Kubernetes object should be managed using only one technique. Mixing
 and matching techniques for the same object results in undefined behavior.
-{{< /warning >}}
+{{}}
 
 | Management technique             | Operates on          |Recommended environment | Supported writers  | Learning curve |
 |----------------------------------|----------------------|------------------------|--------------------|----------------|
@@ -64,17 +64,17 @@ operation (create, replace, etc.), optional flags and at least one file
 name. The file specified must contain a full definition of the object
 in YAML or JSON format.
 
-See the [API reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+See the [API reference](/docs/reference/generated/kubernetes-api/{{}}/)
 for more details on object definitions.
 
-{{< warning >}}
+{{}}
 The imperative `replace` command replaces the existing
 spec with the newly provided one, dropping all changes to the object missing from
 the configuration file.  This approach should not be used with resource
 types whose specs are updated independently of the configuration file.
 Services of type `LoadBalancer`, for example, have their `externalIPs` field updated
 independently from the configuration by the cluster.
-{{< /warning >}}
+{{}}
 
 ### Examples
 
@@ -128,13 +128,13 @@ operations to be taken on the files. Create, update, and delete operations
 are automatically detected per-object by `kubectl`. This enables working on
 directories, where different operations might be needed for different objects.
 
-{{< note >}}
+{{}}
 Declarative object configuration retains changes made by other
 writers, even if the changes are not merged back to the object configuration file.
 This is possible by using the `patch` API operation to write only
 observed differences, instead of using the `replace`
 API operation to replace the entire object configuration.
-{{< /note >}}
+{{}}
 
 ### Examples
 
@@ -174,5 +174,5 @@ Disadvantages compared to imperative object configuration:
 - [Declarative Management of Kubernetes Objects Using Kustomize](/docs/tasks/manage-kubernetes-objects/kustomization/)
 - [Kubectl Command Reference](/docs/reference/generated/kubectl/kubectl-commands/)
 - [Kubectl Book](https://kubectl.docs.kubernetes.io)
-- [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+- [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{}}/)
 

@@ -6,50 +6,50 @@ weight: 220
 content_type: task
 ---
 
-<!-- overview -->
+
 
 
 *Static Pods* are managed directly by the kubelet daemon on a specific node,
-without the {{< glossary_tooltip text="API server" term_id="kube-apiserver" >}}
+without the {{}}
 observing them.
 Unlike Pods that are managed by the control plane (for example, a
-{{< glossary_tooltip text="Deployment" term_id="deployment" >}});
+{{}});
 instead, the kubelet watches each static Pod (and restarts it if it fails).
 
-Static Pods are always bound to one {{< glossary_tooltip term_id="kubelet" >}} on a specific node.
+Static Pods are always bound to one {{}} on a specific node.
 
-The kubelet automatically tries to create a {{< glossary_tooltip text="mirror Pod" term_id="mirror-pod" >}}
+The kubelet automatically tries to create a {{}}
 on the Kubernetes API server for each static Pod.
 This means that the Pods running on a node are visible on the API server,
 but cannot be controlled from there.
 The Pod names will be suffixed with the node hostname with a leading hyphen.
 
-{{< note >}}
+{{}}
 If you are running clustered Kubernetes and are using static
 Pods to run a Pod on every node, you should probably be using a
-{{< glossary_tooltip text="DaemonSet" term_id="daemonset" >}} instead.
-{{< /note >}}
+{{}} instead.
+{{}}
 
-{{< note >}}
+{{}}
 The `spec` of a static Pod cannot refer to other API objects
-(e.g., {{< glossary_tooltip text="ServiceAccount" term_id="service-account" >}},
-{{< glossary_tooltip text="ConfigMap" term_id="configmap" >}},
-{{< glossary_tooltip text="Secret" term_id="secret" >}}, etc).
-{{< /note >}}
+(e.g., {{}},
+{{}},
+{{}}, etc).
+{{}}
 
-{{< note >}}
+{{}}
 Static pods do not support [ephemeral containers](/docs/concepts/workloads/pods/ephemeral-containers/).
-{{< /note >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-This page assumes you're using {{< glossary_tooltip term_id="cri-o" >}} to run Pods,
+This page assumes you're using {{}} to run Pods,
 and that your nodes are running the Fedora operating system.
 Instructions for other distributions or Kubernetes installations may vary.
 
-<!-- steps -->
+
 
 ## Create a static pod {#static-pod-creation}
 
@@ -60,7 +60,7 @@ or a [web hosted configuration file](/docs/tasks/configure-pod-container/static-
 ### Filesystem-hosted static Pod manifest {#configuration-files}
 
 Manifests are standard Pod definitions in JSON or YAML format in a specific directory.
-Use the `staticPodPath: <the directory>` field in the
+Use the `staticPodPath: ` field in the
 [kubelet configuration file](/docs/reference/config-api/kubelet-config.v1beta1/),
 which periodically scans the directory and creates/deletes static Pods as YAML/JSON files appear/disappear there.
 Note that the kubelet will ignore files starting with dots when scanning the specified directory.
@@ -79,7 +79,7 @@ For example, this is how to start a simple web server as a static Pod:
    ```shell
    # Run this command on the node where kubelet is running
    mkdir -p /etc/kubernetes/manifests/
-   cat <<EOF >/etc/kubernetes/manifests/static-web.yaml
+   cat /etc/kubernetes/manifests/static-web.yaml
    apiVersion: v1
    kind: Pod
    metadata:
@@ -116,7 +116,7 @@ For example, this is how to start a simple web server as a static Pod:
 
 ### Web-hosted static pod manifest {#pods-created-via-http}
 
-Kubelet periodically downloads a file specified by `--manifest-url=<URL>` argument
+Kubelet periodically downloads a file specified by `--manifest-url=` argument
 and interprets it as a JSON/YAML file that contains Pod definitions.
 Similar to how [filesystem-hosted manifests](#configuration-files) work, the kubelet
 refetches the manifest on a schedule. If there are changes to the list of static
@@ -144,11 +144,11 @@ To use this approach:
     ```
 
 1. Configure the kubelet on your selected node to use this web manifest by
-   running it with `--manifest-url=<manifest-url>`.
+   running it with `--manifest-url=`.
    On Fedora, edit `/etc/kubernetes/kubelet` to include this line:
 
    ```shell
-   KUBELET_ARGS="--cluster-dns=10.254.0.10 --cluster-domain=kube.local --manifest-url=<manifest-url>"
+   KUBELET_ARGS="--cluster-dns=10.254.0.10 --cluster-domain=kube.local --manifest-url="
    ```
 
 1. Restart the kubelet. On Fedora, you would run:
@@ -177,10 +177,10 @@ CONTAINER       IMAGE                                 CREATED           STATE   
 129fd7d382018   docker.io/library/nginx@sha256:...    11 minutes ago    Running    web     0          34533c6729106
 ```
 
-{{< note >}}
+{{}}
 `crictl` outputs the image URI and SHA-256 checksum. `NAME` will look more like:
 `docker.io/library/nginx@sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31`.
-{{< /note >}}
+{{}}
 
 You can see the mirror Pod on the API server:
 
@@ -192,14 +192,14 @@ NAME                  READY   STATUS    RESTARTS        AGE
 static-web-my-node1   1/1     Running   0               2m
 ```
 
-{{< note >}}
+{{}}
 Make sure the kubelet has permission to create the mirror Pod in the API server.
 If not, the creation request is rejected by the API server.
-{{< /note >}}
+{{}}
 
-{{< glossary_tooltip term_id="label" text="Labels" >}} from the static Pod are
+{{}} from the static Pod are
 propagated into the mirror Pod. You can use those labels as normal via
-{{< glossary_tooltip term_id="selector" text="selectors" >}}, etc.
+{{}}, etc.
 
 If you try to use `kubectl` to delete the mirror Pod from the API server,
 the kubelet _doesn't_ remove the static Pod:
@@ -238,7 +238,7 @@ Once you identify the right container, you can get the logs for that container w
 
 ```shell
 # Run these commands on the node where the container is running
-crictl logs <container_id>
+crictl logs 
 ```
 
 ```console

@@ -10,13 +10,13 @@ content_type: concept
 weight: 80
 ---
 
-<!-- overview -->
+
 
 Storage capacity is limited and may vary depending on the node on
 which a pod runs: network-attached storage might not be accessible by
 all nodes, or storage is local to a node to begin with.
 
-{{< feature-state for_k8s_version="v1.24" state="stable" >}}
+{{}}
 
 This page describes how Kubernetes keeps track of storage capacity and
 how the scheduler uses that information to [schedule Pods](/docs/concepts/scheduling-eviction/) onto nodes
@@ -27,14 +27,14 @@ multiple scheduling retries will be needed.
 
 ## {{% heading "prerequisites" %}}
 
-Kubernetes v{{< skew currentVersion >}} includes cluster-level API support for
+Kubernetes v{{}} includes cluster-level API support for
 storage capacity tracking. To use this you must also be using a CSI driver that
 supports capacity tracking. Consult the documentation for the CSI drivers that
 you use to find out whether this support is available and, if so, how to use
-it. If you are not running Kubernetes v{{< skew currentVersion >}}, check the
+it. If you are not running Kubernetes v{{}}, check the
 documentation for that version of Kubernetes.
 
-<!-- body -->
+
 
 ## API
 
@@ -52,7 +52,7 @@ There are two API extensions for this feature:
 
 Storage capacity information is used by the Kubernetes scheduler if:
 - a Pod uses a volume that has not been created yet,
-- that volume uses a {{< glossary_tooltip text="StorageClass" term_id="storage-class" >}} which references a CSI driver and
+- that volume uses a {{}} which references a CSI driver and
   uses `WaitForFirstConsumer` [volume binding
   mode](/docs/concepts/storage/storage-classes/#volume-binding-mode),
   and

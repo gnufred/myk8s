@@ -7,13 +7,13 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
+
 
 This command initializes a Kubernetes control-plane node.
 
-<!-- body -->
 
-{{< include "generated/kubeadm_init.md" >}}
+
+{{}}
 
 ### Init workflow {#init-workflow}
 
@@ -23,7 +23,7 @@ following steps:
 1. Runs a series of pre-flight checks to validate the system state
    before making changes. Some checks only trigger warnings, others are
    considered errors and will exit kubeadm until the problem is corrected or the
-   user specifies `--ignore-preflight-errors=<list-of-errors>`.
+   user specifies `--ignore-preflight-errors=`.
 
 1. Generates a self-signed CA to set up identities for each component in the cluster. The user can provide their
    own CA cert and/or key by dropping it in the cert directory configured via `--cert-dir`
@@ -71,9 +71,9 @@ following steps:
    In Kubernetes version 1.11 and later CoreDNS is the default DNS server.
    Please note that although the DNS server is deployed, it will not be scheduled until CNI is installed.
 
-   {{< warning >}}
+   {{}}
    kube-dns usage with kubeadm is deprecated as of v1.18 and is removed in v1.21.
-   {{< /warning >}}
+   {{}}
 
 ### Using init phases with kubeadm {#init-phases}
 
@@ -113,15 +113,15 @@ What this example would do is write the manifest files for the control plane and
 modify the files and then skip these phases using `--skip-phases`. By calling the last command you
 will create a control plane node with the custom manifest files.
 
-{{< feature-state for_k8s_version="v1.22" state="beta" >}}
+{{}}
 
 Alternatively, you can use the `skipPhases` field under `InitConfiguration`.
 
 ### Using kubeadm init with a configuration file {#config-file}
 
-{{< caution >}}
+{{}}
 The config file is still considered beta and may change in future versions.
-{{< /caution >}}
+{{}}
 
 It's possible to configure `kubeadm init` with a configuration file instead of command
 line flags, and some more advanced features may only be available as
@@ -155,17 +155,17 @@ directly to kubeadm is not supported. Instead, it is possible to pass them by
 
 List of feature gates:
 
-{{< table caption="kubeadm feature gates" >}}
+{{}}
 Feature | Default | Alpha | Beta | GA
 :-------|:--------|:------|:-----|:----
 `EtcdLearnerMode` | `true` | 1.27 | 1.29 | -
 `PublicKeysECDSA` | `false` | 1.19 | - | -
 `RootlessControlPlane` | `false` | 1.22 | - | -
-{{< /table >}}
+{{}}
 
-{{< note >}}
+{{}}
 Once a feature gate goes GA its value becomes locked to `true` by default.
-{{< /note >}}
+{{}}
 
 Feature gate descriptions:
 
@@ -186,11 +186,11 @@ you upgrade to a newer version of Kubernetes.
 
 List of deprecated feature gates:
 
-{{< table caption="kubeadm deprecated feature gates" >}}
+{{}}
 Feature | Default
 :-------|:--------
 `UpgradeAddonsBeforeControlPlane` | `false`
-{{< /table >}}
+{{}}
 
 Feature gate descriptions:
 
@@ -210,12 +210,12 @@ feature gate will be removed in a future release.
 
 List of removed feature gates:
 
-{{< table caption="kubeadm removed feature gates" >}}
+{{}}
 Feature | Alpha | Beta | GA | Removed
 :-------|:------|:-----|:---|:-------
 `IPv6DualStack` | 1.16 | 1.21 | 1.23 | 1.24
 `UnversionedKubeletConfigMap` | 1.22 | 1.23 | 1.25 | 1.26
-{{< /table >}}
+{{}}
 
 Feature gate descriptions:
 
@@ -224,10 +224,10 @@ Feature gate descriptions:
 dual-stack support see [Dual-stack support with kubeadm](/docs/setup/production-environment/tools/kubeadm/dual-stack-support/).
 
 `UnversionedKubeletConfigMap`
-: This flag controls the name of the {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}} where kubeadm stores
+: This flag controls the name of the {{}} where kubeadm stores
 kubelet configuration data. With this flag not specified or set to `true`, the ConfigMap is named `kubelet-config`.
 If you set this flag to `false`, the name of the ConfigMap includes the major and minor version for Kubernetes
-(for example: `kubelet-config-{{< skew currentVersion >}}`). Kubeadm ensures that RBAC rules for reading and writing
+(for example: `kubelet-config-{{}}`). Kubeadm ensures that RBAC rules for reading and writing
 that ConfigMap are appropriate for the value you set. When kubeadm writes this ConfigMap (during `kubeadm init`
 or `kubeadm upgrade apply`), kubeadm respects the value of `UnversionedKubeletConfigMap`. When reading that ConfigMap
 (during `kubeadm join`, `kubeadm reset`, `kubeadm upgrade ...`), kubeadm attempts to use unversioned ConfigMap name first;
@@ -293,7 +293,7 @@ for etcd and CoreDNS.
 #### Custom sandbox (pause) images {#custom-pause-image}
 
 To set a custom image for these you need to configure this in your
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+{{}}
 to use the image.
 Consult the documentation for your container runtime to find out how to change this setting;
 for selected container runtimes, you can also find advice within the
@@ -313,10 +313,10 @@ The following phase command can be used to re-upload the certificates after expi
 ```shell
 kubeadm init phase upload-certs --upload-certs --config=SOME_YAML_FILE
 ```
-{{< note >}}
+{{}}
 A predefined `certificateKey` can be provided in `InitConfiguration` when passing the
 [configuration file](/docs/reference/config-api/kubeadm-config.v1beta3/) with `--config`.
-{{< /note >}}
+{{}}
 
 If a predefined certificate key is not passed to `kubeadm init` and
 `kubeadm init phase upload-certs` a new key will be generated automatically.
@@ -366,8 +366,7 @@ you can parallelize the token distribution for easier automation. To implement t
 you must know the IP address that the control-plane node will have after it is started, or use a
 DNS name or an address of a load balancer.
 
-1. Generate a token. This token must have the form  `<6 character string>.<16
-   character string>`. More formally, it must match the regex:
+1. Generate a token. This token must have the form  `.`. More formally, it must match the regex:
    `[a-z0-9]{6}\.[a-z0-9]{16}`.
 
    kubeadm can generate a token for you:

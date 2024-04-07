@@ -3,14 +3,14 @@ title: Flow control
 weight: 130
 ---
 
-<!-- overview -->
+
 
 API Priority and Fairness controls the behavior of the Kubernetes API server in
 an overload situation. You can find more information about it in the
 [API Priority and Fairness](/docs/concepts/cluster-administration/flow-control/)
 documentation.
 
-<!-- body -->
+
 
 ## Diagnostics
 

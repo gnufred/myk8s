@@ -9,14 +9,14 @@ min-kubernetes-server-version: 1.7
 ---
 
 
-<!-- overview -->
+
 
 Adding entries to a Pod's `/etc/hosts` file provides Pod-level override of hostname resolution when DNS and other options are not applicable. You can add these custom entries with the HostAliases field in PodSpec.
 
 Modification not using HostAliases is not suggested because the file is managed by the kubelet and can be overwritten on during Pod creation/restart.
 
 
-<!-- steps -->
+
 
 ## Default hosts file content
 
@@ -127,9 +127,9 @@ Current Kubernetes can use a variety of container runtimes; even so, the kubelet
 hosts file within each container so that the outcome is as intended regardless of which
 container runtime you use.
 
-{{< caution >}}
+{{}}
 Avoid making manual changes to the hosts file inside a container.
 
 If you make manual changes to the hosts file,
 those changes are lost when the container exits.
-{{< /caution >}}
+{{}}

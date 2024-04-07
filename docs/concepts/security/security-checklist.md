@@ -6,7 +6,7 @@ content_type: concept
 weight: 100
 ---
 
-<!-- overview -->
+
 
 This checklist aims at providing a basic list of guidance with links to more
 comprehensive documentation on each topic. It does not claim to be exhaustive
@@ -17,7 +17,7 @@ On how to read and use this document:
 - The order of topics does not reflect an order of priority.
 - Some checklist items are detailed in the paragraph below the list of each section.
 
-{{< caution >}}
+{{}}
 Checklists are **not** sufficient for attaining a good security posture on their
 own. A good security posture requires constant attention and improvement, but a
 checklist can be the first step on the never-ending journey towards security
@@ -25,9 +25,9 @@ preparedness. Some of the recommendations in this checklist may be too
 restrictive or too lax for your specific security needs. Since Kubernetes
 security is not "one size fits all", each category of checklist items should be
 evaluated on its merits.
-{{< /caution >}}
+{{}}
 
-<!-- body -->
+
 
 ## Authentication & Authorization
 
@@ -148,9 +148,9 @@ Please note that CPU limits will throttle usage and thus can have unintended
 effects on auto-scaling features or efficiency i.e. running the process in best
 effort with the CPU resource available.
 
-{{< caution >}}
+{{}}
 Memory limit superior to request can expose the whole node to OOM issues.
-{{< /caution >}}
+{{}}
 
 ### Enabling Seccomp
 
@@ -169,9 +169,9 @@ topic. In addition, the
 [Kubernetes Security Profiles Operator](https://github.com/kubernetes-sigs/security-profiles-operator)
 is a project that facilitates the management and use of seccomp in clusters.
 
-{{< note >}}
+{{}}
 Seccomp is only available on Linux nodes.
-{{< /note >}}
+{{}}
 
 ### Enabling AppArmor or SELinux
 
@@ -186,10 +186,10 @@ blocks access to disallowed resources or complain mode, which only reports
 violations. AppArmor profiles are enforced on a per-container basis, with an
 annotation, allowing for processes to gain just the right privileges.
 
-{{< note >}}
+{{}}
 AppArmor is only available on Linux nodes, and enabled in
 [some Linux distributions](https://gitlab.com/apparmor/apparmor/-/wikis/home#distributions-and-ports).
-{{< /note >}}
+{{}}
 
 #### SELinux
 
@@ -199,10 +199,10 @@ control security policies, including Mandatory Access Controls (MAC). SELinux
 labels can be assigned to containers or pods
 [via their `securityContext` section](/docs/tasks/configure-pod-container/security-context/#assign-selinux-labels-to-a-container).
 
-{{< note >}}
+{{}}
 SELinux is only available on Linux nodes, and enabled in
 [some Linux distributions](https://en.wikipedia.org/wiki/Security-Enhanced_Linux#Implementations).
-{{< /note >}}
+{{}}
 
 ## Logs and auditing
 
@@ -391,17 +391,7 @@ has permissions to use the image.
 [`ImagePolicyWebhook`](/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
 : Allows enforcing additional controls for images through webhooks.
 
-<!-- The fourth group includes plugins that are not enabled by default, still in
-alpha state but could be considered for certain use cases:
 
-[`EventRateLimit`](/docs/reference/access-authn-authz/admission-controllers/#eventratelimit)
-: Rate limits adding new Events to the API server.
-
-[`PodNodeSelector`](/docs/reference/access-authn-authz/admission-controllers/#podnodeselector)
-: Allows controls of node selectors within namespaces and cluster-wide.
-
-[`PodTolerationRestriction`](/docs/reference/access-authn-authz/admission-controllers/#podtolerationrestriction)
-: Allows control of pod tolerations permitted for pods within a namespace. -->
 
 ## What's next
 

@@ -6,9 +6,9 @@ content_type: concept
 weight: 70
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.14" state="beta" >}}
+
+{{}}
 
 [kube-scheduler](/docs/concepts/scheduling-eviction/kube-scheduler/#kube-scheduler)
 is the Kubernetes default scheduler. It is responsible for placement of Pods
@@ -24,7 +24,7 @@ in a process called _Binding_.
 This page explains performance tuning optimizations that are relevant for
 large Kubernetes clusters.
 
-<!-- body -->
+
 
 In large clusters, you can tune the scheduler's behaviour balancing
 scheduling outcomes between latency (new Pods are placed quickly) and
@@ -105,7 +105,7 @@ percentageOfNodesToScore: 50
 value being calculated based on the cluster size. There is also a hardcoded
 minimum value of 50 nodes.
 
-{{< note >}}In clusters with less than 50 feasible nodes, the scheduler still
+{{}}In clusters with less than 50 feasible nodes, the scheduler still
 checks all the nodes because there are not enough feasible nodes to stop
 the scheduler's search early.
 
@@ -115,7 +115,7 @@ change will have no or little effect, for a similar reason.
 If your cluster has several hundred Nodes or fewer, leave this configuration option
 at its default value. Making changes is unlikely to improve the
 scheduler's performance significantly.
-{{< /note >}}
+{{}}
 
 An important detail to consider when setting this value is that when a smaller
 number of nodes in a cluster are checked for feasibility, some nodes are not

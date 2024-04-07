@@ -7,7 +7,7 @@ content_type: task
 weight: 20
 ---
 
-<!-- overview -->
+
 
 Kubernetes ships with a default scheduler that is described
 [here](/docs/reference/command-line-tools-reference/kube-scheduler/).
@@ -23,9 +23,9 @@ in the Kubernetes source directory for a canonical example.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Package the scheduler
 
@@ -79,11 +79,11 @@ the `kube-scheduler` during initialization with the `--config` option. The `my-s
 
 In the aforementioned Scheduler Configuration, your scheduler implementation is represented via
 a [KubeSchedulerProfile](/docs/reference/config-api/kube-scheduler-config.v1/#kubescheduler-config-k8s-io-v1-KubeSchedulerProfile).
-{{< note >}}
+{{}}
 To determine if a scheduler is responsible for scheduling a specific Pod, the `spec.schedulerName` field in a 
 PodTemplate or Pod manifest must match the `schedulerName` field of the `KubeSchedulerProfile`.
 All schedulers running in the cluster must have unique names.
-{{< /note >}}
+{{}}
 
 Also, note that you create a dedicated service account `my-scheduler` and bind the ClusterRole
 `system:kube-scheduler` to it so that it can acquire the same privileges as `kube-scheduler`.
@@ -126,13 +126,13 @@ To run multiple-scheduler with leader election enabled, you must do the followin
 Update the following fields for the KubeSchedulerConfiguration in the `my-scheduler-config` ConfigMap in your YAML file:
 
 * `leaderElection.leaderElect` to `true`
-* `leaderElection.resourceNamespace` to `<lock-object-namespace>`
-* `leaderElection.resourceName` to `<lock-object-name>`
+* `leaderElection.resourceNamespace` to ``
+* `leaderElection.resourceName` to ``
 
-{{< note >}}
+{{}}
 The control plane creates the lock objects for you, but the namespace must already exist.
 You can use the `kube-system` namespace.
-{{< /note >}}
+{{}}
 
 If RBAC is enabled on your cluster, you must update the `system:kube-scheduler` cluster role.
 Add your scheduler name to the resourceNames of the rule applied for `endpoints` and `leases` resources, as in the following example:
@@ -196,7 +196,7 @@ scheduler in that pod spec. Let's look at three examples.
   kubectl get pods
   ```
 
-<!-- discussion -->
+
 
 ### Verifying that the pods were scheduled using the desired schedulers
 

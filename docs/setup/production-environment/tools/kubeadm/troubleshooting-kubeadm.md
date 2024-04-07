@@ -4,7 +4,7 @@ content_type: concept
 weight: 20
 ---
 
-<!-- overview -->
+
 
 As with any program, you might run into an error installing or running kubeadm.
 This page lists some common failure scenarios and have provided steps that can help you understand and fix the problem.
@@ -19,7 +19,7 @@ If your problem is not listed below, please follow the following steps:
   or open a question on [StackOverflow](https://stackoverflow.com/questions/tagged/kubernetes). Please include
   relevant tags like `#kubernetes` and `#kubeadm` so folks can help you.
 
-<!-- body -->
+
 
 ## Not possible to join a v1.18 Node to a v1.17 cluster due to missing RBAC
 
@@ -305,10 +305,10 @@ Another cause for CoreDNS to have `CrashLoopBackOff` is when a CoreDNS Pod deplo
 [A number of workarounds](https://github.com/coredns/coredns/tree/master/plugin/loop#troubleshooting-loops-in-kubernetes-clusters)
 are available to avoid Kubernetes trying to restart the CoreDNS Pod every time CoreDNS detects the loop and exits.
 
-{{< warning >}}
+{{}}
 Disabling SELinux or setting `allowPrivilegeEscalation` to `true` can compromise
 the security of your cluster.
-{{< /warning >}}
+{{}}
 
 ## etcd pods restart continually
 
@@ -403,9 +403,9 @@ Kubernetes components like the kubelet and kube-controller-manager use the defau
 `/usr/libexec/kubernetes/kubelet-plugins/volume/exec/`, yet the flex-volume directory _must be writeable_
 for the feature to work.
 
-{{< note >}}
+{{}}
 FlexVolume was deprecated in the Kubernetes v1.23 release.
-{{< /note >}}
+{{}}
 
 To workaround this issue, you can configure the flex-volume directory using the kubeadm
 [configuration file](/docs/reference/config-api/kubeadm-config.v1beta3/).

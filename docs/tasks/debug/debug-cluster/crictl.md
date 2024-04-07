@@ -9,9 +9,9 @@ weight: 30
 ---
 
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.11" state="stable" >}}
+
+{{}}
 
 `crictl` is a command-line interface for CRI-compatible container runtimes.
 You can use it to inspect and debug container runtimes and applications on a
@@ -22,7 +22,7 @@ Kubernetes node. `crictl` and its source are hosted in the
 
 `crictl` requires a Linux operating system with a CRI runtime.
 
-<!-- steps -->
+
 
 ## Installing crictl
 
@@ -35,7 +35,7 @@ of Kubernetes. Extract it and move it to a location on your system path, such as
 ## General usage
 
 The `crictl` command has several subcommands and runtime flags. Use
-`crictl help` or `crictl <subcommand> help` for more details.
+`crictl help` or `crictl  help` for more details.
 
 You can set the endpoint for `crictl` by doing one of the following:
 
@@ -45,10 +45,10 @@ You can set the endpoint for `crictl` by doing one of the following:
 * Set the endpoint in the configuration file `/etc/crictl.yaml`. To specify a
   different file, use the `--config=PATH_TO_FILE` flag when you run `crictl`.
 
-{{<note>}}
+{{}}
 If you don't set an endpoint, `crictl` attempts to connect to a list of known
 endpoints, which might result in an impact to performance.
-{{</note>}}
+{{}}
 
 You can also specify timeout values when connecting to the server and enable or
 disable debugging, by specifying `timeout` or `debug` values in the configuration
@@ -72,11 +72,11 @@ documentation](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/cri
 
 The following examples show some `crictl` commands and example output.
 
-{{< warning >}}
+{{}}
 If you use `crictl` to create pod sandboxes or containers on a running
 Kubernetes cluster, the Kubelet will eventually delete them. `crictl` is not a
 general purpose workflow tool, but a tool that is useful for debugging.
-{{< /warning >}}
+{{}}
 
 ### List pods
 

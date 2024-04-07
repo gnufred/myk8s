@@ -8,16 +8,16 @@ content_type: task
 weight: 320
 ---
 
-<!-- overview -->
+
 
 This document covers topics related to protecting a cluster from accidental or malicious access
 and provides recommendations on overall security.
 
 ## {{% heading "prerequisites" %}}
 
-* {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+* {{}} {{}}
 
-<!-- steps -->
+
 
 ## Controlling access to the Kubernetes API
 
@@ -58,7 +58,7 @@ actions a client might want to perform. It is recommended that you use the
 
 As with authentication, simple and broad roles may be appropriate for smaller clusters, but as
 more users interact with the cluster, it may become necessary to separate teams into separate
-{{< glossary_tooltip text="namespaces" term_id="namespace" >}} with more limited roles.
+{{}} with more limited roles.
 
 With authorization, it is important to understand how updates on one object may cause actions in
 other places. For instance, a user may not be able to create pods directly, but allowing them to
@@ -107,7 +107,7 @@ allow it to run unfettered on a hosting node.
 
 You can configure [Pod security admission](/docs/concepts/security/pod-security-admission/)
 to enforce use of a particular [Pod Security Standard](/docs/concepts/security/pod-security-standards/)
-in a {{< glossary_tooltip text="namespace" term_id="namespace" >}}, or to detect breaches.
+in a {{}}, or to detect breaches.
 
 Generally, most application workloads need limited access to host resources so they can
 successfully run as a root process (uid 0) without access to host information. However,
@@ -198,12 +198,12 @@ credentials from the API servers to their etcd server, such as mutual auth via T
 and it is often recommended to isolate the etcd servers behind a firewall that only the API servers
 may access.
 
-{{< caution >}}
+{{}}
 Allowing other components within the cluster to access the master etcd instance with
 read or write access to the full keyspace is equivalent to granting cluster-admin access. Using
 separate etcd instances for non-master components or using etcd ACLs to restrict read and write
 access to a subset of the keyspace is strongly recommended.
-{{< /caution >}}
+{{}}
 
 ### Enable audit logging
 
@@ -260,7 +260,7 @@ This lets you ensure that when Kubernetes stores data for objects (for example, 
 `ConfigMap` objects), the API server writes an encrypted representation of the object.
 That encryption means that even someone who has access to etcd backup data is unable
 to view the content of those objects.
-In Kubernetes {{< skew currentVersion >}} you can also encrypt custom resources;
+In Kubernetes {{}} you can also encrypt custom resources;
 encryption-at-rest for extension APIs defined in CustomResourceDefinitions was added to
 Kubernetes as part of the v1.26 release.
 

@@ -5,7 +5,7 @@ min-kubernetes-server-version: v1.21
 weight: 30
 ---
 
-<!-- overview -->
+
 
 In this example, you will run a Job in [Indexed completion mode](/blog/2021/04/19/introducing-indexed-jobs/) configured such that
 the pods created by the Job can communicate with each other using pod hostnames rather than pod IP addresses.
@@ -26,15 +26,15 @@ connection with the Kubernetes API server.
 
 You should already be familiar with the basic use of [Job](/docs/concepts/workloads/controllers/job/).
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-{{<note>}}
+{{}}
 If you are using MiniKube or a similar tool, you may need to take
 [extra steps](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/)
 to ensure you have DNS.
-{{</note>}}
+{{}}
 
-<!-- steps -->
+
 
 ## Starting a Job with Pod-to-Pod Communication
 
@@ -42,23 +42,23 @@ To enable pod-to-pod communication using pod hostnames in a Job, you must do the
 
 1. Set up a [headless Service](/docs/concepts/services-networking/service/#headless-services)
 with a valid label selector for the pods created by your Job. The headless service must be in the same namespace as 
-the Job. One easy way to do this is to use the `job-name: <your-job-name>` selector, since the `job-name` label will be automatically added by Kubernetes. This configuration will trigger the DNS system to create records of the hostnames of 
+the Job. One easy way to do this is to use the `job-name: ` selector, since the `job-name` label will be automatically added by Kubernetes. This configuration will trigger the DNS system to create records of the hostnames of 
 the pods running your Job. 
 
 2. Configure the headless service as subdomain service for the Job pods by including the following value in your Job template spec: 
 
    ```yaml
-   subdomain: <headless-svc-name>
+   subdomain: 
    ```
 
 ### Example 
 Below is a working example of a Job with pod-to-pod communication via pod hostnames enabled.
 The Job is completed only after all pods successfully ping each other using hostnames.
 
-{{<note>}}
+{{}}
 In the Bash script executed on each pod in the example below, the pod hostnames can be prefixed
 by the namespace as well  if the pod needs to be reached from outside the namespace.
-{{</note>}}
+{{}}
 
 ```yaml
 
@@ -108,7 +108,7 @@ spec:
 ```
 
 After applying the example above, reach each other over the network
-using: `<pod-hostname>.<headless-service-name>`. You should see output similar to the following:
+using: `.`. You should see output similar to the following:
 
 ```shell
 kubectl logs example-job-0-qws42
@@ -121,8 +121,8 @@ Successfully pinged pod: example-job-1.headless-svc
 Successfully pinged pod: example-job-2.headless-svc
 ```
 
-{{<note>}}
-Keep in mind that the `<pod-hostname>.<headless-service-name>` name format used
+{{}}
+Keep in mind that the `.` name format used
 in this example would not work with DNS policy set to `None` or `Default`.
 You can learn more about pod DNS policies [here](/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy).
-{{</note>}}
+{{}}

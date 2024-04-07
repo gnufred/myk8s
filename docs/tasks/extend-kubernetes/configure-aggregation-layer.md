@@ -8,7 +8,7 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 
 Configuring the [aggregation layer](/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
 allows the Kubernetes apiserver to be extended with additional APIs, which are not
@@ -16,21 +16,21 @@ part of the core Kubernetes APIs.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-{{< note >}}
+{{}}
 There are a few setup requirements for getting the aggregation layer working in
 your environment to support mutual TLS auth between the proxy and extension apiservers.
 Kubernetes and the kube-apiserver have multiple CAs, so make sure that the proxy is
 signed by the aggregation layer CA and not by something else, like the Kubernetes general CA.
-{{< /note >}}
+{{}}
 
-{{< caution >}}
+{{}}
 Reusing the same CA for different client types can negatively impact the cluster's
 ability to function. For more information, see [CA Reusage and Conflicts](#ca-reusage-and-conflicts).
-{{< /caution >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Authentication Flow
 
@@ -61,14 +61,7 @@ The flow can be seen in the following diagram.
 
 The source for the above swimlanes can be found in the source of this document.
 
-<!--
-Swimlanes generated at https://swimlanes.io with the source as follows:
-
------BEGIN-----
-title: Welcome to swimlanes.io
-
-
-User -> kube-apiserver / aggregator:
+ kube-apiserver / aggregator:
 
 note:
 1. The user makes a request to the Kube API server using any recognized credential (e.g. OIDC or client certs)
@@ -176,10 +169,10 @@ valid by a compliant extension apiserver, the following conditions must be met:
 2. The connection must be made using a client certificate whose CN is one of
    those listed in `--requestheader-allowed-names`.
 
-{{< note >}}
+{{}}
 You can set this option to blank as `--requestheader-allowed-names=""`.
 This will indicate to an extension apiserver that _any_ CN is acceptable.
-{{< /note >}}
+{{}}
 
 When started with these options, the Kubernetes apiserver will:
 
@@ -256,13 +249,13 @@ If the `SubjectAccessReview` passes, the extension apiserver executes the reques
 Enable the aggregation layer via the following `kube-apiserver` flags.
 They may have already been taken care of by your provider.
 
-    --requestheader-client-ca-file=<path to aggregator CA cert>
+    --requestheader-client-ca-file=
     --requestheader-allowed-names=front-proxy-client
     --requestheader-extra-headers-prefix=X-Remote-Extra-
     --requestheader-group-headers=X-Remote-Group
     --requestheader-username-headers=X-Remote-User
-    --proxy-client-cert-file=<path to aggregator proxy cert>
-    --proxy-client-key-file=<path to aggregator proxy key>
+    --proxy-client-cert-file=
+    --proxy-client-key-file=
 
 ### CA Reusage and Conflicts
 
@@ -301,10 +294,10 @@ as well as end-users, to be unable to authenticate to the Kubernetes apiserver.
 For this reason, use different CA certs for the `--client-ca-file`
 option - to authorize control plane components and end-users - and the `--requestheader-client-ca-file` option - to authorize aggregation apiserver requests.
 
-{{< warning >}}
+{{}}
 Do **not** reuse a CA that is used in a different context unless you understand
 the risks and the mechanisms to protect the CA's usage.
-{{< /warning >}}
+{{}}
 
 If you are not running kube-proxy on a host running the API server,
 then you must make sure that the system is enabled with the following
@@ -324,16 +317,16 @@ apiserver. The following is an example registration:
 apiVersion: apiregistration.k8s.io/v1
 kind: APIService
 metadata:
-  name: <name of the registration object>
+  name: 
 spec:
-  group: <API group name this extension apiserver hosts>
-  version: <API version this extension apiserver hosts>
-  groupPriorityMinimum: <priority this APIService for this group, see API documentation>
-  versionPriority: <prioritizes ordering of this version within a group, see API documentation>
+  group: 
+  version: 
+  groupPriorityMinimum: 
+  versionPriority: 
   service:
-    namespace: <namespace of the extension apiserver service>
-    name: <name of the extension apiserver service>
-  caBundle: <pem encoded ca cert that signs the server cert used by the webhook>
+    namespace: 
+    name: 
+  caBundle: 
 ```
 
 The name of an APIService object must be a valid
@@ -361,7 +354,7 @@ spec:
     namespace: my-service-namespace
     name: my-service-name
     port: 1234
-  caBundle: "Ci0tLS0tQk...<base64-encoded PEM bundle>...tLS0K"
+  caBundle: "Ci0tLS0tQk......tLS0K"
 ...
 ```
 

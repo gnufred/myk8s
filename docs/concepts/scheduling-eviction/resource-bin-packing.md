@@ -8,12 +8,12 @@ content_type: concept
 weight: 80
 ---
 
-<!-- overview -->
+
 
 In the [scheduling-plugin](/docs/reference/scheduling/config/#scheduling-plugins) `NodeResourcesFit` of kube-scheduler, there are two
 scoring strategies that support the bin packing of resources: `MostAllocated` and `RequestedToCapacityRatio`.
 
-<!-- body -->
+
 
 ## Enabling bin packing using MostAllocated strategy
 The `MostAllocated` strategy scores the nodes based on the utilization of resources, favoring the ones with higher allocation.

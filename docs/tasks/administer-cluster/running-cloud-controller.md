@@ -8,13 +8,13 @@ content_type: concept
 weight: 110
 ---
 
-<!-- overview -->
 
-{{< feature-state state="beta" for_k8s_version="v1.11" >}}
+
+{{}}
 
 Since cloud providers develop and release at a different pace compared to the
 Kubernetes project, abstracting the provider-specific code to the
-`{{< glossary_tooltip text="cloud-controller-manager" term_id="cloud-controller-manager" >}}`
+`{{}}`
 binary allows cloud vendors to evolve independently from the core Kubernetes code.
 
 The `cloud-controller-manager` can be linked to any cloud provider that satisfies
@@ -25,7 +25,7 @@ provided in the core Kubernetes project uses the same cloud libraries as `kube-c
 Cloud providers already supported in Kubernetes core are expected to use the in-tree
 cloud-controller-manager to transition out of Kubernetes core.
 
-<!-- body -->
+
 
 ## Administration
 

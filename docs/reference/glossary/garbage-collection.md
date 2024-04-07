@@ -16,7 +16,7 @@ tags:
 Garbage collection is a collective term for the various mechanisms Kubernetes uses to clean up
 cluster resources. 
 
-<!--more-->
+
 
 Kubernetes uses garbage collection to clean up resources like
 [unused containers and images](/docs/concepts/architecture/garbage-collection/#containers-images),

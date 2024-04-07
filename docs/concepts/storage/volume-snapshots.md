@@ -11,13 +11,13 @@ content_type: concept
 weight: 60
 ---
 
-<!-- overview -->
+
 
 In Kubernetes, a _VolumeSnapshot_ represents a snapshot of a volume on a storage
 system. This document assumes that you are already familiar with Kubernetes
 [persistent volumes](/docs/concepts/storage/persistent-volumes/).
 
-<!-- body -->
+
 
 ## Introduction
 
@@ -46,7 +46,7 @@ performing edit or delete modifications.
 Users need to be aware of the following when using this feature:
 
 - API Objects `VolumeSnapshot`, `VolumeSnapshotContent`, and `VolumeSnapshotClass`
-  are {{< glossary_tooltip term_id="CustomResourceDefinition" text="CRDs" >}}, not
+  are {{}}, not
   part of the core API.
 - `VolumeSnapshot` support is only available for CSI drivers.
 - As part of the deployment process of `VolumeSnapshot`, the Kubernetes team provides
@@ -99,7 +99,7 @@ requested VolumeSnapshotContent object is created.
 ### Persistent Volume Claim as Snapshot Source Protection
 
 The purpose of this protection is to ensure that in-use
-{{< glossary_tooltip text="PersistentVolumeClaim" term_id="persistent-volume-claim" >}}
+{{}}
 API objects are not removed from the system while a snapshot is being taken from it
 (as this may result in data loss).
 

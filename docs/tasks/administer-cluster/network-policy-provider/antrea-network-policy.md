@@ -4,7 +4,7 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 This page shows how to install and use Antrea CNI plugin on Kubernetes.
 For background on Project Antrea, read the [Introduction to Antrea](https://antrea.io/docs/).
 
@@ -13,7 +13,7 @@ For background on Project Antrea, read the [Introduction to Antrea](https://antr
 You need to have a Kubernetes cluster. Follow the
 [kubeadm getting started guide](/docs/reference/setup-tools/kubeadm/) to bootstrap one.
 
-<!-- steps -->
+
 
 ## Deploying Antrea with kubeadm
 

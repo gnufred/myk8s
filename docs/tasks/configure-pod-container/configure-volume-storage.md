@@ -4,7 +4,7 @@ content_type: task
 weight: 80
 ---
 
-<!-- overview -->
+
 
 This page shows how to configure a Pod to use a Volume for storage.
 
@@ -16,9 +16,9 @@ applications, such as key-value stores (such as Redis) and databases.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Configure a volume for a Pod
 
@@ -83,10 +83,10 @@ restarts. Here is the configuration file for the Pod:
 1. In your shell, kill the Redis process:
 
    ```shell
-   root@redis:/data/redis# kill <pid>
+   root@redis:/data/redis# kill 
    ```
 
-   where `<pid>` is the Redis process ID (PID).
+   where `` is the Redis process ID (PID).
 
 1. In your original terminal, watch for changes to the Redis Pod. Eventually,
    you will see something like this:
@@ -100,7 +100,7 @@ restarts. Here is the configuration file for the Pod:
 
 At this point, the Container has terminated and restarted. This is because the
 Redis Pod has a
-[restartPolicy](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
+[restartPolicy](/docs/reference/generated/kubernetes-api/{{}}/#podspec-v1-core)
 of `Always`.
 
 1. Get a shell into the restarted Container:
@@ -125,9 +125,9 @@ of `Always`.
 
 ## {{% heading "whatsnext" %}}
 
-- See [Volume](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core).
+- See [Volume](/docs/reference/generated/kubernetes-api/{{}}/#volume-v1-core).
 
-- See [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core).
+- See [Pod](/docs/reference/generated/kubernetes-api/{{}}/#pod-v1-core).
 
 - In addition to the local disk storage provided by `emptyDir`, Kubernetes
   supports many different network-attached storage solutions, including PD on

@@ -6,7 +6,7 @@ reviewers:
 weight: 30
 ---
 
-<!-- overview -->
+
 
 This page outlines steps to find out what [container runtime](/docs/setup/production-environment/container-runtimes/)
 the nodes in your cluster use.
@@ -67,10 +67,10 @@ In some cases, you might find it useful to know which socket your nodes use. For
 example, with the removal of dockershim in Kubernetes v1.24 and later, you might
 want to know whether you use Docker Engine with dockershim.
 
-{{<note>}}
+{{}}
 If you currently use Docker Engine in your nodes with `cri-dockerd`, you aren't
 affected by the dockershim removal.
-{{</note>}}
+{{}}
 
 You can check which socket you use by checking the kubelet configuration on your
 nodes.

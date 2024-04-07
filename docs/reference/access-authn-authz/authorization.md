@@ -9,12 +9,12 @@ content_type: concept
 weight: 60
 ---
 
-<!-- overview -->
+
 Learn more about Kubernetes authorization, including details about creating
 policies using the supported authorization modules.
 
 
-<!-- body -->
+
 In Kubernetes, you must be authenticated (logged in) before your request can be
 authorized (granted permission to access). For information about authentication,
 see [Controlling Access to the Kubernetes API](/docs/concepts/security/controlling-access/).
@@ -52,12 +52,12 @@ Kubernetes reviews only the following API request attributes:
  * **Resource** - The ID or name of the resource that is being accessed (for resource requests only) -- For resource requests using `get`, `update`, `patch`, and `delete` verbs, you must provide the resource name.
  * **Subresource** - The subresource that is being accessed (for resource requests only).
  * **Namespace** - The namespace of the object that is being accessed (for namespaced resource requests only).
- * **API group** - The {{< glossary_tooltip text="API Group" term_id="api-group" >}} being accessed (for resource requests only). An empty string designates the _core_ [API group](/docs/reference/using-api/#api-groups).
+ * **API group** - The {{}} being accessed (for resource requests only). An empty string designates the _core_ [API group](/docs/reference/using-api/#api-groups).
 
 ## Determine the Request Verb
 
 **Non-resource requests**
-Requests to endpoints other than `/api/v1/...` or `/apis/<group>/<version>/...`
+Requests to endpoints other than `/api/v1/...` or `/apis///...`
 are considered "non-resource requests", and use the lower-cased HTTP method of the request as the verb.
 For example, a `GET` request to endpoints like `/api` or `/healthz` would use `get` as the verb.
 
@@ -74,9 +74,9 @@ PUT       | update
 PATCH     | patch
 DELETE    | delete (for individual resources), deletecollection (for collections)
 
-{{< caution >}}
+{{}}
 The `get`, `list` and `watch` verbs can all return the full details of a resource. In terms of the returned data they are equivalent. For example, `list` on `secrets` will still reveal the `data` attributes of any returned resources.
-{{< /caution >}}
+{{}}
 
 Kubernetes sometimes checks authorization for additional permissions using specialized verbs. For example:
 
@@ -163,55 +163,7 @@ These APIs can be queried by creating normal Kubernetes resources, where the res
 field of the returned object is the result of the query.
 
 ```bash
-kubectl create -f - -o yaml << EOF
-apiVersion: authorization.k8s.io/v1
-kind: SelfSubjectAccessReview
-spec:
-  resourceAttributes:
-    group: apps
-    resource: deployments
-    verb: create
-    namespace: dev
-EOF
-```
-
-The generated `SelfSubjectAccessReview` is:
-```yaml
-apiVersion: authorization.k8s.io/v1
-kind: SelfSubjectAccessReview
-metadata:
-  creationTimestamp: null
-spec:
-  resourceAttributes:
-    group: apps
-    resource: deployments
-    namespace: dev
-    verb: create
-status:
-  allowed: true
-  denied: false
-```
-
-## Using Flags for Your Authorization Module
-
-You must include a flag in your policy to indicate which authorization module
-your policies include:
-
-The following flags can be used:
-
-  * `--authorization-mode=ABAC` Attribute-Based Access Control (ABAC) mode allows you to configure policies using local files.
-  * `--authorization-mode=RBAC` Role-based access control (RBAC) mode allows you to create and store policies using the Kubernetes API.
-  * `--authorization-mode=Webhook` WebHook is an HTTP callback mode that allows you to manage authorization using a remote REST endpoint.
-  * `--authorization-mode=Node` Node authorization is a special-purpose authorization mode that specifically authorizes API requests made by kubelets.
-  * `--authorization-mode=AlwaysDeny` This flag blocks all requests. Use this flag only for testing.
-  * `--authorization-mode=AlwaysAllow` This flag allows all requests. Use this flag only if you do not require authorization for your API requests.
-
-You can choose more than one authorization module. Modules are checked in order
-so an earlier module has higher priority to allow or deny a request.
-
-## Configuring the API Server using an Authorization Config File
-
-{{< feature-state state="alpha" for_k8s_version="v1.29" >}}
+kubectl create -f - -o yaml }}
 
 The Kubernetes API server's authorizer chain can be configured using a
 configuration file.
@@ -231,7 +183,7 @@ configuring an authorization webhook using the `--authorization-mode` and
 `--authorization-webhook-*` command line flags is not allowed. If done, there
 will be an error and API Server would exit right away.
 
-{{< caution >}}
+{{}}
 While the feature is in Alpha/Beta, there is no change if you want to keep on
 using command line flags. When the feature goes Beta, the feature flag would
 be turned on by default. The feature flag would be removed when feature goes GA.
@@ -242,7 +194,7 @@ when upgrading/downgrading the clusters. For example, if upgrading to v1.29+
 clusters and using the config file, you would need to make sure the config file
 exists before upgrading the cluster. When downgrading to v1.28, you would need
 to add the flags back to their bootstrap mechanism.
-{{< /caution >}}
+{{}}
 
 ```yaml
 #
@@ -351,10 +303,10 @@ authorizers:
 Users who can create/edit pods in a namespace, either directly or through a [controller](/docs/concepts/architecture/controller/)
 such as an operator, could escalate their privileges in that namespace.
 
-{{< caution >}}
+{{}}
 System administrators, use care when granting access to create or edit workloads.
 Details of how these can be misused are documented in [escalation paths](/docs/reference/access-authn-authz/authorization/#escalation-paths)
-{{< /caution >}}
+{{}}
 
 ### Escalation paths {#escalation-paths}
 - Mounting arbitrary secrets in that namespace
@@ -368,11 +320,11 @@ Details of how these can be misused are documented in [escalation paths](/docs/r
 - Mounting volumes meant for other workloads in that namespace
   - Can be used to obtain information meant for other workloads, and change it.
 
-{{< caution >}}
+{{}}
 System administrators should be cautious when deploying CRDs that
 change the above areas. These may open privilege escalations paths.
 This should be considered when deciding on your RBAC controls.
-{{< /caution >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

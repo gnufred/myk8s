@@ -5,9 +5,9 @@ weight: 110
 min-kubernetes-server-version: v1.21
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.21" state="stable" >}}
+
+{{}}
 
 This page shows how to limit the number of concurrent disruptions
 that your application experiences, allowing for higher availability
@@ -16,7 +16,7 @@ nodes.
 
 ## {{% heading "prerequisites" %}}
 
-{{< version-check >}}
+{{}}
 
 - You are the owner of an application running on a Kubernetes cluster that requires
   high availability.
@@ -26,7 +26,7 @@ nodes.
 - You should confirm with your cluster owner or service provider that they respect
   Pod Disruption Budgets.
 
-<!-- steps -->
+
 
 ## Protecting an Application with a PodDisruptionBudget
 
@@ -35,7 +35,7 @@ nodes.
 1. Create a PDB definition as a YAML file.
 1. Create the PDB object from the YAML file.
 
-<!-- discussion -->
+
 
 ## Identify an Application to Protect
 
@@ -116,11 +116,11 @@ A `PodDisruptionBudget` has three fields:
   of the number of pods from that set that can be unavailable after the eviction.
   It can be either an absolute number or a percentage.
 
-{{< note >}}
+{{}}
 The behavior for an empty selector differs between the policy/v1beta1 and policy/v1 APIs for
 PodDisruptionBudgets. For policy/v1beta1 an empty selector matches zero pods, while
 for policy/v1 an empty selector matches every pod in the namespace.
-{{< /note >}}
+{{}}
 
 You can specify only one of `maxUnavailable` and `minAvailable` in a single `PodDisruptionBudget`.
 `maxUnavailable` can only be used to control the eviction of pods
@@ -145,14 +145,14 @@ is still allowed for disruption, leading to an effective unavailability of 100%.
 In typical usage, a single budget would be used for a collection of pods managed by
 a controller—for example, the pods in a single ReplicaSet or StatefulSet.
 
-{{< note >}}
+{{}}
 A disruption budget does not truly guarantee that the specified
 number/percentage of pods will always be up. For example, a node that hosts a
 pod from the collection may fail when the collection is at the minimum size
 specified in the budget, thus bringing the number of available pods from the
 collection below the specified size. The budget can only protect against
 voluntary evictions, not all causes of unavailability.
-{{< /note >}}
+{{}}
 
 If you set `maxUnavailable` to 0% or 0, or you set `minAvailable` to 100% or the number of replicas,
 you are requiring zero voluntary evictions. When you set zero voluntary evictions for a workload
@@ -241,13 +241,13 @@ These pods are tracked via `.status.currentHealthy` field in the PDB status.
 
 ## Unhealthy Pod Eviction Policy
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+{{}}
 
-{{< note >}}
+{{}}
 This feature is enabled by default. You can disable it by disabling the `PDBUnhealthyPodEvictionPolicy`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 on the [API server](/docs/reference/command-line-tools-reference/kube-apiserver/).
-{{< /note >}}
+{{}}
 
 PodDisruptionBudget guarding an application ensures that `.status.currentHealthy` number of pods
 does not fall below the number specified in `.status.desiredHealthy` by disallowing eviction of healthy pods.
@@ -279,15 +279,15 @@ Policies:
   with pods in `CrashLoopBackOff` state (due to a bug or misconfiguration), or pods
   that are just failing to report the `Ready` condition.
 
-{{< note >}}
+{{}}
 Pods in `Pending`, `Succeeded` or `Failed` phase are always considered for eviction.
-{{< /note >}}
+{{}}
 
 ## Arbitrary workloads and arbitrary selectors {#arbitrary-controllers-and-selectors}
 
 You can skip this section if you only use PDBs with the built-in
 workload resources (Deployment, ReplicaSet, StatefulSet and ReplicationController)
-or with {{< glossary_tooltip term_id="CustomResourceDefinition" text="custom resources" >}}
+or with {{}}
 that implement a `scale` [subresource](/docs/concepts/extend-kubernetes/api-extension/custom-resources/#advanced-features-and-flexibility),
 and where the PDB selector exactly matches the selector of the Pod's owning resource.
 

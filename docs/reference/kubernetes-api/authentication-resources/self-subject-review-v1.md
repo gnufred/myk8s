@@ -10,16 +10,7 @@ weight: 6
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: authentication.k8s.io/v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 SelfSubjectReview contains the user information that the kube-apiserver has about the user making this request. When using impersonation, users will receive the user info of the user being impersonated.  If impersonation or request header authentication is used, any extra keys will have their case ignored and returned as lowercase.
 
-<hr>
+
 
 - **apiVersion**: authentication.k8s.io/v1
 
@@ -38,11 +29,11 @@ SelfSubjectReview contains the user information that the kube-apiserver has abou
 - **kind**: SelfSubjectReview
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **status** (<a href="{{< ref "../authentication-resources/self-subject-review-v1#SelfSubjectReviewStatus" >}}">SelfSubjectReviewStatus</a>)
+- **status** (}}">SelfSubjectReviewStatus)
 
   Status is filled in by the server with the user attributes.
 
@@ -54,13 +45,13 @@ SelfSubjectReview contains the user information that the kube-apiserver has abou
 
 SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
 
-<hr>
+
 
 - **userInfo** (UserInfo)
 
   User attributes of the user making this request.
 
-  <a name="UserInfo"></a>
+  
   *UserInfo holds the information about the user needed to implement the user.Info interface.*
 
   - **userInfo.extra** (map[string][]string)
@@ -87,7 +78,7 @@ SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
 
 
 
-<hr>
+
 
 
 
@@ -103,40 +94,40 @@ POST /apis/authentication.k8s.io/v1/selfsubjectreviews
 #### Parameters
 
 
-- **body**: <a href="{{< ref "../authentication-resources/self-subject-review-v1#SelfSubjectReview" >}}">SelfSubjectReview</a>, required
+- **body**: }}">SelfSubjectReview, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../authentication-resources/self-subject-review-v1#SelfSubjectReview" >}}">SelfSubjectReview</a>): OK
+200 (}}">SelfSubjectReview): OK
 
-201 (<a href="{{< ref "../authentication-resources/self-subject-review-v1#SelfSubjectReview" >}}">SelfSubjectReview</a>): Created
+201 (}}">SelfSubjectReview): Created
 
-202 (<a href="{{< ref "../authentication-resources/self-subject-review-v1#SelfSubjectReview" >}}">SelfSubjectReview</a>): Accepted
+202 (}}">SelfSubjectReview): Accepted
 
 401: Unauthorized
 

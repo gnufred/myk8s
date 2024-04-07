@@ -6,16 +6,16 @@ title: Enforcing Pod Security Standards
 weight: 40
 ---
 
-<!-- overview -->
+
 
 This page provides an overview of best practices when it comes to enforcing
 [Pod Security Standards](/docs/concepts/security/pod-security-standards).
 
-<!-- body -->
+
 
 ## Using the built-in Pod Security Admission Controller
 
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+{{}}
 
 The [Pod Security Admission Controller](/docs/reference/access-authn-authz/admission-controllers/#podsecurity)
 intends to replace the deprecated PodSecurityPolicies. 

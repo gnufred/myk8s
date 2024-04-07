@@ -4,14 +4,14 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
+
 
 Operators are software extensions to Kubernetes that make use of
 [custom resources](/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 to manage applications and their components. Operators follow
 Kubernetes principles, notably the [control loop](/docs/concepts/architecture/controller).
 
-<!-- body -->
+
 
 ## Motivation
 
@@ -31,9 +31,9 @@ built-in automation from the core of Kubernetes. You can use Kubernetes
 to automate deploying and running workloads, *and* you can automate how
 Kubernetes does that.
 
-Kubernetes' {{< glossary_tooltip text="operator pattern" term_id="operator-pattern" >}}
+Kubernetes' {{}}
 concept lets you extend the cluster's behaviour without modifying the code of Kubernetes
-itself by linking {{< glossary_tooltip text="controllers" term_id="controller" >}} to
+itself by linking {{}} to
 one or more custom resources. Operators are clients of the Kubernetes API that act as
 controllers for a [Custom Resource](/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
@@ -80,7 +80,7 @@ What might an operator look like in more detail? Here's an example:
 The most common way to deploy an operator is to add the
 Custom Resource Definition and its associated Controller to your cluster.
 The Controller will normally run outside of the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}},
+{{}},
 much as you would run any containerized application.
 For example, you can run the controller in your cluster as a Deployment.
 
@@ -128,7 +128,7 @@ operator.
 ## {{% heading "whatsnext" %}}
 
 
-* Read the {{< glossary_tooltip text="CNCF" term_id="cncf" >}}
+* Read the {{}}
   [Operator White Paper](https://github.com/cncf/tag-app-delivery/blob/163962c4b1cd70d085107fc579e3e04c2e14d59c/operator-wg/whitepaper/Operator-WhitePaper_v1-0.md).
 * Learn more about [Custom Resources](/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 * Find ready-made operators on [OperatorHub.io](https://operatorhub.io/) to suit your use case

@@ -8,7 +8,7 @@ content_type: tutorial
 weight: 75
 ---
 
-<!-- overview -->
+
 
 This page provides a walkthrough for some steps you can follow to run
 Windows containers using Kubernetes.
@@ -20,7 +20,7 @@ The [kubectl commands](/docs/reference/kubectl/) to interface with the cluster a
 The examples in this page are provided to jumpstart your experience with Windows containers.
 
 
-<!-- body -->
+
 
 ## Objectives
 
@@ -78,15 +78,10 @@ spec:
         command:
         - powershell.exe
         - -command
-        - "<#code used from https://gist.github.com/19WAS85/5424431#> ; $$listener = New-Object System.Net.HttpListener ; $$listener.Prefixes.Add('http://*:80/') ; $$listener.Start() ; $$callerCounts = @{} ; Write-Host('Listening at http://*:80/') ; while ($$listener.IsListening) { ;$$context = $$listener.GetContext() ;$$requestUrl = $$context.Request.Url ;$$clientIP = $$context.Request.RemoteEndPoint.Address ;$$response = $$context.Response ;Write-Host '' ;Write-Host('> {0}' -f $$requestUrl) ;  ;$$count = 1 ;$$k=$$callerCounts.Get_Item($$clientIP) ;if ($$k -ne $$null) { $$count += $$k } ;$$callerCounts.Set_Item($$clientIP, $$count) ;$$ip=(Get-NetAdapter | Get-NetIpAddress); $$header='<html><body><H1>Windows Container Web Server</H1>' ;$$callerCountsString='' ;$$callerCounts.Keys | % { $$callerCountsString+='<p>IP {0} callerCount {1} ' -f $$ip[1].IPAddress,$$callerCounts.Item($$_) } ;$$footer='</body></html>' ;$$content='{0}{1}{2}' -f $$header,$$callerCountsString,$$footer ;Write-Output $$content ;$$buffer = [System.Text.Encoding]::UTF8.GetBytes($$content) ;$$response.ContentLength64 = $$buffer.Length ;$$response.OutputStream.Write($$buffer, 0, $$buffer.Length) ;$$response.Close() ;$$responseStatus = $$response.StatusCode ;Write-Host('< {0}' -f $$responseStatus)  } ; "
-     nodeSelector:
-      kubernetes.io/os: windows
-```
-
-{{< note >}}
+        - " ; $$listener = New-Object System.Net.HttpListener ; $$listener.Prefixes.Add('http://*:80/') ; $$listener.Start() ; $$callerCounts = @{} ; Write-Host('Listening at http://*:80/') ; while ($$listener.IsListening) { ;$$context = $$listener.GetContext() ;$$requestUrl = $$context.Request.Url ;$$clientIP = $$context.Request.RemoteEndPoint.Address ;$$response = $$context.Response ;Write-Host '' ;Write-Host('> {0}' -f $$requestUrl) ;  ;$$count = 1 ;$$k=$$callerCounts.Get_Item($$clientIP) ;if ($$k -ne $$null) { $$count += $$k } ;$$callerCounts.Set_Item($$clientIP, $$count) ;$$ip=(Get-NetAdapter | Get-NetIpAddress); $$header='Windows Container Web Server' ;$$callerCountsString='' ;$$callerCounts.Keys | % { $$callerCountsString+='IP {0} callerCount {1} ' -f $$ip[1].IPAddress,$$callerCounts.Item($$_) } ;$$footer='' ;$$content='{0}{1}{2}' -f $$header,$$callerCountsString,$$footer ;Write-Output $$content ;$$buffer = [System.Text.Encoding]::UTF8.GetBytes($$content) ;$$response.ContentLength64 = $$buffer.Length ;$$response.OutputStream.Write($$buffer, 0, $$buffer.Length) ;$$response.Close() ;$$responseStatus = $$response.StatusCode ;Write-Host('}}
 Port mapping is also supported, but for simplicity this example exposes
 port 80 of the container directly to the Service.
-{{< /note >}}
+{{}}
 
 1. Check that all nodes are healthy:
 
@@ -116,10 +111,10 @@ port 80 of the container directly to the Service.
     * Inbound connectivity, `curl` the NodePort from the Linux control plane node or machines outside of the cluster
     * Outbound connectivity, `curl` external IPs from inside the pod using `kubectl exec`
 
-{{< note >}}
+{{}}
 Windows container hosts are not able to access the IP of services scheduled on them due to current platform limitations of the Windows networking stack.
 Only Windows pods are able to access service IPs.
-{{< /note >}}
+{{}}
 
 ## Observability
 
@@ -134,7 +129,7 @@ or push entries to the application event log.
 [LogMonitor](https://github.com/microsoft/windows-container-tools/tree/master/LogMonitor), an open source tool by Microsoft,
 is the recommended way to monitor configured log sources inside a Windows container.
 LogMonitor supports monitoring event logs, ETW providers, and custom application logs,
-piping them to STDOUT for consumption by `kubectl logs <pod>`.
+piping them to STDOUT for consumption by `kubectl logs `.
 
 Follow the instructions in the LogMonitor GitHub page to copy its binaries and configuration files
 to all your containers and add the necessary entrypoints for LogMonitor to push your logs to STDOUT.
@@ -157,7 +152,7 @@ Learn more about configuring and using GMSA for Windows containers [here](/docs/
 
 ## Taints and tolerations
 
-Users need to use some combination of {{<glossary_tooltip text="taint" term_id="taint" >}}
+Users need to use some combination of {{}}
 and node selectors in order to schedule Linux and Windows workloads to their respective OS-specific nodes.
 The recommended approach is outlined below,
 with one of its main goals being that this approach should not break compatibility for existing Linux workloads.
@@ -167,11 +162,11 @@ that the containers in that Pod are designed for. For Pods that run Linux contai
 `.spec.os.name` to `linux`. For Pods that run Windows containers, set `.spec.os.name`
 to `windows`.
 
-{{< note >}}
+{{}}
 If you are running a version of Kubernetes older than 1.24, you may need to enable
 the `IdentifyPodOS` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 to be able to set a value for `.spec.pod.os`.
-{{< /note >}}
+{{}}
 
 The scheduler does not use the value of `.spec.os.name` when assigning Pods to nodes. You should
 use normal Kubernetes mechanisms for
@@ -186,7 +181,7 @@ so taints and tolerations (or node selectors) are still required
 ### Ensuring OS-specific workloads land on the appropriate container host
 
 Users can ensure Windows containers can be scheduled on the appropriate host using taints and tolerations.
-All Kubernetes nodes running Kubernetes {{< skew currentVersion >}} have the following default labels:
+All Kubernetes nodes running Kubernetes {{}} have the following default labels:
 
 * kubernetes.io/os = [windows|linux]
 * kubernetes.io/arch = [amd64|arm64|...]
@@ -194,7 +189,7 @@ All Kubernetes nodes running Kubernetes {{< skew currentVersion >}} have the fol
 If a Pod specification does not specify a `nodeSelector` such as `"kubernetes.io/os": windows`,
 it is possible the Pod can be scheduled on any host, Windows or Linux.
 This can be problematic since a Windows container can only run on Windows and a Linux container can only run on Linux.
-The best practice for Kubernetes {{< skew currentVersion >}} is to use a `nodeSelector`.
+The best practice for Kubernetes {{}} is to use a `nodeSelector`.
 
 However, in many cases users have a pre-existing large number of deployments for Linux containers,
 as well as an ecosystem of off-the-shelf configurations, such as community Helm charts, and programmatic Pod generation cases, such as with operators.

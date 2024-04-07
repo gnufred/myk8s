@@ -7,8 +7,8 @@ content_type: task
 weight: 260
 ---
 
-<!-- overview -->
-Kubernetes {{< glossary_tooltip text="namespaces" term_id="namespace" >}}
+
+Kubernetes {{}}
 help different projects, teams, or customers to share a Kubernetes cluster.
 
 It does this by providing the following:
@@ -26,18 +26,18 @@ This example demonstrates how to use Kubernetes namespaces to subdivide your clu
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
-<!-- steps -->
+
 
 ## Prerequisites
 
 This example assumes the following:
 
 1. You have an [existing Kubernetes cluster](/docs/setup/).
-2. You have a basic understanding of Kubernetes {{< glossary_tooltip text="Pods" term_id="pod" >}}, {{< glossary_tooltip term_id="service" text="Services" >}}, and {{< glossary_tooltip text="Deployments" term_id="deployment" >}}.
+2. You have a basic understanding of Kubernetes {{}}, {{}}, and {{}}.
 
 ## Understand the default namespace
 
@@ -98,7 +98,7 @@ kubectl get namespaces --show-labels
 ```
 ```
 NAME          STATUS    AGE       LABELS
-default       Active    32m       <none>
+default       Active    32m       
 development   Active    29s       name=development
 production    Active    23s       name=production
 ```

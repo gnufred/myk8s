@@ -6,8 +6,8 @@ content_type: task
 description: Configure and manage huge pages as a schedulable resource in a cluster.
 ---
 
-<!-- overview -->
-{{< feature-state state="stable" >}}
+
+{{}}
 
 Kubernetes supports the allocation and consumption of pre-allocated huge pages
 by applications in a Pod. This page describes how users can consume huge pages.
@@ -49,17 +49,17 @@ Allocatable:
   pods:               ...
 ```
 
-{{< note >}}
+{{}}
 For dynamically allocated pages (after boot), the Kubelet needs to be restarted
 for the new allocations to be refrelected.
-{{< /note >}}
+{{}}
 
-<!-- steps -->
+
 
 ## API
 
 Huge pages can be consumed via container level resource requirements using the
-resource name `hugepages-<size>`, where `<size>` is the most compact binary
+resource name `hugepages-`, where `` is the most compact binary
 notation using integer values supported on a particular node. For example, if a
 node supports 2048KiB and 1048576KiB page sizes, it will expose a schedulable
 resources `hugepages-2Mi` and `hugepages-1Gi`. Unlike CPU or memory, huge pages
@@ -67,7 +67,7 @@ do not support overcommit. Note that when requesting hugepage resources, either
 memory or CPU resources must be requested as well.
 
 A pod may consume multiple huge page sizes in a single pod spec. In this case it
-must use `medium: HugePages-<hugepagesize>` notation for all volume mounts.
+must use `medium: HugePages-` notation for all volume mounts.
 
 
 ```yaml
@@ -141,6 +141,6 @@ spec:
 - Applications that consume huge pages via `shmget()` with `SHM_HUGETLB` must
   run with a supplemental group that matches `proc/sys/vm/hugetlb_shm_group`.
 - Huge page usage in a namespace is controllable via ResourceQuota similar
-  to other compute resources like `cpu` or `memory` using the `hugepages-<size>`
+  to other compute resources like `cpu` or `memory` using the `hugepages-`
   token.
 

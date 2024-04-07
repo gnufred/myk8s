@@ -5,9 +5,9 @@ min-kubernetes-server-version: v1.21
 weight: 30
 ---
 
-{{< feature-state for_k8s_version="v1.24" state="stable" >}}
+{{}}
 
-<!-- overview -->
+
 
 
 In this example, you will run a Kubernetes Job that uses multiple parallel
@@ -16,7 +16,7 @@ Each worker is a different container running in its own Pod. The Pods have an
 _index number_ that the control plane sets automatically, which allows each Pod
 to identify which part of the overall task to work on.
 
-The pod index is available in the {{< glossary_tooltip text="annotation" term_id="annotation" >}}
+The pod index is available in the {{}}
 `batch.kubernetes.io/job-completion-index` as a string representing its
 decimal value. In order for the containerized task process to obtain this index,
 you can publish the value of the annotation using the [downward API](/docs/concepts/workloads/pods/downward-api/)
@@ -36,16 +36,16 @@ Here is an overview of the steps in this example:
 You should already be familiar with the basic,
 non-parallel, use of [Job](/docs/concepts/workloads/controllers/job/).
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Choose an approach
 
 To access the work item from the worker program, you have a few options:
 
 1. Read the `JOB_COMPLETION_INDEX` environment variable. The Job
-   {{< glossary_tooltip text="controller" term_id="controller" >}}
+   {{}}
    automatically links this variable to the annotation containing the completion
    index.
 1. Read a file that contains the completion index.
@@ -128,7 +128,7 @@ Namespace:         default
 Selector:          controller-uid=bf865e04-0b67-483b-9a90-74cfc4c3e756
 Labels:            controller-uid=bf865e04-0b67-483b-9a90-74cfc4c3e756
                    job-name=indexed-job
-Annotations:       <none>
+Annotations:       
 Parallelism:       3
 Completions:       5
 Start Time:        Thu, 11 Mar 2021 15:47:34 +0000
@@ -140,33 +140,33 @@ Pod Template:
   Init Containers:
    input:
     Image:      docker.io/library/bash
-    Port:       <none>
-    Host Port:  <none>
+    Port:       
+    Host Port:  
     Command:
       bash
       -c
       items=(foo bar baz qux xyz)
       echo ${items[$JOB_COMPLETION_INDEX]} > /input/data.txt
 
-    Environment:  <none>
+    Environment:  
     Mounts:
       /input from input (rw)
   Containers:
    worker:
     Image:      docker.io/library/busybox
-    Port:       <none>
-    Host Port:  <none>
+    Port:       
+    Host Port:  
     Command:
       rev
       /input/data.txt
-    Environment:  <none>
+    Environment:  
     Mounts:
       /input from input (rw)
   Volumes:
    input:
     Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
     Medium:
-    SizeLimit:  <unset>
+    SizeLimit:  
 Events:
   Type    Reason            Age   From            Message
   ----    ------            ----  ----            -------

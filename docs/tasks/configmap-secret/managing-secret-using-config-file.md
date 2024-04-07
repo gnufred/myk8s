@@ -5,19 +5,19 @@ weight: 20
 description: Creating Secret objects using resource configuration file.
 ---
 
-<!-- overview -->
+
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Create the Secret {#create-the-config-file}
 
 You can define the `Secret` object in a manifest first, in JSON or YAML format,
 and then create that object. The
-[Secret](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#secret-v1-core)
+[Secret](/docs/reference/generated/kubernetes-api/{{}}/#secret-v1-core)
 resource contains two maps: `data` and `stringData`.
 The `data` field is used to store arbitrary data, encoded using base64. The
 `stringData` field is provided for convenience, and it allows you to provide
@@ -34,9 +34,9 @@ The following example stores two strings in a Secret using the `data` field.
    echo -n '1f2d1e2e67df' | base64
    ```
 
-   {{< note >}}
+   {{}}
    The serialized JSON and YAML values of Secret data are encoded as base64 strings. Newlines are not valid within these strings and must be omitted. When using the `base64` utility on Darwin/macOS, users should avoid using the `-b` option to split long lines. Conversely, Linux users *should* add the option `-w 0` to `base64` commands or the pipeline `base64 | tr -d '\n'` if the `-w` option is not available.
-   {{< /note >}}
+   {{}}
 
    The output is similar to:
 
@@ -90,8 +90,8 @@ For example, if your application uses the following configuration file:
 
 ```yaml
 apiUrl: "https://my.api.com/api/v1"
-username: "<user>"
-password: "<password>"
+username: ""
+password: ""
 ```
 
 You could store this in a Secret using the following definition:
@@ -105,13 +105,13 @@ type: Opaque
 stringData:
   config.yaml: |
     apiUrl: "https://my.api.com/api/v1"
-    username: <user>
-    password: <password>
+    username: 
+    password: 
 ```
 
-{{< note >}}
+{{}}
 The `stringData` field for a Secret does not work well with server-side apply.
-{{< /note >}}
+{{}}
 
 When you retrieve the Secret data, the command returns the encoded values,
 and not the plaintext values you provided in `stringData`.
@@ -156,9 +156,9 @@ stringData:
   username: administrator
 ```
 
-{{< note >}}
+{{}}
 The `stringData` field for a Secret does not work well with server-side apply.
-{{< /note >}}
+{{}}
 
 The `Secret` object is created as follows:
 

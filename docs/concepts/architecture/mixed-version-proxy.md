@@ -6,12 +6,12 @@ content_type: concept
 weight: 220
 ---
 
-<!-- overview -->
 
-{{< feature-state feature_gate_name="UnknownVersionInteroperabilityProxy" >}}
 
-Kubernetes {{< skew currentVersion >}} includes an alpha feature that lets an
-{{< glossary_tooltip text="API Server" term_id="kube-apiserver" >}}
+{{}}
+
+Kubernetes {{}} includes an alpha feature that lets an
+{{}}
 proxy a resource requests to other _peer_ API servers. This is useful when there are multiple
 API servers running different versions of Kubernetes in one cluster
 (for example, during a long-lived rollout to a new release of Kubernetes).
@@ -26,18 +26,18 @@ This mechanism is called the _Mixed Version Proxy_.
 ## Enabling the Mixed Version Proxy
 
 Ensure that `UnknownVersionInteroperabilityProxy` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
-is enabled when you start the {{< glossary_tooltip text="API Server" term_id="kube-apiserver" >}}:
+is enabled when you start the {{}}:
 
 ```shell
 kube-apiserver \
 --feature-gates=UnknownVersionInteroperabilityProxy=true \
 # required command line arguments for this feature
---peer-ca-file=<path to kube-apiserver CA cert>
---proxy-client-cert-file=<path to aggregator proxy cert>,
---proxy-client-key-file=<path to aggregator proxy key>,
---requestheader-client-ca-file=<path to aggregator CA cert>,
+--peer-ca-file=
+--proxy-client-cert-file=,
+--proxy-client-key-file=,
+--requestheader-client-ca-file=,
 # requestheader-allowed-names can be set to blank to allow any Common Name
---requestheader-allowed-names=<valid Common Names to verify proxy client cert against>,
+--requestheader-allowed-names=,
 
 # optional flags for this feature
 --peer-advertise-ip=`IP of this kube-apiserver that should be used by peers to proxy requests`
@@ -83,7 +83,7 @@ loads a special filter that does the following:
 
 When an API Server receives a resource request, it first checks which API servers can
 serve the requested resource. This check happens using the internal
-[`StorageVersion` API](/docs/reference/generated/kubernetes-api/v{{< skew currentVersion >}}/#storageversioncondition-v1alpha1-internal-apiserver-k8s-io).
+[`StorageVersion` API](/docs/reference/generated/kubernetes-api/v{{}}/#storageversioncondition-v1alpha1-internal-apiserver-k8s-io).
 
 * If the resource is known to the API server that received the request
   (for example, `GET /api/v1/pods/some-pod`), the request is handled locally.

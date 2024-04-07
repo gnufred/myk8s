@@ -8,7 +8,7 @@ content_type: task
 weight: 200
 ---
 
-<!-- overview -->
+
 
 This page shows how to configure process namespace sharing for a pod. When
 process namespace sharing is enabled, processes in a container are visible
@@ -20,9 +20,9 @@ include debugging utilities like a shell.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Configure a Pod
 
@@ -104,7 +104,7 @@ events {
     worker_connections  1024;
 ```
 
-<!-- discussion -->
+
 
 ## Understanding process namespace sharing
 

@@ -10,17 +10,17 @@ weight: 100
 min-kubernetes-server-version: 1.23
 ---
 
-<!-- overview -->
+
 
 A [HorizontalPodAutoscaler](/docs/tasks/run-application/horizontal-pod-autoscale/)
 (HPA for short)
 automatically updates a workload resource (such as
-a {{< glossary_tooltip text="Deployment" term_id="deployment" >}} or
-{{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}), with the
+a {{}} or
+{{}}), with the
 aim of automatically scaling the workload to match demand.
 
 Horizontal scaling means that the response to increased load is to deploy more
-{{< glossary_tooltip text="Pods" term_id="pod" >}}.
+{{}}.
 This is different from _vertical_ scaling, which for Kubernetes would mean
 assigning more resources (for example: memory or CPU) to the Pods that are already
 running for the workload.
@@ -35,14 +35,14 @@ httpd running some PHP code.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}} If you're running an older
+{{}} {{}} If you're running an older
 release of Kubernetes, refer to the version of the documentation for that release (see
 [available documentation versions](/docs/home/supported-doc-versions/)).
 
 To follow this walkthrough, you also need to use a cluster that has a
 [Metrics Server](https://github.com/kubernetes-sigs/metrics-server#readme) deployed and configured.
 The Kubernetes Metrics Server collects resource metrics from
-the {{<glossary_tooltip term_id="kubelet" text="kubelets">}} in your cluster, and exposes those metrics
+the {{}} in your cluster, and exposes those metrics
 through the [Kubernetes API](/docs/concepts/overview/kubernetes-api/),
 using an [APIService](/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/) to add
 new kinds of resource that represent metric readings.
@@ -50,18 +50,18 @@ new kinds of resource that represent metric readings.
 To learn how to deploy the Metrics Server, see the
 [metrics-server documentation](https://github.com/kubernetes-sigs/metrics-server#deployment).
 
-If you are running {{< glossary_tooltip term_id="minikube" >}}, run the following command to enable metrics-server:
+If you are running {{}}, run the following command to enable metrics-server:
 
 ```shell
 minikube addons enable metrics-server
 ```
 
-<!-- steps -->
+
 
 ## Run and expose php-apache server
 
 To demonstrate a HorizontalPodAutoscaler, you will first start a Deployment that runs a container using the
-`hpa-example` image, and expose it as a {{< glossary_tooltip term_id="service">}}
+`hpa-example` image, and expose it as a {{}}
 using the following manifest:
 
 {{% code_sample file="application/php-apache.yaml" %}}
@@ -87,7 +87,7 @@ You will shortly run a command that creates a HorizontalPodAutoscaler that maint
 between 1 and 10 replicas of the Pods controlled by the php-apache Deployment that
 you created in the first step of these instructions.
 
-Roughly speaking, the HPA {{<glossary_tooltip text="controller" term_id="controller">}} will increase and decrease
+Roughly speaking, the HPA {{}} will increase and decrease
 the number of replicas (by updating the Deployment) to maintain an average CPU utilization across all Pods of 50%.
 The Deployment then updates the ReplicaSet - this is part of how all Deployments work in Kubernetes -
 and then the ReplicaSet either adds or removes Pods based on the change to its `.spec`.
@@ -170,18 +170,18 @@ NAME         READY   UP-TO-DATE   AVAILABLE   AGE
 php-apache   7/7      7           7           19m
 ```
 
-{{< note >}}
+{{}}
 It may take a few minutes to stabilize the number of replicas. Since the amount
 of load is not controlled in any way it may happen that the final number of replicas
 will differ from this example.
-{{< /note >}}
+{{}}
 
 ## Stop generating load {#stop-load}
 
 To finish the example, stop sending the load.
 
 In the terminal where you created the Pod that runs a `busybox` image, terminate
-the load generation by typing `<Ctrl> + C`.
+the load generation by typing ` + C`.
 
 Then verify the result state (after a minute or so):
 
@@ -212,7 +212,7 @@ Once CPU utilization dropped to 0, the HPA automatically scaled the number of re
 
 Autoscaling the replicas may take a few minutes.
 
-<!-- discussion -->
+
 
 ## Autoscaling on multiple metrics and custom metrics
 
@@ -248,7 +248,7 @@ spec:
         averageUtilization: 50
 status:
   observedGeneration: 1
-  lastScaleTime: <some-time>
+  lastScaleTime: 
   currentReplicas: 1
   desiredReplicas: 1
   currentMetrics:
@@ -358,7 +358,7 @@ spec:
         value: 10k
 status:
   observedGeneration: 1
-  lastScaleTime: <some-time>
+  lastScaleTime: 
   currentReplicas: 1
   desiredReplicas: 1
   currentMetrics:
@@ -459,8 +459,8 @@ kubectl describe hpa cm-test
 ```
 Name:                           cm-test
 Namespace:                      prom
-Labels:                         <none>
-Annotations:                    <none>
+Labels:                         
+Annotations:                    
 CreationTimestamp:              Fri, 16 Jun 2017 18:09:22 +0000
 Reference:                      ReplicationController/cm-test
 Metrics:                        ( current / target )
@@ -491,7 +491,7 @@ HorizontalPodAutoscaler.
 
 All metrics in the HorizontalPodAutoscaler and metrics APIs are specified using
 a special whole-number notation known in Kubernetes as a
-{{< glossary_tooltip term_id="quantity" text="quantity">}}.  For example,
+{{}}.  For example,
 the quantity `10500m` would be written as `10.5` in decimal notation.  The metrics APIs
 will return whole numbers without a suffix when possible, and will generally return
 quantities in milli-units otherwise.  This means you might see your metric value fluctuate

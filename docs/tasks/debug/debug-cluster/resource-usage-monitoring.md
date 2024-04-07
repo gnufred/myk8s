@@ -6,7 +6,7 @@ title: Tools for Monitoring Resources
 weight: 15
 ---
 
-<!-- overview -->
+
 
 To scale an application and provide a reliable service, you need to
 understand how the application behaves when it is deployed. You can examine
@@ -18,7 +18,7 @@ information about an application's resource usage at each of these levels.
 This information allows you to evaluate your application's performance and
 where bottlenecks can be removed to improve overall performance. 
 
-<!-- body -->
+
 
 In Kubernetes, application monitoring does not depend on a single monitoring solution.
 On new clusters, you can use [resource metrics](#resource-metrics-pipeline) or

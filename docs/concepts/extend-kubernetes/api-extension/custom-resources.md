@@ -10,17 +10,17 @@ content_type: concept
 weight: 10
 ---
 
-<!-- overview -->
+
 
 *Custom resources* are extensions of the Kubernetes API. This page discusses when to add a custom
 resource to your Kubernetes cluster and when to use a standalone service. It describes the two
 methods for adding custom resources and how to choose between them.
 
-<!-- body -->
+
 ## Custom resources
 
 A *resource* is an endpoint in the [Kubernetes API](/docs/concepts/overview/kubernetes-api/) that
-stores a collection of {{< glossary_tooltip text="API objects" term_id="object" >}}
+stores a collection of {{}}
 of a certain kind; for example, the built-in *pods* resource contains a collection of Pod objects.
 
 A *custom resource* is an extension of the Kubernetes API that is not necessarily available in a default
@@ -30,7 +30,7 @@ many core Kubernetes functions are now built using custom resources, making Kube
 Custom resources can appear and disappear in a running cluster through dynamic registration,
 and cluster admins can update custom resources independently of the cluster itself.
 Once a custom resource is installed, users can create and access its objects using
-{{< glossary_tooltip text="kubectl" term_id="kubectl" >}}, just as they do for built-in resources
+{{}}, just as they do for built-in resources
 like *Pods*.
 
 ## Custom controllers
@@ -106,10 +106,10 @@ Use a ConfigMap if any of the following apply:
   rather than the Kubernetes API.
 * You want to perform rolling updates via Deployment, etc., when the file is updated.
 
-{{< note >}}
-Use a {{< glossary_tooltip text="Secret" term_id="secret" >}} for sensitive data, which is similar
+{{}}
+Use a {{}} for sensitive data, which is similar
 to a ConfigMap but more secure.
-{{< /note >}}
+{{}}
 
 Use a custom resource (CRD or Aggregated API) if most of the following apply:
 
@@ -144,7 +144,7 @@ need to understand API Aggregation to use CRDs.
 Regardless of how they are installed, the new resources are referred to as Custom Resources to
 distinguish them from built-in Kubernetes resources (like pods).
 
-{{< note >}}
+{{}}
 Avoid using a Custom Resource as data storage for application, end user, or monitoring data:
 architecture designs that store application data within the Kubernetes API typically represent
 a design that is too closely coupled.
@@ -153,7 +153,7 @@ Architecturally, [cloud native](https://www.cncf.io/about/faq/#what-is-cloud-nat
 favor loose coupling between components. If part of your workload requires a backing service for
 its routine operation, run that backing service as a component or consume it as an external service.
 This way, your workload does not rely on the Kubernetes API for its normal operation.
-{{< /note >}}
+{{}}
 
 ## CustomResourceDefinitions
 

@@ -11,9 +11,9 @@ tags:
 - security
 - fundamental
 ---
- Manages authorization decisions, allowing admins to dynamically configure access policies through the {{< glossary_tooltip text="Kubernetes API" term_id="kubernetes-api" >}}.
+ Manages authorization decisions, allowing admins to dynamically configure access policies through the {{}}.
 
-<!--more--> 
+ 
 
 RBAC utilizes *roles*, which contain permission rules, and *role bindings*, which grant the permissions defined in a role to a set of users.
 

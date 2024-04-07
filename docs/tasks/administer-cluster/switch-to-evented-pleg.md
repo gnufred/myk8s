@@ -5,9 +5,9 @@ content_type: task
 weight: 90
 ---
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+{{}}
 
-<!-- overview -->
+
 
 
 This page shows how to migrate nodes to use event based updates for container status. The event-based
@@ -24,14 +24,14 @@ The polling based approach is referred to as _generic PLEG_.
   Kubernetes v1.27 includes beta support for event-based container
   status updates. The feature is beta but is _disabled_ by default
   because it requires support from the container runtime.
-* {{< version-check >}}
+* {{}}
   If you are running a different version of Kubernetes, check the documentation for that release.
 * The container runtime in use must support container lifecycle events.
   The kubelet automatically switches back to the legacy generic PLEG
   mechanism if the container runtime does not announce support for
   container lifecycle events, even if you have this feature gate enabled.
 
-<!-- steps -->
+
 
 ## Why switch to Evented PLEG?
 
@@ -52,7 +52,7 @@ The polling based approach is referred to as _generic PLEG_.
 
 3. Start the container runtime with the container event generation enabled. 
 
-   {{< tabs name="tab_with_code" >}}
+   {{}}
    {{% tab name="Containerd" %}}
    Version 1.7+
    {{% /tab %}}
@@ -79,9 +79,9 @@ The polling based approach is referred to as _generic PLEG_.
    enable_pod_events: true
    ```
    {{% /tab %}}
-   {{< /tabs >}}
+   {{}}
 
-   {{< version-check >}}
+   {{}}
 
 4. Verify that the kubelet is using event-based container stage change monitoring.
    To check, look for the term `EventedPLEG` in the kubelet logs.

@@ -4,9 +4,9 @@ content_type: concept
 weight: 100
 ---
 
-{{<glossary_definition term_id="node-pressure-eviction" length="short">}}</br>
+{{}}
 
-The {{<glossary_tooltip term_id="kubelet" text="kubelet">}} monitors resources
+The {{}} monitors resources
 like memory, disk space, and filesystem inodes on your cluster's nodes.
 When one or more of these resources reach specific consumption levels, the
 kubelet can proactively fail one or more pods on the node to reclaim resources
@@ -18,7 +18,7 @@ selected pods to `Failed`, and terminates the Pod.
 Node-pressure eviction is not the same as
 [API-initiated eviction](/docs/concepts/scheduling-eviction/api-eviction/).
 
-The kubelet does not respect your configured {{<glossary_tooltip term_id="pod-disruption-budget" text="PodDisruptionBudget">}}
+The kubelet does not respect your configured {{}}
 or the pod's
 `terminationGracePeriodSeconds`. If you use [soft eviction thresholds](#soft-eviction-thresholds),
 the kubelet respects your configured `eviction-max-pod-grace-period`. If you use
@@ -30,9 +30,9 @@ The kubelet attempts to [reclaim node-level resources](#reclaim-node-resources)
 before it terminates end-user pods. For example, it removes unused container
 images when disk resources are starved.
 
-If the pods are managed by a {{< glossary_tooltip text="workload" term_id="workload" >}}
-management object (such as {{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}
-or {{< glossary_tooltip text="Deployment" term_id="deployment" >}}) that
+If the pods are managed by a {{}}
+management object (such as {{}}
+or {{}}) that
 replaces failed pods, the control plane (`kube-controller-manager`) creates new
 pods in place of the evicted pods.
 
@@ -122,145 +122,12 @@ Eviction thresholds have the form `[eviction-signal][operator][quantity]`, where
 
 - `eviction-signal` is the [eviction signal](#eviction-signals) to use.
 - `operator` is the [relational operator](https://en.wikipedia.org/wiki/Relational_operator#Standard_relational_operators)
-  you want, such as `<` (less than).
-- `quantity` is the eviction threshold amount, such as `1Gi`. The value of `quantity`
-  must match the quantity representation used by Kubernetes. You can use either
-  literal values or percentages (`%`).
-
-For example, if a node has 10GiB of total memory and you want trigger eviction if
-the available memory falls below 1GiB, you can define the eviction threshold as
-either `memory.available<10%` or `memory.available<1Gi` (you cannot use both).
-
-#### Soft eviction thresholds {#soft-eviction-thresholds}
-
-A soft eviction threshold pairs an eviction threshold with a required
-administrator-specified grace period. The kubelet does not evict pods until the
-grace period is exceeded. The kubelet returns an error on startup if you do
-not specify a grace period.
-
-You can specify both a soft eviction threshold grace period and a maximum
-allowed pod termination grace period for kubelet to use during evictions. If you
-specify a maximum allowed grace period and the soft eviction threshold is met,
-the kubelet uses the lesser of the two grace periods. If you do not specify a
-maximum allowed grace period, the kubelet kills evicted pods immediately without
-graceful termination.
-
-You can use the following flags to configure soft eviction thresholds:
-
-- `eviction-soft`: A set of eviction thresholds like `memory.available<1.5Gi`
-  that can trigger pod eviction if held over the specified grace period.
-- `eviction-soft-grace-period`: A set of eviction grace periods like `memory.available=1m30s`
-  that define how long a soft eviction threshold must hold before triggering a Pod eviction.
-- `eviction-max-pod-grace-period`: The maximum allowed grace period (in seconds)
-  to use when terminating pods in response to a soft eviction threshold being met.
-
-#### Hard eviction thresholds {#hard-eviction-thresholds}
-
-A hard eviction threshold has no grace period. When a hard eviction threshold is
-met, the kubelet kills pods immediately without graceful termination to reclaim
-the starved resource.
-
-You can use the `eviction-hard` flag to configure a set of hard eviction
-thresholds like `memory.available<1Gi`.
-
-The kubelet has the following default hard eviction thresholds:
-
-- `memory.available<100Mi`
-- `nodefs.available<10%`
-- `imagefs.available<15%`
-- `nodefs.inodesFree<5%` (Linux nodes)
-
-These default values of hard eviction thresholds will only be set if none
-of the parameters is changed. If you change the value of any parameter,
-then the values of other parameters will not be inherited as the default
-values and will be set to zero. In order to provide custom values, you
-should provide all the thresholds respectively.
-
-## Eviction monitoring interval
-
-The kubelet evaluates eviction thresholds based on its configured `housekeeping-interval`,
-which defaults to `10s`.
-
-## Node conditions {#node-conditions}
-
-The kubelet reports [node conditions](/docs/concepts/architecture/nodes/#condition)
-to reflect that the node is under pressure because hard or soft eviction
-threshold is met, independent of configured grace periods.
-
-The kubelet maps eviction signals to node conditions as follows:
-
-| Node Condition    | Eviction Signal                                                                       | Description                                                                                                                  |
-|-------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| `MemoryPressure`  | `memory.available`                                                                    | Available memory on the node has satisfied an eviction threshold                                                             |
-| `DiskPressure`    | `nodefs.available`, `nodefs.inodesFree`, `imagefs.available`, or `imagefs.inodesFree` | Available disk space and inodes on either the node's root filesystem or image filesystem has satisfied an eviction threshold |
-| `PIDPressure`     | `pid.available`                                                                       | Available processes identifiers on the (Linux) node has fallen below an eviction threshold                                   |
-
-The control plane also [maps](/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-nodes-by-condition)
-these node conditions to taints.
-
-The kubelet updates the node conditions based on the configured
-`--node-status-update-frequency`, which defaults to `10s`.
-
-### Node condition oscillation
-
-In some cases, nodes oscillate above and below soft eviction thresholds without
-holding for the defined grace periods. This causes the reported node condition
-to constantly switch between `true` and `false`, leading to bad eviction decisions.
-
-To protect against oscillation, you can use the `eviction-pressure-transition-period`
-flag, which controls how long the kubelet must wait before transitioning a node
-condition to a different state. The transition period has a default value of `5m`.
-
-### Reclaiming node level resources {#reclaim-node-resources}
-
-The kubelet tries to reclaim node-level resources before it evicts end-user pods.
-
-When a `DiskPressure` node condition is reported, the kubelet reclaims node-level
-resources based on the filesystems on the node.
-
-#### With `imagefs`
-
-If the node has a dedicated `imagefs` filesystem for container runtimes to use,
-the kubelet does the following:
-
-- If the `nodefs` filesystem meets the eviction thresholds, the kubelet garbage collects
-  dead pods and containers.
-- If the `imagefs` filesystem meets the eviction thresholds, the kubelet
-  deletes all unused images.
-
-#### Without `imagefs`
-
-If the node only has a `nodefs` filesystem that meets eviction thresholds,
-the kubelet frees up disk space in the following order:
-
-1. Garbage collect dead pods and containers
-1. Delete unused images
-
-### Pod selection for kubelet eviction
-
-If the kubelet's attempts to reclaim node-level resources don't bring the eviction
-signal below the threshold, the kubelet begins to evict end-user pods.
-
-The kubelet uses the following parameters to determine the pod eviction order:
-
-1. Whether the pod's resource usage exceeds requests
-1. [Pod Priority](/docs/concepts/scheduling-eviction/pod-priority-preemption/)
-1. The pod's resource usage relative to requests
-
-As a result, kubelet ranks and evicts pods in the following order:
-
-1. `BestEffort` or `Burstable` pods where the usage exceeds requests. These pods
-   are evicted based on their Priority and then by how much their usage level
-   exceeds the request.
-1. `Guaranteed` pods and `Burstable` pods where the usage is less than requests
-   are evicted last, based on their Priority.
-
-{{<note>}}
+  you want, such as `}}
 The kubelet does not use the pod's [QoS class](/docs/concepts/workloads/pods/pod-qos/) to determine the eviction order.
 You can use the QoS class to estimate the most likely pod eviction order when
 reclaiming resources like memory. QoS classification does not apply to EphemeralStorage requests,
 so the above scenario will not apply if the node is, for example, under `DiskPressure`.
-{{</note>}}
+{{}}
 
 `Guaranteed` pods are guaranteed only when requests and limits are specified for
 all the containers and they are equal. These pods will never be evicted because
@@ -347,10 +214,10 @@ The kubelet sets an `oom_score_adj` value for each container based on the QoS fo
 | `BestEffort`       | 1000                                                                              |
 | `Burstable`        | _min(max(2, 1000 - (1000 × memoryRequestBytes) / machineMemoryCapacityBytes), 999)_ |
 
-{{<note>}}
+{{}}
 The kubelet also sets an `oom_score_adj` value of `-997` for any containers in Pods that have
-`system-node-critical` {{<glossary_tooltip text="Priority" term_id="pod-priority">}}.
-{{</note>}}
+`system-node-critical` {{}}.
+{{}}
 
 If the kubelet can't reclaim memory before a node experiences OOM, the
 `oom_killer` calculates an `oom_score` based on the percentage of memory it's
@@ -382,65 +249,4 @@ Consider the following scenario:
 For this to work, the kubelet is launched as follows:
 
 ```none
---eviction-hard=memory.available<500Mi
---system-reserved=memory=1.5Gi
-```
-
-In this configuration, the `--system-reserved` flag reserves 1.5GiB of memory
-for the system, which is `10% of the total memory + the eviction threshold amount`.
-
-The node can reach the eviction threshold if a pod is using more than its request,
-or if the system is using more than 1GiB of memory, which makes the `memory.available`
-signal fall below 500MiB and triggers the threshold.
-
-### DaemonSets and node-pressure eviction {#daemonset}
-
-Pod priority is a major factor in making eviction decisions. If you do not want
-the kubelet to evict pods that belong to a DaemonSet, give those pods a high
-enough priority by specifying a suitable `priorityClassName` in the pod spec.
-You can also use a lower priority, or the default, to only allow pods from that
-DaemonSet to run when there are enough resources.
-
-## Known issues
-
-The following sections describe known issues related to out of resource handling.
-
-### kubelet may not observe memory pressure right away
-
-By default, the kubelet polls cAdvisor to collect memory usage stats at a
-regular interval. If memory usage increases within that window rapidly, the
-kubelet may not observe `MemoryPressure` fast enough, and the OOM killer
-will still be invoked.
-
-You can use the `--kernel-memcg-notification` flag to enable the `memcg`
-notification API on the kubelet to get notified immediately when a threshold
-is crossed.
-
-If you are not trying to achieve extreme utilization, but a sensible measure of
-overcommit, a viable workaround for this issue is to use the `--kube-reserved`
-and `--system-reserved` flags to allocate memory for the system.
-
-### active_file memory is not considered as available memory
-
-On Linux, the kernel tracks the number of bytes of file-backed memory on active
-least recently used (LRU) list as the `active_file` statistic. The kubelet treats `active_file` memory
-areas as not reclaimable. For workloads that make intensive use of block-backed
-local storage, including ephemeral local storage, kernel-level caches of file
-and block data means that many recently accessed cache pages are likely to be
-counted as `active_file`. If enough of these kernel block buffers are on the
-active LRU list, the kubelet is liable to observe this as high resource use and
-taint the node as experiencing memory pressure - triggering pod eviction.
-
-For more details, see [https://github.com/kubernetes/kubernetes/issues/43916](https://github.com/kubernetes/kubernetes/issues/43916)
-
-You can work around that behavior by setting the memory limit and memory request
-the same for containers likely to perform intensive I/O activity. You will need
-to estimate or measure an optimal memory limit value for that container.
-
-## {{% heading "whatsnext" %}}
-
-- Learn about [API-initiated Eviction](/docs/concepts/scheduling-eviction/api-eviction/)
-- Learn about [Pod Priority and Preemption](/docs/concepts/scheduling-eviction/pod-priority-preemption/)
-- Learn about [PodDisruptionBudgets](/docs/tasks/run-application/configure-pdb/)
-- Learn about [Quality of Service](/docs/tasks/configure-pod-container/quality-service-pod/) (QoS)
-- Check out the [Eviction API](/docs/reference/generated/kubernetes-api/{{<param "version">}}/#create-eviction-pod-v1-core)
+--eviction-hard=memory.available}}/#create-eviction-pod-v1-core)

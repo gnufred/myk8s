@@ -4,20 +4,20 @@ content_type: task
 min-kubernetes-server-version: 1.20
 ---
 
-<!-- overview -->
+
 This page shows how to debug a [node](/docs/concepts/architecture/nodes/)
 running on the Kubernetes cluster using `kubectl debug` command.
 
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 You need to have permission to create Pods and to assign those new Pods to arbitrary nodes.
 You also need to be authorized to create Pods that access filesystems from the host.
 
 
-<!-- steps -->
+
 
 ## Debugging a Node using `kubectl debug node`
 
@@ -40,12 +40,12 @@ The debug command helps to gather information and troubleshoot issues. Commands
 that you might use include `ip`, `ifconfig`, `nc`, `ping`, and `ps` and so on. You can also
 install other tools, such as `mtr`, `tcpdump`, and `curl`, from the respective package manager.
 
-{{< note >}}
+{{}}
 
 The debug commands may differ based on the image the debugging pod is using and
 these commands might need to be installed.
 
-{{< /note >}}
+{{}}
 
 The debugging Pod can access the root filesystem of the Node, mounted at `/host` in the Pod.
 If you run your kubelet in a filesystem namespace,
@@ -99,11 +99,11 @@ kubectl delete pod node-debugger-mynode-pdx84 --now
 pod "node-debugger-mynode-pdx84" deleted
 ```
 
-{{< note >}}
+{{}}
 
 The `kubectl debug node` command won't work if the Node is down (disconnected
 from the network, or kubelet dies and won't restart, etc.).
 Check [debugging a down/unreachable node ](/docs/tasks/debug/debug-cluster/#example-debugging-a-down-unreachable-node)
 in that case.
 
-{{< /note >}}
+{{}}

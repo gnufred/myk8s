@@ -6,7 +6,7 @@ reviewers:
 weight: 60
 ---
 
-<!-- overview -->
+
 
 {{% thirdparty-content %}}
 
@@ -50,7 +50,7 @@ these commands will not work any longer.
 If a pod wants to make calls to the `dockerd` running on the node, the pod must either:
 
 - mount the filesystem containing the Docker daemon's privileged socket, as a
-  {{< glossary_tooltip text="volume" term_id="volume" >}}; or
+  {{}}; or
 - mount the specific path of the Docker daemon's privileged socket directly, also as a volume.
 
 For example: on COS images, Docker exposes its Unix domain socket at
@@ -68,12 +68,12 @@ kubectl get pods --all-namespaces \
 | grep '/var/run/docker.sock'
 ```
 
-{{< note >}}
+{{}}
 There are alternative ways for a pod to access Docker on the host. For instance, the parent
 directory `/var/run` may be mounted instead of the full path (like in [this
 example](https://gist.github.com/itaysk/7bc3e56d69c4d72a549286d98fd557dd)).
 The script above only detects the most common uses.
-{{< /note >}}
+{{}}
 
 ### Detecting Docker dependency from node agents
 
@@ -152,9 +152,9 @@ How to migrate from dockershim-dependent agent:
 2. [Enable and configure `kubelet-metrics`](https://github.com/signalfx/signalfx-agent/blob/main/docs/monitors/kubelet-metrics.md) monitor.
 
 
-{{< note >}}
+{{}}
 The set of collected metrics will change. Review your alerting rules and dashboards.
-{{< /note >}}
+{{}}
 
 The Pod accessing Docker may be named something like:
 

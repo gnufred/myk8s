@@ -5,7 +5,7 @@ weight: 60
 ---
 
 
-<!-- overview -->
+
 
 Once you connected your Application with Service following steps
 like those outlined in [Connecting Applications with Services](/docs/tutorials/services/connect-applications-service/),
@@ -13,7 +13,7 @@ you have a continuously running, replicated application, that is exposed on a ne
 This tutorial helps you look at the termination flow for Pods and to explore ways to implement
 graceful connection draining.
 
-<!-- body -->
+
 
 ## Termination process for Pods and their endpoints
 
@@ -25,7 +25,7 @@ This tutorial explains the flow of Pod termination in connection with the
 corresponding endpoint state and removal by using
 a simple nginx web server to demonstrate the concept.
 
-<!-- body -->
+
 
 ## Example flow with endpoint termination
 

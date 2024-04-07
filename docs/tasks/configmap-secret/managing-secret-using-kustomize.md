@@ -5,7 +5,7 @@ weight: 30
 description: Creating Secret objects using kustomization.yaml file.
 ---
 
-<!-- overview -->
+
 
 `kubectl` supports using the [Kustomize object management tool](/docs/tasks/manage-kubernetes-objects/kustomization/) to manage Secrets
 and ConfigMaps. You create a *resource generator* using Kustomize, which
@@ -13,9 +13,9 @@ generates a Secret that you can apply to the API server using `kubectl`.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Create a Secret
 
@@ -24,20 +24,20 @@ You can generate a Secret by defining a `secretGenerator` in a
 literal values. For example, the following instructions create a Kustomization
 file for the username `admin` and the password `1f2d1e2e67df`.
 
-{{< note >}}
+{{}}
 The `stringData` field for a Secret does not work well with server-side apply.
-{{< /note >}}
+{{}}
 
 ### Create the Kustomization file
 
-{{< tabs name="Secret data" >}}
-{{< tab name="Literals" codelang="yaml" >}}
+{{}}
+{{}}
 secretGenerator:
 - name: database-creds
   literals:
   - username=admin
   - password=1f2d1e2e67df
-{{< /tab >}}
+{{}}
 {{% tab name="Files" %}}
 1.  Store the credentials in files. The filenames are the keys of the secret:
 
@@ -70,7 +70,7 @@ secretGenerator:
   - .env.secret
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 In all cases, you don't need to base64 encode the values. The name of the YAML
 file **must** be `kustomization.yaml` or `kustomization.yml`.
@@ -80,7 +80,7 @@ file **must** be `kustomization.yaml` or `kustomization.yml`.
 To create the Secret, apply the directory that contains the kustomization file:
 
 ```shell
-kubectl apply -k <directory-path>
+kubectl apply -k 
 ```
 
 The output is similar to:
@@ -96,7 +96,7 @@ a new Secret is generated each time the data is modified.
 To verify that the Secret was created and to decode the Secret data, 
 
 ```shell
-kubectl get -k <directory-path> -o jsonpath='{.data}' 
+kubectl get -k  -o jsonpath='{.data}' 
 ```
 
 The output is similar to:
@@ -125,7 +125,7 @@ For more information, refer to
 1.  Apply the directory that contains the kustomization file:
 
     ```shell
-    kubectl apply -k <directory-path>
+    kubectl apply -k 
     ```
 
     The output is similar to:

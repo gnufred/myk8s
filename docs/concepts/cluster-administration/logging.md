@@ -7,7 +7,7 @@ content_type: concept
 weight: 60
 ---
 
-<!-- overview -->
+
 
 Application logs can help you understand what is happening inside your application. The
 logs are particularly useful for debugging problems and monitoring cluster activity. Most
@@ -30,7 +30,7 @@ query logs. Kubernetes does not provide a native storage solution for log data. 
 there are many logging solutions that integrate with Kubernetes. The following sections
 describe how to handle and store logs on nodes.
 
-<!-- body -->
+
 
 ## Pod and container logs {#basic-logging-in-kubernetes}
 
@@ -95,7 +95,7 @@ The usual way to access this is by running `kubectl logs`.
 
 ### Log rotation
 
-{{< feature-state for_k8s_version="v1.21" state="stable" >}}
+{{}}
 
 The kubelet is responsible for rotating container logs and managing the
 logging directory structure.
@@ -112,12 +112,12 @@ When you run [`kubectl logs`](/docs/reference/generated/kubectl/kubectl-commands
 the basic logging example, the kubelet on the node handles the request and
 reads directly from the log file. The kubelet returns the content of the log file.
 
-{{< note >}}
+{{}}
 Only the contents of the latest log file are available through `kubectl logs`.
 
 For example, if a Pod writes 40 MiB of logs and the kubelet rotates logs
 after 10 MiB, running `kubectl logs` returns at most 10MiB of data.
-{{< /note >}}
+{{}}
 
 ## System component logs
 
@@ -125,9 +125,9 @@ There are two types of system components: those that typically run in a containe
 and those components directly involved in running containers. For example:
 
 * The kubelet and container runtime do not run in containers. The kubelet runs
-  your containers (grouped together in {{< glossary_tooltip text="pods" term_id="pod" >}})
+  your containers (grouped together in {{}})
 * The Kubernetes scheduler, controller manager, and API server run within pods
-  (usually {{< glossary_tooltip text="static Pods" term_id="static-pod" >}}).
+  (usually {{}}).
   The etcd component runs in the control plane, and most commonly also as a static pod.
   If your cluster uses kube-proxy, you typically run this as a `DaemonSet`.
 
@@ -136,7 +136,7 @@ and those components directly involved in running containers. For example:
 The way that the kubelet and container runtime write logs depends on the operating
 system that the node uses:
 
-{{< tabs name="log_location_node_tabs" >}}
+{{}}
 {{% tab name="Linux" %}}
 
 On Linux nodes that use systemd, the kubelet and container runtime write to journald
@@ -171,9 +171,9 @@ directory `C:\var\log\pods`.
 
 For more information on `kube-log-runner`, read [System Logs](/docs/concepts/cluster-administration/system-logs/#klog).
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
-<br /><!-- work around rendering nit -->
+
 
 For Kubernetes cluster components that run in pods, these write to files inside
 the `/var/log` directory, bypassing the default logging mechanism (the components
@@ -184,7 +184,7 @@ For details about etcd and its logs, view the [etcd documentation](https://etcd.
 Again, you can use Kubernetes' storage mechanisms to map persistent storage into
 the container that runs the component.
 
-{{< note >}}
+{{}}
 If you deploy Kubernetes cluster components (such as the scheduler) to log to
 a volume shared from the parent node, you need to consider and ensure that those
 logs are rotated. **Kubernetes does not manage that log rotation**.
@@ -196,7 +196,7 @@ outside Kubernetes.
 
 Some deploy tools account for that log rotation and automate it; others leave this
 as your responsibility.
-{{< /note >}}
+{{}}
 
 ## Cluster-level logging architectures
 
@@ -319,12 +319,12 @@ If the node-level logging agent is not flexible enough for your situation, you
 can create a sidecar container with a separate logging agent that you have
 configured specifically to run with your application.
 
-{{< note >}}
+{{}}
 Using a logging agent in a sidecar container can lead
 to significant resource consumption. Moreover, you won't be able to access
 those logs using `kubectl logs` because they are not controlled
 by the kubelet.
-{{< /note >}}
+{{}}
 
 Here are two example manifests that you can use to implement a sidecar container with a logging agent.
 The first manifest contains a [`ConfigMap`](/docs/tasks/configure-pod-container/configure-pod-configmap/)
@@ -332,10 +332,10 @@ to configure fluentd.
 
 {{% code_sample file="admin/logging/fluentd-sidecar-config.yaml" %}}
 
-{{< note >}}
+{{}}
 In the sample configurations, you can replace fluentd with any logging agent, reading
 from any source inside an application container.
-{{< /note >}}
+{{}}
 
 The second manifest describes a pod that has a sidecar container running fluentd.
 The pod mounts a volume where fluentd can pick up its configuration data.

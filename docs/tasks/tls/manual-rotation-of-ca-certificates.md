@@ -3,13 +3,13 @@ title: Manual Rotation of CA Certificates
 content_type: task
 ---
 
-<!-- overview -->
+
 
 This page shows how to manually rotate the certificate authority (CA) certificates.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 
 - For more information about authentication in Kubernetes, see
@@ -17,11 +17,11 @@ This page shows how to manually rotate the certificate authority (CA) certificat
 - For more information about best practices for CA certificates, see
   [Single root CA](/docs/setup/best-practices/certificates/#single-root-ca).
 
-<!-- steps -->
+
 
 ## Rotate the CA certificates manually
 
-{{< caution >}}
+{{}}
 Make sure to back up your certificate directory along with configuration files and any other necessary files.
 
 This approach assumes operation of the Kubernetes control plane in a HA configuration with multiple API servers.
@@ -29,18 +29,18 @@ Graceful termination of the API server is also assumed so clients can cleanly di
 reconnect to another.
 
 Configurations with a single API server will experience unavailability while the API server is being restarted.
-{{< /caution >}}
+{{}}
 
 1. Distribute the new CA certificates and private keys (for example: `ca.crt`, `ca.key`, `front-proxy-ca.crt`,
    and `front-proxy-ca.key`) to all your control plane nodes in the Kubernetes certificates directory.
 
-1. Update the `--root-ca-file` flag for the {{< glossary_tooltip term_id="kube-controller-manager" >}} to include
+1. Update the `--root-ca-file` flag for the {{}} to include
    both old and new CA, then restart the kube-controller-manager.
 
-   Any {{< glossary_tooltip text="ServiceAccount" term_id="service-account" >}} created after this point will get
+   Any {{}} created after this point will get
    Secrets that include both old and new CAs.
 
-   {{< note >}}
+   {{}}
    The files specified by the kube-controller-manager flags `--client-ca-file` and `--cluster-signing-cert-file`
    cannot be CA bundles. If these flags and `--root-ca-file` point to the same `ca.crt` file which is now a
    bundle (includes both old and new CA) you will face an error. To workaround this problem you can copy the new CA
@@ -49,7 +49,7 @@ Configurations with a single API server will experience unavailability while the
 
    [Issue 1350](https://github.com/kubernetes/kubeadm/issues/1350) for kubeadm tracks an bug with the
    kube-controller-manager being unable to accept a CA bundle.
-   {{< /note >}}
+   {{}}
 
 1. Wait for the controller manager to update `ca.crt` in the service account Secrets to include both old and new CA certificates.
 
@@ -75,12 +75,12 @@ Configurations with a single API server will experience unavailability while the
    Additionally, update the `certificate-authority-data` section in the kubeconfig files,
    respectively with Base64-encoded old and new certificate authority data
 
-1. Update the `--root-ca-file` flag for the {{< glossary_tooltip term_id="cloud-controller-manager" >}} to include
+1. Update the `--root-ca-file` flag for the {{}} to include
    both old and new CA, then restart the cloud-controller-manager.
 
-   {{< note >}}
+   {{}}
    If your cluster does not have a cloud-controller-manager, you can skip this step.
-   {{< /note >}}
+   {{}}
 
 1. Follow the steps below in a rolling fashion.
 
@@ -104,15 +104,15 @@ Configurations with a single API server will experience unavailability while the
       after which pods' Kubernetes clients reconnect to the new API server.
       The new API server uses a certificate signed by the new CA.
 
-      * Restart the {{< glossary_tooltip term_id="kube-scheduler" text="kube-scheduler" >}} to use and
+      * Restart the {{}} to use and
         trust the new CAs.
       * Make sure control plane components logs no TLS errors.
 
-      {{< note >}}
+      {{}}
       To generate certificates and private keys for your cluster using the `openssl` command line tool,
       see [Certificates (`openssl`)](/docs/tasks/administer-cluster/certificates/#openssl).
       You can also use [`cfssl`](/docs/tasks/administer-cluster/certificates/#cfssl).
-      {{< /note >}}
+      {{}}
 
     1. Annotate any DaemonSets and Deployments to trigger pod replacement in a safer rolling fashion.
 
@@ -127,10 +127,10 @@ Configurations with a single API server will experience unavailability while the
       done
       ```
 
-      {{< note >}}
+      {{}}
       To limit the number of concurrent disruptions that your application experiences,
       see [configure pod disruption budget](/docs/tasks/run-application/configure-pdb/).
-      {{< /note >}}
+      {{}}
 
         Depending on how you use StatefulSets you may also need to perform similar rolling replacement.
 

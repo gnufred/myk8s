@@ -8,9 +8,9 @@ _build:
   publishResources: false
 ---
 
-{{< note >}}
+{{}}
 Autocomplete for Fish requires kubectl 1.23 or later.
-{{< /note >}}
+{{}}
 
 The kubectl completion script for Fish can be generated with the command `kubectl completion fish`. Sourcing the completion script in your shell enables kubectl autocompletion.
 

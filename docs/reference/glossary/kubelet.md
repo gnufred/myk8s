@@ -10,9 +10,9 @@ aka:
 tags:
 - fundamental
 ---
- An agent that runs on each {{< glossary_tooltip text="node" term_id="node" >}} in the cluster. It makes sure that {{< glossary_tooltip text="containers" term_id="container" >}} are running in a {{< glossary_tooltip text="Pod" term_id="pod" >}}.
+ An agent that runs on each {{}} in the cluster. It makes sure that {{}} are running in a {{}}.
 
-<!--more-->
+
 
 
 The [kubelet](/docs/reference/command-line-tools-reference/kubelet/) takes a set of PodSpecs that 

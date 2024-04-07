@@ -6,7 +6,7 @@ title: Configuring Redis using a ConfigMap
 content_type: tutorial
 ---
 
-<!-- overview -->
+
 
 This page provides a real world example of how to configure Redis using a ConfigMap and builds upon the [Configure a Pod to Use a ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/) task. 
 
@@ -24,14 +24,14 @@ This page provides a real world example of how to configure Redis using a Config
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 * The example shown on this page works with `kubectl` 1.14 and above.
 * Understand [Configure a Pod to Use a ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
 
 
-<!-- lessoncontent -->
+
 
 
 ## Real World Example: Configuring Redis using a ConfigMap
@@ -41,7 +41,7 @@ Follow the steps below to configure a Redis cache using data stored in a ConfigM
 First create a ConfigMap with an empty configuration block:
 
 ```shell
-cat <<EOF >./example-redis-config.yaml
+cat ./example-redis-config.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -97,8 +97,8 @@ You should see an empty `redis-config` key:
 ```shell
 Name:         example-redis-config
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       
+Annotations:  
 
 Data
 ====
@@ -158,8 +158,8 @@ You should see the configuration values we just added:
 ```shell
 Name:         example-redis-config
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       
+Annotations:  
 
 Data
 ====

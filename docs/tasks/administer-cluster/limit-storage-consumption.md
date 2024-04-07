@@ -4,7 +4,7 @@ content_type: task
 weight: 240
 ---
 
-<!-- overview -->
+
 
 This example demonstrates how to limit the amount of storage consumed in a namespace.
 
@@ -16,11 +16,11 @@ and [PersistentVolumeClaim](/docs/concepts/storage/persistent-volumes/).
 ## {{% heading "prerequisites" %}}
 
 
-* {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+* {{}} {{}}
 
 
 
-<!-- steps -->
+
 ## Scenario: Limiting Storage Consumption
 
 The cluster-admin is operating a cluster on behalf of a user population and the admin wants to control
@@ -78,7 +78,7 @@ spec:
     requests.storage: "5Gi"
 ```
 
-<!-- discussion -->
+
 
 ## Summary
 

@@ -4,8 +4,8 @@ content_type: reference
 weight: 10
 ---
 
-<!-- overview -->
-If you configure a {{< glossary_tooltip text="Service" term_id="service" >}},
+
+If you configure a {{}},
 you can select from any network protocol that Kubernetes supports.
 
 Kubernetes supports the following protocols with Services:
@@ -25,14 +25,14 @@ as a transport protocol:
 - [PROXY protocol](#protocol-proxy-special)
 - [TLS](#protocol-tls-special) termination at the load balancer
 
-<!-- body -->
+
 ## Supported protocols {#protocol-support}
 
 There are 3 valid values for the `protocol` of a port for a Service:
 
 ### `SCTP` {#protocol-sctp}
 
-{{< feature-state for_k8s_version="v1.20" state="stable" >}}
+{{}}
 
 When using a network plugin that supports SCTP traffic, you can use SCTP for
 most Services. For `type: LoadBalancer` Services, SCTP support depends on the cloud
@@ -66,16 +66,16 @@ where your cloud provider's load balancer implements HTTP / HTTPS reverse proxyi
 with traffic forwarded to the backend endpoints for that Service.
 
 Typically, you set the protocol for the Service to `TCP` and add an
-{{< glossary_tooltip text="annotation" term_id="annotation" >}}
+{{}}
 (usually specific to your cloud provider) that configures the load balancer
 to handle traffic at the HTTP level.
 This configuration might also include serving HTTPS (HTTP over TLS) and
 reverse-proxying plain HTTP to your workload.
 
-{{< note >}}
-You can also use an {{< glossary_tooltip term_id="ingress" >}} to expose
+{{}}
+You can also use an {{}} to expose
 HTTP/HTTPS Services.
-{{< /note >}}
+{{}}
 
 You might additionally want to specify that the
 [application protocol](/docs/concepts/services-networking/service/#application-protocol)

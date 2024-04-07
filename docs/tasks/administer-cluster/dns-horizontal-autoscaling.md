@@ -4,7 +4,7 @@ content_type: task
 weight: 80
 ---
 
-<!-- overview -->
+
 This page shows how to enable and configure autoscaling of the DNS service in
 your Kubernetes cluster.
 
@@ -12,7 +12,7 @@ your Kubernetes cluster.
 ## {{% heading "prerequisites" %}}
 
 
-* {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+* {{}} {{}}
 
 * This guide assumes your nodes use the AMD64 or Intel 64 CPU architecture.
 
@@ -20,12 +20,12 @@ your Kubernetes cluster.
 
 
 
-<!-- steps -->
+
 
 ## Determine whether DNS horizontal autoscaling is already enabled {#determining-whether-dns-horizontal-autoscaling-is-already-enabled}
 
-List the {{< glossary_tooltip text="Deployments" term_id="deployment" >}}
-in your cluster in the kube-system {{< glossary_tooltip text="namespace" term_id="namespace" >}}:
+List the {{}}
+in your cluster in the kube-system {{}}:
 
 ```shell
 kubectl get deployment --namespace=kube-system
@@ -68,16 +68,16 @@ and look for a deployment named `coredns` or `kube-dns`.
 
 Your scale target is
 
-    Deployment/<your-deployment-name>
+    Deployment/
 
-where `<your-deployment-name>` is the name of your DNS Deployment. For example, if
+where `` is the name of your DNS Deployment. For example, if
 the name of your Deployment for DNS is coredns, your scale target is Deployment/coredns.
 
-{{< note >}}
+{{}}
 CoreDNS is the default DNS service for Kubernetes. CoreDNS sets the label
 `k8s-app=kube-dns` so that it can work in clusters that originally used
 kube-dns.
-{{< /note >}}
+{{}}
 
 ## Enable DNS horizontal autoscaling {#enablng-dns-horizontal-autoscaling}
 
@@ -88,7 +88,7 @@ Create a file named `dns-horizontal-autoscaler.yaml` with this content:
 
 {{% code_sample file="admin/dns/dns-horizontal-autoscaler.yaml" %}}
 
-In the file, replace `<SCALE_TARGET>` with your scale target.
+In the file, replace `` with your scale target.
 
 Go to the directory that contains your configuration file, and enter this
 command to create the Deployment:
@@ -105,7 +105,7 @@ DNS horizontal autoscaling is now enabled.
 
 ## Tune DNS autoscaling parameters {#tuning-autoscaling-parameters}
 
-Verify that the kube-dns-autoscaler {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}} exists:
+Verify that the kube-dns-autoscaler {{}} exists:
 
 ```shell
 kubectl get configmap --namespace=kube-system
@@ -205,7 +205,7 @@ kube-dns-autoscaler Deployment.
 
 
 
-<!-- discussion -->
+
 
 ## Understanding how DNS horizontal autoscaling works
 

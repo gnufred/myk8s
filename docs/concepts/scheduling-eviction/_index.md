@@ -11,10 +11,10 @@ description: >
 no_list: true
 ---
 
-In Kubernetes, scheduling refers to making sure that {{<glossary_tooltip text="Pods" term_id="pod">}}
-are matched to {{<glossary_tooltip text="Nodes" term_id="node">}} so that the
-{{<glossary_tooltip text="kubelet" term_id="kubelet">}} can run them. Preemption
-is the process of terminating Pods with lower {{<glossary_tooltip text="Priority" term_id="pod-priority">}}
+In Kubernetes, scheduling refers to making sure that {{}}
+are matched to {{}} so that the
+{{}} can run them. Preemption
+is the process of terminating Pods with lower {{}}
 so that Pods with higher Priority can schedule on Nodes. Eviction is the process
 of terminating one or more Pods on Nodes.
 
@@ -34,7 +34,7 @@ of terminating one or more Pods on Nodes.
 
 ## Pod Disruption
 
-{{<glossary_definition term_id="pod-disruption" length="all">}}
+{{}}
 
 * [Pod Priority and Preemption](/docs/concepts/scheduling-eviction/pod-priority-preemption/)
 * [Node-pressure Eviction](/docs/concepts/scheduling-eviction/node-pressure-eviction/)

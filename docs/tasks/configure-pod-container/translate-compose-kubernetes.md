@@ -6,7 +6,7 @@ content_type: task
 weight: 230
 ---
 
-<!-- overview -->
+
 
 What's Kompose? It's a conversion tool for all things compose (namely Docker Compose) to container orchestrators (Kubernetes or OpenShift).
 
@@ -14,15 +14,15 @@ More information can be found on the Kompose website at [http://kompose.io](http
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Install Kompose
 
 We have multiple ways to install Kompose. Our preferred method is downloading the binary from the latest GitHub release.
 
-{{< tabs name="install_ways" >}}
+{{}}
 {{% tab name="GitHub download" %}}
 
 Kompose is released via GitHub on a three-week cycle, you can see all current releases on the [GitHub release page](https://github.com/kubernetes/kompose/releases).
@@ -83,7 +83,7 @@ brew install kompose
 ```
 
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## Use Kompose
 
@@ -120,7 +120,7 @@ you need is an existing `docker-compose.yml` file.
    ```
 
 2. To convert the `docker-compose.yml` file to files that you can use with
-   `kubectl`, run `kompose convert` and then `kubectl apply -f <output file>`.
+   `kubectl`, run `kompose convert` and then `kubectl apply -f `.
 
    ```bash
    kompose convert
@@ -209,7 +209,7 @@ you need is an existing `docker-compose.yml` file.
    kubectl delete -f frontend-tcp-service.yaml,redis-master-service.yaml,redis-slave-service.yaml,frontend-deployment.yaml,redis-master-deployment.yaml,redis-slave-deployment.yaml
    ```
 
-<!-- discussion -->
+
 
 ## User Guide
 
@@ -329,9 +329,9 @@ INFO OpenShift file "foo-imagestream.yaml" created
 INFO OpenShift file "foo-buildconfig.yaml" created
 ```
 
-{{< note >}}
+{{}}
 If you are manually pushing the OpenShift artifacts using ``oc create -f``, you need to ensure that you push the imagestream artifact before the buildconfig artifact, to workaround this OpenShift issue: https://github.com/openshift/origin/issues/4518 .
-{{< /note >}}
+{{}}
 
 ## Alternative Conversions
 
@@ -450,9 +450,9 @@ The currently supported options are:
 | kompose.service.type | nodeport / clusterip / loadbalancer |
 | kompose.service.expose| true / hostname |
 
-{{< note >}}
+{{}}
 The `kompose.service.type` label should be defined with `ports` only, otherwise `kompose` will fail.
-{{< /note >}}
+{{}}
 
 ## Restart
 
@@ -465,9 +465,9 @@ If you want to create normal pods without controllers you can use `restart` cons
 | `on-failure`               | Pod               | `OnFailure`         |
 | `no`                       | Pod               | `Never`             |
 
-{{< note >}}
+{{}}
 The controller object could be `deployment` or `replicationcontroller`.
-{{< /note >}}
+{{}}
 
 For example, the `pival` service will become pod down here. This container calculated value of `pi`.
 

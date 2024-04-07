@@ -8,12 +8,12 @@ content_type: concept
 weight: 90
 ---
 
-<!-- overview -->
+
 Node authorization is a special-purpose authorization mode that specifically
 authorizes API requests made by kubelets.
 
 
-<!-- body -->
+
 ## Overview
 
 The Node authorizer allows a kubelet to perform API operations. This includes:
@@ -48,11 +48,11 @@ kubelets have the minimal set of permissions required to operate correctly.
 
 In order to be authorized by the Node authorizer, kubelets must use a credential
 that identifies them as being in the `system:nodes` group, with a username of
-`system:node:<nodeName>`.
+`system:node:`.
 This group and user name format match the identity created for each kubelet as part of 
 [kubelet TLS bootstrapping](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/).
 
-The value of `<nodeName>` **must** match precisely the name of the node as
+The value of `` **must** match precisely the name of the node as
 registered by the kubelet. By default, this is the host name as provided by
 `hostname`, or overridden via the
 [kubelet option](/docs/reference/command-line-tools-reference/kubelet/)

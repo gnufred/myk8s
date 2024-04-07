@@ -4,15 +4,15 @@ content_type: task
 weight: 100
 ---
 
-<!-- overview -->
+
 This page shows how to change the reclaim policy of a Kubernetes
 PersistentVolume.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Why change reclaim policy of a PersistentVolume
 
@@ -49,20 +49,20 @@ Released phase, where all of its data can be manually recovered.
 1. Choose one of your PersistentVolumes and change its reclaim policy:
 
    ```shell
-   kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+   kubectl patch pv  -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
    ```
 
-   where `<your-pv-name>` is the name of your chosen PersistentVolume.
+   where `` is the name of your chosen PersistentVolume.
 
-   {{< note >}}
+   {{}}
    On Windows, you must _double_ quote any JSONPath template that contains spaces (not single
    quote as shown above for bash). This in turn means that you must use a single quote or escaped
    double quote around any literals in the template. For example:
 
    ```cmd
-   kubectl patch pv <your-pv-name> -p "{\"spec\":{\"persistentVolumeReclaimPolicy\":\"Retain\"}}"
+   kubectl patch pv  -p "{\"spec\":{\"persistentVolumeReclaimPolicy\":\"Retain\"}}"
    ```
-   {{< /note >}}
+   {{}}
 
 1. Verify that your chosen PersistentVolume has the right policy:
 
@@ -90,9 +90,9 @@ Released phase, where all of its data can be manually recovered.
 
 ### References {#reference}
 
-* {{< api-reference page="config-and-storage-resources/persistent-volume-v1" >}}
+* {{}}
   * Pay attention to the `.spec.persistentVolumeReclaimPolicy`
     [field](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/#PersistentVolumeSpec)
     of PersistentVolume.
-* {{< api-reference page="config-and-storage-resources/persistent-volume-claim-v1" >}}
+* {{}}
 

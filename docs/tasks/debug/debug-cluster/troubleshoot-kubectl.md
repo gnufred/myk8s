@@ -4,15 +4,15 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 
 This documentation is about investigating and diagnosing
-{{<glossary_tooltip text="kubectl" term_id="kubectl">}} related issues.
+{{}} related issues.
 If you encounter issues accessing `kubectl` or connecting to your cluster, this
 document outlines various common scenarios and potential solutions to help
 identify and address the likely cause.
 
-<!-- body -->
+
 
 ## {{% heading "prerequisites" %}}
 
@@ -39,7 +39,7 @@ Server Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.3",GitComm
 
 ```
 
-If you see `Unable to connect to the server: dial tcp <server-ip>:8443: i/o timeout`,
+If you see `Unable to connect to the server: dial tcp :8443: i/o timeout`,
 instead of `Server Version`, you need to troubleshoot kubectl connectivity with your cluster.
 
 Make sure you have installed the kubectl by following the
@@ -93,12 +93,12 @@ kubectl config get-contexts
 Switch to the appropriate context:
 
 ```shell
-kubectl config use-context <context-name>
+kubectl config use-context 
 ```
 
 ## API server and load balancer
 
-The {{<glossary_tooltip text="kube-apiserver" term_id="kube-apiserver">}} server is the
+The {{}} server is the
 central component of a Kubernetes cluster. If the API server or the load balancer that
 runs in front of your API servers is not reachable or not responding, you won't be able
 to interact with the cluster.

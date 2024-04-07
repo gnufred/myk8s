@@ -12,9 +12,9 @@ tags:
 - operation
 - architecture
 ---
- Provides constraints that limit aggregate resource consumption per {{< glossary_tooltip term_id="namespace" >}}.
+ Provides constraints that limit aggregate resource consumption per {{}}.
 
-<!--more--> 
+ 
 
 Limits the quantity of objects that can be created in a namespace by type, as well as the total amount of compute resources that may be consumed by resources in that project.
 

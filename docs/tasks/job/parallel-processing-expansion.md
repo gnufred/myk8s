@@ -5,9 +5,9 @@ min-kubernetes-server-version: v1.8
 weight: 50
 ---
 
-<!-- overview -->
 
-This task demonstrates running multiple {{< glossary_tooltip text="Jobs" term_id="job" >}}
+
+This task demonstrates running multiple {{}}
 based on a common template. You can use this approach to process batches of work in
 parallel.
 
@@ -22,7 +22,7 @@ this pattern fits more realistic use cases.
 You should be familiar with the basic,
 non-parallel, use of [Job](/docs/concepts/workloads/controllers/job/).
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 For basic templating you need the command-line utility `sed`.
 
@@ -36,7 +36,7 @@ Once you have Python set up, you can install Jinja2 by running:
 pip install --user jinja2
 ```
 
-<!-- steps -->
+
 
 ## Create Jobs based on a template
 
@@ -51,7 +51,7 @@ curl -L -s -O https://k8s.io/examples/application/job/job-tmpl.yaml
 ```
 
 The file you downloaded is not yet a valid Kubernetes
-{{< glossary_tooltip text="manifest" term_id="manifest" >}}.
+{{}}.
 Instead that template is a YAML representation of a Job object with some placeholders
 that need to be filled in before it can be used.  The `$ITEM` syntax is not meaningful to Kubernetes.
 
@@ -122,7 +122,7 @@ Using the `-l` option to kubectl selects only the Jobs that are part
 of this group of jobs (there might be other unrelated jobs in the system).
 
 You can check on the Pods as well using the same
-{{< glossary_tooltip text="label selector" term_id="selector" >}}:
+{{}}:
 
 
 ```shell
@@ -251,7 +251,7 @@ kubectl delete job -l jobgroup=jobexample
 ```
 
 
-<!-- discussion -->
+
 
 ## Using Jobs in real workloads
 
@@ -270,7 +270,7 @@ frame.
 ## Labels on Jobs and Pods
 
 After you create a Job, Kubernetes automatically adds additional
-{{< glossary_tooltip text="labels" term_id="label" >}} that
+{{}} that
 distinguish one Job's pods from another Job's pods.
 
 In this example, each Job and its Pod template have a label:
@@ -283,12 +283,12 @@ In the [first example](#create-jobs-based-on-a-template) you used a template to
 create several Jobs. The template ensures that each Pod also gets the same label, so
 you can check on all Pods for these templated Jobs with a single command.
 
-{{< note >}}
+{{}}
 The label key `jobgroup` is not special or reserved.
 You can pick your own labelling scheme.
 There are [recommended labels](/docs/concepts/overview/working-with-objects/common-labels/#labels)
 that you can use if you wish.
-{{< /note >}}
+{{}}
 
 ## Alternatives
 
@@ -298,7 +298,7 @@ If you plan to create a large number of Job objects, you may find that:
 - If you create many Jobs in a batch, you might place high load
   on the Kubernetes control plane. Alternatively, the Kubernetes API
   server could rate limit you, temporarily rejecting your requests with a 429 status.
-- You are limited by a {{< glossary_tooltip text="resource quota" term_id="resource-quota" >}}
+- You are limited by a {{}}
   on Jobs: the API server permanently rejects some of your requests
   when you create a great deal of work in one batch.
 

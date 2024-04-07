@@ -12,7 +12,7 @@ tags:
 ---
 A technique for assigning requests to queues that provides better isolation than hashing modulo the number of queues.
 
-<!--more--> 
+ 
 
 We are often concerned with insulating different flows of requests
 from each other, so that a high-intensity flow does not crowd out low-intensity flows.

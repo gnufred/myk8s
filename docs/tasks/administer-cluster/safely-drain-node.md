@@ -9,8 +9,8 @@ content_type: task
 weight: 310
 ---
 
-<!-- overview -->
-This page shows how to safely drain a {{< glossary_tooltip text="node" term_id="node" >}},
+
+This page shows how to safely drain a {{}},
 optionally respecting the PodDisruptionBudget you have defined.
 
 ## {{% heading "prerequisites" %}}
@@ -22,7 +22,7 @@ This task assumes that you have met the following prerequisites:
      and have [configured PodDisruptionBudgets](/docs/tasks/run-application/configure-pdb/) for
      applications that need them.
 
-<!-- steps -->
+
 
 ## (Optional) Configure a disruption budget {#configure-poddisruptionbudget}
 
@@ -46,12 +46,12 @@ hardware maintenance, etc.). Safe evictions allow the pod's containers
 to [gracefully terminate](/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination)
 and will respect the PodDisruptionBudgets you have specified.
 
-{{< note >}}
+{{}}
 By default `kubectl drain` ignores certain system pods on the node
 that cannot be killed; see
 the [kubectl drain](/docs/reference/generated/kubectl/kubectl-commands/#drain)
 documentation for more details.
-{{< /note >}}
+{{}}
 
 When `kubectl drain` returns successfully, that indicates that all of
 the pods (except the ones excluded as described in the previous paragraph)
@@ -60,7 +60,7 @@ and respecting the PodDisruptionBudget you have defined). It is then safe to
 bring down the node by powering down its physical machine or, if running on a
 cloud platform, deleting its virtual machine.
 
-{{< note >}}
+{{}}
 If any new Pods tolerate the `node.kubernetes.io/unschedulable` taint, then those Pods
 might be scheduled to the node you have drained. Avoid tolerating that taint other than
 for DaemonSets.
@@ -68,7 +68,7 @@ for DaemonSets.
 If you or another API user directly set the [`nodeName`](/docs/concepts/scheduling-eviction/assign-pod-node/#nodename)
 field for a Pod (bypassing the scheduler), then the Pod is bound to the specified node
 and will run there, even though you have drained that node and marked it unschedulable.
-{{< /note >}}
+{{}}
 
 First, identify the name of the node you wish to drain. You can list all of the nodes in your cluster with
 
@@ -79,7 +79,7 @@ kubectl get nodes
 Next, tell Kubernetes to drain the node:
 
 ```shell
-kubectl drain --ignore-daemonsets <node name>
+kubectl drain --ignore-daemonsets 
 ```
 
 If there are pods managed by a DaemonSet, you will need to specify
@@ -94,7 +94,7 @@ Once it returns (without giving an error), you can power down the node
 If you leave the node in the cluster during the maintenance operation, you need to run
 
 ```shell
-kubectl uncordon <node name>
+kubectl uncordon 
 ```
 afterwards to tell Kubernetes that it can resume scheduling new pods onto the node.
 

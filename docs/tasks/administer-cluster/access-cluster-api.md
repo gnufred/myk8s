@@ -4,14 +4,14 @@ content_type: task
 weight: 60
 ---
 
-<!-- overview -->
+
 This page shows how to access clusters using the Kubernetes API.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Accessing the Kubernetes API
 
@@ -101,18 +101,7 @@ export CLUSTER_NAME="some_server_name"
 APISERVER=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"$CLUSTER_NAME\")].cluster.server}")
 
 # Create a secret to hold a token for the default service account
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Secret
-metadata:
-  name: default-token
-  annotations:
-    kubernetes.io/service-account.name: default
-type: kubernetes.io/service-account-token
-EOF
-
-# Wait for the token controller to populate the secret with a token:
-while ! kubectl describe secret default-token | grep -E '^token' >/dev/null; do
+kubectl apply -f - /dev/null; do
   echo "waiting for token..." >&2
   sleep 1
 done
@@ -163,17 +152,17 @@ for accessing the API from other languages and how they authenticate.
 
 #### Go client
 
-* To get the library, run the following command: `go get k8s.io/client-go@kubernetes-<kubernetes-version-number>`
+* To get the library, run the following command: `go get k8s.io/client-go@kubernetes-`
   See [https://github.com/kubernetes/client-go/releases](https://github.com/kubernetes/client-go/releases)
   to see which versions are supported.
 * Write an application atop of the client-go clients.
 
-{{< note >}}
+{{}}
 
 `client-go` defines its own API objects, so if needed, import API definitions from client-go rather than
 from the main repository. For example, `import "k8s.io/client-go/kubernetes"` is correct.
 
-{{< /note >}}
+{{}}
 
 The Go client can use the same [kubeconfig file](/docs/concepts/configuration/organize-cluster-access-kubeconfig/)
 as the kubectl CLI does to locate and authenticate to the API server. See this [example](https://git.k8s.io/client-go/examples/out-of-cluster-client-configuration/main.go):
@@ -192,7 +181,7 @@ import (
 func main() {
   // uses the current context in kubeconfig
   // path-to-kubeconfig -- for example, /root/.kube/config
-  config, _ := clientcmd.BuildConfigFromFlags("", "<path-to-kubeconfig>")
+  config, _ := clientcmd.BuildConfigFromFlags("", "")
   // creates the clientset
   clientset, _ := kubernetes.NewForConfig(config)
   // access the API to list pods
@@ -263,7 +252,7 @@ import java.io.IOException;
 /**
  * A simple example of how to use the Java API from an application outside a kubernetes cluster
  *
- * <p>Easiest way to run this: mvn exec:java
+ * Easiest way to run this: mvn exec:java
  * -Dexec.mainClass="io.kubernetes.client.examples.KubeConfigFileClientExample"
  *
  */
@@ -371,13 +360,7 @@ as the kubectl CLI does to locate and authenticate to the API server. See this
 ```haskell
 exampleWithKubeConfig :: IO ()
 exampleWithKubeConfig = do
-    oidcCache <- atomically $ newTVar $ Map.fromList []
-    (mgr, kcfg) <- mkKubeClientConfig oidcCache $ KubeConfigFile "/path/to/kubeconfig"
-    dispatchMime
-            mgr
-            kcfg
-            (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
-        >>= print
+    oidcCache >= print
 ```
 
 ## {{% heading "whatsnext" %}}

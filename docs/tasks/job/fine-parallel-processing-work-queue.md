@@ -4,7 +4,7 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 
 In this example, you will run a Kubernetes Job that runs multiple parallel
 tasks as worker processes, each running as a separate Pod.
@@ -28,7 +28,7 @@ Here is an overview of the steps in this example:
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You will need a container image registry where you can upload images to run in your cluster.
 The example uses [Docker Hub](https://hub.docker.com/), but you could adapt it to a different
@@ -37,12 +37,12 @@ container image registry.
 This task example also assumes that you have Docker installed locally. You use Docker to
 build container images.
 
-<!-- steps -->
+
 
 Be familiar with the basic,
 non-parallel, use of [Job](/docs/concepts/workloads/controllers/job/).
 
-<!-- steps -->
+
 
 ## Starting Redis
 
@@ -151,11 +151,11 @@ docker build -t job-wq-2 .
 
 For the [Docker Hub](https://hub.docker.com/), tag your app image with
 your username and push to the Hub with the below commands. Replace
-`<username>` with your Hub username.
+`` with your Hub username.
 
 ```shell
-docker tag job-wq-2 <username>/job-wq-2
-docker push <username>/job-wq-2
+docker tag job-wq-2 /job-wq-2
+docker push /job-wq-2
 ```
 
 You need to push to a public repository or [configure your cluster to be able to access
@@ -167,10 +167,10 @@ Here is a manifest for the Job you will create:
 
 {{% code_sample file="application/job/redis/job.yaml" %}}
 
-{{< note >}}
+{{}}
 Be sure to edit the manifest to
 change `gcr.io/myproject` to your own path.
-{{< /note >}}
+{{}}
 
 In this example, each pod works on several items from the queue and then exits when there are no more items.
 Since the workers themselves detect when the workqueue is empty, and the Job controller does not
@@ -200,9 +200,9 @@ Namespace:        default
 Selector:         controller-uid=b1c7e4e3-92e1-11e7-b85e-fa163ee3c11f
 Labels:           controller-uid=b1c7e4e3-92e1-11e7-b85e-fa163ee3c11f
                   job-name=job-wq-2
-Annotations:      <none>
+Annotations:      
 Parallelism:      2
-Completions:      <unset>
+Completions:      
 Start Time:       Mon, 11 Jan 2022 17:07:59 +0000
 Pods Statuses:    1 Running / 0 Succeeded / 0 Failed
 Pod Template:
@@ -212,9 +212,9 @@ Pod Template:
    c:
     Image:              container-registry.example/exampleproject/job-wq-2
     Port:
-    Environment:        <none>
-    Mounts:             <none>
-  Volumes:              <none>
+    Environment:        
+    Mounts:             
+  Volumes:              
 Events:
   FirstSeen    LastSeen    Count    From            SubobjectPath    Type        Reason            Message
   ---------    --------    -----    ----            -------------    --------    ------            -------
@@ -240,7 +240,7 @@ Working on lemon
 
 As you can see, one of the pods for this Job worked on several work units.
 
-<!-- discussion -->
+
 
 ## Alternatives
 

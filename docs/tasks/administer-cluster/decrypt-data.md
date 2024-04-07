@@ -4,11 +4,11 @@ content_type: task
 weight: 215
 ---
 
-<!-- overview -->
+
 
 All of the APIs in Kubernetes that let you write persistent API resource data support
 at-rest encryption. For example, you can enable at-rest encryption for
-{{< glossary_tooltip text="Secrets" term_id="secret" >}}.
+{{}}.
 This at-rest encryption is additional to any system-level encryption for the
 etcd cluster or for the filesystem(s) on hosts where you are running the
 kube-apiserver.
@@ -18,25 +18,25 @@ are stored unencrypted. You might want to do this to improve performance; usuall
 though, if it was a good idea to encrypt some data, it's also a good idea to leave them
 encrypted.
 
-{{< note >}}
+{{}}
 This task covers encryption for resource data stored using the
-{{< glossary_tooltip text="Kubernetes API" term_id="kubernetes-api" >}}. For example, you can
+{{}}. For example, you can
 encrypt Secret objects, including the key-value data they contain.
 
 If you wanted to manage encryption for data in filesystems that are mounted into containers, you instead
 need to either:
 
 - use a storage integration that provides encrypted
-  {{< glossary_tooltip text="volumes" term_id="volume" >}}
+  {{}}
 - encrypt the data within your own application
-{{< /note >}}
+{{}}
 
 ## {{% heading "prerequisites" %}}
 
-* {{< include "task-tutorial-prereqs.md" >}}
+* {{}}
 
 * This task assumes that you are running the Kubernetes API server as a
-  {{< glossary_tooltip text="static pod" term_id="static-pod" >}} on each control
+  {{}} on each control
   plane node.
 
 * Your cluster's control plane **must** use etcd v3.x (major version 3, any minor version).
@@ -45,10 +45,10 @@ need to either:
 
 * You should have some API data that are already encrypted.
 
-{{< version-check >}}
+{{}}
 
 
-<!-- steps -->
+
 
 ## Determine whether encryption at rest is already enabled
 

@@ -1,13 +1,4 @@
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 Read an older version of the kubeadm configuration API types from a file, and output the similar config object for the newer version
@@ -36,71 +27,71 @@ kubeadm config migrate [flags]
 
 ### Options
 
-   <table style="width: 100%; table-layout: fixed;">
-<colgroup>
-<col span="1" style="width: 10px;" />
-<col span="1" />
-</colgroup>
-<tbody>
+   
 
-<tr>
-<td colspan="2">--allow-experimental-api</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>Allow migration to experimental, unreleased APIs.</p></td>
-</tr>
 
-<tr>
-<td colspan="2">-h, --help</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>help for migrate</p></td>
-</tr>
 
-<tr>
-<td colspan="2">--new-config string</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>Path to the resulting equivalent kubeadm config file using the new API version. Optional, if not specified output will be sent to STDOUT.</p></td>
-</tr>
 
-<tr>
-<td colspan="2">--old-config string</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>Path to the kubeadm config file that is using an old API version and should be converted. This flag is mandatory.</p></td>
-</tr>
 
-</tbody>
-</table>
+
+
+--allow-experimental-api
+
+
+Allow migration to experimental, unreleased APIs.
+
+
+
+-h, --help
+
+
+help for migrate
+
+
+
+--new-config string
+
+
+Path to the resulting equivalent kubeadm config file using the new API version. Optional, if not specified output will be sent to STDOUT.
+
+
+
+--old-config string
+
+
+Path to the kubeadm config file that is using an old API version and should be converted. This flag is mandatory.
+
+
+
+
 
 
 
 ### Options inherited from parent commands
 
-   <table style="width: 100%; table-layout: fixed;">
-<colgroup>
-<col span="1" style="width: 10px;" />
-<col span="1" />
-</colgroup>
-<tbody>
+   
 
-<tr>
-<td colspan="2">--kubeconfig string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default: "/etc/kubernetes/admin.conf"</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.</p></td>
-</tr>
 
-<tr>
-<td colspan="2">--rootfs string</td>
-</tr>
-<tr>
-<td></td><td style="line-height: 130%; word-wrap: break-word;"><p>[EXPERIMENTAL] The path to the 'real' host root filesystem.</p></td>
-</tr>
 
-</tbody>
-</table>
+
+
+
+
+--kubeconfig string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default: "/etc/kubernetes/admin.conf"
+
+
+The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+
+
+--rootfs string
+
+
+[EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+
+
+
 
 
 

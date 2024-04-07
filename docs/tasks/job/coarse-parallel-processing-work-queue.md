@@ -5,7 +5,7 @@ weight: 20
 ---
 
 
-<!-- overview -->
+
 
 In this example, you will run a Kubernetes Job with multiple parallel
 worker processes.
@@ -28,14 +28,14 @@ Here is an overview of the steps in this example:
 You should already be familiar with the basic,
 non-parallel, use of [Job](/docs/concepts/workloads/controllers/job/).
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You will need a container image registry where you can upload images to run in your cluster.
 
 This task example also assumes that you have Docker installed locally.
 
 
-<!-- steps -->
+
 
 ## Starting a message queue service
 
@@ -218,11 +218,11 @@ docker build -t job-wq-1 .
 
 For the [Docker Hub](https://hub.docker.com/), tag your app image with
 your username and push to the Hub with the below commands. Replace
-`<username>` with your Hub username.
+`` with your Hub username.
 
 ```shell
-docker tag job-wq-1 <username>/job-wq-1
-docker push <username>/job-wq-1
+docker tag job-wq-1 /job-wq-1
+docker push /job-wq-1
 ```
 
 If you are using an alternative container image registry, tag the
@@ -266,7 +266,7 @@ Namespace:        default
 Selector:         controller-uid=41d75705-92df-11e7-b85e-fa163ee3c11f
 Labels:           controller-uid=41d75705-92df-11e7-b85e-fa163ee3c11f
                   job-name=job-wq-1
-Annotations:      <none>
+Annotations:      
 Parallelism:      2
 Completions:      8
 Start Time:       Wed, 06 Sep 2022 16:42:02 +0000
@@ -281,8 +281,8 @@ Pod Template:
     Environment:
       BROKER_URL:       amqp://guest:guest@rabbitmq-service:5672
       QUEUE:            job1
-    Mounts:             <none>
-  Volumes:              <none>
+    Mounts:             
+  Volumes:              
 Events:
   FirstSeen  LastSeen   Count    From    SubobjectPath    Type      Reason              Message
   ─────────  ────────   ─────    ────    ─────────────    ──────    ──────              ───────
@@ -301,7 +301,7 @@ Events:
 All the pods for that Job succeeded! You're done.
 
 
-<!-- discussion -->
+
 
 ## Alternatives
 

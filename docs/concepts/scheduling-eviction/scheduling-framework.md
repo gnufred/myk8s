@@ -6,9 +6,9 @@ content_type: concept
 weight: 60
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.19" state="stable" >}}
+
+{{}}
 
 The _scheduling framework_ is a pluggable architecture for the Kubernetes scheduler.
 It consists of a set of "plugin" APIs that are compiled directly into the scheduler.
@@ -19,7 +19,7 @@ the design of the framework.
 
 [kep]: https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/624-scheduling-framework/README.md
 
-<!-- body -->
+
 
 ## Framework workflow
 
@@ -53,7 +53,7 @@ stateful tasks.
 Some interfaces match the scheduler extension points which can be configured through
 [Scheduler Configuration](/docs/reference/scheduling/config/#extension-points).
 
-{{< figure src="/images/docs/scheduling-framework-extensions.png" title="Scheduling framework extension points" class="diagram-large">}}
+{{}}
 
 ### PreEnqueue {#pre-enqueue}
 
@@ -74,7 +74,7 @@ Plugins that implement PreEnqueue, PreFilter, Filter, Reserve or Permit should i
 
 ### QueueingHint
 
-{{< feature-state for_k8s_version="v1.28" state="beta" >}}
+{{}}
 
 QueueingHint is a callback function for deciding whether a Pod can be requeued to the active queue or backoff queue.
 It's executed every time a certain kind of event or change happens in the cluster.
@@ -82,15 +82,15 @@ When the QueueingHint finds that the event might make the Pod schedulable,
 the Pod is put into the active queue or the backoff queue
 so that the scheduler will retry the scheduling of the Pod.
 
-{{< note >}}
+{{}}
 QueueingHint evaluation during scheduling is a beta-level feature.
 The v1.28 release series initially enabled the associated feature gate; however, after the
 discovery of an excessive memory footprint, the Kubernetes project set that feature gate
-to be disabled by default. In Kubernetes {{< skew currentVersion >}}, this feature gate is
+to be disabled by default. In Kubernetes {{}}, this feature gate is
 disabled and you need to enable it manually.
 You can enable it via the
 `SchedulerQueueingHints` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/).
-{{< /note >}}
+{{}}
 
 ### QueueSort {#queue-sort}
 
@@ -168,10 +168,10 @@ func NormalizeScores(scores map[string]int) {
 If any NormalizeScore plugin returns an error, the scheduling cycle is
 aborted.
 
-{{< note >}}
+{{}}
 Plugins wishing to perform "pre-reserve" work should use the
 NormalizeScore extension point.
-{{< /note >}}
+{{}}
 
 ### Reserve {#reserve}
 
@@ -194,10 +194,10 @@ When this happens, the `Unreserve` method of **all** Reserve plugins will be
 executed in the reverse order of `Reserve` method calls. This phase exists to
 clean up the state associated with the reserved Pod.
 
-{{< caution >}}
+{{}}
 The implementation of the `Unreserve` method in Reserve plugins must be
 idempotent and may not fail.
-{{< /caution >}}
+{{}}
 
 ### Permit
 
@@ -219,12 +219,12 @@ the three things:
     and the Pod is returned to the scheduling queue, triggering the
     Unreserve phase in [Reserve plugins](#reserve).
 
-{{< note >}}
+{{}}
 While any plugin can access the list of "waiting" Pods and approve them
 (see [`FrameworkHandle`](https://git.k8s.io/enhancements/keps/sig-scheduling/624-scheduling-framework#frameworkhandle)),
 we expect only the permit plugins to approve binding of reserved Pods that are in "waiting" state.
 Once a Pod is approved, it is sent to the [PreBind](#pre-bind) phase.
-{{< /note >}}
+{{}}
 
 ### PreBind {#pre-bind}
 

@@ -9,7 +9,7 @@ content_type: concept
 weight: 120
 ---
 
-<!-- overview -->
+
 
 In a Kubernetes cluster, the components on the worker nodes - kubelet and kube-proxy - need
 to communicate with Kubernetes control plane components, specifically kube-apiserver.
@@ -28,7 +28,7 @@ and signing API. The proposal can be found [here](https://github.com/kubernetes/
 This document describes the process of node initialization, how to set up TLS client certificate bootstrapping for
 kubelets, and how it works.
 
-<!-- body -->
+
 
 ## Initialization process
 
@@ -449,7 +449,7 @@ or pass the following command line argument to the kubelet (deprecated):
 --rotate-server-certificates
 ```
 
-{{< note >}}
+{{}}
 The CSR approving controllers implemented in core Kubernetes do not
 approve node _serving_ certificates for
 [security reasons](https://github.com/kubernetes/community/pull/1982). To use
@@ -459,14 +459,14 @@ controller, or manually approve the serving certificate requests.
 A deployment-specific approval process for kubelet serving certificates should typically only approve CSRs which:
 
 1. are requested by nodes (ensure the `spec.username` field is of the form
-   `system:node:<nodeName>` and `spec.groups` contains `system:nodes`)
+   `system:node:` and `spec.groups` contains `system:nodes`)
 1. request usages for a serving certificate (ensure `spec.usages` contains `server auth`,
    optionally contains `digital signature` and `key encipherment`, and contains no other usages)
 1. only have IP and DNS subjectAltNames that belong to the requesting node,
    and have no URI and Email subjectAltNames (parse the x509 Certificate Signing Request
    in `spec.request` to verify `subjectAltNames`)
 
-{{< /note >}}
+{{}}
 
 ## Other authenticating components
 
@@ -496,5 +496,5 @@ approval handled by an external approval controller or the approval controller
 implemented in the core controller-manager. However cluster administrators can
 also manually approve certificate requests using kubectl. An administrator can
 list CSRs with `kubectl get csr` and describe one in detail with
-`kubectl describe csr <name>`. An administrator can approve or deny a CSR with
-`kubectl certificate approve <name>` and `kubectl certificate deny <name>`.
+`kubectl describe csr `. An administrator can approve or deny a CSR with
+`kubectl certificate approve ` and `kubectl certificate deny `.

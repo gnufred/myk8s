@@ -12,12 +12,12 @@ card:
   weight: 40
 ---
 
-<!-- overview -->
+
 
 This page explains how Kubernetes objects are represented in the Kubernetes API, and how you can
 express them in `.yaml` format.
 
-<!-- body -->
+
 
 ## Understanding Kubernetes objects {#kubernetes-objects}
 
@@ -49,7 +49,7 @@ its _desired state_.
 
 The `status` describes the _current state_ of the object, supplied and updated
 by the Kubernetes system and its components. The Kubernetes
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}} continually
+{{}} continually
 and actively manages every object's actual state to match the desired state you
 supplied.
 
@@ -124,10 +124,10 @@ satisfy the StatefulSet specification.
 Different kinds of object can also have different `.status`; again, the API reference pages
 detail the structure of that `.status` field, and its content for each different type of object.
 
-{{< note >}}
+{{}}
 See [Configuration Best Practices](/docs/concepts/configuration/overview/) for additional
 information on writing YAML configuration files.
-{{< /note >}}
+{{}}
 
 ## Server side field validation
 
@@ -172,4 +172,4 @@ To learn about the Kubernetes API in general, visit:
 * [Kubernetes API overview](/docs/reference/using-api/)
 
 To learn about objects in Kubernetes in more depth, read other pages in this section:
-<!-- Docsy automatically includes a list of pages in the section -->
+

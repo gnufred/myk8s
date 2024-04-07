@@ -6,22 +6,22 @@ description: >
   Manage security and best-practices with policies.
 ---
 
-<!-- overview -->
+
 
 Kubernetes policies are configurations that manage other configurations or runtime behaviors. Kubernetes offers various forms of policies, described below:
 
-<!-- body -->
+
 
 ## Apply policies using API objects
 
  Some API objects act as policies. Here are some examples:
 * [NetworkPolicies](/docs/concepts/services-networking/network-policies/) can be used to restrict ingress and egress traffic for a workload.
 * [LimitRanges](/docs/concepts/policy/limit-range/) manage resource allocation constraints across different object kinds.
-* [ResourceQuotas](/docs/concepts/policy/resource-quotas/) limit resource consumption for a {{< glossary_tooltip text="namespace" term_id="namespace" >}}.
+* [ResourceQuotas](/docs/concepts/policy/resource-quotas/) limit resource consumption for a {{}}.
 
 ## Apply policies using admission controllers
 
-An {{< glossary_tooltip text="admission controller" term_id="admission-controller" >}}
+An {{}}
 runs in the API server
 and can validate or mutate API requests. Some admission controllers act to apply policies.
 For example, the [AlwaysPullImages](/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller modifies a new Pod to set the image pull policy to `Always`.

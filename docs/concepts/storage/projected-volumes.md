@@ -8,11 +8,11 @@ content_type: concept
 weight: 21 # just after persistent volumes
 ---
 
-<!-- overview -->
+
 
 This document describes _projected volumes_ in Kubernetes. Familiarity with [volumes](/docs/concepts/storage/volumes/) is suggested.
 
-<!-- body -->
+
 
 ## Introduction
 
@@ -66,18 +66,18 @@ can also limit its maximum value by specifying the `--service-account-max-token-
 option for the API server. The `path` field specifies a relative path to the mount point
 of the projected volume.
 
-{{< note >}}
+{{}}
 A container using a projected volume source as a [`subPath`](/docs/concepts/storage/volumes/#using-subpath)
 volume mount will not receive updates for those volume sources.
-{{< /note >}}
+{{}}
 
 ## clusterTrustBundle projected volumes {#clustertrustbundle}
 
-{{<feature-state for_k8s_version="v1.29" state="alpha" >}}
+{{}}
 
-{{< note >}}
-To use this feature in Kubernetes {{< skew currentVersion >}}, you must enable support for ClusterTrustBundle objects with the `ClusterTrustBundle` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) and `--runtime-config=certificates.k8s.io/v1alpha1/clustertrustbundles=true` kube-apiserver flag, then enable the `ClusterTrustBundleProjection` feature gate.
-{{< /note >}}
+{{}}
+To use this feature in Kubernetes {{}}, you must enable support for ClusterTrustBundle objects with the `ClusterTrustBundle` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) and `--runtime-config=certificates.k8s.io/v1alpha1/clustertrustbundles=true` kube-apiserver flag, then enable the `ClusterTrustBundleProjection` feature gate.
+{{}}
 
 The `clusterTrustBundle` projected volume source injects the contents of one or more [ClusterTrustBundle](/docs/reference/access-authn-authz/certificate-signing-requests#cluster-trust-bundles) objects as an automatically-updating file in the container filesystem.
 
@@ -114,15 +114,15 @@ or container
 then the kubelet ensures that the contents of the `serviceAccountToken` volume are owned by that user,
 and the token file has its permission mode set to `0600`.
 
-{{< note >}}
-{{< glossary_tooltip text="Ephemeral containers" term_id="ephemeral-container" >}}
+{{}}
+{{}}
 added to a Pod after it is created do *not* change volume permissions that were
 set when the pod was created.
 
 If a Pod's `serviceAccountToken` volume permissions were set to `0600` because
 all other containers in the Pod have the same `runAsUser`, ephemeral
 containers must use the same `runAsUser` to be able to read the token.
-{{< /note >}}
+{{}}
 
 ### Windows
 
@@ -159,11 +159,11 @@ This implies all administrator users like `ContainerAdministrator` will have
 read, write and execute access while, non-administrator users will have read and
 execute access.
 
-{{< note >}}
+{{}}
 In general, granting the container access to the host is discouraged as it can
 open the door for potential security exploits.
 
 Creating a Windows Pod with `RunAsUser` in it's `SecurityContext` will result in
 the Pod being stuck at `ContainerCreating` forever. So it is advised to not use
 the Linux only `RunAsUser` option with Windows Pods.
-{{< /note >}}
+{{}}

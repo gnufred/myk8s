@@ -13,7 +13,7 @@ tags:
 ---
  A tool for running Kubernetes locally.
 
-<!--more--> 
+ 
 
 Minikube runs a single-node cluster inside a VM on your computer.
 You can use Minikube to

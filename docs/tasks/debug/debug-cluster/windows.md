@@ -8,9 +8,9 @@ title: Windows debugging tips
 content_type: concept
 ---
 
-<!-- overview -->
 
-<!-- body -->
+
+
 
 ## Node-level troubleshooting {#troubleshooting-node}
 
@@ -20,10 +20,10 @@ content_type: concept
    See [Pause container](/docs/concepts/windows/intro/#pause-container)
    to see the latest / recommended pause image and/or get more information.
 
-   {{< note >}}
+   {{}}
    If using containerd as your container runtime the pause image is specified in the
    `plugins.plugins.cri.sandbox_image` field of the of config.toml configuration file.
-   {{< /note >}}
+   {{}}
 
 1. My pods show status as `ErrImgPull` or `ImagePullBackOff`
 
@@ -45,8 +45,8 @@ content_type: concept
 
    Windows Pods do not have outbound rules programmed for the ICMP protocol. However,
    TCP/UDP is supported. When trying to demonstrate connectivity to resources
-   outside of the cluster, substitute `ping <IP>` with corresponding
-   `curl <IP>` commands.
+   outside of the cluster, substitute `ping ` with corresponding
+   `curl ` commands.
 
    If you are still facing problems, most likely your network configuration in
    [cni.conf](https://github.com/Microsoft/SDN/blob/master/Kubernetes/flannel/l2bridge/cni/config/cni.conf)
@@ -147,8 +147,8 @@ content_type: concept
    A workaround is to relaunch `start.ps1` or relaunch it manually as follows:
 
    ```powershell
-   [Environment]::SetEnvironmentVariable("NODE_NAME", "<Windows_Worker_Hostname>")
-   C:\flannel\flanneld.exe --kubeconfig-file=c:\k\config --iface=<Windows_Worker_Node_IP> --ip-masq=1 --kube-subnet-mgr=1
+   [Environment]::SetEnvironmentVariable("NODE_NAME", "")
+   C:\flannel\flanneld.exe --kubeconfig-file=c:\k\config --iface= --ip-masq=1 --kube-subnet-mgr=1
    ```
 
 1. My Windows Pods cannot launch because of missing `/run/flannel/subnet.env`

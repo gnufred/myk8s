@@ -27,7 +27,7 @@ If you see a message similar to the following, kubectl is not configured correct
 or is not able to connect to a Kubernetes cluster.
 
 ```
-The connection to the server <server-name:port> was refused - did you specify the right host or port?
+The connection to the server  was refused - did you specify the right host or port?
 ```
 
 For example, if you are intending to run a Kubernetes cluster on your laptop (locally),

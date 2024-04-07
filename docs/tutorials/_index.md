@@ -6,7 +6,7 @@ weight: 60
 content_type: concept
 ---
 
-<!-- overview -->
+
 
 This section of the Kubernetes documentation contains tutorials.
 A tutorial shows how to accomplish a goal that is larger than a single
@@ -15,7 +15,7 @@ each of which has a sequence of steps.
 Before walking through each tutorial, you may want to bookmark the
 [Standardized Glossary](/docs/reference/glossary/) page for later references.
 
-<!-- body -->
+
 
 ## Basics
 

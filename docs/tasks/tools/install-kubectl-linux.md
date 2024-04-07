@@ -9,9 +9,9 @@ weight: 10
 ## {{% heading "prerequisites" %}}
 
 You must use a kubectl version that is within one minor version difference of
-your cluster. For example, a v{{< skew currentVersion >}} client can communicate
-with v{{< skew currentVersionAddMinor -1 >}}, v{{< skew currentVersionAddMinor 0 >}},
-and v{{< skew currentVersionAddMinor 1 >}} control planes.
+your cluster. For example, a v{{}} client can communicate
+with v{{}}, v{{}},
+and v{{}} control planes.
 Using the latest compatible version of kubectl helps avoid unforeseen issues.
 
 ## Install kubectl on Linux
@@ -26,45 +26,45 @@ The following methods exist for installing kubectl on Linux:
 
 1. Download the latest release with the command:
 
-   {{< tabs name="download_binary_linux" >}}
-   {{< tab name="x86-64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-   {{< /tab >}}
-   {{< tab name="ARM64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
 
-   {{< note >}}
+   {{}}
    To download a specific version, replace the `$(curl -L -s https://dl.k8s.io/release/stable.txt)`
    portion of the command with the specific version.
 
-   For example, to download version {{< skew currentPatchVersion >}} on Linux x86-64, type:
+   For example, to download version {{}} on Linux x86-64, type:
 
    ```bash
-   curl -LO https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/linux/amd64/kubectl
+   curl -LO https://dl.k8s.io/release/v{{}}/bin/linux/amd64/kubectl
    ```
 
    And for Linux ARM64, type:
 
    ```bash
-   curl -LO https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/linux/arm64/kubectl
+   curl -LO https://dl.k8s.io/release/v{{}}/bin/linux/arm64/kubectl
    ```
 
-   {{< /note >}}
+   {{}}
 
 1. Validate the binary (optional)
 
    Download the kubectl checksum file:
 
-   {{< tabs name="download_checksum_linux" >}}
-   {{< tab name="x86-64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-   {{< /tab >}}
-   {{< tab name="ARM64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
 
    Validate the kubectl binary against the checksum file:
 
@@ -85,9 +85,9 @@ The following methods exist for installing kubectl on Linux:
    sha256sum: WARNING: 1 computed checksum did NOT match
    ```
 
-   {{< note >}}
+   {{}}
    Download the same version of the binary and checksum.
-   {{< /note >}}
+   {{}}
 
 1. Install kubectl
 
@@ -95,7 +95,7 @@ The following methods exist for installing kubectl on Linux:
    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
    ```
 
-   {{< note >}}
+   {{}}
    If you do not have root access on the target system, you can still install
    kubectl to the `~/.local/bin` directory:
 
@@ -106,7 +106,7 @@ The following methods exist for installing kubectl on Linux:
    # and then append (or prepend) ~/.local/bin to $PATH
    ```
 
-   {{< /note >}}
+   {{}}
 
 1. Test to ensure the version you installed is up-to-date:
 
@@ -122,7 +122,7 @@ The following methods exist for installing kubectl on Linux:
 
 ### Install using native package management
 
-{{< tabs name="kubectl_install" >}}
+{{}}
 {{% tab name="Debian-based distributions" %}}
 
 1. Update the `apt` package index and install packages needed to use the Kubernetes `apt` repository:
@@ -138,24 +138,24 @@ The following methods exist for installing kubectl on Linux:
    ```shell
    # If the folder `/etc/apt/keyrings` does not exist, it should be created before the curl command, read the note below.
    # sudo mkdir -p -m 755 /etc/apt/keyrings
-   curl -fsSL https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+   curl -fsSL https://pkgs.k8s.io/core:/stable:/{{}}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
    ```
    
-{{< note >}}
+{{}}
 In releases older than Debian 12 and Ubuntu 22.04, folder `/etc/apt/keyrings` does not exist by default, and it should be created before the curl command.
-{{< /note >}}
+{{}}
 
-3. Add the appropriate Kubernetes `apt` repository. If you want to use Kubernetes version different than {{< param "version" >}},
-   replace {{< param "version" >}} with the desired minor version in the command below:
+3. Add the appropriate Kubernetes `apt` repository. If you want to use Kubernetes version different than {{}},
+   replace {{}} with the desired minor version in the command below:
 
    ```shell
    # This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
-   echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{}}/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
    ```
 
-{{< note >}}
+{{}}
 To upgrade kubectl to another minor release, you'll need to bump the version in `/etc/apt/sources.list.d/kubernetes.list` before running `apt-get update` and `apt-get upgrade`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
-{{< /note >}}
+{{}}
 
 4. Update `apt` package index, then install kubectl:
 
@@ -169,24 +169,21 @@ To upgrade kubectl to another minor release, you'll need to bump the version in 
 {{% tab name="Red Hat-based distributions" %}}
 
 1. Add the Kubernetes `yum` repository. If you want to use Kubernetes version
-   different than {{< param "version" >}}, replace {{< param "version" >}} with
+   different than {{}}, replace {{}} with
    the desired minor version in the command below.
 
    ```bash
    # This overwrites any existing configuration in /etc/yum.repos.d/kubernetes.repo
-   cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
-   [kubernetes]
-   name=Kubernetes
-   baseurl=https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/rpm/
+   cat }}/rpm/
    enabled=1
    gpgcheck=1
-   gpgkey=https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/rpm/repodata/repomd.xml.key
+   gpgkey=https://pkgs.k8s.io/core:/stable:/{{}}/rpm/repodata/repomd.xml.key
    EOF
    ```
 
-{{< note >}}
+{{}}
 To upgrade kubectl to another minor release, you'll need to bump the version in `/etc/yum.repos.d/kubernetes.repo` before running `yum update`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
-{{< /note >}}
+{{}}
 
 2. Install kubectl using `yum`:
 
@@ -199,26 +196,23 @@ To upgrade kubectl to another minor release, you'll need to bump the version in 
 {{% tab name="SUSE-based distributions" %}}
 
 1. Add the Kubernetes `zypper` repository. If you want to use Kubernetes version
-   different than {{< param "version" >}}, replace {{< param "version" >}} with
+   different than {{}}, replace {{}} with
    the desired minor version in the command below.
 
    ```bash
    # This overwrites any existing configuration in /etc/zypp/repos.d/kubernetes.repo
-   cat <<EOF | sudo tee /etc/zypp/repos.d/kubernetes.repo
-   [kubernetes]
-   name=Kubernetes
-   baseurl=https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/rpm/
+   cat }}/rpm/
    enabled=1
    gpgcheck=1
-   gpgkey=https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/rpm/repodata/repomd.xml.key
+   gpgkey=https://pkgs.k8s.io/core:/stable:/{{}}/rpm/repodata/repomd.xml.key
    EOF
    ```
 
-{{< note >}}
+{{}}
 To upgrade kubectl to another minor release, you'll need to bump the version in `/etc/zypp/repos.d/kubernetes.repo`
 before running `zypper update`. This procedure is described in more detail in
 [Changing The Kubernetes Package Repository](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
-{{< /note >}}
+{{}}
 
    2. Install kubectl using `zypper`:
 
@@ -227,11 +221,11 @@ before running `zypper update`. This procedure is described in more detail in
       ```
 
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ### Install using other package management
 
-{{< tabs name="other_kubectl_install" >}}
+{{}}
 {{% tab name="Snap" %}}
 If you are on Ubuntu or another Linux distribution that supports the
 [snap](https://snapcraft.io/docs/core/install) package manager, kubectl
@@ -255,11 +249,11 @@ kubectl version --client
 
 {{% /tab %}}
 
-{{< /tabs >}}
+{{}}
 
 ## Verify kubectl configuration
 
-{{< include "included/verify-kubectl.md" >}}
+{{}}
 
 ## Optional kubectl configurations and plugins
 
@@ -270,39 +264,39 @@ which can save you a lot of typing.
 
 Below are the procedures to set up autocompletion for Bash, Fish, and Zsh.
 
-{{< tabs name="kubectl_autocompletion" >}}
-{{< tab name="Bash" include="included/optional-kubectl-configs-bash-linux.md" />}}
-{{< tab name="Fish" include="included/optional-kubectl-configs-fish.md" />}}
-{{< tab name="Zsh" include="included/optional-kubectl-configs-zsh.md" />}}
-{{< /tabs >}}
+{{}}
+{{}}
+{{}}
+{{}}
+{{}}
 
 ### Install `kubectl convert` plugin
 
-{{< include "included/kubectl-convert-overview.md" >}}
+{{}}
 
 1. Download the latest release with the command:
 
-   {{< tabs name="download_convert_binary_linux" >}}
-   {{< tab name="x86-64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert"
-   {{< /tab >}}
-   {{< tab name="ARM64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl-convert"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
 
 1. Validate the binary (optional)
 
    Download the kubectl-convert checksum file:
 
-   {{< tabs name="download_convert_checksum_linux" >}}
-   {{< tab name="x86-64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert.sha256"
-   {{< /tab >}}
-   {{< tab name="ARM64" codelang="bash" >}}
+   {{}}
+   {{}}
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl-convert.sha256"
-   {{< /tab >}}
-   {{< /tabs >}}
+   {{}}
+   {{}}
 
    Validate the kubectl-convert binary against the checksum file:
 
@@ -323,9 +317,9 @@ Below are the procedures to set up autocompletion for Bash, Fish, and Zsh.
    sha256sum: WARNING: 1 computed checksum did NOT match
    ```
 
-   {{< note >}}
+   {{}}
    Download the same version of the binary and checksum.
-   {{< /note >}}
+   {{}}
 
 1. Install kubectl-convert
 
@@ -349,4 +343,4 @@ Below are the procedures to set up autocompletion for Bash, Fish, and Zsh.
 
 ## {{% heading "whatsnext" %}}
 
-{{< include "included/kubectl-whats-next.md" >}}
+{{}}

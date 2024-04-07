@@ -7,13 +7,13 @@ content_type: task
 weight: 10
 ---
 
-<!-- overview -->
+
 
 This guide is to help users debug applications that are deployed into Kubernetes
 and not behaving correctly. This is *not* a guide for people who want to debug their cluster.
 For that you should check out [this guide](/docs/tasks/debug/debug-cluster).
 
-<!-- body -->
+
 
 ## Diagnosing the problem
 
@@ -67,7 +67,7 @@ There are three things to check:
 * Make sure that you have the name of the image correct.
 * Have you pushed the image to the registry?
 * Try to manually pull the image to see if the image can be pulled. For example,
-  if you use Docker on your PC, run `docker pull <image>`.
+  if you use Docker on your PC, run `docker pull `.
 
 
 #### My pod stays terminating
@@ -122,7 +122,7 @@ I0805 10:43:25.129973   46757 schema.go:129] this may be a false alarm, see http
 pods/mypod
 ```
 
-<!-- TODO: Now that #11914 is merged, this advice may need to be updated -->
+
 
 The next thing to check is whether the pod on the apiserver
 matches the pod you meant to create (e.g. in a yaml file on your local machine).

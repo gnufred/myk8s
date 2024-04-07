@@ -11,17 +11,17 @@ tags:
 - extension
 ---
  Device plugins run on worker
-{{< glossary_tooltip term_id="node" text="Nodes">}} and provide
-{{< glossary_tooltip term_id="pod" text="Pods ">}} with access to resources,
+{{}} and provide
+{{}} with access to resources,
 such as local hardware, that require vendor-specific initialization or setup
 steps.
 
-<!--more-->
+
 
 Device plugins advertise resources to the
-{{< glossary_tooltip term_id="kubelet" text="kubelet" >}}, so that workload
+{{}}, so that workload
 Pods can access hardware features that relate to the Node where that Pod is running.
-You can deploy a device plugin as a {{< glossary_tooltip term_id="daemonset" >}},
+You can deploy a device plugin as a {{}},
 or install the device plugin software directly on each target Node.
 
 See

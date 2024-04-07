@@ -10,9 +10,9 @@ aka:
 tags:
 - community
 ---
- Facilitates the discussion and/or implementation of a short-lived, narrow, or decoupled project for a committee, {{< glossary_tooltip text="SIG" term_id="sig" >}}, or cross-SIG effort.
+ Facilitates the discussion and/or implementation of a short-lived, narrow, or decoupled project for a committee, {{}}, or cross-SIG effort.
 
-<!--more-->
+
 
 Working groups are a way of organizing people to accomplish a discrete task.
 

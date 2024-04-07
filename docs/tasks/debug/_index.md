@@ -13,7 +13,7 @@ card:
   title: Getting help
 ---
 
-<!-- overview -->
+
 
 Sometimes things go wrong. This guide is aimed at making them right. It has
 two sections:
@@ -26,7 +26,7 @@ two sections:
 You should also check the known issues for the [release](https://github.com/kubernetes/kubernetes/releases)
 you're using.
 
-<!-- body -->
+
 
 ## Getting help
 
@@ -42,7 +42,7 @@ practical instructions for getting started. [Tasks](/docs/tasks/) show how to
 accomplish commonly used tasks, and [Tutorials](/docs/tutorials/) are more
 comprehensive walkthroughs of real-world, industry-specific, or end-to-end
 development scenarios. The [Reference](/docs/reference/) section provides
-detailed documentation on the [Kubernetes API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+detailed documentation on the [Kubernetes API](/docs/reference/generated/kubernetes-api/{{}}/)
 and command-line interfaces (CLIs), such as [`kubectl`](/docs/reference/kubectl/).
 
 ## Help! My question isn't covered!  I need help now!
@@ -90,7 +90,7 @@ interest. For example, people new to Kubernetes may also want to join the
 There are also many country specific / local language channels. Feel free to join
 these channels for localized support and info:
 
-{{< table caption="Country / language specific Slack channels" >}}
+{{}}
 Country | Channels
 :---------|:------------
 China | [`#cn-users`](https://kubernetes.slack.com/messages/cn-users), [`#cn-events`](https://kubernetes.slack.com/messages/cn-events)
@@ -108,7 +108,7 @@ Russia | [`#ru-users`](https://kubernetes.slack.com/messages/ru-users)
 Spain | [`#es-users`](https://kubernetes.slack.com/messages/es-users)
 Sweden | [`#se-users`](https://kubernetes.slack.com/messages/se-users)
 Turkey | [`#tr-users`](https://kubernetes.slack.com/messages/tr-users), [`#tr-events`](https://kubernetes.slack.com/messages/tr-events)
-{{< /table >}}
+{{}}
 
 ### Forum
 

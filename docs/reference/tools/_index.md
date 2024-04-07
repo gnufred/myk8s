@@ -7,15 +7,15 @@ weight: 150
 no_list: true
 ---
 
-<!-- overview -->
+
 Kubernetes contains several tools to help you work with the Kubernetes system.
 
-<!-- body -->
+
 
 ## crictl
 
 [`crictl`](https://github.com/kubernetes-sigs/cri-tools) is a command-line
-interface for inspecting and debugging {{<glossary_tooltip term_id="cri" text="CRI">}}-compatible
+interface for inspecting and debugging {{}}-compatible
 container runtimes.
 
 ## Dashboard
@@ -60,7 +60,7 @@ Kui lets you:
 
 * Directly click on long, auto-generated resource names instead of copying and pasting
 * Type in `kubectl` commands and see them execute, even sometimes faster than `kubectl` itself
-* Query a {{< glossary_tooltip text="Job" term_id="job">}} and see its execution rendered
+* Query a {{}} and see its execution rendered
   as a waterfall diagram
 * Click through resources in your cluster using a tabbed UI 
 

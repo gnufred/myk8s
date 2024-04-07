@@ -4,7 +4,7 @@ content_type: task
 weight: 70
 ---
 
-<!-- overview -->
+
 
 This page shows how to specify extended resources for a Node.
 Extended resources allow cluster administrators to advertise node-level
@@ -12,9 +12,9 @@ resources that would otherwise be unknown to Kubernetes.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Get the names of your Nodes
 
@@ -32,7 +32,7 @@ attached. Here's an example of a PATCH request that advertises four dongle resou
 for your Node.
 
 ```
-PATCH /api/v1/nodes/<your-node-name>/status HTTP/1.1
+PATCH /api/v1/nodes//status HTTP/1.1
 Accept: application/json
 Content-Type: application/json-patch+json
 Host: k8s-master:8080
@@ -57,21 +57,21 @@ kubectl proxy
 ```
 
 In another command window, send the HTTP PATCH request.
-Replace `<your-node-name>` with the name of your Node:
+Replace `` with the name of your Node:
 
 ```shell
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
   --data '[{"op": "add", "path": "/status/capacity/example.com~1dongle", "value": "4"}]' \
-  http://localhost:8001/api/v1/nodes/<your-node-name>/status
+  http://localhost:8001/api/v1/nodes//status
 ```
 
-{{< note >}}
+{{}}
 In the preceding request, `~1` is the encoding for the character / in
 the patch path. The operation path value in JSON-Patch is interpreted as a
 JSON-Pointer. For more details, see
 [IETF RFC 6901](https://tools.ietf.org/html/rfc6901), section 3.
-{{< /note >}}
+{{}}
 
 The output shows that the Node has a capacity of 4 dongles:
 
@@ -85,7 +85,7 @@ The output shows that the Node has a capacity of 4 dongles:
 Describe your Node:
 
 ```
-kubectl describe node <your-node-name>
+kubectl describe node 
 ```
 
 Once again, the output shows the dongle resource:
@@ -146,7 +146,7 @@ Then a Container could request any number of bytes of special storage, up to 800
 Here is a PATCH request that removes the dongle advertisement from a Node.
 
 ```
-PATCH /api/v1/nodes/<your-node-name>/status HTTP/1.1
+PATCH /api/v1/nodes//status HTTP/1.1
 Accept: application/json
 Content-Type: application/json-patch+json
 Host: k8s-master:8080
@@ -166,19 +166,19 @@ kubectl proxy
 ```
 
 In another command window, send the HTTP PATCH request.
-Replace `<your-node-name>` with the name of your Node:
+Replace `` with the name of your Node:
 
 ```shell
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
   --data '[{"op": "remove", "path": "/status/capacity/example.com~1dongle"}]' \
-  http://localhost:8001/api/v1/nodes/<your-node-name>/status
+  http://localhost:8001/api/v1/nodes//status
 ```
 
 Verify that the dongle advertisement has been removed:
 
 ```
-kubectl describe node <your-node-name> | grep dongle
+kubectl describe node  | grep dongle
 ```
 
 (you should not see any output)

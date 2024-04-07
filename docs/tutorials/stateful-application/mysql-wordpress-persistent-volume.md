@@ -10,7 +10,7 @@ card:
   title: "Stateful Example: Wordpress with Persistent Volumes"
 ---
 
-<!-- overview -->
+
 This tutorial shows you how to deploy a WordPress site and a MySQL database using
 Minikube. Both applications use PersistentVolumes and PersistentVolumeClaims to store data.
 
@@ -22,19 +22,19 @@ is a request for storage by a user that can be fulfilled by a PV. PersistentVolu
 PersistentVolumeClaims are independent from Pod lifecycles and preserve data through
 restarting, rescheduling, and even deleting Pods.
 
-{{< warning >}}
+{{}}
 This deployment is not suitable for production use cases, as it uses single instance
 WordPress and MySQL Pods. Consider using
 [WordPress Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/wordpress)
 to deploy WordPress in production.
-{{< /warning >}}
+{{}}
 
-{{< note >}}
+{{}}
 The files provided in this tutorial are using GA Deployment APIs and are specific
 to kubernetes version 1.9 and later. If you wish to use this tutorial with an earlier
 version of Kubernetes, please update the API version appropriately, or reference
 earlier versions of this tutorial.
-{{< /note >}}
+{{}}
 
 ## {{% heading "objectives" %}}
 
@@ -48,7 +48,7 @@ earlier versions of this tutorial.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 The example shown on this page works with `kubectl` 1.27 and above.
 
@@ -58,7 +58,7 @@ Download the following configuration files:
 
 1. [wordpress-deployment.yaml](/examples/application/wordpress/wordpress-deployment.yaml)
 
-<!-- lessoncontent -->
+
 
 ## Create PersistentVolumeClaims and PersistentVolumes
 
@@ -72,23 +72,23 @@ the cluster's default StorageClass is used instead.
 When a PersistentVolumeClaim is created, a PersistentVolume is dynamically
 provisioned based on the StorageClass configuration.
 
-{{< warning >}}
+{{}}
 In local clusters, the default StorageClass uses the `hostPath` provisioner.
 `hostPath` volumes are only suitable for development and testing. With `hostPath`
 volumes, your data lives in `/tmp` on the node the Pod is scheduled onto and does
 not move between nodes. If a Pod dies and gets scheduled to another node in the
 cluster, or the node is rebooted, the data is lost.
-{{< /warning >}}
+{{}}
 
-{{< note >}}
+{{}}
 If you are bringing up a cluster that needs to use the `hostPath` provisioner,
 the `--enable-hostpath-provisioner` flag must be set in the `controller-manager` component.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 If you have a Kubernetes cluster running on Google Kubernetes Engine, please
 follow [this guide](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk).
-{{< /note >}}
+{{}}
 
 ## Create a kustomization.yaml
 
@@ -103,7 +103,7 @@ Add a Secret generator in `kustomization.yaml` from the following command.
 You will need to replace `YOUR_PASSWORD` with the password you want to use.
 
 ```shell
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 secretGenerator:
 - name: mysql-pass
   literals:
@@ -141,7 +141,7 @@ the name of the MySQL Service defined above, and WordPress will access the datab
 3. Add them to `kustomization.yaml` file.
 
    ```shell
-   cat <<EOF >>./kustomization.yaml
+   cat >./kustomization.yaml
    resources:
      - mysql-deployment.yaml
      - wordpress-deployment.yaml
@@ -178,9 +178,9 @@ Now you can verify that all objects exist.
    kubectl get pvc
    ```
 
-   {{< note >}}
+   {{}}
    It can take up to a few minutes for the PVs to be provisioned and bound.
-   {{< /note >}}
+   {{}}
 
    The response should be like this:
 
@@ -196,9 +196,9 @@ Now you can verify that all objects exist.
    kubectl get pods
    ```
 
-   {{< note >}}
+   {{}}
    It can take up to a few minutes for the Pod's Status to be `RUNNING`.
-   {{< /note >}}
+   {{}}
 
    The response should be like this:
 
@@ -217,12 +217,12 @@ Now you can verify that all objects exist.
 
    ```
    NAME        TYPE            CLUSTER-IP   EXTERNAL-IP   PORT(S)        AGE
-   wordpress   LoadBalancer    10.0.0.89    <pending>     80:32406/TCP   4m
+   wordpress   LoadBalancer    10.0.0.89         80:32406/TCP   4m
    ```
 
-   {{< note >}}
+   {{}}
    Minikube can only expose Services through `NodePort`. The EXTERNAL-IP is always pending.
-   {{< /note >}}
+   {{}}
 
 5. Run the following command to get the IP Address for the WordPress Service:
 
@@ -242,11 +242,11 @@ Now you can verify that all objects exist.
 
    ![wordpress-init](https://raw.githubusercontent.com/kubernetes/examples/master/mysql-wordpress-pd/WordPress.png)
 
-   {{< warning >}}
+   {{}}
    Do not leave your WordPress installation on this page. If another user finds it,
-   they can set up a website on your instance and use it to serve malicious content.<br/><br/>
+   they can set up a website on your instance and use it to serve malicious content.
    Either install WordPress by creating a username and password or delete your instance.
-   {{< /warning >}}
+   {{}}
 
 ## {{% heading "cleanup" %}}
 

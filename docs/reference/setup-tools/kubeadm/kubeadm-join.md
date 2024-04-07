@@ -6,11 +6,11 @@ title: kubeadm join
 content_type: concept
 weight: 30
 ---
-<!-- overview -->
+
 This command initializes a Kubernetes worker node and joins it to the cluster.
 
-<!-- body -->
-{{< include "generated/kubeadm_join.md" >}}
+
+{{}}
 
 ### The join workflow {#join-workflow}
 
@@ -64,7 +64,7 @@ For example:
 sudo kubeadm join --skip-phases=preflight --config=config.yaml
 ```
 
-{{< feature-state for_k8s_version="v1.22" state="beta" >}}
+{{}}
 
 Alternatively, you can use the `skipPhases` field in `JoinConfiguration`.
 
@@ -81,7 +81,7 @@ the cluster configuration (including root CA) and validates it using the token
 as well as validating that the root CA public key matches the provided hash and
 that the API server certificate is valid under the root CA.
 
-The CA key hash has the format `sha256:<hex_encoded_hash>`.
+The CA key hash has the format `sha256:`.
 By default, the hash value is printed at the end of the `kubeadm init` command or
 in the output from the `kubeadm token create --print-join-command` command.
 It is in a standard format (see [RFC7469](https://tools.ietf.org/html/rfc7469#section-2.4))
@@ -277,8 +277,8 @@ apiVersion: v1
 kind: Config
 clusters:
 - cluster:
-    certificate-authority-data: <ca-cert>
-    server: https://<ip>:<port>
+    certificate-authority-data: 
+    server: https://:
   name: ""
 contexts: []
 current-context: ""
@@ -298,9 +298,9 @@ These commands should be run after `kubeadm init` but before `kubeadm join`.
 
 ### Using kubeadm join with a configuration file {#config-file}
 
-{{< caution >}}
+{{}}
 The config file is still considered beta and may change in future versions.
-{{< /caution >}}
+{{}}
 
 It's possible to configure `kubeadm join` with a configuration file instead of command
 line flags, and some more advanced features may only be available as

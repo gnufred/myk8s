@@ -9,7 +9,7 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 
 In order for the Ingress resource to work, the cluster must have an ingress controller running. 
 
@@ -21,7 +21,7 @@ Kubernetes as a project supports and maintains [AWS](https://github.com/kubernet
   [nginx](https://git.k8s.io/ingress-nginx/README.md#readme) ingress controllers.
 
 
-<!-- body -->
+
 
 ## Additional controllers
 
@@ -79,9 +79,9 @@ You mark an IngressClass as default by setting the [`ingressclass.kubernetes.io/
 Ideally, all ingress controllers should fulfill this specification, but the various ingress
 controllers operate slightly differently.
 
-{{< note >}}
+{{}}
 Make sure you review your ingress controller's documentation to understand the caveats of choosing it.
-{{< /note >}}
+{{}}
 
 
 

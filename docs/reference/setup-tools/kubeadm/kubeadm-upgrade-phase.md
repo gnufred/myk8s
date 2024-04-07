@@ -13,12 +13,12 @@ Using this phase you can choose to execute the separate steps of the upgrade of
 secondary control-plane or worker nodes. Please note that `kubeadm upgrade apply` still has to
 be called on a primary control-plane node.
 
-{{< tabs name="tab-phase" >}}
-{{< tab name="phase" include="generated/kubeadm_upgrade_node_phase.md" />}}
-{{< tab name="preflight" include="generated/kubeadm_upgrade_node_phase_preflight.md" />}}
-{{< tab name="control-plane" include="generated/kubeadm_upgrade_node_phase_control-plane.md" />}}
-{{< tab name="kubelet-config" include="generated/kubeadm_upgrade_node_phase_kubelet-config.md" />}}
-{{< /tabs >}}
+{{}}
+{{}}
+{{}}
+{{}}
+{{}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

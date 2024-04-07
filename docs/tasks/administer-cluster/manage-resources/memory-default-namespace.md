@@ -7,17 +7,17 @@ description: >-
   in that namespace has a memory resource limit configured.
 ---
 
-<!-- overview -->
+
 
 This page shows how to configure default memory requests and limits for a
-{{< glossary_tooltip text="namespace" term_id="namespace" >}}.
+{{}}.
 
 A Kubernetes cluster can be divided into namespaces. Once you have a namespace that
 has a default memory
 [limit](/docs/concepts/configuration/manage-resources-containers/#requests-and-limits),
 and you then try to create a Pod with a container that does not specify its own memory
 limit, then the
-{{< glossary_tooltip text="control plane" term_id="control-plane" >}} assigns the default
+{{}} assigns the default
 memory limit to that container.
 
 Kubernetes assigns a default memory request under certain conditions that are explained later in this topic.
@@ -28,7 +28,7 @@ Kubernetes assigns a default memory request under certain conditions that are ex
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You must have access to create namespaces in your cluster.
 
@@ -36,7 +36,7 @@ Each node in your cluster must have at least 2 GiB of memory.
 
 
 
-<!-- steps -->
+
 
 ## Create a namespace
 
@@ -49,7 +49,7 @@ kubectl create namespace default-mem-example
 
 ## Create a LimitRange and a Pod
 
-Here's a manifest for an example {{< glossary_tooltip text="LimitRange" term_id="limitrange" >}}.
+Here's a manifest for an example {{}}.
 The manifest specifies a default memory
 request and a default memory limit.
 
@@ -63,7 +63,7 @@ kubectl apply -f https://k8s.io/examples/admin/resource/memory-defaults.yaml --n
 
 Now if you create a Pod in the default-mem-example namespace, and any container
 within that Pod does not specify its own values for memory request and memory limit,
-then the {{< glossary_tooltip text="control plane" term_id="control-plane" >}}
+then the {{}}
 applies default values: a memory request of 256MiB and a memory limit of 512MiB.
 
 
@@ -167,17 +167,17 @@ resources:
     memory: 128Mi
 ```
 
-{{< note >}}
+{{}}
 
 A `LimitRange` does **not** check the consistency of the default values it applies. This means that a default value for the _limit_ that is set by `LimitRange` may be less than the _request_ value specified for the container in the spec that a client submits to the API server. If that happens, the final Pod will not be scheduleable.
 See [Constraints on resource limits and requests](/docs/concepts/policy/limit-range/#constraints-on-resource-limits-and-requests) for more details.
 
-{{< /note >}}
+{{}}
 
 
 ## Motivation for default memory limits and requests
 
-If your namespace has a memory {{< glossary_tooltip text="resource quota" term_id="resource-quota" >}}
+If your namespace has a memory {{}}
 configured,
 it is helpful to have a default value in place for memory limit.
 Here are three of the restrictions that a resource quota imposes on a namespace:

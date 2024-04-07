@@ -10,7 +10,7 @@ fabric that links Pods together.
 
 * [CSI](/docs/concepts/storage/volumes/#csi) and [FlexVolume](/docs/concepts/storage/volumes/#flexvolume) storage plugins
 
-  {{< glossary_tooltip text="Container Storage Interface" term_id="csi" >}} (CSI) plugins
+  {{}} (CSI) plugins
   provide a way to extend Kubernetes with supports for new kinds of volumes. The volumes can
   be backed by durable external storage, or provide ephemeral storage, or they might offer a
   read-only interface to information using a filesystem paradigm.
@@ -39,6 +39,6 @@ fabric that links Pods together.
   Your Kubernetes cluster needs a _network plugin_ in order to have a working Pod network
   and to support other aspects of the Kubernetes network model.
 
-  Kubernetes {{< skew currentVersion >}} is compatible with {{< glossary_tooltip text="CNI" term_id="cni" >}}
+  Kubernetes {{}} is compatible with {{}}
   network plugins.
 

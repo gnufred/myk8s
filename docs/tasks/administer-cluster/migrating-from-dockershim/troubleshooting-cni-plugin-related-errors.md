@@ -7,7 +7,7 @@ reviewers:
 weight: 40
 ---
 
-<!-- overview -->
+
 
 To avoid CNI plugin-related errors, verify that you are using or upgrading to a
 container runtime that has been tested to work correctly with your version of
@@ -75,7 +75,7 @@ following upgrade operations:
   - Upgrade node components (for example, the kubelet) to Kubernetes v1.24
   - Upgrade to or install the most current version of the container runtime.
 3. Bring the node back into your cluster by restarting your container runtime
-and kubelet. Uncordon the node (`kubectl uncordon <nodename>`).
+and kubelet. Uncordon the node (`kubectl uncordon `).
 
 ## An example containerd configuration file
 

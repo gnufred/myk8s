@@ -6,9 +6,9 @@ content_type: tutorial
 weight: 30
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.4" state="beta" >}}
+
+{{}}
 
 
 [AppArmor](https://apparmor.net/) is a Linux kernel security module that supplements the standard Linux user and group based
@@ -58,8 +58,8 @@ Nodes before proceeding:
    explicitly configured.
 
 3. Container runtime supports AppArmor -- All common Kubernetes-supported container
-   runtimes should support AppArmor, including {{< glossary_tooltip term_id="containerd" >}} and
-   {{< glossary_tooltip term_id="cri-o" >}}. Please refer to the corresponding runtime
+   runtimes should support AppArmor, including {{}} and
+   {{}}. Please refer to the corresponding runtime
    documentation and verify that the cluster fulfills the requirements to use AppArmor.
 
 4. Profile is loaded -- AppArmor is applied to a Pod by specifying an AppArmor profile that each
@@ -80,27 +80,27 @@ Nodes before proceeding:
    For more details on loading profiles on nodes, see
    [Setting up nodes with profiles](#setting-up-nodes-with-profiles).
 
-<!-- lessoncontent -->
+
 
 ## Securing a Pod
 
-{{< note >}}
+{{}}
 AppArmor is currently in beta, so options are specified as annotations. Once support graduates to
 general availability, the annotations will be replaced with first-class fields.
-{{< /note >}}
+{{}}
 
 AppArmor profiles are specified *per-container*. To specify the AppArmor profile to run a Pod
 container with, add an annotation to the Pod's metadata:
 
 ```yaml
-container.apparmor.security.beta.kubernetes.io/<container_name>: <profile_ref>
+container.apparmor.security.beta.kubernetes.io/: 
 ```
 
-Where `<container_name>` is the name of the container to apply the profile to, and `<profile_ref>`
-specifies the profile to apply. The `<profile_ref>` can be one of:
+Where `` is the name of the container to apply the profile to, and ``
+specifies the profile to apply. The `` can be one of:
 
 * `runtime/default` to apply the runtime's default profile
-* `localhost/<profile_name>` to apply the profile loaded on the host with the name `<profile_name>`
+* `localhost/` to apply the profile loaded on the host with the name ``
 * `unconfined` to indicate that no profiles will be loaded
 
 See the [API Reference](#api-reference) for the full details on the annotation and profile name formats.
@@ -109,7 +109,7 @@ To verify that the profile was applied, you can check that the container's root 
 running with the correct profile by examining its proc attr:
 
 ```shell
-kubectl exec <pod_name> -- cat /proc/1/attr/current
+kubectl exec  -- cat /proc/1/attr/current
 ```
 
 The output should look something like this:
@@ -125,10 +125,10 @@ k8s-apparmor-example-deny-write (enforce)
 First, load the profile you want to use onto your Nodes. This profile denies all file writes:
 
 ```
-#include <tunables/global>
+#include 
 
 profile k8s-apparmor-example-deny-write flags=(attach_disconnected) {
-  #include <abstractions/base>
+  #include 
 
   file,
 
@@ -145,11 +145,10 @@ discussed in [Setting up nodes with profiles](#setting-up-nodes-with-profiles).
 # This example assumes that node names match host names, and are reachable via SSH.
 NODES=($(kubectl get nodes -o name))
 
-for NODE in ${NODES[*]}; do ssh $NODE 'sudo apparmor_parser -q <<EOF
-#include <tunables/global>
+for NODE in ${NODES[*]}; do ssh $NODE 'sudo apparmor_parser -q 
 
 profile k8s-apparmor-example-deny-write flags=(attach_disconnected) {
-  #include <abstractions/base>
+  #include 
 
   file,
 
@@ -192,35 +191,7 @@ error: error executing remote command: command terminated with non-zero exit cod
 To wrap up, see what happens if you try to specify a profile that hasn't been loaded:
 
 ```shell
-kubectl create -f /dev/stdin <<EOF
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hello-apparmor-2
-  annotations:
-    container.apparmor.security.beta.kubernetes.io/hello: localhost/k8s-apparmor-example-allow-write
-spec:
-  containers:
-  - name: hello
-    image: busybox:1.28
-    command: [ "sh", "-c", "echo 'Hello AppArmor!' && sleep 1h" ]
-EOF
-```
-```
-pod/hello-apparmor-2 created
-```
-
-Although the Pod was created successfully, further examination will show that it is stuck in pending:
-
-```shell
-kubectl describe pod hello-apparmor-2
-```
-```
-Name:          hello-apparmor-2
-Namespace:     default
-Node:          gke-test-default-pool-239f5d02-x1kf/10.128.0.27
-Start Time:    Tue, 30 Aug 2016 17:58:56 -0700
-Labels:        <none>
+kubectl create -f /dev/stdin 
 Annotations:   container.apparmor.security.beta.kubernetes.io/hello=localhost/k8s-apparmor-example-allow-write
 Status:        Pending
 ... 
@@ -276,8 +247,8 @@ logs or through `journalctl`. More information is provided in
 
 Specifying the profile a container will run with:
 
-- **key**: `container.apparmor.security.beta.kubernetes.io/<container_name>`
-  Where `<container_name>` matches the name of a container in the Pod.
+- **key**: `container.apparmor.security.beta.kubernetes.io/`
+  Where `` matches the name of a container in the Pod.
   A separate profile can be specified for each container in the Pod.
 - **value**: a profile reference, described below
 
@@ -287,7 +258,7 @@ Specifying the profile a container will run with:
   - Equivalent to not specifying a profile, except it still requires AppArmor to be enabled.
   - In practice, many container runtimes use the same OCI default profile, defined here:
     https://github.com/containers/common/blob/main/pkg/apparmor/apparmor_linux_template.go
-- `localhost/<profile_name>`: Refers to a profile loaded on the node (localhost) by name.
+- `localhost/`: Refers to a profile loaded on the node (localhost) by name.
   - The possible profile names are detailed in the
     [core policy reference](https://gitlab.com/apparmor/apparmor/wikis/AppArmor_Core_Policy_Reference#profile-names-and-attachment-specifications).
 - `unconfined`: This effectively disables AppArmor on the container.

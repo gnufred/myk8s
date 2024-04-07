@@ -37,7 +37,7 @@ Install the following on your workstation:
 
    ```
    Creating cluster "psa-ns-level" ...
-    ✓ Ensuring node image (kindest/node:v{{< skew currentPatchVersion >}}) 🖼 
+    ✓ Ensuring node image (kindest/node:v{{}}) 🖼 
     ✓ Preparing nodes 📦  
     ✓ Writing configuration 📜 
     ✓ Starting control-plane 🕹️ 

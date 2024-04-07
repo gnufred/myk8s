@@ -6,7 +6,7 @@ content_type: task
 weight: 30
 ---
 
-<!-- overview -->
+
 
 kubeadm does not support automated ways of reconfiguring components that
 were deployed on managed nodes. One way of automating this would be
@@ -25,7 +25,7 @@ to achieve kubeadm cluster reconfiguration.
 to a running kube-apiserver in the cluster from a host that has kubectl installed
 - Have a text editor installed on all hosts
 
-<!-- steps -->
+
 
 ## Reconfiguring the cluster
 
@@ -40,20 +40,20 @@ the kubectl consumed kubeconfig file and preferred text editor.
 
 For example:
 ```
-KUBECONFIG=/etc/kubernetes/admin.conf KUBE_EDITOR=nano kubectl edit <parameters>
+KUBECONFIG=/etc/kubernetes/admin.conf KUBE_EDITOR=nano kubectl edit 
 ```
 
-{{< note >}}
+{{}}
 Upon saving any changes to these cluster objects, components running on nodes may not be
 automatically updated. The steps below instruct you on how to perform that manually.
-{{< /note >}}
+{{}}
 
-{{< warning >}}
+{{}}
 Component configuration in ConfigMaps is stored as unstructured data (YAML string).
 This means that validation will not be performed upon updating the contents of a ConfigMap.
 You have to be careful to follow the documented API format for a particular
 component configuration and avoid introducing typos and YAML indentation mistakes.
-{{< /warning >}}
+{{}}
 
 ### Applying cluster configuration changes
 
@@ -71,11 +71,11 @@ kubectl edit cm -n kube-system kubeadm-config
 
 The configuration is located under the `data.ClusterConfiguration` key.
 
-{{< note >}}
+{{}}
 The `ClusterConfiguration` includes a variety of options that affect the configuration of individual
 components such as kube-apiserver, kube-scheduler, kube-controller-manager, CoreDNS, etcd and kube-proxy.
 Changes to the configuration must be reflected on node components manually.
-{{< /note >}}
+{{}}
 
 #### Reflecting `ClusterConfiguration` changes on control plane nodes
 
@@ -93,25 +93,25 @@ Before proceeding with these changes, make sure you have backed up the directory
 
 To write new certificates you can use:
 ```shell
-kubeadm init phase certs <component-name> --config <config-file>
+kubeadm init phase certs  --config 
 ```
 
 To write new manifest files in `/etc/kubernetes/manifests` you can use:
 
 ```shell
 # For Kubernetes control plane components
-kubeadm init phase control-plane <component-name> --config <config-file>
+kubeadm init phase control-plane  --config 
 # For local etcd
-kubeadm init phase etcd local --config <config-file>
+kubeadm init phase etcd local --config 
 ```
 
-The `<config-file>` contents must match the updated `ClusterConfiguration`.
-The `<component-name>` value must be a name of a Kubernetes control plane component (`apiserver`, `controller-manager` or `scheduler`).
+The `` contents must match the updated `ClusterConfiguration`.
+The `` value must be a name of a Kubernetes control plane component (`apiserver`, `controller-manager` or `scheduler`).
 
-{{< note >}}
+{{}}
 Updating a file in `/etc/kubernetes/manifests` will tell the kubelet to restart the static Pod for the corresponding component.
 Try doing these changes one node at a time to leave the cluster without downtime.
-{{< /note >}}
+{{}}
 
 ### Applying kubelet configuration changes
 
@@ -139,17 +139,17 @@ ConfigMap contents into the local file `/var/lib/kubelet/config.yaml`
 flags
 - Restart the kubelet service with `systemctl restart kubelet`
 
-{{< note >}}
+{{}}
 Do these changes one node at a time to allow workloads to be rescheduled properly.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 During `kubeadm upgrade`, kubeadm downloads the `KubeletConfiguration` from the
 `kubelet-config` ConfigMap and overwrite the contents of `/var/lib/kubelet/config.yaml`.
 This means that node local configuration must be applied either by flags in
 `/var/lib/kubelet/kubeadm-flags.env` or by manually updating the contents of
 `/var/lib/kubelet/config.yaml` after `kubeadm upgrade`, and then restarting the kubelet.
-{{< /note >}}
+{{}}
 
 ### Applying kube-proxy configuration changes
 
@@ -182,14 +182,14 @@ kubectl get po -n kube-system | grep kube-proxy
 Delete a Pod with:
 
 ```shell
-kubectl delete po -n kube-system <pod-name>
+kubectl delete po -n kube-system 
 ```
 
 New Pods that use the updated ConfigMap will be created.
 
-{{< note >}}
+{{}}
 Because kubeadm deploys kube-proxy as a DaemonSet, node specific configuration is unsupported.
-{{< /note >}}
+{{}}
 
 ### Applying CoreDNS configuration changes
 
@@ -219,16 +219,16 @@ kubectl get po -n kube-system | grep coredns
 Delete a Pod with:
 
 ```shell
-kubectl delete po -n kube-system <pod-name>
+kubectl delete po -n kube-system 
 ```
 
 New Pods with the updated CoreDNS configuration will be created.
 
-{{< note >}}
+{{}}
 kubeadm does not allow CoreDNS configuration during cluster creation and upgrade.
 This means that if you execute `kubeadm upgrade apply`, your changes to the CoreDNS
 objects will be lost and must be reapplied.
-{{< /note >}}
+{{}}
 
 ## Persisting the reconfiguration
 
@@ -241,7 +241,7 @@ kubeadm writes Labels, Taints, CRI socket and other information on the Node obje
 Kubernetes node. To change any of the contents of this Node object you can use:
 
 ```shell
-kubectl edit no <node-name>
+kubectl edit no 
 ```
 
 During `kubeadm upgrade` the contents of such a Node might get overwritten.
@@ -250,7 +250,7 @@ you can prepare a [kubectl patch](/docs/tasks/manage-kubernetes-objects/update-a
 and apply it to the Node object:
 
 ```shell
-kubectl patch no <node-name> --patch-file <patch-file>
+kubectl patch no  --patch-file 
 ```
 
 #### Persisting control plane component reconfiguration
@@ -260,7 +260,7 @@ object stored in the cluster. To extend the static Pod manifests configuration,
 [patches](/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches) can be used.
 
 These patch files must remain as files on the control plane nodes to ensure that
-they can be used by the `kubeadm upgrade ... --patches <directory>`.
+they can be used by the `kubeadm upgrade ... --patches `.
 
 If reconfiguration is done to the `ClusterConfiguration` and static Pod manifests on disk,
 the set of node specific patches must be updated accordingly.

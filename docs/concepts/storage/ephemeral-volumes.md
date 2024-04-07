@@ -10,13 +10,13 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
+
 
 This document describes _ephemeral volumes_ in Kubernetes. Familiarity
 with [volumes](/docs/concepts/storage/volumes/) is suggested, in
 particular PersistentVolumeClaim and PersistentVolume.
 
-<!-- body -->
+
 
 Some applications need additional storage but don't care whether that
 data is stored persistently across restarts. For example, caching
@@ -47,7 +47,7 @@ different purposes:
   [secret](/docs/concepts/storage/volumes/#secret): inject different
   kinds of Kubernetes data into a Pod
 - [CSI ephemeral volumes](#csi-ephemeral-volumes):
-  similar to the previous volume kinds, but provided by special {{< glossary_tooltip text="CSI" term_id="csi" >}} drivers
+  similar to the previous volume kinds, but provided by special {{}} drivers
   which specifically [support this feature](https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html)
 - [generic ephemeral volumes](#generic-ephemeral-volumes), which
   can be provided by all storage drivers that also support persistent volumes
@@ -73,13 +73,13 @@ is managed by kubelet, or injecting different data.
 
 ### CSI ephemeral volumes
 
-{{< feature-state for_k8s_version="v1.25" state="stable" >}}
+{{}}
 
-{{< note >}}
+{{}}
 CSI ephemeral volumes are only supported by a subset of CSI drivers.
 The Kubernetes CSI [Drivers list](https://kubernetes-csi.github.io/docs/drivers.html)
 shows which drivers support ephemeral volumes.
-{{< /note >}}
+{{}}
 
 Conceptually, CSI ephemeral volumes are similar to `configMap`,
 `downwardAPI` and `secret` volume types: the storage is managed locally on each
@@ -140,7 +140,7 @@ allowed to be used as inline volumes within a Pod spec may do so by:
 
 ### Generic ephemeral volumes
 
-{{< feature-state for_k8s_version="v1.23" state="stable" >}}
+{{}}
 
 Generic ephemeral volumes are similar to `emptyDir` volumes in the
 sense that they provide a per-pod directory for scratch data that is
@@ -191,7 +191,7 @@ spec:
 ### Lifecycle and PersistentVolumeClaim
 
 The key design idea is that the
-[parameters for a volume claim](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#ephemeralvolumesource-v1-core)
+[parameters for a volume claim](/docs/reference/generated/kubernetes-api/{{}}/#ephemeralvolumesource-v1-core)
 are allowed inside a volume source of the Pod. Labels, annotations and
 the whole set of fields for a PersistentVolumeClaim are supported. When such a Pod gets
 created, the ephemeral volume controller then creates an actual PersistentVolumeClaim
@@ -199,7 +199,7 @@ object in the same namespace as the Pod and ensures that the PersistentVolumeCla
 gets deleted when the Pod gets deleted.
 
 That triggers volume binding and/or provisioning, either immediately if
-the {{< glossary_tooltip text="StorageClass" term_id="storage-class" >}} uses immediate volume binding or when the Pod is
+the {{}} uses immediate volume binding or when the Pod is
 tentatively scheduled onto a node (`WaitForFirstConsumer` volume
 binding mode). The latter is recommended for generic ephemeral volumes
 because then the scheduler is free to choose a suitable node for
@@ -240,10 +240,10 @@ ownership relationship. An existing PVC is not overwritten or
 modified. But this does not resolve the conflict because without the
 right PVC, the Pod cannot start.
 
-{{< caution >}}
+{{}}
 Take care when naming Pods and volumes inside the
 same namespace, so that these conflicts can't occur.
-{{< /caution >}}
+{{}}
 
 ### Security
 

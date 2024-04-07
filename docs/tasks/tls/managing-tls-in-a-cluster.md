@@ -7,7 +7,7 @@ reviewers:
 - liggit
 ---
 
-<!-- overview -->
+
 
 Kubernetes provides a `certificates.k8s.io` API, which lets you provision TLS
 certificates signed by a Certificate Authority (CA) that you control. These CA
@@ -16,12 +16,12 @@ and certificates can be used by your workloads to establish trust.
 `certificates.k8s.io` API uses a protocol that is similar to the [ACME
 draft](https://github.com/ietf-wg-acme/acme/).
 
-{{< note >}}
+{{}}
 Certificates created using the `certificates.k8s.io` API are signed by a
 [dedicated CA](#configuring-your-cluster-to-provide-signing). It is possible to configure your cluster to use the cluster root
 CA for this purpose, but you should never rely on this. Do not assume that
 these certificates will validate against the cluster root CA.
-{{< /note >}}
+{{}}
 
 
 
@@ -29,7 +29,7 @@ these certificates will validate against the cluster root CA.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You need the `cfssl` tool. You can download `cfssl` from
 [https://github.com/cloudflare/cfssl/releases](https://github.com/cloudflare/cfssl/releases).
@@ -38,7 +38,7 @@ Some steps in this page use the `jq` tool. If you don't have `jq`, you can
 install it via your operating system's software sources, or fetch it from
 [https://jqlang.github.io/jq/](https://jqlang.github.io/jq/).
 
-<!-- steps -->
+
 
 ## Trusting TLS in a cluster
 
@@ -49,7 +49,7 @@ example, you would do this with a golang TLS config by parsing the certificate
 chain and adding the parsed certificates to the `RootCAs` field in the
 [`tls.Config`](https://pkg.go.dev/crypto/tls#Config) struct.
 
-{{< note >}}
+{{}}
 Even though the custom CA certificate may be included in the filesystem (in the
 ConfigMap `kube-root-ca.crt`),
 you should not use that certificate authority for any purpose other than to verify internal
@@ -60,16 +60,16 @@ If you want to use a custom certificate authority for your workloads, you should
 that CA separately, and distribute its CA certificate using a 
 [ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap) that your pods 
 have access to read.
-{{< /note >}}
+{{}}
 
 ## Requesting a certificate
 
 The following section demonstrates how to create a TLS certificate for a
 Kubernetes service accessed through DNS.
 
-{{< note >}}
+{{}}
 This tutorial uses CFSSL: Cloudflare's PKI and TLS toolkit [click here](https://blog.cloudflare.com/introducing-cfssl/) to know more.
-{{< /note >}}
+{{}}
 
 ## Create a certificate signing request
 
@@ -77,80 +77,8 @@ Generate a private key and certificate signing request (or CSR) by running
 the following command:
 
 ```shell
-cat <<EOF | cfssl genkey - | cfssljson -bare server
-{
-  "hosts": [
-    "my-svc.my-namespace.svc.cluster.local",
-    "my-pod.my-namespace.pod.cluster.local",
-    "192.0.2.24",
-    "10.0.34.2"
-  ],
-  "CN": "my-pod.my-namespace.pod.cluster.local",
-  "key": {
-    "algo": "ecdsa",
-    "size": 256
-  }
-}
-EOF
-```
-
-Where `192.0.2.24` is the service's cluster IP,
-`my-svc.my-namespace.svc.cluster.local` is the service's DNS name,
-`10.0.34.2` is the pod's IP and `my-pod.my-namespace.pod.cluster.local`
-is the pod's DNS name. You should see the output similar to:
-
-```
-2022/02/01 11:45:32 [INFO] generate received request
-2022/02/01 11:45:32 [INFO] received CSR
-2022/02/01 11:45:32 [INFO] generating key: ecdsa-256
-2022/02/01 11:45:32 [INFO] encoded CSR
-```
-
-This command generates two files; it generates `server.csr` containing the PEM
-encoded [PKCS#10](https://tools.ietf.org/html/rfc2986) certification request,
-and `server-key.pem` containing the PEM encoded key to the certificate that
-is still to be created.
-
-## Create a CertificateSigningRequest object to send to the Kubernetes API
-
-Generate a CSR manifest (in YAML), and send it to the API server. You can do that by
-running the following command:
-
-```shell
-cat <<EOF | kubectl apply -f -
-apiVersion: certificates.k8s.io/v1
-kind: CertificateSigningRequest
-metadata:
-  name: my-svc.my-namespace
-spec:
-  request: $(cat server.csr | base64 | tr -d '\n')
-  signerName: example.com/serving
-  usages:
-  - digital signature
-  - key encipherment
-  - server auth
-EOF
-```
-
-Notice that the `server.csr` file created in step 1 is base64 encoded
-and stashed in the `.spec.request` field. You are also requesting a
-certificate with the "digital signature", "key encipherment", and "server
-auth" key usages, signed by an example `example.com/serving` signer.
-A specific `signerName` must be requested.
-View documentation for [supported signer names](/docs/reference/access-authn-authz/certificate-signing-requests/#signers)
-for more information.
-
-The CSR should now be visible from the API in a Pending state. You can see
-it by running:
-
-```shell
-kubectl describe csr my-svc.my-namespace
-```
-
-```none
-Name:                   my-svc.my-namespace
-Labels:                 <none>
-Annotations:            <none>
+cat 
+Annotations:            
 CreationTimestamp:      Tue, 01 Feb 2022 11:49:15 -0500
 Requesting User:        yourname@example.com
 Signer:                 example.com/serving
@@ -163,7 +91,7 @@ Subject Alternative Names:
                         my-svc.my-namespace.svc.cluster.local
         IP Addresses:   192.0.2.24
                         10.0.34.2
-Events: <none>
+Events: 
 ```
 
 ## Get the CertificateSigningRequest approved {#get-the-certificate-signing-request-approved}
@@ -189,7 +117,7 @@ kubectl get csr
 
 ```none
 NAME                  AGE   SIGNERNAME            REQUESTOR              REQUESTEDDURATION   CONDITION
-my-svc.my-namespace   10m   example.com/serving   yourname@example.com   <none>              Approved
+my-svc.my-namespace   10m   example.com/serving   yourname@example.com                 Approved
 ```
 
 This means the certificate request has been approved and is waiting for the
@@ -210,68 +138,12 @@ You need an authority to provide the digital signature on the new certificate.
 First, create a signing certificate by running the following:
 
 ```shell
-cat <<EOF | cfssl gencert -initca - | cfssljson -bare ca
-{
-  "CN": "My Example Signer",
-  "key": {
-    "algo": "rsa",
-    "size": 2048
-  }
-}
-EOF
-```
-
-You should see output similar to:
-
-```none
-2022/02/01 11:50:39 [INFO] generating a new CA key and certificate from CSR
-2022/02/01 11:50:39 [INFO] generate received request
-2022/02/01 11:50:39 [INFO] received CSR
-2022/02/01 11:50:39 [INFO] generating key: rsa-2048
-2022/02/01 11:50:39 [INFO] encoded CSR
-2022/02/01 11:50:39 [INFO] signed certificate with serial number 263983151013686720899716354349605500797834580472
-```
-
-This produces a certificate authority key file (`ca-key.pem`) and certificate (`ca.pem`).
-
-### Issue a certificate
-
-{{% code_sample file="tls/server-signing-config.json" %}}
-
-Use a `server-signing-config.json` signing configuration and the certificate authority key file 
-and certificate to sign the certificate request:
-
-```shell
-kubectl get csr my-svc.my-namespace -o jsonpath='{.spec.request}' | \
-  base64 --decode | \
-  cfssl sign -ca ca.pem -ca-key ca-key.pem -config server-signing-config.json - | \
-  cfssljson -bare ca-signed-server
-```
-
-You should see the output similar to:
-
-```
-2022/02/01 11:52:26 [INFO] signed certificate with serial number 576048928624926584381415936700914530534472870337
-```
-
-This produces a signed serving certificate file, `ca-signed-server.pem`.
-
-### Upload the signed certificate
-
-Finally, populate the signed certificate in the API object's status:
-
-```shell
-kubectl get csr my-svc.my-namespace -o json | \
-  jq '.status.certificate = "'$(base64 ca-signed-server.pem | tr -d '\n')'"' | \
-  kubectl replace --raw /apis/certificates.k8s.io/v1/certificatesigningrequests/my-svc.my-namespace/status -f -
-```
-
-{{< note >}}
+cat }}
 This uses the command line tool [`jq`](https://jqlang.github.io/jq/) to populate the base64-encoded
 content in the `.status.certificate` field.
 If you do not have `jq`, you can also save the JSON output to a file, populate this field manually, and
 upload the resulting file.
-{{< /note >}}
+{{}}
 
 Once the CSR is approved and the signed certificate is uploaded, run:
 
@@ -282,7 +154,7 @@ kubectl get csr
 The output is similar to:
 ```none
 NAME                  AGE   SIGNERNAME            REQUESTOR              REQUESTEDDURATION   CONDITION
-my-svc.my-namespace   20m   example.com/serving   yourname@example.com   <none>              Approved,Issued
+my-svc.my-namespace   20m   example.com/serving   yourname@example.com                 Approved,Issued
 ```
 
 ## Download the certificate and use it
@@ -296,7 +168,7 @@ kubectl get csr my-svc.my-namespace -o jsonpath='{.status.certificate}' \
 ```
 
 Now you can populate `server.crt` and `server-key.pem` in a
-{{< glossary_tooltip text="Secret" term_id="secret" >}}
+{{}}
 that you could later mount into a Pod (for example, to use with a webserver
 that serves HTTPS).
 
@@ -308,7 +180,7 @@ kubectl create secret tls server --cert server.crt --key server-key.pem
 secret/server created
 ```
 
-Finally, you can populate `ca.pem` into a {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}}
+Finally, you can populate `ca.pem` into a {{}}
 and use it as the trust root to verify the serving certificate:
 
 ```shell
@@ -327,14 +199,14 @@ approve` and `kubectl certificate deny` commands. However if you intend
 to make heavy usage of this API, you might consider writing an automated
 certificates controller.
 
-{{< caution >}}
+{{}}
 The ability to approve CSRs decides who trusts whom within your environment. The
 ability to approve CSRs should not be granted broadly or lightly.
 
 You should make sure that you confidently understand both the verification requirements
 that fall on the approver **and** the repercussions of issuing a specific certificate
 before you grant the `approve` permission.
-{{< /caution >}}
+{{}}
 
 Whether a machine or a human using kubectl as above, the role of the _approver_ is
 to verify that the CSR satisfies two requirements:

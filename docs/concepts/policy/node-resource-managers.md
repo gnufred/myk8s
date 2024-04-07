@@ -7,11 +7,11 @@ content_type: concept
 weight: 50
 ---
 
-<!-- overview -->
+
 
 In order to support latency-critical and high-throughput workloads, Kubernetes offers a suite of Resource Managers. The managers aim to co-ordinate and optimise node's resources alignment for pods configured with a specific requirement for CPUs, devices, and memory (hugepages) resources. 
 
-<!-- body -->
+
 
 The main manager, the Topology Manager, is a Kubelet component that co-ordinates the overall resource management process through its [policy](/docs/tasks/administer-cluster/topology-manager/).
 

@@ -6,12 +6,12 @@ reviewers:
 weight: 40
 ---
 
-<!-- overview -->
+
 
 You've deployed your application and exposed it via a Service. Now what? Kubernetes provides a
 number of tools to help you manage your application deployment, including scaling and updating.
 
-<!-- body -->
+
 
 ## Organizing resource configurations
 
@@ -66,7 +66,7 @@ If you need to define more manifests, such as adding a ConfigMap, you can do tha
 
 This section lists only the most common tools used for managing workloads on Kubernetes. To see a larger list, view
 [Application definition and image build](https://landscape.cncf.io/guide#app-definition-and-development--application-definition-image-build)
-in the {{< glossary_tooltip text="CNCF" term_id="cncf" >}} Landscape.
+in the {{}} Landscape.
 
 #### Helm {#external-tool-helm}
 
@@ -129,7 +129,7 @@ The output might be similar to:
 
 ```none
 NAME           TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)      AGE
-my-nginx-svc   LoadBalancer   10.0.0.208   <pending>     80/TCP       0s
+my-nginx-svc   LoadBalancer   10.0.0.208        80/TCP       0s
 ```
 
 With the above commands, first you create resources under `examples/application/nginx/` and print
@@ -143,7 +143,7 @@ directory, you can recursively perform the operations on the subdirectories also
 `--recursive` or `-R` alongside the `--filename`/`-f` argument.
 
 For instance, assume there is a directory `project/k8s/development` that holds all of the
-{{< glossary_tooltip text="manifests" term_id="manifest" >}} needed for the development environment,
+{{}} needed for the development environment,
 organized by resource type:
 
 ```none
@@ -286,7 +286,7 @@ Visit [`kubectl rollout`](/docs/reference/kubectl/generated/kubectl_rollout/) to
 
 ## Canary deployments
 
-<!--TODO: make a task out of this for canary deployment, ref #42786-->
+
 
 Another scenario where multiple labels are needed is to distinguish deployments of different
 releases or configurations of the same component. It is common practice to deploy a *canary* of a

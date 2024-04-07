@@ -9,9 +9,9 @@ content_type: concept
 weight: 25
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.22" state="stable" >}}
+
+{{}}
 
 Kubernetes supports multiple appliers collaborating to manage the fields
 of a single [object](/docs/concepts/overview/working-with-objects/).
@@ -20,9 +20,9 @@ Server-Side Apply provides an optional mechanism for your cluster's control plan
 changes to an object's fields. At the level of a specific resource, Server-Side
 Apply records and tracks information about control over the fields of that object.
 
-Server-Side Apply helps users and {{< glossary_tooltip text="controllers" term_id="controller" >}}
+Server-Side Apply helps users and {{}}
 manage their resources through declarative configuration. Clients can create and modify
-{{< glossary_tooltip text="objects" term_id="object" >}}
+{{}}
 declaratively by submitting their _fully specified intent_.
 
 A fully specified intent is a partial object that only includes the fields and
@@ -34,7 +34,7 @@ object (using default values for unspecified fields), or is
 how Server-Side Apply differs from the original, client-side `kubectl apply`
 implementation.
 
-<!-- body -->
+
 
 ## Field management
 
@@ -141,10 +141,10 @@ for example, the `.metadata.managedFields` get into an inconsistent state
 The format of `managedFields` is [described](/docs/reference/kubernetes-api/common-definitions/object-meta/#System)
 in the Kubernetes API reference.
 
-{{< caution >}}
+{{}}
 The `.metadata.managedFields` field is managed by the API server.
 You should avoid updating it manually.
-{{< /caution >}}
+{{}}
 
 ### Conflicts
 
@@ -192,12 +192,12 @@ sets the manager identity to `"kubectl"` by default.
 At the protocol level, Kubernetes represents Server-Side Apply message bodies
 as [YAML](https://yaml.org/), with the media type `application/apply-patch+yaml`.
 
-{{< note >}}
+{{}}
 Whether you are submitting JSON data or YAML data, use
 `application/apply-patch+yaml` as the `Content-Type` header value.
 
 All JSON documents are valid YAML.
-{{< /note >}}
+{{}}
 
 The serialization is the same as for Kubernetes objects, with the exception that
 clients are not required to send a complete object.
@@ -289,7 +289,7 @@ merging, see
 The Kubernetes API (and the Go code that implements that API for Kubernetes) allows
 defining _merge strategy markers_. These markers describe the merge strategy supported
 for fields within Kubernetes objects.
-For a {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}},
+For a {{}},
 you can set these markers when you define the custom resource.
 
 | Golang marker | OpenAPI extension | Possible values | Description |
@@ -314,7 +314,7 @@ By default, Server-Side Apply treats custom resources as unstructured data. All
 keys are treated the same as struct fields, and all lists are considered atomic.
 
 If the CustomResourceDefinition defines a
-[schema](/docs/reference/generated/kubernetes-api/{{< param "version" >}}#jsonschemaprops-v1-apiextensions-k8s-io)
+[schema](/docs/reference/generated/kubernetes-api/{{}}#jsonschemaprops-v1-apiextensions-k8s-io)
 that contains annotations as defined in the previous [Merge Strategy](#merge-strategy)
 section, these annotations will be used when merging objects of this
 type.
@@ -444,11 +444,11 @@ spec:
   replicas: 3
 ```
 
-{{< note >}}
+{{}}
 The YAML file for SSA in this case only contains the fields you want to change.
 You are not supposed to provide a fully compliant Deployment manifest if you only
 want to modify the `spec.replicas` field using SSA.
-{{< /note >}}
+{{}}
 
 The user applies that manifest using a private field manager name. In this example,
 the user picked `handover-to-hpa`:
@@ -483,7 +483,7 @@ complete the transfer to the other field manager.
 
 Server-Side Apply is meant both as a replacement for the original client-side
 implementation of the `kubectl apply` subcommand, and as simple and effective
-mechanism for {{< glossary_tooltip term_id="controller" text="controllers" >}}
+mechanism for {{}}
 to enact their changes.
 
 Compared to the `last-applied` annotation managed by `kubectl`, Server-Side
@@ -522,7 +522,7 @@ kubectl apply --server-side [--dry-run=server]
 By default, field management of the object transfers from client-side apply to
 kubectl server-side apply, without encountering conflicts.
 
-{{< caution >}}
+{{}}
 Keep the `last-applied-configuration` annotation up to date.
 The annotation infers client-side applies managed fields.
 Any fields not managed by client-side apply raise conflicts.
@@ -530,7 +530,7 @@ Any fields not managed by client-side apply raise conflicts.
 For example, if you used `kubectl scale` to update the replicas field after
 client-side apply, then this field is not owned by client-side apply and
 creates conflicts on `kubectl apply --server-side`.
-{{< /caution >}}
+{{}}
 
 This behavior applies to server-side apply with the `kubectl` field manager.
 As an exception, you can opt-out of this behavior by specifying a different,
@@ -573,7 +573,7 @@ request bodies that are also valid JSON.
 ### Access control and permissions {#rbac-and-permissions}
 
 Since Server-Side Apply is a type of `PATCH`, a principal (such as a Role for Kubernetes
-{{< glossary_tooltip text="RBAC" term_id="rbac" >}}) requires the **patch** permission to
+{{}}) requires the **patch** permission to
 edit existing resources, and also needs the **create** verb permission in order to create
 new resources with Server-Side Apply.
 
@@ -619,12 +619,12 @@ than the `managedFields`, this will result in the `managedFields` being reset
 first and the other changes being processed afterwards. As a result the
 applier takes ownership of any fields updated in the same request.
 
-{{< note >}}
+{{}}
 Server-Side Apply does not correctly track ownership on
 sub-resources that don't receive the resource object type. If you are
 using Server-Side Apply with such a sub-resource, the changed fields
 may not be tracked.
-{{< /note >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

@@ -8,11 +8,11 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
+
 This document details the deprecation policy for various facets of the system.
 
 
-<!-- body -->
+
 Kubernetes is a large system with many components and many contributors.  As
 with any such software, the feature set naturally evolves over time, and
 sometimes a feature may need to be removed. This could include an API, a flag,
@@ -56,11 +56,11 @@ Once an API element has been added to an API group at a particular version, it
 can not be removed from that version or have its behavior significantly
 changed, regardless of track.
 
-{{< note >}}
+{{}}
 For historical reasons, there are 2 "monolithic" API groups - "core" (no
 group name) and "extensions".  Resources will incrementally be moved from these
 legacy API groups into more domain-specific API groups.
-{{< /note >}}
+{{}}
 
 **Rule #2: API objects must be able to round-trip between API versions in a given
 release without information loss, with the exception of whole REST resources
@@ -89,17 +89,17 @@ might have to add an equivalent field or represent it as an annotation.
 This ensures beta API support covers the [maximum supported version skew of 2 releases](/releases/version-skew-policy/),
 and that APIs don't stagnate on unstable beta versions, accumulating production usage that will be disrupted when support for the beta API ends.
 
-{{< note >}}
+{{}}
 There are no current plans for a major version revision of Kubernetes that removes GA APIs.
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 Until [#52185](https://github.com/kubernetes/kubernetes/issues/52185) is
 resolved, no API versions that have been persisted to storage may be removed.
 Serving REST endpoints for those versions may be disabled (subject to the
 deprecation timelines in this document), but the API server must remain capable
 of decoding/converting previously persisted data from storage.
-{{< /note >}}
+{{}}
 
 **Rule #4b: The "preferred" API version and the "storage version" for a given
 group may not advance until after a release has been made that supports both the
@@ -116,163 +116,163 @@ version X, which introduces a new API group.  A new Kubernetes release is made
 every approximately 4 months (3 per year).  The following table describes which
 API versions are supported in a series of subsequent releases.
 
-<table>
-  <thead>
-    <tr>
-      <th>Release</th>
-      <th>API Versions</th>
-      <th>Preferred/Storage Version</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>X</td>
-      <td>v1alpha1</td>
-      <td>v1alpha1</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>X+1</td>
-      <td>v1alpha2</td>
-      <td>v1alpha2</td>
-      <td>
-        <ul>
-           <li>v1alpha1 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+2</td>
-      <td>v1beta1</td>
-      <td>v1beta1</td>
-      <td>
-        <ul>
-          <li>v1alpha2 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+3</td>
-      <td>v1beta2, v1beta1 (deprecated)</td>
-      <td>v1beta1</td>
-      <td>
-        <ul>
-          <li>v1beta1 is deprecated, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+4</td>
-      <td>v1beta2, v1beta1 (deprecated)</td>
-      <td>v1beta2</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>X+5</td>
-      <td>v1, v1beta1 (deprecated), v1beta2 (deprecated)</td>
-      <td>v1beta2</td>
-      <td>
-        <ul>
-          <li>v1beta2 is deprecated, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+6</td>
-      <td>v1, v1beta2 (deprecated)</td>
-      <td>v1</td>
-      <td>
-        <ul>
-          <li>v1beta1 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+7</td>
-      <td>v1, v1beta2 (deprecated)</td>
-      <td>v1</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>X+8</td>
-      <td>v2alpha1, v1</td>
-      <td>v1</td>
-      <td>
-        <ul>
-          <li>v1beta2 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+9</td>
-      <td>v2alpha2, v1</td>
-      <td>v1</td>
-      <td>
-        <ul>
-           <li>v2alpha1 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+10</td>
-      <td>v2beta1, v1</td>
-      <td>v1</td>
-      <td>
-        <ul>
-          <li>v2alpha2 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+11</td>
-      <td>v2beta2, v2beta1 (deprecated), v1</td>
-      <td>v1</td>
-      <td>
-        <ul>
-          <li>v2beta1 is deprecated, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+12</td>
-      <td>v2, v2beta2 (deprecated), v2beta1 (deprecated), v1 (deprecated)</td>
-      <td>v1</td>
-      <td>
-        <ul>
-          <li>v2beta2 is deprecated, "action required" relnote</li>
-          <li>v1 is deprecated in favor of v2, but will not be removed</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+13</td>
-      <td>v2, v2beta1 (deprecated), v2beta2 (deprecated), v1 (deprecated)</td>
-      <td>v2</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>X+14</td>
-      <td>v2, v2beta2 (deprecated), v1 (deprecated)</td>
-      <td>v2</td>
-      <td>
-        <ul>
-          <li>v2beta1 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>X+15</td>
-      <td>v2, v1 (deprecated)</td>
-      <td>v2</td>
-      <td>
-        <ul>
-          <li>v2beta2 is removed, "action required" relnote</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+  
+    
+      Release
+      API Versions
+      Preferred/Storage Version
+      Notes
+    
+  
+  
+    
+      X
+      v1alpha1
+      v1alpha1
+      
+    
+    
+      X+1
+      v1alpha2
+      v1alpha2
+      
+        
+           v1alpha1 is removed, "action required" relnote
+        
+      
+    
+    
+      X+2
+      v1beta1
+      v1beta1
+      
+        
+          v1alpha2 is removed, "action required" relnote
+        
+      
+    
+    
+      X+3
+      v1beta2, v1beta1 (deprecated)
+      v1beta1
+      
+        
+          v1beta1 is deprecated, "action required" relnote
+        
+      
+    
+    
+      X+4
+      v1beta2, v1beta1 (deprecated)
+      v1beta2
+      
+    
+    
+      X+5
+      v1, v1beta1 (deprecated), v1beta2 (deprecated)
+      v1beta2
+      
+        
+          v1beta2 is deprecated, "action required" relnote
+        
+      
+    
+    
+      X+6
+      v1, v1beta2 (deprecated)
+      v1
+      
+        
+          v1beta1 is removed, "action required" relnote
+        
+      
+    
+    
+      X+7
+      v1, v1beta2 (deprecated)
+      v1
+      
+    
+    
+      X+8
+      v2alpha1, v1
+      v1
+      
+        
+          v1beta2 is removed, "action required" relnote
+        
+      
+    
+    
+      X+9
+      v2alpha2, v1
+      v1
+      
+        
+           v2alpha1 is removed, "action required" relnote
+        
+      
+    
+    
+      X+10
+      v2beta1, v1
+      v1
+      
+        
+          v2alpha2 is removed, "action required" relnote
+        
+      
+    
+    
+      X+11
+      v2beta2, v2beta1 (deprecated), v1
+      v1
+      
+        
+          v2beta1 is deprecated, "action required" relnote
+        
+      
+    
+    
+      X+12
+      v2, v2beta2 (deprecated), v2beta1 (deprecated), v1 (deprecated)
+      v1
+      
+        
+          v2beta2 is deprecated, "action required" relnote
+          v1 is deprecated in favor of v2, but will not be removed
+        
+      
+    
+    
+      X+13
+      v2, v2beta1 (deprecated), v2beta2 (deprecated), v1 (deprecated)
+      v2
+      
+    
+    
+      X+14
+      v2, v2beta2 (deprecated), v1 (deprecated)
+      v2
+      
+        
+          v2beta1 is removed, "action required" relnote
+        
+      
+    
+    
+      X+15
+      v2, v1 (deprecated)
+      v2
+      
+        
+          v2beta2 is removed, "action required" relnote
+        
+      
+    
+  
+
 
 ### REST resources (aka API objects)
 

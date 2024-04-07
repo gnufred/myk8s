@@ -9,10 +9,10 @@ weight: 50
 ---
 
 
-<!-- overview -->
+
 [_Node affinity_](/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
-is a property of {{< glossary_tooltip text="Pods" term_id="pod" >}} that *attracts* them to
-a set of {{< glossary_tooltip text="nodes" term_id="node" >}} (either as a preference or a
+is a property of {{}} that *attracts* them to
+a set of {{}} (either as a preference or a
 hard requirement). _Taints_ are the opposite -- they allow a node to repel a set of pods.
 
 _Tolerations_ are applied to pods. Tolerations allow the scheduler to schedule pods with matching
@@ -24,7 +24,7 @@ Taints and tolerations work together to ensure that pods are not scheduled
 onto inappropriate nodes. One or more taints are applied to a node; this
 marks that the node should not accept any pods that do not tolerate the taints.
 
-<!-- body -->
+
 
 ## Concepts
 
@@ -73,7 +73,7 @@ A toleration "matches" a taint if the keys are the same and the effects are the 
 * the `operator` is `Exists` (in which case no `value` should be specified), or
 * the `operator` is `Equal` and the values should be equal.
 
-{{< note >}}
+{{}}
 
 There are two special cases:
 
@@ -82,7 +82,7 @@ will tolerate everything.
 
 An empty `effect` matches all effects with key `key1`.
 
-{{< /note >}}
+{{}}
 
 The above example used the `effect` of `NoSchedule`. Alternatively, you can use the `effect` of `PreferNoSchedule`.
 
@@ -210,7 +210,7 @@ when there are node problems, which is described in the next section.
 
 ## Taint based Evictions
 
-{{< feature-state for_k8s_version="v1.18" state="stable" >}}
+{{}}
 
 
 
@@ -242,11 +242,11 @@ with the kubelet on the node. The decision to delete the pods cannot be communic
 the kubelet until communication with the API server is re-established. In the meantime,
 the pods that are scheduled for deletion may continue to run on the partitioned node.
 
-{{< note >}}
+{{}}
 The control plane limits the rate of adding new taints to nodes. This rate limiting
 manages the number of evictions that are triggered when many nodes become unreachable at
 once (for example: if there is a network disruption).
-{{< /note >}}
+{{}}
 
 You can specify `tolerationSeconds` for a Pod to define how long that Pod stays bound
 to a failing or unresponsive Node.
@@ -264,7 +264,7 @@ tolerations:
   tolerationSeconds: 6000
 ```
 
-{{< note >}}
+{{}}
 Kubernetes automatically adds a toleration for
 `node.kubernetes.io/not-ready` and `node.kubernetes.io/unreachable`
 with `tolerationSeconds=300`,
@@ -272,7 +272,7 @@ unless you, or a controller, set those tolerations explicitly.
 
 These automatically-added tolerations mean that Pods remain bound to
 Nodes for 5 minutes after one of these problems is detected.
-{{< /note >}}
+{{}}
 
 [DaemonSet](/docs/concepts/workloads/controllers/daemonset/) pods are created with
 `NoExecute` tolerations for the following taints with no `tolerationSeconds`:
@@ -284,7 +284,7 @@ This ensures that DaemonSet pods are never evicted due to these problems.
 
 ## Taint Nodes by Condition
 
-The control plane, using the node {{<glossary_tooltip text="controller" term_id="controller">}},
+The control plane, using the node {{}},
 automatically creates taints with a `NoSchedule` effect for
 [node conditions](/docs/concepts/scheduling-eviction/node-pressure-eviction/#node-conditions).
 
@@ -297,7 +297,7 @@ control plane adds the `node.kubernetes.io/memory-pressure` taint.
 
 You can ignore node conditions for newly created pods by adding the corresponding
 Pod tolerations. The control plane also adds the `node.kubernetes.io/memory-pressure`
-toleration on pods that have a {{< glossary_tooltip text="QoS class" term_id="qos-class" >}}
+toleration on pods that have a {{}}
 other than `BestEffort`. This is because Kubernetes treats pods in the `Guaranteed`
 or `Burstable` QoS classes (even pods with no memory request set) as if they are
 able to cope with memory pressure, while new `BestEffort` pods are not scheduled

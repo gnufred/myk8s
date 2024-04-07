@@ -7,7 +7,7 @@ reviewers:
 weight: 20
 ---
 
-<!-- overview -->
+
 
 *Node Problem Detector* is a daemon for monitoring and reporting about a node's health.
 You can run Node Problem Detector as a `DaemonSet` or as a standalone daemon.
@@ -20,9 +20,9 @@ To learn how to install and use Node Problem Detector, see
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
-<!-- steps -->
+
 
 ## Limitations
 
@@ -31,7 +31,7 @@ To learn how to install and use Node Problem Detector, see
 
 ## Enabling Node Problem Detector
 
-Some cloud providers enable Node Problem Detector as an {{< glossary_tooltip text="Addon" term_id="addons" >}}.
+Some cloud providers enable Node Problem Detector as an {{}}.
 You can also enable Node Problem Detector with `kubectl` or by creating an Addon DaemonSet.
 
 ### Using kubectl to enable Node Problem Detector {#using-kubectl}
@@ -44,9 +44,9 @@ to detect customized node problems. For example:
 
    {{% code_sample file="debug/node-problem-detector.yaml" %}}
 
-   {{< note >}}
+   {{}}
    You should verify that the system log directory is right for your operating system distribution.
-   {{< /note >}}
+   {{}}
 
 1. Start node problem detector with `kubectl`:
 
@@ -90,9 +90,9 @@ to overwrite the configuration:
    kubectl apply -f https://k8s.io/examples/debug/node-problem-detector-configmap.yaml
    ```
 
-{{< note >}}
+{{}}
 This approach only applies to a Node Problem Detector started with `kubectl`.
-{{< /note >}}
+{{}}
 
 Overwriting a configuration is not supported if a Node Problem Detector runs as a cluster Addon.
 The Addon manager does not support `ConfigMap`.
@@ -151,7 +151,7 @@ The following exporters are supported:
   Monitoring API. The exporting behavior can be customized using a
   [configuration file](https://github.com/kubernetes/node-problem-detector/blob/v0.8.12/config/exporter/stackdriver-exporter.json).
 
-<!-- discussion -->
+
 
 ## Recommendations and restrictions
 

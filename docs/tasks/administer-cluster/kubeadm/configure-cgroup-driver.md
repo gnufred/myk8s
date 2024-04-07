@@ -4,7 +4,7 @@ content_type: task
 weight: 20
 ---
 
-<!-- overview -->
+
 
 This page explains how to configure the kubelet's cgroup driver to match the container
 runtime cgroup driver for kubeadm clusters.
@@ -14,7 +14,7 @@ runtime cgroup driver for kubeadm clusters.
 You should be familiar with the Kubernetes
 [container runtime requirements](/docs/setup/production-environment/container-runtimes).
 
-<!-- steps -->
+
 
 ## Configuring the container runtime cgroup driver
 
@@ -33,7 +33,7 @@ kubeadm allows you to pass a `KubeletConfiguration` structure during `kubeadm in
 This `KubeletConfiguration` can include the `cgroupDriver` field which controls the cgroup
 driver of the kubelet.
 
-{{< note >}}
+{{}}
 In v1.22 and later, if the user does not set the `cgroupDriver` field under `KubeletConfiguration`,
 kubeadm defaults it to `systemd`.
 
@@ -41,7 +41,7 @@ In Kubernetes v1.28, you can enable automatic detection of the
 cgroup driver as an alpha feature.
 See [systemd cgroup driver](/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver)
 for more details.
-{{< /note >}}
+{{}}
 
 A minimal example of configuring the field explicitly:
 
@@ -62,7 +62,7 @@ Such a configuration file can then be passed to the kubeadm command:
 kubeadm init --config kubeadm-config.yaml
 ```
 
-{{< note >}}
+{{}}
 Kubeadm uses the same `KubeletConfiguration` for all nodes in the cluster.
 The `KubeletConfiguration` is stored in a [ConfigMap](/docs/concepts/configuration/configmap)
 object under the `kube-system` namespace.
@@ -70,7 +70,7 @@ object under the `kube-system` namespace.
 Executing the sub commands `init`, `join` and `upgrade` would result in kubeadm
 writing the `KubeletConfiguration` as a file under `/var/lib/kubelet/config.yaml`
 and passing it to the local node kubelet.
-{{< /note >}}
+{{}}
 
 ## Using the `cgroupfs` driver
 
@@ -91,12 +91,12 @@ To change the cgroup driver of an existing kubeadm cluster from `cgroupfs` to `s
 a similar procedure to a kubelet upgrade is required. This must include both
 steps outlined below.
 
-{{< note >}}
+{{}}
 Alternatively, it is possible to replace the old nodes in the cluster with new ones
 that use the `systemd` driver. This requires executing only the first step below
 before joining the new nodes and ensuring the workloads can safely move to the new
 nodes before deleting the old nodes.
-{{< /note >}}
+{{}}
 
 ### Modify the kubelet ConfigMap
 
@@ -112,14 +112,14 @@ nodes before deleting the old nodes.
 
 For each node in the cluster:
 
-- [Drain the node](/docs/tasks/administer-cluster/safely-drain-node) using `kubectl drain <node-name> --ignore-daemonsets`
+- [Drain the node](/docs/tasks/administer-cluster/safely-drain-node) using `kubectl drain  --ignore-daemonsets`
 - Stop the kubelet using `systemctl stop kubelet`
 - Stop the container runtime
 - Modify the container runtime cgroup driver to `systemd`
 - Set `cgroupDriver: systemd` in `/var/lib/kubelet/config.yaml`
 - Start the container runtime
 - Start the kubelet using `systemctl start kubelet`
-- [Uncordon the node](/docs/tasks/administer-cluster/safely-drain-node) using `kubectl uncordon <node-name>`
+- [Uncordon the node](/docs/tasks/administer-cluster/safely-drain-node) using `kubectl uncordon `
 
 Execute these steps on nodes one at a time to ensure workloads
 have sufficient time to schedule on different nodes.

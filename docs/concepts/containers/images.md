@@ -8,24 +8,24 @@ weight: 10
 hide_summary: true # Listed separately in section index
 ---
 
-<!-- overview -->
+
 
 A container image represents binary data that encapsulates an application and all its
 software dependencies. Container images are executable software bundles that can run
 standalone and that make very well defined assumptions about their runtime environment.
 
 You typically create a container image of your application and push it to a registry
-before referring to it in a {{< glossary_tooltip text="Pod" term_id="pod" >}}.
+before referring to it in a {{}}.
 
 This page provides an outline of the container image concept.
 
-{{< note >}}
+{{}}
 If you are looking for the container images for a Kubernetes
-release (such as v{{< skew latestVersion >}}, the latest minor release),
+release (such as v{{}}, the latest minor release),
 visit [Download Kubernetes](https://kubernetes.io/releases/download/).
-{{< /note >}}
+{{}}
 
-<!-- body -->
+
 
 ## Image names
 
@@ -46,12 +46,12 @@ If you don't specify a tag, Kubernetes assumes you mean the tag `latest`.
 
 ## Updating images
 
-When you first create a {{< glossary_tooltip text="Deployment" term_id="deployment" >}},
-{{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}, Pod, or other
+When you first create a {{}},
+{{}}, Pod, or other
 object that includes a Pod template, then by default the pull policy of all
 containers in that pod will be set to `IfNotPresent` if it is not explicitly
 specified. This policy causes the
-{{< glossary_tooltip text="kubelet" term_id="kubelet" >}} to skip pulling an
+{{}} to skip pulling an
 image if it already exists.
 
 ### Image pull policy
@@ -83,17 +83,17 @@ The caching semantics of the underlying image provider make even
 Your container runtime can notice that the image layers already exist on the node
 so that they don't need to be downloaded again.
 
-{{< note >}}
+{{}}
 You should avoid using the `:latest` tag when deploying containers in production as
 it is harder to track which version of the image is running and more difficult to
 roll back properly.
 
 Instead, specify a meaningful tag such as `v1.42.0` and/or a digest.
-{{< /note >}}
+{{}}
 
 To make sure the Pod always uses the same version of a container image, you can specify
 the image's digest;
-replace `<image-name>:<tag>` with `<image-name>@<digest>`
+replace `:` with `@`
 (for example, `image@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2`).
 
 When using image tags, if the image registry were to change the code that the tag on that image
@@ -123,7 +123,7 @@ When you (or a controller) submit a new Pod to the API server, your cluster sets
   container image that isn't `:latest`, the `imagePullPolicy` is automatically set to
   `IfNotPresent`.
 
-{{< note >}}
+{{}}
 The value of `imagePullPolicy` of the container is always set when the object is
 first _created_, and is not updated if the image's tag or digest later changes.
 
@@ -131,7 +131,7 @@ For example, if you create a Deployment with an image whose tag is _not_
 `:latest`, and later update that Deployment's image to a `:latest` tag, the
 `imagePullPolicy` field will _not_ change to `Always`. You must manually change
 the pull policy of any object after its initial creation.
-{{< /note >}}
+{{}}
 
 #### Required image pull
 
@@ -161,12 +161,12 @@ which is 300 seconds (5 minutes).
 
 ### Image pull per runtime class
 
-{{< feature-state feature_gate_name="RuntimeClassInImageCriApi" >}}
+{{}}
 Kubernetes includes alpha support for performing image pulls based on the RuntimeClass of a Pod.
 
 If you enable the `RuntimeClassInImageCriApi` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/),
 the kubelet references container images by a tuple of (image name, runtime handler) rather than just the
-image name or digest. Your {{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}
+image name or digest. Your {{}}
 may adapt its behavior based on the selected runtime handler.
 Pulling images based on runtime class will be helpful for VM based containers like windows hyperV containers.
 
@@ -195,7 +195,7 @@ behalf of the two different Pods, when parallel image pulls is enabled.
 
 ### Maximum parallel image pulls
 
-{{< feature-state for_k8s_version="v1.27" state="alpha" >}}
+{{}}
 
 When `serializeImagePulls` is set to false, the kubelet defaults to no limit on the
 maximum number of images being pulled at the same time. If you would like to
@@ -261,10 +261,10 @@ task. That example uses a private registry in Docker Hub.
 
 ### Kubelet credential provider for authenticated image pulls {#kubelet-credential-provider}
 
-{{< note >}}
+{{}}
 This approach is especially suitable when kubelet needs to fetch registry credentials dynamically.
 Most commonly used for registries provided by cloud providers where auth tokens are short-lived. 
-{{< /note >}}
+{{}}
 
 You can configure the kubelet to invoke a plugin binary to dynamically fetch registry credentials for a container image.
 This is the most robust and versatile way to fetch credentials for private registries, but also requires kubelet-level configuration to enable.
@@ -332,11 +332,11 @@ authentication sources if one of them fails.
 
 ### Pre-pulled images
 
-{{< note >}}
+{{}}
 This approach is suitable if you can control node configuration.  It
 will not work reliably if your cloud provider manages nodes and replaces
 them automatically.
-{{< /note >}}
+{{}}
 
 By default, the kubelet tries to pull each image from the specified registry.
 However, if the `imagePullPolicy` property of the container is set to `IfNotPresent` or `Never`,
@@ -352,10 +352,10 @@ All pods will have read access to any pre-pulled images.
 
 ### Specifying imagePullSecrets on a Pod
 
-{{< note >}}
+{{}}
 This is the recommended approach to run containers based on images
 in private registries.
-{{< /note >}}
+{{}}
 
 Kubernetes supports specifying container image registry keys on a Pod.
 `imagePullSecrets` must all be in the same namespace as the Pod. The referenced
@@ -368,7 +368,7 @@ to the registry, as well as its hostname.
 Run the following command, substituting the appropriate uppercase values:
 
 ```shell
-kubectl create secret docker-registry <name> \
+kubectl create secret docker-registry  \
   --docker-server=DOCKER_REGISTRY_SERVER \
   --docker-username=DOCKER_USER \
   --docker-password=DOCKER_PASSWORD \
@@ -377,7 +377,7 @@ kubectl create secret docker-registry <name> \
 
 If you already have a Docker credentials file then, rather than using the above
 command, you can import the credentials file as a Kubernetes
-{{< glossary_tooltip text="Secrets" term_id="secret" >}}.  
+{{}}.  
 [Create a Secret based on existing Docker credentials](/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials)
 explains how to set this up.
 
@@ -385,10 +385,10 @@ This is particularly useful if you are using multiple private container
 registries, as `kubectl create secret docker-registry` creates a Secret that
 only works with a single private registry.
 
-{{< note >}}
+{{}}
 Pods can only reference image pull secrets in their own namespace,
 so this process needs to be done one time per namespace.
-{{< /note >}}
+{{}}
 
 #### Referring to an imagePullSecrets on a Pod
 
@@ -399,7 +399,7 @@ reference a Secret in the same namespace.
 For example:
 
 ```shell
-cat <<EOF > pod.yaml
+cat  pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -413,7 +413,7 @@ spec:
     - name: myregistrykey
 EOF
 
-cat <<EOF >> ./kustomization.yaml
+cat > ./kustomization.yaml
 resources:
 - pod.yaml
 EOF
@@ -472,7 +472,7 @@ There were three built-in implementations of the kubelet credential provider int
 ACR (Azure Container Registry), ECR (Elastic Container Registry), and GCR (Google Container Registry).
 
 For more information on the legacy mechanism, read the documentation for the version of Kubernetes that you
-are using. Kubernetes v1.26 through to v{{< skew latestVersion >}} do not include the legacy mechanism, so
+are using. Kubernetes v1.26 through to v{{}} do not include the legacy mechanism, so
 you would need to either:
 - configure a kubelet image credential provider on each node
 - specify image pull credentials using `imagePullSecrets` and at least one Secret

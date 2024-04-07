@@ -10,8 +10,8 @@ aka:
 tags:
 - networking
 ---
- Endpoints track the IP addresses of Pods with matching  {{< glossary_tooltip text="selectors" term_id="selector" >}}.
+ Endpoints track the IP addresses of Pods with matching  {{}}.
 
-<!--more-->
-Endpoints can be configured manually for {{< glossary_tooltip text="Services" term_id="service" >}} without selectors specified.
-The {{< glossary_tooltip text="EndpointSlice" term_id="endpoint-slice" >}} resource provides a scalable and extensible alternative to Endpoints.
+
+Endpoints can be configured manually for {{}} without selectors specified.
+The {{}} resource provides a scalable and extensible alternative to Endpoints.

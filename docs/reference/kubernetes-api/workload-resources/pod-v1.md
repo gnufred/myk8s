@@ -10,16 +10,7 @@ weight: 1
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 `apiVersion: v1`
 
@@ -30,7 +21,7 @@ guide. You can file document formatting bugs against the
 
 Pod is a collection of containers that can run on a host. This resource is created by clients and scheduled onto hosts.
 
-<hr>
+
 
 - **apiVersion**: v1
 
@@ -38,15 +29,15 @@ Pod is a collection of containers that can run on a host. This resource is creat
 - **kind**: Pod
 
 
-- **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
+- **metadata** (}}">ObjectMeta)
 
   Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../workload-resources/pod-v1#PodSpec" >}}">PodSpec</a>)
+- **spec** (}}">PodSpec)
 
   Specification of the desired behavior of the pod. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
-- **status** (<a href="{{< ref "../workload-resources/pod-v1#PodStatus" >}}">PodStatus</a>)
+- **status** (}}">PodStatus)
 
   Most recently observed status of the pod. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
@@ -58,32 +49,32 @@ Pod is a collection of containers that can run on a host. This resource is creat
 
 PodSpec is a description of a pod.
 
-<hr>
+
 
 
 
 ### Containers
 
 
-- **containers** ([]<a href="{{< ref "../workload-resources/pod-v1#Container" >}}">Container</a>), required
+- **containers** ([]}}">Container), required
 
   *Patch strategy: merge on key `name`*
   
   List of containers belonging to the pod. Containers cannot currently be added or removed. There must be at least one container in a Pod. Cannot be updated.
 
-- **initContainers** ([]<a href="{{< ref "../workload-resources/pod-v1#Container" >}}">Container</a>)
+- **initContainers** ([]}}">Container)
 
   *Patch strategy: merge on key `name`*
   
   List of initialization containers belonging to the pod. Init containers are executed in order prior to containers being started. If any init container fails, the pod is considered to have failed and is handled according to its restartPolicy. The name for an init container or normal container must be unique among all containers. Init containers may not have Lifecycle actions, Readiness probes, Liveness probes, or Startup probes. The resourceRequirements of an init container are taken into account during scheduling by finding the highest request/limit for each resource type, and then using the max of of that value or the sum of the normal containers. Limits are applied to init containers in a similar fashion. Init containers cannot currently be added or removed. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 
-- **ephemeralContainers** ([]<a href="{{< ref "../workload-resources/pod-v1#EphemeralContainer" >}}">EphemeralContainer</a>)
+- **ephemeralContainers** ([]}}">EphemeralContainer)
 
   *Patch strategy: merge on key `name`*
   
   List of ephemeral containers run in this pod. Ephemeral containers may be run in an existing pod to perform user-initiated actions such as debugging. This list cannot be specified when creating a pod, and it cannot be modified by updating the pod spec. In order to add an ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource.
 
-- **imagePullSecrets** ([]<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
+- **imagePullSecrets** ([]}}">LocalObjectReference)
 
   *Patch strategy: merge on key `name`*
   
@@ -101,7 +92,7 @@ PodSpec is a description of a pod.
   
   If the OS field is set to windows, following fields must be unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile - spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups - spec.containers[*].securityContext.seLinuxOptions - spec.containers[*].securityContext.seccompProfile - spec.containers[*].securityContext.capabilities - spec.containers[*].securityContext.readOnlyRootFilesystem - spec.containers[*].securityContext.privileged - spec.containers[*].securityContext.allowPrivilegeEscalation - spec.containers[*].securityContext.procMount - spec.containers[*].securityContext.runAsUser - spec.containers[*].securityContext.runAsGroup
 
-  <a name="PodOS"></a>
+  
   *PodOS defines the OS parameters of a pod.*
 
   - **os.name** (string), required
@@ -111,7 +102,7 @@ PodSpec is a description of a pod.
 ### Volumes
 
 
-- **volumes** ([]<a href="{{< ref "../config-and-storage-resources/volume#Volume" >}}">Volume</a>)
+- **volumes** ([]}}">Volume)
 
   *Patch strategies: retainKeys, merge on key `name`*
   
@@ -132,18 +123,18 @@ PodSpec is a description of a pod.
 
   If specified, the pod's scheduling constraints
 
-  <a name="Affinity"></a>
+  
   *Affinity is a group of affinity scheduling rules.*
 
-  - **affinity.nodeAffinity** (<a href="{{< ref "../workload-resources/pod-v1#NodeAffinity" >}}">NodeAffinity</a>)
+  - **affinity.nodeAffinity** (}}">NodeAffinity)
 
     Describes node affinity scheduling rules for the pod.
 
-  - **affinity.podAffinity** (<a href="{{< ref "../workload-resources/pod-v1#PodAffinity" >}}">PodAffinity</a>)
+  - **affinity.podAffinity** (}}">PodAffinity)
 
     Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
 
-  - **affinity.podAntiAffinity** (<a href="{{< ref "../workload-resources/pod-v1#PodAntiAffinity" >}}">PodAntiAffinity</a>)
+  - **affinity.podAntiAffinity** (}}">PodAntiAffinity)
 
     Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
 
@@ -151,8 +142,8 @@ PodSpec is a description of a pod.
 
   If specified, the pod's tolerations.
 
-  <a name="Toleration"></a>
-  *The pod this Toleration is attached to tolerates any taint that matches the triple <key,value,effect> using the matching operator <operator>.*
+  
+  *The pod this Toleration is attached to tolerates any taint that matches the triple  using the matching operator .*
 
   - **tolerations.key** (string)
 
@@ -202,7 +193,7 @@ PodSpec is a description of a pod.
   
   TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. Scheduler will schedule pods in a way which abides by the constraints. All topologySpreadConstraints are ANDed.
 
-  <a name="TopologySpreadConstraint"></a>
+  
   *TopologySpreadConstraint specifies how to spread matching pods among the given topology.*
 
   - **topologySpreadConstraints.maxSkew** (int32), required
@@ -211,7 +202,7 @@ PodSpec is a description of a pod.
 
   - **topologySpreadConstraints.topologyKey** (string), required
 
-    TopologyKey is the key of node labels. Nodes that have a label with this key and identical values are considered to be in the same topology. We consider each \<key, value> as a "bucket", and try to put balanced number of pods into each bucket. We define a domain as a particular instance of a topology. Also, we define an eligible domain as a domain whose nodes meet the requirements of nodeAffinityPolicy and nodeTaintsPolicy. e.g. If TopologyKey is "kubernetes.io/hostname", each Node is a domain of that topology. And, if TopologyKey is "topology.kubernetes.io/zone", each zone is a domain of that topology. It's a required field.
+    TopologyKey is the key of node labels. Nodes that have a label with this key and identical values are considered to be in the same topology. We consider each \ as a "bucket", and try to put balanced number of pods into each bucket. We define a domain as a particular instance of a topology. Also, we define an eligible domain as a domain whose nodes meet the requirements of nodeAffinityPolicy and nodeTaintsPolicy. e.g. If TopologyKey is "kubernetes.io/hostname", each Node is a domain of that topology. And, if TopologyKey is "topology.kubernetes.io/zone", each zone is a domain of that topology. It's a required field.
 
   - **topologySpreadConstraints.whenUnsatisfiable** (string), required
 
@@ -220,7 +211,7 @@ PodSpec is a description of a pod.
       skew.
     A constraint is considered "Unsatisfiable" for an incoming pod if and only if every possible node assignment for that pod would violate "MaxSkew" on some topology. For example, in a 3-zone cluster, MaxSkew is set to 1, and pods with the same labelSelector spread as 3/1/1: | zone1 | zone2 | zone3 | | P P P |   P   |   P   | If WhenUnsatisfiable is set to DoNotSchedule, incoming pod can only be scheduled to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies MaxSkew(1). In other words, the cluster can still be imbalanced, but scheduler won't make it *more* imbalanced. It's a required field.
 
-  - **topologySpreadConstraints.labelSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+  - **topologySpreadConstraints.labelSelector** (}}">LabelSelector)
 
     LabelSelector is used to find matching pods. Pods that match this label selector are counted to determine the number of pods in their corresponding topology domain.
 
@@ -252,7 +243,7 @@ PodSpec is a description of a pod.
     
     If this value is nil, the behavior is equivalent to the Ignore policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
 
-- **overhead** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
+- **overhead** (map[string]}}">Quantity)
 
   Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md
 
@@ -275,7 +266,7 @@ PodSpec is a description of a pod.
 
   If specified, all readiness gates will be evaluated for pod readiness. A pod is ready when all its containers are ready AND all conditions specified in the readiness gates have status equal to "True" More info: https://git.k8s.io/enhancements/keps/sig-network/580-pod-readiness-gates
 
-  <a name="PodReadinessGate"></a>
+  
   *PodReadinessGate contains the reference to a pod condition*
 
   - **readinessGates.conditionType** (string), required
@@ -295,7 +286,7 @@ PodSpec is a description of a pod.
 
 - **subdomain** (string)
 
-  If specified, the fully qualified Pod hostname will be "\<hostname>.\<subdomain>.\<pod namespace>.svc.\<cluster domain>". If not specified, the pod will not have a domainname at all.
+  If specified, the fully qualified Pod hostname will be "\.\.\.svc.\". If not specified, the pod will not have a domainname at all.
 
 - **hostAliases** ([]HostAlias)
 
@@ -303,7 +294,7 @@ PodSpec is a description of a pod.
   
   HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified. This is only valid for non-hostNetwork pods.
 
-  <a name="HostAlias"></a>
+  
   *HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the pod's hosts file.*
 
   - **hostAliases.hostnames** ([]string)
@@ -318,7 +309,7 @@ PodSpec is a description of a pod.
 
   Specifies the DNS parameters of a pod. Parameters specified here will be merged to the generated DNS configuration based on DNSPolicy.
 
-  <a name="PodDNSConfig"></a>
+  
   *PodDNSConfig defines the DNS parameters of a pod in addition to those generated from DNSPolicy.*
 
   - **dnsConfig.nameservers** ([]string)
@@ -329,7 +320,7 @@ PodSpec is a description of a pod.
 
     A list of DNS resolver options. This will be merged with the base options generated from DNSPolicy. Duplicated entries will be removed. Resolution options given in Options will override those that appear in the base DNSPolicy.
 
-    <a name="PodDNSConfigOption"></a>
+    
     *PodDNSConfigOption defines DNS resolver options of a pod.*
 
     - **dnsConfig.options.name** (string)
@@ -384,7 +375,7 @@ PodSpec is a description of a pod.
 
   SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.
 
-  <a name="PodSecurityContext"></a>
+  
   *PodSecurityContext holds pod-level security attributes and common container settings. Some fields are also present in container.securityContext.  Field values of container.securityContext take precedence over field values of PodSecurityContext.*
 
   - **securityContext.runAsUser** (int64)
@@ -419,7 +410,7 @@ PodSpec is a description of a pod.
 
     The seccomp options to use by the containers in this pod. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="SeccompProfile"></a>
+    
     *SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set.*
 
     - **securityContext.seccompProfile.type** (string), required
@@ -436,7 +427,7 @@ PodSpec is a description of a pod.
 
     The SELinux context to be applied to all containers. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="SELinuxOptions"></a>
+    
     *SELinuxOptions are the labels to be applied to the container*
 
     - **securityContext.seLinuxOptions.level** (string)
@@ -459,7 +450,7 @@ PodSpec is a description of a pod.
 
     Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="Sysctl"></a>
+    
     *Sysctl defines a kernel parameter to be set*
 
     - **securityContext.sysctls.name** (string), required
@@ -474,7 +465,7 @@ PodSpec is a description of a pod.
 
     The Windows specific settings applied to all containers. If unspecified, the options within a container's SecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is linux.
 
-    <a name="WindowsSecurityContextOptions"></a>
+    
     *WindowsSecurityContextOptions contain Windows-specific options and credentials.*
 
     - **securityContext.windowsOptions.gmsaCredentialSpec** (string)
@@ -512,7 +503,7 @@ PodSpec is a description of a pod.
   
   This field is immutable.
 
-  <a name="PodResourceClaim"></a>
+  
   *PodResourceClaim references exactly one ResourceClaim through a ClaimSource. It adds a name to it that uniquely identifies the ResourceClaim inside the Pod. Containers that need access to the ResourceClaim reference it with this name.*
 
   - **resourceClaims.name** (string), required
@@ -523,7 +514,7 @@ PodSpec is a description of a pod.
 
     Source describes where to find the ResourceClaim.
 
-    <a name="ClaimSource"></a>
+    
     *ClaimSource describes a reference to a ResourceClaim.
     
     Exactly one of these fields should be set.  Consumers of this type must treat an empty object as if it has an unknown value.*
@@ -552,7 +543,7 @@ PodSpec is a description of a pod.
   
   This is a beta feature enabled by the PodSchedulingReadiness feature gate.
 
-  <a name="PodSchedulingGate"></a>
+  
   *PodSchedulingGate is associated to a Pod to guard its scheduling.*
 
   - **schedulingGates.name** (string), required
@@ -572,7 +563,7 @@ PodSpec is a description of a pod.
 
 A single application container that you want to run within a pod.
 
-<hr>
+
 
 - **name** (string), required
 
@@ -617,39 +608,12 @@ A single application container that you want to run within a pod.
   
   List of ports to expose from the container. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default "0.0.0.0" address inside a container will be accessible from the network. Modifying this array with strategic merge patch may corrupt the data. For more information See https://github.com/kubernetes/kubernetes/issues/108255. Cannot be updated.
 
-  <a name="ContainerPort"></a>
+  
   *ContainerPort represents a network port in a single container.*
 
   - **ports.containerPort** (int32), required
 
-    Number of port to expose on the pod's IP address. This must be a valid port number, 0 \< x \< 65536.
-
-  - **ports.hostIP** (string)
-
-    What host IP to bind the external port to.
-
-  - **ports.hostPort** (int32)
-
-    Number of port to expose on the host. If specified, this must be a valid port number, 0 \< x \< 65536. If HostNetwork is specified, this must match ContainerPort. Most containers do not need this.
-
-  - **ports.name** (string)
-
-    If specified, this must be an IANA_SVC_NAME and unique within the pod. Each named port in a pod must have a unique name. Name for the port that can be referred to by services.
-
-  - **ports.protocol** (string)
-
-    Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
-
-### Environment variables
-
-
-- **env** ([]EnvVar)
-
-  *Patch strategy: merge on key `name`*
-  
-  List of environment variables to set in the container. Cannot be updated.
-
-  <a name="EnvVar"></a>
+    Number of port to expose on the pod's IP address. This must be a valid port number, 0 \
   *EnvVar represents an environment variable present in a Container.*
 
   - **env.name** (string), required
@@ -664,14 +628,14 @@ A single application container that you want to run within a pod.
 
     Source for the environment variable's value. Cannot be used if value is not empty.
 
-    <a name="EnvVarSource"></a>
+    
     *EnvVarSource represents a source for the value of an EnvVar.*
 
     - **env.valueFrom.configMapKeyRef** (ConfigMapKeySelector)
 
       Selects a key of a ConfigMap.
 
-      <a name="ConfigMapKeySelector"></a>
+      
       *Selects a key from a ConfigMap.*
 
       - **env.valueFrom.configMapKeyRef.key** (string), required
@@ -686,11 +650,11 @@ A single application container that you want to run within a pod.
 
         Specify whether the ConfigMap or its key must be defined
 
-    - **env.valueFrom.fieldRef** (<a href="{{< ref "../common-definitions/object-field-selector#ObjectFieldSelector" >}}">ObjectFieldSelector</a>)
+    - **env.valueFrom.fieldRef** (}}">ObjectFieldSelector)
 
-      Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['\<KEY>']`, `metadata.annotations['\<KEY>']`, spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+      Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['\']`, `metadata.annotations['\']`, spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
 
-    - **env.valueFrom.resourceFieldRef** (<a href="{{< ref "../common-definitions/resource-field-selector#ResourceFieldSelector" >}}">ResourceFieldSelector</a>)
+    - **env.valueFrom.resourceFieldRef** (}}">ResourceFieldSelector)
 
       Selects a resource of the container: only resources limits and requests (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
 
@@ -698,7 +662,7 @@ A single application container that you want to run within a pod.
 
       Selects a key of a secret in the pod's namespace
 
-      <a name="SecretKeySelector"></a>
+      
       *SecretKeySelector selects a key of a Secret.*
 
       - **env.valueFrom.secretKeyRef.key** (string), required
@@ -717,14 +681,14 @@ A single application container that you want to run within a pod.
 
   List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.
 
-  <a name="EnvFromSource"></a>
+  
   *EnvFromSource represents the source of a set of ConfigMaps*
 
   - **envFrom.configMapRef** (ConfigMapEnvSource)
 
     The ConfigMap to select from
 
-    <a name="ConfigMapEnvSource"></a>
+    
     *ConfigMapEnvSource selects a ConfigMap to populate the environment variables with.
     
     The contents of the target ConfigMap's Data field will represent the key-value pairs as environment variables.*
@@ -745,7 +709,7 @@ A single application container that you want to run within a pod.
 
     The Secret to select from
 
-    <a name="SecretEnvSource"></a>
+    
     *SecretEnvSource selects a Secret to populate the environment variables with.
     
     The contents of the target Secret's Data field will represent the key-value pairs as environment variables.*
@@ -767,7 +731,7 @@ A single application container that you want to run within a pod.
   
   Pod volumes to mount into the container's filesystem. Cannot be updated.
 
-  <a name="VolumeMount"></a>
+  
   *VolumeMount describes a mounting of a Volume within a container.*
 
   - **volumeMounts.mountPath** (string), required
@@ -800,7 +764,7 @@ A single application container that you want to run within a pod.
   
   volumeDevices is the list of block devices to be used by the container.
 
-  <a name="VolumeDevice"></a>
+  
   *volumeDevice describes a mapping of a raw block device within a container.*
 
   - **volumeDevices.devicePath** (string), required
@@ -818,7 +782,7 @@ A single application container that you want to run within a pod.
 
   Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 
-  <a name="ResourceRequirements"></a>
+  
   *ResourceRequirements describes the compute resource requirements.*
 
   - **resources.claims** ([]ResourceClaim)
@@ -831,18 +795,18 @@ A single application container that you want to run within a pod.
     
     This field is immutable. It can only be set for containers.
 
-    <a name="ResourceClaim"></a>
+    
     *ResourceClaim references one entry in PodSpec.ResourceClaims.*
 
     - **resources.claims.name** (string), required
 
       Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
 
-  - **resources.limits** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
+  - **resources.limits** (map[string]}}">Quantity)
 
     Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 
-  - **resources.requests** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
+  - **resources.requests** (map[string]}}">Quantity)
 
     Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. Requests cannot exceed Limits. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 
@@ -852,7 +816,7 @@ A single application container that you want to run within a pod.
   
   Resources resize policy for the container.
 
-  <a name="ContainerResizePolicy"></a>
+  
   *ContainerResizePolicy represents resource resize policy for the container.*
 
   - **resizePolicy.resourceName** (string), required
@@ -870,14 +834,14 @@ A single application container that you want to run within a pod.
 
   Actions that the management system should take in response to container lifecycle events. Cannot be updated.
 
-  <a name="Lifecycle"></a>
+  
   *Lifecycle describes actions that the management system should take in response to container lifecycle events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the action is complete, unless the container process fails, in which case the handler is aborted.*
 
-  - **lifecycle.postStart** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
+  - **lifecycle.postStart** (}}">LifecycleHandler)
 
     PostStart is called immediately after a container is created. If the handler fails, the container is terminated and restarted according to its restart policy. Other management of the container blocks until the hook completes. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
 
-  - **lifecycle.preStop** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
+  - **lifecycle.preStop** (}}">LifecycleHandler)
 
     PreStop is called immediately before a container is terminated due to an API request or management event such as liveness/startup probe failure, preemption, resource contention, etc. The handler is not called if the container crashes or exits. The Pod's termination grace period countdown begins before the PreStop hook is executed. Regardless of the outcome of the handler, the container will eventually terminate within the Pod's termination grace period (unless delayed by finalizers). Other management of the container blocks until the hook completes or until the termination grace period is reached. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
 
@@ -889,15 +853,15 @@ A single application container that you want to run within a pod.
 
   Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.
 
-- **livenessProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
+- **livenessProbe** (}}">Probe)
 
   Periodic probe of container liveness. Container will be restarted if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 
-- **readinessProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
+- **readinessProbe** (}}">Probe)
 
   Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 
-- **startupProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
+- **startupProbe** (}}">Probe)
 
   StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 
@@ -912,7 +876,7 @@ A single application container that you want to run within a pod.
 
   SecurityContext defines the security options the container should be run with. If set, the fields of SecurityContext override the equivalent fields of PodSecurityContext. More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-  <a name="SecurityContext"></a>
+  
   *SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence.*
 
   - **securityContext.runAsUser** (int64)
@@ -947,7 +911,7 @@ A single application container that you want to run within a pod.
 
     The capabilities to add/drop when running containers. Defaults to the default set of capabilities granted by the container runtime. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="Capabilities"></a>
+    
     *Adds and removes POSIX capabilities from running containers.*
 
     - **securityContext.capabilities.add** ([]string)
@@ -962,7 +926,7 @@ A single application container that you want to run within a pod.
 
     The seccomp options to use by this container. If seccomp options are provided at both the pod & container level, the container options override the pod options. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="SeccompProfile"></a>
+    
     *SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set.*
 
     - **securityContext.seccompProfile.type** (string), required
@@ -979,7 +943,7 @@ A single application container that you want to run within a pod.
 
     The SELinux context to be applied to the container. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="SELinuxOptions"></a>
+    
     *SELinuxOptions are the labels to be applied to the container*
 
     - **securityContext.seLinuxOptions.level** (string)
@@ -1002,7 +966,7 @@ A single application container that you want to run within a pod.
 
     The Windows specific settings applied to all containers. If unspecified, the options from the PodSecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is linux.
 
-    <a name="WindowsSecurityContextOptions"></a>
+    
     *WindowsSecurityContextOptions contain Windows-specific options and credentials.*
 
     - **securityContext.windowsOptions.gmsaCredentialSpec** (string)
@@ -1044,7 +1008,7 @@ An EphemeralContainer is a temporary container that you may add to an existing P
 
 To add an ephemeral container, use the ephemeralcontainers subresource of an existing Pod. Ephemeral containers may not be removed or restarted.
 
-<hr>
+
 
 - **name** (string), required
 
@@ -1093,7 +1057,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
   
   List of environment variables to set in the container. Cannot be updated.
 
-  <a name="EnvVar"></a>
+  
   *EnvVar represents an environment variable present in a Container.*
 
   - **env.name** (string), required
@@ -1108,14 +1072,14 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
     Source for the environment variable's value. Cannot be used if value is not empty.
 
-    <a name="EnvVarSource"></a>
+    
     *EnvVarSource represents a source for the value of an EnvVar.*
 
     - **env.valueFrom.configMapKeyRef** (ConfigMapKeySelector)
 
       Selects a key of a ConfigMap.
 
-      <a name="ConfigMapKeySelector"></a>
+      
       *Selects a key from a ConfigMap.*
 
       - **env.valueFrom.configMapKeyRef.key** (string), required
@@ -1130,11 +1094,11 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
         Specify whether the ConfigMap or its key must be defined
 
-    - **env.valueFrom.fieldRef** (<a href="{{< ref "../common-definitions/object-field-selector#ObjectFieldSelector" >}}">ObjectFieldSelector</a>)
+    - **env.valueFrom.fieldRef** (}}">ObjectFieldSelector)
 
-      Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['\<KEY>']`, `metadata.annotations['\<KEY>']`, spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+      Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['\']`, `metadata.annotations['\']`, spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
 
-    - **env.valueFrom.resourceFieldRef** (<a href="{{< ref "../common-definitions/resource-field-selector#ResourceFieldSelector" >}}">ResourceFieldSelector</a>)
+    - **env.valueFrom.resourceFieldRef** (}}">ResourceFieldSelector)
 
       Selects a resource of the container: only resources limits and requests (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
 
@@ -1142,7 +1106,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
       Selects a key of a secret in the pod's namespace
 
-      <a name="SecretKeySelector"></a>
+      
       *SecretKeySelector selects a key of a Secret.*
 
       - **env.valueFrom.secretKeyRef.key** (string), required
@@ -1161,14 +1125,14 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
   List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.
 
-  <a name="EnvFromSource"></a>
+  
   *EnvFromSource represents the source of a set of ConfigMaps*
 
   - **envFrom.configMapRef** (ConfigMapEnvSource)
 
     The ConfigMap to select from
 
-    <a name="ConfigMapEnvSource"></a>
+    
     *ConfigMapEnvSource selects a ConfigMap to populate the environment variables with.
     
     The contents of the target ConfigMap's Data field will represent the key-value pairs as environment variables.*
@@ -1189,7 +1153,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
     The Secret to select from
 
-    <a name="SecretEnvSource"></a>
+    
     *SecretEnvSource selects a Secret to populate the environment variables with.
     
     The contents of the target Secret's Data field will represent the key-value pairs as environment variables.*
@@ -1211,7 +1175,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
   
   Pod volumes to mount into the container's filesystem. Subpath mounts are not allowed for ephemeral containers. Cannot be updated.
 
-  <a name="VolumeMount"></a>
+  
   *VolumeMount describes a mounting of a Volume within a container.*
 
   - **volumeMounts.mountPath** (string), required
@@ -1244,7 +1208,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
   
   volumeDevices is the list of block devices to be used by the container.
 
-  <a name="VolumeDevice"></a>
+  
   *volumeDevice describes a mapping of a raw block device within a container.*
 
   - **volumeDevices.devicePath** (string), required
@@ -1264,7 +1228,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
   
   Resources resize policy for the container.
 
-  <a name="ContainerResizePolicy"></a>
+  
   *ContainerResizePolicy represents resource resize policy for the container.*
 
   - **resizePolicy.resourceName** (string), required
@@ -1312,7 +1276,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
   Optional: SecurityContext defines the security options the ephemeral container should be run with. If set, the fields of SecurityContext override the equivalent fields of PodSecurityContext.
 
-  <a name="SecurityContext"></a>
+  
   *SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence.*
 
   - **securityContext.runAsUser** (int64)
@@ -1347,7 +1311,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
     The capabilities to add/drop when running containers. Defaults to the default set of capabilities granted by the container runtime. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="Capabilities"></a>
+    
     *Adds and removes POSIX capabilities from running containers.*
 
     - **securityContext.capabilities.add** ([]string)
@@ -1362,7 +1326,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
     The seccomp options to use by this container. If seccomp options are provided at both the pod & container level, the container options override the pod options. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="SeccompProfile"></a>
+    
     *SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set.*
 
     - **securityContext.seccompProfile.type** (string), required
@@ -1379,7 +1343,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
     The SELinux context to be applied to the container. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows.
 
-    <a name="SELinuxOptions"></a>
+    
     *SELinuxOptions are the labels to be applied to the container*
 
     - **securityContext.seLinuxOptions.level** (string)
@@ -1402,7 +1366,7 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
     The Windows specific settings applied to all containers. If unspecified, the options from the PodSecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is linux.
 
-    <a name="WindowsSecurityContextOptions"></a>
+    
     *WindowsSecurityContextOptions contain Windows-specific options and credentials.*
 
     - **securityContext.windowsOptions.gmsaCredentialSpec** (string)
@@ -1432,34 +1396,12 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
   
   Ports are not allowed for ephemeral containers.
 
-  <a name="ContainerPort"></a>
+  
   *ContainerPort represents a network port in a single container.*
 
   - **ports.containerPort** (int32), required
 
-    Number of port to expose on the pod's IP address. This must be a valid port number, 0 \< x \< 65536.
-
-  - **ports.hostIP** (string)
-
-    What host IP to bind the external port to.
-
-  - **ports.hostPort** (int32)
-
-    Number of port to expose on the host. If specified, this must be a valid port number, 0 \< x \< 65536. If HostNetwork is specified, this must match ContainerPort. Most containers do not need this.
-
-  - **ports.name** (string)
-
-    If specified, this must be an IANA_SVC_NAME and unique within the pod. Each named port in a pod must have a unique name. Name for the port that can be referred to by services.
-
-  - **ports.protocol** (string)
-
-    Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
-
-- **resources** (ResourceRequirements)
-
-  Resources are not allowed for ephemeral containers. Ephemeral containers use spare resources already allocated to the pod.
-
-  <a name="ResourceRequirements"></a>
+    Number of port to expose on the pod's IP address. This must be a valid port number, 0 \
   *ResourceRequirements describes the compute resource requirements.*
 
   - **resources.claims** ([]ResourceClaim)
@@ -1472,18 +1414,18 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
     
     This field is immutable. It can only be set for containers.
 
-    <a name="ResourceClaim"></a>
+    
     *ResourceClaim references one entry in PodSpec.ResourceClaims.*
 
     - **resources.claims.name** (string), required
 
       Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
 
-  - **resources.limits** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
+  - **resources.limits** (map[string]}}">Quantity)
 
     Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 
-  - **resources.requests** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
+  - **resources.requests** (map[string]}}">Quantity)
 
     Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. Requests cannot exceed Limits. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 
@@ -1491,26 +1433,26 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
   Lifecycle is not allowed for ephemeral containers.
 
-  <a name="Lifecycle"></a>
+  
   *Lifecycle describes actions that the management system should take in response to container lifecycle events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the action is complete, unless the container process fails, in which case the handler is aborted.*
 
-  - **lifecycle.postStart** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
+  - **lifecycle.postStart** (}}">LifecycleHandler)
 
     PostStart is called immediately after a container is created. If the handler fails, the container is terminated and restarted according to its restart policy. Other management of the container blocks until the hook completes. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
 
-  - **lifecycle.preStop** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
+  - **lifecycle.preStop** (}}">LifecycleHandler)
 
     PreStop is called immediately before a container is terminated due to an API request or management event such as liveness/startup probe failure, preemption, resource contention, etc. The handler is not called if the container crashes or exits. The Pod's termination grace period countdown begins before the PreStop hook is executed. Regardless of the outcome of the handler, the container will eventually terminate within the Pod's termination grace period (unless delayed by finalizers). Other management of the container blocks until the hook completes or until the termination grace period is reached. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
 
-- **livenessProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
+- **livenessProbe** (}}">Probe)
 
   Probes are not allowed for ephemeral containers.
 
-- **readinessProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
+- **readinessProbe** (}}">Probe)
 
   Probes are not allowed for ephemeral containers.
 
-- **startupProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
+- **startupProbe** (}}">Probe)
 
   Probes are not allowed for ephemeral containers.
 
@@ -1520,13 +1462,13 @@ To add an ephemeral container, use the ephemeralcontainers subresource of an exi
 
 LifecycleHandler defines a specific action that should be taken in a lifecycle hook. One and only one of the fields, except TCPSocket must be specified.
 
-<hr>
+
 
 - **exec** (ExecAction)
 
   Exec specifies the action to take.
 
-  <a name="ExecAction"></a>
+  
   *ExecAction describes a "run in container" action.*
 
   - **exec.command** ([]string)
@@ -1537,14 +1479,14 @@ LifecycleHandler defines a specific action that should be taken in a lifecycle h
 
   HTTPGet specifies the http request to perform.
 
-  <a name="HTTPGetAction"></a>
+  
   *HTTPGetAction describes an action based on HTTP Get requests.*
 
   - **httpGet.port** (IntOrString), required
 
     Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 
-    <a name="IntOrString"></a>
+    
     *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
   - **httpGet.host** (string)
@@ -1555,7 +1497,7 @@ LifecycleHandler defines a specific action that should be taken in a lifecycle h
 
     Custom headers to set in the request. HTTP allows repeated headers.
 
-    <a name="HTTPHeader"></a>
+    
     *HTTPHeader describes a custom header to be used in HTTP probes*
 
     - **httpGet.httpHeaders.name** (string), required
@@ -1578,14 +1520,14 @@ LifecycleHandler defines a specific action that should be taken in a lifecycle h
 
   Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
 
-  <a name="TCPSocketAction"></a>
+  
   *TCPSocketAction describes an action based on opening a socket*
 
   - **tcpSocket.port** (IntOrString), required
 
     Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 
-    <a name="IntOrString"></a>
+    
     *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
   - **tcpSocket.host** (string)
@@ -1600,27 +1542,27 @@ LifecycleHandler defines a specific action that should be taken in a lifecycle h
 
 Node affinity is a group of node affinity scheduling rules.
 
-<hr>
+
 
 - **preferredDuringSchedulingIgnoredDuringExecution** ([]PreferredSchedulingTerm)
 
   The scheduler will prefer to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, requiredDuringScheduling affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node matches the corresponding matchExpressions; the node(s) with the highest sum are the most preferred.
 
-  <a name="PreferredSchedulingTerm"></a>
+  
   *An empty preferred scheduling term matches all objects with implicit weight 0 (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).*
 
   - **preferredDuringSchedulingIgnoredDuringExecution.preference** (NodeSelectorTerm), required
 
     A node selector term, associated with the corresponding weight.
 
-    <a name="NodeSelectorTerm"></a>
+    
     *A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.*
 
-    - **preferredDuringSchedulingIgnoredDuringExecution.preference.matchExpressions** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+    - **preferredDuringSchedulingIgnoredDuringExecution.preference.matchExpressions** ([]}}">NodeSelectorRequirement)
 
       A list of node selector requirements by node's labels.
 
-    - **preferredDuringSchedulingIgnoredDuringExecution.preference.matchFields** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+    - **preferredDuringSchedulingIgnoredDuringExecution.preference.matchFields** ([]}}">NodeSelectorRequirement)
 
       A list of node selector requirements by node's fields.
 
@@ -1632,21 +1574,21 @@ Node affinity is a group of node affinity scheduling rules.
 
   If the affinity requirements specified by this field are not met at scheduling time, the pod will not be scheduled onto the node. If the affinity requirements specified by this field cease to be met at some point during pod execution (e.g. due to an update), the system may or may not try to eventually evict the pod from its node.
 
-  <a name="NodeSelector"></a>
+  
   *A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms.*
 
   - **requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms** ([]NodeSelectorTerm), required
 
     Required. A list of node selector terms. The terms are ORed.
 
-    <a name="NodeSelectorTerm"></a>
+    
     *A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.*
 
-    - **requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchExpressions** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+    - **requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchExpressions** ([]}}">NodeSelectorRequirement)
 
       A list of node selector requirements by node's labels.
 
-    - **requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchFields** ([]<a href="{{< ref "../common-definitions/node-selector-requirement#NodeSelectorRequirement" >}}">NodeSelectorRequirement</a>)
+    - **requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchFields** ([]}}">NodeSelectorRequirement)
 
       A list of node selector requirements by node's fields.
 
@@ -1658,31 +1600,31 @@ Node affinity is a group of node affinity scheduling rules.
 
 Pod affinity is a group of inter pod affinity scheduling rules.
 
-<hr>
+
 
 - **preferredDuringSchedulingIgnoredDuringExecution** ([]WeightedPodAffinityTerm)
 
   The scheduler will prefer to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, requiredDuringScheduling affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the node(s) with the highest sum are the most preferred.
 
-  <a name="WeightedPodAffinityTerm"></a>
+  
   *The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)*
 
   - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm** (PodAffinityTerm), required
 
     Required. A pod affinity term, associated with the corresponding weight.
 
-    <a name="PodAffinityTerm"></a>
-    *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key <topologyKey> matches that of any node on which a pod of the set of pods is running*
+    
+    *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key  matches that of any node on which a pod of the set of pods is running*
 
     - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.topologyKey** (string), required
 
       This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching the labelSelector in the specified namespaces, where co-located is defined as running on a node whose value of the label with key topologyKey matches that of any node on which any of the selected pods is running. Empty topologyKey is not allowed.
 
-    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector** (}}">LabelSelector)
 
       A label query over a set of resources, in this case pods.
 
-    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.namespaceSelector** (}}">LabelSelector)
 
       A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
 
@@ -1698,18 +1640,18 @@ Pod affinity is a group of inter pod affinity scheduling rules.
 
   If the affinity requirements specified by this field are not met at scheduling time, the pod will not be scheduled onto the node. If the affinity requirements specified by this field cease to be met at some point during pod execution (e.g. due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each podAffinityTerm are intersected, i.e. all terms must be satisfied.
 
-  <a name="PodAffinityTerm"></a>
-  *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key <topologyKey> matches that of any node on which a pod of the set of pods is running*
+  
+  *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key  matches that of any node on which a pod of the set of pods is running*
 
   - **requiredDuringSchedulingIgnoredDuringExecution.topologyKey** (string), required
 
     This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching the labelSelector in the specified namespaces, where co-located is defined as running on a node whose value of the label with key topologyKey matches that of any node on which any of the selected pods is running. Empty topologyKey is not allowed.
 
-  - **requiredDuringSchedulingIgnoredDuringExecution.labelSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+  - **requiredDuringSchedulingIgnoredDuringExecution.labelSelector** (}}">LabelSelector)
 
     A label query over a set of resources, in this case pods.
 
-  - **requiredDuringSchedulingIgnoredDuringExecution.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+  - **requiredDuringSchedulingIgnoredDuringExecution.namespaceSelector** (}}">LabelSelector)
 
     A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
 
@@ -1725,31 +1667,31 @@ Pod affinity is a group of inter pod affinity scheduling rules.
 
 Pod anti affinity is a group of inter pod anti affinity scheduling rules.
 
-<hr>
+
 
 - **preferredDuringSchedulingIgnoredDuringExecution** ([]WeightedPodAffinityTerm)
 
   The scheduler will prefer to schedule pods to nodes that satisfy the anti-affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, requiredDuringScheduling anti-affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the node(s) with the highest sum are the most preferred.
 
-  <a name="WeightedPodAffinityTerm"></a>
+  
   *The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)*
 
   - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm** (PodAffinityTerm), required
 
     Required. A pod affinity term, associated with the corresponding weight.
 
-    <a name="PodAffinityTerm"></a>
-    *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key <topologyKey> matches that of any node on which a pod of the set of pods is running*
+    
+    *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key  matches that of any node on which a pod of the set of pods is running*
 
     - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.topologyKey** (string), required
 
       This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching the labelSelector in the specified namespaces, where co-located is defined as running on a node whose value of the label with key topologyKey matches that of any node on which any of the selected pods is running. Empty topologyKey is not allowed.
 
-    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector** (}}">LabelSelector)
 
       A label query over a set of resources, in this case pods.
 
-    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+    - **preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.namespaceSelector** (}}">LabelSelector)
 
       A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
 
@@ -1765,18 +1707,18 @@ Pod anti affinity is a group of inter pod anti affinity scheduling rules.
 
   If the anti-affinity requirements specified by this field are not met at scheduling time, the pod will not be scheduled onto the node. If the anti-affinity requirements specified by this field cease to be met at some point during pod execution (e.g. due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each podAffinityTerm are intersected, i.e. all terms must be satisfied.
 
-  <a name="PodAffinityTerm"></a>
-  *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key <topologyKey> matches that of any node on which a pod of the set of pods is running*
+  
+  *Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key  matches that of any node on which a pod of the set of pods is running*
 
   - **requiredDuringSchedulingIgnoredDuringExecution.topologyKey** (string), required
 
     This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching the labelSelector in the specified namespaces, where co-located is defined as running on a node whose value of the label with key topologyKey matches that of any node on which any of the selected pods is running. Empty topologyKey is not allowed.
 
-  - **requiredDuringSchedulingIgnoredDuringExecution.labelSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+  - **requiredDuringSchedulingIgnoredDuringExecution.labelSelector** (}}">LabelSelector)
 
     A label query over a set of resources, in this case pods.
 
-  - **requiredDuringSchedulingIgnoredDuringExecution.namespaceSelector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
+  - **requiredDuringSchedulingIgnoredDuringExecution.namespaceSelector** (}}">LabelSelector)
 
     A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
 
@@ -1792,13 +1734,13 @@ Pod anti affinity is a group of inter pod anti affinity scheduling rules.
 
 Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
 
-<hr>
+
 
 - **exec** (ExecAction)
 
   Exec specifies the action to take.
 
-  <a name="ExecAction"></a>
+  
   *ExecAction describes a "run in container" action.*
 
   - **exec.command** ([]string)
@@ -1809,14 +1751,14 @@ Probe describes a health check to be performed against a container to determine 
 
   HTTPGet specifies the http request to perform.
 
-  <a name="HTTPGetAction"></a>
+  
   *HTTPGetAction describes an action based on HTTP Get requests.*
 
   - **httpGet.port** (IntOrString), required
 
     Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 
-    <a name="IntOrString"></a>
+    
     *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
   - **httpGet.host** (string)
@@ -1827,7 +1769,7 @@ Probe describes a health check to be performed against a container to determine 
 
     Custom headers to set in the request. HTTP allows repeated headers.
 
-    <a name="HTTPHeader"></a>
+    
     *HTTPHeader describes a custom header to be used in HTTP probes*
 
     - **httpGet.httpHeaders.name** (string), required
@@ -1850,14 +1792,14 @@ Probe describes a health check to be performed against a container to determine 
 
   TCPSocket specifies an action involving a TCP port.
 
-  <a name="TCPSocketAction"></a>
+  
   *TCPSocketAction describes an action based on opening a socket*
 
   - **tcpSocket.port** (IntOrString), required
 
     Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 
-    <a name="IntOrString"></a>
+    
     *IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.*
 
   - **tcpSocket.host** (string)
@@ -1892,7 +1834,7 @@ Probe describes a health check to be performed against a container to determine 
 
   GRPC specifies an action involving a GRPC port.
 
-  <a name="GRPCAction"></a>
+  
   **
 
   - **grpc.port** (int32), required
@@ -1913,7 +1855,7 @@ Probe describes a health check to be performed against a container to determine 
 
 PodStatus represents information about the status of a pod. Status may trail the actual state of a system, especially if the node that hosts the pod cannot contact the control plane.
 
-<hr>
+
 
 - **nominatedNodeName** (string)
 
@@ -1931,7 +1873,7 @@ PodStatus represents information about the status of a pod. Status may trail the
   
   hostIPs holds the IP addresses allocated to the host. If this field is specified, the first entry must match the hostIP field. This list is empty if the pod has not started yet. A pod can be assigned to a node that has a problem in kubelet which in turns means that HostIPs will not be updated even if there is a node is assigned to this pod.
 
-  <a name="HostIP"></a>
+  
   *HostIP represents a single IP address allocated to the host.*
 
   - **hostIPs.ip** (string)
@@ -1942,7 +1884,7 @@ PodStatus represents information about the status of a pod. Status may trail the
 
   RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod.
 
-  <a name="Time"></a>
+  
   *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
 - **phase** (string)
@@ -1971,7 +1913,7 @@ PodStatus represents information about the status of a pod. Status may trail the
   
   podIPs holds the IP addresses allocated to the pod. If this field is specified, the 0th entry must match the podIP field. Pods may be allocated at most 1 value for each of IPv4 and IPv6. This list is empty if no IPs have been allocated yet.
 
-  <a name="PodIP"></a>
+  
   *PodIP represents a single IP address allocated to the pod.*
 
   - **podIPs.ip** (string)
@@ -1984,7 +1926,7 @@ PodStatus represents information about the status of a pod. Status may trail the
   
   Current service state of pod. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
 
-  <a name="PodCondition"></a>
+  
   *PodCondition contains details for the current condition of this pod.*
 
   - **conditions.status** (string), required
@@ -1999,14 +1941,14 @@ PodStatus represents information about the status of a pod. Status may trail the
 
     Last time we probed the condition.
 
-    <a name="Time"></a>
+    
     *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
   - **conditions.lastTransitionTime** (Time)
 
     Last time the condition transitioned from one status to another.
 
-    <a name="Time"></a>
+    
     *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
   - **conditions.message** (string)
@@ -2025,21 +1967,21 @@ PodStatus represents information about the status of a pod. Status may trail the
 
   The list has one entry per init container in the manifest. The most recent successful init container will have ready = true, the most recently started container will have startTime set. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
 
-  <a name="ContainerStatus"></a>
+  
   *ContainerStatus contains details for the current status of this container.*
 
 - **containerStatuses** ([]ContainerStatus)
 
   The list has one entry per container in the manifest. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
 
-  <a name="ContainerStatus"></a>
+  
   *ContainerStatus contains details for the current status of this container.*
 
 - **ephemeralContainerStatuses** ([]ContainerStatus)
 
   Status for any ephemeral containers that have run in this pod.
 
-  <a name="ContainerStatus"></a>
+  
   *ContainerStatus contains details for the current status of this container.*
 
 - **resourceClaimStatuses** ([]PodResourceClaimStatus)
@@ -2050,7 +1992,7 @@ PodStatus represents information about the status of a pod. Status may trail the
   
   Status of resource claims.
 
-  <a name="PodResourceClaimStatus"></a>
+  
   *PodResourceClaimStatus is stored in the PodStatus for each PodResourceClaim which references a ResourceClaimTemplate. It stores the generated name for the corresponding ResourceClaim.*
 
   - **resourceClaimStatuses.name** (string), required
@@ -2073,9 +2015,9 @@ PodStatus represents information about the status of a pod. Status may trail the
 
 PodList is a list of Pods.
 
-<hr>
 
-- **items** ([]<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>), required
+
+- **items** ([]}}">Pod), required
 
   List of pods. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md
 
@@ -2087,7 +2029,7 @@ PodList is a list of Pods.
 
   Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
-- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (}}">ListMeta)
 
   Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
@@ -2099,7 +2041,7 @@ PodList is a list of Pods.
 
 
 
-<hr>
+
 
 
 
@@ -2122,19 +2064,19 @@ GET /api/v1/namespaces/{namespace}/pods/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
 401: Unauthorized
 
@@ -2155,19 +2097,19 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
 401: Unauthorized
 
@@ -2188,7 +2130,7 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/log
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **container** (*in query*): string
@@ -2213,7 +2155,7 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/log
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **previous** (*in query*): boolean
@@ -2261,19 +2203,19 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
 401: Unauthorized
 
@@ -2289,69 +2231,69 @@ GET /api/v1/namespaces/{namespace}/pods
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#PodList" >}}">PodList</a>): OK
+200 (}}">PodList): OK
 
 401: Unauthorized
 
@@ -2367,64 +2309,64 @@ GET /api/v1/pods
 
 - **allowWatchBookmarks** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
+  }}">allowWatchBookmarks
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 - **watch** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
+  }}">watch
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#PodList" >}}">PodList</a>): OK
+200 (}}">PodList): OK
 
 401: Unauthorized
 
@@ -2440,43 +2382,43 @@ POST /api/v1/namespaces/{namespace}/pods
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, required
+- **body**: }}">Pod, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Created
+201 (}}">Pod): Created
 
-202 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Accepted
+202 (}}">Pod): Accepted
 
 401: Unauthorized
 
@@ -2497,41 +2439,41 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, required
+- **body**: }}">Pod, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Created
+201 (}}">Pod): Created
 
 401: Unauthorized
 
@@ -2552,41 +2494,41 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, required
+- **body**: }}">Pod, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Created
+201 (}}">Pod): Created
 
 401: Unauthorized
 
@@ -2607,41 +2549,41 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, required
+- **body**: }}">Pod, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Created
+201 (}}">Pod): Created
 
 401: Unauthorized
 
@@ -2662,46 +2604,46 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Created
+201 (}}">Pod): Created
 
 401: Unauthorized
 
@@ -2722,46 +2664,46 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Created
+201 (}}">Pod): Created
 
 401: Unauthorized
 
@@ -2782,46 +2724,46 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}/status
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, required
+- **body**: }}">Patch, required
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldManager** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
+  }}">fieldManager
 
 
 - **fieldValidation** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
+  }}">fieldValidation
 
 
 - **force** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
+  }}">force
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Created
+201 (}}">Pod): Created
 
 401: Unauthorized
 
@@ -2842,41 +2784,41 @@ DELETE /api/v1/namespaces/{namespace}/pods/{name}
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): OK
+200 (}}">Pod): OK
 
-202 (<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>): Accepted
+202 (}}">Pod): Accepted
 
 401: Unauthorized
 
@@ -2892,79 +2834,79 @@ DELETE /api/v1/namespaces/{namespace}/pods
 
 - **namespace** (*in path*): string, required
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
+  }}">namespace
 
 
-- **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
+- **body**: }}">DeleteOptions
 
   
 
 
 - **continue** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
+  }}">continue
 
 
 - **dryRun** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
+  }}">dryRun
 
 
 - **fieldSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
+  }}">fieldSelector
 
 
 - **gracePeriodSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
+  }}">gracePeriodSeconds
 
 
 - **labelSelector** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
+  }}">labelSelector
 
 
 - **limit** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
+  }}">limit
 
 
 - **pretty** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
+  }}">pretty
 
 
 - **propagationPolicy** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
+  }}">propagationPolicy
 
 
 - **resourceVersion** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
+  }}">resourceVersion
 
 
 - **resourceVersionMatch** (*in query*): string
 
-  <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
+  }}">resourceVersionMatch
 
 
 - **sendInitialEvents** (*in query*): boolean
 
-  <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
+  }}">sendInitialEvents
 
 
 - **timeoutSeconds** (*in query*): integer
 
-  <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
+  }}">timeoutSeconds
 
 
 
 #### Response
 
 
-200 (<a href="{{< ref "../common-definitions/status#Status" >}}">Status</a>): OK
+200 (}}">Status): OK
 
 401: Unauthorized
 

@@ -4,16 +4,16 @@ content_type: task
 weight: 100
 ---
 
-<!-- overview -->
+
 
 This page shows how to use kubectl to list all of the Container images
 for Pods running in a cluster.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 In this exercise you will use kubectl to fetch all of the Pods
 running in a cluster, and format the output to pull out the list
@@ -45,11 +45,11 @@ The jsonpath is interpreted as follows:
 - `['initContainers', 'containers'][*]`: for each container
 - `.image`: get the image
 
-{{< note >}}
+{{}}
 When fetching a single Pod by name, for example `kubectl get pod nginx`,
 the `.items[*]` portion of the path should be omitted because a single
 Pod is returned instead of a list of items.
-{{< /note >}}
+{{}}
 
 ## List Container images by Pod
 

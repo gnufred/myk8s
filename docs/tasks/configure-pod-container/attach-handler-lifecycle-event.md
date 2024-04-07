@@ -3,7 +3,7 @@ title: Attach Handlers to Container Lifecycle Events
 weight: 180
 ---
 
-<!-- overview -->
+
 
 This page shows how to attach handlers to Container lifecycle events. Kubernetes supports
 the postStart and preStop events. Kubernetes sends the postStart event immediately
@@ -16,12 +16,12 @@ Container is terminated. A Container may specify one handler per event.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
 
-<!-- steps -->
+
 
 ## Define postStart and preStop handlers
 
@@ -60,7 +60,7 @@ The output shows the text written by the postStart handler:
 
 
 
-<!-- discussion -->
+
 
 ## Discussion
 
@@ -76,11 +76,11 @@ Kubernetes' management of the Container blocks until the preStop handler complet
 unless the Pod's grace period expires. For more details, see
 [Pod Lifecycle](/docs/concepts/workloads/pods/pod-lifecycle/).
 
-{{< note >}}
+{{}}
 Kubernetes only sends the preStop event when a Pod or a container in the Pod is *terminated*.
 This means that the preStop hook is not invoked when the Pod is *completed*.
 About this limitation, please see [Container hooks](/docs/concepts/containers/container-lifecycle-hooks/#container-hooks) for the detail.
-{{< /note >}}
+{{}}
 
 
 
@@ -94,9 +94,9 @@ About this limitation, please see [Container hooks](/docs/concepts/containers/co
 
 ### Reference
 
-* [Lifecycle](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#lifecycle-v1-core)
-* [Container](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
-* See `terminationGracePeriodSeconds` in [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
+* [Lifecycle](/docs/reference/generated/kubernetes-api/{{}}/#lifecycle-v1-core)
+* [Container](/docs/reference/generated/kubernetes-api/{{}}/#container-v1-core)
+* See `terminationGracePeriodSeconds` in [PodSpec](/docs/reference/generated/kubernetes-api/{{}}/#podspec-v1-core)
 
 
 

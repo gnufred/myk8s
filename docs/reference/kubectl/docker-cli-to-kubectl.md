@@ -7,11 +7,11 @@ reviewers:
 weight: 50
 ---
 
-<!-- overview -->
+
 You can use the Kubernetes command line tool `kubectl` to interact with the API Server. Using kubectl is straightforward if you are familiar with the Docker command line tool. However, there are a few differences between the Docker commands and the kubectl commands. The following sections show a Docker sub-command and describe the equivalent `kubectl` command.
 
 
-<!-- body -->
+
 ## docker run
 
 To run an nginx Deployment and expose the Deployment, see [kubectl create deployment](/docs/reference/generated/kubectl/kubectl-commands#-em-deployment-em-).
@@ -50,9 +50,9 @@ kubectl set env deployment/nginx-app  DOMAIN=cluster
 deployment.apps/nginx-app env updated
 ```
 
-{{< note >}}
+{{}}
 `kubectl` commands print the type and name of the resource created or mutated, which can then be used in subsequent commands. You can expose a new Service after a Deployment is created.
-{{< /note >}}
+{{}}
 
 ```shell
 # expose a port through with a service
@@ -66,7 +66,7 @@ By using kubectl, you can create a [Deployment](/docs/concepts/workloads/control
 
 By default images run in the background, similar to `docker run -d ...`. To run things in the foreground, use [`kubectl run`](/docs/reference/generated/kubectl/kubectl-commands/#run) to create pod:
 ```shell
-kubectl run [-i] [--tty] --attach <name> --image=<image>
+kubectl run [-i] [--tty] --attach  --image=
 ```
 
 Unlike `docker run ...`, if you specify `--attach`, then you attach `stdin`, `stdout` and `stderr`. You cannot control which streams are attached (`docker -a ...`).
@@ -284,9 +284,9 @@ kubectl get po -l app=nginx-app
 # Return nothing
 ```
 
-{{< note >}}
+{{}}
 When you use kubectl, you don't delete the pod directly. You have to first delete the Deployment that owns the pod. If you delete the pod directly, the Deployment recreates the pod.
-{{< /note >}}
+{{}}
 
 ## docker login
 

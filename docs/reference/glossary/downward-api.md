@@ -10,7 +10,7 @@ tags:
 - architecture
 ---
 Kubernetes' mechanism to expose Pod and container field values to code running in a container.
-<!--more-->
+
 It is sometimes useful for a container to have information about itself, without
 needing to make changes to the container code that directly couple it to Kubernetes.
 

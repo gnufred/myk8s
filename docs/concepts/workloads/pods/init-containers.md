@@ -6,9 +6,9 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
+
 This page provides an overview of init containers: specialized containers that run
-before app containers in a {{< glossary_tooltip text="Pod" term_id="pod" >}}.
+before app containers in a {{}}.
 Init containers can contain utilities or setup scripts not present in an app image.
 
 You can specify init containers in the Pod specification alongside the `containers`
@@ -18,11 +18,11 @@ In Kubernetes, a [sidecar container](/docs/concepts/workloads/pods/sidecar-conta
 starts before the main application container and _continues to run_. This document is about init containers:
 containers that run to completion during Pod initialization.
 
-<!-- body -->
+
 
 ## Understanding init containers
 
-A {{< glossary_tooltip text="Pod" term_id="pod" >}} can have multiple containers
+A {{}} can have multiple containers
 running apps within it, but it can also have one or more init containers, which are run
 before the app containers are started.
 
@@ -90,7 +90,7 @@ have some advantages for start-up related code:
   the need to jointly build a single app image.
 * Init containers can run with a different view of the filesystem than app containers in the
   same Pod. Consequently, they can be given access to
-  {{< glossary_tooltip text="Secrets" term_id="secret" >}} that app containers cannot access.
+  {{}} that app containers cannot access.
 * Because init containers run to completion before any app containers start, init containers offer
   a mechanism to block or delay app container startup until a set of preconditions are met. Once
   preconditions are met, all of the app containers in a Pod can start in parallel.
@@ -102,7 +102,7 @@ have some advantages for start-up related code:
 ### Examples
 Here are some ideas for how to use init containers:
 
-* Wait for a {{< glossary_tooltip text="Service" term_id="service">}} to
+* Wait for a {{}} to
   be created, using a shell one-line command like:
   ```shell
   for i in {1..100}; do sleep 1; if nslookup myservice; then exit 0; fi; done; exit 1
@@ -110,7 +110,7 @@ Here are some ideas for how to use init containers:
 
 * Register this Pod with a remote server from the downward API with a command like:
   ```shell
-  curl -X POST http://$MANAGEMENT_SERVICE_HOST:$MANAGEMENT_SERVICE_PORT/register -d 'instance=$(<POD_NAME>)&ip=$(<POD_IP>)'
+  curl -X POST http://$MANAGEMENT_SERVICE_HOST:$MANAGEMENT_SERVICE_PORT/register -d 'instance=$()&ip=$()'
   ```
 
 * Wait for some time before starting the app container with a command like
@@ -118,7 +118,7 @@ Here are some ideas for how to use init containers:
   sleep 60
   ```
 
-* Clone a Git repository into a {{< glossary_tooltip text="Volume" term_id="volume" >}}
+* Clone a Git repository into a {{}}
 
 * Place values into a configuration file and run a template tool to dynamically
   generate a configuration file for the main app container. For example,
@@ -218,7 +218,7 @@ kubectl logs myapp-pod -c init-myservice # Inspect the first init container
 kubectl logs myapp-pod -c init-mydb      # Inspect the second init container
 ```
 
-At this point, those init containers will be waiting to discover {{< glossary_tooltip text="Services" term_id="service" >}} named
+At this point, those init containers will be waiting to discover {{}} named
 `mydb` and `myservice`.
 
 Here's a configuration you can use to make those Services appear:
@@ -334,10 +334,10 @@ limit.
 Pod level control groups (cgroups) are based on the effective Pod request and
 limit, the same as the scheduler.
 
-{{< comment >}}
+{{}}
 This section also present under [sidecar containers](/docs/concepts/workloads/pods/sidecar-containers/) page.
 If you're editing this section, change both places.
-{{< /comment >}}
+{{}}
 
 ### Pod restart reasons
 
@@ -348,7 +348,7 @@ reasons:
   have to be done by someone with root access to nodes.
 * All containers in a Pod are terminated while `restartPolicy` is set to Always,
   forcing a restart, and the init container completion record has been lost due
-  to {{< glossary_tooltip text="garbage collection" term_id="garbage-collection" >}}.
+  to {{}}.
 
 The Pod will not be restarted when the init container image is changed, or the
 init container completion record has been lost due to garbage collection. This

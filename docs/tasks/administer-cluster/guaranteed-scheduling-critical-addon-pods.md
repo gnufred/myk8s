@@ -8,7 +8,7 @@ content_type: concept
 weight: 220
 ---
 
-<!-- overview -->
+
 
 Kubernetes core components such as the API server, scheduler, and controller-manager run on a control plane node. However, add-ons must run on a regular cluster node.
 Some of these add-ons are critical to a fully functional cluster, such as metrics-server, DNS, and UI.
@@ -19,7 +19,7 @@ vacated by the evicted critical add-on pod or the amount of resources available 
 Note that marking a pod as critical is not meant to prevent evictions entirely; it only prevents the pod from becoming permanently unavailable.
 A static pod marked as critical can't be evicted. However, non-static pods marked as critical are always rescheduled.
 
-<!-- body -->
+
 
 ### Marking pod as critical
 

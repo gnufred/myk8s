@@ -12,7 +12,7 @@ content_type: tutorial
 weight: 40
 ---
 
-<!-- overview -->
+
 This tutorial demonstrates running [Apache Zookeeper](https://zookeeper.apache.org) on
 Kubernetes using [StatefulSets](/docs/concepts/workloads/controllers/statefulset/),
 [PodDisruptionBudgets](/docs/concepts/workloads/pods/disruptions/#pod-disruption-budget),
@@ -49,7 +49,7 @@ After this tutorial, you will know the following.
 - How to spread the deployment of ZooKeeper servers in the ensemble.
 - How to use PodDisruptionBudgets to ensure service availability during planned maintenance.
 
-<!-- lessoncontent -->
+
 
 ### ZooKeeper
 
@@ -136,7 +136,7 @@ of the Pods in the `zk` StatefulSet.
 for i in 0 1 2; do kubectl exec zk-$i -- hostname; done
 ```
 
-The StatefulSet controller provides each Pod with a unique hostname based on its ordinal index. The hostnames take the form of `<statefulset name>-<ordinal index>`. Because the `replicas` field of the `zk` StatefulSet is set to `3`, the Set's controller creates three Pods with their hostnames set to `zk-0`, `zk-1`, and
+The StatefulSet controller provides each Pod with a unique hostname based on its ordinal index. The hostnames take the form of `-`. Because the `replicas` field of the `zk` StatefulSet is set to `3`, the Set's controller creates three Pods with their hostnames set to `zk-0`, `zk-1`, and
 `zk-2`.
 
 ```
@@ -901,7 +901,7 @@ kubectl get nodes
 This tutorial assumes a cluster with at least four nodes. If the cluster has more than four, use [`kubectl cordon`](/docs/reference/generated/kubectl/kubectl-commands/#cordon) to cordon all but four nodes. Constraining to four nodes will ensure Kubernetes encounters affinity and PodDisruptionBudget constraints when scheduling zookeeper Pods in the following maintenance simulation.
 
 ```shell
-kubectl cordon <node-name>
+kubectl cordon 
 ```
 
 Use this command to get the `zk-pdb` `PodDisruptionBudget`.

@@ -4,10 +4,10 @@ content_type: task
 weight: 90
 ---
 
-<!-- overview -->
+
 
 This page shows you how to configure a Pod to use a
-{{< glossary_tooltip text="PersistentVolumeClaim" term_id="persistent-volume-claim" >}}
+{{}}
 for storage.
 Here is a summary of the process:
 
@@ -23,7 +23,7 @@ Here is a summary of the process:
 ## {{% heading "prerequisites" %}}
 
 * You need to have a Kubernetes cluster that has only one Node, and the
-  {{< glossary_tooltip text="kubectl" term_id="kubectl" >}}
+  {{}}
   command-line tool must be configured to communicate with your cluster. If you
   do not already have a single-node cluster, you can create one by using
   [Minikube](https://minikube.sigs.k8s.io/docs/).
@@ -31,7 +31,7 @@ Here is a summary of the process:
 * Familiarize yourself with the material in
   [Persistent Volumes](/docs/concepts/storage/persistent-volumes/).
 
-<!-- steps -->
+
 
 ## Create an index.html file on your Node
 
@@ -55,10 +55,10 @@ In the `/mnt/data` directory, create an `index.html` file:
 sudo sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
 ```
 
-{{< note >}}
+{{}}
 If your Node uses a tool for superuser access other than `sudo`, you can
 usually make this work if you replace `sudo` with the name of the other tool.
-{{< /note >}}
+{{}}
 
 Test that the `index.html` file exists:
 
@@ -83,7 +83,7 @@ PersistentVolume uses a file or directory on the Node to emulate network-attache
 In a production cluster, you would not use hostPath. Instead a cluster administrator
 would provision a network resource like a Google Compute Engine persistent disk,
 an NFS share, or an Amazon Elastic Block Store volume. Cluster administrators can also
-use [StorageClasses](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#storageclass-v1-storage-k8s-io)
+use [StorageClasses](/docs/reference/generated/kubernetes-api/{{}}/#storageclass-v1-storage-k8s-io)
 to set up
 [dynamic provisioning](/docs/concepts/storage/dynamic-provisioning/).
 
@@ -98,11 +98,11 @@ read-write by a single Node. It defines the [StorageClass name](/docs/concepts/s
 `manual` for the PersistentVolume, which will be used to bind
 PersistentVolumeClaim requests to this PersistentVolume.
 
-{{< note >}}
+{{}}
 This example uses the `ReadWriteOnce` access mode, for simplicity. For
 production use, the Kubernetes project recommends using the `ReadWriteOncePod`
 access mode instead.
-{{< /note >}}
+{{}}
 
 Create the PersistentVolume:
 
@@ -257,7 +257,7 @@ You can perform 2 volume mounts on your nginx container:
 - `/usr/share/nginx/html` for the static website
 - `/etc/nginx/nginx.conf` for the default config
 
-<!-- discussion -->
+
 
 ## Access control
 
@@ -284,10 +284,10 @@ Pod's security context are. Every GID, whether it originates from a PersistentVo
 annotation or the Pod's specification, is applied to the first process run in
 each container.
 
-{{< note >}}
+{{}}
 When a Pod consumes a PersistentVolume, the GIDs associated with the
 PersistentVolume are not present on the Pod resource itself.
-{{< /note >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 
@@ -296,7 +296,7 @@ PersistentVolume are not present on the Pod resource itself.
 
 ### Reference
 
-* [PersistentVolume](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolume-v1-core)
-* [PersistentVolumeSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumespec-v1-core)
-* [PersistentVolumeClaim](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumeclaim-v1-core)
-* [PersistentVolumeClaimSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumeclaimspec-v1-core)
+* [PersistentVolume](/docs/reference/generated/kubernetes-api/{{}}/#persistentvolume-v1-core)
+* [PersistentVolumeSpec](/docs/reference/generated/kubernetes-api/{{}}/#persistentvolumespec-v1-core)
+* [PersistentVolumeClaim](/docs/reference/generated/kubernetes-api/{{}}/#persistentvolumeclaim-v1-core)
+* [PersistentVolumeClaimSpec](/docs/reference/generated/kubernetes-api/{{}}/#persistentvolumeclaimspec-v1-core)

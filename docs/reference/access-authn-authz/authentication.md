@@ -9,10 +9,10 @@ content_type: concept
 weight: 10
 ---
 
-<!-- overview -->
+
 This page provides an overview of authentication.
 
-<!-- body -->
+
 ## Users in Kubernetes
 
 All Kubernetes clusters have two categories of users: service accounts managed
@@ -109,19 +109,19 @@ changed without restarting the API server.
 The token file is a csv file with a minimum of 3 columns: token, user name, user uid,
 followed by optional group names.
 
-{{< note >}}
+{{}}
 If you have more than one group the column must be double quoted e.g.
 
 ```conf
 token,user,uid,"group1,group2,group3"
 ```
-{{< /note >}}
+{{}}
 
 #### Putting a bearer token in a request
 
 When using bearer token authentication from an http client, the API
 server expects an `Authorization` header with a value of `Bearer
-<token>`.  The bearer token must be a character sequence that can be
+`.  The bearer token must be a character sequence that can be
 put in an HTTP header value using no more than the encoding and
 quoting facilities of HTTP.  For example: if the bearer token is
 `31ada4fd-adec-460c-809a-9e56ceb75269` then it would appear in an HTTP
@@ -133,7 +133,7 @@ Authorization: Bearer 31ada4fd-adec-460c-809a-9e56ceb75269
 
 ### Bootstrap tokens
 
-{{< feature-state for_k8s_version="v1.18" state="stable" >}}
+{{}}
 
 To allow for streamlined bootstrapping for new clusters, Kubernetes includes a
 dynamically-managed Bearer token type called a *Bootstrap Token*. These tokens
@@ -155,7 +155,7 @@ the TokenCleaner controller via the `--controllers` flag on the Controller
 Manager.  This is done with something like `--controllers=*,tokencleaner`.
 `kubeadm` will do this for you if you are using it to bootstrap a cluster.
 
-The authenticator authenticates as `system:bootstrap:<Token ID>`.  It is
+The authenticator authenticates as `system:bootstrap:`.  It is
 included in the `system:bootstrappers` group.  The naming and groups are
 intentionally limited to discourage users from using these tokens past
 bootstrapping.  The user names and group can be used (and are used by `kubeadm`)
@@ -184,9 +184,9 @@ mounted into pods at well-known locations, and allow in-cluster processes to
 talk to the API server. Accounts may be explicitly associated with pods using the
 `serviceAccountName` field of a `PodSpec`.
 
-{{< note >}}
+{{}}
 `serviceAccountName` is usually omitted because this is done automatically.
-{{< /note >}}
+{{}}
 
 ```yaml
 apiVersion: apps/v1 # this apiVersion is relevant as of Kubernetes 1.9
@@ -240,12 +240,12 @@ the API server, but can be used from outside the cluster as well.
 Service accounts authenticate with the username `system:serviceaccount:(NAMESPACE):(SERVICEACCOUNT)`,
 and are assigned to the groups `system:serviceaccounts` and `system:serviceaccounts:(NAMESPACE)`.
 
-{{< warning >}}
+{{}}
 Because service account tokens can also be stored in Secret API objects, any user with
 write access to Secrets can request a token, and any user with read access to those
 Secrets can authenticate as the service account. Be cautious when granting permissions
 to service accounts and read or write capabilities for Secrets.
-{{< /warning >}}
+{{}}
 
 ### OpenID Connect Tokens
 
@@ -261,7 +261,7 @@ from the OAuth2 [token response](https://openid.net/specs/openid-connect-core-1_
 as a bearer token. See [above](#putting-a-bearer-token-in-a-request) for how the token
 is included in a request.
 
-{{< mermaid >}}
+{{}}
 sequenceDiagram
     participant user as User
     participant idp as Identity Provider
@@ -270,10 +270,10 @@ sequenceDiagram
 
     user ->> idp: 1. Log in to IdP
     activate idp
-    idp -->> user: 2. Provide access_token,<br>id_token, and refresh_token
+    idp -->> user: 2. Provide access_token,id_token, and refresh_token
     deactivate idp
     activate user
-    user ->> kube: 3. Call Kubectl<br>with --token being the id_token<br>OR add tokens to .kube/config
+    user ->> kube: 3. Call Kubectlwith --token being the id_tokenOR add tokens to .kube/config
     deactivate user
     activate kube
     kube ->> api: 4. Authorization: Bearer...
@@ -282,12 +282,12 @@ sequenceDiagram
     api ->> api: 5. Is JWT signature valid?
     api ->> api: 6. Has the JWT expired? (iat+exp)
     api ->> api: 7. User authorized?
-    api -->> kube: 8. Authorized: Perform<br>action and return result
+    api -->> kube: 8. Authorized: Performaction and return result
     deactivate api
     activate kube
     kube --x user: 9. Return result
     deactivate kube
-{{< /mermaid >}}
+{{}}
 
 1. Log in to your identity provider
 1. Your identity provider will provide you with an `access_token`, `id_token` and a `refresh_token`
@@ -331,7 +331,7 @@ To enable the plugin, configure the following flags on the API server:
 
 ##### Using Authentication Configuration
 
-{{< feature-state for_k8s_version="v1.29" state="alpha" >}}
+{{}}
 
 JWT Authenticator is an authenticator to authenticate Kubernetes users using JWT compliant tokens. The authenticator will attempt to
 parse a raw ID token, verify it's been signed by the configured issuer. The public key to verify the signature is discovered from the issuer's public endpoint using OIDC discovery.
@@ -340,9 +340,9 @@ The API server can be configured to use a JWT authenticator via the `--authentic
 To use this config, the `StructuredAuthenticationConfiguration` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 has to be enabled.
 
-{{< note >}}
+{{}}
 When the feature is enabled, setting both `--authentication-config` and any of the `--oidc-*` flags will result in an error. If you want to use the feature, you have to remove the `--oidc-*` flags and use the configuration file instead.
-{{< /note >}}
+{{}}
 
 ```yaml
 ---
@@ -369,65 +369,7 @@ jwt:
   - expression: 'claims.hd == "example.com"'
     # Message customizes the error message seen in the API server logs when the validation fails.
     message: the hd claim must be set to example.com
-  - expression: 'claims.exp - claims.nbf <= 86400'
-    message: total token lifetime must not exceed 24 hours
-  claimMappings:
-    # username represents an option for the username attribute.
-    # This is the only required attribute.
-    username:
-      # Same as --oidc-username-claim. Mutually exclusive with username.expression.
-      claim: "sub"
-      # Same as --oidc-username-prefix. Mutually exclusive with username.expression.
-      # if username.claim is set, username.prefix is required.
-      # Explicitly set it to "" if no prefix is desired.
-      prefix: ""
-      # Mutually exclusive with username.claim and username.prefix.
-      # expression is a CEL expression that evaluates to a string.
-      expression: 'claims.username + ":external-user"'
-    # groups represents an option for the groups attribute.
-    groups:
-      # Same as --oidc-groups-claim. Mutually exclusive with groups.expression.
-      claim: "sub"
-      # Same as --oidc-groups-prefix. Mutually exclusive with groups.expression.
-      # if groups.claim is set, groups.prefix is required.
-      # Explicitly set it to "" if no prefix is desired.
-      prefix: ""
-      # Mutually exclusive with groups.claim and groups.prefix.
-      # expression is a CEL expression that evaluates to a string or a list of strings.
-      expression: 'claims.roles.split(",")'
-    # uid represents an option for the uid attribute.
-    uid:
-      # Mutually exclusive with uid.expression.
-      claim: 'sub'
-      # Mutually exclusive with uid.claim
-      # expression is a CEL expression that evaluates to a string.
-      expression: 'claims.sub'
-    # extra attributes to be added to the UserInfo object. Keys must be domain-prefix path and must be unique.
-    extra:
-    - key: 'example.com/tenant'
-      # valueExpression is a CEL expression that evaluates to a string or a list of strings.
-      valueExpression: 'claims.tenant'
-  # validation rules applied to the final user object.
-  userValidationRules:
-    # expression is a CEL expression that evaluates to a boolean.
-    # all the expressions must evaluate to true for the user to be valid.
-  - expression: "!user.username.startsWith('system:')"
-    # Message customizes the error message seen in the API server logs when the validation fails.
-    message: 'username cannot used reserved system: prefix'
-  - expression: "user.groups.all(group, !group.startsWith('system:'))"
-    message: 'groups cannot used reserved system: prefix'
-```
-
-* Claim validation rule expression
-
-  `jwt.claimValidationRules[i].expression` represents the expression which will be evaluated by CEL.
-  CEL expressions have access to the contents of the token payload, organized into `claims` CEL variable.
-  `claims` is a map of claim names (as strings) to claim values (of any type).
-* User validation rule expression
-
-  `jwt.userValidationRules[i].expression` represents the expression which will be evaluated by CEL.
-  CEL expressions have access to the contents of `userInfo`, organized into `user` CEL variable.
-  Refer to the [UserInfo](/docs/reference/generated/kubernetes-api/v{{< skew currentVersion >}}/#userinfo-v1-authentication-k8s-io) API documentation for the schema of `user`.
+  - expression: 'claims.exp - claims.nbf }}/#userinfo-v1-authentication-k8s-io) API documentation for the schema of `user`.
 * Claim mapping expression
 
   `jwt.claimMappings.username.expression`, `jwt.claimMappings.groups.expression`, `jwt.claimMappings.uid.expression`
@@ -439,7 +381,7 @@ jwt:
 
   Here are examples of the `AuthenticationConfiguration` with different token payloads.
 
-  {{< tabs name="example_configuration" >}}
+  {{}}
   {{% tab name="Valid token" %}}
   ```yaml
   apiVersion: apiserver.config.k8s.io/v1alpha1
@@ -612,7 +554,7 @@ jwt:
   ```
   which will fail user validation because the username starts with `system:`. The API server will return `401 Unauthorized` error.
   {{% /tab %}}
-  {{< /tabs >}}
+  {{}}
 
 Importantly, the API server is not an OAuth2 client, rather it can only be
 configured to trust a single issuer. This allows the use of public providers,
@@ -763,12 +705,12 @@ Note that webhook API objects are subject to the same [versioning compatibility 
 as other Kubernetes API objects. Implementers should check the `apiVersion` field of the request to ensure correct deserialization,
 and **must** respond with a `TokenReview` object of the same version as the request.
 
-{{< tabs name="TokenReview_request" >}}
+{{}}
 {{% tab name="authentication.k8s.io/v1" %}}
-{{< note >}}
+{{}}
 The Kubernetes API server defaults to sending `authentication.k8s.io/v1beta1` token reviews for backwards compatibility.
 To opt into receiving `authentication.k8s.io/v1` token reviews, the API server must be started with `--authentication-token-webhook-version=v1`.
-{{< /note >}}
+{{}}
 
 ```yaml
 {
@@ -809,14 +751,14 @@ To opt into receiving `authentication.k8s.io/v1` token reviews, the API server m
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 The remote service is expected to fill the `status` field of the request to indicate the success of the login.
 The response body's `spec` field is ignored and may be omitted.
 The remote service must return a response using the same `TokenReview` API version that it received.
 A successful validation of the bearer token would return:
 
-{{< tabs name="TokenReview_response_success" >}}
+{{}}
 {{% tab name="authentication.k8s.io/v1" %}}
 ```yaml
 {
@@ -881,11 +823,11 @@ A successful validation of the bearer token would return:
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 An unsuccessful request would return:
 
-{{< tabs name="TokenReview_response_error" >}}
+{{}}
 {{% tab name="authentication.k8s.io/v1" %}}
 ```yaml
 {
@@ -916,7 +858,7 @@ An unsuccessful request would return:
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ### Authenticating Proxy
 
@@ -933,10 +875,10 @@ It is designed for use in combination with an authenticating proxy, which sets t
   The remainder of the header name is lowercased and [percent-decoded](https://tools.ietf.org/html/rfc3986#section-2.1)
   and becomes the extra key, and the header value is the extra value.
 
-{{< note >}}
+{{}}
 Prior to 1.11.3 (and 1.10.7, 1.9.11), the extra key could only contain characters which
 were [legal in HTTP header labels](https://tools.ietf.org/html/rfc7230#section-3.2.6).
-{{< /note >}}
+{{}}
 
 For example, with this configuration:
 
@@ -1032,14 +974,14 @@ The following HTTP headers can be used to performing an impersonation request:
 * `Impersonate-Uid`: A unique identifier that represents the user being impersonated. Optional.
   Requires "Impersonate-User". Kubernetes does not impose any format requirements on this string.
 
-{{< note >}}
+{{}}
 Prior to 1.11.3 (and 1.10.7, 1.9.11), `( extra name )` could only contain characters which
 were [legal in HTTP header labels](https://tools.ietf.org/html/rfc7230#section-3.2.6).
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 `Impersonate-Uid` is only available in versions 1.22.0 and higher.
-{{< /note >}}
+{{}}
 
 An example of the impersonation headers used when impersonating a user with groups:
 
@@ -1083,9 +1025,9 @@ node/mynode cordoned
 node/mynode drained
 ```
 
-{{< note >}}
+{{}}
 `kubectl` cannot impersonate extra fields or UIDs.
-{{< /note >}}
+{{}}
 
 To impersonate a user, group, user identifier (UID) or extra fields, the impersonating user must
 have the ability to perform the "impersonate" verb on the kind of attribute
@@ -1155,17 +1097,17 @@ rules:
   resourceNames: ["06f6ce97-e2c5-4ab8-7ba5-7654dd08d52b"]
 ```
 
-{{< note >}}
+{{}}
 Impersonating a user or group allows you to perform any action as if you were that user or group;
 for that reason, impersonation is not namespace scoped.
 If you want to allow impersonation using Kubernetes RBAC,
 this requires using a `ClusterRole` and a `ClusterRoleBinding`,
 not a `Role` and `RoleBinding`.
-{{< /note >}}
+{{}}
 
 ## client-go credential plugins
 
-{{< feature-state for_k8s_version="v1.22" state="stable" >}}
+{{}}
 
 `k8s.io/client-go` and tools using it such as `kubectl` and `kubelet` are able to execute an
 external command to receive user credentials.
@@ -1176,9 +1118,9 @@ protocol specific logic, then returns opaque credentials to use. Almost all cred
 use cases require a server side component with support for the [webhook token authenticator](#webhook-token-authentication)
 to interpret the credential format produced by the client plugin.
 
-{{< note >}}
+{{}}
 Earlier versions of `kubectl` included built-in support for authenticating to AKS and GKE, but this is no longer present.
-{{< /note >}}
+{{}}
 
 ### Example use case
 
@@ -1200,7 +1142,7 @@ To authenticate against the API:
 Credential plugins are configured through [kubectl config files](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
 as part of the user fields.
 
-{{< tabs name="exec_plugin_kubeconfig_example_1" >}}
+{{}}
 {{% tab name="client.authentication.k8s.io/v1" %}}
 ```yaml
 apiVersion: v1
@@ -1348,7 +1290,7 @@ contexts:
 current-context: my-cluster
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 Relative command paths are interpreted as relative to the directory of the config file. If
 KUBECONFIG is set to `/home/jane/kubeconfig` and the exec command is `./bin/example-client-go-exec-plugin`,
@@ -1383,18 +1325,18 @@ to run successfully) is declared via the `user.exec.interactiveMode` field in th
 below for valid values). The `user.exec.interactiveMode` field is optional in `client.authentication.k8s.io/v1beta1`
 and required in `client.authentication.k8s.io/v1`.
 
-{{< table caption="interactiveMode values" >}}
+{{}}
 | `interactiveMode` Value | Meaning |
 | ----------------------- | ------- |
 | `Never` | This exec plugin never needs to use standard input, and therefore the exec plugin will be run regardless of whether standard input is available for user input. |
 | `IfAvailable` | This exec plugin would like to use standard input if it is available, but can still operate if standard input is not available. Therefore, the exec plugin will be run regardless of whether stdin is available for user input. If standard input is available for user input, then it will be provided to this exec plugin. |
 | `Always` | This exec plugin requires standard input in order to run, and therefore the exec plugin will only be run if standard input is available for user input. If standard input is not available for user input, then the exec plugin will not be run and an error will be returned by the exec plugin runner. |
-{{< /table >}}
+{{}}
 
 To use bearer token credentials, the plugin returns a token in the status of the
 [`ExecCredential`](/docs/reference/config-api/client-authentication.v1beta1/#client-authentication-k8s-io-v1beta1-ExecCredential)
 
-{{< tabs name="exec_plugin_ExecCredential_example_1" >}}
+{{}}
 {{% tab name="client.authentication.k8s.io/v1" %}}
 ```json
 {
@@ -1417,7 +1359,7 @@ To use bearer token credentials, the plugin returns a token in the status of the
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 Alternatively, a PEM-encoded client certificate and key can be returned to use TLS client auth.
 If the plugin returns a different certificate and key on a subsequent call, `k8s.io/client-go`
@@ -1427,7 +1369,7 @@ If specified, `clientKeyData` and `clientCertificateData` must both must be pres
 
 `clientCertificateData` may contain additional intermediate certificates to send to the server.
 
-{{< tabs name="exec_plugin_ExecCredential_example_2" >}}
+{{}}
 {{% tab name="client.authentication.k8s.io/v1" %}}
 ```json
 {
@@ -1452,7 +1394,7 @@ If specified, `clientKeyData` and `clientCertificateData` must both must be pres
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 Optionally, the response can include the expiry of the credential formatted as a
 [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) timestamp.
@@ -1465,7 +1407,7 @@ Presence or absence of an expiry has the following impact:
 - If an expiry is omitted, the bearer token and TLS credentials are cached until
   the server responds with a 401 HTTP status code or until the process exits.
 
-{{< tabs name="exec_plugin_ExecCredential_example_3" >}}
+{{}}
 {{% tab name="client.authentication.k8s.io/v1" %}}
 ```json
 {
@@ -1490,7 +1432,7 @@ Presence or absence of an expiry has the following impact:
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 To enable the exec plugin to obtain cluster-specific information, set `provideClusterInfo` on the `user.exec`
 field in the [kubeconfig](/docs/concepts/configuration/organize-cluster-access-kubeconfig/).
@@ -1499,7 +1441,7 @@ Information from this environment variable can be used to perform cluster-specif
 credential acquisition logic.
 The following `ExecCredential` manifest describes a cluster information sample.
 
-{{< tabs name="exec_plugin_ExecCredential_example_4" >}}
+{{}}
 {{% tab name="client.authentication.k8s.io/v1" %}}
 ```json
 {
@@ -1540,11 +1482,11 @@ The following `ExecCredential` manifest describes a cluster information sample.
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 ## API access to authentication information for a client {#self-subject-review}
 
-{{< feature-state for_k8s_version="v1.28" state="stable" >}}
+{{}}
 
 If your cluster has the API enabled, you can use the `SelfSubjectReview` API to find out
 how your Kubernetes cluster maps your authentication information to identify you as a client.
@@ -1612,7 +1554,7 @@ produce the following output (yet different user attributes will be shown):
 
 By providing the output flag, it is also possible to print the JSON or YAML representation of the result:
 
-{{< tabs name="self_subject_attributes_review_Example_1" >}}
+{{}}
 {{% tab name="JSON" %}}
 ```json
 {
@@ -1664,34 +1606,34 @@ status:
       - sports
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 This feature is extremely useful when a complicated authentication flow is used in a Kubernetes cluster,
 for example, if you use [webhook token authentication](/docs/reference/access-authn-authz/authentication/#webhook-token-authentication)
 or [authenticating proxy](/docs/reference/access-authn-authz/authentication/#authenticating-proxy).
 
-{{< note >}}
+{{}}
 The Kubernetes API server fills the `userInfo` after all authentication mechanisms are applied,
 including [impersonation](/docs/reference/access-authn-authz/authentication/#user-impersonation).
 If you, or an authentication proxy, make a SelfSubjectReview using impersonation,
 you see the user details and properties for the user that was impersonated.
-{{< /note >}}
+{{}}
 
 By default, all authenticated users can create `SelfSubjectReview` objects when the `APISelfSubjectReview`
 feature is enabled. It is allowed by the `system:basic-user` cluster role.
 
-{{< note >}}
+{{}}
 You can only make `SelfSubjectReview` requests if:
 
 * the `APISelfSubjectReview`
   [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
-  is enabled for your cluster (not needed for Kubernetes {{< skew currentVersion >}}, but older
+  is enabled for your cluster (not needed for Kubernetes {{}}, but older
   Kubernetes versions might not offer this feature gate, or might default it to be off)
 * (if you are running a version of Kubernetes older than v1.28) the API server for your
   cluster has the `authentication.k8s.io/v1alpha1` or `authentication.k8s.io/v1beta1`
-  {{< glossary_tooltip term_id="api-group" text="API group" >}}
+  {{}}
   enabled.
-{{< /note >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

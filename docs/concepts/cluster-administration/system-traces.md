@@ -7,9 +7,9 @@ content_type: concept
 weight: 90
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+
+{{}}
 
 System component traces record the latency of and relationships between operations in the cluster.
 
@@ -18,7 +18,7 @@ Kubernetes components emit traces using the
 with the gRPC exporter and can be collected and routed to tracing backends using an
 [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector#-opentelemetry-collector).
 
-<!-- body -->
+
 
 ## Trace Collection
 
@@ -60,7 +60,7 @@ as the kube-apiserver is often a public endpoint.
 #### Enabling tracing in the kube-apiserver
 
 To enable tracing, provide the kube-apiserver with a tracing configuration file
-with `--tracing-config-file=<path-to-config>`. This is an example config that records
+with `--tracing-config-file=`. This is an example config that records
 spans for 1 in 10000 requests, and uses the default OpenTelemetry endpoint:
 
 ```yaml
@@ -76,7 +76,7 @@ For more information about the `TracingConfiguration` struct, see
 
 ### kubelet traces
 
-{{< feature-state feature_gate_name="KubeletTracing" >}}
+{{}}
 
 The kubelet CRI interface and authenticated http servers are instrumented to generate
 trace spans. As with the apiserver, the endpoint and sampling rate are configurable.
@@ -103,7 +103,7 @@ tracing:
 If the `samplingRatePerMillion` is set to one million (`1000000`), then every
 span will be sent to the exporter.
 
-The kubelet in Kubernetes v{{< skew currentVersion >}} collects spans from
+The kubelet in Kubernetes v{{}} collects spans from
 the garbage collection, pod synchronization routine as well as every gRPC
 method. The kubelet propagates trace context with gRPC requests so that
 container runtimes with trace instrumentation, such as CRI-O and containerd,

@@ -6,15 +6,15 @@ content_type: task
 weight: 400
 ---
 
-<!-- overview -->
 
-{{< feature-state for_k8s_version="v1.21" state="stable" >}}
+
+{{}}
 
 This document describes how to configure and use kernel parameters within a
-Kubernetes cluster using the {{< glossary_tooltip term_id="sysctl" >}}
+Kubernetes cluster using the {{}}
 interface.
 
-{{< note >}}
+{{}}
 Starting from Kubernetes version 1.23, the kubelet supports the use of either `/` or `.`
 as separators for sysctl names.
 Starting from Kubernetes version 1.25, setting Sysctls for a Pod supports setting sysctls with slashes.
@@ -23,21 +23,21 @@ period as the separator, or as `kernel/shm_rmid_forced` using a slash as a separ
 For more sysctl parameter conversion method details, please refer to
 the page [sysctl.d(5)](https://man7.org/linux/man-pages/man5/sysctl.d.5.html) from
 the Linux man-pages project.
-{{< /note >}}
+{{}}
 ## {{% heading "prerequisites" %}}
 
-{{< note >}}
+{{}}
 `sysctl` is a Linux-specific command-line tool used to configure various kernel parameters
 and it is not available on non-Linux operating systems.
-{{< /note >}}
+{{}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 For some steps, you also need to be able to reconfigure the command line
 options for the kubelets running on your cluster.
 
 
-<!-- steps -->
+
 
 ## Listing all Sysctl Parameters
 
@@ -82,12 +82,12 @@ The following sysctls are supported in the _safe_ set:
 - `net.ipv4.tcp_keepalive_intvl` (since Kubernetes 1.29, needs kernel 4.5+);
 - `net.ipv4.tcp_keepalive_probes` (since Kubernetes 1.29, needs kernel 4.5+).
 
-{{< note >}}
+{{}}
 There are some exceptions to the set of safe sysctls:
 
 - The `net.*` sysctls are not allowed with host networking enabled.
 - The `net.ipv4.tcp_syncookies` sysctl is not namespaced on Linux kernel version 4.4 or lower.
-{{< /note >}}
+{{}}
 
 This list will be extended in future Kubernetes versions when the kubelet
 supports better isolation mechanisms.
@@ -110,7 +110,7 @@ kubelet --allowed-unsafe-sysctls \
   'kernel.msg*,net.core.somaxconn' ...
 ```
 
-For {{< glossary_tooltip term_id="minikube" >}}, this can be done via the `extra-config` flag:
+For {{}}, this can be done via the `extra-config` flag:
 
 ```shell
 minikube start --extra-config="kubelet.allowed-unsafe-sysctls=kernel.msg*,net.core.somaxconn"...
@@ -148,10 +148,10 @@ This example uses the pod securityContext to set a safe sysctl
 `kernel.msgmax`. There is no distinction between _safe_ and _unsafe_ sysctls in
 the specification.
 
-{{< warning >}}
+{{}}
 Only modify sysctl parameters after you understand their effects, to avoid
 destabilizing your operating system.
-{{< /warning >}}
+{{}}
 
 ```yaml
 apiVersion: v1
@@ -171,13 +171,13 @@ spec:
 ```
 
 
-<!-- discussion -->
 
-{{< warning >}}
+
+{{}}
 Due to their nature of being _unsafe_, the use of _unsafe_ sysctls
 is at-your-own-risk and can lead to severe problems like wrong behavior of
 containers, resource shortage or complete breakage of a node.
-{{< /warning >}}
+{{}}
 
 It is good practice to consider nodes with special sysctl settings as
 _tainted_ within a cluster, and only schedule pods onto them which need those

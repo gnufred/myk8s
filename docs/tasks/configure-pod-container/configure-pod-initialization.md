@@ -4,16 +4,16 @@ content_type: task
 weight: 170
 ---
 
-<!-- overview -->
+
 
 This page shows how to use an Init Container to initialize a Pod before an
 application Container runs.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## Create a Pod that has an Init Container
 
@@ -76,13 +76,13 @@ root@nginx:~# curl localhost
 The output shows that nginx is serving the web page that was written by the init container:
 
 ```html
-<html><head></head><body><header>
-<title>http://info.cern.ch</title>
-</header>
 
-<h1>http://info.cern.ch - home of the first website</h1>
+http://info.cern.ch
+
+
+http://info.cern.ch - home of the first website
   ...
-  <li><a href="http://info.cern.ch/hypertext/WWW/TheProject.html">Browse the first website</a></li>
+  Browse the first website
   ...
 ```
 

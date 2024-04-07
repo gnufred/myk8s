@@ -15,7 +15,7 @@ card:
   title: Use the Web UI Dashboard
 ---
 
-<!-- overview -->
+
 
 Dashboard is a web-based Kubernetes user interface.
 You can use Dashboard to deploy containerized applications to a Kubernetes cluster,
@@ -30,7 +30,7 @@ Dashboard also provides information on the state of Kubernetes resources in your
 
 ![Kubernetes Dashboard UI](/images/docs/ui-dashboard.png)
 
-<!-- body -->
+
 
 ## Deploying the Dashboard UI
 
@@ -47,9 +47,9 @@ Currently, Dashboard only supports logging in with a Bearer Token.
 To create a token for this demo, you can follow our guide on
 [creating a sample user](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md).
 
-{{< warning >}}
+{{}}
 The sample user created in the tutorial will have administrative privileges and is for educational purposes only.
-{{< /warning >}}
+{{}}
 
 ### Command line proxy
 
@@ -64,10 +64,10 @@ Kubectl will make Dashboard available at [http://localhost:8001/api/v1/namespace
 
 The UI can _only_ be accessed from the machine where the command is executed. See `kubectl proxy --help` for more options.
 
-{{< note >}}
+{{}}
 The kubeconfig authentication method does **not** support external identity providers
 or X.509 certificate-based authentication.
-{{< /note >}}
+{{}}
 
 ## Welcome view
 
@@ -113,9 +113,9 @@ The deploy wizard expects that you provide the following information:
   [Service](/docs/concepts/services-networking/service/) onto an external,
   maybe public IP address outside of your cluster (external Service).
 
-  {{< note >}}
+  {{}}
   For external Services, you may need to open up one or more ports to do so.
-  {{< /note >}}
+  {{}}
 
   Other Services that are only visible from inside the cluster are called internal Services.
 

@@ -11,12 +11,12 @@ content_type: concept
 weight: 40
 ---
 
-<!-- overview -->
+
 In addition to [compiled-in admission plugins](/docs/reference/access-authn-authz/admission-controllers/),
 admission plugins can be developed as extensions and run as webhooks configured at runtime.
 This page describes how to build, configure, use, and monitor admission webhooks.
 
-<!-- body -->
+
 
 ## What are admission webhooks?
 
@@ -29,10 +29,10 @@ Mutating admission webhooks are invoked first, and can modify objects sent to th
 After all object modifications are complete, and after the incoming object is validated by the API server,
 validating admission webhooks are invoked and can reject requests to enforce custom policies.
 
-{{< note >}}
+{{}}
 Admission webhooks that need to guarantee they see the final state of the object in order to enforce policy
 should use a validating admission webhook, since objects can be modified after being seen by mutating webhooks.
-{{< /note >}}
+{{}}
 
 ## Experimenting with admission webhooks
 
@@ -72,8 +72,8 @@ how to [authenticate API servers](#authenticate-apiservers).
 ### Deploy the admission webhook service
 
 The webhook server in the e2e test is deployed in the Kubernetes cluster, via
-the [deployment API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deployment-v1-apps).
-The test also creates a [service](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core)
+the [deployment API](/docs/reference/generated/kubernetes-api/{{}}/#deployment-v1-apps).
+The test also creates a [service](/docs/reference/generated/kubernetes-api/{{}}/#service-v1-core)
 as the front-end of the webhook server. See
 [code](https://github.com/kubernetes/kubernetes/blob/v1.22.0/test/e2e/apimachinery/webhook.go#L748).
 
@@ -84,9 +84,9 @@ your webhook configurations accordingly.
 
 You can dynamically configure what resources are subject to what admission
 webhooks via
-[ValidatingWebhookConfiguration](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#validatingwebhookconfiguration-v1-admissionregistration-k8s-io)
+[ValidatingWebhookConfiguration](/docs/reference/generated/kubernetes-api/{{}}/#validatingwebhookconfiguration-v1-admissionregistration-k8s-io)
 or
-[MutatingWebhookConfiguration](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#mutatingwebhookconfiguration-v1-admissionregistration-k8s-io).
+[MutatingWebhookConfiguration](/docs/reference/generated/kubernetes-api/{{}}/#mutatingwebhookconfiguration-v1-admissionregistration-k8s-io).
 
 The following is an example `ValidatingWebhookConfiguration`, a mutating webhook configuration is similar.
 See the [webhook configuration](#webhook-configuration) section for details about each config field.
@@ -108,31 +108,31 @@ webhooks:
     service:
       namespace: "example-namespace"
       name: "example-service"
-    caBundle: <CA_BUNDLE>
+    caBundle: 
   admissionReviewVersions: ["v1"]
   sideEffects: None
   timeoutSeconds: 5
 ```
 
-{{< note >}}
-You must replace the `<CA_BUNDLE>` in the above example by a valid CA bundle
+{{}}
+You must replace the `` in the above example by a valid CA bundle
 which is a PEM-encoded (field value is Base64 encoded) CA bundle for validating the webhook's server certificate.
-{{< /note >}}
+{{}}
 
 The `scope` field specifies if only cluster-scoped resources ("Cluster") or namespace-scoped
 resources ("Namespaced") will match this rule. "&lowast;" means that there are no scope restrictions.
 
-{{< note >}}
+{{}}
 When using `clientConfig.service`, the server cert must be valid for
-`<svc_name>.<svc_namespace>.svc`.
-{{< /note >}}
+`..svc`.
+{{}}
 
-{{< note >}}
+{{}}
 Default timeout for a webhook call is 10 seconds,
 You can set the `timeout` and it is encouraged to use a short timeout for webhooks.
 If the webhook call times out, the request is handled according to the webhook's
 failure policy.
-{{< /note >}}
+{{}}
 
 When an API server receives a request that matches one of the `rules`, the
 API server sends an `admissionReview` request to webhook as specified in the
@@ -156,7 +156,7 @@ the webhooks. There are three steps to complete the configuration.
   (yes, the same schema that's used by kubectl), so the field name is
   `kubeConfigFile`. Here is an example admission control configuration file:
 
-{{< tabs name="admissionconfiguration_example1" >}}
+{{}}
 {{% tab name="apiserver.config.k8s.io/v1" %}}
 ```yaml
 apiVersion: apiserver.config.k8s.io/v1
@@ -166,12 +166,12 @@ plugins:
   configuration:
     apiVersion: apiserver.config.k8s.io/v1
     kind: WebhookAdmissionConfiguration
-    kubeConfigFile: "<path-to-kubeconfig-file>"
+    kubeConfigFile: ""
 - name: MutatingAdmissionWebhook
   configuration:
     apiVersion: apiserver.config.k8s.io/v1
     kind: WebhookAdmissionConfiguration
-    kubeConfigFile: "<path-to-kubeconfig-file>"
+    kubeConfigFile: ""
 ```
 {{% /tab %}}
 {{% tab name="apiserver.k8s.io/v1alpha1" %}}
@@ -185,16 +185,16 @@ plugins:
     # Deprecated in v1.17 in favor of apiserver.config.k8s.io/v1, kind=WebhookAdmissionConfiguration
     apiVersion: apiserver.config.k8s.io/v1alpha1
     kind: WebhookAdmission
-    kubeConfigFile: "<path-to-kubeconfig-file>"
+    kubeConfigFile: ""
 - name: MutatingAdmissionWebhook
   configuration:
     # Deprecated in v1.17 in favor of apiserver.config.k8s.io/v1, kind=WebhookAdmissionConfiguration
     apiVersion: apiserver.config.k8s.io/v1alpha1
     kind: WebhookAdmission
-    kubeConfigFile: "<path-to-kubeconfig-file>"
+    kubeConfigFile: ""
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{}}
 
 For more information about `AdmissionConfiguration`, see the
 [AdmissionConfiguration (v1) reference](/docs/reference/config-api/apiserver-webhookadmission.v1/).
@@ -235,17 +235,17 @@ users:
 #
 - name: 'webhook1.ns1.svc'
   user:
-    client-certificate-data: "<pem encoded certificate>"
-    client-key-data: "<pem encoded key>"
+    client-certificate-data: ""
+    client-key-data: ""
 # The `name` supports using * to wildcard-match prefixing segments.
 - name: '*.webhook-company.org'
   user:
-    password: "<password>"
-    username: "<name>"
+    password: ""
+    username: ""
 # '*' is the default match.
 - name: '*'
   user:
-    token: "<token>"
+    token: ""
 ```
 
 Of course you need to set up the webhook server to handle these authentication requests.
@@ -394,7 +394,7 @@ Example of a minimal response from a webhook to allow a request:
   "apiVersion": "admission.k8s.io/v1",
   "kind": "AdmissionReview",
   "response": {
-    "uid": "<value from request.uid>",
+    "uid": "",
     "allowed": true
   }
 }
@@ -407,7 +407,7 @@ Example of a minimal response from a webhook to forbid a request:
   "apiVersion": "admission.k8s.io/v1",
   "kind": "AdmissionReview",
   "response": {
-    "uid": "<value from request.uid>",
+    "uid": "",
     "allowed": false
   }
 }
@@ -415,7 +415,7 @@ Example of a minimal response from a webhook to forbid a request:
 
 When rejecting a request, the webhook can customize the http code and message returned to the user
 using the `status` field. The specified status object is returned to the user.
-See the [API documentation](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#status-v1-meta)
+See the [API documentation](/docs/reference/generated/kubernetes-api/{{}}/#status-v1-meta)
 for details about the `status` type.
 Example of a response to forbid a request, customizing the HTTP status code and message presented to the user:
 
@@ -424,7 +424,7 @@ Example of a response to forbid a request, customizing the HTTP status code and 
   "apiVersion": "admission.k8s.io/v1",
   "kind": "AdmissionReview",
   "response": {
-    "uid": "<value from request.uid>",
+    "uid": "",
     "allowed": false,
     "status": {
       "code": 403,
@@ -452,7 +452,7 @@ So a webhook response to add that label would be:
   "apiVersion": "admission.k8s.io/v1",
   "kind": "AdmissionReview",
   "response": {
-    "uid": "<value from request.uid>",
+    "uid": "",
     "allowed": true,
     "patchType": "JSONPatch",
     "patch": "W3sib3AiOiAiYWRkIiwgInBhdGgiOiAiL3NwZWMvcmVwbGljYXMiLCAidmFsdWUiOiAzfV0="
@@ -469,17 +469,17 @@ If you're implementing a webhook that returns a warning:
 * Use warning messages to describe problems the client making the API request should correct or be aware of
 * Limit warnings to 120 characters if possible
 
-{{< caution >}}
+{{}}
 Individual warning messages over 256 characters may be truncated by the API server before being returned to clients.
 If more than 4096 characters of warning messages are added (from all sources), additional warning messages are ignored.
-{{< /caution >}}
+{{}}
 
 ```json
 {
   "apiVersion": "admission.k8s.io/v1",
   "kind": "AdmissionReview",
   "response": {
-    "uid": "<value from request.uid>",
+    "uid": "",
     "allowed": true,
     "warnings": [
       "duplicate envvar entries specified with name MY_ENV",
@@ -721,7 +721,7 @@ The `matchPolicy` for an admission webhooks defaults to `Equivalent`.
 
 ### Matching requests: `matchConditions`
 
-{{< feature-state state="beta" for_k8s_version="v1.28" >}}
+{{}}
 
 You can define _match conditions_ for webhooks if you need fine-grained request filtering. These
 conditions are useful if you find that match rules, `objectSelectors` and `namespaceSelectors` still
@@ -748,7 +748,7 @@ webhooks:
       service:
         namespace: my-namespace
         name: my-webhook
-      caBundle: '<omitted>'
+      caBundle: ''
     # You can have up to 64 matchConditions per webhook
     matchConditions:
       - name: 'exclude-leases' # Each match condition must have a unique name
@@ -774,7 +774,7 @@ webhooks:
       service:
         namespace: my-namespace
         name: my-webhook
-      caBundle: '<omitted>'
+      caBundle: ''
     # You can have up to 64 matchConditions per webhook
     matchConditions:
       - name: 'breakglass'
@@ -783,9 +783,9 @@ webhooks:
         expression: '!authorizer.group("admissionregistration.k8s.io").resource("validatingwebhookconfigurations").name("my-webhook.example.com").check("breakglass").allowed()'
 ```
 
-{{< note >}}
+{{}}
 You can define up to 64 elements in the `matchConditions` field per webhook.
-{{< /note >}}
+{{}}
 
 Match conditions have access to the following CEL variables:
 
@@ -871,7 +871,7 @@ kind: MutatingWebhookConfiguration
 webhooks:
 - name: my-webhook.example.com
   clientConfig:
-    caBundle: <CA_BUNDLE>
+    caBundle: 
     service:
       namespace: my-service-namespace
       name: my-service-name
@@ -879,10 +879,10 @@ webhooks:
       port: 1234
 ```
 
-{{< note >}}
-You must replace the `<CA_BUNDLE>` in the above example by a valid CA bundle
+{{}}
+You must replace the `` in the above example by a valid CA bundle
 which is a PEM-encoded CA bundle for validating the webhook's server certificate.
-{{< /note >}}
+{{}}
 
 ### Side effects
 

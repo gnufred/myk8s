@@ -13,9 +13,9 @@ min-kubernetes-server-version: v1.18
 weight: 150
 ---
 
-<!-- overview -->
 
-{{< feature-state state="stable" for_k8s_version="v1.27" >}}
+
+{{}}
 
 An increasing number of systems leverage a combination of CPUs and hardware accelerators to
 support latency-critical execution and high-throughput parallel computation. These include
@@ -31,9 +31,9 @@ responsible for these optimizations.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
-<!-- steps -->
+
 
 ## How Topology Manager Works
 
@@ -77,17 +77,17 @@ The `scope` defines the granularity at which you would like resource alignment t
 carry out the alignment (e.g. `best-effort`, `restricted`, `single-numa-node`, etc.).
 Details on the various `scopes` and `policies` available today can be found below.
 
-{{< note >}}
+{{}}
 To align CPU resources with other requested resources in a Pod Spec, the CPU Manager should be
 enabled and proper CPU Manager policy should be configured on a Node.
 See [control CPU Management Policies](/docs/tasks/administer-cluster/cpu-management-policies/).
-{{< /note >}}
+{{}}
 
-{{< note >}}
+{{}}
 To align memory (and hugepages) resources with other requested resources in a Pod Spec, the Memory
 Manager should be enabled and proper Memory Manager policy should be configured on a Node. Examine
 [Memory Manager](/docs/tasks/administer-cluster/memory-manager/) documentation.
-{{< /note >}}
+{{}}
 
 ### Topology Manager Scopes
 
@@ -157,11 +157,11 @@ Topology Manager supports four allocation policies. You can set a policy via a K
 * `restricted`
 * `single-numa-node`
 
-{{< note >}}
+{{}}
 If Topology Manager is configured with the **pod** scope, the container, which is considered by
 the policy, is reflecting requirements of the entire pod, and thus each container from the pod
 will result with **the same** topology alignment decision.
-{{< /note >}}
+{{}}
 
 ### none policy {#policy-none}
 
@@ -222,7 +222,7 @@ You will still have to enable each option using the `TopologyManagerPolicyOption
 
 The following policy options exists:
 * `prefer-closest-numa-nodes` (beta, visible by default; `TopologyManagerPolicyOptions` and `TopologyManagerPolicyBetaOptions` feature gates have to be enabled).
-The `prefer-closest-numa-nodes` policy option is beta in Kubernetes {{< skew currentVersion >}}.
+The `prefer-closest-numa-nodes` policy option is beta in Kubernetes {{}}.
 
 If the `prefer-closest-numa-nodes` policy option is specified, the `best-effort` and `restricted`
 policies will favor sets of NUMA nodes with shorter distance between them when making admission decisions.

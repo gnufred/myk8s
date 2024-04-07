@@ -9,9 +9,9 @@ content_type: task
 weight: 70
 ---
 
-<!-- overview -->
+
 This page shows how to delete Pods which are part of a
-{{< glossary_tooltip text="stateful set" term_id="StatefulSet" >}},
+{{}},
 and explains the considerations to keep in mind when doing so.
 
 ## {{% heading "prerequisites" %}}
@@ -20,7 +20,7 @@ and explains the considerations to keep in mind when doing so.
   inherent to StatefulSet.
 - Before proceeding, make yourself familiar with the considerations enumerated below.
 
-<!-- steps -->
+
 
 ## StatefulSet considerations
 
@@ -43,7 +43,7 @@ and may lead to data loss (e.g. split brain scenario in quorum-based systems).
 You can perform a graceful pod deletion with the following command:
 
 ```shell
-kubectl delete pods <pod>
+kubectl delete pods 
 ```
 
 For the above to lead to graceful termination, the Pod **must not** specify a
@@ -91,20 +91,17 @@ replacement to be created.
 If you want to delete a Pod forcibly using kubectl version >= 1.5, do the following:
 
 ```shell
-kubectl delete pods <pod> --grace-period=0 --force
+kubectl delete pods  --grace-period=0 --force
 ```
 
-If you're using any version of kubectl <= 1.4, you should omit the `--force` option and use:
-
-```shell
-kubectl delete pods <pod> --grace-period=0
+If you're using any version of kubectl  --grace-period=0
 ```
 
 If even after these commands the pod is stuck on `Unknown` state, use the following command to
 remove the pod from the cluster:
 
 ```shell
-kubectl patch pod <pod> -p '{"metadata":{"finalizers":null}}'
+kubectl patch pod  -p '{"metadata":{"finalizers":null}}'
 ```
 
 Always perform force deletion of StatefulSet Pods carefully and with complete knowledge of the risks involved.

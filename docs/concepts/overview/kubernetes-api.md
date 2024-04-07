@@ -12,10 +12,10 @@ card:
   weight: 30
 ---
 
-<!-- overview -->
 
-The core of Kubernetes' {{< glossary_tooltip text="control plane" term_id="control-plane" >}}
-is the {{< glossary_tooltip text="API server" term_id="kube-apiserver" >}}. The API server
+
+The core of Kubernetes' {{}}
+is the {{}}. The API server
 exposes an HTTP API that lets end users, different parts of your cluster, and
 external components communicate with one another.
 
@@ -71,7 +71,7 @@ separate endpoint for each group version.
 
 ### Aggregated discovery
 
-{{< feature-state state="beta" for_k8s_version="v1.27" >}}
+{{}}
 
 Kubernetes offers beta support for aggregated discovery, publishing
 all resources supported by a cluster through two endpoints (`/api` and
@@ -86,7 +86,7 @@ Without indicating the resource type using the `Accept` header, the default
 response for the `/api` and `/apis` endpoint is an unaggregated discovery
 document.
 
-The [discovery document](https://github.com/kubernetes/kubernetes/blob/release-{{< skew currentVersion >}}/api/discovery/aggregated_v2beta1.json)
+The [discovery document](https://github.com/kubernetes/kubernetes/blob/release-{{}}/api/discovery/aggregated_v2beta1.json)
 for the built-in resources can be found in the Kubernetes GitHub repository.
 This Github document can be used as a reference of the base set of the available resources
 if a Kubernetes cluster is not available to query.
@@ -137,14 +137,14 @@ the `/api` and `/apis` endpoints. Example:
 ```
 
 Additional requests are needed to obtain the discovery document for each group version at
-`/apis/<group>/<version>` (for example:
+`/apis//` (for example:
 `/apis/rbac.authorization.k8s.io/v1alpha1`), which advertises the list of
 resources served under a particular group version. These endpoints are used by
 kubectl to fetch the list of resources supported by a cluster.
 
-<!-- body -->
 
-<a id="#api-specification" />
+
+
 
 ## OpenAPI interface definition
 
@@ -161,41 +161,41 @@ The Kubernetes API server serves an aggregated OpenAPI v2 spec via the
 `/openapi/v2` endpoint. You can request the response format using
 request headers as follows:
 
-<table>
-  <caption style="display:none">Valid request header values for OpenAPI v2 queries</caption>
-  <thead>
-     <tr>
-        <th>Header</th>
-        <th style="min-width: 50%;">Possible values</th>
-        <th>Notes</th>
-     </tr>
-  </thead>
-  <tbody>
-     <tr>
-        <td><code>Accept-Encoding</code></td>
-        <td><code>gzip</code></td>
-        <td><em>not supplying this header is also acceptable</em></td>
-     </tr>
-     <tr>
-        <td rowspan="3"><code>Accept</code></td>
-        <td><code>application/com.github.proto-openapi.spec.v2@v1.0+protobuf</code></td>
-        <td><em>mainly for intra-cluster use</em></td>
-     </tr>
-     <tr>
-        <td><code>application/json</code></td>
-        <td><em>default</em></td>
-     </tr>
-     <tr>
-        <td><code>*</code></td>
-        <td><em>serves </em><code>application/json</code></td>
-     </tr>
-  </tbody>
-</table>
+
+  Valid request header values for OpenAPI v2 queries
+  
+     
+        Header
+        Possible values
+        Notes
+     
+  
+  
+     
+        Accept-Encoding
+        gzip
+        not supplying this header is also acceptable
+     
+     
+        Accept
+        application/com.github.proto-openapi.spec.v2@v1.0+protobuf
+        mainly for intra-cluster use
+     
+     
+        application/json
+        default
+     
+     
+        *
+        serves application/json
+     
+  
+
 
 
 ### OpenAPI V3
 
-{{< feature-state feature_gate_name="OpenAPIV3" >}}
+{{}}
 
 Kubernetes supports publishing a description of its APIs as OpenAPI v3.
 
@@ -217,7 +217,7 @@ group/versions are provided in the following format:
     }
 }
 ```
-<!-- for editors: intentionally use yaml instead of json here, to prevent syntax highlight error. -->
+
 
 The relative URLs are pointing to immutable OpenAPI descriptions, in
 order to improve client-side caching. The proper HTTP caching headers
@@ -226,46 +226,46 @@ the future, and `Cache-Control` to `immutable`). When an obsolete URL is
 used, the API server returns a redirect to the newest URL.
 
 The Kubernetes API server publishes an OpenAPI v3 spec per Kubernetes
-group version at the `/openapi/v3/apis/<group>/<version>?hash=<hash>`
+group version at the `/openapi/v3/apis//?hash=`
 endpoint.
 
 Refer to the table below for accepted request headers.
 
-<table>
-  <caption style="display:none">Valid request header values for OpenAPI v3 queries</caption>
-  <thead>
-     <tr>
-        <th>Header</th>
-        <th style="min-width: 50%;">Possible values</th>
-        <th>Notes</th>
-     </tr>
-  </thead>
-  <tbody>
-     <tr>
-        <td><code>Accept-Encoding</code></td>
-        <td><code>gzip</code></td>
-        <td><em>not supplying this header is also acceptable</em></td>
-     </tr>
-     <tr>
-        <td rowspan="3"><code>Accept</code></td>
-        <td><code>application/com.github.proto-openapi.spec.v3@v1.0+protobuf</code></td>
-        <td><em>mainly for intra-cluster use</em></td>
-     </tr>
-     <tr>
-        <td><code>application/json</code></td>
-        <td><em>default</em></td>
-     </tr>
-     <tr>
-        <td><code>*</code></td>
-        <td><em>serves </em><code>application/json</code></td>
-     </tr>
-  </tbody>
-</table>
+
+  Valid request header values for OpenAPI v3 queries
+  
+     
+        Header
+        Possible values
+        Notes
+     
+  
+  
+     
+        Accept-Encoding
+        gzip
+        not supplying this header is also acceptable
+     
+     
+        Accept
+        application/com.github.proto-openapi.spec.v3@v1.0+protobuf
+        mainly for intra-cluster use
+     
+     
+        application/json
+        default
+     
+     
+        *
+        serves application/json
+     
+  
+
 
 A Golang implementation to fetch the OpenAPI V3 is provided in the package
 [`k8s.io/client-go/openapi3`](https://pkg.go.dev/k8s.io/client-go/openapi3).
 
-Kubernetes {{< skew currentVersion >}} publishes
+Kubernetes {{}} publishes
 OpenAPI v2.0 and v3.0; there are no plans to support 3.1 in the near future.
 
 ### Protobuf serialization
@@ -280,20 +280,20 @@ packages that define the API objects.
 ## Persistence
 
 Kubernetes stores the serialized state of objects by writing them into
-{{< glossary_tooltip term_id="etcd" >}}.
+{{}}.
 
 ## API Discovery
 
 A list of all group versions supported by a cluster is published at
 the `/api` and `/apis` endpoints. Each group version also advertises
-the list of resources supported via `/apis/<group>/<version>` (for
+the list of resources supported via `/apis//` (for
 example: `/apis/rbac.authorization.k8s.io/v1alpha1`). These endpoints
 are used by kubectl to fetch the list of resources supported by a
 cluster.
 
 ### Aggregated Discovery
 
-{{< feature-state feature_gate_name="AggregatedDiscoveryEndpoint" >}}
+{{}}
 
 Kubernetes offers beta support for aggregated discovery, publishing
 all resources supported by a cluster through two endpoints (`/api` and
@@ -354,12 +354,12 @@ once the API graduates. The best time to do this is while the beta API is in its
 since objects are simultaneously accessible via both API versions. Once the beta API completes its
 deprecation period and is no longer served, the replacement API version must be used.
 
-{{< note >}}
+{{}}
 Although Kubernetes also aims to maintain compatibility for _alpha_ APIs versions, in some
 circumstances this is not possible. If you use any alpha API versions, check the release notes
 for Kubernetes when upgrading your cluster, in case the API did change in incompatible
 ways that require deleting all existing alpha objects prior to upgrade.
-{{< /note >}}
+{{}}
 
 Refer to [API versions reference](/docs/reference/using-api/#api-versioning)
 for more details on the API version level definitions.

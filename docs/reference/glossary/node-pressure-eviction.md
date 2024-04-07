@@ -11,10 +11,10 @@ aka:
 tags:
 - operation
 ---
-Node-pressure eviction is the process by which the {{<glossary_tooltip term_id="kubelet" text="kubelet">}} proactively terminates
+Node-pressure eviction is the process by which the {{}} proactively terminates
 pods to reclaim resources on nodes.
 
-<!--more-->
+
 
 The kubelet monitors resources like CPU, memory, disk space, and filesystem 
 inodes on your cluster's nodes. When one or more of these resources reach

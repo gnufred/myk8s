@@ -5,7 +5,7 @@ content_type: task
 weight: 50
 ---
 
-<!-- overview -->
+
 
 This task shows how to use `kubectl patch` to update an API object in place. The exercises
 in this task demonstrate a strategic merge patch and a JSON merge patch.
@@ -15,12 +15,12 @@ in this task demonstrate a strategic merge patch and a JSON merge patch.
 ## {{% heading "prerequisites" %}}
 
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{}} {{}}
 
 
 
 
-<!-- steps -->
+
 
 ## Use a strategic merge patch to update a Deployment
 
@@ -114,7 +114,7 @@ patch-demo-1081991389-jmg7b   2/2       Running   0          1m
 Take a closer look at one of the patch-demo Pods:
 
 ```shell
-kubectl get pod <your-pod-name> --output yaml
+kubectl get pod  --output yaml
 ```
 
 The output shows that the Pod has two Containers: one running nginx and one running redis:
@@ -161,10 +161,10 @@ You can also see the patch strategy in the
     "x-kubernetes-patch-strategy": "merge"
 }
 ```
-<!-- for editors: intentionally use yaml instead of json here, to prevent syntax highlight error. -->
+
 
 And you can see the patch strategy in the
-[Kubernetes API documentation](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
+[Kubernetes API documentation](/docs/reference/generated/kubernetes-api/{{}}/#podspec-v1-core).
 
 Create a file named `patch-file-tolerations.yaml` that has this content:
 
@@ -221,12 +221,12 @@ replaces the existing list.
 
 The `kubectl patch` command has a `type` parameter that you can set to one of these values:
 
-<table>
-  <tr><th>Parameter value</th><th>Merge type</th></tr>
-  <tr><td>json</td><td><a href="https://tools.ietf.org/html/rfc6902">JSON Patch, RFC 6902</a></td></tr>
-  <tr><td>merge</td><td><a href="https://tools.ietf.org/html/rfc7386">JSON Merge Patch, RFC 7386</a></td></tr>
-  <tr><td>strategic</td><td>Strategic merge patch</td></tr>
-</table>
+
+  Parameter valueMerge type
+  jsonJSON Patch, RFC 6902
+  mergeJSON Merge Patch, RFC 7386
+  strategicStrategic merge patch
+
 
 For a comparison of JSON patch and JSON merge patch, see
 [JSON Patch and JSON Merge Patch](https://erosb.github.io/post/json-patch-vs-merge-patch/).
@@ -387,10 +387,10 @@ You can also see the `retainKeys` strategy in the [OpenApi spec](https://raw.git
     ....
 }
 ```
-<!-- for editors: intentionally use yaml instead of json here, to prevent syntax highlight error. -->
+
 
 And you can see the `retainKeys` strategy in the
-[Kubernetes API documentation](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deploymentspec-v1-apps).
+[Kubernetes API documentation](/docs/reference/generated/kubernetes-api/{{}}/#deploymentspec-v1-apps).
 
 ### Alternate forms of the kubectl patch command
 
@@ -429,7 +429,7 @@ kubectl patch deployment patch-demo --patch '{"spec": {"template": {"spec": {"co
 
 ### Update an object's replica count using `kubectl patch` with `--subresource` {#scale-kubectl-patch}
 
-{{< feature-state for_k8s_version="v1.24" state="alpha" >}}
+{{}}
 
 The flag `--subresource=[subresource-name]` is used with kubectl commands like get, patch,
 edit and replace to fetch and update `status` and `scale` subresources of the resources
@@ -506,10 +506,10 @@ status:
   replicas: 3
 ```
 
-{{< note >}}
+{{}}
 If you run `kubectl patch` and specify `--subresource` flag for resource that doesn't support that
 particular subresource, the API server returns a 404 Not Found error.
-{{< /note >}}
+{{}}
 
 ## Summary
 
@@ -524,9 +524,9 @@ and
 [kubectl apply](/docs/reference/generated/kubectl/kubectl-commands/#apply).
 
 
-{{< note >}}
+{{}}
 Strategic merge patch is not supported for custom resources.
-{{< /note >}}
+{{}}
 
 
 ## {{% heading "whatsnext" %}}

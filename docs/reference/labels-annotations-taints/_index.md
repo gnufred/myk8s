@@ -11,13 +11,13 @@ card:
     title: Labels, annotations and taints
 ---
 
-<!-- overview -->
+
 
 Kubernetes reserves all labels and annotations in the `kubernetes.io` and `k8s.io` namespaces.
 
 This document serves both as a reference to the values and as a coordination point for assigning values.
 
-<!-- body -->
+
 
 ## Labels, annotations and taints used on API objects
 
@@ -58,9 +58,9 @@ Used on: All Objects (typically used on [workload resources](/docs/reference/kub
 
 The controller/user who created this resource.
 
-{{< note >}}
+{{}}
 Starting from v1.9, this label is deprecated.
-{{< /note >}}
+{{}}
 
 ### app.kubernetes.io/instance
 
@@ -143,9 +143,9 @@ Example: `applyset.kubernetes.io/additional-namespaces: "namespace1,namespace2"`
 Used on: Objects being used as ApplySet parents.
 
 Use of this annotation is Alpha.
-For Kubernetes version {{< skew currentVersion >}}, you can use this annotation on Secrets,
+For Kubernetes version {{}}, you can use this annotation on Secrets,
 ConfigMaps, or custom resources if the
-{{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}}
+{{}}
 defining them has the `applyset.kubernetes.io/is-parent-type` label.
 
 Part of the specification used to implement
@@ -164,7 +164,7 @@ Example: `applyset.kubernetes.io/contains-group-resources: "certificates.cert-ma
 Used on: Objects being used as ApplySet parents.
 
 Use of this annotation is Alpha.
-For Kubernetes version {{< skew currentVersion >}}, you can use this annotation on Secrets, ConfigMaps,
+For Kubernetes version {{}}, you can use this annotation on Secrets, ConfigMaps,
 or custom resources if the CustomResourceDefinition
 defining them has the `applyset.kubernetes.io/is-parent-type` label.
 
@@ -172,9 +172,9 @@ Part of the specification used to implement
 [ApplySet-based pruning in kubectl](/docs/tasks/manage-kubernetes-objects/declarative-config/#alternative-kubectl-apply-f-directory-prune).
 This annotation is applied to the parent object used to track an ApplySet to optimize listing of
 ApplySet member objects. It is optional in the ApplySet specification, as tools can perform discovery
-or use a different optimization. However, as of Kubernetes version {{< skew currentVersion >}},
+or use a different optimization. However, as of Kubernetes version {{}},
 it is required by kubectl. When present, the value of this annotation must be a comma separated list
-of the group-kinds, in the fully-qualified name format, i.e. `<resource>.<group>`.
+of the group-kinds, in the fully-qualified name format, i.e. `.`.
 
 ### applyset.kubernetes.io/id (alpha) {#applyset-kubernetes-io-id}
 
@@ -185,7 +185,7 @@ Example: `applyset.kubernetes.io/id: "applyset-0eFHV8ySqp7XoShsGvyWFQD3s96yqwHmz
 Used on: Objects being used as ApplySet parents.
 
 Use of this label is Alpha.
-For Kubernetes version {{< skew currentVersion >}}, you can use this label on Secrets, ConfigMaps,
+For Kubernetes version {{}}, you can use this label on Secrets, ConfigMaps,
 or custom resources if the CustomResourceDefinition
 defining them has the `applyset.kubernetes.io/is-parent-type` label.
 
@@ -195,7 +195,7 @@ This label is what makes an object an ApplySet parent object.
 Its value is the unique ID of the ApplySet, which is derived from the identity of the parent
 object itself. This ID **must** be the base64 encoding (using the URL safe encoding of RFC4648) of
 the hash of the group-kind-name-namespace of the object it is on, in the form:
-`<base64(sha256(<name>.<namespace>.<kind>.<group>))>`.
+`...))>`.
 There is no relation between the value of this label and object UID.
 
 ### applyset.kubernetes.io/is-parent-type (alpha) {#applyset-kubernetes-io-is-parent-type}
@@ -233,12 +233,12 @@ label on the parent object.
 
 Type: Annotation
 
-Example: `applyset.kubernetes.io/tooling: "kubectl/v{{< skew currentVersion >}}"`
+Example: `applyset.kubernetes.io/tooling: "kubectl/v{{}}"`
 
 Used on: Objects being used as ApplySet parents.
 
 Use of this annotation is Alpha.
-For Kubernetes version {{< skew currentVersion >}}, you can use this annotation on Secrets,
+For Kubernetes version {{}}, you can use this annotation on Secrets,
 ConfigMaps, or custom resources if the CustomResourceDefinitiondefining them has the
 `applyset.kubernetes.io/is-parent-type` label.
 
@@ -246,7 +246,7 @@ Part of the specification used to implement
 [ApplySet-based pruning in kubectl](/docs/tasks/manage-kubernetes-objects/declarative-config/#alternative-kubectl-apply-f-directory-prune).
 This annotation is applied to the parent object used to track an ApplySet to indicate which
 tooling manages that ApplySet. Tooling should refuse to mutate ApplySets belonging to other tools.
-The value must be in the format `<toolname>/<semver>`.
+The value must be in the format `/`.
 
 ### apps.kubernetes.io/pod-index (beta) {#apps-kubernetes.io-pod-index}
 
@@ -410,12 +410,12 @@ Example: `kubernetes.io/metadata.name: "mynamespace"`
 
 Used on: Namespaces
 
-The Kubernetes API server (part of the {{< glossary_tooltip text="control plane" term_id="control-plane" >}})
+The Kubernetes API server (part of the {{}})
 sets this label on all namespaces. The label value is set
 to the name of the namespace. You can't change this label's value.
 
 This is useful if you want to target a specific namespace with a label
-{{< glossary_tooltip text="selector" term_id="selector" >}}.
+{{}}.
 
 ### kubernetes.io/limit-ranger
 
@@ -455,7 +455,7 @@ Example: `kubernetes.io/config.mirror: "df7cc47f8477b6b1226d7d23a904867b"`
 
 Used on: Pod
 
-For a static Pod created by the kubelet on a node, a {{< glossary_tooltip text="mirror Pod" term_id="mirror-pod" >}}
+For a static Pod created by the kubelet on a node, a {{}}
 is created on the API server. The kubelet adds an annotation to indicate that this Pod is
 actually a mirror Pod. The annotation value is copied from the [`kubernetes.io/config.hash`](#kubernetes-io-config-hash)
 annotation, which is the UID of the Pod.
@@ -533,10 +533,10 @@ The `kube-apiserver` sets this label on any APIService object that the API serve
 has created automatically. The label marks how the control plane should manage that
 APIService. You should not add, modify, or remove this label by yourself.
 
-{{< note >}}
+{{}}
 Automanaged APIService objects are deleted by kube-apiserver when it has no built-in
 or custom resource API corresponding to the API group/version of the APIService.
-{{< /note >}}
+{{}}
 
 There are two possible values:
 
@@ -634,7 +634,7 @@ The following command can be used to exclude a worker node from the list of back
 backend set:
 
 ```shell
-kubectl label nodes <node-name> node.kubernetes.io/exclude-from-external-load-balancers=true
+kubectl label nodes  node.kubernetes.io/exclude-from-external-load-balancers=true
 ```
 
 ### controller.kubernetes.io/pod-deletion-cost {#pod-deletion-cost}
@@ -666,9 +666,9 @@ you can set this annotation to `"false"` for important DaemonSet pods.
 If this annotation is not set, then the ClusterAutoscaler follows its overall behavior
 (i.e evict the DaemonSets based on its configuration).
 
-{{< note >}}
+{{}}
 This annotation only impacts DaemonSet Pods.
-{{< /note >}}
+{{}}
 
 ### kubernetes.io/ingress-bandwidth
 
@@ -686,12 +686,12 @@ specifying ingress rate is bits per second, as a
 [Quantity](/docs/reference/kubernetes-api/common-definitions/quantity/).
 For example, `10M` means 10 megabits per second.
 
-{{< note >}}
+{{}}
 Ingress traffic shaping annotation is an experimental feature.
 If you want to enable traffic shaping support, you must add the `bandwidth` plugin to your CNI
 configuration file (default `/etc/cni/net.d`) and ensure that the binary is included in your CNI
 bin dir (default `/opt/cni/bin`).
-{{< /note >}}
+{{}}
 
 ### kubernetes.io/egress-bandwidth
 
@@ -708,21 +708,21 @@ speed using `kubernetes.io/egress-bandwidth` annotation. The unit used for speci
 is bits per second, as a [Quantity](/docs/reference/kubernetes-api/common-definitions/quantity/).
 For example, `10M` means 10 megabits per second.
 
-{{< note >}}
+{{}}
 Egress traffic shaping annotation is an experimental feature.
 If you want to enable traffic shaping support, you must add the `bandwidth` plugin to your CNI
 configuration file (default `/etc/cni/net.d`) and ensure that the binary is included in your CNI
 bin dir (default `/opt/cni/bin`).
-{{< /note >}}
+{{}}
 
 ### beta.kubernetes.io/instance-type (deprecated)
 
 Type: Label
 
-{{< note >}}
+{{}}
 Starting in v1.17, this label is deprecated in favor of
 [node.kubernetes.io/instance-type](#nodekubernetesioinstance-type).
-{{< /note >}}
+{{}}
 
 ### node.kubernetes.io/instance-type {#nodekubernetesioinstance-type}
 
@@ -743,19 +743,19 @@ You should aim to schedule based on properties rather than on instance types
 
 Type: Label
 
-{{< note >}}
+{{}}
 Starting in v1.17, this label is deprecated in favor of
 [topology.kubernetes.io/region](#topologykubernetesioregion).
-{{< /note >}}
+{{}}
 
 ### failure-domain.beta.kubernetes.io/zone (deprecated) {#failure-domainbetakubernetesiozone}
 
 Type: Label
 
-{{< note >}}
+{{}}
 Starting in v1.17, this label is deprecated in favor of
 [topology.kubernetes.io/zone](#topologykubernetesiozone).
-{{< /note >}}
+{{}}
 
 ### pv.kubernetes.io/bind-completed {#pv-kubernetesiobind-completed}
 
@@ -780,7 +780,7 @@ Used on: PersistentVolume, PersistentVolumeClaim
 
 If this annotation is set on a PersistentVolume or PersistentVolumeClaim, it indicates that a
 storage binding (PersistentVolume → PersistentVolumeClaim, or PersistentVolumeClaim → PersistentVolume)
-was installed by the {{< glossary_tooltip text="controller" term_id="controller" >}}.
+was installed by the {{}}.
 If the annotation isn't set, and there is a storage binding in place, the absence of that
 annotation means that the binding was done manually.
 The value of this annotation does not matter.
@@ -978,7 +978,7 @@ Used on: Node
 
 If a node has the annotation `volumes.kubernetes.io/controller-managed-attach-detach`,
 its storage attach and detach operations are being managed by the _volume attach/detach_
-{{< glossary_tooltip text="controller" term_id="controller" >}}.
+{{}}.
 
 The value of the annotation isn't important.
 
@@ -1019,7 +1019,7 @@ Setting the annotation to `Auto`, on a Service, configured the Kubernetes contro
 add topology hints on EndpointSlices associated with that Service. You can also explicitly
 set the annotation to `Disabled`.
 
-If you are running a version of Kubernetes older than {{< skew currentVersion >}},
+If you are running a version of Kubernetes older than {{}},
 check the documentation for that Kubernetes version to see how topology aware routing
 works in that release.
 
@@ -1053,7 +1053,7 @@ Used on: EndpointSlice
 Kubernetes associates [EndpointSlices](/docs/concepts/services-networking/endpoint-slices/) with
 [Services](/docs/concepts/services-networking/service/) using this label.
 
-This label records the {{< glossary_tooltip term_id="name" text="name">}} of the
+This label records the {{}} of the
 Service that the EndpointSlice is backing. All EndpointSlices should have this label set to
 the name of their associated Service.
 
@@ -1065,7 +1065,7 @@ Example: `kubernetes.io/service-account.name: "sa-name"`
 
 Used on: Secret
 
-This annotation records the {{< glossary_tooltip term_id="name" text="name">}} of the
+This annotation records the {{}} of the
 ServiceAccount that the token (stored in the Secret of type `kubernetes.io/service-account-token`)
 represents.
 
@@ -1077,7 +1077,7 @@ Example: `kubernetes.io/service-account.uid: da68f9c6-9d26-11e7-b84e-002dc52800d
 
 Used on: Secret
 
-This annotation records the {{< glossary_tooltip term_id="uid" text="unique ID" >}} of the
+This annotation records the {{}} of the
 ServiceAccount that the token (stored in the Secret of type `kubernetes.io/service-account-token`)
 represents.
 
@@ -1108,7 +1108,7 @@ Used on: Secret
 The control plane automatically adds this label to auto-generated Secrets that
 have the type `kubernetes.io/service-account-token`, provided that you have the
 `LegacyServiceAccountTokenCleanUp` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
-enabled. Kubernetes {{< skew currentVersion >}} enables that behavior by default.
+enabled. Kubernetes {{}} enables that behavior by default.
 This label marks the Secret-based token as invalid for authentication. The value
 of this label records the date (ISO 8601 format, UTC time zone) when the control
 plane detects that the auto-generated Secret has not been used for a specified
@@ -1157,10 +1157,10 @@ Used on: Pod
 
 The annotation is used to run Windows containers with Hyper-V isolation.
 
-{{< note >}}
+{{}}
 Starting from v1.20, this annotation is deprecated.
 Experimental Hyper-V support was removed in 1.21.
-{{< /note >}}
+{{}}
 
 ### ingressclass.kubernetes.io/is-default-class
 
@@ -1179,9 +1179,9 @@ Type: Annotation
 
 Used on: Ingress
 
-{{< note >}}
+{{}}
 Starting in v1.18, this annotation is deprecated in favor of `spec.ingressClassName`.
-{{< /note >}}
+{{}}
 
 ### storageclass.kubernetes.io/is-default-class
 
@@ -1257,11 +1257,11 @@ The value of the annotation is the container name that is the default logging co
 Pod. For example, `kubectl logs` without `-c` or `--container` flag will use this default
 container.
 
-{{< note >}}
+{{}}
 This annotation is deprecated. You should use the
 [`kubectl.kubernetes.io/default-container`](#kubectl-kubernetes-io-default-container)
 annotation instead. Kubernetes versions 1.25 and newer ignore this annotation.
-{{< /note >}}
+{{}}
 
 ### kubectl.kubernetes.io/last-applied-configuration
 
@@ -1287,9 +1287,9 @@ Example: `endpoints.kubernetes.io/over-capacity:truncated`
 
 Used on: Endpoints
 
-The {{< glossary_tooltip text="control plane" term_id="control-plane" >}} adds this annotation to
+The {{}} adds this annotation to
 an [Endpoints](/docs/concepts/services-networking/service/#endpoints) object if the associated
-{{< glossary_tooltip term_id="service" >}} has more than 1000 backing endpoints.
+{{}} has more than 1000 backing endpoints.
 The annotation indicates that the Endpoints object is over capacity and the number of endpoints
 has been truncated to 1000.
 
@@ -1303,7 +1303,7 @@ Example: `control-plane.alpha.kubernetes.io/leader={"holderIdentity":"controller
 
 Used on: Endpoints
 
-The {{< glossary_tooltip text="control plane" term_id="control-plane" >}} previously set annotation on
+The {{}} previously set annotation on
 an [Endpoints](/docs/concepts/services-networking/service/#endpoints) object. This annotation provided
 the following detail:
 
@@ -1337,10 +1337,10 @@ Example: `job-name: "pi"`
 
 Used on: Jobs and Pods controlled by Jobs
 
-{{< note >}}
+{{}}
 Starting from Kubernetes 1.27, this label is deprecated.
 Kubernetes 1.27 and newer ignore this label and use the prefixed `job-name` label.
-{{< /note >}}
+{{}}
 
 ### controller-uid (deprecated) {#controller-uid}
 
@@ -1350,10 +1350,10 @@ Example: `controller-uid: "$UID"`
 
 Used on: Jobs and Pods controlled by Jobs
 
-{{< note >}}
+{{}}
 Starting from Kubernetes 1.27, this label is deprecated.
 Kubernetes 1.27 and newer ignore this label and use the prefixed `controller-uid` label.
-{{< /note >}}
+{{}}
 
 ### batch.kubernetes.io/job-name {#batchkubernetesio-job-name}
 
@@ -1514,10 +1514,10 @@ the Pods on the node will be forcefully deleted if there are no matching tolerat
 volume detach operations for the Pods terminating on the node will happen immediately.
 This allows the Pods on the out-of-service node to recover quickly on a different node.
 
-{{< caution >}}
+{{}}
 Refer to [Non-graceful node shutdown](/docs/concepts/architecture/nodes/#non-graceful-node-shutdown)
 for further details about when and how to use this taint.
-{{< /caution >}}
+{{}}
 
 ### node.cloudprovider.kubernetes.io/uninitialized
 
@@ -1552,7 +1552,7 @@ Used on: Node
 
 These labels are used by the Node Feature Discovery (NFD) component to advertise
 features on a node. All built-in labels use the `feature.node.kubernetes.io` label
-namespace and have the format `feature.node.kubernetes.io/<feature-name>: "true"`.
+namespace and have the format `feature.node.kubernetes.io/: "true"`.
 NFD has many extension points for creating vendor and application-specific labels.
 For details, see the [customization guide](https://kubernetes-sigs.github.io/node-feature-discovery/v0.12/usage/customization-guide).
 
@@ -1619,11 +1619,11 @@ Creators of NodeFeature objects must set this label and
 consumers of the objects are supposed to use the label for 
 filtering features designated for a certain node.
 
-{{< note >}}
+{{}}
 These Node Feature Discovery (NFD) labels or annotations only apply to 
 the nodes where NFD is running. To learn more about NFD and 
 its components go to its official [documentation](https://kubernetes-sigs.github.io/node-feature-discovery/stable/get-started/).
-{{< /note >}}
+{{}}
 
 ### service.beta.kubernetes.io/aws-load-balancer-access-log-emit-interval (beta) {#service-beta-kubernetes-io-aws-load-balancer-access-log-emit-interval}
 
@@ -1957,11 +1957,11 @@ When this annotation is added to a Service, the load-balancer controller attache
 referenced by the annotation to the load balancer. If you omit this annotation, the AWS load balancer
 controller automatically creates a new security group and attaches it to the load balancer.
 
-{{< note >}}
+{{}}
 Kubernetes v1.27 and later do not directly set or read this annotation. However, the AWS
 load balancer controller (part of the Kubernetes project) does still use the
 `service.beta.kubernetes.io/aws-load-balancer-security-groups` annotation.
-{{< /note >}}
+{{}}
 
 ### service.beta.kubernetes.io/load-balancer-source-ranges (deprecated) {#service-beta-kubernetes-io-load-balancer-source-ranges}
 
@@ -2055,11 +2055,11 @@ and your cluster has a working deployment of the AWS Load Balancer controller,
 then the AWS Load Balancer controller attempts to deploy a load balancer based
 on the Service specification.
 
-{{< caution >}}
+{{}}
 Do not modify or add the `service.beta.kubernetes.io/aws-load-balancer-type` annotation
 on an existing Service object. See the AWS documentation on this topic for more
 details.
-{{< /caution >}}
+{{}}
 
 ### pod-security.kubernetes.io/enforce
 
@@ -2081,11 +2081,11 @@ for more information.
 
 Type: Label
 
-Example: `pod-security.kubernetes.io/enforce-version: "{{< skew currentVersion >}}"`
+Example: `pod-security.kubernetes.io/enforce-version: "{{}}"`
 
 Used on: Namespace
 
-Value **must** be `latest` or a valid Kubernetes version in the format `v<major>.<minor>`.
+Value **must** be `latest` or a valid Kubernetes version in the format `v.`.
 This determines the version of the
 [Pod Security Standard](/docs/concepts/security/pod-security-standards)
 policies to apply when validating a Pod.
@@ -2114,11 +2114,11 @@ for more information.
 
 Type: Label
 
-Example: `pod-security.kubernetes.io/audit-version: "{{< skew currentVersion >}}"`
+Example: `pod-security.kubernetes.io/audit-version: "{{}}"`
 
 Used on: Namespace
 
-Value **must** be `latest` or a valid Kubernetes version in the format `v<major>.<minor>`.
+Value **must** be `latest` or a valid Kubernetes version in the format `v.`.
 This determines the version of the
 [Pod Security Standard](/docs/concepts/security/pod-security-standards)
 policies to apply when validating a Pod.
@@ -2149,11 +2149,11 @@ for more information.
 
 Type: Label
 
-Example: `pod-security.kubernetes.io/warn-version: "{{< skew currentVersion >}}"`
+Example: `pod-security.kubernetes.io/warn-version: "{{}}"`
 
 Used on: Namespace
 
-Value **must** be `latest` or a valid Kubernetes version in the format `v<major>.<minor>`.
+Value **must** be `latest` or a valid Kubernetes version in the format `v.`.
 This determines the version of the [Pod Security Standard](/docs/concepts/security/pod-security-standards)
 policies to apply when validating a submitted Pod.
 Note that warnings are also displayed when creating or updating objects that contain
@@ -2175,7 +2175,7 @@ they are automatically updated at server start to add missing permissions and su
 (extra permissions and subjects are left in place).
 To prevent autoupdating a particular role or rolebinding, set this annotation to `"false"`.
 If you create your own RBAC objects and set this annotation to `"false"`, `kubectl auth reconcile`
-(which allows reconciling arbitrary RBAC objects in a {{< glossary_tooltip text="manifest" term_id="manifest" >}})
+(which allows reconciling arbitrary RBAC objects in a {{}})
 respects this annotation and does not automatically add missing permissions and subjects.
 
 ### kubernetes.io/psp (deprecated) {#kubernetes-io-psp}
@@ -2188,7 +2188,7 @@ Used on: Pod
 
 This annotation was only relevant if you were using
 [PodSecurityPolicy](/docs/concepts/security/pod-security-policy/) objects.
-Kubernetes v{{< skew currentVersion >}} does not support the PodSecurityPolicy API.
+Kubernetes v{{}} does not support the PodSecurityPolicy API.
 
 When the PodSecurityPolicy admission controller admitted a Pod, the admission controller
 modified the Pod to have this annotation.
@@ -2241,14 +2241,14 @@ Used on: Pod
 This annotation lets Kubernetes control plane know about a Pod being a critical Pod
 so that the descheduler will not remove this Pod.
 
-{{< note >}}
+{{}}
 Starting in v1.16, this annotation was removed in favor of
 [Pod Priority](/docs/concepts/scheduling-eviction/pod-priority-preemption/).
-{{< /note >}}
+{{}}
 
 ## Annotations used for audit
 
-<!-- sorted by annotation -->
+
 - [`authorization.k8s.io/decision`](/docs/reference/labels-annotations-taints/audit-annotations/#authorization-k8s-io-decision)
 - [`authorization.k8s.io/reason`](/docs/reference/labels-annotations-taints/audit-annotations/#authorization-k8s-io-reason)
 - [`insecure-sha1.invalid-cert.kubernetes.io/$hostname`](/docs/reference/labels-annotations-taints/audit-annotations/#insecure-sha1-invalid-cert-kubernetes-io-hostname)
@@ -2341,7 +2341,7 @@ be scheduled onto them. You can manually remove this taint with the following
 command on a specific node.
 
 ```shell
-kubectl taint nodes <node-name> node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl taint nodes  node-role.kubernetes.io/control-plane:NoSchedule-
 ```
 
 ### node-role.kubernetes.io/master (deprecated) {#node-role-kubernetes-io-master-taint}

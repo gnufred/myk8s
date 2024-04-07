@@ -15,16 +15,16 @@ content_type: concept
 no_list: true
 ---
 
-<!-- overview -->
+
 
 Kubernetes is highly configurable and extensible. As a result, there is rarely a need to fork or
 submit patches to the Kubernetes project code.
 
 This guide describes the options for customizing a Kubernetes cluster. It is aimed at
-{{< glossary_tooltip text="cluster operators" term_id="cluster-operator" >}} who want to understand
+{{}} who want to understand
 how to adapt their Kubernetes cluster to the needs of their work environment. Developers who are
-prospective {{< glossary_tooltip text="Platform Developers" term_id="platform-developer" >}} or
-Kubernetes Project {{< glossary_tooltip text="Contributors" term_id="contributor" >}} will also
+prospective {{}} or
+Kubernetes Project {{}} will also
 find it useful as an introduction to what extension points and patterns exist, and their
 trade-offs and limitations.
 
@@ -33,7 +33,7 @@ involves changing command line arguments, local configuration files, or API reso
 which involve running additional programs, additional network services, or both.
 This document is primarily about _extensions_.
 
-<!-- body -->
+
 
 ## Configuration
 
@@ -80,7 +80,7 @@ Automation generally works with any Kubernetes cluster, including hosted
 clusters and managed installations.
 
 There is a specific pattern for writing client programs that work well with
-Kubernetes called the {{< glossary_tooltip term_id="controller" text="controller" >}}
+Kubernetes called the {{}}
 pattern. Controllers typically read an object's `.spec`, possibly do things, and then
 update the object's `.status`.
 
@@ -88,12 +88,12 @@ A controller is a client of the Kubernetes API. When Kubernetes is the client an
 out to a remote service, Kubernetes calls this a *webhook*. The remote service is called
 a *webhook backend*. As with custom controllers, webhooks do add a point of failure.
 
-{{< note >}}
+{{}}
 Outside of Kubernetes, the term “webhook” typically refers to a mechanism for asynchronous
 notifications, where the webhook call serves as a one-way notification to another system or
 component. In the Kubernetes ecosystem, even synchronous HTTP callouts are often
 described as “webhooks”.
-{{< /note >}}
+{{}}
 
 In the webhook model, Kubernetes makes a network request to a remote service.
 With the alternative *binary Plugin* model, Kubernetes executes a binary (program).
@@ -106,11 +106,9 @@ and by kubectl (see [Extend kubectl with plugins](/docs/tasks/extend-kubectl/kub
 This diagram shows the extension points in a Kubernetes cluster and the
 clients that access it.
 
-<!-- image source: https://docs.google.com/drawings/d/1k2YdJgNTtNfW7_A8moIIkij-DmVgEhNrn3y2OODwqQQ/view -->
 
-{{< figure src="/docs/concepts/extend-kubernetes/extension-points.png"
-    alt="Symbolic representation of seven numbered extension points for Kubernetes"
-    class="diagram-large" caption="Kubernetes extension points" >}}
+
+{{}}
 
 #### Key to the figure
 
@@ -131,7 +129,7 @@ clients that access it.
    described in the [Scheduling extensions](#scheduling-extensions) section.
 
 1. Much of the behavior of Kubernetes is implemented by programs called
-   {{< glossary_tooltip term_id="controller" text="controllers" >}}, that are
+   {{}}, that are
    clients of the API server. Controllers are often used in conjunction with custom resources.
    Read [combining new APIs with automation](#combining-new-apis-with-automation) and
    [Changing built-in resources](#changing-built-in-resources) to learn more.
@@ -145,7 +143,7 @@ clients that access it.
    includes support for working with device plugins.
 
    The kubelet also mounts and unmounts
-   {{< glossary_tooltip text="volume" term_id="volume" >}} for pods and their containers.
+   {{}} for pods and their containers.
    You can use [Storage Plugins](#storage-plugins) to add support for new kinds
    of storage and other volume types.
 
@@ -155,11 +153,9 @@ clients that access it.
 If you are unsure where to start, this flowchart can help. Note that some solutions may involve
 several types of extensions.
 
-<!-- image source for flowchart: https://docs.google.com/drawings/d/1sdviU6lDz4BpnzJNHfNpQrqI9F19QZ07KnhnxVrp2yg/edit -->
 
-{{< figure src="/docs/concepts/extend-kubernetes/flowchart.svg"
-    alt="Flowchart with questions about use cases and guidance for implementers. Green circles indicate yes; red circles indicate no."
-    class="diagram-large" caption="Flowchart guide to select an extension approach" >}}
+
+{{}}
 
 ---
 
@@ -190,9 +186,9 @@ to integrate the Kubernetes API with additional services such as for [metrics](/
 ### Combining new APIs with automation
 
 A combination of a custom resource API and a control loop is called the
-{{< glossary_tooltip term_id="controller" text="controllers" >}} pattern. If your controller takes
+{{}} pattern. If your controller takes
 the place of a human operator deploying infrastructure based on a desired state, then the controller
-may also be following the {{< glossary_tooltip text="operator pattern" term_id="operator-pattern" >}}.
+may also be following the {{}}.
 The Operator pattern is used to manage specific applications; usually, these are applications that
 maintain state and require care in how they are managed.
 
@@ -259,7 +255,7 @@ builtin ones like cpu and memory) via a
 
 ### Storage plugins
 
-{{< glossary_tooltip text="Container Storage Interface" term_id="csi" >}} (CSI) plugins provide
+{{}} (CSI) plugins provide
 a way to extend Kubernetes with supports for new kinds of volumes. The volumes can be backed by
 durable external storage, or provide ephemeral storage, or they might offer a read-only interface
 to information using a filesystem paradigm.
@@ -285,7 +281,7 @@ allow Kubernetes to work with different networking topologies and technologies.
 
 ### Kubelet image credential provider plugins
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+{{}}
 Kubelet image credential providers are plugins for the kubelet to dynamically retrieve image registry
 credentials. The credentials are then used when pulling images from container image registries that
 match the configuration.
@@ -318,11 +314,11 @@ Finally, the built in `kube-scheduler` component supports a
 that permits a remote HTTP backend (scheduler extension) to filter and / or prioritize
 the nodes that the kube-scheduler chooses for a pod.
 
-{{< note >}}
+{{}}
 You can only affect node filtering
 and node prioritization with a scheduler extender webhook; other extension points are
 not available through the webhook integration.
-{{< /note >}}
+{{}}
 
 ## {{% heading "whatsnext" %}}
 

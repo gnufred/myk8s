@@ -7,15 +7,15 @@ card:
   weight: 50
 ---
 
-<!-- overview -->
+
 Many applications rely on configuration which is used during either application initialization or runtime.
 Most times, there is a requirement to adjust values assigned to configuration parameters.
 ConfigMaps are a Kubernetes mechanism that let you inject configuration data into application
-{{< glossary_tooltip text="pods" term_id="pod" >}}.
+{{}}.
 
 The ConfigMap concept allow you to decouple configuration artifacts from image content to
 keep containerized applications portable. For example, you can download and run the same
-{{< glossary_tooltip text="container image" term_id="image" >}} to spin up containers for 
+{{}} to spin up containers for 
 the purposes of local development, system test, or running a live end-user workload.
 
 This page provides a series of usage examples demonstrating how to create ConfigMaps and
@@ -23,13 +23,13 @@ configure Pods using data stored in ConfigMaps.
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}}
+{{}}
 
 You need to have the `wget` tool installed. If you have a different tool
 such as `curl`, and you do not have `wget`, you will need to adapt the
 step that downloads example data.
 
-<!-- steps -->
+
 
 ## Create a ConfigMap
 
@@ -43,15 +43,15 @@ Use the `kubectl create configmap` command to create ConfigMaps from
 or [literal values](#create-configmaps-from-literal-values):
 
 ```shell
-kubectl create configmap <map-name> <data-source>
+kubectl create configmap  
 ```
 
-where \<map-name> is the name you want to assign to the ConfigMap and \<data-source> is the
+where \ is the name you want to assign to the ConfigMap and \ is the
 directory, file, or literal value to draw the data from.
 The name of a ConfigMap object must be a valid
 [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
-When you are creating a ConfigMap based on a file, the key in the \<data-source> defaults to
+When you are creating a ConfigMap based on a file, the key in the \ defaults to
 the basename of the file, and the value defaults to the file content.
 
 You can use [`kubectl describe`](/docs/reference/generated/kubectl/kubectl-commands/#describe) or
@@ -66,14 +66,14 @@ whose filename is a valid key in the directory and packages each of those files 
 ConfigMap. Any directory entries except regular files are ignored (for example: subdirectories,
 symlinks, devices, pipes, and more).
 
-{{< note >}}
+{{}}
 Each filename being used for ConfigMap creation must consist of only acceptable characters,
 which are: letters (`A` to `Z` and `a` to `z`), digits (`0` to `9`), '-', '_', or '.'.
 If you use `kubectl create configmap` with a directory where any of the file names contains
 an unacceptable character, the `kubectl` command may fail.
 
 The `kubectl` command does not print an error when it encounters an invalid filename.
-{{< /note >}}
+{{}}
 
 Create the local directory:
 
@@ -104,8 +104,8 @@ The output is similar to this:
 ```
 Name:         game-config
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       
+Annotations:  
 
 Data
 ====
@@ -181,8 +181,8 @@ where the output is similar to this:
 ```
 Name:         game-config-2
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       
+Annotations:  
 
 Data
 ====
@@ -215,8 +215,8 @@ The output is similar to this:
 ```
 Name:         game-config-2
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       
+Annotations:  
 
 Data
 ====
@@ -327,10 +327,10 @@ You can define a key other than the file name to use in the `data` section of yo
 when using the `--from-file` argument:
 
 ```shell
-kubectl create configmap game-config-3 --from-file=<my-key-name>=<path-to-file>
+kubectl create configmap game-config-3 --from-file==
 ```
 
-where `<my-key-name>` is the key you want to use in the ConfigMap and `<path-to-file>` is the
+where `` is the key you want to use in the ConfigMap and `` is the
 location of the data source file you want the key to represent.
 
 For example:
@@ -408,7 +408,7 @@ For example, to generate a ConfigMap from files `configure-pod-container/configm
 
 ```shell
 # Create a kustomization.yaml file with ConfigMapGenerator
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 configMapGenerator:
 - name: game-config-4
   options:
@@ -461,7 +461,7 @@ enemies.cheat.level=noGoodRotten
 secret.code.passphrase=UUDDLRLRBABAS
 secret.code.allowed=true
 secret.code.lives=30
-Events:  <none>
+Events:  
 ```
 
 Notice that the generated ConfigMap name has a suffix appended by hashing the contents. This
@@ -475,7 +475,7 @@ with the key `game-special-key`
 
 ```shell
 # Create a kustomization.yaml file with ConfigMapGenerator
-cat <<EOF >./kustomization.yaml
+cat ./kustomization.yaml
 configMapGenerator:
 - name: game-config-5
   options:
@@ -688,10 +688,10 @@ Text data is exposed as files using the UTF-8 character encoding. To use some ot
 character encoding, use `binaryData`
 (see [ConfigMap object](/docs/concepts/configuration/configmap/#configmap-object) for more details).
 
-{{< note >}}
+{{}}
 If there are any files in the `/etc/config` directory of that container image, the volume
 mount will make those files from the image inaccessible.
-{{< /note >}}
+{{}}
 
 Once you're happy to move on, delete that Pod:
 ```shell
@@ -717,9 +717,9 @@ When the pod runs, the command `cat /etc/config/keys` produces the output below:
 very
 ```
 
-{{< caution >}}
+{{}}
 Like before, all previous files in the `/etc/config/` directory will be deleted.
-{{< /caution >}}
+{{}}
 
 Delete that Pod:
 ```shell
@@ -751,12 +751,12 @@ when new keys are projected to the pod can be as long as kubelet sync period (1
 minute by default) + TTL of ConfigMaps cache (1 minute by default) in kubelet. You
 can trigger an immediate refresh by updating one of the pod's annotations.
 
-{{< note >}}
+{{}}
 A container using a ConfigMap as a [subPath](/docs/concepts/storage/volumes/#using-subpath)
 volume will not receive ConfigMap updates.
-{{< /note >}}
+{{}}
 
-<!-- discussion -->
+
 
 ## Understanding ConfigMaps and Pods
 
@@ -766,12 +766,12 @@ similar to [Secrets](/docs/concepts/configuration/secret/), but provides a means
 with strings that don't contain sensitive information. Users and system components alike can
 store configuration data in ConfigMap.
 
-{{< note >}}
+{{}}
 ConfigMaps should reference properties files, not replace them. Think of the ConfigMap as
 representing something similar to the Linux `/etc` directory and its contents. For example,
 if you create a [Kubernetes Volume](/docs/concepts/storage/volumes/) from a ConfigMap, each
 data item in the ConfigMap is represented by an individual file in the volume.
-{{< /note >}}
+{{}}
 
 The ConfigMap's `data` field contains the configuration data. As shown in the example below,
 this can be simple (like individual properties defined using `--from-literal`) or complex
@@ -800,7 +800,7 @@ these into the `binaryData` field of the ConfigMap, and not in `data`. Both text
 data sources can be combined in one ConfigMap.
 
 If you want to view the `binaryData` keys (and their values) in a ConfigMap, you can run
-`kubectl get configmap -o jsonpath='{.binaryData}' <name>`.
+`kubectl get configmap -o jsonpath='{.binaryData}' `.
 
 Pods can load data from a ConfigMap that uses either `data` or `binaryData`.
 
@@ -890,11 +890,11 @@ spec:
   0s       0s        1     dapi-test-pod Pod              Warning   InvalidEnvironmentVariableNames   {kubelet, 127.0.0.1}  Keys [1badkey, 2alsobad] from the EnvFrom configMap default/myconfig were skipped since they are considered invalid environment variable names.
   ```
 
-- ConfigMaps reside in a specific {{< glossary_tooltip term_id="namespace" >}}.
+- ConfigMaps reside in a specific {{}}.
   Pods can only refer to ConfigMaps that are in the same namespace as the Pod.
 
 - You can't use ConfigMaps for
-  {{< glossary_tooltip text="static pods" term_id="static-pod" >}}, because the
+  {{}}, because the
   kubelet does not support this.
 
 ## {{% heading "cleanup" %}}

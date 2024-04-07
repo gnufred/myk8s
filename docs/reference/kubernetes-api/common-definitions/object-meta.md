@@ -10,16 +10,7 @@ weight: 7
 auto_generated: true
 ---
 
-<!--
-The file is auto-generated from the Go source code of the component using a generic
-[generator](https://github.com/kubernetes-sigs/reference-docs/). To learn how
-to generate the reference documentation, please read
-[Contributing to the reference documentation](/docs/contribute/generate-ref-docs/).
-To update the reference content, please follow the 
-[Contributing upstream](/docs/contribute/generate-ref-docs/contribute-upstream/)
-guide. You can file document formatting bugs against the
-[reference-docs](https://github.com/kubernetes-sigs/reference-docs/) project.
--->
+
 
 
 
@@ -28,7 +19,7 @@ guide. You can file document formatting bugs against the
 
 ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
 
-<hr>
+
 
 - **name** (string)
 
@@ -69,7 +60,7 @@ ObjectMeta is metadata that all persisted resources must have, which includes al
 
   ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like "ci-cd". The set of fields is always in the version that the workflow used when modifying the object.
 
-  <a name="ManagedFieldsEntry"></a>
+  
   *ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the fieldset applies to.*
 
   - **managedFields.apiVersion** (string)
@@ -84,10 +75,10 @@ ObjectMeta is metadata that all persisted resources must have, which includes al
 
     FieldsV1 holds the first JSON version format as described in the "FieldsV1" type.
 
-    <a name="FieldsV1"></a>
+    
     *FieldsV1 stores a set of fields in a data structure like a Trie, in JSON format.
     
-    Each key is either a '.' representing the field itself, and will always map to an empty set, or a string representing a sub-field or item. The string will follow one of these four formats: 'f:<name>', where <name> is the name of a field in a struct, or key in a map 'v:<value>', where <value> is the exact json formatted value of a list item 'i:<index>', where <index> is position of a item in a list 'k:<keys>', where <keys> is a map of  a list item's key fields to their unique values If a key maps to an empty Fields value, the field that key represents is part of the set.
+    Each key is either a '.' representing the field itself, and will always map to an empty set, or a string representing a sub-field or item. The string will follow one of these four formats: 'f:', where  is the name of a field in a struct, or key in a map 'v:', where  is the exact json formatted value of a list item 'i:', where  is position of a item in a list 'k:', where  is a map of  a list item's key fields to their unique values If a key maps to an empty Fields value, the field that key represents is part of the set.
     
     The exact format is defined in sigs.k8s.io/structured-merge-diff*
 
@@ -107,7 +98,7 @@ ObjectMeta is metadata that all persisted resources must have, which includes al
 
     Time is the timestamp of when the ManagedFields entry was added. The timestamp will also be updated if a field is added, the manager changes any of the owned fields value or removes a field. The timestamp does not update when a field is removed from the entry because another manager took it over.
 
-    <a name="Time"></a>
+    
     *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
 - **ownerReferences** ([]OwnerReference)
@@ -116,7 +107,7 @@ ObjectMeta is metadata that all persisted resources must have, which includes al
   
   List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.
 
-  <a name="OwnerReference"></a>
+  
   *OwnerReference contains enough information to let you identify an owning object. An owning object must be in the same namespace as the dependent, or be cluster-scoped, so there is no namespace field.*
 
   - **ownerReferences.apiVersion** (string), required
@@ -152,7 +143,7 @@ ObjectMeta is metadata that all persisted resources must have, which includes al
   
   Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-  <a name="Time"></a>
+  
   *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
 - **deletionGracePeriodSeconds** (int64)
@@ -165,7 +156,7 @@ ObjectMeta is metadata that all persisted resources must have, which includes al
   
   Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-  <a name="Time"></a>
+  
   *Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.*
 
 - **generation** (int64)

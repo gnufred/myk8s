@@ -7,9 +7,9 @@ content_type: concept
 weight: 30
 ---
 
-<!-- overview -->
 
-Each {{< glossary_tooltip text="object" term_id="object" >}} in your cluster has a [_Name_](#names) that is unique for that type of resource.
+
+Each {{}} in your cluster has a [_Name_](#names) that is unique for that type of resource.
 Every Kubernetes object also has a [_UID_](#uids) that is unique across your whole cluster.
 
 For example, you can only have one Pod named `myapp-1234` within the same [namespace](/docs/concepts/overview/working-with-objects/namespaces/), but you can have one Pod and one Deployment that are each named `myapp-1234`.
@@ -18,19 +18,19 @@ For non-unique user-provided attributes, Kubernetes provides [labels](/docs/conc
 
 
 
-<!-- body -->
+
 
 ## Names
 
-{{< glossary_definition term_id="name" length="all" >}}
+{{}}
 
 **Names must be unique across all [API versions](/docs/concepts/overview/kubernetes-api/#api-groups-and-versioning)
 of the same resource. API resources are distinguished by their API group, resource type, namespace
 (for namespaced resources), and name. In other words, API version is irrelevant in this context.**
 
-{{< note >}}
+{{}}
 In cases when objects represent a physical entity, like a Node representing a physical host, when the host is re-created under the same name without deleting and re-creating the Node, Kubernetes treats the new host as the old one, which may lead to inconsistencies.
-{{< /note >}}
+{{}}
 
 Below are four types of commonly used name constraints for resources.
 
@@ -67,12 +67,12 @@ This means the name must:
 - start with an alphabetic character
 - end with an alphanumeric character
 
-{{< note >}}
+{{}}
 The only difference between the RFC 1035 and RFC 1123
 label standards is that RFC 1123 labels are allowed to
 start with a digit, whereas RFC 1035 labels can start
 with a lowercase alphabetic character only.
-{{< /note >}}
+{{}}
 
 ### Path Segment Names
 
@@ -96,13 +96,13 @@ spec:
 ```
 
 
-{{< note >}}
+{{}}
 Some resource types have additional restrictions on their names.
-{{< /note >}}
+{{}}
 
 ## UIDs
 
-{{< glossary_definition term_id="uid" length="all" >}}
+{{}}
 
 Kubernetes UIDs are universally unique identifiers (also known as UUIDs).
 UUIDs are standardized as ISO/IEC 9834-8 and as ITU-T X.667.
