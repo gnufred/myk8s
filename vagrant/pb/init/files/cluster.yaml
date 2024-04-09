@@ -4,3 +4,5 @@ kind: ClusterConfiguration
 controlPlaneEndpoint: "10.1.2.10:6443"
 certSANs:
   - "10.1.2.10"
+networking:
+  serviceSubnet: "10.1.2.0/24"
