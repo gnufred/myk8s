@@ -6,6 +6,11 @@
 
   tasks:
 
+    ### DEBUG ###
+
+  - name: Install debug packages
+    tags: rsyslog
+    shell: apk add --allow-untrusted /.lfs/apk/debug/*
 
     ### RSYSLOG ###
     
@@ -206,6 +211,11 @@
       - .bash_profile
       - .bashrc
 
+  ### NFS: ALL ###
+- name: Install NFS
+  hosts: nf0, wo0, wo1, wo2, wo3, wo4, wo5
+  become: true
+  become_user: root
 
   ### NFS: ALL ###
 - name: Install NFS

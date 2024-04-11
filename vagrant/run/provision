@@ -54,7 +54,7 @@ join() {
 
 load_balancer() {
 	NAME=lb
-	BOOKS=(ufw install haproxy)
+	BOOKS=(ufw install haproxy dns)
 	for i in 0; do
 		NODE="$NAME$i"
 		provision $NODE $BOOKS
@@ -65,7 +65,7 @@ load_balancer() {
 cplane_main(){
 	MAIN=cp0
 	NAME=cp
-	BOOKS=(ufw install init auth)
+	BOOKS=(ufw install init auth dns)
 	for i in 0; do
 		NODE="$NAME$i"
 		provision $NODE $BOOKS
