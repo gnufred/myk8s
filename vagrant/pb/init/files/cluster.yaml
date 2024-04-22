@@ -6,3 +6,13 @@ certSANs:
   - "10.1.2.10"
 networking:
   serviceSubnet: "10.1.2.0/24"
+apiServer:
+  extraArgs:
+    requestheader-client-ca-file: "/etc/kubernetes/pki/front-proxy-ca.crt"
+    requestheader-allowed-names: "front-proxy-client"
+    requestheader-extra-headers-prefix: "X-Remote-Extra-"
+    requestheader-group-headers: "X-Remote-Group"
+    requestheader-username-headers: "X-Remote-User"
+    proxy-client-cert-file: "/etc/kubernetes/pki/front-proxy-client.crt"
+    proxy-client-key-file: "/etc/kubernetes/pki/front-proxy-client.key"
+    enable-aggregator-routing: "true"
