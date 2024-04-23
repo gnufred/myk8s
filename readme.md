@@ -10,7 +10,7 @@ Time to go back to the night lab! 🌘 🖥
 
 ### Ongoing: [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
 
-Progress: Chapter 14/18
+Progress: Chapter 15/18
 
 ### 2024-03-18: Up and Running!
 
