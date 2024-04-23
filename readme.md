@@ -8,9 +8,9 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Training
 
-### Ongoing: [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
+### 2024-04-23: [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
 
-Progress: Chapter 15/18
+Completed: [Certificate](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frederic-potvin-71e80add-19bb-489d-bf43-bf83a5e9be5e-certificate.pdf).
 
 ### 2024-03-18: Up and Running!
 
