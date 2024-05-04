@@ -15,7 +15,7 @@ That moment when you set foot in the room as a nobody. I'm reading [K8s - Commun
 For now, I'll attend meetings, read updates from the mailing list, and study for my upcoming CKA exam.
 
 
-## Training
+## Train
 
 ### Ongoing: [Final exam preparations](https://gitlab.com/gnufred/myk8s/-/issues/45)
 
@@ -33,7 +33,7 @@ Completed study and labs from [Kubernetes: Up and Running](https://www.oreilly.c
 
 Having goals and deadlines is important. As such, I purchased the [LFS258 + CKA bundle](https://training.linuxfoundation.org/training/kubernetes-fundamentals-lfs258-cka-exam-bundle/). The clock is ticking! 365 days left to get the cert :)
 
-## Labs
+## Home Lab
 
 ### [2024-04-05](//gitlab.com/gnufred/myk8s/-/tree/2024-04-05/vagrant): NFS server
 
