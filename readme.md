@@ -6,6 +6,15 @@ When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP
 
 Time to go back to the night lab! 🌘 🖥
 
+## Contribute
+
+### 2024-05-04: Joined [SIG CLI](https://app.slack.com/client/T09NY5SBT/C2GL57FJ4)
+
+That moment when you set foot in the room as a nobody. I'm reading [K8s - Community Groups](https://www.kubernetes.dev/community/community-groups/) and I've chosen SIG CLI. Why? Because I love CLIs and I love GoLang. I want to contribute a properly written alias of my current [K](https://gitlab.com/gnufred/k) prototype as my first project. Those chairs... they're all from big companies. But you know what? One day I'll be on this list. It'll be **Frédéric Potvin, [Kiln](https://www.kiln.fi/) or [Tesla](https://www.tesla.com/en_eu)** (depending on which one of those hires me, but that's another story).
+
+For now, I'll attend meetings, read updates from the mailing list, and study for my upcoming CKA exam.
+
+
 ## Training
 
 ### Ongoing: [Final exam preparations](https://gitlab.com/gnufred/myk8s/-/issues/45)
