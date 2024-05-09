@@ -24,7 +24,9 @@ For now, I'll attend meetings, read updates from the mailing list, and study for
 
 ### Ongoing: [Final exam preparations](https://gitlab.com/gnufred/myk8s/-/issues/45)
 
-Come on... I can do this!!!
+#### 2024-05-09: [Killer.sh CKA Simulator](https://killer.sh/cka)
+
+Completed it brilliantly with a score of 119/125 in 5.5 hours. I had to divide it into 3 sessions to get through all the questions. I was way too slow for the actual exam, but at least my score shows my thorough understanding of the foundational knowledge.
 
 ### 2024-04-23: [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
 
