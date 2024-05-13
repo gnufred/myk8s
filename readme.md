@@ -22,9 +22,13 @@ For now, I'll attend meetings, read updates from the mailing list, and study for
 
 ## Train
 
-### Ongoing: [Final exam preparations](https://gitlab.com/gnufred/myk8s/-/issues/45)
+### 2024-05-13: [Certification completed](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frdric-potvin-e4366b32-2f13-452a-accb-adf0ece8782f-certificate.pdf)
 
-#### 2024-05-09: [Killer.sh CKA Simulator](https://killer.sh/cka)
+After 11 weeks of intense studying, I finally passed the CKA exam with a score of 86 out of 100!
+
+Fun story: during the exam, my laptop started experiencing kernel crashes and became unresponsive. I forgot to plug in the power adapter! Because the PSI browser was full screen and blocked all notifications, I didn't see the alert beforehand. I had to reauthenticate to the exam, losing 30 minutes. Given that extra time constraint, I couldn't finish the etcd recovery and network policy questions properly.
+
+### 2024-05-09: [Killer.sh CKA Simulator](https://killer.sh/cka)
 
 Completed it brilliantly with a score of 119/125 in 5.5 hours. I had to divide it into 3 sessions to get through all the questions. I was way too slow for the actual exam, but at least my score shows my thorough understanding of the foundational knowledge.
 
