@@ -36,7 +36,7 @@ Fun story: during the exam, my laptop started experiencing kernel crashes and be
 
 Completed it brilliantly with a score of 119/125 in 5.5 hours. I had to divide it into 3 sessions to get through all the questions. I was way too slow for the actual exam, but at least my score shows my thorough understanding of the foundational knowledge.
 
-### 2024-04-23: [LFS258](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
+### 2024-04-23: [LFS258 - Kubernetes Fundamentals](https://training.linuxfoundation.org/training/kubernetes-fundamentals/)
 
 Completed: [Certificate](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frederic-potvin-71e80add-19bb-489d-bf43-bf83a5e9be5e-certificate.pdf).
 
@@ -54,7 +54,7 @@ Lab experiments located in `/vagrant`. I use Vagrant and Ansible to deploy: an H
 
 Learning the hard way, I guess :)
 
-### 2024-02: Courses and Certificates
+### 2024-02: Courses, and LFCS certification.
 
 After a year of relearning Go, it was time to dive into sysadmin stuff.
 
