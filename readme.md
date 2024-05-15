@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Contribute
 
+### 2024-05-15: First meeting
+
+Attended SIG CLI weekly meeting for the first time, and introduced myself with another new contributor.
+
 ### 2024-05-05: The First Step
 
 Today, I reviewed [feat: add ports autocompletion for kubectl port-forward command #124683](https://github.com/kubernetes/kubernetes/pull/124683), closing [cmd/port-forward: port number completion #1536](https://github.com/kubernetes/kubectl/issues/1536). It's a very small contribution, but it marks the initial stride.
