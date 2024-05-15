@@ -26,7 +26,7 @@ For now, I'll attend meetings, read updates from the mailing list, and study for
 
 ## Train
 
-### 2024-05-13: [Certification completed](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frdric-potvin-e4366b32-2f13-452a-accb-adf0ece8782f-certificate.pdf)
+### 2024-05-13: [CKA obtained](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frdric-potvin-e4366b32-2f13-452a-accb-adf0ece8782f-certificate.pdf)
 
 After 11 weeks of intense studying, I finally passed the CKA exam with a score of 86 out of 100!
 
