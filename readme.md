@@ -6,24 +6,6 @@ When I started learning "the Internet" 20 years ago, CSS wasn't a thing, and PHP
 
 Time to go back to the night lab! 🌘 🖥
 
-## Contribute
-
-### 2024-05-15: First meeting
-
-Attended SIG CLI weekly meeting for the first time, and introduced myself with another new contributor.
-
-### 2024-05-05: The First Step
-
-Today, I reviewed [feat: add ports autocompletion for kubectl port-forward command #124683](https://github.com/kubernetes/kubernetes/pull/124683), closing [cmd/port-forward: port number completion #1536](https://github.com/kubernetes/kubectl/issues/1536). It's a very small contribution, but it marks the initial stride.
-
-For me, the first step holds immense significance in any new venture. It's that pivotal moment where you step beyond your familiar confines. With luck, this journey will extend over the next two decades until I retire at 62.
-
-### 2024-05-04: Joined [SIG CLI](https://app.slack.com/client/T09NY5SBT/C2GL57FJ4)
-
-That moment when you set foot in the room as a nobody. I'm reading [K8s - Community Groups](https://www.kubernetes.dev/community/community-groups/) and I've chosen SIG CLI. Why? Because I love CLIs and I love GoLang. I want to contribute a properly written alias of my current [K](https://gitlab.com/gnufred/k) prototype as my first project. Those chairs... they're all from big companies. But you know what? One day I'll be on this list. It'll be **Frédéric Potvin, [Kiln](https://www.kiln.fi/) or [Tesla](https://www.tesla.com/en_eu)** (depending on which one of those hires me, but that's another story).
-
-For now, I'll attend meetings, read updates from the mailing list, and study for my upcoming CKA exam.
-
 ## Train
 
 ### 2024-05-13: [CKA obtained](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frdric-potvin-e4366b32-2f13-452a-accb-adf0ece8782f-certificate.pdf)
