@@ -8,6 +8,10 @@ Time to go back to the night lab! 🌘 🖥
 
 ## Train
 
+### 2024-11-04: [Helm: LFS244](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frdric-potvin-897eb1f2-0c5d-432e-9e14-5fa20504a81c-certificate.pdf)
+
+In my new SRE role, I constantly had to improve existing or create new Helm Charts. While having 15 years of experience as a developer and being proficient in GoLang greatly helped, I wanted to fully understand Helm to its full extent. First, I read "[Learning Helm](https://www.oreilly.com/library/view/learning-helm/9781492083641/)" by O'Reilly, and then I followed the "Managing Kubernetes Applications with Helm (LFS244)" class.
+
 ### 2024-05-13: [CKA obtained](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frdric-potvin-e4366b32-2f13-452a-accb-adf0ece8782f-certificate.pdf)
 
 After 11 weeks of intense studying, I finally passed the CKA exam with a score of 86 out of 100!
