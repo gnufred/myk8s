@@ -4,10 +4,6 @@
 
 Added an NFS server to enable PV and PVC.
 
-### [2024-03-15](//gitlab.com/gnufred/k): kubectl aliases
-
-Created a script to alias `kubectl` commands, resources, and options.
-
 ### [2024-03-11](https://github.com/gnufred/myk8s/tree/2024-03-11/vagrant): Ready to Use the API!
 
 Simplified the playbook file structure, enabled rsyslog on all nodes, activated logs for packet transmissions, and made many other small improvements.
