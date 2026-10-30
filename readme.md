@@ -34,7 +34,7 @@ Completed study and labs from [Kubernetes: Up and Running](https://www.oreilly.c
 
 Having goals and deadlines is important. As such, I purchased the [LFS258 + CKA bundle](https://training.linuxfoundation.org/training/kubernetes-fundamentals-lfs258-cka-exam-bundle/). The clock is ticking! 365 days left to get the cert :)
 
-### 2024-02 to 04: [Home Lab](//gitlab.com/gnufred/myk8s/-/blob/main/lab.md)
+### 2024-02 to 04: [Home Lab](lab.md)
 
 Lab experiments located in `/vagrant`. I use Vagrant and Ansible to deploy: an HAProxy load balancer, 3 highly available control plane nodes, an NFS server, and 6 worker nodes.
 
@@ -50,7 +50,7 @@ I completed the following courses and earned these certificates:
 * [LFS151.x: Introduction to Cloud Infrastructure Technologies](https://courses.edx.org/certificates/b51f3461a2124e77a3916126d5436e47)
 * [Linux Foundation Certified System Administrator (LFCS)](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/2b01f0e0-397b-49b8-a81e-1f0628e10548-frederic-potvin-5a5f270c-2b75-45e6-b648-f28a23c01577-certificate.pdf)
 
-### 2023-04 to 2024-01: [Logslate](https://gitlab.com/gnufred/logslate/)
+### 2023-04 to 2024-01: [Logslate](https://github.com/gnufred/logslate)
 
 This was an almost year-long project, which was promoted to an official security tool used at [Platform.sh](https://platform.sh). I spent many weekends and holidays coding and studying security.
 
