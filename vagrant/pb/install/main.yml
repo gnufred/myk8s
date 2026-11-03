@@ -147,7 +147,7 @@
 
   ### DIRS ###
 
-- name: Upload control plane container image blobs
+- name: Load offline control plane container images
   hosts: cp0, cp1, cp2
   become: true
   become_user: root
@@ -164,26 +164,27 @@
 
     ### IMAGES ###
 
-  - name: Check if blobs are already uploaded
+  - name: Upload offline control plane image archive
     tags: blobs
-    stat:
-      path: /var/lib/containerd/io.containerd.content.v1.content/blobs
-    register: blobdir
-
-  - name: Create image folder
-    tags: blobs
-    when: not blobdir.stat.exists
-    file:
-      path: /var/lib/containerd/io.containerd.content.v1.content/blobs
-      state: directory
-
-  - name: Upload blobs
-    tags: blobs
-    when: not blobdir.stat.exists
     copy:
-      src: ../../../.lfs/blobs/sha256
-      dest: /var/lib/containerd/io.containerd.content.v1.content/blobs
-    
+      src: "{{ playbook_dir }}/../../.lfs/images/control-plane-v1.29.2-amd64.tar"
+      dest: /tmp/myk8s-control-plane-images.tar
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Import offline control plane images
+    tags: blobs
+    command:
+      argv:
+        - ctr
+        - --namespace
+        - k8s.io
+        - images
+        - import
+        - --platform
+        - linux/amd64
+        - /tmp/myk8s-control-plane-images.tar
 
     ### BASH ###
     

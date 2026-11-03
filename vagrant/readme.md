@@ -27,3 +27,21 @@ The `.lfs/apk/containerd/` cache includes `containerd-ctr-1.7.2-r4.apk`, which s
 - The package is stored with Git LFS; run `git lfs pull` after cloning.
 
 For an existing `cp0`, run `vagrant rsync cp0`, then `run/playbook -h cp0 -b install -t containerd` to sync the cache and rerun its containerd installation tasks. New provisioning runs pick up the package automatically.
+
+## Offline Kubernetes images
+
+The `.lfs/images/control-plane-v1.29.2-amd64.tar` OCI archive is stored in Git LFS. Run `git lfs pull` after cloning to restore it along with the cached APKs and raw image blobs. Its SHA-256 is `fec7ecbbbf4b6f6fd7d5dae51aa82630428af676ccf7462108190d987c39f5d5`.
+
+The archive contains the original cached Linux/amd64 manifests, configurations and layers, with image references verified against the official Kubernetes registry manifests:
+
+- `registry.k8s.io/kube-apiserver:v1.29.2`
+- `registry.k8s.io/kube-controller-manager:v1.29.2`
+- `registry.k8s.io/kube-scheduler:v1.29.2`
+- `registry.k8s.io/kube-proxy:v1.29.2`
+- `registry.k8s.io/coredns/coredns:v1.11.1`
+- `registry.k8s.io/pause:3.9`
+- `registry.k8s.io/etcd:3.5.10-0`
+
+The `blobs` tasks in `pb/install/main.yml` copy this archive to each control plane and run `ctr --namespace k8s.io images import --platform linux/amd64 /tmp/myk8s-control-plane-images.tar`. This registers the content and named image records and unpacks the layers without downloading images. The import runs on each invocation so a pre-existing content directory cannot cause the metadata-registration step to be skipped.
+
+For an existing `cp0`, run `run/playbook -h cp0 -b install -t blobs`, then inspect `vagrant ssh cp0 -c "sudo crictl images"`. The archive and import command were manually verified on `cp0`: all seven images unpacked successfully and appeared through CRI. This validates image loading; kubelet/control-plane startup is a separate check.
