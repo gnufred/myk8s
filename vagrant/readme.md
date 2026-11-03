@@ -16,7 +16,7 @@ Read `run/playbook --help`.
 
 The local `ansible.cfg` uses `interpreter_python = auto_silent`: Ansible still discovers the guest Python interpreter, but suppresses its interpreter-selection warning. This applies when running the lab commands from this directory.
 
-For SSH connections, the same configuration sets `StrictHostKeyChecking=accept-new`. New VM host keys are recorded automatically, so noninteractive playbooks can connect without an SSH confirmation prompt. Keys that conflict with an existing known-host entry are still rejected.
+For disposable Vagrant VMs, the same configuration uses `StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`. Ansible does not check or store user known-host keys, allowing destroy/recreate cycles that regenerate keys and reuse IP addresses. This deliberately skips SSH host identity verification for Ansible runs from this lab directory; normal SSH configuration and other project configurations are not modified.
 
 ### Kubectl
 
