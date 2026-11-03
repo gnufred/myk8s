@@ -16,6 +16,8 @@ Read `run/playbook --help`.
 
 The local `ansible.cfg` uses `interpreter_python = auto_silent`: Ansible still discovers the guest Python interpreter, but suppresses its interpreter-selection warning. This applies when running the lab commands from this directory.
 
+For SSH connections, the same configuration sets `StrictHostKeyChecking=accept-new`. New VM host keys are recorded automatically, so noninteractive playbooks can connect without an SSH confirmation prompt. Keys that conflict with an existing known-host entry are still rejected.
+
 ### Kubectl
 
 Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
