@@ -14,6 +14,8 @@ Use the Playbook helper to run playbooks, roles, or tags on the Vagrant VM.
 
 Read `run/playbook --help`.
 
+The local `ansible.cfg` uses `interpreter_python = auto_silent`: Ansible still discovers the guest Python interpreter, but suppresses its interpreter-selection warning. This applies when running the lab commands from this directory.
+
 ### Kubectl
 
 Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
