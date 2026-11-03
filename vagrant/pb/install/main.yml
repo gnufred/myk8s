@@ -220,6 +220,36 @@
       - .bash_profile
       - .bashrc
 
+  ### WORKER IMAGES ###
+- name: Load offline worker container images
+  hosts: wo0, wo1, wo2, wo3, wo4, wo5
+  become: true
+  become_user: root
+
+  tasks:
+
+  - name: Upload offline worker image archive
+    tags: blobs
+    copy:
+      src: "{{ playbook_dir }}/../../.lfs/images/worker-v1.29.2-amd64.tar"
+      dest: /tmp/myk8s-worker-images.tar
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Import offline worker images
+    tags: blobs
+    command:
+      argv:
+        - ctr
+        - --namespace
+        - k8s.io
+        - images
+        - import
+        - --platform
+        - linux/amd64
+        - /tmp/myk8s-worker-images.tar
+
   ### NFS: ALL ###
 - name: Install NFS
   hosts: nf0, wo0, wo1, wo2, wo3, wo4, wo5

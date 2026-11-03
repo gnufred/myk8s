@@ -46,11 +46,15 @@ The archive contains the original cached Linux/amd64 manifests, configurations a
 - `registry.k8s.io/pause:3.9`
 - `registry.k8s.io/etcd:3.5.10-0`
 
-The `containerd` tasks configure `sandbox_image = "registry.k8s.io/pause:3.9"` in `/etc/containerd/config.toml` on control planes and workers, matching the image required by kubeadm v1.29.2. Containerd restarts when this setting changes; otherwise the service is simply ensured to be running. This prevents the runtime from trying to download its packaged `pause:3.8` default. The sandbox image must also be present locally on each node for offline Pod startup; the archive import below currently targets control planes.
+The `containerd` tasks configure `sandbox_image = "registry.k8s.io/pause:3.9"` in `/etc/containerd/config.toml` on control planes and workers, matching the image required by kubeadm v1.29.2. Containerd restarts when this setting changes; otherwise the service is simply ensured to be running. This prevents the runtime from trying to download its packaged `pause:3.8` default. The sandbox image must also be present locally on each node for offline Pod startup; separate control plane and worker archives supply it.
 
 The `blobs` tasks in `pb/install/main.yml` copy this archive to each control plane and run `ctr --namespace k8s.io images import --platform linux/amd64 /tmp/myk8s-control-plane-images.tar`. This registers the content and named image records and unpacks the layers without downloading images. The import runs on each invocation so a pre-existing content directory cannot cause the metadata-registration step to be skipped.
 
 For an existing `cp0`, run `run/playbook -h cp0 -b install -t blobs`, then inspect `vagrant ssh cp0 -c "sudo crictl images"`. The archive and import command were manually verified on `cp0`: all seven images unpacked successfully and appeared through CRI. This validates image loading; kubelet/control-plane startup is a separate check.
+
+The `.lfs/images/worker-v1.29.2-amd64.tar` OCI archive is also stored in Git LFS. It contains only `registry.k8s.io/pause:3.9` and `registry.k8s.io/kube-proxy:v1.29.2`, using the same verified Linux/amd64 content as the control plane archive. Its size is 28,692,480 bytes (27.4 MiB), and its SHA-256 is `68ef070ecccf50b5a26ba843711e356da13af1cc4fa71c29900317b0fa0b8eb7`.
+
+The worker `blobs` tasks copy this smaller archive to `wo0` through `wo5` and import it into containerd's `k8s.io` namespace before the provisioning helper joins each worker to the cluster. Control planes retain their seven-image archive. For an existing worker, run `run/playbook -h wo1 -b install -t blobs` to load the two required images without rerunning its join. Kubelet retries failed Pod creation; recreating a kube-proxy Pod after the images were imported was manually verified to start it on a worker.
 
 ## Kubeadm initialization logs
 
