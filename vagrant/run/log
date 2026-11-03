@@ -38,6 +38,7 @@ case $NAME in
 	haproxy) FILE='/var/log/haproxy.log';;
 	messages) FILE='/var/log/messages.log';;
 	kubelet) FILE='/var/log/kubelet/kubelet.log';;
+	kubeadm) FILE='/var/log/kubeadm-init.log';;
 	ufw) FILE='/var/log/ufw.log';;
 esac
 
@@ -55,7 +56,7 @@ vssh() {
 }
 
 watch() {
-	COMMAND="tail -fn+0 $FILE"
+	COMMAND="tail -F -n +1 $FILE"
 	vssh "$COMMAND"
 }
 

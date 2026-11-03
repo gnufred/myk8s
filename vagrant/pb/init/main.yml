@@ -27,10 +27,23 @@
       src: cluster.yaml
       dest: /etc/kubernetes/cluster.yaml
 
-  - name: Kubeadmin init
+  - name: Prepare kubeadm initialization log
     when: not cacert.stat.exists
     tags: init
-    shell: kubeadm init --config /etc/kubernetes/cluster.yaml --ignore-preflight-errors=DirAvailable--var-lib-etcd
+    file:
+      path: /var/log/kubeadm-init.log
+      state: touch
+      owner: root
+      group: vagrant
+      mode: '0640'
+
+  - name: Kubeadm init
+    when: not cacert.stat.exists
+    tags: init
+    shell: >-
+      kubeadm init --config /etc/kubernetes/cluster.yaml
+      --ignore-preflight-errors=DirAvailable--var-lib-etcd
+      --v=5 > /var/log/kubeadm-init.log 2>&1
 
   - name: Fetch certificates
     when: not cacert.stat.exists
