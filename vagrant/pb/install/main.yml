@@ -96,12 +96,20 @@
     tags: containerd
     shell: apk add --allow-untrusted /.lfs/apk/containerd/*
 
+  - name: Configure containerd sandbox image
+    tags: containerd
+    replace:
+      path: /etc/containerd/config.toml
+      regexp: '^(\s*sandbox_image\s*=\s*).*$'
+      replace: '\1"registry.k8s.io/pause:3.9"'
+    register: containerd_sandbox
+
   - name: Enable containerd
     tags: containerd
     service:
       name: containerd
       enabled: yes
-      state: started
+      state: "{{ 'restarted' if containerd_sandbox.changed else 'started' }}"
 
   - name: Wait for containerd to start
     wait_for:

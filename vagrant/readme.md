@@ -42,6 +42,8 @@ The archive contains the original cached Linux/amd64 manifests, configurations a
 - `registry.k8s.io/pause:3.9`
 - `registry.k8s.io/etcd:3.5.10-0`
 
+The `containerd` tasks configure `sandbox_image = "registry.k8s.io/pause:3.9"` in `/etc/containerd/config.toml` on control planes and workers, matching the image required by kubeadm v1.29.2. Containerd restarts when this setting changes; otherwise the service is simply ensured to be running. This prevents the runtime from trying to download its packaged `pause:3.8` default. The sandbox image must also be present locally on each node for offline Pod startup; the archive import below currently targets control planes.
+
 The `blobs` tasks in `pb/install/main.yml` copy this archive to each control plane and run `ctr --namespace k8s.io images import --platform linux/amd64 /tmp/myk8s-control-plane-images.tar`. This registers the content and named image records and unpacks the layers without downloading images. The import runs on each invocation so a pre-existing content directory cannot cause the metadata-registration step to be skipped.
 
 For an existing `cp0`, run `run/playbook -h cp0 -b install -t blobs`, then inspect `vagrant ssh cp0 -c "sudo crictl images"`. The archive and import command were manually verified on `cp0`: all seven images unpacked successfully and appeared through CRI. This validates image loading; kubelet/control-plane startup is a separate check.
