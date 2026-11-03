@@ -1,4 +1,4 @@
-- name: "RoleBinding {{ sa_user }}-{{ namespace }}"
+- name: "RoleBinding {{ sa_user }}-{{ sa_namespace }}"
   tags: rbac
   kubernetes.core.k8s:
     kubeconfig: /etc/kubernetes/admin.conf
@@ -7,8 +7,8 @@
       apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       metadata:
-        name: "{{ sa_user }}-{{ namespace }}" 
-        namespace: "{{ namespace }}"
+        name: "{{ sa_user }}-{{ sa_namespace }}"
+        namespace: "{{ sa_namespace }}"
       subjects:
       - kind: User
         name: "{{ sa_user }}"

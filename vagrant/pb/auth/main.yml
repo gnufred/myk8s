@@ -16,7 +16,7 @@
     tags: rbac
     include_tasks: sa-namespace.yml
     vars:
-      namespace: "{{ item }}"
+      sa_namespace: "{{ item }}"
     loop:
       - default
       - kube-public
