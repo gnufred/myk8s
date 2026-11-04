@@ -34,6 +34,8 @@
 
   ### NODES ###
 - name: Configure OS and install K8s packages
+  vars_files:
+    - ../../kubernetes.json
   hosts: cp0, cp1, cp2, wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
@@ -96,20 +98,29 @@
     tags: containerd
     shell: apk add --allow-untrusted /.lfs/apk/containerd/*
 
-  - name: Configure containerd sandbox image
+  - name: Create containerd configuration directory
     tags: containerd
-    replace:
-      path: /etc/containerd/config.toml
-      regexp: '^(\s*sandbox_image\s*=\s*).*$'
-      replace: '\1"registry.k8s.io/pause:3.9"'
-    register: containerd_sandbox
+    file:
+      path: /etc/containerd/conf.d
+      state: directory
+      mode: '0755'
+
+  - name: Configure containerd for Kubernetes
+    tags: containerd
+    template:
+      src: 20-kubernetes.toml
+      dest: /etc/containerd/conf.d/20-kubernetes.toml
+      owner: root
+      group: root
+      mode: '0644'
+    register: containerd_config
 
   - name: Enable containerd
     tags: containerd
     service:
       name: containerd
       enabled: yes
-      state: "{{ 'restarted' if containerd_sandbox.changed else 'started' }}"
+      state: "{{ 'restarted' if containerd_config.changed else 'started' }}"
 
   - name: Wait for containerd to start
     wait_for:
@@ -129,6 +140,35 @@
   - name: Install packages
     tags: kubes
     shell: apk add --allow-untrusted /.lfs/apk/kubes/*
+
+  - name: Enable cgroup v2 service
+    tags: kubes
+    service:
+      name: cgroups
+      state: started
+      enabled: yes
+
+  - name: Check unified cgroup v2 controllers
+    tags: kubes
+    stat:
+      path: /sys/fs/cgroup/cgroup.controllers
+      get_checksum: false
+    register: cgroup_controllers
+
+  - name: Require cgroup v2 for Kubernetes
+    tags: kubes
+    assert:
+      that: cgroup_controllers.stat.exists
+      fail_msg: 'Kubernetes 1.36 requires this lab to boot with OpenRC unified cgroups (cgroup v2).'
+
+  - name: Configure kubelet for the private node network
+    tags: kubes
+    template:
+      src: kubelet.conf
+      dest: /etc/conf.d/kubelet
+      owner: root
+      group: root
+      mode: '0644'
 
   - name: Create Kubernetes config folders
     tags: kubes
@@ -156,6 +196,8 @@
   ### DIRS ###
 
 - name: Load offline control plane container images
+  vars_files:
+    - ../../kubernetes.json
   hosts: cp0, cp1, cp2
   become: true
   become_user: root
@@ -175,7 +217,7 @@
   - name: Upload offline control plane image archive
     tags: blobs
     copy:
-      src: "{{ playbook_dir }}/../../.lfs/images/control-plane-v1.29.2-amd64.tar"
+      src: "{{ playbook_dir }}/../../.lfs/images/control-plane-{{ kubernetes_version }}-amd64.tar"
       dest: /tmp/myk8s-control-plane-images.tar
       owner: root
       group: root
@@ -222,6 +264,8 @@
 
   ### WORKER IMAGES ###
 - name: Load offline worker container images
+  vars_files:
+    - ../../kubernetes.json
   hosts: wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
@@ -231,7 +275,7 @@
   - name: Upload offline worker image archive
     tags: blobs
     copy:
-      src: "{{ playbook_dir }}/../../.lfs/images/worker-v1.29.2-amd64.tar"
+      src: "{{ playbook_dir }}/../../.lfs/images/worker-{{ kubernetes_version }}-amd64.tar"
       dest: /tmp/myk8s-worker-images.tar
       owner: root
       group: root

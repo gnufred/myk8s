@@ -1,0 +1,9 @@
+# Alpine containerd 2.3 imports this file from its packaged config.toml.
+version = 4
+
+[plugins.'io.containerd.cri.v1.images'.pinned_images]
+  sandbox = '{{ kubernetes_pause_image }}'
+
+# Alpine uses OpenRC; cgroupfs manages the unified cgroup v2 hierarchy.
+[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options]
+  SystemdCgroup = false

@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+"""Build the lab's offline Linux/amd64 OCI archives from the pinned image list."""
+import concurrent.futures
+import hashlib
+import io
+import json
+from pathlib import Path
+import tarfile
+import tempfile
+import urllib.request
+
+LAB = Path(__file__).resolve().parent.parent
+CONFIG = LAB / 'kubernetes.json'
+WORK = LAB / '.cache/images'
+OUTPUT = LAB / '.lfs/images'
+ACCEPT = ', '.join(['application/vnd.oci.image.index.v1+json',
+                    'application/vnd.docker.distribution.manifest.list.v2+json',
+                    'application/vnd.oci.image.manifest.v1+json',
+                    'application/vnd.docker.distribution.manifest.v2+json'])
+
+
+def digest(data):
+    return 'sha256:' + hashlib.sha256(data).hexdigest()
+
+
+def get(url):
+    request = urllib.request.Request(url, headers={'Accept': ACCEPT})
+    with urllib.request.urlopen(request, timeout=120) as response:
+        return response.read()
+
+
+def store_blob(data, expected=None):
+    identifier = digest(data)
+    if expected and identifier != expected:
+        raise ValueError('Registry content digest mismatch: ' + expected)
+    path = WORK / identifier.split(':')[1]
+    if not path.exists() or digest(path.read_bytes()) != identifier:
+        with tempfile.NamedTemporaryFile(dir=WORK, delete=False) as stream:
+            stream.write(data)
+            temporary = Path(stream.name)
+        temporary.replace(path)
+    return identifier
+
+
+def fetch_image(reference):
+    registry, image = reference.split('/', 1)
+    repository, tag = image.rsplit(':', 1)
+    base = f'https://{registry}/v2/{repository}'
+    index_data = get(f'{base}/manifests/{tag}')
+    index = json.loads(index_data)
+    if 'manifests' in index:
+        candidates = [m for m in index['manifests'] if m.get('platform', {}).get('architecture') == 'amd64' and m.get('platform', {}).get('os') == 'linux']
+        if len(candidates) != 1:
+            raise ValueError('Expected one Linux/amd64 manifest for ' + reference)
+        descriptor = candidates[0]
+        manifest_data = get(f'{base}/manifests/{descriptor["digest"]}')
+        store_blob(manifest_data, descriptor['digest'])
+    else:
+        manifest_data = index_data
+        store_blob(manifest_data)
+    manifest = json.loads(manifest_data)
+    for item in [manifest['config'], *manifest['layers']]:
+        path = WORK / item['digest'].split(':')[1]
+        data = path.read_bytes() if path.exists() else get(f'{base}/blobs/{item["digest"]}')
+        if len(data) != item['size']:
+            raise ValueError('Registry content size mismatch: ' + item['digest'])
+        store_blob(data, item['digest'])
+    config = json.loads((WORK / manifest['config']['digest'].split(':')[1]).read_bytes())
+    if config['architecture'] != 'amd64' or config['os'] != 'linux':
+        raise ValueError('Wrong image platform: ' + reference)
+    print('Verified ' + reference, flush=True)
+    return {'reference': reference, 'index_digest': digest(index_data),
+            'digest': digest(manifest_data), 'size': len(manifest_data),
+            'mediaType': manifest['mediaType'],
+            'blobs': [item['digest'] for item in [manifest['config'], *manifest['layers']]]}
+
+
+def add_bytes(archive, name, data):
+    info = tarfile.TarInfo(name)
+    info.size = len(data)
+    info.mode = 0o644
+    archive.addfile(info, io.BytesIO(data))
+
+
+def write_archive(path, images):
+    temporary = path.with_suffix('.tar.tmp')
+    manifests = [{'mediaType': image['mediaType'], 'digest': image['digest'], 'size': image['size'],
+                  'platform': {'architecture': 'amd64', 'os': 'linux'},
+                  'annotations': {'io.containerd.image.name': image['reference'],
+                                  'org.opencontainers.image.ref.name': image['reference']}} for image in images]
+    blobs = {item for image in images for item in [image['digest'], *image['blobs']]}
+    with tarfile.open(temporary, 'w') as archive:
+        add_bytes(archive, 'oci-layout', b'{"imageLayoutVersion":"1.0.0"}')
+        add_bytes(archive, 'index.json', json.dumps({'schemaVersion': 2, 'mediaType': 'application/vnd.oci.image.index.v1+json', 'manifests': manifests}).encode())
+        for identifier in sorted(blobs):
+            add_bytes(archive, 'blobs/sha256/' + identifier.split(':')[1], (WORK / identifier.split(':')[1]).read_bytes())
+    temporary.replace(path)
+    with path.open('rb') as stream:
+        checksum = hashlib.file_digest(stream, 'sha256').hexdigest()
+    return {'file': path.name, 'sha256': checksum, 'bytes': path.stat().st_size}
+
+
+def main():
+    config = json.loads(CONFIG.read_text())
+    WORK.mkdir(parents=True, exist_ok=True)
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        images = list(pool.map(fetch_image, config['kubernetes_images']))
+    by_reference = {image['reference']: image for image in images}
+    version = config['kubernetes_version']
+    archives = [write_archive(OUTPUT / f'control-plane-{version}-amd64.tar', images),
+                write_archive(OUTPUT / f'worker-{version}-amd64.tar', [by_reference[ref] for ref in config['kubernetes_worker_images']])]
+    lock = {'kubernetes_version': version, 'platform': 'linux/amd64', 'images': images, 'archives': archives}
+    (LAB / 'kubernetes-images.lock.json').write_text(json.dumps(lock, indent=2) + '\n')
+    for archive in archives:
+        print(f'{archive["file"]}: {archive["sha256"]}', flush=True)
+
+
+if __name__ == '__main__':
+    main()

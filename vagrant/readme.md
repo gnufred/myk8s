@@ -19,7 +19,7 @@ run/provision
 
 `git lfs pull` restores the base box, cached APKs and container image archives. `run/provision` automatically calls `run/register-box`: if `myk8s/alpine-3.24` version `3.24.3` for libvirt/amd64 is missing, it verifies and registers the local archive from `.lfs/boxes/`. The locally generated Vagrant metadata includes its version and SHA-256; no remote box catalog is needed. An already registered matching version is reused. You can also run `run/register-box` before invoking Vagrant directly.
 
-The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The OS APK cache now targets Alpine 3.24 and has passed offline installation checks in isolated Alpine filesystems. Full VM provisioning with this refreshed cache remains the next test; Kubernetes v1.29.2 is still pinned.
+The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The APK cache targets Alpine 3.24. A fresh `lb0` plus one control plane (`cp0`) has passed provisioning with Kubernetes 1.36.1-r2 and containerd 2.3.7-r0: the node is Ready, all six system Pods are Running, the API is ready through the load balancer, and cluster DNS resolves. The remaining control planes, workers and NFS VM have not been tested with this Kubernetes version.
 
 ### Host services
 
@@ -29,7 +29,16 @@ The host firewall must still allow traffic on the libvirt management bridge; the
 
 ### Provision
 
-Use `run/provision` for all VMs or `run/provision lb0` to test one VM. Existing VMs retain their current disks; changing the base box applies when a VM is recreated.
+Start the validated single-control-plane setup with:
+
+```bash
+run/provision lb0
+run/provision cp0
+vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes'
+vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get pods -n kube-system'
+```
+
+This creates one control plane behind the existing load balancer. It is a fresh bootstrap, not an in-place upgrade of a Kubernetes 1.29 cluster. Existing VMs retain their disks; changing the base box applies when a VM is recreated. The argument-free `run/provision` still builds the entire lab, including additional control planes and workers; those joins have not yet been validated for 1.36.
 
 ### Playbook
 
@@ -47,7 +56,7 @@ For disposable Vagrant VMs, the same configuration uses `StrictHostKeyChecking=n
 
 ### Kubectl
 
-Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
+The control plane includes a matching kubectl 1.36.1. Use `vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes'` from this directory. A host kubectl left at 1.29 is outside the supported version skew for this API; use a matching host client when connecting with `.kubeconfig`.
 
 ## Build an Alpine base box
 
@@ -59,7 +68,7 @@ The APK cache targets Alpine **3.24 / x86_64**, using the latest packages availa
 
 Current OS package versions include Python 3.14.10-r1, UFW 0.36.2-r4, iptables 1.8.13-r0, HAProxy 3.4.7-r0, Unbound 1.25.2-r2, rsyslog 8.2604.0-r0 and nfs-utils 2.6.4-r6. Python's Kubernetes client is 34.1.0-r1. The iptables package uses the **nf_tables** backend rather than the previous cache's legacy backend.
 
-Kubernetes 1.29.2, cri-tools 1.28.0, containerd/ctr 1.7.2, runc 1.1.12, CNI plugins 1.3.0 and etcdctl 3.5.12 retain their original cached APKs. Their OS dependencies are refreshed. These are deliberate temporary migration pins, not current supported-version recommendations. Updating them requires a separate coordinated change to the runtime configuration, kubeadm configuration and container image archives.
+Cluster packages are pinned to the tested Alpine builds: Kubernetes 1.36.1-r2, cri-tools 1.36.0-r3, containerd/ctr 2.3.7-r0, runc 1.4.3-r2 and CNI plugins 1.9.1-r4. `etcdctl` 3.5.12 remains cached for the existing exercises; its health query was tested against the new server. Snapshot restoration is outside this bootstrap test: the legacy `pb/ic` restore task must be migrated to a matching `etcdutl` before using it with etcd 3.6 snapshots.
 
 After cloning and pulling LFS, verify the files without network access:
 
@@ -71,48 +80,40 @@ To refresh OS packages from the configured Alpine 3.24 repositories, run `run/ca
 
 Provisioning's shell bootstrap rejects an older Alpine release before installing this cache and stops immediately if an APK installation fails. Recreate older lab VMs with the current base box instead of applying the 3.24 package cache to Alpine 3.19.
 
-Validation on 4 November 2026: all 301 cached APK files passed signature verification; the load-balancer, control-plane, worker and NFS dependency sets installed with repositories empty and networking disabled in disposable Alpine 3.24 filesystems. The existing HAProxy, Unbound and rendered rsyslog configurations passed checks with the new binaries. Python and its Kubernetes client imported successfully, and the pinned Kubernetes/containerd binaries ran. These checks do not validate the guest kernel modules, service startup or end-to-end cluster behavior.
+Validation on 4 November 2026: all 312 cached APK files passed Alpine signature verification. `lb0` and `cp0` were created from the Alpine 3.24.3 base box and provisioned using the local APK and image caches. Kubernetes reports `cp0` Ready on v1.36.1 with containerd 2.3.7; all six system Pods are 1/1 Running with zero restarts. API readiness succeeded directly and through the authenticated host connection to `https://10.1.2.10:9443`; etcd health and DNS queries through CoreDNS and Unbound passed.
 
-For the next VM test, start with the recreated `lb0`:
+## Kubernetes and containerd configuration
 
-```bash
-vagrant rsync lb0
-run/provision lb0
-```
+`kubernetes.json` pins the Kubernetes version and image references used by the Ansible tasks and image-cache helper. The kubeadm template uses `kubeadm.k8s.io/v1beta4` and explicitly sets `kubernetesVersion`, so offline initialization does not query the upstream release channel. It advertises the control plane's private `eth1` address. Kubelet's OpenRC arguments likewise select the private node address.
 
-## Offline containerd tools
+Kubelet and runc use the `cgroupfs` driver with OpenRC's unified cgroup v2 hierarchy. Provisioning starts/enables the `cgroups` service and checks `/sys/fs/cgroup/cgroup.controllers`. BusyBox `stat -f %T` reports `UNKNOWN` for this filesystem on the tested box, so it is not used as the readiness check.
 
-The `.lfs/apk/containerd/` cache includes `containerd-ctr-1.7.2-r4.apk`, which supplies the `ctr` diagnostic client and matches the cached containerd daemon's version and Alpine packaging commit. The existing `Install containerd packages` task in `pb/install/main.yml` installs every APK in this directory, including this client, without network access.
+Alpine's containerd 2.3 package supplies config version 4 and the CNI path `/usr/libexec/cni`. Provisioning writes `/etc/containerd/conf.d/20-kubernetes.toml`, which the packaged configuration imports. This pins `pinned_images.sandbox` to the cached pause image and keeps `SystemdCgroup = false`. The old `sandbox_image` replacement is no longer used. Containerd restarts when this drop-in changes.
 
-- Source: [official Alpine v3.18 x86_64 package](https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/containerd-ctr-1.7.2-r4.apk), matching the existing daemon package's build.
-- SHA-256: `c66b48d4b7a3d70234c258c702d7f9690230cdfeb353bda67bd406a594a169e6`.
-- The package is stored with Git LFS; run `git lfs pull` after cloning.
-
-For an existing `cp0`, run `vagrant rsync cp0`, then `run/playbook -h cp0 -b install -t containerd` to sync the cache and rerun its containerd installation tasks. New provisioning runs pick up the package automatically.
+The offline containerd group includes its matching `containerd-ctr` client. For runtime diagnostics, use `vagrant ssh cp0 -c 'doas crictl images'` or `vagrant ssh cp0 -c 'doas ctr --namespace k8s.io images list'`.
 
 ## Offline Kubernetes images
 
-The `.lfs/images/control-plane-v1.29.2-amd64.tar` OCI archive is stored in Git LFS. Run `git lfs pull` after cloning to restore it along with the cached APKs and raw image blobs. Its SHA-256 is `fec7ecbbbf4b6f6fd7d5dae51aa82630428af676ccf7462108190d987c39f5d5`.
+The Git LFS OCI archives contain verified Linux/amd64 image manifests, configurations and layers from the official Kubernetes registry. `kubernetes-images.lock.json` records the index/manifest digests and archive SHA-256 values. Pull LFS after cloning to restore the archives; provisioning never downloads them.
 
-The archive contains the original cached Linux/amd64 manifests, configurations and layers, with image references verified against the official Kubernetes registry manifests:
+The control plane archive contains:
 
-- `registry.k8s.io/kube-apiserver:v1.29.2`
-- `registry.k8s.io/kube-controller-manager:v1.29.2`
-- `registry.k8s.io/kube-scheduler:v1.29.2`
-- `registry.k8s.io/kube-proxy:v1.29.2`
-- `registry.k8s.io/coredns/coredns:v1.11.1`
-- `registry.k8s.io/pause:3.9`
-- `registry.k8s.io/etcd:3.5.10-0`
+- `registry.k8s.io/kube-apiserver:v1.36.1`
+- `registry.k8s.io/kube-controller-manager:v1.36.1`
+- `registry.k8s.io/kube-scheduler:v1.36.1`
+- `registry.k8s.io/kube-proxy:v1.36.1`
+- `registry.k8s.io/coredns/coredns:v1.14.2`
+- `registry.k8s.io/pause:3.10.2`
+- `registry.k8s.io/etcd:3.6.8-0`
 
-The `containerd` tasks configure `sandbox_image = "registry.k8s.io/pause:3.9"` in `/etc/containerd/config.toml` on control planes and workers, matching the image required by kubeadm v1.29.2. Containerd restarts when this setting changes; otherwise the service is simply ensured to be running. This prevents the runtime from trying to download its packaged `pause:3.8` default. The sandbox image must also be present locally on each node for offline Pod startup; separate control plane and worker archives supply it.
+The worker archive contains only kube-proxy and pause. Both archives are imported with `ctr --namespace k8s.io images import --platform linux/amd64` before initialization or joining, creating the named image records and unpacking layers. The control plane import and startup have been tested; worker joins remain a separate validation step.
 
-The `blobs` tasks in `pb/install/main.yml` copy this archive to each control plane and run `ctr --namespace k8s.io images import --platform linux/amd64 /tmp/myk8s-control-plane-images.tar`. This registers the content and named image records and unpacks the layers without downloading images. The import runs on each invocation so a pre-existing content directory cannot cause the metadata-registration step to be skipped.
+- `control-plane-v1.36.1-amd64.tar`: 144,558,080 bytes; SHA-256 `bf1a53a625fb3bfab468dea81a9bba5cdd18554f4b06c29903481214a9c86495`.
+- `worker-v1.36.1-amd64.tar`: 29,184,000 bytes; SHA-256 `57e58b15b992a5bc5f4ee72170f6378af4e189973111731a0d7c4cdd7ca6373f`.
 
-For an existing `cp0`, run `run/playbook -h cp0 -b install -t blobs`, then inspect `vagrant ssh cp0 -c "sudo crictl images"`. The archive and import command were manually verified on `cp0`: all seven images unpacked successfully and appeared through CRI. This validates image loading; kubelet/control-plane startup is a separate check.
+To rebuild the archives online, run `run/cache-images` (Python 3.11+). It reads `kubernetes.json`, selects each registry's Linux/amd64 manifest, verifies content hashes and platform metadata, and writes deterministic OCI archives plus their lockfile. It does not start VMs. For an existing node, `run/playbook -h cp0 -b install -t blobs` imports the cached control plane archive again.
 
-The `.lfs/images/worker-v1.29.2-amd64.tar` OCI archive is also stored in Git LFS. It contains only `registry.k8s.io/pause:3.9` and `registry.k8s.io/kube-proxy:v1.29.2`, using the same verified Linux/amd64 content as the control plane archive. Its size is 28,692,480 bytes (27.4 MiB), and its SHA-256 is `68ef070ecccf50b5a26ba843711e356da13af1cc4fa71c29900317b0fa0b8eb7`.
-
-The worker `blobs` tasks copy this smaller archive to `wo0` through `wo5` and import it into containerd's `k8s.io` namespace before the provisioning helper joins each worker to the cluster. Control planes retain their seven-image archive. For an existing worker, run `run/playbook -h wo1 -b install -t blobs` to load the two required images without rerunning its join. Kubelet retries failed Pod creation; recreating a kube-proxy Pod after the images were imported was manually verified to start it on a worker.
+The existing training network layout is preserved, including its custom CoreDNS Service address and bridge CNI configuration. The single-node checks do not establish cross-node Pod connectivity or HA behavior.
 
 ## Kubeadm initialization logs
 

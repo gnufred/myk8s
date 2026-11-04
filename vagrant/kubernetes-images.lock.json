@@ -1,0 +1,166 @@
+{
+  "kubernetes_version": "v1.36.1",
+  "platform": "linux/amd64",
+  "images": [
+    {
+      "reference": "registry.k8s.io/kube-apiserver:v1.36.1",
+      "index_digest": "sha256:2460df74307cafacf674573c88df511aeb1aece9daa7fbd968fe27cb1c8c4588",
+      "digest": "sha256:e2b3603155694949d304f489e138c0b23087b293c38ba1a19be57f019fa9b963",
+      "size": 3444,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "blobs": [
+        "sha256:315157c5c4d7605a3830b3cf84354bc5423830b9975769267eac2466d60036be",
+        "sha256:526604835308e0d61f64a3d3e2d614308fef4ed655f0111a4566627296c0195c",
+        "sha256:990a9c434e5e0f11549a8d4a41a1991e621b04e30cd63269adbc97b1dc38fd7e",
+        "sha256:ef49c20a7b35aa995683f311510d35d77e203a2204f84de14a71a6d726e6af73",
+        "sha256:bf7a4185f01524837d19abde915ffde84e64368b250f5b5e9f6f75aea62a11d4",
+        "sha256:2780920e5dbfbe103d03a583ed75345306e572ec5a48cb10361f046767d9f29a",
+        "sha256:7c12895b777bcaa8ccae0605b4de635b68fc32d60fa08f421dc3818bf55ee212",
+        "sha256:3214acf345c0cc6bbdb56b698a41ccdefc624a09d6beb0d38b5de0b2303ecaf4",
+        "sha256:52630fc75a18675c530ed9eba5f55eca09b03e91bd5bc15307918bbc1a7e7296",
+        "sha256:dd64bf2dd177757451a98fcdc999a339c35dee5d9872d8f4dc69c8f3c4dd0112",
+        "sha256:b839dfae01f66e15c6a8b63520557ed315bdfe036342fa7a0c537259f10d7a9a",
+        "sha256:dcaa5a89b0ccda4b283e16d0b4d0891cd93d5fe05c6798f7806781a6a2d84354",
+        "sha256:069d1e267530c2e681fbd4d481553b4d05f98082b18fafac86e7f12996dddd0b",
+        "sha256:f6b5add4332739375a11a9dd75579dca8d6ff0a826f5b28cffaca0277dc986e3",
+        "sha256:219a4445e5f58300f7ccc6f5733d4ed756aae2d462b3d699174e6c8ebd9a7d30",
+        "sha256:3382b40bf2a053243b67f5adaab112a0eb93f1cec867625ce57de069bb2ff0fe"
+      ]
+    },
+    {
+      "reference": "registry.k8s.io/kube-controller-manager:v1.36.1",
+      "index_digest": "sha256:c8adb8daee5b30576bd87638a89351ab8388b3fda466bedb7eacf10cde77dbe7",
+      "digest": "sha256:f2c03314f93861b94505d1758df8f5e244698d976ed523a541619c083db644e6",
+      "size": 3444,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "blobs": [
+        "sha256:c2616bc3c695669d9cf234cb17fccbbb77931dded6e7aca9327ec596b8ba88f9",
+        "sha256:526604835308e0d61f64a3d3e2d614308fef4ed655f0111a4566627296c0195c",
+        "sha256:990a9c434e5e0f11549a8d4a41a1991e621b04e30cd63269adbc97b1dc38fd7e",
+        "sha256:ef49c20a7b35aa995683f311510d35d77e203a2204f84de14a71a6d726e6af73",
+        "sha256:bf7a4185f01524837d19abde915ffde84e64368b250f5b5e9f6f75aea62a11d4",
+        "sha256:2780920e5dbfbe103d03a583ed75345306e572ec5a48cb10361f046767d9f29a",
+        "sha256:7c12895b777bcaa8ccae0605b4de635b68fc32d60fa08f421dc3818bf55ee212",
+        "sha256:3214acf345c0cc6bbdb56b698a41ccdefc624a09d6beb0d38b5de0b2303ecaf4",
+        "sha256:52630fc75a18675c530ed9eba5f55eca09b03e91bd5bc15307918bbc1a7e7296",
+        "sha256:dd64bf2dd177757451a98fcdc999a339c35dee5d9872d8f4dc69c8f3c4dd0112",
+        "sha256:b839dfae01f66e15c6a8b63520557ed315bdfe036342fa7a0c537259f10d7a9a",
+        "sha256:dcaa5a89b0ccda4b283e16d0b4d0891cd93d5fe05c6798f7806781a6a2d84354",
+        "sha256:069d1e267530c2e681fbd4d481553b4d05f98082b18fafac86e7f12996dddd0b",
+        "sha256:f6b5add4332739375a11a9dd75579dca8d6ff0a826f5b28cffaca0277dc986e3",
+        "sha256:21193cdb8be70d3d17b73aabfeea7c6a65222918c3d8ca5f4f93169352d727f9",
+        "sha256:3382b40bf2a053243b67f5adaab112a0eb93f1cec867625ce57de069bb2ff0fe"
+      ]
+    },
+    {
+      "reference": "registry.k8s.io/kube-scheduler:v1.36.1",
+      "index_digest": "sha256:3a4333e8ba6e1f74c9bc467c791a06a26808474e8819582cf130cfe0fddc3155",
+      "digest": "sha256:da3d942f1b5298382fbd1033fa4e3c531ef92826b259224b00051da53bc87bd7",
+      "size": 3444,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "blobs": [
+        "sha256:b665198f31ae0e1bb7488858964d6f2a60e6052c1091d3e79f37108b29edbcc4",
+        "sha256:526604835308e0d61f64a3d3e2d614308fef4ed655f0111a4566627296c0195c",
+        "sha256:990a9c434e5e0f11549a8d4a41a1991e621b04e30cd63269adbc97b1dc38fd7e",
+        "sha256:ef49c20a7b35aa995683f311510d35d77e203a2204f84de14a71a6d726e6af73",
+        "sha256:bf7a4185f01524837d19abde915ffde84e64368b250f5b5e9f6f75aea62a11d4",
+        "sha256:2780920e5dbfbe103d03a583ed75345306e572ec5a48cb10361f046767d9f29a",
+        "sha256:7c12895b777bcaa8ccae0605b4de635b68fc32d60fa08f421dc3818bf55ee212",
+        "sha256:3214acf345c0cc6bbdb56b698a41ccdefc624a09d6beb0d38b5de0b2303ecaf4",
+        "sha256:52630fc75a18675c530ed9eba5f55eca09b03e91bd5bc15307918bbc1a7e7296",
+        "sha256:dd64bf2dd177757451a98fcdc999a339c35dee5d9872d8f4dc69c8f3c4dd0112",
+        "sha256:b839dfae01f66e15c6a8b63520557ed315bdfe036342fa7a0c537259f10d7a9a",
+        "sha256:dcaa5a89b0ccda4b283e16d0b4d0891cd93d5fe05c6798f7806781a6a2d84354",
+        "sha256:069d1e267530c2e681fbd4d481553b4d05f98082b18fafac86e7f12996dddd0b",
+        "sha256:f6b5add4332739375a11a9dd75579dca8d6ff0a826f5b28cffaca0277dc986e3",
+        "sha256:e37f376aecb780f84b5d9fd398afe55d7ed51b2ab41c5169584ad524e78c3b05",
+        "sha256:3382b40bf2a053243b67f5adaab112a0eb93f1cec867625ce57de069bb2ff0fe"
+      ]
+    },
+    {
+      "reference": "registry.k8s.io/kube-proxy:v1.36.1",
+      "index_digest": "sha256:a96b6e12863ef766d18f69afaad7a5329220c37ce21cb232bcb58362d284f3f7",
+      "digest": "sha256:5a3717e4599cea37ef68a9eefcbcfc3311bf2c5caba840f7f76d918bd94775b2",
+      "size": 952,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "blobs": [
+        "sha256:78282b5844742761f4b51b4dbc2103e5bda6c694fbacd5afe7dfa3b23b4e1590",
+        "sha256:1faccb5a2f0f6cdd625bf4e3a5a08b309ff68ae7a98c90ace0a3c0fd970a27a5",
+        "sha256:9eb38b0e1fbf448542b69a55accf5d8520359ca2843683e8bd0b2d6776d62df2",
+        "sha256:3382b40bf2a053243b67f5adaab112a0eb93f1cec867625ce57de069bb2ff0fe"
+      ]
+    },
+    {
+      "reference": "registry.k8s.io/coredns/coredns:v1.14.2",
+      "index_digest": "sha256:e7e6440cfd1e919280958f5b5a6ab2b184d385bba774c12ad2a9e1e4183f90d9",
+      "digest": "sha256:fd5079792b93909db3adefa91e41c3995455013394f0197c7346786ae19079fc",
+      "size": 3023,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "blobs": [
+        "sha256:38667dd9be96c17227adde456e33ad701bdbdc5c6db0272a1d33a929bd8e62d6",
+        "sha256:03c9b64681eef07f903b45cfbe5c064db1f1c7f682863b895104ac2680a271a7",
+        "sha256:2e4cf50eeb92ac3a7afe75e15d96a26dee99449f86b46c75b5d95f4418a5bca0",
+        "sha256:56ce5a7a0a8cc3aded9e8cab00fd85f0a1c50376aa9f2318c4e66beb03eadf8f",
+        "sha256:e1089d61b200106053b1717881bf0c1c47551478f01569d9224d33cccf3e4692",
+        "sha256:0f8b424aa0b96c1c388a5fd4d90735604459256336853082afb61733438872b5",
+        "sha256:d557676654e572af3e3173c90e7874644207fda32cd87e9d3d66b5d7b98a7b21",
+        "sha256:d82bc7a76a838c9a4a6025192429c2fed58f73742ef1fb9c8bb7b995fc3b7213",
+        "sha256:68e4cd60e60fed4486d5b4b40b079e57781e828d93d80a7411e8760dcccfbbf7",
+        "sha256:0783a66ae7492bb16937c7723c534e431404aa3ebbdcaaed65d264a95a266b9e",
+        "sha256:efae86a3fb38e05e6e2584bc2f48534a0d82f8d9e9a4163d04885d5c65423105",
+        "sha256:6b72b81ed96620b324f40ade069bbd3fcee69d62182bb03681c3976b6909eec4",
+        "sha256:6cdd517ba90571b01009637268b5fddb4e3eea409bb6dae0bf40ed8ad9e33ef4",
+        "sha256:7bae8e7097d7983932f15870289838ba42ce97e13c38fda26cbdd9ba09d17e87"
+      ]
+    },
+    {
+      "reference": "registry.k8s.io/pause:3.10.2",
+      "index_digest": "sha256:f548e0e8e3dc1896ca956272154dde3314e8cc4fde0a57577ee9fa1c63f5baf4",
+      "digest": "sha256:412c4a7219cb8a299a37337f3d87810c5340095322e15594a1637785adad0f17",
+      "size": 501,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "blobs": [
+        "sha256:4a83b15d3ecfe0d916b2d0a7991bc2854a629b8097017c2ee1ff65b30ae4c07c",
+        "sha256:81ede36234b06d9a16771d804ef81ea888e29f8c425a5269e3d55d34a1b128a8"
+      ]
+    },
+    {
+      "reference": "registry.k8s.io/etcd:3.6.8-0",
+      "index_digest": "sha256:397189418d1a00e500c0605ad18d1baf3b541a1004d768448c367e48071622e5",
+      "digest": "sha256:aa2b41e3f99c9a337b82f687875a63c5119e6d39bc43fc76b6c40a96f55cf391",
+      "size": 3650,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "blobs": [
+        "sha256:ee85eb1f0edd27fd11e3bed20f21a4001ad63107eb2f8d489429648a799c0e86",
+        "sha256:688513194d7a0f0d77e4a3692748d21c4ccd1af6a5ff9012f18f053ed9573c13",
+        "sha256:bfb59b82a9b65e47d485e53b3e815bca3b3e21a095bd0cb88ced9ac0b48062bf",
+        "sha256:efa9d1d5d3a286c60a7261496166fdf31cec2284dafe7eef7cda89eba2f675d6",
+        "sha256:b6824ed73363f94b3b2b44084c51c31bc32af77a96861d49e16f91e3ab6bed71",
+        "sha256:7c12895b777bcaa8ccae0605b4de635b68fc32d60fa08f421dc3818bf55ee212",
+        "sha256:3214acf345c0cc6bbdb56b698a41ccdefc624a09d6beb0d38b5de0b2303ecaf4",
+        "sha256:5664b15f108bf9436ce3312090a767300800edbbfd4511aa1a6d64357024d5dd",
+        "sha256:27be814a09ebd97fac6fb7b82d19f117185e90601009df3fbab6f442f85cd6b3",
+        "sha256:4aa0ea1413d37a58615488592a0b827ea4b2e48fa5a77cf707d0e35f025e613f",
+        "sha256:da7816fa955ea24533c388143c78804c28682eef99b4ee3723b548c70148bba6",
+        "sha256:9aee425378d2c16cd44177dc54a274b312897f5860a8e78fdfda555a0d79dd71",
+        "sha256:a00667e02fadf9b1abd2bee47eb52ed370b74c0f373fc901d2154955521a26b0",
+        "sha256:f097e84ccdedac935d1bf8ac375ab35cdb5bc7aae58ec7b692d539f5b5e21dcb",
+        "sha256:c39cffd75ba2756c8ae7a24a92a5e4371e6f937c8068d4b43d126ee9193a4fad",
+        "sha256:4c78bfe854226b178fdd1e9c39bc77c48d47e9ae1d45fcc18d7c09460cd27cea",
+        "sha256:8c02b6f8ac46c3042e40b910c4c40cb2559dd7eac715318ab1bc150b685d2cbd"
+      ]
+    }
+  ],
+  "archives": [
+    {
+      "file": "control-plane-v1.36.1-amd64.tar",
+      "sha256": "bf1a53a625fb3bfab468dea81a9bba5cdd18554f4b06c29903481214a9c86495",
+      "bytes": 144558080
+    },
+    {
+      "file": "worker-v1.36.1-amd64.tar",
+      "sha256": "57e58b15b992a5bc5f4ee72170f6378af4e189973111731a0d7c4cdd7ca6373f",
+      "bytes": 29184000
+    }
+  ]
+}

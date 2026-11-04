@@ -1,5 +1,7 @@
 ---
 - name: Initialize main control plane
+  vars_files:
+    - ../../kubernetes.json
   hosts: cp0
   become: true
   become_user: root
@@ -20,10 +22,10 @@
       state: started
       enabled: yes
 
-  - name: Copy cluster configuration
+  - name: Render cluster configuration
     when: not cacert.stat.exists
     tags: init
-    copy:
+    template:
       src: cluster.yaml
       dest: /etc/kubernetes/cluster.yaml
 
@@ -42,7 +44,6 @@
     tags: init
     shell: >-
       kubeadm init --config /etc/kubernetes/cluster.yaml
-      --ignore-preflight-errors=DirAvailable--var-lib-etcd
       --v=5 > /var/log/kubeadm-init.log 2>&1
 
   - name: Fetch certificates
