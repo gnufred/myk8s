@@ -19,7 +19,7 @@ run/provision
 
 `git lfs pull` restores the base box, cached APKs and container image archives. `run/provision` automatically calls `run/register-box`: if `myk8s/alpine-3.24` version `3.24.3` for libvirt/amd64 is missing, it verifies and registers the local archive from `.lfs/boxes/`. The locally generated Vagrant metadata includes its version and SHA-256; no remote box catalog is needed. An already registered matching version is reused. You can also run `run/register-box` before invoking Vagrant directly.
 
-The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The APK cache targets Alpine 3.24. A fresh `lb0` and `cp0` bootstrap plus the joins of `cp1` and `cp2` have passed with Kubernetes 1.36.1-r2 and containerd 2.3.7-r0. All three control planes are Ready, all 16 system Pods are Running, and the three etcd voting members are healthy on the private network. `wo0` has also joined and passed a Pod DNS/API test. The other five workers and the NFS VM have not been tested with this Kubernetes version.
+The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The APK cache targets Alpine 3.24. A fresh `lb0` and `cp0` bootstrap plus the joins of `cp1` and `cp2` have passed with Kubernetes 1.36.1-r2 and containerd 2.3.7-r0. All three control planes are Ready, all 16 system Pods are Running, and the three etcd voting members are healthy on the private network. `wo0` has also joined and passed a Pod DNS/API test. The NFS VM (`nf0`) has passed a worker mount/read/write test and a Kubernetes PV/PVC persistence test. The other five workers have not been tested with this Kubernetes version.
 
 ### Host services
 
@@ -38,7 +38,7 @@ vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes'
 vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get pods -n kube-system'
 ```
 
-This creates one control plane behind the existing load balancer. It is a fresh bootstrap, not an in-place upgrade of a Kubernetes 1.29 cluster. Existing VMs retain their disks; changing the base box applies when a VM is recreated. The argument-free `run/provision` builds the entire lab. The three control planes and one worker (`wo0`) have been validated for 1.36; the other workers and NFS server remain to be tested.
+This creates one control plane behind the existing load balancer. It is a fresh bootstrap, not an in-place upgrade of a Kubernetes 1.29 cluster. Existing VMs retain their disks; changing the base box applies when a VM is recreated. The argument-free `run/provision` builds the entire lab. The three control planes and one worker (`wo0`) have been validated for 1.36; the other five workers remain to be tested.
 
 ### Add the other control planes
 
@@ -77,7 +77,26 @@ The Pod test exposed UFW blocking forwarded packets from `cni0` despite successf
 - Pod source `10.88.0.0/16` arriving on `cni0` to the lab DNS resolver `10.1.2.10`, UDP/TCP port 53.
 - The same Pod source/interface to the three private API addresses `10.1.2.20`–`10.1.2.22`, TCP port 6443. These match the destination after kube-proxy translates the API Service address/port.
 
-The validated worker retains a deny policy for other routed traffic. For an existing installed node, `run/playbook -h wo0 -b install -t pod-network` applies just these rules. Reapplying the tested rules through Ansible reported no changes. This validates worker startup and Pod DNS/API access; general cross-node Pod routing, other workload forwarding and NFS volumes are separate checks. The existing shared host-local Pod subnet is not redesigned by this change.
+The validated worker retains a deny policy for other routed traffic. For an existing installed node, `run/playbook -h wo0 -b install -t pod-network` applies just these rules. Reapplying the tested rules through Ansible reported no changes. This validates worker startup and Pod DNS/API access; general cross-node Pod routing and other workload forwarding are separate checks. NFS volume mounting and persistence have since been tested separately below. The existing shared host-local Pod subnet is not redesigned by this change.
+
+### NFS storage
+
+Provision the dedicated NFS server VM with `run/provision nf0`. It serves `/export` at private address `10.1.2.40`, using the cached Alpine NFS packages and the OpenRC `rpcbind` and `nfs` services. `/etc/exports` allows the six worker hostnames (`wo0` through `wo5`) and retains `rw,root_squash,no_subtree_check`. The NFS server stays separate from Kubernetes node registration.
+
+The export directory is owned by `root:vagrant` (GID 1000), with mode `2775`: the shared lab group can write, and newly created subdirectories inherit its group. Client-root writes are still squashed and denied. Applications should use the matching identity/group; the tested Pods used:
+
+```yaml
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  runAsNonRoot: true
+```
+
+A root-owned `0755` export mounted successfully but did not let the normal worker user write. Provisioning now sets the tested group and mode explicitly without making the directory world-writable or disabling root squash. Backing directories for static NFS volumes can be created by UID/GID 1000 underneath `/export`.
+
+Validation on 4 November 2026: `wo0` mounted `nf0:/export` over NFSv4.2/TCP, wrote/read data as UID/GID 1000, and failed a client-root write as expected. A temporary static `ReadWriteMany` NFS PV/PVC bound successfully with `nfsvers=4.2`. A non-root writer Pod on `wo0` read worker-created data and wrote its own file. After that Pod was deleted, a replacement reader Pod recovered the same file. Its contents were also verified directly on `nf0` and through the worker mount. Temporary Pods, PV/PVC, test data, mounts and the diagnostic image were cleaned up. Multi-worker sharing has not yet been exercised.
+
+The full provision helper keeps NFS and workers parallel, tracks the NFS job explicitly, and waits for it before returning. NFS VM/playbook failures now return a nonzero status even when workers succeed; worker failures also remain visible when NFS succeeds. The duplicate empty NFS installation play was removed.
 
 ### Playbook
 

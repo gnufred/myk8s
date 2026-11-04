@@ -92,9 +92,12 @@ cplane_replica(){
 nfs() {
 	NAME=nf
 	BOOKS=(ufw install)
+	NFS_PROVISION_PID=""
 	for i in {0..0}; do
 		NODE="$NAME$i"
-		provision $NODE $BOOKS &
+		if [[ -n "$HOST" && "$HOST" != "$NODE" ]]; then continue; fi
+		provision "$NODE" "${BOOKS[@]}" &
+		NFS_PROVISION_PID=$!
 	done
 }
 
@@ -120,8 +123,6 @@ worker() {
 			status=$result
 		fi
 	done
-	# The NFS provisioner may still be running during a full lab bootstrap.
-	wait
 	return "$status"
 }
 
@@ -133,3 +134,10 @@ cplane_main
 cplane_replica
 nfs
 worker
+worker_status=$?
+# Keep NFS and workers parallel, but never hide a failed NFS provision.
+if [[ -n "$NFS_PROVISION_PID" ]]; then
+	wait "$NFS_PROVISION_PID"
+	exit_on_error $? "[nf0] provisioning failed"
+fi
+exit "$worker_status"

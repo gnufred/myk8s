@@ -333,12 +333,6 @@
   become: true
   become_user: root
 
-  ### NFS: ALL ###
-- name: Install NFS
-  hosts: nf0, wo0, wo1, wo2, wo3, wo4, wo5
-  become: true
-  become_user: root
-
   tasks:
 
   - name: Install nfs packages
@@ -365,6 +359,11 @@
     file:
       path: /export
       state: directory
+      owner: root
+      # The lab's vagrant group is GID 1000 on the server and workers.
+      # Keep root_squash; workloads use UID/GID 1000 for writable volumes.
+      group: vagrant
+      mode: '2775'
 
   - name: Copy export config
     tags: nfs
