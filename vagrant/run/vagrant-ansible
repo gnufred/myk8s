@@ -1,0 +1,13 @@
+#!/bin/bash
+# Vagrant 2.4.9 emits an inventory alias deprecated by current Ansible.
+set -euo pipefail
+
+arguments=()
+for argument in "$@"; do
+  case "$argument" in
+    --inventory-file) arguments+=(--inventory) ;;
+    --inventory-file=*) arguments+=("--inventory=${argument#--inventory-file=}") ;;
+    *) arguments+=("$argument") ;;
+  esac
+done
+exec ansible-playbook "${arguments[@]}"

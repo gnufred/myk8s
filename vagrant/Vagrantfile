@@ -1,5 +1,6 @@
 require 'json'
 box = JSON.parse(File.read(File.join(__dir__, '.lfs/boxes/alpine-3.24.3.json')))
+ansible_command = File.join(__dir__, 'run/vagrant-ansible')
 
 Vagrant.configure('2') do |config|
 
@@ -22,7 +23,7 @@ Vagrant.configure('2') do |config|
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/def.sh'
-			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml', playbook_command: ansible_command
 
 		end
 	end
@@ -42,7 +43,7 @@ Vagrant.configure('2') do |config|
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/cp.sh'
-			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml', playbook_command: ansible_command
 
 		end
 	end
@@ -61,7 +62,7 @@ Vagrant.configure('2') do |config|
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/def.sh'
-			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml', playbook_command: ansible_command
 		end
 	end
 
@@ -79,7 +80,7 @@ Vagrant.configure('2') do |config|
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 
 			n.vm.provision :shell, path: 'prov/def.sh'
-			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml'
+			n.vm.provision :ansible, playbook: 'pb/vagrant/main.yml', playbook_command: ansible_command
 
 		end
 	end

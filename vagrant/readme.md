@@ -37,6 +37,8 @@ Use the Playbook helper to run playbooks, roles, or tags on the Vagrant VM.
 
 Read `run/playbook --help`.
 
+Vagrant's Ansible provisioners use `run/vagrant-ansible` through the supported `playbook_command` setting. The wrapper replaces Vagrant 2.4.9's deprecated `--inventory-file` argument with `--inventory`, forwards all other arguments, and preserves Ansible's exit status. This avoids the deprecated alias without changing the installed Vagrant package.
+
 Privilege escalation uses `community.general.doas`, matching the Alpine base box. Install the `community.general` collection on the host if it is not supplied by your Ansible package. The box's sudo compatibility shim does not implement all options used by Ansible's default sudo plugin.
 
 The local `ansible.cfg` uses `interpreter_python = auto_silent`: Ansible still discovers the guest Python interpreter, but suppresses its interpreter-selection warning. This applies when running the lab commands from this directory.
