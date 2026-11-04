@@ -1,0 +1,71 @@
+#!/bin/bash
+# Build a local Alpine Vagrant/libvirt base box from the reviewed Packer recipe.
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: run/build-alpine [--check]
+
+Build an Alpine 3.24.3 amd64 UEFI box using Packer and QEMU/KVM.
+--check initializes Packer plugins and validates the recipe without booting a VM.
+
+Output: vagrant/.cache/build-alpine/alpine-3.24.3-amd64-libvirt.box
+The build downloads its ISO, Packer plugins and guest packages.
+It does not register the box, change the lab Vagrantfile, or start lab VMs.
+EOF
+}
+
+case "${1:-}" in
+  -h|--help) usage; exit 0 ;;
+  ''|--check) ;;
+  *) usage >&2; exit 2 ;;
+esac
+if (( $# > 1 )); then usage >&2; exit 2; fi
+
+lab_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+recipe_dir="$lab_dir/build/alpine"
+build_dir="$lab_dir/.cache/build-alpine"
+box_path="$build_dir/alpine-3.24.3-amd64-libvirt.box"
+
+for executable in packer qemu-system-x86_64 qemu-img; do
+  if ! command -v "$executable" >/dev/null 2>&1; then
+    echo "Missing command: $executable" >&2
+    echo "On Arch, install Packer (HashiCorp CLI), qemu-base and edk2-ovmf." >&2
+    exit 1
+  fi
+done
+for firmware in OVMF_CODE.4m.fd OVMF_VARS.4m.fd OVMF.4m.fd; do
+  if [[ ! -r "/usr/share/edk2/x64/$firmware" ]]; then
+    echo "Missing UEFI firmware: /usr/share/edk2/x64/$firmware (Arch: edk2-ovmf)" >&2
+    exit 1
+  fi
+done
+if [[ "${1:-}" != --check ]]; then
+  if [[ ! -r /dev/kvm || ! -w /dev/kvm ]]; then
+    echo "QEMU/KVM requires read and write access to /dev/kvm." >&2
+    exit 1
+  fi
+  if [[ -e "$box_path" || -d "$build_dir/output-alpine-uefi-amd64" ]]; then
+    echo "Previous build output exists in $build_dir; move it aside before rebuilding." >&2
+    exit 1
+  fi
+fi
+
+mkdir -p "$build_dir"
+cp "$recipe_dir/"{alpine.pkr.hcl,install.sh,provision.sh,Vagrantfile-uefi.template} "$build_dir/"
+cd "$build_dir"
+export CHECKPOINT_DISABLE=1
+export PKR_VAR_vagrant_box="$box_path"
+packer init alpine.pkr.hcl
+packer validate alpine.pkr.hcl
+if [[ "${1:-}" == --check ]]; then exit 0; fi
+
+# Packer connects by SSH before running the guest provisioning script.
+PACKER_KEY_INTERVAL=10ms packer build \
+  -only=qemu.alpine-uefi-amd64 \
+  -on-error=abort \
+  -timestamp-ui \
+  alpine.pkr.hcl
+sha256sum "$box_path" > "$box_path.sha256"
+printf '\nBuilt: %s\n' "$box_path"
+printf 'Register with:\n  vagrant box add --name myk8s/alpine-3.24 --provider libvirt "%s"\n' "$box_path"

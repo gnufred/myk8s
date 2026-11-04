@@ -28,6 +28,10 @@ For disposable Vagrant VMs, the same configuration uses `StrictHostKeyChecking=n
 
 Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
 
+## Build an Alpine base box
+
+`run/build-alpine` builds a local Alpine 3.24.3 amd64 UEFI Vagrant/libvirt box from the pinned [rgl recipe](build/alpine/README.md), adapted for an Arch host. It requires Packer 1.16+, QEMU/KVM and `edk2-ovmf`. Use `run/build-alpine --check` to initialize plugins and validate without booting a VM. Build output stays in `.cache/build-alpine/`. After a successful build, the helper prints the command to register the box as `myk8s/alpine-3.24`; it does not change the lab configuration or register it automatically.
+
 ## Offline containerd tools
 
 The `.lfs/apk/containerd/` cache includes `containerd-ctr-1.7.2-r4.apk`, which supplies the `ctr` diagnostic client and matches the cached containerd daemon's version and Alpine packaging commit. The existing `Install containerd packages` task in `pb/install/main.yml` installs every APK in this directory, including this client, without network access.
