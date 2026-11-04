@@ -3,15 +3,8 @@
 
 10.1.2.10	lb0
 
-10.1.2.20	cp0
-10.1.2.21	cp1
-10.1.2.22	cp2
-
-10.1.2.30	wo0
-10.1.2.31	wo1
-10.1.2.32	wo2
-10.1.2.33	wo3
-10.1.2.34	wo4
-10.1.2.35	wo5
+{% for name, node in lab_nodes.items() %}
+{{ node.address }}	{{ name }}
+{% endfor %}
 
 10.1.2.40	nf0

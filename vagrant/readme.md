@@ -19,7 +19,7 @@ run/provision
 
 `git lfs pull` restores the base box, cached APKs and container image archives. `run/provision` automatically calls `run/register-box`: if `myk8s/alpine-3.24` version `3.24.3` for libvirt/amd64 is missing, it verifies and registers the local archive from `.lfs/boxes/`. The locally generated Vagrant metadata includes its version and SHA-256; no remote box catalog is needed. An already registered matching version is reused. You can also run `run/register-box` before invoking Vagrant directly.
 
-The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The APK cache targets Alpine 3.24. A fresh `lb0` and `cp0` bootstrap plus the joins of `cp1` and `cp2` have passed with Kubernetes 1.36.1-r2 and containerd 2.3.7-r0. All three control planes are Ready, all 16 system Pods are Running, and the three etcd voting members are healthy on the private network. `wo0` has also joined and passed a Pod DNS/API test. The NFS VM (`nf0`) has passed a worker mount/read/write test and a Kubernetes PV/PVC persistence test. The other five workers have not been tested with this Kubernetes version.
+The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access. The APK cache targets Alpine 3.24. The current Service/Pod network layout has been tested with `lb0`, `cp0`, `wo0` and `wo1`, using Kubernetes 1.36.1-r2 and containerd 2.3.7-r0. Before the address changes, all three control planes passed stacked-etcd health checks and the NFS VM passed worker/PV persistence tests. The additional control planes, remaining four workers and NFS VM have not been retested with the new network layout.
 
 ### Host services
 
@@ -38,7 +38,7 @@ vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes'
 vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get pods -n kube-system'
 ```
 
-This creates one control plane behind the existing load balancer. It is a fresh bootstrap, not an in-place upgrade of a Kubernetes 1.29 cluster. Existing VMs retain their disks; changing the base box applies when a VM is recreated. The argument-free `run/provision` builds the entire lab. The three control planes and one worker (`wo0`) have been validated for 1.36; the other five workers remain to be tested.
+This creates one control plane behind the existing load balancer. It is a fresh bootstrap, not an in-place upgrade of a Kubernetes 1.29 cluster. Existing VMs retain their disks; changing the base box applies when a VM is recreated. The argument-free `run/provision` builds the entire lab. The current network layout has been validated with `cp0` and two workers (`wo0`, `wo1`); the remaining nodes have static address assignments ready for provisioning.
 
 ### Add the other control planes
 
@@ -56,28 +56,25 @@ Control-plane joins explicitly use the private `eth1` address for `--apiserver-a
 
 The join playbook creates the etcd certificate directory before copying the shared CA material, including when retrying after `kubeadm reset`. Shared private keys are installed as root with mode `0600`; public certificates and keys use `0644`.
 
-Validation on 4 November 2026: `cp0`, `cp1` and `cp2` are Ready on v1.36.1, with 16/16 system Pods Running. Etcd has three voting members, no learners, one leader and matching applied Raft indexes; health proposals succeeded at every endpoint. Authenticated `/readyz` requests passed on all three private API addresses and the load-balanced endpoint. The controller-manager and scheduler on `cp1` retain a restart count of one from the failed join/reset; retained logs distinguish that attempt from their healthy replacements. Helper checks verified sequential ordering and propagation of both provisioning and join failures.
+Before the network-address changes, validation on 4 November 2026 found `cp0`, `cp1` and `cp2` Ready on v1.36.1, with 16/16 system Pods Running. Etcd has three voting members, no learners, one leader and matching applied Raft indexes; health proposals succeeded at every endpoint. Authenticated `/readyz` requests passed on all three private API addresses and the load-balanced endpoint. The controller-manager and scheduler on `cp1` retain a restart count of one from the failed join/reset; retained logs distinguish that attempt from their healthy replacements. Helper checks verified sequential ordering and propagation of both provisioning and join failures.
 
-### Add one worker
+### Add workers
 
-After the control plane is healthy, provision a fresh worker with:
+After the control plane is healthy, provision fresh workers with:
 
 ```bash
 run/provision wo0
+run/provision wo1
 vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes -o wide'
+vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes -o custom-columns=NAME:.metadata.name,POD-CIDR:.spec.podCIDR'
 vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf -n kube-system get pods -o wide'
 ```
 
 Worker provisioning remains parallel during a full bootstrap, but the helper records each worker PID and checks its exit status. A failed provision or join returns a nonzero status even if a later worker succeeds. A targeted `run/provision wo0` launches only that worker.
 
-Validation on 4 November 2026: `wo0` joined as Ready on private IP `10.1.2.30`, running Kubernetes v1.36.1 and containerd 2.3.7. Its kube-proxy Pod is ready, bringing the system namespace to 17 ready Pods. A temporary Pod scheduled on `wo0` resolved `kubernetes.default.svc.cluster.local` and made a service-account-authenticated request to the Kubernetes API `/version` endpoint, then exited successfully. Its diagnostic image was built offline from the checksum-verified Alpine 3.24.3 minirootfs already cached by the APK helper. The temporary Pods and image were removed; the regular worker archive still contains only kube-proxy and pause.
+The tested layout has three Ready nodes (`cp0`, `wo0`, `wo1`) and eight ready system Pods. Temporary non-root diagnostic Pods on all three nodes passed direct Pod connections in every direction and connections through a separate Service per endpoint, including each Pod reaching itself through its Service. Servers observed the original client Pod IP on cross-node connections. Each client resolved cluster and external names, received NXDOMAIN for a nonexistent cluster name, queried CoreDNS over UDP and TCP, and made a service-account-authenticated HTTPS request to the API `/version` with CA verification.
 
-The Pod test exposed UFW blocking forwarded packets from `cni0` despite successful node registration. The UFW module can treat the initial routed policy as already configured when it reports `disabled`, before the installation playbook enables IP forwarding. Installation now adds explicit rules for these required flows, without changing default policies:
-
-- Pod source `10.88.0.0/16` arriving on `cni0` to the lab DNS resolver `10.1.2.10`, UDP/TCP port 53.
-- The same Pod source/interface to the three private API addresses `10.1.2.20`–`10.1.2.22`, TCP port 6443. These match the destination after kube-proxy translates the API Service address/port.
-
-The validated worker retains a deny policy for other routed traffic. For an existing installed node, `run/playbook -h wo0 -b install -t pod-network` applies just these rules. Reapplying the tested rules through Ansible reported no changes. This validates worker startup and Pod DNS/API access; general cross-node Pod routing and other workload forwarding are separate checks. NFS volume mounting and persistence have since been tested separately below. The existing shared host-local Pod subnet is not redesigned by this change.
+The diagnostic image was built offline from the checksum-verified Alpine 3.24.3 minirootfs and verified cached Python APKs. It is temporary; the regular worker archive still contains only kube-proxy and pause. No network daemon, overlay or new CNI plugin is installed. See the network addressing section for routes, NAT, firewall persistence and the scope of these checks.
 
 ### NFS storage
 
@@ -94,7 +91,7 @@ securityContext:
 
 A root-owned `0755` export mounted successfully but did not let the normal worker user write. Provisioning now sets the tested group and mode explicitly without making the directory world-writable or disabling root squash. Backing directories for static NFS volumes can be created by UID/GID 1000 underneath `/export`.
 
-Validation on 4 November 2026: `wo0` mounted `nf0:/export` over NFSv4.2/TCP, wrote/read data as UID/GID 1000, and failed a client-root write as expected. A temporary static `ReadWriteMany` NFS PV/PVC bound successfully with `nfsvers=4.2`. A non-root writer Pod on `wo0` read worker-created data and wrote its own file. After that Pod was deleted, a replacement reader Pod recovered the same file. Its contents were also verified directly on `nf0` and through the worker mount. Temporary Pods, PV/PVC, test data, mounts and the diagnostic image were cleaned up. Multi-worker sharing has not yet been exercised.
+Before the network-address changes, validation on 4 November 2026 confirmed `wo0` mounted `nf0:/export` over NFSv4.2/TCP, wrote/read data as UID/GID 1000, and failed a client-root write as expected. A temporary static `ReadWriteMany` NFS PV/PVC bound successfully with `nfsvers=4.2`. A non-root writer Pod on `wo0` read worker-created data and wrote its own file. After that Pod was deleted, a replacement reader Pod recovered the same file. Its contents were also verified directly on `nf0` and through the worker mount. Temporary Pods, PV/PVC, test data, mounts and the diagnostic image were cleaned up. Multi-worker sharing has not yet been exercised.
 
 The full provision helper keeps NFS and workers parallel, tracks the NFS job explicitly, and waits for it before returning. NFS VM/playbook failures now return a nonzero status even when workers succeed; worker failures also remain visible when NFS succeeds. The duplicate empty NFS installation play was removed.
 
@@ -164,7 +161,7 @@ The control plane archive contains:
 - `registry.k8s.io/pause:3.10.2`
 - `registry.k8s.io/etcd:3.6.8-0`
 
-The worker archive contains only kube-proxy and pause. Both archives are imported with `ctr --namespace k8s.io images import --platform linux/amd64` before initialization or joining, creating the named image records and unpacking layers. The control plane import, startup, both replica joins and the `wo0` worker import/join have been tested. The other workers remain to be validated.
+The worker archive contains only kube-proxy and pause. Both archives are imported with `ctr --namespace k8s.io images import --platform linux/amd64` before initialization or joining, creating the named image records and unpacking layers. The control plane import/startup and the `wo0`/`wo1` worker imports/joins have been tested. Both control-plane replica joins passed before the network-address changes; the remaining workers have not been validated.
 
 - `control-plane-v1.36.1-amd64.tar`: 144,558,080 bytes; SHA-256 `bf1a53a625fb3bfab468dea81a9bba5cdd18554f4b06c29903481214a9c86495`.
 - `worker-v1.36.1-amd64.tar`: 29,184,000 bytes; SHA-256 `57e58b15b992a5bc5f4ee72170f6378af4e189973111731a0d7c4cdd7ca6373f`.
@@ -175,13 +172,41 @@ The bridge CNI is retained. The Service network is now separate from VM addresse
 
 ## Network addressing
 
-`network.json` defines the shared Service/DNS settings. The VM private network stays `10.1.2.0/24`; Kubernetes Services use `10.96.0.0/16`, with the API Service at `10.96.0.1` and CoreDNS at `10.96.0.10`. Kubeadm and kubelet use the same DNS address. Changing the Service CIDR requires a fresh cluster; this configuration is not an in-place migration of existing VMs.
+`network.json` defines shared Service/DNS settings and each Kubernetes node's private address and Pod subnet. Vagrant and the generated `/etc/hosts` entries use the same node address map. The VM private network stays `10.1.2.0/24`; Kubernetes Services use `10.96.0.0/16`, with the API Service at `10.96.0.1` and CoreDNS at `10.96.0.10`. Kubeadm and kubelet use the same DNS address. Changing the Service CIDR requires a fresh cluster; this configuration is not an in-place migration of existing VMs.
 
 Pods query CoreDNS directly. CoreDNS answers `cluster.local` and forwards other queries to Unbound on `lb0` (`10.1.2.10`). Unbound retains its `cluster.local` forwarding zone for host/VM clients, now pointing to the DNS Service IP. Its other queries go to libvirt DNS at `192.168.121.1`, which uses the host resolver. Direct requests from `lb0` to the old public upstream `1.1.1.1` timed out on the test host, while libvirt DNS answered; no host firewall policy was changed. CoreDNS handles cluster names authoritatively, so this split forwarding does not send unresolved cluster names back to Unbound.
 
 Because `lb0` is outside Kubernetes, it needs a route to the Service subnet via `cp0` (`10.1.2.20`). The DNS playbook installs and applies `/etc/network/if-up.d/myk8s-service-route`; Alpine reapplies it when the private interface comes up. This preserves the existing dependency on `cp0` for host-side cluster DNS. No new networking component is installed. The DNS playbook updates the kubeadm-created Service without deleting/recreating it.
 
-Validation on 4 November 2026 (Service/DNS checkpoint): a fresh `lb0`/`cp0` bootstrap produced a Ready control plane and six ready system Pods. API and DNS Services have the new addresses; kubelet uses `10.96.0.10`. CoreDNS and Unbound both resolved the Kubernetes API name to `10.96.0.1`, external DNS resolved, and a missing Service name returned NXDOMAIN. Unbound cluster DNS passed over UDP and TCP after rebooting `lb0`; its static Service route survived. Cross-node Pod connectivity is the next checkpoint.
+Validation on 4 November 2026 (Service/DNS checkpoint): a fresh `lb0`/`cp0` bootstrap produced a Ready control plane and six ready system Pods. API and DNS Services have the new addresses; kubelet uses `10.96.0.10`. CoreDNS and Unbound both resolved the Kubernetes API name to `10.96.0.1`, external DNS resolved, and a missing Service name returned NXDOMAIN. Unbound cluster DNS passed over UDP and TCP after rebooting `lb0`; its static Service route survived. The following Pod-routing checkpoint extends these checks across nodes.
+
+### Static Pod routing
+
+The existing `bridge`, `host-local` and `portmap` plugins are retained. The old IPv6 pool is removed; kubeadm and the Pod network are IPv4-only. The Pod range is `10.88.0.0/16`, split into fixed, disjoint `/24` subnets:
+
+| Node | Private IP / route gateway | Pod subnet |
+| --- | --- | --- |
+| cp0 | 10.1.2.20 | 10.88.0.0/24 |
+| cp1 | 10.1.2.21 | 10.88.1.0/24 |
+| cp2 | 10.1.2.22 | 10.88.2.0/24 |
+| wo0 | 10.1.2.30 | 10.88.10.0/24 |
+| wo1 | 10.1.2.31 | 10.88.11.0/24 |
+| wo2 | 10.1.2.32 | 10.88.12.0/24 |
+| wo3 | 10.1.2.33 | 10.88.13.0/24 |
+| wo4 | 10.1.2.34 | 10.88.14.0/24 |
+| wo5 | 10.1.2.35 | 10.88.15.0/24 |
+
+For example, `wo0` reaches `10.88.11.0/24` through `10.1.2.31` on `eth1`; `wo1` reaches `10.88.10.0/24` through `10.1.2.30`. Each node has routes for all configured peers, including peers not yet provisioned. Its own Pod subnet is connected through `cni0`, created when its first non-host-network Pod starts. `/etc/network/if-up.d/myk8s-pod-routes` reapplies peer routes after the private interface comes up.
+
+Kubeadm sets the aggregate `podSubnet` for kube-proxy's cluster-traffic detection. The controller-manager's automatic CIDR allocator is disabled: fixed allocations must not depend on join order. After initialization/join, Ansible records the configured subnet as the Node's `spec.podCIDR`/`spec.podCIDRs`, rejecting a conflicting existing allocation. Recreate old-layout nodes; changing their CNI subnet underneath existing Pods is not supported.
+
+The bridge does not install its per-Pod masquerading rules. `/etc/ufw/after.init` instead maintains one idempotent egress NAT rule per node: traffic from its local Pod subnet to destinations outside `10.88.0.0/16` is masqueraded. Cross-node Pod traffic retains its original source IP. Kube-proxy still handles Service translation and hairpin NAT; the bridge enables hairpin mode. Containerd restarts when its CNI template or runtime drop-in changes.
+
+Incoming/outgoing VM access retains the existing permissive training policy. The default routed policy is explicitly **deny**, checked after IP forwarding is enabled. Scoped forwarding rules permit local-to-remote Pod traffic, remote-to-local Pod traffic, Pod DNS to Unbound, Pod API requests to the control planes, and Unbound queries reaching CoreDNS after Service DNAT. `run/playbook -h cp0,wo0,wo1 -b install -t pod-network` reapplies the networking configuration. The DNS playbook waits for CoreDNS availability, so failed Pod startup cannot be reported as successful provisioning.
+
+This is a static lab network: adding a node requires extending `network.json` and applying peer routes on existing nodes. NetworkPolicy enforcement, routing failover, load-balancer HA, arbitrary Pod Internet egress and multi-worker NFS sharing are outside the current validation. No additional networking component is required.
+
+Validation on 4 November 2026 (static routing checkpoint): `cp0`, `wo0` and `wo1` are Ready on v1.36.1 with eight ready system Pods. All three diagnostic Pods passed the direct/Service/DNS/API matrix above, then passed it again after all three Kubernetes VMs were rebooted with `--no-provision`. After reboot, each node had IP forwarding enabled, all eight peer routes, exactly one Pod egress NAT rule, and UFW's routed deny policy. Two UFW reloads on `wo1` also preserved exactly one NAT rule. Reapplying the final Pod-network playbook reported zero changes on all three nodes; reapplying CoreDNS and its availability check reported zero changes. Diagnostic Pods, Services, namespace, image records and uploaded archives were removed. The four requested VMs (`lb0`, `cp0`, `wo0`, `wo1`) remain running. Other nodes were not started for this checkpoint.
 
 ## Kubeadm initialization logs
 

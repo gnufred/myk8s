@@ -1,0 +1,10 @@
+#!/bin/sh
+# Installed by Ansible. Each peer's private IP routes its fixed Pod subnet.
+set -eu
+[ "${IFACE:-}" = "{{ lab_node_interface }}" ] || exit 0
+{% for name, node in lab_nodes.items() if name != inventory_hostname %}
+if ! ip -4 route show {{ node.pod_subnet }} | grep -Fq '{{ node.pod_subnet }} via {{ node.address }} dev {{ lab_node_interface }}'; then
+    ip route replace {{ node.pod_subnet }} via {{ node.address }} dev {{ lab_node_interface }}
+    echo 'Configured route to {{ name }} Pods'
+fi
+{% endfor %}

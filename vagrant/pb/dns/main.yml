@@ -284,3 +284,10 @@
               k8s-app: kube-dns
             sessionAffinity: None
             type: ClusterIP
+
+    - name: Wait for CoreDNS to become available
+      tags: [coredns, kubedns]
+      command: >-
+        kubectl --kubeconfig=/etc/kubernetes/admin.conf -n kube-system
+        rollout status deployment/coredns --timeout=120s
+      changed_when: false

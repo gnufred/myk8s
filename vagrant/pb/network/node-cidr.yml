@@ -1,0 +1,33 @@
+# Called after kubeadm has registered a node. Allocation is managed by this lab.
+- name: Wait for the registered Kubernetes node
+  kubernetes.core.k8s_info:
+    kubeconfig: /etc/kubernetes/admin.conf
+    api_version: v1
+    kind: Node
+    name: "{{ inventory_hostname }}"
+  delegate_to: cp0
+  register: registered_node
+  until: registered_node.resources | length == 1
+  retries: 30
+  delay: 2
+
+- name: Require a matching or unassigned Pod subnet
+  assert:
+    that:
+      - registered_node.resources[0].spec.podCIDR | default('') in ['', lab_nodes[inventory_hostname].pod_subnet]
+    fail_msg: 'This node has a different Pod subnet. Recreate the lab rather than changing an active allocation.'
+
+- name: Record the static Pod subnet on the node
+  kubernetes.core.k8s:
+    kubeconfig: /etc/kubernetes/admin.conf
+    state: patched
+    definition:
+      apiVersion: v1
+      kind: Node
+      metadata:
+        name: "{{ inventory_hostname }}"
+      spec:
+        podCIDR: "{{ lab_nodes[inventory_hostname].pod_subnet }}"
+        podCIDRs:
+          - "{{ lab_nodes[inventory_hostname].pod_subnet }}"
+  delegate_to: cp0

@@ -11,6 +11,12 @@ kubernetesVersion: "{{ kubernetes_version }}"
 controlPlaneEndpoint: "10.1.2.10:6443"
 networking:
   serviceSubnet: "{{ lab_service_subnet }}"
+  podSubnet: "{{ lab_pod_subnet }}"
+# The lab assigns fixed per-node Pod subnets instead of allocating them by join order.
+controllerManager:
+  extraArgs:
+    - name: allocate-node-cidrs
+      value: "false"
 apiServer:
   certSANs:
     - "10.1.2.10"

@@ -14,6 +14,8 @@
 
 
 - name: Prepare extra control planes 
+  vars_files:
+    - ../../network.json
   hosts: cp1, cp2
   become: true
   become_user: root
@@ -94,7 +96,13 @@
         mode: '640'
 
 
+    - name: Record the control plane Pod subnet
+      import_tasks: ../network/node-cidr.yml
+
+
 - name: Join the cluster as a worker node
+  vars_files:
+    - ../../network.json
   hosts: wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
@@ -108,3 +116,6 @@
 
     - name: Join the cluster
       shell: $(cat "/etc/kubernetes/var/.join_cmd_{{ uid }}")
+
+    - name: Record the worker Pod subnet
+      import_tasks: ../network/node-cidr.yml

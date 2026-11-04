@@ -1,5 +1,6 @@
 require 'json'
 box = JSON.parse(File.read(File.join(__dir__, '.lfs/boxes/alpine-3.24.3.json')))
+network = JSON.parse(File.read(File.join(__dir__, 'network.json')))
 ansible_command = File.join(__dir__, 'run/vagrant-ansible')
 
 Vagrant.configure('2') do |config|
@@ -33,7 +34,7 @@ Vagrant.configure('2') do |config|
 	(0..2).each do |i|
 		config.vm.define "cp#{i}" do |n|
 
-			n.vm.network :private_network, ip: "10.1.2.2#{i}"
+			n.vm.network :private_network, ip: network.fetch('lab_nodes').fetch("cp#{i}").fetch('address')
 
 			n.vm.provider :libvirt do |v|
 				v.memory = 1800
@@ -57,7 +58,7 @@ Vagrant.configure('2') do |config|
 				v.cpus = 2
 			end
 
-			n.vm.network :private_network, ip: "10.1.2.3#{i}"
+			n.vm.network :private_network, ip: network.fetch('lab_nodes').fetch("wo#{i}").fetch('address')
 
 			n.vm.synced_folder '.lfs/apk/', '/.lfs/apk/', id: 'apk', type: 'rsync'
 

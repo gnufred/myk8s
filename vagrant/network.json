@@ -5,5 +5,43 @@
   "lab_service_gateway_ip": "10.1.2.20",
   "lab_node_interface": "eth1",
   "lab_pod_subnet": "10.88.0.0/16",
-  "lab_external_dns_ip": "192.168.121.1"
+  "lab_external_dns_ip": "192.168.121.1",
+  "lab_nodes": {
+    "cp0": {
+      "address": "10.1.2.20",
+      "pod_subnet": "10.88.0.0/24"
+    },
+    "cp1": {
+      "address": "10.1.2.21",
+      "pod_subnet": "10.88.1.0/24"
+    },
+    "cp2": {
+      "address": "10.1.2.22",
+      "pod_subnet": "10.88.2.0/24"
+    },
+    "wo0": {
+      "address": "10.1.2.30",
+      "pod_subnet": "10.88.10.0/24"
+    },
+    "wo1": {
+      "address": "10.1.2.31",
+      "pod_subnet": "10.88.11.0/24"
+    },
+    "wo2": {
+      "address": "10.1.2.32",
+      "pod_subnet": "10.88.12.0/24"
+    },
+    "wo3": {
+      "address": "10.1.2.33",
+      "pod_subnet": "10.88.13.0/24"
+    },
+    "wo4": {
+      "address": "10.1.2.34",
+      "pod_subnet": "10.88.14.0/24"
+    },
+    "wo5": {
+      "address": "10.1.2.35",
+      "pod_subnet": "10.88.15.0/24"
+    }
+  }
 }

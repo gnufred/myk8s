@@ -4,6 +4,8 @@
 # we will reuse to run playbook manually.
 ---
 - name: Provision the Vagrant VM
+  vars_files:
+    - ../../network.json
   hosts: all
   become: true
   become_user: root

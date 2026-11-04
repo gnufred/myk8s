@@ -32,15 +32,12 @@
       direction: in
       interface: eth0
 
-    # The main goal is to log all network requests
-    # in the firewall for inspection.
-    # Given it's a test lab, I don't want to block
-    # anything by default.
-  - name: Allow everything
+    # Keep VM access permissive for training. The node installation playbook
+    # permits the required forwarded Pod flows explicitly.
+  - name: Allow incoming and outgoing VM traffic
     ufw:
       direction: '{{ item }}'
       policy: allow
     loop:
       - incoming
       - outgoing
-      - routed

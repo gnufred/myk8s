@@ -87,3 +87,7 @@
       group: vagrant
       mode: '640'
 
+
+  - name: Record the control plane Pod subnet
+    tags: pod-network
+    import_tasks: ../network/node-cidr.yml

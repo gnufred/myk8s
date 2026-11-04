@@ -44,6 +44,14 @@
   tasks:
 
 
+  - name: Check the static private node address
+    tags: pod-network
+    assert:
+      that:
+        - inventory_hostname in lab_nodes
+        - ansible_facts[lab_node_interface]['ipv4']['address'] == lab_nodes[inventory_hostname].address
+      fail_msg: 'The node private address must match network.json before configuring Pod routes.'
+
     ### KERNEL ###
 
   - name: Enable kernel modules
@@ -76,8 +84,15 @@
     shell: sysctl -p /etc/sysctl.d/kubernetes.conf
 
 
-    # UFW can report routed traffic as disabled before IP forwarding is enabled.
-    # Keep Pod DNS/API access independent of that initial default-policy check.
+    # Check after enabling IP forwarding: UFW otherwise reports routed traffic
+    # as disabled and its Ansible module can skip the default-policy update.
+  - name: Keep other routed traffic denied
+    tags: pod-network
+    community.general.ufw:
+      direction: routed
+      policy: deny
+
+
   - name: Allow Pod DNS queries to the lab resolver
     tags: pod-network
     community.general.ufw:
@@ -125,6 +140,67 @@
       - udp
       - tcp
 
+  - name: Allow local Pods to reach other Pods
+    tags: pod-network
+    community.general.ufw:
+      rule: allow
+      route: true
+      interface_in: cni0
+      from_ip: "{{ lab_nodes[inventory_hostname].pod_subnet }}"
+      to_ip: "{{ lab_pod_subnet }}"
+      comment: pod-to-pod-out
+
+  - name: Allow remote Pods to reach local Pods
+    tags: pod-network
+    community.general.ufw:
+      rule: allow
+      route: true
+      interface_in: "{{ lab_node_interface }}"
+      from_ip: "{{ lab_pod_subnet }}"
+      to_ip: "{{ lab_nodes[inventory_hostname].pod_subnet }}"
+      comment: pod-to-pod-in
+
+  - name: Create private interface hook directory
+    tags: pod-network
+    file:
+      path: /etc/network/if-up.d
+      state: directory
+      owner: root
+      group: root
+      mode: '0755'
+
+  - name: Configure persistent routes to peer Pod subnets
+    tags: pod-network
+    template:
+      src: pod-routes
+      dest: /etc/network/if-up.d/myk8s-pod-routes
+      owner: root
+      group: root
+      mode: '0755'
+
+  - name: Apply routes to peer Pod subnets
+    tags: pod-network
+    command: /etc/network/if-up.d/myk8s-pod-routes
+    environment:
+      IFACE: "{{ lab_node_interface }}"
+    register: pod_routes
+    changed_when: pod_routes.stdout | length > 0
+
+  - name: Configure Pod egress NAT after UFW starts
+    tags: pod-network
+    template:
+      src: ufw-after.init
+      dest: /etc/ufw/after.init
+      owner: root
+      group: root
+      mode: '0755'
+
+  - name: Apply Pod egress NAT
+    tags: pod-network
+    command: /etc/ufw/after.init start
+    register: pod_nat
+    changed_when: pod_nat.stdout | length > 0
+
     ### CONTAINERD ###
 
   - name: Create /etc/cni/net.d
@@ -134,10 +210,11 @@
       state: directory
 
   - name: Copy 10-containerd-net.conflist
-    tags: containerd
-    copy:
+    tags: [containerd, pod-network]
+    template:
       src: 10-containerd-net.conflist
       dest: /etc/cni/net.d/10-containerd-net.conflist
+    register: cni_config
 
   - name: Configure crictl
     copy:
@@ -166,11 +243,11 @@
     register: containerd_config
 
   - name: Enable containerd
-    tags: containerd
+    tags: [containerd, pod-network]
     service:
       name: containerd
       enabled: yes
-      state: "{{ 'restarted' if containerd_config.changed else 'started' }}"
+      state: "{{ 'restarted' if (containerd_config.changed | default(false)) or cni_config.changed else 'started' }}"
 
   - name: Wait for containerd to start
     wait_for:
