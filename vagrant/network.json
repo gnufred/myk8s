@@ -1,0 +1,9 @@
+{
+  "lab_service_subnet": "10.96.0.0/16",
+  "lab_dns_service_ip": "10.96.0.10",
+  "lab_dns_forwarder_ip": "10.1.2.10",
+  "lab_service_gateway_ip": "10.1.2.20",
+  "lab_node_interface": "eth1",
+  "lab_pod_subnet": "10.88.0.0/16",
+  "lab_external_dns_ip": "192.168.121.1"
+}

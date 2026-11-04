@@ -1,5 +1,7 @@
 ---
 - name: Configure load balancer DNS service
+  vars_files:
+    - ../../network.json
   hosts: lb0
   become: true
   become_user: root
@@ -10,22 +12,57 @@
       tags: unbound
       shell: apk add --allow-untrusted /.lfs/apk/unbound/*
 
+    # lb0 is outside Kubernetes: route Service IPs through a Kubernetes node.
+    - name: Create interface hook directory
+      tags: unbound
+      file:
+        path: /etc/network/if-up.d
+        state: directory
+        mode: '0755'
+
+    - name: Configure persistent Service network route
+      tags: unbound
+      template:
+        src: service-route
+        dest: /etc/network/if-up.d/myk8s-service-route
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Read current Service network route
+      tags: unbound
+      command: ip -4 route show {{ lab_service_subnet }}
+      register: service_route
+      changed_when: false
+
+    - name: Apply Service network route
+      tags: unbound
+      command: /etc/network/if-up.d/myk8s-service-route
+      environment:
+        IFACE: "{{ lab_node_interface }}"
+      changed_when: >-
+        (lab_service_subnet ~ ' via ' ~ lab_service_gateway_ip ~ ' dev ' ~ lab_node_interface)
+        not in service_route.stdout
+
     - name: Copy unbound config
       tags: unbound
-      copy:
+      template:
         src: unbound.conf
         dest: /etc/unbound/unbound.conf
+        validate: unbound-checkconf %s
+      register: unbound_config
 
     - name: Enable unbound
       tags: unbound
       service:
         name: unbound
-        state: started
+        state: "{{ 'restarted' if unbound_config.changed else 'started' }}"
         enabled: yes
 
 - name: Configure cluster DNS service
   vars_files:
     - ../../kubernetes.json
+    - ../../network.json
   hosts: cp0
   become: true
   become_user: root
@@ -57,6 +94,7 @@
                      fallthrough in-addr.arpa ip6.arpa
                      ttl 30
                   }
+                  forward . {{ lab_dns_forwarder_ip }}
                   prometheus :9153
                   cache 30
                   loop
@@ -203,16 +241,6 @@
                       name: coredns
                     name: config-volume
 
-    - name: Delete kube-dns service
-      tags: kubedns
-      k8s:
-        kubeconfig: /etc/kubernetes/admin.conf
-        kind: Service
-        namespace: kube-system
-        label_selectors:
-          - k8s-app=kube-dns
-        state: absent
-
     - name: Configure kube-dns service
       tags: kubedns
       k8s:
@@ -234,7 +262,7 @@
             name: kube-dns
             namespace: kube-system
           spec:
-            clusterIP: 10.1.2.20
+            clusterIP: "{{ lab_dns_service_ip }}"
             internalTrafficPolicy: Cluster
             ipFamilies:
             - IPv4

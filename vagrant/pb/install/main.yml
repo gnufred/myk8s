@@ -36,6 +36,7 @@
 - name: Configure OS and install K8s packages
   vars_files:
     - ../../kubernetes.json
+    - ../../network.json
   hosts: cp0, cp1, cp2, wo0, wo1, wo2, wo3, wo4, wo5
   become: true
   become_user: root
@@ -83,8 +84,8 @@
       rule: allow
       route: true
       interface_in: cni0
-      from_ip: 10.88.0.0/16
-      to_ip: 10.1.2.10
+      from_ip: "{{ lab_pod_subnet }}"
+      to_ip: "{{ lab_dns_forwarder_ip }}"
       port: '53'
       proto: "{{ item }}"
       comment: pod-dns
@@ -98,7 +99,7 @@
       rule: allow
       route: true
       interface_in: cni0
-      from_ip: 10.88.0.0/16
+      from_ip: "{{ lab_pod_subnet }}"
       to_ip: "{{ item }}"
       port: '6443'
       proto: tcp
@@ -107,6 +108,22 @@
       - 10.1.2.20
       - 10.1.2.21
       - 10.1.2.22
+
+    # Service DNAT happens before UFW sees the forwarded packet.
+  - name: Allow the VM resolver to reach CoreDNS Pods
+    tags: pod-network
+    community.general.ufw:
+      rule: allow
+      route: true
+      interface_in: "{{ lab_node_interface }}"
+      from_ip: "{{ lab_dns_forwarder_ip }}"
+      to_ip: "{{ lab_pod_subnet }}"
+      port: '53'
+      proto: "{{ item }}"
+      comment: vm-cluster-dns
+    loop:
+      - udp
+      - tcp
 
     ### CONTAINERD ###
 

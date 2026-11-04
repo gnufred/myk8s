@@ -171,7 +171,17 @@ The worker archive contains only kube-proxy and pause. Both archives are importe
 
 To rebuild the archives online, run `run/cache-images` (Python 3.11+). It reads `kubernetes.json`, selects each registry's Linux/amd64 manifest, verifies content hashes and platform metadata, and writes deterministic OCI archives plus their lockfile. It does not start VMs. For an existing node, `run/playbook -h cp0 -b install -t blobs` imports the cached control plane archive again.
 
-The existing training network layout is preserved, including its custom CoreDNS Service address and bridge CNI configuration. These checks do not establish general cross-node Pod connectivity or failover of the single load-balancer/DNS services.
+The bridge CNI is retained. The Service network is now separate from VM addresses; see the network addressing section. Earlier bootstrap checks do not establish general cross-node Pod connectivity or failover of the single load-balancer/DNS services.
+
+## Network addressing
+
+`network.json` defines the shared Service/DNS settings. The VM private network stays `10.1.2.0/24`; Kubernetes Services use `10.96.0.0/16`, with the API Service at `10.96.0.1` and CoreDNS at `10.96.0.10`. Kubeadm and kubelet use the same DNS address. Changing the Service CIDR requires a fresh cluster; this configuration is not an in-place migration of existing VMs.
+
+Pods query CoreDNS directly. CoreDNS answers `cluster.local` and forwards other queries to Unbound on `lb0` (`10.1.2.10`). Unbound retains its `cluster.local` forwarding zone for host/VM clients, now pointing to the DNS Service IP. Its other queries go to libvirt DNS at `192.168.121.1`, which uses the host resolver. Direct requests from `lb0` to the old public upstream `1.1.1.1` timed out on the test host, while libvirt DNS answered; no host firewall policy was changed. CoreDNS handles cluster names authoritatively, so this split forwarding does not send unresolved cluster names back to Unbound.
+
+Because `lb0` is outside Kubernetes, it needs a route to the Service subnet via `cp0` (`10.1.2.20`). The DNS playbook installs and applies `/etc/network/if-up.d/myk8s-service-route`; Alpine reapplies it when the private interface comes up. This preserves the existing dependency on `cp0` for host-side cluster DNS. No new networking component is installed. The DNS playbook updates the kubeadm-created Service without deleting/recreating it.
+
+Validation on 4 November 2026 (Service/DNS checkpoint): a fresh `lb0`/`cp0` bootstrap produced a Ready control plane and six ready system Pods. API and DNS Services have the new addresses; kubelet uses `10.96.0.10`. CoreDNS and Unbound both resolved the Kubernetes API name to `10.96.0.1`, external DNS resolved, and a missing Service name returned NXDOMAIN. Unbound cluster DNS passed over UDP and TCP after rebooting `lb0`; its static Service route survived. Cross-node Pod connectivity is the next checkpoint.
 
 ## Kubeadm initialization logs
 

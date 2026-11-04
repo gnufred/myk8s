@@ -1,0 +1,5 @@
+#!/bin/sh
+# Installed by Ansible. Reapply after the private VM interface comes up.
+set -eu
+[ "${IFACE:-}" = "{{ lab_node_interface }}" ] || exit 0
+ip route replace {{ lab_service_subnet }} via {{ lab_service_gateway_ip }} dev {{ lab_node_interface }}

@@ -2,6 +2,7 @@
 - name: Initialize main control plane
   vars_files:
     - ../../kubernetes.json
+    - ../../network.json
   hosts: cp0
   become: true
   become_user: root
