@@ -57,3 +57,7 @@ This was an almost year-long project, which was promoted to an official security
 ### 2023-03: [Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/)
 
 This was the stepping stone. At the time, I didn't know that my drive to become a Go master would lead me to discover the CNCF ecosystem and Kubernetes itself. It's entirely Google's fault since they created both Go and Kubernetes, which everyone started using to re-engineer the whole Internet.
+
+## Run the lab
+
+The [Vagrant lab instructions](vagrant/readme.md#clone-and-provision) cover host prerequisites and setup. After cloning, run `git lfs pull` to retrieve the cached base box, APK packages and container images before provisioning. The provision helper registers the versioned local base box automatically when needed.

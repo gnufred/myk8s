@@ -1,0 +1,54 @@
+#!/bin/bash
+# Register the versioned local base box without consulting a remote catalog.
+set -euo pipefail
+
+if [[ "${1:-}" == --help || "${1:-}" == -h ]]; then
+  echo "Usage: run/register-box"
+  echo "Register the Git LFS Alpine box if its name/version/provider/architecture is absent."
+  exit 0
+fi
+if (( $# )); then echo "Usage: run/register-box" >&2; exit 2; fi
+lab_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+manifest="$lab_dir/.lfs/boxes/alpine-3.24.3.json"
+config="$(python3 - "$manifest" <<'PYCONFIG'
+import json,sys
+m=json.load(open(sys.argv[1]))
+print('\t'.join(m[k] for k in ('name','version','provider','architecture','file')))
+PYCONFIG
+)"
+IFS=$'\t' read -r name version provider architecture filename <<< "$config"
+installed="$(vagrant box list --machine-readable)"
+if awk -F, -v n="$name" -v v="$version" -v p="$provider" -v a="$architecture" '
+  $3 == "box-name" { name = $4 }
+  $3 == "box-provider" { provider = $4 }
+  $3 == "box-version" { version = $4 }
+  $3 == "box-architecture" && name == n && provider == p && version == v && $4 == a { found = 1 }
+  END { exit !found }
+' <<< "$installed"; then
+  echo "Base box already registered: $name $version ($provider/$architecture)"
+  exit 0
+fi
+archive="$lab_dir/.lfs/boxes/$filename"
+if [[ ! -f "$archive" ]] || head -c 100 "$archive" | grep -q '^version https://git-lfs.github.com/spec/v1'; then
+  echo "Base box payload is missing. Run git lfs pull from the repository, then retry." >&2
+  exit 1
+fi
+mkdir -p "$lab_dir/.cache"
+metadata="$lab_dir/.cache/alpine-box.json"
+python3 - "$manifest" "$archive" "$metadata" <<'PYMETADATA'
+import hashlib,json,sys
+from pathlib import Path
+manifest,archive,output=map(Path,sys.argv[1:])
+m=json.loads(manifest.read_text())
+hash_value=hashlib.sha256()
+with archive.open('rb') as f:
+    while chunk:=f.read(1024*1024): hash_value.update(chunk)
+if hash_value.hexdigest()!=m['sha256']:
+    sys.exit('Base box checksum mismatch. Restore its Git LFS payload before retrying.')
+metadata={'name':m['name'],'versions':[{'version':m['version'],'providers':[{
+    'name':m['provider'],'architecture':m['architecture'],'default_architecture':True,
+    'url':archive.resolve().as_uri(),'checksum_type':'sha256','checksum':m['sha256']
+}]}]}
+output.write_text(json.dumps(metadata,indent=2)+'\n')
+PYMETADATA
+vagrant box add --provider "$provider" --architecture "$architecture" --box-version "$version" "$metadata"

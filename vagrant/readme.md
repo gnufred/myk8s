@@ -4,6 +4,23 @@ Latest Vagrant configuration for my K8s labs.
 
 ## Usage
 
+### Clone and provision
+
+Install Git LFS and the host prerequisites (Vagrant, vagrant-libvirt, Ansible, QEMU/KVM and Arch OVMF firmware), then:
+
+```bash
+git clone https://github.com/gnufred/myk8s.git
+cd myk8s
+git lfs pull
+cd vagrant
+run/services
+run/provision
+```
+
+`git lfs pull` restores the base box, cached APKs and container image archives. `run/provision` automatically calls `run/register-box`: if `myk8s/alpine-3.24` version `3.24.3` for libvirt/amd64 is missing, it verifies and registers the local archive from `.lfs/boxes/`. The locally generated Vagrant metadata includes its version and SHA-256; no remote box catalog is needed. An already registered matching version is reused. You can also run `run/register-box` before invoking Vagrant directly.
+
+The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The existing APK cache and Kubernetes v1.29.2 provisioning still need compatibility testing on this newer OS. This is the next migration test, not a completed Kubernetes upgrade.
+
 ### Host services
 
 After a host reboot, run `run/services` to start the `virtqemud`, `virtstoraged`, and `virtnetworkd` systemd sockets used by libvirt. The command asks for sudo when needed and reports each socket's status. Use `run/services status` to check without starting anything. These sockets activate their daemons on demand; they are not enabled for automatic startup by this helper.
@@ -12,7 +29,7 @@ The host firewall must still allow traffic on the libvirt management bridge; the
 
 ### Provision
 
-Use `run/provision`.
+Use `run/provision` for all VMs or `run/provision lb0` to test one VM. Existing VMs retain their current disks; changing the base box applies when a VM is recreated.
 
 ### Playbook
 
