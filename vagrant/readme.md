@@ -19,7 +19,7 @@ run/provision
 
 `git lfs pull` restores the base box, cached APKs and container image archives. `run/provision` automatically calls `run/register-box`: if `myk8s/alpine-3.24` version `3.24.3` for libvirt/amd64 is missing, it verifies and registers the local archive from `.lfs/boxes/`. The locally generated Vagrant metadata includes its version and SHA-256; no remote box catalog is needed. An already registered matching version is reused. You can also run `run/register-box` before invoking Vagrant directly.
 
-The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The APK cache targets Alpine 3.24. A fresh `lb0` plus one control plane (`cp0`) has passed provisioning with Kubernetes 1.36.1-r2 and containerd 2.3.7-r0: the node is Ready, all six system Pods are Running, the API is ready through the load balancer, and cluster DNS resolves. The remaining control planes, workers and NFS VM have not been tested with this Kubernetes version.
+The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The APK cache targets Alpine 3.24. A fresh `lb0` and `cp0` bootstrap plus the joins of `cp1` and `cp2` have passed with Kubernetes 1.36.1-r2 and containerd 2.3.7-r0. All three control planes are Ready, all 16 system Pods are Running, and the three etcd voting members are healthy on the private network. Workers and the NFS VM have not been tested with this Kubernetes version.
 
 ### Host services
 
@@ -38,7 +38,25 @@ vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes'
 vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get pods -n kube-system'
 ```
 
-This creates one control plane behind the existing load balancer. It is a fresh bootstrap, not an in-place upgrade of a Kubernetes 1.29 cluster. Existing VMs retain their disks; changing the base box applies when a VM is recreated. The argument-free `run/provision` still builds the entire lab, including additional control planes and workers; those joins have not yet been validated for 1.36.
+This creates one control plane behind the existing load balancer. It is a fresh bootstrap, not an in-place upgrade of a Kubernetes 1.29 cluster. Existing VMs retain their disks; changing the base box applies when a VM is recreated. The argument-free `run/provision` builds the entire lab, including workers; worker joins have not yet been validated for 1.36.
+
+### Add the other control planes
+
+After `cp0` is healthy, provision fresh replicas with:
+
+```bash
+run/provision cp1
+run/provision cp2
+vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf get nodes -o wide'
+```
+
+The full provision helper also adds control planes sequentially and stops with a nonzero exit status if provisioning or joining fails. This avoids overlapping stacked-etcd membership changes and prevents a background job from hiding a failed join.
+
+Control-plane joins explicitly use the private `eth1` address for `--apiserver-advertise-address`, matching `cp0`. Kubeadm uses this address for the new API server and etcd peer certificates/listeners. Allowing automatic selection chose the management address (`192.168.121.x`) in the first test: etcd then rejected a peer's management source IP because its certificate contained the private IP. The failed learner was removed and `cp1` rejoined using `10.1.2.21`; `cp2` joined directly using `10.1.2.22`.
+
+The join playbook creates the etcd certificate directory before copying the shared CA material, including when retrying after `kubeadm reset`. Shared private keys are installed as root with mode `0600`; public certificates and keys use `0644`.
+
+Validation on 4 November 2026: `cp0`, `cp1` and `cp2` are Ready on v1.36.1, with 16/16 system Pods Running. Etcd has three voting members, no learners, one leader and matching applied Raft indexes; health proposals succeeded at every endpoint. Authenticated `/readyz` requests passed on all three private API addresses and the load-balanced endpoint. The controller-manager and scheduler on `cp1` retain a restart count of one from the failed join/reset; retained logs distinguish that attempt from their healthy replacements. Helper checks verified sequential ordering and propagation of both provisioning and join failures.
 
 ### Playbook
 
@@ -106,14 +124,14 @@ The control plane archive contains:
 - `registry.k8s.io/pause:3.10.2`
 - `registry.k8s.io/etcd:3.6.8-0`
 
-The worker archive contains only kube-proxy and pause. Both archives are imported with `ctr --namespace k8s.io images import --platform linux/amd64` before initialization or joining, creating the named image records and unpacking layers. The control plane import and startup have been tested; worker joins remain a separate validation step.
+The worker archive contains only kube-proxy and pause. Both archives are imported with `ctr --namespace k8s.io images import --platform linux/amd64` before initialization or joining, creating the named image records and unpacking layers. The control plane import, startup and both replica joins have been tested; worker joins remain a separate validation step.
 
 - `control-plane-v1.36.1-amd64.tar`: 144,558,080 bytes; SHA-256 `bf1a53a625fb3bfab468dea81a9bba5cdd18554f4b06c29903481214a9c86495`.
 - `worker-v1.36.1-amd64.tar`: 29,184,000 bytes; SHA-256 `57e58b15b992a5bc5f4ee72170f6378af4e189973111731a0d7c4cdd7ca6373f`.
 
 To rebuild the archives online, run `run/cache-images` (Python 3.11+). It reads `kubernetes.json`, selects each registry's Linux/amd64 manifest, verifies content hashes and platform metadata, and writes deterministic OCI archives plus their lockfile. It does not start VMs. For an existing node, `run/playbook -h cp0 -b install -t blobs` imports the cached control plane archive again.
 
-The existing training network layout is preserved, including its custom CoreDNS Service address and bridge CNI configuration. The single-node checks do not establish cross-node Pod connectivity or HA behavior.
+The existing training network layout is preserved, including its custom CoreDNS Service address and bridge CNI configuration. The control-plane and etcd checks do not establish cross-node Pod connectivity or failover of the single load-balancer/DNS services.
 
 ## Kubeadm initialization logs
 

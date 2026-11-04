@@ -77,14 +77,16 @@ cplane_main(){
 }
 
 cplane_replica(){
+	NAME=cp
 	BOOKS=(ufw install)
+	# Add stacked-etcd members one at a time and report join failures.
 	for i in {1..2}; do
 		NODE="$NAME$i"
-		provision $NODE $BOOKS && \
-		join $MAIN $NODE &
+		provision "$NODE" "${BOOKS[@]}"
 		exit_on_error $? "[$NODE] provisioning failed"
+		join "$MAIN" "$NODE"
+		exit_on_error $? "[$NODE] joining cluster failed"
 	done
-	wait
 }
 
 nfs() {

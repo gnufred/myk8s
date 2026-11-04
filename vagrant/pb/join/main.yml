@@ -24,10 +24,21 @@
       tags: init
       shell: apk add --allow-untrusted /.lfs/apk/etcd/*
 
+    - name: Create shared certificate directory
+      file:
+        path: /etc/kubernetes/pki/etcd
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
     - name: Upload certificates
       copy:
         src: "../../.certs/{{ item }}"
         dest: "/etc/kubernetes/pki/{{ item }}"
+        owner: root
+        group: root
+        mode: "{{ '0600' if item.endswith('.key') else '0644' }}"
       loop:
         - ca.crt
         - ca.key
@@ -71,7 +82,9 @@
         dest: "/etc/kubernetes/var/.join_cmd_{{ uid }}"
 
     - name: Join the cluster
-      shell: $(cat "/etc/kubernetes/var/.join_cmd_{{ uid }}") --control-plane
+      shell: >-
+        $(cat "/etc/kubernetes/var/.join_cmd_{{ uid }}") --control-plane
+        --apiserver-advertise-address={{ ansible_facts['eth1']['ipv4']['address'] }}
 
     - name: Allow Vagrant to read kubeconfig
       file:
