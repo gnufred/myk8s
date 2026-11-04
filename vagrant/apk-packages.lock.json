@@ -1,0 +1,1596 @@
+{
+  "alpine": "3.24",
+  "architecture": "x86_64",
+  "resolved_at": "2026-11-04T14:27:34.525527+00:00",
+  "repositories": [
+    "https://dl-cdn.alpinelinux.org/alpine/v3.24/main",
+    "https://dl-cdn.alpinelinux.org/alpine/v3.24/community"
+  ],
+  "roots": {
+    "python3": [
+      "python3",
+      "python3-pyc"
+    ],
+    "py3-kubernetes": [
+      "py3-kubernetes",
+      "py3-kubernetes-pyc"
+    ],
+    "ufw": [
+      "ufw",
+      "ufw-openrc",
+      "ufw-pyc",
+      "iptables",
+      "iptables-openrc"
+    ],
+    "debug": [
+      "bind-tools",
+      "tshark",
+      "net-tools"
+    ],
+    "rsyslog": [
+      "rsyslog",
+      "rsyslog-openrc"
+    ],
+    "haproxy": [
+      "haproxy",
+      "haproxy-openrc"
+    ],
+    "unbound": [
+      "unbound",
+      "unbound-openrc"
+    ],
+    "nfs": [
+      "nfs-utils",
+      "nfs-utils-openrc",
+      "rpcbind",
+      "rpcbind-openrc"
+    ],
+    "containerd": [
+      "containerd=1.7.2-r4",
+      "containerd-ctr=1.7.2-r4",
+      "containerd-openrc=1.7.2-r4",
+      "cni-plugins=1.3.0-r4",
+      "runc=1.1.12-r0"
+    ],
+    "kubes": [
+      "kubeadm=1.29.2-r0",
+      "kubectl=1.29.2-r0",
+      "kubelet=1.29.2-r0",
+      "kubelet-openrc=1.29.2-r0",
+      "cri-tools=1.28.0-r2"
+    ],
+    "etcd": [
+      "etcd-ctl=3.5.12-r1"
+    ]
+  },
+  "packages": {
+    "python3": [
+      {
+        "file": "gdbm-1.26-r0.apk",
+        "sha256": "3278ccba30b241168ca4ab93c919be805411b918fdc062f06d3684d12dc33ae3",
+        "bytes": 31902
+      },
+      {
+        "file": "libbz2-1.0.8-r6.apk",
+        "sha256": "2737e2b23ed08d4911ee62cd0163b5f4bf0379cacf4dc35b23a00209584c98fd",
+        "bytes": 35467
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libexpat-2.10.0-r0.apk",
+        "sha256": "e7e7408ea787ed06d00159b0ff1f9b65a63cf634f36d9e0fa7512ce2c489a503",
+        "bytes": 63634
+      },
+      {
+        "file": "libffi-3.5.2-r1.apk",
+        "sha256": "6da1a19313a40c56cac756fb11e2c4d5267831e1c22fc8323f24c943c94da6e0",
+        "bytes": 18348
+      },
+      {
+        "file": "libgcc-15.2.0-r5.apk",
+        "sha256": "393dcd32629f06d7d85409c272d142d0c082772d10b87ef55ee82f47de3be637",
+        "bytes": 80348
+      },
+      {
+        "file": "libncursesw-6.6_p20260516-r0.apk",
+        "sha256": "cf8caa8a88bc4ce9d9e395567fefaf9ef7fbd55c50ae6155b35c1b58f3755023",
+        "bytes": 159438
+      },
+      {
+        "file": "libpanelw-6.6_p20260516-r0.apk",
+        "sha256": "057be8b1b788580f4cb72c382a6dcc03467d15bd69700f32192bd709e7a57a12",
+        "bytes": 5563
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "libstdc++-15.2.0-r5.apk",
+        "sha256": "14c987b556f5385a5db18376e788c75f37d85321b8dc1920d926ea7daac1d6f6",
+        "bytes": 961295
+      },
+      {
+        "file": "mpdecimal-4.0.1-r0.apk",
+        "sha256": "1278f374bbc8b4aad674244458cca5fc63e0780a921138eef400d5db64381a31",
+        "bytes": 78803
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "ncurses-terminfo-base-6.6_p20260516-r0.apk",
+        "sha256": "ce83be6d0bd10584a53c3a5868cc1595ce5f0f8e0b621f8f7f70b6144e521fc9",
+        "bytes": 22172
+      },
+      {
+        "file": "pyc-3.14.10-r1.apk",
+        "sha256": "8b1678559e6c29db978a923b611cd21a8bfda26d4814edefbb2d62a903bf7df8",
+        "bytes": 1269
+      },
+      {
+        "file": "python3-3.14.10-r1.apk",
+        "sha256": "32ae9c446a79f965f942ae704c5121fa4744c5fee76ec86955fe0fc9a6e6c412",
+        "bytes": 8414398
+      },
+      {
+        "file": "python3-pyc-3.14.10-r1.apk",
+        "sha256": "bc63349707d5658ee2d852e415846246b8d71ece5007120b1d2aee85b4a2ad0a",
+        "bytes": 1316
+      },
+      {
+        "file": "python3-pycache-pyc0-3.14.10-r1.apk",
+        "sha256": "19a814d76898adbf90ec0f33ff1fd85fb8454be8615f4993fba0b69b7b978926",
+        "bytes": 4495572
+      },
+      {
+        "file": "readline-8.3.3-r1.apk",
+        "sha256": "766911ecb986a6c5cf0841a6b556cd1e9dbbf22b3559726de32416486cd15c81",
+        "bytes": 127194
+      },
+      {
+        "file": "sqlite-libs-3.53.4-r0.apk",
+        "sha256": "a8a216e53d22faa3f04d2e3650c1991af66f8d0b42fadff5afcdb9afb60b19e5",
+        "bytes": 877769
+      },
+      {
+        "file": "xz-libs-5.8.4-r0.apk",
+        "sha256": "ab362dd515ead04c31a6c302163248da7aa4813e283c971e6dd3f789b453a1d9",
+        "bytes": 118503
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      }
+    ],
+    "py3-kubernetes": [
+      {
+        "file": "ca-certificates-bundle-20261020-r0.apk",
+        "sha256": "bb008f6d214b6af7576324659856fb63dc8dcb4373f8345ff706388696f1254d",
+        "bytes": 107116
+      },
+      {
+        "file": "gdbm-1.26-r0.apk",
+        "sha256": "3278ccba30b241168ca4ab93c919be805411b918fdc062f06d3684d12dc33ae3",
+        "bytes": 31902
+      },
+      {
+        "file": "libbz2-1.0.8-r6.apk",
+        "sha256": "2737e2b23ed08d4911ee62cd0163b5f4bf0379cacf4dc35b23a00209584c98fd",
+        "bytes": 35467
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libexpat-2.10.0-r0.apk",
+        "sha256": "e7e7408ea787ed06d00159b0ff1f9b65a63cf634f36d9e0fa7512ce2c489a503",
+        "bytes": 63634
+      },
+      {
+        "file": "libffi-3.5.2-r1.apk",
+        "sha256": "6da1a19313a40c56cac756fb11e2c4d5267831e1c22fc8323f24c943c94da6e0",
+        "bytes": 18348
+      },
+      {
+        "file": "libgcc-15.2.0-r5.apk",
+        "sha256": "393dcd32629f06d7d85409c272d142d0c082772d10b87ef55ee82f47de3be637",
+        "bytes": 80348
+      },
+      {
+        "file": "libncursesw-6.6_p20260516-r0.apk",
+        "sha256": "cf8caa8a88bc4ce9d9e395567fefaf9ef7fbd55c50ae6155b35c1b58f3755023",
+        "bytes": 159438
+      },
+      {
+        "file": "libpanelw-6.6_p20260516-r0.apk",
+        "sha256": "057be8b1b788580f4cb72c382a6dcc03467d15bd69700f32192bd709e7a57a12",
+        "bytes": 5563
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "libstdc++-15.2.0-r5.apk",
+        "sha256": "14c987b556f5385a5db18376e788c75f37d85321b8dc1920d926ea7daac1d6f6",
+        "bytes": 961295
+      },
+      {
+        "file": "mpdecimal-4.0.1-r0.apk",
+        "sha256": "1278f374bbc8b4aad674244458cca5fc63e0780a921138eef400d5db64381a31",
+        "bytes": 78803
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "ncurses-terminfo-base-6.6_p20260516-r0.apk",
+        "sha256": "ce83be6d0bd10584a53c3a5868cc1595ce5f0f8e0b621f8f7f70b6144e521fc9",
+        "bytes": 22172
+      },
+      {
+        "file": "py3-asn1-0.6.3-r0.apk",
+        "sha256": "5ba9ad24cb22eb3115178b588b2ad1710202d55fe9cf46e949da871e3d597fee",
+        "bytes": 70043
+      },
+      {
+        "file": "py3-asn1-modules-0.4.2-r1.apk",
+        "sha256": "25a424bb017d57f03d83d52297d7d6ea88d1163306095021aedb840e7a78bc7f",
+        "bytes": 121273
+      },
+      {
+        "file": "py3-asn1-modules-pyc-0.4.2-r1.apk",
+        "sha256": "c7ce6b6e1bb9517819e4ad15a17600cee649f5a27f5345e5fd94c3dfe2916e86",
+        "bytes": 291638
+      },
+      {
+        "file": "py3-asn1-pyc-0.6.3-r0.apk",
+        "sha256": "ea6550f682d551289d09f265d2d1c18eecd1869e492e476250839af12b29678c",
+        "bytes": 149459
+      },
+      {
+        "file": "py3-certifi-2026.2.25-r1.apk",
+        "sha256": "76d3ae8c2f546ef975215236abb55624b9eb73d418165efda5d856ff6c9429f9",
+        "bytes": 5554
+      },
+      {
+        "file": "py3-certifi-pyc-2026.2.25-r1.apk",
+        "sha256": "d9c6bb7cf1989a98004c17325304a0055e0240d47479c4269ec196ad4151a9f8",
+        "bytes": 3741
+      },
+      {
+        "file": "py3-cffi-2.0.0-r0.apk",
+        "sha256": "125c7ee50bb9222b22e9ff57af487f3f52f68596e0f42d50dbad04a4e8b25b5f",
+        "bytes": 168678
+      },
+      {
+        "file": "py3-cffi-pyc-2.0.0-r0.apk",
+        "sha256": "b773146083d6f172e1a5cbe62f4905d82d40ad56511d320a6a27a6e41458f5e7",
+        "bytes": 178934
+      },
+      {
+        "file": "py3-charset-normalizer-3.4.9-r0.apk",
+        "sha256": "4a567523cd4f88d0c6cc84be1e81a55475045717f275eca48b8b66cf875b43a4",
+        "bytes": 62902
+      },
+      {
+        "file": "py3-charset-normalizer-pyc-3.4.9-r0.apk",
+        "sha256": "9d60cb0b5e508692a4a8ee3938cc0e31c4056d4f29f025e2b57f52dfdbeb2b08",
+        "bytes": 82455
+      },
+      {
+        "file": "py3-cparser-3.0-r1.apk",
+        "sha256": "0c01743da256578b61b6c9a35c8a334afbd8564327ac7802ac328974cd574f5e",
+        "bytes": 45620
+      },
+      {
+        "file": "py3-cparser-pyc-3.0-r1.apk",
+        "sha256": "a458b6052ea8db3318d353437924ae5c63dc4c30716ad527974e7a9f59710eaf",
+        "bytes": 85961
+      },
+      {
+        "file": "py3-cryptography-47.0.0-r0.apk",
+        "sha256": "8b0f226a1336cdb8266c664828f72de4975e5407001154578346df51830428bd",
+        "bytes": 1234907
+      },
+      {
+        "file": "py3-cryptography-pyc-47.0.0-r0.apk",
+        "sha256": "551182745cbba259a6721b932740ec471e60e4e311c7f90c47eb171dce8460f2",
+        "bytes": 209205
+      },
+      {
+        "file": "py3-dateutil-2.9.0-r4.apk",
+        "sha256": "6a2f2174e6d972af6c5e5aa1e8a52a5df821cdf0987689ac6e81ca4af6aa95ce",
+        "bytes": 228892
+      },
+      {
+        "file": "py3-dateutil-pyc-2.9.0-r4.apk",
+        "sha256": "d3a987913548a6929c41fdf1b52a9184b8dc7470174dccb4db43421596ad12ef",
+        "bytes": 130517
+      },
+      {
+        "file": "py3-durationpy-0.10-r1.apk",
+        "sha256": "4afa040affcdfa46e2199170f600475889bbc2ed40bd0f13c6a1820b16952d47",
+        "bytes": 5033
+      },
+      {
+        "file": "py3-durationpy-pyc-0.10-r1.apk",
+        "sha256": "619fb573d6c484437e8a5a063ed55c276075feab1b6347ac2e17a86027aa46e9",
+        "bytes": 4670
+      },
+      {
+        "file": "py3-google-auth-2.48.0-r1.apk",
+        "sha256": "0f748587f174f6c789d1689c5b532d6ec595e492b1aacb8e764e4ef88103b69c",
+        "bytes": 174242
+      },
+      {
+        "file": "py3-google-auth-pyc-2.48.0-r1.apk",
+        "sha256": "9c289b5789dce7ac4c8468c16ab97b7cbbeaee6be57790030f49888ab9c37d93",
+        "bytes": 298666
+      },
+      {
+        "file": "py3-idna-3.16-r0.apk",
+        "sha256": "d25444cc6e6d6c33760c2873b642fe219ab38f467968bca8a8ed5084a2178181",
+        "bytes": 74947
+      },
+      {
+        "file": "py3-idna-pyc-3.16-r0.apk",
+        "sha256": "6202064b0eb0e7d2ae87cf1a00f763bd687efde3885d11286f719c667b064395",
+        "bytes": 92718
+      },
+      {
+        "file": "py3-kubernetes-34.1.0-r1.apk",
+        "sha256": "98aca22d9c06b6fd02df211366746577f1a55319dca1977336b7656c490e7e0b",
+        "bytes": 1047588
+      },
+      {
+        "file": "py3-kubernetes-pyc-34.1.0-r1.apk",
+        "sha256": "fee1a84e0e2e1aa55adacea679417e84442d4e40f9ee2e36b9c63f185698772e",
+        "bytes": 1837392
+      },
+      {
+        "file": "py3-oauthlib-3.3.1-r2.apk",
+        "sha256": "bb5b36d12735c807a631ffbbcc96c3da40c17ebc853b94058397c4b814d29bae",
+        "bytes": 123890
+      },
+      {
+        "file": "py3-oauthlib-pyc-3.3.1-r2.apk",
+        "sha256": "b174fe95719e662ab04445d4ac7b15a39027dd17438e9791840d65a55d12538f",
+        "bytes": 189206
+      },
+      {
+        "file": "py3-requests-2.33.1-r0.apk",
+        "sha256": "a7063a0737f0ad89e79b8a25ebba4f724e893b6adaddd450b47e28aa4409c7f6",
+        "bytes": 60992
+      },
+      {
+        "file": "py3-requests-oauthlib-2.0.0-r2.apk",
+        "sha256": "47578ba4b50cb063f30e392f3e7822c2e8d365ff814d48fea778b12f3d9edeb6",
+        "bytes": 21238
+      },
+      {
+        "file": "py3-requests-oauthlib-pyc-2.0.0-r2.apk",
+        "sha256": "a91ebe64f44b119b18dabab8f65b7965b4694471d6bfb3921bf162710a6189bf",
+        "bytes": 25509
+      },
+      {
+        "file": "py3-requests-pyc-2.33.1-r0.apk",
+        "sha256": "8cfb8b870ec9e3a8e5e904cda1f4ee52ad53f3716d6bd4c73ea4945c7995a32f",
+        "bytes": 93707
+      },
+      {
+        "file": "py3-rsa-4.9.1-r1.apk",
+        "sha256": "4881541dbac59c841a3437bc238d072c29a72d726ae6c587a7d2ae5234f847b0",
+        "bytes": 28903
+      },
+      {
+        "file": "py3-rsa-pyc-4.9.1-r1.apk",
+        "sha256": "92d21544bdfbc5fe8e4d2414b9dd3035ba77200733afb93ddec01dc32aabfd7a",
+        "bytes": 46398
+      },
+      {
+        "file": "py3-six-1.17.0-r1.apk",
+        "sha256": "47bf6bd3f7e1b7f9d0c9584c5452159ef16552642aa0a697f5a84736de1ec94c",
+        "bytes": 11914
+      },
+      {
+        "file": "py3-six-pyc-1.17.0-r1.apk",
+        "sha256": "c80a325c498b6d6193dd0b089cb06f4fadb4ffda573e80ed621a11aeffcd9fe7",
+        "bytes": 19949
+      },
+      {
+        "file": "py3-urllib3-2.7.0-r0.apk",
+        "sha256": "9fde77a1efbe1da8482785eca2920a0b0fb97ebf0ffa0f647baf95057c484ba4",
+        "bytes": 119048
+      },
+      {
+        "file": "py3-urllib3-pyc-2.7.0-r0.apk",
+        "sha256": "2a1c0e9180d2be5cb69495ea73081d978490c56ba37e438b5394bc8912c76f01",
+        "bytes": 216295
+      },
+      {
+        "file": "py3-websocket-client-1.9.0-r1.apk",
+        "sha256": "85e11a7f4935f258da9d2a9bc7c8abb4e2196537014d5b7d884f90b796c1d37e",
+        "bytes": 38568
+      },
+      {
+        "file": "py3-websocket-client-pyc-1.9.0-r1.apk",
+        "sha256": "a3aaad67ee80804eaf90bbbfeeeae0a6a80712f55e716ecbcb0b9eceef42aa37",
+        "bytes": 70114
+      },
+      {
+        "file": "py3-yaml-6.0.3-r2.apk",
+        "sha256": "a5772e51d96b05507a9a3a62e2c83c1d6af548f3abf2c169f4f349b129d8faf7",
+        "bytes": 117641
+      },
+      {
+        "file": "py3-yaml-pyc-6.0.3-r2.apk",
+        "sha256": "785ba99d41824107924325c0ae43bd421e34a0d061cdb61e8ef88a346986172b",
+        "bytes": 87982
+      },
+      {
+        "file": "pyc-3.14.10-r1.apk",
+        "sha256": "8b1678559e6c29db978a923b611cd21a8bfda26d4814edefbb2d62a903bf7df8",
+        "bytes": 1269
+      },
+      {
+        "file": "python3-3.14.10-r1.apk",
+        "sha256": "32ae9c446a79f965f942ae704c5121fa4744c5fee76ec86955fe0fc9a6e6c412",
+        "bytes": 8414398
+      },
+      {
+        "file": "python3-pyc-3.14.10-r1.apk",
+        "sha256": "bc63349707d5658ee2d852e415846246b8d71ece5007120b1d2aee85b4a2ad0a",
+        "bytes": 1316
+      },
+      {
+        "file": "python3-pycache-pyc0-3.14.10-r1.apk",
+        "sha256": "19a814d76898adbf90ec0f33ff1fd85fb8454be8615f4993fba0b69b7b978926",
+        "bytes": 4495572
+      },
+      {
+        "file": "readline-8.3.3-r1.apk",
+        "sha256": "766911ecb986a6c5cf0841a6b556cd1e9dbbf22b3559726de32416486cd15c81",
+        "bytes": 127194
+      },
+      {
+        "file": "sqlite-libs-3.53.4-r0.apk",
+        "sha256": "a8a216e53d22faa3f04d2e3650c1991af66f8d0b42fadff5afcdb9afb60b19e5",
+        "bytes": 877769
+      },
+      {
+        "file": "xz-libs-5.8.4-r0.apk",
+        "sha256": "ab362dd515ead04c31a6c302163248da7aa4813e283c971e6dd3f789b453a1d9",
+        "bytes": 118503
+      },
+      {
+        "file": "yaml-0.2.5-r2.apk",
+        "sha256": "c7359ffa9d0c785c3298300a1daa08b9199799748b40696ce4cd589194b57ab2",
+        "bytes": 45094
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      }
+    ],
+    "ufw": [
+      {
+        "file": "busybox-1.37.0-r31.apk",
+        "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+        "bytes": 504769
+      },
+      {
+        "file": "busybox-binsh-1.37.0-r31.apk",
+        "sha256": "93f803ae5db6b729c0f66f4afba6e907ccc17d7d5f8b8c3d25bdb4636de2c48a",
+        "bytes": 1571
+      },
+      {
+        "file": "gdbm-1.26-r0.apk",
+        "sha256": "3278ccba30b241168ca4ab93c919be805411b918fdc062f06d3684d12dc33ae3",
+        "bytes": 31902
+      },
+      {
+        "file": "iptables-1.8.13-r0.apk",
+        "sha256": "af3aaf9303c829ccee795725965ee6894816a98f9afa62b5dd52b25e6e62e8f0",
+        "bytes": 319701
+      },
+      {
+        "file": "iptables-openrc-1.8.13-r0.apk",
+        "sha256": "ad3cedfc9b5e9ac702f693e6cb9b7a596826fc405a350fab3368fdd88794fa6c",
+        "bytes": 4199
+      },
+      {
+        "file": "libbz2-1.0.8-r6.apk",
+        "sha256": "2737e2b23ed08d4911ee62cd0163b5f4bf0379cacf4dc35b23a00209584c98fd",
+        "bytes": 35467
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libexpat-2.10.0-r0.apk",
+        "sha256": "e7e7408ea787ed06d00159b0ff1f9b65a63cf634f36d9e0fa7512ce2c489a503",
+        "bytes": 63634
+      },
+      {
+        "file": "libffi-3.5.2-r1.apk",
+        "sha256": "6da1a19313a40c56cac756fb11e2c4d5267831e1c22fc8323f24c943c94da6e0",
+        "bytes": 18348
+      },
+      {
+        "file": "libgcc-15.2.0-r5.apk",
+        "sha256": "393dcd32629f06d7d85409c272d142d0c082772d10b87ef55ee82f47de3be637",
+        "bytes": 80348
+      },
+      {
+        "file": "libmnl-1.0.5-r2.apk",
+        "sha256": "3693162ff7c27998dbbb2da1c4bd9072079cd55af1fa3d6d2ade51d276e20157",
+        "bytes": 9023
+      },
+      {
+        "file": "libncursesw-6.6_p20260516-r0.apk",
+        "sha256": "cf8caa8a88bc4ce9d9e395567fefaf9ef7fbd55c50ae6155b35c1b58f3755023",
+        "bytes": 159438
+      },
+      {
+        "file": "libnftnl-1.3.1-r0.apk",
+        "sha256": "2f4cf35959fde00fdba0dd35ef12a6739739b504e8319c97e30bd4834f98d924",
+        "bytes": 67237
+      },
+      {
+        "file": "libpanelw-6.6_p20260516-r0.apk",
+        "sha256": "057be8b1b788580f4cb72c382a6dcc03467d15bd69700f32192bd709e7a57a12",
+        "bytes": 5563
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "libstdc++-15.2.0-r5.apk",
+        "sha256": "14c987b556f5385a5db18376e788c75f37d85321b8dc1920d926ea7daac1d6f6",
+        "bytes": 961295
+      },
+      {
+        "file": "libxtables-1.8.13-r0.apk",
+        "sha256": "4b5c981a77af40f965debe18f06c0c20268956f141a1bfc1c8ff6a406d914465",
+        "bytes": 24615
+      },
+      {
+        "file": "mpdecimal-4.0.1-r0.apk",
+        "sha256": "1278f374bbc8b4aad674244458cca5fc63e0780a921138eef400d5db64381a31",
+        "bytes": 78803
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "ncurses-terminfo-base-6.6_p20260516-r0.apk",
+        "sha256": "ce83be6d0bd10584a53c3a5868cc1595ce5f0f8e0b621f8f7f70b6144e521fc9",
+        "bytes": 22172
+      },
+      {
+        "file": "pyc-3.14.10-r1.apk",
+        "sha256": "8b1678559e6c29db978a923b611cd21a8bfda26d4814edefbb2d62a903bf7df8",
+        "bytes": 1269
+      },
+      {
+        "file": "python3-3.14.10-r1.apk",
+        "sha256": "32ae9c446a79f965f942ae704c5121fa4744c5fee76ec86955fe0fc9a6e6c412",
+        "bytes": 8414398
+      },
+      {
+        "file": "python3-pyc-3.14.10-r1.apk",
+        "sha256": "bc63349707d5658ee2d852e415846246b8d71ece5007120b1d2aee85b4a2ad0a",
+        "bytes": 1316
+      },
+      {
+        "file": "python3-pycache-pyc0-3.14.10-r1.apk",
+        "sha256": "19a814d76898adbf90ec0f33ff1fd85fb8454be8615f4993fba0b69b7b978926",
+        "bytes": 4495572
+      },
+      {
+        "file": "readline-8.3.3-r1.apk",
+        "sha256": "766911ecb986a6c5cf0841a6b556cd1e9dbbf22b3559726de32416486cd15c81",
+        "bytes": 127194
+      },
+      {
+        "file": "sqlite-libs-3.53.4-r0.apk",
+        "sha256": "a8a216e53d22faa3f04d2e3650c1991af66f8d0b42fadff5afcdb9afb60b19e5",
+        "bytes": 877769
+      },
+      {
+        "file": "ssl_client-1.37.0-r31.apk",
+        "sha256": "e578a140670e4cf9816117b0c2063632bf3754ecbe8fa593a7fd2b4039372bf0",
+        "bytes": 4686
+      },
+      {
+        "file": "ufw-0.36.2-r4.apk",
+        "sha256": "9a3f0e55acb05e3646f702e83519c3263b4915882bf6765a18b3e24420932f7b",
+        "bytes": 63349
+      },
+      {
+        "file": "ufw-openrc-0.36.2-r4.apk",
+        "sha256": "4dad8bba92e92e96b8293d905d35c84450daf09be7f63261d5abc2b4d1189ee4",
+        "bytes": 2739
+      },
+      {
+        "file": "ufw-pyc-0.36.2-r4.apk",
+        "sha256": "89d76c54162307ed16e36006f369de9464a1917402d5137a9979dbf6aa492076",
+        "bytes": 99530
+      },
+      {
+        "file": "xz-libs-5.8.4-r0.apk",
+        "sha256": "ab362dd515ead04c31a6c302163248da7aa4813e283c971e6dd3f789b453a1d9",
+        "bytes": 118503
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      }
+    ],
+    "debug": [
+      {
+        "file": "bind-libs-9.20.30-r0.apk",
+        "sha256": "ac6a9c42978b0143a82568c2b2ccd1ccbf494cb6354887b076454ece607d4671",
+        "bytes": 1286470
+      },
+      {
+        "file": "bind-tools-9.20.30-r0.apk",
+        "sha256": "1419cd7a1a8a5ee5fe3d57f0467167e31c70b7b9a6b351da5e9e1b0e0beaecd8",
+        "bytes": 227479
+      },
+      {
+        "file": "brotli-libs-1.2.1-r0.apk",
+        "sha256": "62a7e37e43bbfc1f8525a00ad2125fd5897135dc93b849733884cb78ffd8e26c",
+        "bytes": 429435
+      },
+      {
+        "file": "busybox-1.37.0-r31.apk",
+        "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+        "bytes": 504769
+      },
+      {
+        "file": "busybox-binsh-1.37.0-r31.apk",
+        "sha256": "93f803ae5db6b729c0f66f4afba6e907ccc17d7d5f8b8c3d25bdb4636de2c48a",
+        "bytes": 1571
+      },
+      {
+        "file": "c-ares-1.34.9-r0.apk",
+        "sha256": "3539a3e11c1ef1516117d8179a546ac882086e94e0d78ad51d687b3fa2b3b5f2",
+        "bytes": 113179
+      },
+      {
+        "file": "fstrm-0.6.1-r4.apk",
+        "sha256": "c0ef7c34a1e343bf25fbc9b14b8ed324b10728cd1abdd3680721c3a66e9edff7",
+        "bytes": 17021
+      },
+      {
+        "file": "glib-2.88.1-r1.apk",
+        "sha256": "2f32203b97789bc9a92e57e2d9b89eb2e6951b69534ba082a683c6e49031cb5d",
+        "bytes": 2061645
+      },
+      {
+        "file": "gmp-6.3.0-r4.apk",
+        "sha256": "85323ef5bce8ff234736dc2d6592ea37aebdc6348a531e27430bdfe38364d256",
+        "bytes": 220074
+      },
+      {
+        "file": "gnutls-3.8.13-r0.apk",
+        "sha256": "8d3f3612145db8cd7feb83607187a60f809f06cfa3c2e74d310d58a6b053d54c",
+        "bytes": 969352
+      },
+      {
+        "file": "json-c-0.18-r1.apk",
+        "sha256": "22dc7a8fe3eda0d22635615cca682b2a575ef25e8c2f401445e12be4cbf77302",
+        "bytes": 27819
+      },
+      {
+        "file": "keyutils-libs-1.6.3-r4.apk",
+        "sha256": "855c94e6bd750fcd2ca34df29ae3602bc93bb0b4512b56d8f4ecca06919ed1b8",
+        "bytes": 7635
+      },
+      {
+        "file": "krb5-conf-1.0-r2.apk",
+        "sha256": "28b8e361a1583c04e98c261c3eb05ca7f0c0e80a9984a7c1b3cbfd7b60c86f37",
+        "bytes": 1745
+      },
+      {
+        "file": "krb5-libs-1.22.2-r1.apk",
+        "sha256": "79502e864cafa97c7da8a07937422ee020f470526fe0c7fc8c2306302a7c2439",
+        "bytes": 765540
+      },
+      {
+        "file": "libblkid-2.42.3-r1.apk",
+        "sha256": "2512c2bff496ac2b8561a3c814d21d35ce10cda579b3d410f9f96da93a5aaac1",
+        "bytes": 98429
+      },
+      {
+        "file": "libcap2-2.78-r0.apk",
+        "sha256": "42886a7b4bcde26347c712925c8dc7db202b6029ef9b8c7ee81577ab7bdd8fad",
+        "bytes": 21582
+      },
+      {
+        "file": "libcom_err-1.47.4-r0.apk",
+        "sha256": "4723d0fb8e286dc6adb54dd3cdaedcd8db54260f75ee778a5acb4c16922c0f52",
+        "bytes": 6095
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libeconf-0.8.3-r0.apk",
+        "sha256": "2a791c7957961f830cf31b04f35f814a63afcf633badc9052425ff1cf2f64380",
+        "bytes": 26054
+      },
+      {
+        "file": "libffi-3.5.2-r1.apk",
+        "sha256": "6da1a19313a40c56cac756fb11e2c4d5267831e1c22fc8323f24c943c94da6e0",
+        "bytes": 18348
+      },
+      {
+        "file": "libgcrypt-1.12.2-r0.apk",
+        "sha256": "e7dd4be813331a5a42d433b2e2a0ce6ebf4e1f0752ce2bdf7e81a38f88a6517d",
+        "bytes": 600796
+      },
+      {
+        "file": "libgpg-error-1.61-r0.apk",
+        "sha256": "580b80e679adda234e5d36e7633023c25cf20ce9fcf3ee8f9dd85ba578d886b6",
+        "bytes": 77788
+      },
+      {
+        "file": "libidn2-2.3.8-r0.apk",
+        "sha256": "7d038ac558dde464964b033ce5126dd2eaf84cc414dc15e77c5424a321d0ebee",
+        "bytes": 104623
+      },
+      {
+        "file": "libintl-1.0-r0.apk",
+        "sha256": "cb03919cba5624b5e8759d04f3b31913b02585355988b914bc31de4746ff5ef6",
+        "bytes": 39537
+      },
+      {
+        "file": "libmaxminddb-libs-1.13.3-r0.apk",
+        "sha256": "fecf65d848bd141674dee87c48755c3c560eb5e8ac6e654e1a8f83d7a3363eb1",
+        "bytes": 10976
+      },
+      {
+        "file": "libmount-2.42.3-r1.apk",
+        "sha256": "e2ae003260f2c1ec13666c6e108d5e8e3d64974b0667166a02432bd3be263a7a",
+        "bytes": 134799
+      },
+      {
+        "file": "libnl3-3.11.0-r0.apk",
+        "sha256": "b8c9b0a045b1615027b58618103f3dabeca69aacb80b527ac7b96ba354aba4a4",
+        "bytes": 332603
+      },
+      {
+        "file": "libpcap-1.10.7-r0.apk",
+        "sha256": "1883aff264d8b5901f6bbc3575929ad01855e24d06557b7d0ad9762241b7e3cf",
+        "bytes": 110393
+      },
+      {
+        "file": "libsmi-0.5.0-r5.apk",
+        "sha256": "8f23dae013000ff55e94b255dbbb8ab223cf58db11c3a857b31a85c89081f3bb",
+        "bytes": 3270559
+      },
+      {
+        "file": "libssh-0.12.2-r0.apk",
+        "sha256": "ad36fea448d82f3ed08fcd8eefeabb60f56ef94d1c8c66e1282443521fe72d01",
+        "bytes": 206002
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "libtasn1-4.21.0-r0.apk",
+        "sha256": "407f255c5af989f4e22a5e9404c4558f6fda04f14a4209a2ca1e06c3f2ba476e",
+        "bytes": 33219
+      },
+      {
+        "file": "libunistring-1.4.2-r0.apk",
+        "sha256": "3aa6030e603e34d96192742f327c0509f409c6769ce2e7b1463685dede38d714",
+        "bytes": 743597
+      },
+      {
+        "file": "libuv-1.52.1-r0.apk",
+        "sha256": "a0074b92335b4d8b16c001a9a580caced88aa5de0552a02dc32a9ee0ed5aaa03",
+        "bytes": 99585
+      },
+      {
+        "file": "libverto-0.3.2-r2.apk",
+        "sha256": "c20d2d8db18fe088c14cf00efa3780c81ff13f0663525df85d25ad44d415cdf5",
+        "bytes": 9283
+      },
+      {
+        "file": "libxml2-2.13.9-r2.apk",
+        "sha256": "4b2f986159c659f014b942fe8a5d70c67af475153ca826c3dd53389eea46a300",
+        "bytes": 495342
+      },
+      {
+        "file": "lua5.4-libs-5.4.8-r0.apk",
+        "sha256": "3a77aaf5c0d396e62faf67f5d5d190a06b3960c50ed8d531dad68557db638aa8",
+        "bytes": 104189
+      },
+      {
+        "file": "lz4-libs-1.10.0-r1.apk",
+        "sha256": "3ad4912ab8ecf5f6236fdb751f88243006b3a8f152684e455b781e16284dd298",
+        "bytes": 79080
+      },
+      {
+        "file": "mii-tool-2.10-r3.apk",
+        "sha256": "71329a712d92610dbeb2c559c0a34997f76056f68b91a5a1a7e18e5078973de8",
+        "bytes": 8207
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "net-tools-2.10-r3.apk",
+        "sha256": "e10355029e7e99659a7653588958bd17937a92be7ac078bd4ef0fa223fa123ee",
+        "bytes": 130133
+      },
+      {
+        "file": "nettle-3.10.2-r0.apk",
+        "sha256": "693c1a99b781cd17149916df30113ccd6bdddac130298c17b1286fd2ae438386",
+        "bytes": 343067
+      },
+      {
+        "file": "nghttp2-libs-1.70.0-r0.apk",
+        "sha256": "f0c4014eb2f10308dcdfd84cd49c121673c7b78cb8182b6e7a1388d8ae112a3b",
+        "bytes": 63259
+      },
+      {
+        "file": "p11-kit-0.26.2-r0.apk",
+        "sha256": "134d653aeeb4ada32746fbc3e2a7ae4201f584725de9263e4f32503658f3ddd8",
+        "bytes": 399735
+      },
+      {
+        "file": "pcre2-10.49-r0.apk",
+        "sha256": "2919897914820f42a17a8d7d37df310d2dfad1c82ebe5f539cc5c765f916752a",
+        "bytes": 323099
+      },
+      {
+        "file": "protobuf-c-1.5.2-r2.apk",
+        "sha256": "7b27bf483eae1076ed9c5e76463ddb093e49a3b11e64312ec5c1bfa78aa1c604",
+        "bytes": 13365
+      },
+      {
+        "file": "speexdsp-1.2.1-r2.apk",
+        "sha256": "4badc79354db263b3fc83b68152a6091c16bbfbbe76dec1b6c1b8d5c43edb232",
+        "bytes": 34802
+      },
+      {
+        "file": "ssl_client-1.37.0-r31.apk",
+        "sha256": "e578a140670e4cf9816117b0c2063632bf3754ecbe8fa593a7fd2b4039372bf0",
+        "bytes": 4686
+      },
+      {
+        "file": "tshark-4.6.6-r0.apk",
+        "sha256": "e35493c0aa06930c18168b694ffeeaa39edb3bebc61cf2f4542b915ab18198ad",
+        "bytes": 145101
+      },
+      {
+        "file": "userspace-rcu-0.15.3-r0.apk",
+        "sha256": "1cd69dd84e40d284e00182593068a17285ea7035306403d00eef62f33b1a7d2c",
+        "bytes": 84869
+      },
+      {
+        "file": "wireshark-common-4.6.6-r0.apk",
+        "sha256": "a527da8d51940ca7b301b63d48a0c5d0f4cf592ec4eee3821d5ee24d7368acc3",
+        "bytes": 25031639
+      },
+      {
+        "file": "xz-libs-5.8.4-r0.apk",
+        "sha256": "ab362dd515ead04c31a6c302163248da7aa4813e283c971e6dd3f789b453a1d9",
+        "bytes": 118503
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      },
+      {
+        "file": "zstd-libs-1.5.7-r2.apk",
+        "sha256": "23c6065b0049b2406441564bcf0032515a43f78e80d76fcb85535a3803ef5d4e",
+        "bytes": 376646
+      }
+    ],
+    "rsyslog": [
+      {
+        "file": "busybox-1.37.0-r31.apk",
+        "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+        "bytes": 504769
+      },
+      {
+        "file": "busybox-binsh-1.37.0-r31.apk",
+        "sha256": "93f803ae5db6b729c0f66f4afba6e907ccc17d7d5f8b8c3d25bdb4636de2c48a",
+        "bytes": 1571
+      },
+      {
+        "file": "libcap-ng-0.8.5-r2.apk",
+        "sha256": "feeb65b050ec75766057ce8f3e9611eef3c03d9eeed17d31a900ab900ed2bcf2",
+        "bytes": 11389
+      },
+      {
+        "file": "libestr-0.1.11-r4.apk",
+        "sha256": "9ddb2f7b9c0950865e74ad4a0b0bb973943277d6bd8886a54b937fccc3a3d091",
+        "bytes": 6083
+      },
+      {
+        "file": "libfastjson-1.2304.0-r4.apk",
+        "sha256": "88a35a6d9075b28530f81d9427b3d5413f2a52b8ce1b268908e854c401e0b109",
+        "bytes": 18428
+      },
+      {
+        "file": "libuuid-2.42.3-r1.apk",
+        "sha256": "8306e5bb577696c9069fe1dfd9e1dcc39d2d481c6a1b0e707fd03c3e21aa6aa2",
+        "bytes": 14261
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "rsyslog-8.2604.0-r0.apk",
+        "sha256": "bdde22928c9b8474653db1f0122236e52da755ecab4e58184c99a440a6a5b6e2",
+        "bytes": 496095
+      },
+      {
+        "file": "rsyslog-openrc-8.2604.0-r0.apk",
+        "sha256": "bab2c1a97857585b1c005494179e6620e2bce5166baccf568000b9434611f9a7",
+        "bytes": 2075
+      },
+      {
+        "file": "yaml-0.2.5-r2.apk",
+        "sha256": "c7359ffa9d0c785c3298300a1daa08b9199799748b40696ce4cd589194b57ab2",
+        "bytes": 45094
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      }
+    ],
+    "haproxy": [
+      {
+        "file": "busybox-1.37.0-r31.apk",
+        "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+        "bytes": 504769
+      },
+      {
+        "file": "busybox-binsh-1.37.0-r31.apk",
+        "sha256": "93f803ae5db6b729c0f66f4afba6e907ccc17d7d5f8b8c3d25bdb4636de2c48a",
+        "bytes": 1571
+      },
+      {
+        "file": "haproxy-3.4.7-r0.apk",
+        "sha256": "34b98c7247da96ec2d2abcde723d70448eb6a1255a4548c543258ebb7005b458",
+        "bytes": 2512741
+      },
+      {
+        "file": "haproxy-openrc-3.4.7-r0.apk",
+        "sha256": "ad00caaf368f129b5b602b34770bb42e52067d6e4be3a03d4e42450a8c020a70",
+        "bytes": 2231
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "lua5.4-libs-5.4.8-r0.apk",
+        "sha256": "3a77aaf5c0d396e62faf67f5d5d190a06b3960c50ed8d531dad68557db638aa8",
+        "bytes": 104189
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "pcre2-10.49-r0.apk",
+        "sha256": "2919897914820f42a17a8d7d37df310d2dfad1c82ebe5f539cc5c765f916752a",
+        "bytes": 323099
+      },
+      {
+        "file": "ssl_client-1.37.0-r31.apk",
+        "sha256": "e578a140670e4cf9816117b0c2063632bf3754ecbe8fa593a7fd2b4039372bf0",
+        "bytes": 4686
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      }
+    ],
+    "unbound": [
+      {
+        "file": "busybox-1.37.0-r31.apk",
+        "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+        "bytes": 504769
+      },
+      {
+        "file": "busybox-binsh-1.37.0-r31.apk",
+        "sha256": "93f803ae5db6b729c0f66f4afba6e907ccc17d7d5f8b8c3d25bdb4636de2c48a",
+        "bytes": 1571
+      },
+      {
+        "file": "dnssec-root-20250524-r0.apk",
+        "sha256": "f27f4d8548785f5e5a684c9c063b318a24021dd269c56f90d357b7cc9c2d454c",
+        "bytes": 2169
+      },
+      {
+        "file": "hiredis-1.3.0-r0.apk",
+        "sha256": "8dbbaf6c432cf8738c2a93a27c31c81153b8a4aae8795d73204f82236c24587d",
+        "bytes": 28296
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libevent-2.1.13-r0.apk",
+        "sha256": "870d4b22a2e4068205b67bb8e4631342c9e84060d052fb36cf4721e18d4043a2",
+        "bytes": 281729
+      },
+      {
+        "file": "libexpat-2.10.0-r0.apk",
+        "sha256": "e7e7408ea787ed06d00159b0ff1f9b65a63cf634f36d9e0fa7512ce2c489a503",
+        "bytes": 63634
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "nghttp2-libs-1.70.0-r0.apk",
+        "sha256": "f0c4014eb2f10308dcdfd84cd49c121673c7b78cb8182b6e7a1388d8ae112a3b",
+        "bytes": 63259
+      },
+      {
+        "file": "protobuf-c-1.5.2-r2.apk",
+        "sha256": "7b27bf483eae1076ed9c5e76463ddb093e49a3b11e64312ec5c1bfa78aa1c604",
+        "bytes": 13365
+      },
+      {
+        "file": "ssl_client-1.37.0-r31.apk",
+        "sha256": "e578a140670e4cf9816117b0c2063632bf3754ecbe8fa593a7fd2b4039372bf0",
+        "bytes": 4686
+      },
+      {
+        "file": "unbound-1.25.2-r2.apk",
+        "sha256": "6aff221562dfd14cfabb02cc0f1df12c5ff34b949f2636ccc067207355b6dfef",
+        "bytes": 1105814
+      },
+      {
+        "file": "unbound-libs-1.25.2-r2.apk",
+        "sha256": "fcc2a5f21e65b4e01c62d78745023ad205af3c2f102cb9434d2fdfb17b90c591",
+        "bytes": 442803
+      },
+      {
+        "file": "unbound-openrc-1.25.2-r2.apk",
+        "sha256": "155279bd27ed343f5e6b95789d12f0e2d27a0ff89d2f350fed9cf906835b24e0",
+        "bytes": 2462
+      }
+    ],
+    "nfs": [
+      {
+        "file": "busybox-1.37.0-r31.apk",
+        "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+        "bytes": 504769
+      },
+      {
+        "file": "busybox-binsh-1.37.0-r31.apk",
+        "sha256": "93f803ae5db6b729c0f66f4afba6e907ccc17d7d5f8b8c3d25bdb4636de2c48a",
+        "bytes": 1571
+      },
+      {
+        "file": "device-mapper-libs-2.03.35-r3.apk",
+        "sha256": "ba6522d2e88296a44b71a7038043552256feb14564a1886030102a262843abac",
+        "bytes": 138220
+      },
+      {
+        "file": "gdbm-1.26-r0.apk",
+        "sha256": "3278ccba30b241168ca4ab93c919be805411b918fdc062f06d3684d12dc33ae3",
+        "bytes": 31902
+      },
+      {
+        "file": "keyutils-libs-1.6.3-r4.apk",
+        "sha256": "855c94e6bd750fcd2ca34df29ae3602bc93bb0b4512b56d8f4ecca06919ed1b8",
+        "bytes": 7635
+      },
+      {
+        "file": "krb5-conf-1.0-r2.apk",
+        "sha256": "28b8e361a1583c04e98c261c3eb05ca7f0c0e80a9984a7c1b3cbfd7b60c86f37",
+        "bytes": 1745
+      },
+      {
+        "file": "krb5-libs-1.22.2-r1.apk",
+        "sha256": "79502e864cafa97c7da8a07937422ee020f470526fe0c7fc8c2306302a7c2439",
+        "bytes": 765540
+      },
+      {
+        "file": "libblkid-2.42.3-r1.apk",
+        "sha256": "2512c2bff496ac2b8561a3c814d21d35ce10cda579b3d410f9f96da93a5aaac1",
+        "bytes": 98429
+      },
+      {
+        "file": "libbz2-1.0.8-r6.apk",
+        "sha256": "2737e2b23ed08d4911ee62cd0163b5f4bf0379cacf4dc35b23a00209584c98fd",
+        "bytes": 35467
+      },
+      {
+        "file": "libcap2-2.78-r0.apk",
+        "sha256": "42886a7b4bcde26347c712925c8dc7db202b6029ef9b8c7ee81577ab7bdd8fad",
+        "bytes": 21582
+      },
+      {
+        "file": "libcom_err-1.47.4-r0.apk",
+        "sha256": "4723d0fb8e286dc6adb54dd3cdaedcd8db54260f75ee778a5acb4c16922c0f52",
+        "bytes": 6095
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libeconf-0.8.3-r0.apk",
+        "sha256": "2a791c7957961f830cf31b04f35f814a63afcf633badc9052425ff1cf2f64380",
+        "bytes": 26054
+      },
+      {
+        "file": "libevent-2.1.13-r0.apk",
+        "sha256": "870d4b22a2e4068205b67bb8e4631342c9e84060d052fb36cf4721e18d4043a2",
+        "bytes": 281729
+      },
+      {
+        "file": "libexpat-2.10.0-r0.apk",
+        "sha256": "e7e7408ea787ed06d00159b0ff1f9b65a63cf634f36d9e0fa7512ce2c489a503",
+        "bytes": 63634
+      },
+      {
+        "file": "libffi-3.5.2-r1.apk",
+        "sha256": "6da1a19313a40c56cac756fb11e2c4d5267831e1c22fc8323f24c943c94da6e0",
+        "bytes": 18348
+      },
+      {
+        "file": "libgcc-15.2.0-r5.apk",
+        "sha256": "393dcd32629f06d7d85409c272d142d0c082772d10b87ef55ee82f47de3be637",
+        "bytes": 80348
+      },
+      {
+        "file": "libmount-2.42.3-r1.apk",
+        "sha256": "e2ae003260f2c1ec13666c6e108d5e8e3d64974b0667166a02432bd3be263a7a",
+        "bytes": 134799
+      },
+      {
+        "file": "libncursesw-6.6_p20260516-r0.apk",
+        "sha256": "cf8caa8a88bc4ce9d9e395567fefaf9ef7fbd55c50ae6155b35c1b58f3755023",
+        "bytes": 159438
+      },
+      {
+        "file": "libnfsidmap-2.6.4-r6.apk",
+        "sha256": "c93f1dca20994d6a0e6bf8f244a4a402dcce6d7ca9c1cf00596ab6511b7b2421",
+        "bytes": 51731
+      },
+      {
+        "file": "libpanelw-6.6_p20260516-r0.apk",
+        "sha256": "057be8b1b788580f4cb72c382a6dcc03467d15bd69700f32192bd709e7a57a12",
+        "bytes": 5563
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "libstdc++-15.2.0-r5.apk",
+        "sha256": "14c987b556f5385a5db18376e788c75f37d85321b8dc1920d926ea7daac1d6f6",
+        "bytes": 961295
+      },
+      {
+        "file": "libtirpc-1.3.5-r1.apk",
+        "sha256": "73d0fa9459a9b506a88f5c545c77af86e46495b5cdd16b3502928ab306bb9616",
+        "bytes": 76160
+      },
+      {
+        "file": "libtirpc-conf-1.3.5-r1.apk",
+        "sha256": "eb9b5e86ecb79f9d4092d9747466491a5f6d6b0b2ebb1d3812dc5cba4a04c0ba",
+        "bytes": 2182
+      },
+      {
+        "file": "libuuid-2.42.3-r1.apk",
+        "sha256": "8306e5bb577696c9069fe1dfd9e1dcc39d2d481c6a1b0e707fd03c3e21aa6aa2",
+        "bytes": 14261
+      },
+      {
+        "file": "libverto-0.3.2-r2.apk",
+        "sha256": "c20d2d8db18fe088c14cf00efa3780c81ff13f0663525df85d25ad44d415cdf5",
+        "bytes": 9283
+      },
+      {
+        "file": "mpdecimal-4.0.1-r0.apk",
+        "sha256": "1278f374bbc8b4aad674244458cca5fc63e0780a921138eef400d5db64381a31",
+        "bytes": 78803
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "ncurses-terminfo-base-6.6_p20260516-r0.apk",
+        "sha256": "ce83be6d0bd10584a53c3a5868cc1595ce5f0f8e0b621f8f7f70b6144e521fc9",
+        "bytes": 22172
+      },
+      {
+        "file": "nfs-utils-2.6.4-r6.apk",
+        "sha256": "6bdf2fe237792da8b4abf343282d89999678405bd50cef017d8a55dbd6dcdbf0",
+        "bytes": 498342
+      },
+      {
+        "file": "nfs-utils-openrc-2.6.4-r6.apk",
+        "sha256": "b050bf71f8bb14646066d0e52d261c25fbe708e2f5bac5c8509bf84dc97ef349",
+        "bytes": 5852
+      },
+      {
+        "file": "pyc-3.14.10-r1.apk",
+        "sha256": "8b1678559e6c29db978a923b611cd21a8bfda26d4814edefbb2d62a903bf7df8",
+        "bytes": 1269
+      },
+      {
+        "file": "python3-3.14.10-r1.apk",
+        "sha256": "32ae9c446a79f965f942ae704c5121fa4744c5fee76ec86955fe0fc9a6e6c412",
+        "bytes": 8414398
+      },
+      {
+        "file": "python3-pyc-3.14.10-r1.apk",
+        "sha256": "bc63349707d5658ee2d852e415846246b8d71ece5007120b1d2aee85b4a2ad0a",
+        "bytes": 1316
+      },
+      {
+        "file": "python3-pycache-pyc0-3.14.10-r1.apk",
+        "sha256": "19a814d76898adbf90ec0f33ff1fd85fb8454be8615f4993fba0b69b7b978926",
+        "bytes": 4495572
+      },
+      {
+        "file": "readline-8.3.3-r1.apk",
+        "sha256": "766911ecb986a6c5cf0841a6b556cd1e9dbbf22b3559726de32416486cd15c81",
+        "bytes": 127194
+      },
+      {
+        "file": "rpcbind-1.2.9-r0.apk",
+        "sha256": "06953bc1fef0973e72c55a37bc19c54849660ce8e87bc67e2b5c26439f122737",
+        "bytes": 40246
+      },
+      {
+        "file": "rpcbind-openrc-1.2.9-r0.apk",
+        "sha256": "8d92d40b1436825b7890021e08c7713de4bc658a0be2bbd47f23498b46650961",
+        "bytes": 2048
+      },
+      {
+        "file": "sqlite-libs-3.53.4-r0.apk",
+        "sha256": "a8a216e53d22faa3f04d2e3650c1991af66f8d0b42fadff5afcdb9afb60b19e5",
+        "bytes": 877769
+      },
+      {
+        "file": "ssl_client-1.37.0-r31.apk",
+        "sha256": "e578a140670e4cf9816117b0c2063632bf3754ecbe8fa593a7fd2b4039372bf0",
+        "bytes": 4686
+      },
+      {
+        "file": "xz-libs-5.8.4-r0.apk",
+        "sha256": "ab362dd515ead04c31a6c302163248da7aa4813e283c971e6dd3f789b453a1d9",
+        "bytes": 118503
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      }
+    ],
+    "containerd": [
+      {
+        "file": "cni-plugins-1.3.0-r4.apk",
+        "sha256": "846415647b8a954339c7c7851d104369374e3fad9b4c3b593b007441658d0b1f",
+        "bytes": 23274884
+      },
+      {
+        "file": "containerd-1.7.2-r4.apk",
+        "sha256": "20b67a018177d923c8113c1b65b5cbe62057c9dda61440b271d057d3a61553a0",
+        "bytes": 28566201
+      },
+      {
+        "file": "containerd-ctr-1.7.2-r4.apk",
+        "sha256": "c66b48d4b7a3d70234c258c702d7f9690230cdfeb353bda67bd406a594a169e6",
+        "bytes": 9653805
+      },
+      {
+        "file": "containerd-openrc-1.7.2-r4.apk",
+        "sha256": "40114d053a77b33248249f4a2f5501bf00e708aa6bb58c68cafb9243da11af49",
+        "bytes": 2582
+      },
+      {
+        "file": "libseccomp-2.6.1-r0.apk",
+        "sha256": "b22ccfe8cb072e4c8d3bc17222eeda132e270ce6258c27622acb193bf27b48e1",
+        "bytes": 50518
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "runc-1.1.12-r0.apk",
+        "sha256": "cc619c1468c4a1d630294d1d3c66f5563fd0252bd2c0b974cfa26e1343af6c04",
+        "bytes": 3605589
+      }
+    ],
+    "kubes": [
+      {
+        "file": "bridge-1.5-r5.apk",
+        "sha256": "1ff3c2b1c451b35bc3efd2d7db697c3bc36506327e94876265e8d7bed7cd7f74",
+        "bytes": 2866
+      },
+      {
+        "file": "busybox-1.37.0-r31.apk",
+        "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+        "bytes": 504769
+      },
+      {
+        "file": "busybox-binsh-1.37.0-r31.apk",
+        "sha256": "93f803ae5db6b729c0f66f4afba6e907ccc17d7d5f8b8c3d25bdb4636de2c48a",
+        "bytes": 1571
+      },
+      {
+        "file": "conntrack-tools-1.4.9-r0.apk",
+        "sha256": "6b06bd2d403888d1c4579453fef9657dc058dc15e9b3f37981403b1d3c0f1c3a",
+        "bytes": 141092
+      },
+      {
+        "file": "conntrack-tools-openrc-1.4.9-r0.apk",
+        "sha256": "9e7b0d1720604d9a1ce16556d47ddfc12398f60470037134365acc418bc634c7",
+        "bytes": 3015
+      },
+      {
+        "file": "cri-tools-1.28.0-r2.apk",
+        "sha256": "bc8b8ea09a3848cddbd4b03058c1e65fc64e816f060a03c090a0e2711b195ad4",
+        "bytes": 25090810
+      },
+      {
+        "file": "ethtool-7.0-r0.apk",
+        "sha256": "f8c38acdc2f56fde73011f55730edeebaae13cb3bf710242f9107e1291b01fee",
+        "bytes": 260588
+      },
+      {
+        "file": "ifupdown-ng-0.13.0-r0.apk",
+        "sha256": "21452f75f9e7bb5222ae90cfc00464952ed10fe4c9b99144abeb3537804e434c",
+        "bytes": 67057
+      },
+      {
+        "file": "ifupdown-ng-ethtool-0.13.0-r0.apk",
+        "sha256": "eb80af816d431ae91ccb1c5d8f0a55596b1390fff8ee51910a18224ddc76a813",
+        "bytes": 2347
+      },
+      {
+        "file": "ifupdown-ng-iproute2-0.13.0-r0.apk",
+        "sha256": "7f69ce2b8885a1f46a18c5d4683f24b2d810a0e355c6b36b1afea19ed35ccfe6",
+        "bytes": 4224
+      },
+      {
+        "file": "iproute2-7.0.0-r0.apk",
+        "sha256": "4c74d82ca030ed30aa43f993d0353a1bba6e9f57f461ad90aa65ea355440673f",
+        "bytes": 183592
+      },
+      {
+        "file": "iproute2-minimal-7.0.0-r0.apk",
+        "sha256": "7a40bb386c19e7945e09683402adf2e30b15ce0003267376aa758280ce96dc27",
+        "bytes": 277788
+      },
+      {
+        "file": "iproute2-ss-7.0.0-r0.apk",
+        "sha256": "524ce46df07ed94d626e78a582934cfdaf40a966869bd4aeaea59b8147a9df7e",
+        "bytes": 47222
+      },
+      {
+        "file": "iproute2-tc-7.0.0-r0.apk",
+        "sha256": "986bd70ac15aee6f230d08e60b5df9b86acf30e65ee8d4adf7fc08799ee18741",
+        "bytes": 260920
+      },
+      {
+        "file": "iptables-1.8.13-r0.apk",
+        "sha256": "af3aaf9303c829ccee795725965ee6894816a98f9afa62b5dd52b25e6e62e8f0",
+        "bytes": 319701
+      },
+      {
+        "file": "iptables-openrc-1.8.13-r0.apk",
+        "sha256": "ad3cedfc9b5e9ac702f693e6cb9b7a596826fc405a350fab3368fdd88794fa6c",
+        "bytes": 4199
+      },
+      {
+        "file": "kubeadm-1.29.2-r0.apk",
+        "sha256": "847d4f0be89aad7f5de253616f0e97b741761fca2ce2da4c67bc981e9c32ccdf",
+        "bytes": 16103810
+      },
+      {
+        "file": "kubectl-1.29.2-r0.apk",
+        "sha256": "6536a33464e9d8618ca10980b2a5f8aaacc58711d7e7492513c7523c7c28a6f6",
+        "bytes": 16537688
+      },
+      {
+        "file": "kubelet-1.29.2-r0.apk",
+        "sha256": "3b2c3abd1cd20629af7f63c517b4c068563d50f19ab2fe4bc411bed1296c24e1",
+        "bytes": 22225623
+      },
+      {
+        "file": "kubelet-openrc-1.29.2-r0.apk",
+        "sha256": "d667b7835b1f2bb9204f44209f8f2a508d19de79744e4d9289e162229c14f726",
+        "bytes": 2146
+      },
+      {
+        "file": "libcap2-2.78-r0.apk",
+        "sha256": "42886a7b4bcde26347c712925c8dc7db202b6029ef9b8c7ee81577ab7bdd8fad",
+        "bytes": 21582
+      },
+      {
+        "file": "libcrypto3-3.5.9-r0.apk",
+        "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+        "bytes": 1980198
+      },
+      {
+        "file": "libelf-0.195-r0.apk",
+        "sha256": "78c5a1993342ab1bdcdce30639fd0937e8000f6d0d85cea171f573d31decd036",
+        "bytes": 43475
+      },
+      {
+        "file": "libmnl-1.0.5-r2.apk",
+        "sha256": "3693162ff7c27998dbbb2da1c4bd9072079cd55af1fa3d6d2ade51d276e20157",
+        "bytes": 9023
+      },
+      {
+        "file": "libncursesw-6.6_p20260516-r0.apk",
+        "sha256": "cf8caa8a88bc4ce9d9e395567fefaf9ef7fbd55c50ae6155b35c1b58f3755023",
+        "bytes": 159438
+      },
+      {
+        "file": "libnetfilter_conntrack-1.1.1-r0.apk",
+        "sha256": "ed2c2717779ac694bba8c8674a35f440291c7cee432b6471ea968236846291ec",
+        "bytes": 41664
+      },
+      {
+        "file": "libnetfilter_cthelper-1.0.1-r2.apk",
+        "sha256": "c69c46d2771197751c76c7b4d66bcd11f77769df25e6c4d8f1bd17866f936485",
+        "bytes": 6269
+      },
+      {
+        "file": "libnetfilter_cttimeout-1.0.1-r2.apk",
+        "sha256": "8e2b32a1639ee299b08827fcf0a62bb0c31a0e98dbc6d4fdfa717fcbbc79fd5c",
+        "bytes": 6117
+      },
+      {
+        "file": "libnetfilter_queue-1.0.5-r2.apk",
+        "sha256": "e4213330df668eb77ca3a96f50b4d98d45f4a9febd7a58b0813286f9c6223cf9",
+        "bytes": 12400
+      },
+      {
+        "file": "libnfnetlink-1.0.2-r3.apk",
+        "sha256": "4833463e4d57216647433b927e1a5cca684be4ce8da0597610ecf03daafa0bb2",
+        "bytes": 12359
+      },
+      {
+        "file": "libnftnl-1.3.1-r0.apk",
+        "sha256": "2f4cf35959fde00fdba0dd35ef12a6739739b504e8319c97e30bd4834f98d924",
+        "bytes": 67237
+      },
+      {
+        "file": "libssl3-3.5.9-r0.apk",
+        "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+        "bytes": 381860
+      },
+      {
+        "file": "libxtables-1.8.13-r0.apk",
+        "sha256": "4b5c981a77af40f965debe18f06c0c20268956f141a1bfc1c8ff6a406d914465",
+        "bytes": 24615
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      },
+      {
+        "file": "ncurses-terminfo-base-6.6_p20260516-r0.apk",
+        "sha256": "ce83be6d0bd10584a53c3a5868cc1595ce5f0f8e0b621f8f7f70b6144e521fc9",
+        "bytes": 22172
+      },
+      {
+        "file": "openrc-0.63.2-r0.apk",
+        "sha256": "cda5779b160ddbdf1d1b9cc9514b7b72f0a18453792ff7c0a6eb6e28d5bc2225",
+        "bytes": 217933
+      },
+      {
+        "file": "openrc-user-0.63.2-r0.apk",
+        "sha256": "c350ab9e3de14d5eb33e609bca2f1c4c4d45c9cf3d1ee7a152800e76c26e3863",
+        "bytes": 6113
+      },
+      {
+        "file": "readline-8.3.3-r1.apk",
+        "sha256": "766911ecb986a6c5cf0841a6b556cd1e9dbbf22b3559726de32416486cd15c81",
+        "bytes": 127194
+      },
+      {
+        "file": "socat-1.8.1.3-r0.apk",
+        "sha256": "4b8eb402357d976d285f30a68e510bd268d9163db8a39bb0bbbe7ab93ada4042",
+        "bytes": 218840
+      },
+      {
+        "file": "ssl_client-1.37.0-r31.apk",
+        "sha256": "e578a140670e4cf9816117b0c2063632bf3754ecbe8fa593a7fd2b4039372bf0",
+        "bytes": 4686
+      },
+      {
+        "file": "zlib-1.3.2-r1.apk",
+        "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+        "bytes": 56210
+      },
+      {
+        "file": "zstd-libs-1.5.7-r2.apk",
+        "sha256": "23c6065b0049b2406441564bcf0032515a43f78e80d76fcb85535a3803ef5d4e",
+        "bytes": 376646
+      }
+    ],
+    "etcd": [
+      {
+        "file": "etcd-ctl-3.5.12-r1.apk",
+        "sha256": "d87d37636bb43267cd57ecac3122956dd486655af11d71ff12f4545a08fd3eb7",
+        "bytes": 6834307
+      },
+      {
+        "file": "musl-1.2.6-r3.apk",
+        "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+        "bytes": 415466
+      }
+    ]
+  },
+  "config_sha256": "0ec3ca12cbf9ec0d5ba9b55c8a192062b299fc24601f1dbe9e35bfc6c0932670"
+}

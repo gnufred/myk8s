@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+"""Refresh signed Alpine OS APKs without changing the pinned cluster stack."""
+import argparse
+import datetime
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import tarfile
+import tempfile
+import urllib.request
+
+LAB = Path(__file__).resolve().parent.parent
+CONFIG = LAB / 'apk-packages.json'
+LOCK = LAB / 'apk-packages.lock.json'
+CACHE = LAB / '.lfs/apk'
+WORK = LAB / '.cache/apk'
+
+
+def sha256(path):
+    with path.open('rb') as stream:
+        return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+
+def run(args):
+    subprocess.run([str(arg) for arg in args], check=True)
+
+
+def download(url, path):
+    temporary = path.with_suffix(path.suffix + '.download')
+    with urllib.request.urlopen(url, timeout=120) as source, temporary.open('wb') as dest:
+        shutil.copyfileobj(source, dest)
+    temporary.replace(path)
+
+
+def bootstrap(config):
+    """Use the release keyring and verify apk.static before executing it."""
+    settings = config['resolver']
+    rootfs = WORK / settings['minirootfs']
+    if not rootfs.exists():
+        download(settings['minirootfs_url'], rootfs)
+    if sha256(rootfs) != settings['minirootfs_sha256']:
+        raise ValueError('Resolver minirootfs checksum mismatch; remove ' + str(rootfs))
+    keys = WORK / 'keys'
+    keys.mkdir(exist_ok=True)
+    with tarfile.open(rootfs) as archive:
+        for member in archive:
+            if member.name.startswith('./etc/apk/keys/') and member.isfile():
+                (keys / Path(member.name).name).write_bytes(archive.extractfile(member).read())
+    package = WORK / 'apk-tools-static.apk'
+    if not package.exists():
+        download(settings['apk_url'], package)
+    if sha256(package) != settings['apk_sha256']:
+        raise ValueError('Resolver APK checksum mismatch; remove ' + str(package))
+    # Alpine v2 APKs contain concatenated tar streams, handled by bsdtar.
+    run(['bsdtar', '-xf', package, '-C', WORK, 'sbin/apk.static'])
+    apk = WORK / 'sbin/apk.static'
+    run([apk, '--keys-dir', keys, 'verify', package])
+    return apk, keys
+
+
+def check():
+    lock = json.loads(LOCK.read_text())
+    if lock['config_sha256'] != sha256(CONFIG):
+        raise ValueError('Package roots changed; refresh the cache before provisioning')
+    expected = set()
+    for group, packages in lock['packages'].items():
+        for package in packages:
+            path = CACHE / group / package['file']
+            expected.add(path)
+            if not path.is_file() or sha256(path) != package['sha256']:
+                raise ValueError('Missing or incorrect APK: ' + str(path) + '; run git lfs pull')
+    actual = set(CACHE.glob('*/*.apk'))
+    if actual != expected:
+        raise ValueError('APK files differ from lock: ' + str(sorted(str(p) for p in actual ^ expected)))
+    print(f'Verified {len(expected)} APK files against {LOCK.name}')
+
+
+def refresh():
+    config = json.loads(CONFIG.read_text())
+    WORK.mkdir(parents=True, exist_ok=True)
+    apk, keys = bootstrap(config)
+    with tempfile.TemporaryDirectory(prefix='refresh-', dir=WORK) as directory:
+        stage = Path(directory)
+        pinned = stage / 'pinned/x86_64'
+        pinned.mkdir(parents=True)
+        for item in config['pinned']:
+            source = CACHE / item['group'] / item['file']
+            if sha256(source) != item['sha256']:
+                raise ValueError('Pinned cluster package changed: ' + str(source))
+            shutil.copy2(source, pinned / source.name)
+        # This temporary unsigned index only describes already pinned, signed APKs.
+        # Every fetched APK is independently signature-verified below.
+        run([apk, '--keys-dir', keys, 'index', '--rewrite-arch', config['architecture'],
+             '--output', pinned / 'APKINDEX.tar.gz', *sorted(pinned.glob('*.apk'))])
+        resolver = stage / 'root'
+        resolver.mkdir()
+        command = [apk, '--root', resolver, '--arch', config['architecture'],
+                   '--keys-dir', keys, '--repository', pinned.parent]
+        for repository in config['repositories']:
+            command += ['--repository', repository]
+        packages = {}
+        for group, roots in config['groups'].items():
+            print(f'Fetching {group}: {", ".join(roots)}', flush=True)
+            target = stage / 'packages' / group
+            target.mkdir(parents=True)
+            run([*command, '--allow-untrusted', 'fetch', '--recursive', '--output', target, *roots])
+            files = sorted(target.glob('*.apk'))
+            if not files:
+                raise ValueError('No APKs fetched for ' + group)
+            # Strict verification: no --allow-untrusted here.
+            run([apk, '--keys-dir', keys, 'verify', *files])
+            packages[group] = [{'file': p.name, 'sha256': sha256(p), 'bytes': p.stat().st_size} for p in files]
+        # All downloads and signatures succeed before replacing any tracked cache.
+        for group in config['groups']:
+            target = CACHE / group
+            target.mkdir(parents=True, exist_ok=True)
+            for old in target.glob('*.apk'):
+                old.unlink()
+            for source in (stage / 'packages' / group).glob('*.apk'):
+                shutil.copy2(source, target / source.name)
+        lock = {'alpine': config['alpine'], 'architecture': config['architecture'],
+                'config_sha256': sha256(CONFIG),
+                'resolved_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                'repositories': config['repositories'], 'roots': config['groups'], 'packages': packages}
+        LOCK.write_text(json.dumps(lock, indent=2) + '\n')
+    check()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check', action='store_true', help='Verify cached files against the lock without network access')
+    args = parser.parse_args()
+    try:
+        check() if args.check else refresh()
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        parser.exit(1, f'cache-apk: {error}\n')
+
+
+if __name__ == '__main__':
+    main()

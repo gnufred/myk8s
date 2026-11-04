@@ -19,7 +19,7 @@ run/provision
 
 `git lfs pull` restores the base box, cached APKs and container image archives. `run/provision` automatically calls `run/register-box`: if `myk8s/alpine-3.24` version `3.24.3` for libvirt/amd64 is missing, it verifies and registers the local archive from `.lfs/boxes/`. The locally generated Vagrant metadata includes its version and SHA-256; no remote box catalog is needed. An already registered matching version is reused. You can also run `run/register-box` before invoking Vagrant directly.
 
-The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The existing APK cache and Kubernetes v1.29.2 provisioning still need compatibility testing on this newer OS. This is the next migration test, not a completed Kubernetes upgrade.
+The Alpine 3.24.3 base has passed boot, SSH key replacement and passwordless root access in a separate Vagrant smoke test. Its archived metadata uses the same tested VNC/Cirrus display configuration; the pristine Packer guest disk is preserved. The OS APK cache now targets Alpine 3.24 and has passed offline installation checks in isolated Alpine filesystems. Full VM provisioning with this refreshed cache remains the next test; Kubernetes v1.29.2 is still pinned.
 
 ### Host services
 
@@ -52,6 +52,33 @@ Use `run/kubectl` to run Kubectl commands on the Vagrant VM.
 ## Build an Alpine base box
 
 `run/build-alpine` builds a local Alpine 3.24.3 amd64 UEFI Vagrant/libvirt box from the pinned [rgl recipe](build/alpine/README.md), adapted for an Arch host. It requires Packer 1.16+, QEMU/KVM and `edk2-ovmf`. Use `run/build-alpine --check` to initialize plugins and validate without booting a VM. Build output stays in `.cache/build-alpine/`. After a successful build, the helper prints the command to register the box as `myk8s/alpine-3.24`; it does not change the lab configuration or register it automatically.
+
+## Offline OS packages
+
+The APK cache targets Alpine **3.24 / x86_64**, using the latest packages available in that stable branch when refreshed. `apk-packages.json` lists the requested packages and repositories; `apk-packages.lock.json` records every cached filename and SHA-256. Each directory includes its complete recursive dependency set, so provisioning needs no Alpine mirror access. Shared dependencies appear in multiple groups to keep each existing wildcard installation self-contained.
+
+Current OS package versions include Python 3.14.10-r1, UFW 0.36.2-r4, iptables 1.8.13-r0, HAProxy 3.4.7-r0, Unbound 1.25.2-r2, rsyslog 8.2604.0-r0 and nfs-utils 2.6.4-r6. Python's Kubernetes client is 34.1.0-r1. The iptables package uses the **nf_tables** backend rather than the previous cache's legacy backend.
+
+Kubernetes 1.29.2, cri-tools 1.28.0, containerd/ctr 1.7.2, runc 1.1.12, CNI plugins 1.3.0 and etcdctl 3.5.12 retain their original cached APKs. Their OS dependencies are refreshed. These are deliberate temporary migration pins, not current supported-version recommendations. Updating them requires a separate coordinated change to the runtime configuration, kubeadm configuration and container image archives.
+
+After cloning and pulling LFS, verify the files without network access:
+
+```bash
+run/cache-apk --check
+```
+
+To refresh OS packages from the configured Alpine 3.24 repositories, run `run/cache-apk`. This Linux x86_64 helper needs Python 3, `bsdtar` and internet access. It downloads a checksum-pinned Alpine package resolver and release keyring into `.cache/apk/`, resolves dependencies using Alpine's own solver, and verifies every APK signature before replacing any tracked package group. A temporary unsigned index describes the pinned cluster packages; downloaded packages still undergo strict signature verification. It does not start VMs or change the container image archives. Review the cache and lock changes, test provisioning, then commit the APKs with Git LFS.
+
+Provisioning's shell bootstrap rejects an older Alpine release before installing this cache and stops immediately if an APK installation fails. Recreate older lab VMs with the current base box instead of applying the 3.24 package cache to Alpine 3.19.
+
+Validation on 4 November 2026: all 301 cached APK files passed signature verification; the load-balancer, control-plane, worker and NFS dependency sets installed with repositories empty and networking disabled in disposable Alpine 3.24 filesystems. The existing HAProxy, Unbound and rendered rsyslog configurations passed checks with the new binaries. Python and its Kubernetes client imported successfully, and the pinned Kubernetes/containerd binaries ran. These checks do not validate the guest kernel modules, service startup or end-to-end cluster behavior.
+
+For the next VM test, start with the recreated `lb0`:
+
+```bash
+vagrant rsync lb0
+run/provision lb0
+```
 
 ## Offline containerd tools
 

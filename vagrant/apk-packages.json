@@ -1,0 +1,129 @@
+{
+  "alpine": "3.24",
+  "architecture": "x86_64",
+  "repositories": [
+    "https://dl-cdn.alpinelinux.org/alpine/v3.24/main",
+    "https://dl-cdn.alpinelinux.org/alpine/v3.24/community"
+  ],
+  "resolver": {
+    "minirootfs": "alpine-minirootfs-3.24.3-x86_64.tar.gz",
+    "minirootfs_url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/releases/x86_64/alpine-minirootfs-3.24.3-x86_64.tar.gz",
+    "minirootfs_sha256": "f8e1cafba9b1b283b5d30d06f9885c8d2bc161ffe9083ade8e2e157813a53407",
+    "apk_url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/apk-tools-static-3.0.9-r0.apk",
+    "apk_sha256": "0a1a0682375f66a83b7b903f6e4638ccfe312547d50d336b5f2be9fc391281be"
+  },
+  "groups": {
+    "python3": [
+      "python3",
+      "python3-pyc"
+    ],
+    "py3-kubernetes": [
+      "py3-kubernetes",
+      "py3-kubernetes-pyc"
+    ],
+    "ufw": [
+      "ufw",
+      "ufw-openrc",
+      "ufw-pyc",
+      "iptables",
+      "iptables-openrc"
+    ],
+    "debug": [
+      "bind-tools",
+      "tshark",
+      "net-tools"
+    ],
+    "rsyslog": [
+      "rsyslog",
+      "rsyslog-openrc"
+    ],
+    "haproxy": [
+      "haproxy",
+      "haproxy-openrc"
+    ],
+    "unbound": [
+      "unbound",
+      "unbound-openrc"
+    ],
+    "nfs": [
+      "nfs-utils",
+      "nfs-utils-openrc",
+      "rpcbind",
+      "rpcbind-openrc"
+    ],
+    "containerd": [
+      "containerd=1.7.2-r4",
+      "containerd-ctr=1.7.2-r4",
+      "containerd-openrc=1.7.2-r4",
+      "cni-plugins=1.3.0-r4",
+      "runc=1.1.12-r0"
+    ],
+    "kubes": [
+      "kubeadm=1.29.2-r0",
+      "kubectl=1.29.2-r0",
+      "kubelet=1.29.2-r0",
+      "kubelet-openrc=1.29.2-r0",
+      "cri-tools=1.28.0-r2"
+    ],
+    "etcd": [
+      "etcd-ctl=3.5.12-r1"
+    ]
+  },
+  "pinned": [
+    {
+      "group": "containerd",
+      "file": "containerd-1.7.2-r4.apk",
+      "sha256": "20b67a018177d923c8113c1b65b5cbe62057c9dda61440b271d057d3a61553a0"
+    },
+    {
+      "group": "containerd",
+      "file": "containerd-ctr-1.7.2-r4.apk",
+      "sha256": "c66b48d4b7a3d70234c258c702d7f9690230cdfeb353bda67bd406a594a169e6"
+    },
+    {
+      "group": "containerd",
+      "file": "containerd-openrc-1.7.2-r4.apk",
+      "sha256": "40114d053a77b33248249f4a2f5501bf00e708aa6bb58c68cafb9243da11af49"
+    },
+    {
+      "group": "containerd",
+      "file": "cni-plugins-1.3.0-r4.apk",
+      "sha256": "846415647b8a954339c7c7851d104369374e3fad9b4c3b593b007441658d0b1f"
+    },
+    {
+      "group": "containerd",
+      "file": "runc-1.1.12-r0.apk",
+      "sha256": "cc619c1468c4a1d630294d1d3c66f5563fd0252bd2c0b974cfa26e1343af6c04"
+    },
+    {
+      "group": "kubes",
+      "file": "kubeadm-1.29.2-r0.apk",
+      "sha256": "847d4f0be89aad7f5de253616f0e97b741761fca2ce2da4c67bc981e9c32ccdf"
+    },
+    {
+      "group": "kubes",
+      "file": "kubectl-1.29.2-r0.apk",
+      "sha256": "6536a33464e9d8618ca10980b2a5f8aaacc58711d7e7492513c7523c7c28a6f6"
+    },
+    {
+      "group": "kubes",
+      "file": "kubelet-1.29.2-r0.apk",
+      "sha256": "3b2c3abd1cd20629af7f63c517b4c068563d50f19ab2fe4bc411bed1296c24e1"
+    },
+    {
+      "group": "kubes",
+      "file": "kubelet-openrc-1.29.2-r0.apk",
+      "sha256": "d667b7835b1f2bb9204f44209f8f2a508d19de79744e4d9289e162229c14f726"
+    },
+    {
+      "group": "kubes",
+      "file": "cri-tools-1.28.0-r2.apk",
+      "sha256": "bc8b8ea09a3848cddbd4b03058c1e65fc64e816f060a03c090a0e2711b195ad4"
+    },
+    {
+      "group": "etcd",
+      "file": "etcd-ctl-3.5.12-r1.apk",
+      "sha256": "d87d37636bb43267cd57ecac3122956dd486655af11d71ff12f4545a08fd3eb7"
+    }
+  ]
+}
