@@ -102,62 +102,38 @@
                   loadbalance
               }
 
-    - name: Reconfigure CoreDNS deployment
+    - name: Configure CoreDNS DaemonSet
       tags: coredns
       k8s:
         state: present
         kubeconfig: /etc/kubernetes/admin.conf
         namespace: kube-system
-        kind: Deployment
+        kind: DaemonSet
         name: coredns
         definition:
           apiVersion: apps/v1
-          kind: Deployment
+          kind: DaemonSet
           metadata:
-            annotations:
-              deployment.kubernetes.io/revision: "2"
             labels:
               k8s-app: kube-dns
             name: coredns
             namespace: kube-system
           spec:
-            progressDeadlineSeconds: 600
-            replicas: 1
             revisionHistoryLimit: 10
             selector:
               matchLabels:
                 k8s-app: kube-dns
-            strategy:
-              rollingUpdate:
-                maxSurge: 25%
-                maxUnavailable: 1
+            updateStrategy:
               type: RollingUpdate
+              rollingUpdate:
+                maxUnavailable: 1
+                maxSurge: 0
             template:
               metadata:
                 creationTimestamp: null
                 labels:
                   k8s-app: kube-dns
               spec:
-                affinity:
-                  nodeAffinity:
-                    requiredDuringSchedulingIgnoredDuringExecution:
-                      nodeSelectorTerms:
-                        - matchExpressions:
-                            - key: kubernetes.io/hostname
-                              operator: In
-                              values:
-                                - cp0
-                  podAntiAffinity:
-                    preferredDuringSchedulingIgnoredDuringExecution:
-                      - podAffinityTerm:
-                          labelSelector:
-                            matchExpressions:
-                              - key: k8s-app
-                                operator: In
-                                values:
-                                  - kube-dns
-                          topologyKey: kubernetes.io/hostname
-                        weight: 100
                 containers:
                   - args:
                       - -conf
@@ -241,6 +217,33 @@
                       name: coredns
                     name: config-volume
 
+    # Keep the old Deployment serving until its DaemonSet replacement is ready.
+    - name: Wait for the CoreDNS DaemonSet
+      tags: coredns
+      command: >-
+        kubectl --kubeconfig=/etc/kubernetes/admin.conf -n kube-system
+        rollout status daemonset/coredns --timeout=180s
+      changed_when: false
+
+    - name: Remove the legacy CoreDNS Deployment
+      tags: coredns
+      kubernetes.core.k8s:
+        state: absent
+        kubeconfig: /etc/kubernetes/admin.conf
+        api_version: apps/v1
+        kind: Deployment
+        name: coredns
+        namespace: kube-system
+        wait: true
+        wait_timeout: 120
+
+    - name: Wait for legacy CoreDNS Pods to terminate
+      tags: coredns
+      command: >-
+        kubectl --kubeconfig=/etc/kubernetes/admin.conf -n kube-system
+        wait --for=delete pod -l k8s-app=kube-dns,pod-template-hash --timeout=120s
+      changed_when: false
+
     - name: Configure kube-dns service
       tags: kubedns
       k8s:
@@ -289,5 +292,5 @@
       tags: [coredns, kubedns]
       command: >-
         kubectl --kubeconfig=/etc/kubernetes/admin.conf -n kube-system
-        rollout status deployment/coredns --timeout=120s
+        rollout status daemonset/coredns --timeout=180s
       changed_when: false

@@ -180,6 +180,22 @@ Because `lb0` is outside Kubernetes, it needs a route to the Service subnet via 
 
 Validation on 4 November 2026 (Service/DNS checkpoint): a fresh `lb0`/`cp0` bootstrap produced a Ready control plane and six ready system Pods. API and DNS Services have the new addresses; kubelet uses `10.96.0.10`. CoreDNS and Unbound both resolved the Kubernetes API name to `10.96.0.1`, external DNS resolved, and a missing Service name returned NXDOMAIN. Unbound cluster DNS passed over UDP and TCP after rebooting `lb0`; its static Service route survived. The following Pod-routing checkpoint extends these checks across nodes.
 
+### CoreDNS placement
+
+The DNS playbook manages a `coredns` DaemonSet restricted to Linux control-plane nodes, with the control-plane taint tolerations. It runs one Pod on `cp0` during bootstrap, then adds one each on `cp1` and `cp2` as they join. Its rolling update uses `maxUnavailable: 1` and `maxSurge: 0`, keeping at most one DaemonSet Pod per control plane during replacement. The existing `kube-dns` Service (`10.96.0.10`, UDP/TCP 53) selects all replicas.
+
+To migrate the kubeadm-created Deployment, the playbook creates the DaemonSet and waits for it to become ready before deleting the Deployment. Both can briefly serve queries on `cp0` during this migration; the playbook waits for the old Deployment Pods to terminate before returning. Subsequent runs are idempotent. Kubeadm normally manages CoreDNS as a Deployment, so its addon behavior must be accounted for during future upgrades; reapply this playbook if kubeadm recreates that Deployment.
+
+Inspect or reapply it with:
+
+```bash
+run/playbook -h cp0 -b dns -t coredns,kubedns
+vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf -n kube-system get daemonset coredns'
+vagrant ssh cp0 -c 'kubectl --kubeconfig=/etc/kubernetes/admin.conf -n kube-system get pods -l k8s-app=kube-dns -o wide'
+```
+
+Validation on 4 November 2026 (DaemonSet bootstrap checkpoint): with only `cp0` eligible, the DaemonSet has one desired/current/ready Pod on `cp0`; the legacy Deployment is absent. Cluster DNS through the Service and cluster/external DNS through Unbound passed. Reapplying the migration reported zero changes. Additional control planes are the next validation step. The Service route from `lb0` still uses `cp0`; replica placement alone does not provide VM-side DNS routing failover.
+
 ### Static Pod routing
 
 The existing `bridge`, `host-local` and `portmap` plugins are retained. The old IPv6 pool is removed; kubeadm and the Pod network are IPv4-only. The Pod range is `10.88.0.0/16`, split into fixed, disjoint `/24` subnets:
