@@ -8,6 +8,7 @@ Local changes:
 - Arch OVMF firmware paths for Packer and the resulting Vagrant box.
 - Packer's HTTP server binds to loopback; the installer accesses it through QEMU user networking's host gateway, `10.0.2.2`.
 - US keyboard layout; add Bash and rsync for the lab's shell and synced-folder workflow.
+- VNC/Cirrus graphics instead of SPICE/QXL, matching the existing host capabilities; retain the QEMU guest-agent channel.
 - Disable the box's default `/vagrant` share instead of requiring an NFS server on the host. The lab defines its own rsync share.
 
 Run `run/build-alpine --check` from the Vagrant lab to initialize the pinned Packer plugins and validate the configuration, or `run/build-alpine` to build it. Packer 1.16+ is the upstream prerequisite. The output and temporary files stay under `.cache/build-alpine/`, which is ignored by Git.
