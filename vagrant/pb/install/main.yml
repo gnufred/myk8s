@@ -140,6 +140,23 @@
       - udp
       - tcp
 
+    # kube-proxy masquerades node/VM clients before sending them to a remote DNS Pod.
+  - name: Allow node-proxied queries to local CoreDNS Pods
+    tags: pod-network
+    when: inventory_hostname in ['cp0', 'cp1', 'cp2']
+    community.general.ufw:
+      rule: allow
+      route: true
+      interface_in: "{{ lab_node_interface }}"
+      from_ip: "{{ lab_node_subnet }}"
+      to_ip: "{{ lab_nodes[inventory_hostname].pod_subnet }}"
+      port: '53'
+      proto: "{{ item }}"
+      comment: node-proxied-dns
+    loop:
+      - udp
+      - tcp
+
   - name: Allow local Pods to reach other Pods
     tags: pod-network
     community.general.ufw:

@@ -72,6 +72,8 @@
 
 
 - name: Join the cluster as a control plane
+  vars_files:
+    - ../../network.json
   hosts: cp1, cp2
   become: true
   become_user: root
