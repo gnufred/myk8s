@@ -4,6 +4,12 @@ Latest Vagrant configuration for my K8s labs.
 
 ## Usage
 
+### Host services
+
+After a host reboot, run `run/services` to start the `virtqemud`, `virtstoraged`, and `virtnetworkd` systemd sockets used by libvirt. The command asks for sudo when needed and reports each socket's status. Use `run/services status` to check without starting anything. These sockets activate their daemons on demand; they are not enabled for automatic startup by this helper.
+
+The host firewall must still allow traffic on the libvirt management bridge; the bridge name and existing UFW rules depend on the host configuration. This helper does not modify firewall rules or start VMs.
+
 ### Provision
 
 Use `run/provision`.

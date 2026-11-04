@@ -1,0 +1,42 @@
+#!/bin/bash
+# Start the host-side libvirt sockets used by the Vagrant lab.
+set -euo pipefail
+
+sockets=(virtqemud.socket virtstoraged.socket virtnetworkd.socket)
+
+case "${1:-start}" in
+  start)
+    if (( $# > 1 )); then
+      echo "Usage: run/services [start|status]" >&2
+      exit 2
+    fi
+    echo "Starting libvirt sockets (sudo may ask for your password)..."
+    sudo systemctl start "${sockets[@]}"
+    ;;
+  status)
+    if (( $# > 1 )); then
+      echo "Usage: run/services [start|status]" >&2
+      exit 2
+    fi
+    ;;
+  -h|--help)
+    echo "Usage: run/services [start|status]"
+    echo "Start or check the host libvirt sockets needed by the lab."
+    exit 0
+    ;;
+  *)
+    echo "Usage: run/services [start|status]" >&2
+    exit 2
+    ;;
+esac
+
+failed=0
+for socket in "${sockets[@]}"; do
+  if systemctl is-active --quiet "$socket"; then
+    printf '%s: active\n' "$socket"
+  else
+    printf '%s: inactive or failed\n' "$socket" >&2
+    failed=1
+  fi
+done
+exit "$failed"
