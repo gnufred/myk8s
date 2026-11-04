@@ -101,12 +101,28 @@ nfs() {
 worker() {
 	NAME=wo
 	BOOKS=(ufw install)
+	local worker_pids=() worker_nodes=()
+	local index status=0 result
 	for i in {0..5}; do
 		NODE="$NAME$i"
-		provision $NODE $BOOKS && \
-		join $MAIN $NODE &
+		if [[ -n "$HOST" && "$HOST" != "$NODE" ]]; then continue; fi
+		provision "$NODE" "${BOOKS[@]}" && join "$MAIN" "$NODE" &
+		worker_pids+=("$!")
+		worker_nodes+=("$NODE")
 	done
+	# Preserve parallel provisioning, but check every worker's result.
+	for index in "${!worker_pids[@]}"; do
+		if wait "${worker_pids[$index]}"; then
+			:
+		else
+			result=$?
+			echo "[${worker_nodes[$index]}] provisioning or joining failed" >&2
+			status=$result
+		fi
+	done
+	# The NFS provisioner may still be running during a full lab bootstrap.
 	wait
+	return "$status"
 }
 
 run/register-box || exit $?

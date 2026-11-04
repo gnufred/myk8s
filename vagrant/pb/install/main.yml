@@ -75,6 +75,39 @@
     shell: sysctl -p /etc/sysctl.d/kubernetes.conf
 
 
+    # UFW can report routed traffic as disabled before IP forwarding is enabled.
+    # Keep Pod DNS/API access independent of that initial default-policy check.
+  - name: Allow Pod DNS queries to the lab resolver
+    tags: pod-network
+    community.general.ufw:
+      rule: allow
+      route: true
+      interface_in: cni0
+      from_ip: 10.88.0.0/16
+      to_ip: 10.1.2.10
+      port: '53'
+      proto: "{{ item }}"
+      comment: pod-dns
+    loop:
+      - udp
+      - tcp
+
+  - name: Allow Pod requests to the control plane APIs
+    tags: pod-network
+    community.general.ufw:
+      rule: allow
+      route: true
+      interface_in: cni0
+      from_ip: 10.88.0.0/16
+      to_ip: "{{ item }}"
+      port: '6443'
+      proto: tcp
+      comment: pod-api
+    loop:
+      - 10.1.2.20
+      - 10.1.2.21
+      - 10.1.2.22
+
     ### CONTAINERD ###
 
   - name: Create /etc/cni/net.d
